@@ -1,6 +1,5 @@
 package com.playtogether_android.app.presentation.base
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

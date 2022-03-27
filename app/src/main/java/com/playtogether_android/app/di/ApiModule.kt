@@ -1,14 +1,13 @@
 package com.playtogether_android.app.di
 
 import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = "http://smartcity.gimhae.go.kr/smart_tour/dashboard/api/"
+private const val BASE_URL = ""
 
 val apiModule = module {
 

@@ -1,7 +1,5 @@
 package com.playtogether_android.app.presentation.base
 
-import android.app.Dialog
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
