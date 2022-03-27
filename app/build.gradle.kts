@@ -1,13 +1,6 @@
-
 plugins {
     id ("com.android.application")
-    kotlin("android")
-    kotlin("android.extensions")
-    kotlin("kapt")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    id ("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -20,7 +13,6 @@ android {
         targetSdk = Apps.targetSdk
         versionCode = Apps.versionCode
         versionName = Apps.versionName
-        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,8 +42,7 @@ android {
 }
 
 dependencies {
-    implementation (project(":domain"))
-    implementation (project(":data"))
+
     implementation(KotlinDependencies.kotlin)
     implementation(AndroidXDependencies.appCompat)
     implementation(AndroidXDependencies.coreKtx)
@@ -60,9 +51,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    // debugImplementation("com.squareup.leakcanary:leakcanary-android:2.6")
+    implementation (project(":domain"))
+    implementation (project(":data"))
 
-// ViewModel
+
+    //ViewModel
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
@@ -85,8 +78,7 @@ dependencies {
     implementation(ThirdPartyDependencies.glide)
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
-    implementation("com.android.support:support-v4:28.0.0")
-    kapt(KaptDependencies.glideCompiler)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
 
 // Navigation
@@ -157,7 +149,5 @@ dependencies {
     //update
     implementation("com.google.android.play:core:1.10.3")
 
-    //flex-box layout
-    implementation("com.google.android.flexbox:flexbox:3.0.0")
 
 }
