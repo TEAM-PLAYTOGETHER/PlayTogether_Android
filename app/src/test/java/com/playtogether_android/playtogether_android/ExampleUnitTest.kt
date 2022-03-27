@@ -1,4 +1,4 @@
-package com.example.playtogether_android
+package com.playtogether_android.playtogether_android
 
 import org.junit.Test
 
