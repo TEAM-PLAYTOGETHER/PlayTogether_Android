@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_review"
+        android:icon="@drawable/spring_dot_stroke_background"
+        android:title="@string/navigation_home" />
+    <item
+        android:id="@+id/navigation_room"
+        android:icon="@drawable/spring_dot_stroke_background"
+        android:title="@string/navigation_thunder"/>
+    <item
+        android:id="@+id/navigation_notice"
+        android:icon="@drawable/spring_dot_stroke_background"
+        android:title="@string/navigation_message"/>
+    <item
+        android:id="@+id/navigation_mypage"
+        android:icon="@drawable/spring_dot_stroke_background"
+        android:title="@string/navigation_mypage"/>
+</menu>
