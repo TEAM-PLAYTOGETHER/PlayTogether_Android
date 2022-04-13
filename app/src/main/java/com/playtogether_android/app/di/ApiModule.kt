@@ -1,6 +1,7 @@
 package com.playtogether_android.app.di
 
 import com.google.gson.GsonBuilder
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -23,6 +24,7 @@ val apiModule = module {
         OkHttpClient.Builder()
             .run {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+                addInterceptor(get<Interceptor>())
                 build()
             }
 
