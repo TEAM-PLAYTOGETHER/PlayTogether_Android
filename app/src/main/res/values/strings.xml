@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PlayTogether_android</string>
+
+    <!--바텀네비-->
+    <string name="navigation_mypage">마이페이지</string>
+    <string name="navigation_message">쪽지</string>
+    <string name="navigation_thunder">번개</string>
+    <string name="navigation_home">홈</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

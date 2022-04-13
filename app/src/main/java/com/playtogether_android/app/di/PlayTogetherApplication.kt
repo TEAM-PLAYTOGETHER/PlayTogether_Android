@@ -2,10 +2,11 @@ package com.playtogether_android.app.di
 
 import android.app.Application
 import android.content.Context
-import com.playtogether_android.app.BuildConfig
+import androidx.databinding.ktx.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext
+import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
 class PlayTogetherApplication : Application() {
@@ -22,7 +23,7 @@ class PlayTogetherApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        GlobalContext.startKoin {
+        startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@PlayTogetherApplication)
             modules(viewModelModule)
