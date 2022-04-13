@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_text.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_test.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/menu/menu.xml" value="0.1921875" />
