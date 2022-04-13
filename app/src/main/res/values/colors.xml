@@ -11,7 +11,7 @@
     <!--main -->
     <color name="main_green">#C5F213</color>
     <color name="main_black">#191919</color>
-    <color name="black33">#333333</color>
-    <color name="gray99">#999999</color>
+    <color name="black_333333">#333333</color>
+    <color name="gray_999999">#999999</color>
 
 </resources>
