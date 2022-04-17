@@ -17,7 +17,11 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_my_page.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_thunder.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/menu/menu.xml" value="0.1921875" />
-        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.6" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/ic_icn_check_inactive.xml" value="0.194" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_dotted_gray02_radius_10.xml" value="0.201" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray03_radius_10.xml" value="0.201" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray04_radius_10.xml" value="0.201" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.176" />
       </map>
     </option>
   </component>

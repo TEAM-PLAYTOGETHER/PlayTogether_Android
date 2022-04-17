@@ -10,9 +10,16 @@
 
     <!--main -->
     <color name="main_green">#C5F213</color>
-    <color name="main_black">#191919</color>
+    <color name="main_purple">#a258ff</color>
+    <color name="sub_purple">#fafafa</color>
+    <color name="gray_black">#191919</color>
+    <color name="gray_gray01">#828282</color>
+    <color name="gray_gray02">#c5c5c5</color>
+    <color name="gray_gray03">#e6e6e6</color>
+    <color name="gray_gray04">#fafafa</color>
     <color name="black_333333">#333333</color>
     <color name="gray_999999">#999999</color>
-    <color name="gray_gray01">#828282</color>
+
+
 
 </resources>

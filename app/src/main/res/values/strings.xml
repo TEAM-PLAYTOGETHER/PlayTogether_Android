@@ -8,8 +8,26 @@
     <string name="navigation_home">홈</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--common-->
     <string name="text_finish">완료</string>
+    <string name="text_title">제목</string>
+    <string name="text_date_type">YYYY.MM.DD</string>
+    <string name="text_time_type">NN:NN</string>
+    <string name="text_place">장소</string>
 
     <!--createThunder-->
-    <string name=""
+    <string name="createthunder_openthunder">번개를\n오픈해 볼까요?</string>
+    <string name="createthunder_thunder_name">번개 이름은 무엇인가요?</string>
+    <string name="createthunder_choose_category">카테고리를 골라주세요.</string>
+    <string name="createthunder_when_date">언제 열리는 번개인가요?</string>
+    <string name="createthunder_when_time">몇 시에 열리는 번개인가요?</string>
+    <string name="createthunder_where">어디서 열리는 번개인가요?</string>
+    <string name="createthunder_howmany">몇 명이 모이나요?</string>
+    <string name="createthunder_max20">최대 20명</string>
+    <string name="createthunder_explain">번개 소개글을 작성해주세요.</string>
+    <string name="createthunder_explaination">만나서 무엇을 할지, 위치 등을 구체적으로 적어주세요. 200자까지 쓸 수 있어요.</string>
+    <string name="no_constraint">인원제한 없음</string>
+
+
 </resources>
