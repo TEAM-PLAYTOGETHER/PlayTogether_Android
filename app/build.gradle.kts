@@ -1,3 +1,5 @@
+import java.util.regex.Pattern.compile
+
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
@@ -61,6 +63,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    //implementation("com.square.okhttp3:logging-interceptor:4.9.1")
 
 
 // DataStore
@@ -97,6 +100,7 @@ dependencies {
     implementation(ThirdPartyDependencies.retrofit)
     implementation(ThirdPartyDependencies.retrofitGsonConverter)
     implementation("com.squareup.retrofit2:retrofit-converters:2.4.0")
+    //implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
 // Androidx Security
     implementation(AndroidXDependencies.security)
