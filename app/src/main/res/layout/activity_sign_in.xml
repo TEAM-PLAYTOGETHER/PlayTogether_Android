@@ -88,6 +88,8 @@
             android:paddingBottom="20dp"
             android:textColorHint="@color/gray_gray01"
             android:textSize="14sp"
+            android:lines="1"
+            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_signin_id"
             app:layout_constraintTop_toBottomOf="@+id/tv_signin_id" />
@@ -116,10 +118,12 @@
             android:hint="@string/signin_input_pw"
             android:inputType="textPassword"
             android:paddingStart="19dp"
+            android:singleLine="true"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:textColorHint="@color/gray_gray01"
             android:textSize="14sp"
+            android:lines="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_signin_pw"
             app:layout_constraintTop_toBottomOf="@+id/tv_signin_pw" />
