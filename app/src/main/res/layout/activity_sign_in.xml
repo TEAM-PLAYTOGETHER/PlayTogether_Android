@@ -150,7 +150,7 @@
                 android:layout_width="1dp"
                 android:layout_height="12dp"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/rectangle_fill_grayadadad_0dp"
+                android:background="@drawable/rectangle_fill_grayadadad_radius_0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/text_sign_in_signup"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -173,7 +173,7 @@
                 android:layout_width="1dp"
                 android:layout_height="12dp"
                 android:layout_marginStart="15dp"
-                android:background="@drawable/rectangle_fill_grayadadad_0dp"
+                android:background="@drawable/rectangle_fill_grayadadad_radius_0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/text_sign_in_findpw"
                 app:layout_constraintTop_toTopOf="@+id/text_sign_in_horizontal_bar1" />
