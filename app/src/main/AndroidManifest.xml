@@ -15,9 +15,7 @@
         android:usesCleartextTraffic="true" >
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
-            android:exported="false"
-            android:label="@string/title_activity_sign_in"
-            android:theme="@style/Theme.PlayTogether_android.NoActionBar" />
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
             android:exported="true" />
