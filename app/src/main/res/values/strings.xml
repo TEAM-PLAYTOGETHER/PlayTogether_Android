@@ -43,4 +43,15 @@
     <string name="text_signup">회원가입</string>
 
 
+    <!--signUpInfo-->
+    <string name="signupinfo_main_message">안전한 번개를 위해\n정보를 입력해주세요</string>
+    <string name="text_name">이름</string>
+    <string name="signupinfo_input_name">성함을 입력해주세요</string>
+    <string name="text_gender">성별</string>
+    <string name="text_man">남</string>
+    <string name="text_woman">여</string>
+    <string name="text_birth">생년월일</string>
+    <string name="signupinfo_birth_example">ex. 1998.01.01</string>
+
+
 </resources>
