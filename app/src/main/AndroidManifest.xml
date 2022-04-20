@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.playtogether_android.app">
+    package="com.playtogether_android.app" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,13 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlayTogether_android"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".presentation.ui.sign.SignInActivity"
+            android:exported="false"
+            android:label="@string/title_activity_sign_in"
+            android:theme="@style/Theme.PlayTogether_android.NoActionBar" />
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

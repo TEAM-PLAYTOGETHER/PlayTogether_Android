@@ -30,4 +30,17 @@
     <string name="no_constraint">인원제한 없음</string>
 
 
+    <!--signIn-->
+    <string name="signin">로그인</string>
+    <string name="signin_main_message">함께 놀아요! \nPLAY TOGETHER</string>
+    <string name="signin_id">아이디</string>
+    <string name="signin_input_id">아이디를 입력해주세요</string>
+    <string name="signin_pw">비밀번호</string>
+    <string name="signin_input_pw">비밀번호를 입력해주세요</string>
+    <string name="signin_finish">로그인 하기</string>
+    <string name="signin_find_id">아이디 찾기</string>
+    <string name="signin_change_pw">비밀번호 변경</string>
+    <string name="signin_signup">회원가입</string>
+
+
 </resources>
