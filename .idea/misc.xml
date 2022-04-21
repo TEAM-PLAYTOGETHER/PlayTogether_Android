@@ -25,12 +25,17 @@
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray03_radius_10.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray03_radius_10dp.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_black02_radius_14.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray03_10dp.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray_black_radius_10.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_grayadadad_radius_0.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_green_border_black_radius_10.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_white_border_black01_radius10.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_applied.xml" value="0.12335359675785208" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.14628623188405798" />
-        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_thunder_detail.xml" value="0.2" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_thunder_detail.xml" value="0.264" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/dialog_yes_no.xml" value="0.4" />
       </map>
     </option>
   </component>
