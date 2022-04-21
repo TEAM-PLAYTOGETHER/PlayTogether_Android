@@ -184,10 +184,10 @@
 
         <Button
             android:id="@+id/btn_signupinfo_datepicker"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/rectangle_fill_gray_black_radius_10"
+            android:src="@drawable/ic_calendar"
             app:layout_constraintBottom_toBottomOf="@+id/et_signupinfo_birth"
             app:layout_constraintEnd_toEndOf="@+id/et_signupinfo_birth"
             app:layout_constraintTop_toTopOf="@+id/et_signupinfo_birth" />
