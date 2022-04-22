@@ -9,6 +9,7 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1135" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_img_go_active.xml" value="0.1735" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1135" />
+<<<<<<< HEAD
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_dotted_gray02_radius_10.xml" value="0.1125" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.132" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10dp.xml" value="0.1125" />
@@ -29,16 +30,40 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_info.xml" value="0.2" />
+=======
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_text.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
+>>>>>>> 0e5cb78ada73f044594ae6ac91c8f9d6a326bc37
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_test.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_home.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_my_page.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_thunder.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/menu/menu.xml" value="0.1921875" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/line_dotted_white.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/line_dotted_white_2.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_black02_radius_14.xml" value="0.1945" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_dotted_gray02_radius_10.xml" value="0.259" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray03_radius_10.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray03_radius_10dp.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_black02_radius_14.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray03_10dp.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray_black_radius_10.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_grayadadad_radius_0.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_green_border_black_radius_10.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_white_border_black01_radius10.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.2085" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_applied.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_thunder_detail.xml" value="0.264" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/dialog_yes_no.xml" value="0.4" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

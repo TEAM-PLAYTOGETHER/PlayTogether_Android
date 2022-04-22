@@ -16,6 +16,15 @@
         <activity
             android:name=".presentation.ui.sign.SignUpInfoActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".presentation.ui.home.AppliedActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ui.home.ThunderDetailActivity"
+            android:exported="true" />
+
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
             android:exported="true" />
