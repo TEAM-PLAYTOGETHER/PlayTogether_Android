@@ -1,17 +1,12 @@
 package com.playtogether_android.app.presentation.ui.sign
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.DatePicker
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
-import com.playtogether_android.app.databinding.ActivitySignInBinding
 import com.playtogether_android.app.databinding.ActivitySignUpInfoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import java.text.SimpleDateFormat
+import java.lang.String
 import java.util.*
 
 class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.activity_sign_up_info) {
@@ -22,7 +17,7 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
 
 
     private fun initDatePickerDialog() {
-        binding.btnSignupinfoDatepicker.setOnClickListener {
+        binding.ivSignupinfoDatepicker.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
 
             val datePickerDialog = DatePickerDialog(
@@ -33,9 +28,10 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
                     calendar.set(Calendar.MONTH, month)
                     calendar.set(Calendar.DAY_OF_YEAR, day)
 
+                    val month = month +1
+                    val dateString = String.format("%d.%02d.%02d", year, month, day)
 
-                    binding.etSignupinfoBirth.setText("$year.$month.$day")
-
+                    binding.etSignupinfoBirth.setText(dateString)
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -51,5 +47,6 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
             datePickerDialog.getButton(
                 DatePickerDialog.BUTTON_NEGATIVE).setTextColor(textColor)
         }
+
     }
 }

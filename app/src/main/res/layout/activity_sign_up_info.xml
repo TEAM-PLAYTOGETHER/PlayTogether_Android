@@ -178,12 +178,13 @@
             android:textSize="14sp"
             android:lines="1"
             android:singleLine="true"
+            android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_signupinfo_birth"
             app:layout_constraintTop_toBottomOf="@+id/tv_signupinfo_birth" />
 
-        <Button
-            android:id="@+id/btn_signupinfo_datepicker"
+        <ImageView
+            android:id="@+id/iv_signupinfo_datepicker"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="20dp"
