@@ -178,7 +178,7 @@
             android:textSize="14sp"
             android:lines="1"
             android:singleLine="true"
-            android:clickable="false"
+            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_signupinfo_birth"
             app:layout_constraintTop_toBottomOf="@+id/tv_signupinfo_birth" />

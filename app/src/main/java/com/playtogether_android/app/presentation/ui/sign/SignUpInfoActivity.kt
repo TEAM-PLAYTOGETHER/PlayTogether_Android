@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.sign
 
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
@@ -32,6 +33,7 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
                     val dateString = String.format("%d.%02d.%02d", year, month, day)
 
                     binding.etSignupinfoBirth.setText(dateString)
+                    binding.etSignupinfoBirth.setTextColor(Color.parseColor("#191919"))
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
