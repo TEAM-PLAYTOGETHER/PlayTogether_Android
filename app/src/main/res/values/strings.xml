@@ -51,4 +51,15 @@
     <!--thunderdetail-->
     <string name="thunderdetail_example">안녕하세요 저는 문수빈인데요. 제가 이번에 번개를 한 번 열어보려구 합니다. 장소는 저희 집이구요, 오실 때 귤 한 박스씩 사들고 오셔야 해요. 그럼 대문 활짝 열어두고 기다릴게요😊 아래 사진은 우리 집 오는 약도입니다. 다들 많은 신청 부탁드려요.\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크</string>
 
+    <!--signUpInfo-->
+    <string name="signupinfo_main_message">안전한 번개를 위해\n정보를 입력해주세요</string>
+    <string name="text_name">이름</string>
+    <string name="signupinfo_input_name">성함을 입력해주세요</string>
+    <string name="text_gender">성별</string>
+    <string name="text_man">남</string>
+    <string name="text_woman">여</string>
+    <string name="text_birth">생년월일</string>
+    <string name="signupinfo_birth_example">ex. 1998.01.01</string>
+
+
 </resources>

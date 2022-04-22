@@ -20,4 +20,16 @@
     <style name="Theme.PlayTogether_android.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.PlayTogether_android.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+
+    <style name="MySpinnerDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <!-- 상단 색 변경 -->
+        <item name="colorAccent">@color/gray_black</item>
+        <!-- 선택한 날짜를 표시할 색상 -->
+        <item name="colorControlActivated">@color/gray_black</item>
+        <item name="colorControlHighlight">@color/gray_black</item>
+    </style>
+
 </resources>
