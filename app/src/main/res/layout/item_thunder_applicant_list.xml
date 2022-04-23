@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rectangle_fill_gray_black_radius_10">
+
+    <ImageView
+        android:id="@+id/iv_applicant_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_img_profile"
+        android:paddingVertical="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_applicant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="김세후니"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:paddingVertical="16dp"
+        app:layout_constraintStart_toEndOf="@id/iv_applicant_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_applicant_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="25"
+        android:fontFamily="@font/pretendard_regular"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:paddingVertical="16dp"
+        app:layout_constraintStart_toEndOf="@id/tv_applicant_name"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="95dp"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
