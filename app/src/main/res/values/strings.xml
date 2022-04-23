@@ -8,4 +8,9 @@
     <string name="navigation_home">홈</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    HomeFragment-->
+    <string name="home_group_name">SOPT</string>
+
+
 </resources>

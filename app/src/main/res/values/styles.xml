@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="home_user_text">
+        <item name="android:textColor">@color/main_black</item>
+        <item name="android:textSize">35sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="lineHeight">45dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="home_image_text">
+        <item name="android:textColor">@color/main_black</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="home_title_text">
+        <item name="android:textColor">@color/main_black</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+</resources>

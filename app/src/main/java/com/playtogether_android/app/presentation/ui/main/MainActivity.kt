@@ -1,20 +1,15 @@
 package com.playtogether_android.app.presentation.ui.main
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.FragmentTransaction
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.HomeFragment
-import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
 import com.playtogether_android.app.presentation.ui.message.MessageFragment
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
-import com.playtogether_android.app.util.popFragmentBackStack
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
