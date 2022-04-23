@@ -21,6 +21,7 @@
     <string name="text_posting_report"><u>게시글 신고</u></string>
     <string name="text_no">아니오</string>
     <string name="text_yes">네</string>
+    <string name="slash">/</string>
 
     <!--createThunder-->
     <string name="createthunder_openthunder">번개를\n오픈해 볼까요?</string>
@@ -60,6 +61,8 @@
     <string name="text_woman">여</string>
     <string name="text_birth">생년월일</string>
     <string name="signupinfo_birth_example">ex. 1998.01.01</string>
-
+    
+<!--    AboutThunderTap-->
+    <string name="cancel_application">신청 취소</string>
 
 </resources>
