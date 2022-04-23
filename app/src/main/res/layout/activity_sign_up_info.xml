@@ -83,13 +83,13 @@
             android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/signupinfo_input_name"
+            android:lines="1"
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
+            android:singleLine="true"
             android:textColorHint="@color/gray_gray01"
             android:textSize="14sp"
-            android:lines="1"
-            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_signupinfo_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_signupinfo_name" />
@@ -135,10 +135,10 @@
                 android:id="@+id/tv_signupinfo_woman"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/selector_rectangle_border_gray0_to_fill_black"
                 android:paddingTop="14dp"
                 android:paddingBottom="14dp"
-                android:layout_marginStart="8dp"
                 android:text="@string/text_woman"
                 android:textAlignment="center"
                 android:textColor="@drawable/selector_text_gray01_to_main_green"
@@ -169,35 +169,47 @@
             android:layout_marginTop="13dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
+            android:enabled="false"
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/signupinfo_birth_example"
+            android:lines="1"
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
+            android:singleLine="true"
             android:textColorHint="@color/gray_gray01"
             android:textSize="14sp"
-            android:lines="1"
-            android:singleLine="true"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_signupinfo_birth"
             app:layout_constraintTop_toBottomOf="@+id/tv_signupinfo_birth" />
 
-        <ImageView
-            android:id="@+id/iv_signupinfo_datepicker"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_calendar"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_picker_icon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/et_signupinfo_birth"
             app:layout_constraintEnd_toEndOf="@+id/et_signupinfo_birth"
-            app:layout_constraintTop_toTopOf="@+id/et_signupinfo_birth" />
+            app:layout_constraintStart_toStartOf="@+id/et_signupinfo_birth"
+            app:layout_constraintTop_toTopOf="@+id/et_signupinfo_birth">
 
+
+            <ImageView
+                android:id="@+id/iv_signupinfo_datepicker"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="14dp"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_picker_icon"
+                app:layout_constraintEnd_toEndOf="@+id/cl_picker_icon"
+                app:layout_constraintTop_toTopOf="@+id/cl_picker_icon" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="36dp"
             android:background="@drawable/selector_rectangle_fill_gray03_to_black"
             android:fontFamily="@font/pretendard_bold"
             android:paddingTop="19dp"
@@ -206,7 +218,6 @@
             android:textAlignment="center"
             android:textColor="@drawable/selector_text_gray01_to_main_green"
             android:textSize="15sp"
-            android:layout_marginBottom="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
