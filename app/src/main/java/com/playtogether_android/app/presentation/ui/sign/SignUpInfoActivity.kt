@@ -18,7 +18,7 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
 
 
     private fun initDatePickerDialog() {
-        binding.ivSignupinfoDatepicker.setOnClickListener {
+        binding.clPickerIcon.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
 
             val datePickerDialog = DatePickerDialog(
