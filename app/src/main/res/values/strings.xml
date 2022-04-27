@@ -77,7 +77,8 @@
     <string name="cancel_application">신청 취소</string>
 
     <!-- onBoarding -->
-    <string name="onboarding_mbti">님의\nMBTI는 무엇인가요?</string>
+    <string name="onboarding_user">님의</string>
+    <string name="onboarding_mbti">MBTI는 무엇인가요?</string>
     <string name="onboarding_select_mbti">해당하는 MBTI를 선택해주세요</string>
     <string name="onboarding_e">E</string>
     <string name="onboarding_n">N</string>

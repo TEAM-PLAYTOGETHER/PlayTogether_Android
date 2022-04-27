@@ -9,13 +9,21 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1135" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_icn_back.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1135" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/radio_flat_regular.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/radio_flat_selected.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/radio_flat_selector.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/radio_flat_text_selector.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_black01_radius_10.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_black01_radius_5.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray3_radius_0.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_grayadadad_radius_0.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_green.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_text.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_text_gray01_to_main_green.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.23385416666666667" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.536" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.264" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_finish.xml" value="0.144" />

@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".presentation.ui.onboarding.FirstOnBoardingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignUpFinishActivity"
             android:exported="true" />
