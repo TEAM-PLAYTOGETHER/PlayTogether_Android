@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_rectangle_fill_gray03_to_black01.xml" value="0.1015" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-mdpi/rectangle_fill_gray03_border_gray02_radius_10.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-mdpi/selector_rectangle_fill_gray3_to_fill_green.xml" value="0.1015" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_electric_bolt_24.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.1" />
@@ -19,11 +22,15 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray3_radius_0.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_grayadadad_radius_0.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_green.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_green_border_black_radius_10.xml" value="0.1015" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_text.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_border_gray03_to_gray01.xml" value="0.1015" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_border_gray0_to_fill_black.xml" value="0.1015" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_fill_gray03_to_black.xml" value="0.1015" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_text_gray01_to_main_green.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.23385416666666667" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.2" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_finish.xml" value="0.144" />

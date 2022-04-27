@@ -88,5 +88,8 @@
     <string name="onboarding_s">S</string>
     <string name="onboarding_t">T</string>
     <string name="onboarding_j">J</string>
+    <string name="text_next">다음</string>
+    <string name="text_get_start">시작하기</string>
+    <string name="text_no_relevant">해당사항 없음</string>
 
 </resources>
