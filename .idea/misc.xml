@@ -7,18 +7,28 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1135" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_icn_back.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1135" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray3_radius_0.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_grayadadad_radius_0.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_green.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_text.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.23385416666666667" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.11550151975683891" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.536" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_finish.xml" value="0.144" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_info.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_main.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_test.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_thunder_detail.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/dialog_yes_no.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_home.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_my_page.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_thunder.xml" value="0.2006340579710145" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_thunder_applicant_list.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/menu/menu.xml" value="0.1921875" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/line_dotted_white.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/line_dotted_white_2.xml" value="0.2085" />

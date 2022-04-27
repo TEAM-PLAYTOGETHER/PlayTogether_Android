@@ -8,9 +8,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_first_onboarding_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.sign.SignInActivity">
+        tools:context=".presentation.ui.onboarding.FirstOnBoardingActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_signin_top"
@@ -25,12 +26,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_icn_back" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:id="@+id/view_first_onboarding_progressbar_green"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/rectangle_fill_green_radius_0"
+            app:layout_constraintEnd_toStartOf="@+id/view_first_onboarding_progressbar_gray"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_signin_top" />
+
+
+        <View
+            android:id="@+id/view_first_onboarding_progressbar_gray"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/rectangle_fill_gray3_radius_0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="7"
+            app:layout_constraintStart_toEndOf="@+id/view_first_onboarding_progressbar_green"
+            app:layout_constraintTop_toBottomOf="@+id/cl_signin_top" />
 
         <TextView
             android:id="@+id/tv_signin_title"
