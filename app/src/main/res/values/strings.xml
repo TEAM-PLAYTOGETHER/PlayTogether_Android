@@ -69,6 +69,8 @@
     <string name="signupmain_expression_pw">8-15자 이내 대문자, 소문자, 숫자, 특수문자 사용 가능</string>
     <string name="signupmain_check_pw">비밀번호 확인</string>
     <string name="signupmain_agreement_pw">비밀번호 일치</string>
+    <string name="signupmain_agreement_pw_true">비밀번호가 일치합니다</string>
+    <string name="signupmain_agreement_pw_false">비밀번호가 일치하지 않습니다</string>
     <string name="signup_finish_main">회원가입이 완료되었어요!</string>
     <string name="signup_finish_welcome">님, 반가워요</string>
     <string name="signup_finish_start">시작하기</string>
