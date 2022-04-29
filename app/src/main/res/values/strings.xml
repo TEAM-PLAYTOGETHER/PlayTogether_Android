@@ -22,6 +22,7 @@
     <string name="text_no">아니오</string>
     <string name="text_yes">네</string>
     <string name="slash">/</string>
+    <string name="text_check">확인</string>
 
     <!--createThunder-->
     <string name="createthunder_openthunder">번개를\n오픈해 볼까요?</string>
