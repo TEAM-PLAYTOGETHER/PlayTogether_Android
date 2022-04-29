@@ -18,6 +18,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
         initIdTextField()
         initPwTextField()
+        Log.d("test1", "test입니다")
         initPwCheckTextField()
         pwCheckTextWatcher()
         pwTextWatcher()
@@ -74,7 +75,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
             override fun afterTextChanged(p0: Editable?) {
 
-                if(etSignupmainPw.text.toString()== ""){
+                if (etSignupmainPw.text.toString() == "") {
                     tvSignupmainPwExpression.visibility = View.VISIBLE
                     tvSignupmainPwExpressionOk.visibility = View.INVISIBLE
                 } else {
@@ -88,21 +89,21 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //비밀번호 확인 textwatcher
     private fun pwCheckTextWatcher() = with(binding) {
-        if (etSignupmainPwCheck.text.isEmpty()) {
-            tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
-            tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
-            tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
-        } else {
-            etSignupmainPwCheck.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun afterTextChanged(p0: Editable?) {
+        etSignupmainPwCheck.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                if (etSignupmainPwCheck.text.toString() == "") {
+                    tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
+                    tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
+                    tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
+                } else {
 
                     isPwSame()
 
                 }
-            })
-        }
+            }
+        })
     }
 
     //비밀번호, 비밀번호 확인 일치 여부 체크 함수
@@ -111,12 +112,20 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             tvSignupmainPwExpressionCheck.visibility = View.INVISIBLE
             tvSignupmainPwExpressionCheckTrue.visibility = View.VISIBLE
             tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
+            ivPwCheckCheck.visibility= View.VISIBLE
             Timber.d("비밀번호 일치")
         } else {
-            tvSignupmainPwExpressionCheck.visibility = View.INVISIBLE
-            tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
-            tvSignupmainPwExpressionCheckFalse.visibility = View.VISIBLE
-            Timber.d("비밀번호 일치하지 않음")
+            if(etSignupmainPwCheck.text.toString()=="") {
+                tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
+                tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
+                tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
+            } else {
+                tvSignupmainPwExpressionCheck.visibility = View.INVISIBLE
+                tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
+                tvSignupmainPwExpressionCheckFalse.visibility = View.VISIBLE
+                ivPwCheckCheck.visibility = View.INVISIBLE
+                Timber.d("비밀번호 일치하지 않음")
+            }
         }
     }
 }
