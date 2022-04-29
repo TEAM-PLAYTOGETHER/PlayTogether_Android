@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".presentation.ui.onboarding.FirstOnBoardingActivity"
             android:exported="true" />
@@ -48,7 +49,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
     </application>
 
 </manifest>
