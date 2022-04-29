@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.sign.SignUpMainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_signupmain_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_black"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_signupmain_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_icn_back" />
+
+            <TextView
+                android:id="@+id/tv_signupmain_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/text_signup"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/iv_signupmain_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_signupmain_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/signupmain_message"
+            android:textColor="@color/gray_black"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_signupmain_top" />
+
+        <TextView
+            android:id="@+id/tv_signupmain_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/text_id"
+            android:textColor="@color/gray_black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_signupmain_message"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signupmain_message" />
+
+
+        <EditText
+            android:id="@+id/et_signupmain_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
+            android:fontFamily="@font/pretendard_regular"
+            android:hint="@string/signupmain_input_id"
+            android:paddingStart="19dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textColorHint="@color/gray_gray01"
+            android:textSize="14sp"
+            android:lines="1"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_signupmain_id"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signupmain_id" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_rectangle_fill_gray03_to_black01"
+            android:paddingStart="13dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp"
+            android:layout_marginEnd="13dp"
+            android:text="@string/text_duplication_check"
+            app:layout_constraintBottom_toBottomOf="@+id/et_signupmain_id"
+            app:layout_constraintEnd_toEndOf="@+id/et_signupmain_id"
+            app:layout_constraintTop_toTopOf="@+id/et_signupmain_id" />
+
+
+        <TextView
+            android:id="@+id/tv_signupmain_id_expression"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/signupmain_expression_id"
+            android:textColor="@color/gray_gray02"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/et_signupmain_id"
+            app:layout_constraintTop_toBottomOf="@+id/et_signupmain_id" />
+
+        <TextView
+            android:id="@+id/tv_signupmain_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/text_pw"
+            android:textColor="@color/gray_black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_signupmain_id_expression"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signupmain_id_expression" />
+
+
+        <EditText
+            android:id="@+id/et_signupmain_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
+            android:fontFamily="@font/pretendard_regular"
+            android:hint="@string/signupmain_input_pw"
+            android:paddingStart="19dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textColorHint="@color/gray_gray01"
+            android:textSize="14sp"
+            android:lines="1"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_signupmain_pw"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signupmain_pw" />
+
+
+        <TextView
+            android:id="@+id/tv_signupmain_pw_expression"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/signupmain_expression_pw"
+            android:textColor="@color/gray_gray02"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/et_signupmain_pw"
+            app:layout_constraintTop_toBottomOf="@+id/et_signupmain_pw" />
+
+        <EditText
+            android:id="@+id/et_signupmain_pw_check"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
+            android:fontFamily="@font/pretendard_regular"
+            android:hint="@string/signupmain_check_pw"
+            android:paddingStart="19dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textColorHint="@color/gray_gray01"
+            android:textSize="14sp"
+            android:lines="1"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_signupmain_pw_expression"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signupmain_pw_expression" />
+
+
+        <TextView
+            android:id="@+id/tv_signupmain_pw_expression_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/signupmain_agreement_pw"
+            android:textColor="@color/gray_gray02"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/et_signupmain_pw_check"
+            app:layout_constraintTop_toBottomOf="@+id/et_signupmain_pw_check" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
