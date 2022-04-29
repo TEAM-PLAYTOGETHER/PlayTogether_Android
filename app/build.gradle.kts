@@ -1,8 +1,8 @@
 import java.util.regex.Pattern.compile
 
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -22,11 +22,17 @@ android {
         getByName("debug") {
             isMinifyEnabled = false
             isDebuggable = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -53,9 +59,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    implementation (project(":domain"))
-    implementation (project(":data"))
-
+    implementation(project(":domain"))
+    implementation(project(":data"))
 
     //ViewModel
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
@@ -75,6 +80,10 @@ dependencies {
     implementation(AndroidXDependencies.activityKtx)
     implementation(AndroidXDependencies.viewModelKtx)
     implementation(AndroidXDependencies.liveDataKtx)
+
+// SwipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    implementation ("com.github.nabil6391:LottieSwipeRefreshLayout:1.0.0")
 
 // Glide
     implementation(ThirdPartyDependencies.glide)
@@ -142,7 +151,7 @@ dependencies {
 
 
     //dot indicator
-    implementation ("com.tbuonomo:dotsindicator:4.2")
+    implementation("com.tbuonomo:dotsindicator:4.2")
 
     //Timber
     implementation("com.jakewharton.timber:timber:4.7.1")

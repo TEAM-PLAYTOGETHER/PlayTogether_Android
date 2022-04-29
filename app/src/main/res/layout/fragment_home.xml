@@ -7,160 +7,174 @@
 
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_my_page_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_home_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="14dp"
-            android:src="@drawable/ic_logo"
+        <com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
+            android:id="@+id/lsrl_home_container"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_home_group_title"
-            style="@style/home_title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="@string/home_group_name"
-            app:layout_constraintStart_toEndOf="@id/iv_home_logo"
-            app:layout_constraintTop_toTopOf="@id/iv_home_logo"
-
-            tools:text="SOPT" />
-
-        <TextView
-            android:id="@+id/tv_home_unknown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/pretendard_medium"
-            android:textColor="@color/gray_text"
-            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_home_logo"
-            tools:text="ff" />
-
-
-        <TextView
-            android:id="@+id/tv_home_user_name"
-            style="@style/home_user_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="120dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_group_title"
-            tools:text="채연" />
-
-        <TextView
-            android:id="@+id/tv_home_user_name_end"
-            style="@style/home_user_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/tv_home_user_name"
-            app:layout_constraintTop_toTopOf="@id/tv_home_user_name"
-            tools:text="아," />
-
-        <View
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="0dp"
-            android:layout_height="10dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_home_user_title"
-            app:layout_constraintEnd_toEndOf="@id/tv_home_user_title"
-            app:layout_constraintStart_toStartOf="@id/tv_home_user_title"
-            tools:background="@color/main_green" />
+            android:layout_height="0dp">
 
-        <TextView
-            android:id="@+id/tv_home_user_title"
-            style="@style/home_user_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/tv_home_user_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_user_name"
-            tools:text="내일 뭐 해?" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_my_page_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_home_eat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/img_temp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_user_title" />
+                <ImageView
+                    android:id="@+id/iv_home_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/ic_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_home_eat"
-            style="@style/home_image_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="@id/iv_home_eat"
-            app:layout_constraintStart_toStartOf="@id/iv_home_eat"
-            app:layout_constraintTop_toBottomOf="@id/iv_home_eat"
-            tools:text="먹을래" />
+                <TextView
+                    android:id="@+id/tv_home_group_title"
+                    style="@style/home_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/home_group_name"
+                    app:layout_constraintStart_toEndOf="@id/iv_home_logo"
+                    app:layout_constraintTop_toTopOf="@id/iv_home_logo"
+                    tools:text="SOPT" />
 
-
-        <ImageView
-            android:id="@+id/iv_home_go"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/img_temp"
-            app:layout_constraintStart_toEndOf="@id/iv_home_eat"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_user_title" />
-
-        <TextView
-            style="@style/home_image_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="@id/iv_home_go"
-            app:layout_constraintStart_toStartOf="@id/iv_home_go"
-            app:layout_constraintTop_toBottomOf="@id/iv_home_go"
-            tools:text="길래" />
-
-        <TextView
-            style="@style/home_image_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="@id/iv_home_do"
-            app:layout_constraintStart_toStartOf="@id/iv_home_do"
-            app:layout_constraintTop_toBottomOf="@id/iv_home_do"
-            tools:text="할래" />
-
-        <ImageView
-            android:id="@+id/iv_home_do"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/img_temp"
-            app:layout_constraintStart_toEndOf="@id/iv_home_go"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_user_title" />
-
-        <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/tv_home_new_title"
-            style="@style/home_title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_eat"
-            tools:text="✨ NEW" />
+                <TextView
+                    android:id="@+id/tv_home_unknown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textColor="@color/gray_text"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/iv_home_logo"
+                    tools:text="ff" />
 
 
+                <TextView
+                    android:id="@+id/tv_home_user_name"
+                    style="@style/home_user_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="120dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_group_title"
+                    tools:text="채연" />
+
+                <TextView
+                    android:id="@+id/tv_home_user_name_end"
+                    style="@style/home_user_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/tv_home_user_name"
+                    app:layout_constraintTop_toTopOf="@id/tv_home_user_name"
+                    tools:text="아," />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_home_user_title"
+                    app:layout_constraintEnd_toEndOf="@id/tv_home_user_title"
+                    app:layout_constraintStart_toStartOf="@id/tv_home_user_title"
+                    tools:background="@color/main_green" />
+
+                <TextView
+                    android:id="@+id/tv_home_user_title"
+                    style="@style/home_user_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_home_user_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_user_name"
+                    tools:text="내일 뭐 해?" />
+
+                <ImageView
+                    android:id="@+id/iv_home_eat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/img_temp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_user_title" />
+
+                <TextView
+                    android:id="@+id/tv_home_eat"
+                    style="@style/home_image_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_home_eat"
+                    app:layout_constraintStart_toStartOf="@id/iv_home_eat"
+                    app:layout_constraintTop_toBottomOf="@id/iv_home_eat"
+                    tools:text="먹을래" />
+
+
+                <ImageView
+                    android:id="@+id/iv_home_go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/img_temp"
+                    app:layout_constraintStart_toEndOf="@id/iv_home_eat"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_user_title" />
+
+                <TextView
+                    style="@style/home_image_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_home_go"
+                    app:layout_constraintStart_toStartOf="@id/iv_home_go"
+                    app:layout_constraintTop_toBottomOf="@id/iv_home_go"
+                    tools:text="길래" />
+
+                <TextView
+                    style="@style/home_image_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_home_do"
+                    app:layout_constraintStart_toStartOf="@id/iv_home_do"
+                    app:layout_constraintTop_toBottomOf="@id/iv_home_do"
+                    tools:text="할래" />
+
+                <ImageView
+                    android:id="@+id/iv_home_do"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/img_temp"
+                    app:layout_constraintStart_toEndOf="@id/iv_home_go"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_user_title" />
+
+                <TextView
+                    android:id="@+id/tv_home_new_title"
+                    style="@style/home_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_eat"
+                    tools:text="✨ NEW" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
