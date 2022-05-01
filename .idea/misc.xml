@@ -18,6 +18,7 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_my_page.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_thunder.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/menu/menu.xml" value="0.1921875" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/circle_main_green.xml" value="0.2345" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/ic_icn_arrow_right.xml" value="0.21" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/line_dotted_black.xml" value="0.21" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/line_dotted_white.xml" value="0.2085" />
@@ -42,7 +43,9 @@
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_thunder_applied.xml" value="0.264" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_thunder_detail.xml" value="0.4" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/dialog_yes_no.xml" value="0.4" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.536" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_members.xml" value="0.264" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_message_room.xml" value="0.4" />
       </map>
     </option>
   </component>
