@@ -23,7 +23,7 @@ class ThunderDetailActivity : BaseActivity<ActivityThunderDetailBinding>(R.layou
         dialog.setOnClickedListener(object:CustomDialog.ButtonClickListener{
             override fun onClicked(num: Int) {
                 if(num==1){
-                    val intent = Intent(this@ThunderDetailActivity, AppliedActivity::class.java)
+                    val intent = Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
                     startActivity(intent)
                     this@ThunderDetailActivity.finish()
                 }

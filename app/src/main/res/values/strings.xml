@@ -21,7 +21,8 @@
     <string name="text_posting_report"><u>게시글 신고</u></string>
     <string name="text_no">아니오</string>
     <string name="text_yes">네</string>
-    <string name="slash">/</string>
+    <string name="text_slash">/</string>
+    <string name="text_read_detail">자세히 보기</string>
 
     <!--createThunder-->
     <string name="createthunder_openthunder">번개를\n오픈해 볼까요?</string>
@@ -51,6 +52,10 @@
 
     <!--thunderdetail-->
     <string name="thunderdetail_example">안녕하세요 저는 문수빈인데요. 제가 이번에 번개를 한 번 열어보려구 합니다. 장소는 저희 집이구요, 오실 때 귤 한 박스씩 사들고 오셔야 해요. 그럼 대문 활짝 열어두고 기다릴게요😊 아래 사진은 우리 집 오는 약도입니다. 다들 많은 신청 부탁드려요.\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크</string>
+
+    <!--applied complete-->
+    <string name="applied_complete">번개 신청을\n완료했어요!</string>
+    <string name="applied_applier">"번개 신청자"</string>
 
     <!--signUp-->
     <string name="signupinfo_main_message">안전한 번개를 위해\n정보를 입력해주세요</string>
