@@ -102,4 +102,6 @@
     <string name="text_get_start">시작하기</string>
     <string name="text_no_relevant">해당사항 없음</string>
 
+    <!-- message -->
+    <string name="messageBox">쪽지함</string>
 </resources>
