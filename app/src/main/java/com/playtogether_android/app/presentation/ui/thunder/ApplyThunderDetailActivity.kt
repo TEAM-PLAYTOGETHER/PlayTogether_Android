@@ -26,11 +26,17 @@ class ApplyThunderDetailActivity : BaseActivity<ActivityApplyThunderDetailBindin
         dialog.setOnClickedListener(object:CustomDialog.ButtonClickListener {
             override fun onClicked(num: Int) {
                 if(num==1) {
-                    Toast.makeText(this@ApplyThunderDetailActivity, "신청 취소 완료", Toast.LENGTH_LONG).show()
-
+                    showConfirmDialog()
+                    Toast.makeText(this@ApplyThunderDetailActivity, "신청취소완료", Toast.LENGTH_LONG).show()
                 }
             }
         })
+    }
+
+    private fun showConfirmDialog() {
+        val title = "신청 취소되었습니다."
+        val dialog = CustomDialog(this, title)
+        dialog.showConfirmDialog(R.layout.dialog_check)
     }
 
 
