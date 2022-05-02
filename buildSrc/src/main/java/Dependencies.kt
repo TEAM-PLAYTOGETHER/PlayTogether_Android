@@ -6,6 +6,7 @@ object Apps {
     var versionName = "1.0.0"
     const val pacakageName = "com.playtogether_android.app"
 }
+
 object Versions {
     const val kotlin_version = "1.5.21"
     const val core_ktx_version = "1.3.2"
@@ -39,7 +40,6 @@ object Versions {
 }
 
 
-
 object KotlinDependencies {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
 }
@@ -62,9 +62,11 @@ object AndroidXDependencies {
         "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
     const val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
     const val security = "androidx.security:security-crypto:${Versions.security_version}"
-    const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinx_serialization_version}"
+    const val kotlinxSerialization =
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinx_serialization_version}"
     const val cardview = "androidx.cardview:cardview:${Versions.cardview_version}"
-    const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_ktx_version}"
+    const val liveDataKtx =
+        "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_ktx_version}"
 
 }
 
@@ -89,6 +91,7 @@ object ThirdPartyDependencies {
     const val okhttpBOM = "com.squareup.okhttp3:okhttp-bom:${Versions.okhttp_version}"
     const val okhttp = "com.squareup.okhttp3:okhttp"
     const val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor"
+    const val lottieSwipeRefreshLayout = "com.github.nabil6391:LottieSwipeRefreshLayout:1.0.0"
 }
 
 
