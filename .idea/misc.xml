@@ -32,6 +32,7 @@
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray03_10dp.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray04_border_black01_radius10.xml" value="0.21" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray04_border_black01_radius_10.xml" value="0.21" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray05_radius_10.xml" value="0.2065" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_gray_black_radius_10.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_grayadadad_radius_0.xml" value="0.2085" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/drawable/rectangle_fill_green_border_black_radius_10.xml" value="0.2085" />
@@ -43,9 +44,12 @@
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_thunder_applied.xml" value="0.264" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_thunder_detail.xml" value="0.4" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/dialog_yes_no.xml" value="0.4" />
-        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.536" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/fragment_in_chatting.xml" value="0.264" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.264" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_members.xml" value="0.264" />
         <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_message_room.xml" value="0.4" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_my_chat.xml" value="1.2" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_other_chat.xml" value="0.6" />
       </map>
     </option>
   </component>
