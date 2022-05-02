@@ -9,7 +9,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_my_page_main"
+        android:id="@+id/cl_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

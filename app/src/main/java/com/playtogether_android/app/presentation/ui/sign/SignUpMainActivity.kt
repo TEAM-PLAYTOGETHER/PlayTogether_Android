@@ -1,27 +1,32 @@
 package com.playtogether_android.app.presentation.ui.sign
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.regex.Pattern
 
 class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.activity_sign_up_main) {
+
+    private val signViewModel: SignViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initIdTextField()
         initPwTextField()
-        Log.d("test1", "test입니다")
         initPwCheckTextField()
         pwCheckTextWatcher()
         pwTextWatcher()
+        actvieDuplicationBtn()
+        idTextWatcher()
     }
 
     //id editText 클릭 리스너
@@ -46,20 +51,68 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         }
     }
 
+    //아이디 정규식
+    private fun isVaildRegistrationId() = with(binding) {
+        if(!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())){
+            tvSignupmanIdDuplication.isSelected = false
+            tvSignupmainIdExpressionWarn.visibility = View.VISIBLE
+            tvSignupmainIdExpression.visibility = View.INVISIBLE
+            Timber.d("정규식 맞지 않음")
+        } else {
+            tvSignupmanIdDuplication.isSelected = true
+            tvSignupmainIdExpressionWarn.visibility = View.INVISIBLE
+            tvSignupmainIdExpression.visibility = View.INVISIBLE
+            tvSignupmanIdDuplication.isSelected = true
+            Timber.d("정규식 맞지 않음")
+        }
+    }
+
+    //중복 확인 버튼 활성화 클릭 리스너
+    private fun actvieDuplicationBtn() = with(binding) {
+        tvSignupmainNext.setOnClickListener {
+            if (tvSignupmanIdDuplication.isSelected == true or tvSignupmainNext.isSelected) {
+                startActivity(Intent(this@SignUpMainActivity, SignInActivity::class.java))
+                finish()
+            }
+        }
+    }
+
+
     //비밀번호 정규식
-    fun isValidRegistrationPw() = with(binding) {
-        if (!Pattern.matches(
-                "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,20}\$",
-                etSignupmainPw.text.toString()
-            )
-        ) {
+    private fun isValidRegistrationPw() = with(binding) {
+        if (!Pattern.matches("^[a-z|A-Z|0-9|(!,@,#,$,&,*,(,))|]{8,15}", etSignupmainPw.text.toString())) {
             tvSignupmainPwExpression.setTextColor(Color.parseColor("#FF0000"))
+            tvSignupmainPwExpression.visibility = View.VISIBLE
+            ivPwCheck.visibility = View.INVISIBLE
+            tvSignupmainPwExpressionOk.visibility = View.INVISIBLE
         } else {
             tvSignupmainPwExpression.visibility = View.INVISIBLE
             tvSignupmainPwExpressionOk.visibility = View.VISIBLE
-            Log.d("찍히나", "test")
+            ivPwCheck.visibility = View.VISIBLE
             //textSignupBasicinfoPwTitle.setTextColor(Color.parseColor("#94959E"))
         }
+    }
+
+
+    //아이디 textwatcher
+    private fun idTextWatcher()= with(binding) {
+        etSignupmainId.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (signViewModel.id.value != etSignupmainId.text.toString()) {
+
+                }
+                isVaildRegistrationId()
+            }
+
+        })
     }
 
     //비밀번호 textwatcher
