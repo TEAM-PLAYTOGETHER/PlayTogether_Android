@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.home.AppliedActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_thunderdetail_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_black"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_thunderdetail_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:layout_marginStart="10dp"
+                android:padding="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_icn_clear" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/applied_complete"
+                android:fontFamily="@font/pretendard_regular"
+                android:includeFontPadding="false"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_thunderdetail_back" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/sc_thunderdetail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toBottomOf="@id/cl_thunderdetail_top"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_thunderdetail_middle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_applied_applier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/applied_applier"
+                    android:textColor="@color/gray_black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_thunderdetail_content" />
+
+                <TextView
+                    android:id="@+id/tv_applied_member_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/gray_black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_applied_applier"
+                    app:layout_constraintStart_toEndOf="@+id/tv_applied_applier"
+                    app:layout_constraintTop_toTopOf="@+id/tv_applied_applier"
+                    tools:text="(2/6)" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_members"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_applied_applier" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_thunderdetail_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/rectangle_fill_gray04_border_black01_radius_10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/gray_black"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="우리집에서 피자 먹기" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/text_date"
+                        android:textColor="@color/gray_gray01"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_title" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_date_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/gray_black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_date"
+                        app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_date"
+                        app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_date"
+                        tools:text="2022.04.15" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/text_time"
+                        android:textColor="@color/gray_gray01"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_date"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_date" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_time_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/gray_black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_time"
+                        app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_time"
+                        app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_time"
+                        tools:text="18:00 ~" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/text_place"
+                        android:textColor="@color/gray_gray01"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_time"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_time" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_place_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/gray_black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_place"
+                        app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_place"
+                        app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_place"
+                        tools:text="우리집" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/text_category"
+                        android:textColor="@color/gray_gray01"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_place"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_place" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_category_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/gray_black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_category"
+                        app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_category"
+                        app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_category"
+                        tools:text="음식" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_dotted_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/line_dotted_black"
+                        app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_category" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginVertical="4dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="112dp"
+                        android:paddingVertical="9dp"
+                        android:text="@string/text_read_detail"
+                        android:textColor="@color/gray_black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_dotted_line" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,13 +1,10 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.playtogether_android.app.R
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
-import com.playtogether_android.app.presentation.ui.home.AppliedActivity
 import com.playtogether_android.app.util.CustomDialog
 
 class ApplyThunderDetailActivity : BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
