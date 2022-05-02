@@ -119,7 +119,7 @@
             app:layout_constraintTop_toBottomOf="@id/ll_thunder_align_container"
             tools:listitem="@layout/item_thunder_list" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fab_thunderlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,8 +129,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_height="64dp"
-            tools:layout_width="64dp"
-             />
+            tools:layout_width="64dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

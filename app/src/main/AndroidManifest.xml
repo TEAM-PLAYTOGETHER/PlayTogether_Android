@@ -16,7 +16,7 @@
 
         <activity
             android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.home.ThunderAppliedActivity"
             android:exported="false" />
