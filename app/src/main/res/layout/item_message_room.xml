@@ -11,9 +11,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="19dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_czonstraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.111"
         app:srcCompat="@drawable/ic_img_profile" />
