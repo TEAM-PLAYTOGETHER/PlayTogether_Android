@@ -15,8 +15,10 @@
         <entry key="app/src/main/res/drawable/rectangle_border_dotted_gray02_radius_10.xml" value="0.129" />
         <entry key="app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable/rectangle_border_gray03_radius_10.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable/rectangle_fill_black01_radius_10.xml" value="0.167" />
         <entry key="app/src/main/res/drawable/rectangle_fill_black01_radius_5.xml" value="0.129" />
         <entry key="app/src/main/res/drawable/rectangle_fill_gray04_border_black01_radius_10.xml" value="0.129" />
+        <entry key="app/src/main/res/drawable/rectangle_right_fill_black01_radius_10.xml" value="0.167" />
         <entry key="app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.2625" />
         <entry key="app/src/main/res/drawable/selector_nav_menu_text.xml" value="0.2625" />
         <entry key="app/src/main/res/layout-v28/activity_thunder_list.xml" value="0.2671875" />

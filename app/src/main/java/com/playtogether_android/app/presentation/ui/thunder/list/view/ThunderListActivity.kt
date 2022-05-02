@@ -14,6 +14,7 @@ class ThunderListActivity :
 
     private fun initView() {
         binding.fabThunderlist.layoutParams.apply {
+            width = resources.getDimension(R.dimen.fab_size).toInt()
             height = resources.getDimension(R.dimen.fab_size).toInt()
         }
         initData()

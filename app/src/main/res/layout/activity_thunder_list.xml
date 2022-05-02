@@ -129,7 +129,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_height="64dp"
-            tools:layout_width="64dp" />
+            tools:layout_width="64dp"
+             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
