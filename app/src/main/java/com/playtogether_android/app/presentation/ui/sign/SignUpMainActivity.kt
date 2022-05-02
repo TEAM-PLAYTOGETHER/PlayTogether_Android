@@ -29,25 +29,26 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         idTextWatcher()
     }
 
+
     //id editText 클릭 리스너
-    private fun initIdTextField() {
-        binding.etSignupmainId.setOnClickListener {
-            binding.etSignupmainId.isFocused
+    private fun initIdTextField() = with(binding) {
+        etSignupmainId.setOnClickListener {
+            etSignupmainId.isFocused
         }
     }
 
 
     //pw editText 클릭 리스너
-    private fun initPwTextField() {
-        binding.etSignupmainPw.setOnClickListener {
-            binding.etSignupmainPw.isFocused
+    private fun initPwTextField() = with(binding) {
+        etSignupmainPw.setOnClickListener {
+            etSignupmainPw.isFocused
         }
     }
 
     //pw check editText 클릭 리스너
-    private fun initPwCheckTextField() {
-        binding.etSignupmainPwCheck.setOnClickListener {
-            binding.etSignupmainPwCheck.isFocused
+    private fun initPwCheckTextField() = with(binding) {
+        etSignupmainPwCheck.setOnClickListener {
+            etSignupmainPwCheck.isFocused
         }
     }
 
