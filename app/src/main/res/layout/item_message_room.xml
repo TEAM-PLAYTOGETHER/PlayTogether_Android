@@ -11,6 +11,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="19dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_message_room_content"
         app:layout_constraintStart_toEndOf="@+id/iv_message_room_profile"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="궈뇽민" />
+        tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/tv_message_room_content"
@@ -48,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_message_room_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_message_room_name"
-        tools:text="네 가능합니다." />
+        tools:text="@tools:sample/lorem" />
 
     <TextView
         android:id="@+id/tv_message_room_time"

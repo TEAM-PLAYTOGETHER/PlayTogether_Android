@@ -28,7 +28,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.thunder.ApplyThunderDetailActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignUpInfoActivity"
             android:exported="true" />
