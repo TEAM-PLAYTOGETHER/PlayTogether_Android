@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true">
 
         <activity
+            android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.home.ThunderAppliedActivity"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignUpMainActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.thunder.ApplyThunderDetailActivity"
             android:exported="true" />
@@ -43,15 +46,13 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="true">
-
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
