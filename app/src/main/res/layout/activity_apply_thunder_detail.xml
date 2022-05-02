@@ -56,10 +56,8 @@
                 android:id="@+id/cl_applythunderdetail_middle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/gray_gray04"
                 app:layout_constraintTop_toBottomOf="@id/cl_applythunderdetail_top"
-                app:layout_constraintBottom_toTopOf="@id/cl_applythunderdetail_bottom"
-                android:layout_marginBottom="8dp">
+                app:layout_constraintBottom_toTopOf="@id/cl_applythunderdetail_bottom">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_thunder_opener_info"
@@ -349,7 +347,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        // 번개 신청자 위 경계선
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#f0f0f0"
+            app:layout_constraintTop_toBottomOf="@id/cl_applythunderdetail_middle"
+            app:layout_constraintBottom_toTopOf="@id/cl_applythunderdetail_bottom"/>
 
 
             // 아래부분
@@ -358,7 +362,6 @@
             android:id="@+id/cl_applythunderdetail_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray_gray04"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
