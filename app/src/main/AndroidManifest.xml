@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".presentation.ui.onboarding.SecondOnboardingActivity"
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
             android:exported="true" />
@@ -37,19 +39,20 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.home.ThunderDetailActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
             android:exported="true" />
+
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
             android:exported="true" />
+
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -116,6 +116,12 @@
     <string name="text_next">다음</string>
     <string name="text_get_start">시작하기</string>
     <string name="text_no_relevant">해당사항 없음</string>
+    <string name="onboarding_start_thunder">번개를\n시작해볼까요?</string>
+    <string name="onboarding_select_option">개설과 참여 중 선택해주세요</string>
+    <string name="text_open">개설</string>
+    <string name="text_join">참여</string>
+    <string name="onboarding_open_message">번개를 열 동아리나 단체를 개설해요!</string>
+    <string name="onboarding_join_message">개설된 동아리나 다네에 참여해요!</string>
 
     <!-- message -->
     <string name="messageBox">쪽지함</string>
