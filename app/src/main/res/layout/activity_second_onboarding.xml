@@ -94,7 +94,7 @@
             android:layout_marginTop="100dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/rectangle_border_gray01_radius_10"
+            android:background="@drawable/selector_rectangle_border_gray0_to_fill_black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_firt_onboarding_request_mbti">
 
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@string/text_open"
-                android:textColor="@color/gray_gray01"
+                android:textColor="@drawable/selector_text_gray01_to_main_green"
                 android:textSize="16sp"
                 android:layout_marginTop="23dp"
                 android:layout_marginStart="24dp"
@@ -118,7 +118,7 @@
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/pretendard_medium"
                 android:text="@string/onboarding_open_message"
-                android:textColor="@color/gray_gray01"
+                android:textColor="@drawable/selector_text_gray01_to_white"
                 android:textSize="14sp"
                 android:layout_marginBottom="23dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -127,47 +127,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_join_select"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rectangle_fill_black01_radius_10"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_open_not_select">
-
-            <TextView
-                android:id="@+id/tv_onboarding_join_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="23dp"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="@string/text_join"
-                android:textColor="@color/main_green"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_onboarding_join_message_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="23dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="@string/onboarding_join_message"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_onboarding_join_select"
-                app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_join_select" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -177,7 +136,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rectangle_border_gray01_radius_10"
+            android:background="@drawable/selector_rectangle_border_gray0_to_fill_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_open_not_select">
@@ -190,7 +149,7 @@
                 android:layout_marginTop="23dp"
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@string/text_join"
-                android:textColor="@color/gray_gray01"
+                android:textColor="@drawable/selector_text_gray01_to_main_green"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -203,56 +162,13 @@
                 android:layout_marginBottom="23dp"
                 android:fontFamily="@font/pretendard_medium"
                 android:text="@string/onboarding_join_message"
-                android:textColor="@color/gray_gray01"
+                android:textColor="@drawable/selector_text_gray01_to_white"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_onboarding_join"
                 app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_join" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_open_select"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:visibility="invisible"
-            android:background="@drawable/rectangle_fill_black01_radius_10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_firt_onboarding_request_mbti">
-
-            <TextView
-                android:id="@+id/tv_onboarding_open_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="@string/text_open"
-                android:textColor="@color/main_green"
-                android:textSize="16sp"
-                android:layout_marginTop="23dp"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_onboarding_open_message_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="@string/onboarding_open_message"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:layout_marginBottom="23dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_onboarding_open_select"
-                app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_open_select" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         <TextView
@@ -266,7 +182,7 @@
             android:paddingBottom="19dp"
             android:text="@string/text_next"
             android:textAlignment="center"
-            android:textColor="@color/gray_gray01"
+            android:textColor="@drawable/selector_text_gray01_to_black01"
             android:textSize="15sp"
             android:visibility="visible"
             android:layout_marginStart="20dp"

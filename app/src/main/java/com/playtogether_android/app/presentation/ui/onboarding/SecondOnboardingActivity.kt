@@ -1,12 +1,18 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.playtogether_android.app.R
+import com.playtogether_android.app.databinding.ActivitySecondOnboardingBinding
+import com.playtogether_android.app.presentation.base.BaseActivity
 
-class SecondOnboardingActivity : AppCompatActivity() {
+class SecondOnboardingActivity : BaseActivity<ActivitySecondOnboardingBinding>(R.layout.activity_second_onboarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second_onboarding)
+
+        initClickListener()
+    }
+
+    private fun initClickListener() = with(binding){
+
     }
 }
