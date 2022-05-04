@@ -10,5 +10,13 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.layout.activity_first_on_boarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        initSelectMbti()
+    }
+
+    private fun initSelectMbti() = with(binding){
+        if((radioE.isChecked or radioI.isChecked) and (radioN.isChecked or radioS.isChecked) and (radioF.isChecked or radioT.isChecked) and (radioP.isChecked or radioJ.isChecked)) {
+            tvFirstOnboardingNext.isSelected = true
+        }
     }
 }
