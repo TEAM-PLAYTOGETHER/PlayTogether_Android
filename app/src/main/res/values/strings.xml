@@ -12,12 +12,13 @@
     <!--    HomeFragment-->
     <string name="home_group_name">SOPT</string>
     <string name="home_more">more -></string>
-    <string name="home_new_title">✨ NEW</string>
+    <string name="home_new_title">😎 NEW</string>
     <string name="home_hot_title">🔥 HOT</string>
     <string name="home_eat">먹을래</string>
     <string name="home_go">갈래</string>
     <string name="home_do">할래</string>
     <string name="home_searching">에서 찾는중</string>
+    <string name="home_category">⚡️ 번개 카테고리</string>
 
 
     <!--common-->
