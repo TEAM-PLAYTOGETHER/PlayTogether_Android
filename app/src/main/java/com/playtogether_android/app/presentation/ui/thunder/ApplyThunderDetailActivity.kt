@@ -11,9 +11,13 @@ import com.playtogether_android.app.presentation.ui.home.AppliedActivity
 import com.playtogether_android.app.util.CustomDialog
 
 class ApplyThunderDetailActivity : BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
+
+    private lateinit var applicantListAdapter: ApplicantListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         testData()
+        initAdapter()
         binding.tvCancelApplication.setOnClickListener {
             showCancelDialog()
         }
@@ -53,4 +57,23 @@ class ApplyThunderDetailActivity : BaseActivity<ActivityApplyThunderDetailBindin
             tvMaxApplicant.text = "6"
         }
     }
+
+    private fun initAdapter() {
+        applicantListAdapter = ApplicantListAdapter()
+
+        binding.rvThunderApplicantList.adapter = applicantListAdapter
+
+        applicantListAdapter.applicantList = listOf(
+            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
+        )
+
+        applicantListAdapter.notifyDataSetChanged()
+    }
+
+
 }

@@ -50,7 +50,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
             //중간부분
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_applythunderdetail_middle"
@@ -346,113 +345,113 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        // 번개 신청자 위 경계선
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_boundary"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#f0f0f0"
-            app:layout_constraintTop_toBottomOf="@id/cl_applythunderdetail_middle"
-            app:layout_constraintBottom_toTopOf="@id/cl_applythunderdetail_bottom"/>
+            // 번개 신청자 위 경계선
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_boundary"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#f0f0f0"
+                app:layout_constraintTop_toBottomOf="@id/cl_applythunderdetail_middle"
+                app:layout_constraintBottom_toTopOf="@id/cl_applythunderdetail_bottom"/>
 
 
             // 아래부분
 
             <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_applythunderdetail_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_thunder_applicant_title"
+                android:id="@+id/cl_applythunderdetail_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/cl_applythunderdetail_bottom">
+                app:layout_constraintBottom_toBottomOf="parent">
 
-                <TextView
-                    android:id="@+id/tv_thunder_applicant_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="번개 신청자 ("
-                    android:textColor="@color/gray_black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_current_applicant"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_thunder_applicant_title"
-                    app:layout_constraintTop_toTopOf="@id/tv_thunder_applicant_title"
-                    tools:text="2" />
-
-                <TextView
-                    android:id="@+id/tv_applicant_slash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@string/slash"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_current_applicant"
-                    app:layout_constraintTop_toTopOf="@id/tv_current_applicant" />
-
-                <TextView
-                    android:id="@+id/tv_max_applicant"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
-                    app:layout_constraintTop_toTopOf="@id/tv_applicant_slash"
-                    tools:text="6" />
-
-                <TextView
-                    android:id="@+id/tv_thunder_applicant_title_bracket_close"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text=")"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_max_applicant"
-                    app:layout_constraintTop_toTopOf="@id/tv_max_applicant" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_thunder_applicant_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cl_thunder_applicant_title">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_thunder_applicant_list"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_thunder_applicant_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_thunder_applicant_list" />
+                    app:layout_constraintTop_toTopOf="@id/cl_applythunderdetail_bottom">
+
+                    <TextView
+                        android:id="@+id/tv_thunder_applicant_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="번개 신청자 ("
+                        android:textColor="@color/gray_black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_current_applicant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_thunder_applicant_title"
+                        app:layout_constraintTop_toTopOf="@id/tv_thunder_applicant_title"
+                        tools:text="2" />
+
+                    <TextView
+                        android:id="@+id/tv_applicant_slash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/slash"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_current_applicant"
+                        app:layout_constraintTop_toTopOf="@id/tv_current_applicant" />
+
+                    <TextView
+                        android:id="@+id/tv_max_applicant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
+                        app:layout_constraintTop_toTopOf="@id/tv_applicant_slash"
+                        tools:text="6" />
+
+                    <TextView
+                        android:id="@+id/tv_thunder_applicant_title_bracket_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text=")"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_max_applicant"
+                        app:layout_constraintTop_toTopOf="@id/tv_max_applicant" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_thunder_applicant_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/cl_thunder_applicant_title">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_thunder_applicant_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_marginHorizontal="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_thunder_applicant_list"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

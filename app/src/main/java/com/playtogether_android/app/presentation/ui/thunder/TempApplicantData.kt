@@ -11,5 +11,11 @@ data class TempApplicantData(
     @SerializedName("message")
     val message: String,
     @SerializedName("userList")
-    val userList: List<Any>
-)
+    val data: List<UserList>
+) {
+    data class UserList(
+        val userId: String,
+        val age: Int,
+        val mbti: String
+    )
+}
