@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySecondOnboardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import timber.log.Timber
 
 class SecondOnboardingActivity : BaseActivity<ActivitySecondOnboardingBinding>(R.layout.activity_second_onboarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +14,6 @@ class SecondOnboardingActivity : BaseActivity<ActivitySecondOnboardingBinding>(R
     }
 
     private fun initClickListener() = with(binding){
-
+        Timber.d("TEST")
     }
 }
