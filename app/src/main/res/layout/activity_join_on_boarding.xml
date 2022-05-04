@@ -83,6 +83,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="162dp"
             android:textSize="16dp"
+            android:maxLength="6"
             android:fontFamily="@font/pretendard_medium"
             android:textColor="@color/gray_black"
             android:paddingTop="20dp"
