@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import com.playtogether_android.app.R
@@ -41,20 +42,12 @@ class JoinOnBoardingActivity :
     private fun editTextBlankCheck() {
         if (binding.etJoinOnboarding.text.toString() != "") {
             binding.etJoinOnboarding.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-
-            binding.tvJoinOnboardingNext.visibility = View.INVISIBLE
-            binding.tvJoinOnboardingEnter.visibility = View.VISIBLE
-
             Timber.d("빈칸 아님")
-        } else {
-            binding.tvJoinOnboardingNext.visibility = View.VISIBLE
-            binding.tvJoinOnboardingEnter.visibility = View.INVISIBLE
-            Timber.d("빈칸")
         }
     }
 
     private fun editTextWatcher() = with(binding) {
-        etJoinOnboarding.addTextChangedListener { object:TextWatcher{
+        etJoinOnboarding.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -64,11 +57,19 @@ class JoinOnBoardingActivity :
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                editTextBlankCheck()
-                Timber.d("바뀜")
+                if (binding.etJoinOnboarding.text.toString() == "") {
+                    binding.tvJoinOnboardingNext.visibility = View.INVISIBLE
+                    binding.tvJoinOnboardingEnter.visibility = View.VISIBLE
+                } else {
+                    binding.tvJoinOnboardingNext.visibility = View.VISIBLE
+                    binding.tvJoinOnboardingEnter.visibility = View.INVISIBLE
+                    Timber.d("빈칸체크")
+
+                }
+
             }
 
-        } }
+        })
     }
-
 }
+
