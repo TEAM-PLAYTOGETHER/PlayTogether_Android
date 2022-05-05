@@ -3,9 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_rectangle_fill_gray02_to_fill_green.xml" value="0.108" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_black01.xml" value="0.108" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_white.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_second_onboarding.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_border_gray03_to_gray01.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_gray01_to_black01_check.xml" value="0.132" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_join_on_boarding.xml" value="0.152" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_second_onboarding.xml" value="0.2" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_finish.xml" value="0.1157548125633232" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_info.xml" value="0.1" />
       </map>
     </option>
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

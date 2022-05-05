@@ -27,13 +27,14 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         pwTextWatcher()
         actvieDuplicationBtn()
         idTextWatcher()
+        backBtn()
     }
 
 
     //id editText 클릭 리스너
     private fun initIdTextField() = with(binding) {
-        etSignupmainId.setOnClickListener {
-            etSignupmainId.isFocused
+        if(etSignupmainId.text.toString() != "") {
+            etSignupmainId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
         }
     }
 
@@ -167,7 +168,6 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             tvSignupmainPwExpressionCheckTrue.visibility = View.VISIBLE
             tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
             ivPwCheckCheck.visibility= View.VISIBLE
-            Timber.d("비밀번호 일치")
         } else {
             if(etSignupmainPwCheck.text.toString()=="") {
                 tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
@@ -178,8 +178,15 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                 tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
                 tvSignupmainPwExpressionCheckFalse.visibility = View.VISIBLE
                 ivPwCheckCheck.visibility = View.INVISIBLE
-                Timber.d("비밀번호 일치하지 않음")
             }
+        }
+    }
+
+    //이전 버튼
+    private fun backBtn() {
+        binding.ivSignupmainBack.setOnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
     }
 }

@@ -2,6 +2,7 @@ package com.playtogether_android.app.di
 
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
+import com.playtogether_android.app.presentation.ui.onboarding.onBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.SignUpMainActivity
 import com.playtogether_android.app.presentation.ui.sign.SignViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -17,6 +18,9 @@ val viewModelModule = module {
 
     //sign
     viewModel {SignViewModel()}
+
+    //onboarding
+    viewModel {onBoardingViewModel()}
 
 }
 
