@@ -1,6 +1,7 @@
 package com.playtogether_android.app.di
 
 import com.google.gson.GsonBuilder
+import com.playtogether_android.app.util.AuthInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,7 +25,8 @@ val apiModule = module {
         OkHttpClient.Builder()
             .run {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-                addInterceptor(get<Interceptor>())
+                //addInterceptor(get())
+                addInterceptor(AuthInterceptor(BASE_URL))
                 build()
             }
 

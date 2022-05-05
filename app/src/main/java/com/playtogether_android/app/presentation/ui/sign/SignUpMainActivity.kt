@@ -5,11 +5,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -26,9 +28,10 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         initPwCheckTextField()
         pwCheckTextWatcher()
         pwTextWatcher()
-        actvieDuplicationBtn()
+        actvieNextBtn()
         idTextWatcher()
         backBtn()
+        duplicationClickEvent()
     }
 
 
@@ -70,8 +73,8 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         }
     }
 
-    //중복 확인 버튼 활성화 클릭 리스너
-    private fun actvieDuplicationBtn() = with(binding) {
+    //다음 버튼 활성화 클릭 리스너
+    private fun actvieNextBtn() = with(binding) {
         tvSignupmainNext.setOnClickListener {
             if (tvSignupmanIdDuplication.isSelected == true or tvSignupmainNext.isSelected) {
                 startActivity(Intent(this@SignUpMainActivity, SignInActivity::class.java))
@@ -188,6 +191,23 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         binding.ivSignupmainBack.setOnClickListener {
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
+        }
+    }
+
+    //id 중복체크
+    private fun idDuplicationCheck() {
+        val id = binding.etSignupmainId.text.toString()
+        signViewModel.postIdDuplication(
+            IdDuplicationCheckItem(id)
+        )
+    }
+
+    //중복확인 버튼 클릭
+    private fun duplicationClickEvent() {
+        if(binding.tvSignupmanIdDuplication.isSelected) {
+            binding.tvSignupmanIdDuplication.setOnClickListener {
+                idDuplicationCheck()
+            }
         }
     }
 }
