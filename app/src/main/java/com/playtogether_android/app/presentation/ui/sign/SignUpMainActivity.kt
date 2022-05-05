@@ -10,8 +10,11 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.ThunderAppliedActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
+import okhttp3.internal.platform.android.AndroidLogHandler.close
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -212,6 +215,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         signViewModel.idDuplicationCheck.observe(this) {
             if(it.isUser == true) {
                 Log.d("중복확인", "중복되는 아이디 있음")
+                showApplyDialog()
             } else {
                 Log.d("중복확인", "중복되는 아이디 없음")
                 binding.ivIdCheck.visibility = View.VISIBLE
@@ -230,4 +234,14 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             }
         }
     }
+
+
+    //customDialog
+    private fun showApplyDialog(){
+        val title = "중복된 아이디입니다"
+        val dialog= CustomDialog(this, title)
+        dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+    }
+
+
 }
