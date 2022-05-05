@@ -142,4 +142,9 @@
     <string name="thunder_item_title">선착순 곱창 5명 구함</string>
     <string name="thunder_item_people">인원 3/5</string>
     <string name="thunder_item_day">2022.04.13.신촌 14:00</string>
+
+    <!--Mypage-->
+    <string name="mypage_dear">님</string>
+    <string name="mypage_age">세,</string>
+
 </resources>
