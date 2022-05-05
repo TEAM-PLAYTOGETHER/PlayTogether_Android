@@ -19,6 +19,11 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_main.xml" value="0.1157548125633232" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/dialog_one_question.xml" value="0.264" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/dialog_yes_no.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_my_page.xml" value="0.19723865877712032" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_home_hot.xml" value="0.11398176291793313" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_home_new.xml" value="0.11398176291793313" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_message_room.xml" value="0.1" />
       </map>
     </option>
   </component>
