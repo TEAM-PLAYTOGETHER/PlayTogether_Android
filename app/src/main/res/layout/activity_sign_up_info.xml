@@ -194,7 +194,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_signupinfo_datepicker"
+                android:id="@+id/iv_signupinfo_datepicker_gray"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="14dp"
@@ -203,8 +203,20 @@
                 app:layout_constraintEnd_toEndOf="@+id/cl_picker_icon"
                 app:layout_constraintTop_toTopOf="@+id/cl_picker_icon" />
 
+            <ImageView
+                android:id="@+id/iv_signupinfo_datepicker_black"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="14dp"
+                android:src="@drawable/ic_icn_calendar"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_picker_icon"
+                app:layout_constraintEnd_toEndOf="@+id/cl_picker_icon"
+                app:layout_constraintTop_toTopOf="@+id/cl_picker_icon" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
+            android:id="@+id/tv_signupinfo_finish"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

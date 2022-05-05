@@ -180,4 +180,12 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             }
         }
     }
+
+    //이전 버튼
+    private fun backBtn() {
+        binding.ivSignupmainBack.setOnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+        }
+    }
 }
