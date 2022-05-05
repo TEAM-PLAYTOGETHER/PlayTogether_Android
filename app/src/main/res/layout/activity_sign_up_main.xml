@@ -95,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_signupmain_id" />
 
         <TextView
-            android:id="@+id/tv_signupman_id_duplication"
+            android:id="@+id/tv_signupmain_id_duplication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="13dp"
@@ -142,6 +142,19 @@
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/signupmain_expression_id_warn"
             android:textColor="@color/red_FF0000"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/et_signupmain_id"
+            app:layout_constraintTop_toBottomOf="@+id/et_signupmain_id" />
+
+        <TextView
+            android:id="@+id/tv_signmain_id_duplication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/signupmain_id_duplication"
+            android:textColor="@color/main_green"
             android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@+id/et_signupmain_id"
