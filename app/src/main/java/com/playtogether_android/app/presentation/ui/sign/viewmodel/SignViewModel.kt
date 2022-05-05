@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.sign.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,14 +17,20 @@ class SignViewModel(
     var pw = MutableLiveData<String>()
 
     //아이디 중복 체크 변수
-    var idDuplicationCheck: MutableLiveData<IdDuplicationCheckData> = MutableLiveData()
+    private val _idDuplicationCheck = MutableLiveData<IdDuplicationCheckData>()
+    val idDuplicationCheck: LiveData<IdDuplicationCheckData>
+        get() = _idDuplicationCheck
+
+
+
 
     //아이디 중복 체크
     fun postIdDuplication(idDuplicationCheckItem: IdDuplicationCheckItem) {
         viewModelScope.launch {
             kotlin.runCatching { postSignIdUseCase(idDuplicationCheckItem) }
                 .onSuccess {
-                    idDuplicationCheck.value = it
+                    _idDuplicationCheck.value = it
+                    Log.d("test", ":" + _idDuplicationCheck.value)
                     Log.d("IdDuplication", "서버 통신 성공")
                 }
                 .onFailure {

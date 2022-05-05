@@ -59,16 +59,16 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if (!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())) {
-            tvSignupmanIdDuplication.isSelected = false
+        if (!Pattern.matches("^[a-z|0-9|]{3,15}\$", etSignupmainId.text.toString())) {
+            tvSignupmainIdDuplication.isSelected = false
             tvSignupmainIdExpressionWarn.visibility = View.VISIBLE
             tvSignupmainIdExpression.visibility = View.INVISIBLE
             Timber.d("정규식 맞지 않음")
         } else {
-            tvSignupmanIdDuplication.isSelected = true
+            tvSignupmainIdDuplication.isSelected = true
             tvSignupmainIdExpressionWarn.visibility = View.INVISIBLE
             tvSignupmainIdExpression.visibility = View.INVISIBLE
-            tvSignupmanIdDuplication.isSelected = true
+            tvSignupmainIdDuplication.isSelected = true
             Timber.d("정규식 맞지 않음")
         }
     }
@@ -76,7 +76,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
     //다음 버튼 활성화 클릭 리스너
     private fun actvieNextBtn() = with(binding) {
         tvSignupmainNext.setOnClickListener {
-            if (tvSignupmanIdDuplication.isSelected == true or tvSignupmainNext.isSelected) {
+            if (tvSignupmainIdDuplication.isSelected == true or tvSignupmainNext.isSelected) {
                 startActivity(Intent(this@SignUpMainActivity, SignInActivity::class.java))
                 finish()
             }
@@ -116,8 +116,12 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (signViewModel.id.value != etSignupmainId.text.toString()) {
+                val id = signViewModel.id.value
 
+                if (id != etSignupmainId.text.toString()) {
+                    binding.ivIdCheck.visibility = View.INVISIBLE
+                    binding.tvSignmainIdDuplication.visibility = View.INVISIBLE
+                    binding.tvSignupmainIdDuplication.visibility = View.VISIBLE
                 }
                 isVaildRegistrationId()
             }
@@ -201,16 +205,27 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
     //id 중복체크
     private fun idDuplicationCheck() {
         val id = binding.etSignupmainId.text.toString()
-        Log.d("test", "" + binding.etSignupmainId.text.toString().javaClass)
         signViewModel.postIdDuplication(
             IdDuplicationCheckItem(id)
         )
+
+        signViewModel.idDuplicationCheck.observe(this) {
+            if(it.isUser == true) {
+                Log.d("중복확인", "중복되는 아이디 있음")
+            } else {
+                Log.d("중복확인", "중복되는 아이디 없음")
+                binding.ivIdCheck.visibility = View.VISIBLE
+                binding.tvSignmainIdDuplication.visibility = View.VISIBLE
+                binding.tvSignupmainIdDuplication.visibility = View.INVISIBLE
+            }
+        }
+
     }
 
     //중복확인 버튼 클릭
     private fun duplicationClickEvent() {
-        binding.tvSignupmanIdDuplication.setOnClickListener {
-            if (binding.tvSignupmanIdDuplication.isSelected) {
+        binding.tvSignupmainIdDuplication.setOnClickListener {
+            if (binding.tvSignupmainIdDuplication.isSelected) {
                 idDuplicationCheck()
             }
         }
