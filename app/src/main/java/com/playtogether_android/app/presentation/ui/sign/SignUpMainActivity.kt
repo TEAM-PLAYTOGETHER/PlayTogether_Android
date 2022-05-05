@@ -27,6 +27,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         pwTextWatcher()
         actvieDuplicationBtn()
         idTextWatcher()
+        backBtn()
     }
 
 
