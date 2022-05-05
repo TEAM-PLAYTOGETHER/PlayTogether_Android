@@ -167,7 +167,6 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             tvSignupmainPwExpressionCheckTrue.visibility = View.VISIBLE
             tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
             ivPwCheckCheck.visibility= View.VISIBLE
-            Timber.d("비밀번호 일치")
         } else {
             if(etSignupmainPwCheck.text.toString()=="") {
                 tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
@@ -178,7 +177,6 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                 tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
                 tvSignupmainPwExpressionCheckFalse.visibility = View.VISIBLE
                 ivPwCheckCheck.visibility = View.INVISIBLE
-                Timber.d("비밀번호 일치하지 않음")
             }
         }
     }

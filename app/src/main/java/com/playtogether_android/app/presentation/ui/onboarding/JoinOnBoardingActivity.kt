@@ -6,11 +6,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import androidx.core.widget.addTextChangedListener
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityJoinOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import timber.log.Timber
 
 class JoinOnBoardingActivity :
     BaseActivity<ActivityJoinOnBoardingBinding>(R.layout.activity_join_on_boarding) {
@@ -31,21 +29,15 @@ class JoinOnBoardingActivity :
     }
 
 
-    //edittext selector
+    //edittext 입력중일 때 텍스트 백그라운드 selected
     private fun initEditText() {
         binding.etJoinOnboarding.setOnClickListener {
             binding.etJoinOnboarding.isSelected = true
         }
     }
 
-    //빈칸인지 체크
-    private fun editTextBlankCheck() {
-        if (binding.etJoinOnboarding.text.toString() != "") {
-            binding.etJoinOnboarding.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-            Timber.d("빈칸 아님")
-        }
-    }
 
+    //6자리 입력 해야 입장버튼 활성화
     private fun editTextWatcher() = with(binding) {
         etJoinOnboarding.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -57,13 +49,15 @@ class JoinOnBoardingActivity :
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (binding.etJoinOnboarding.text.toString() == "") {
-                    binding.tvJoinOnboardingNext.visibility = View.INVISIBLE
-                    binding.tvJoinOnboardingEnter.visibility = View.VISIBLE
-                } else {
+                val input = binding.etJoinOnboarding.getText().toString()
+                if (input.length == 5) {
                     binding.tvJoinOnboardingNext.visibility = View.VISIBLE
                     binding.tvJoinOnboardingEnter.visibility = View.INVISIBLE
-                    Timber.d("빈칸체크")
+                    Log.d("test", " " + input.length)
+                } else {
+                    binding.tvJoinOnboardingNext.visibility = View.INVISIBLE
+                    binding.tvJoinOnboardingEnter.visibility = View.VISIBLE
+
 
                 }
 
