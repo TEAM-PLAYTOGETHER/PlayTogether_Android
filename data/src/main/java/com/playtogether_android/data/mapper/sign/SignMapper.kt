@@ -17,7 +17,7 @@ object SignMapper {
     //아이디 중복 확인 : Request
     fun mapperToIdDuplicationItem(idDuplicationCheckItem: IdDuplicationCheckItem) : RequestSignId {
         return RequestSignId(
-            id = idDuplicationCheckItem.id
+            userLoginId = idDuplicationCheckItem.userLoginId
         )
     }
 }

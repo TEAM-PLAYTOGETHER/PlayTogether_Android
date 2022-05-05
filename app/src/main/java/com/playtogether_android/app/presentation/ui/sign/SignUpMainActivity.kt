@@ -37,7 +37,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //id editText 클릭 리스너
     private fun initIdTextField() = with(binding) {
-        if(etSignupmainId.text.toString() != "") {
+        if (etSignupmainId.text.toString() != "") {
             etSignupmainId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
         }
     }
@@ -59,7 +59,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if(!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())){
+        if (!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())) {
             tvSignupmanIdDuplication.isSelected = false
             tvSignupmainIdExpressionWarn.visibility = View.VISIBLE
             tvSignupmainIdExpression.visibility = View.INVISIBLE
@@ -86,7 +86,11 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //비밀번호 정규식
     private fun isValidRegistrationPw() = with(binding) {
-        if (!Pattern.matches("^[a-z|A-Z|0-9|(!,@,#,$,&,*,(,))|]{8,15}", etSignupmainPw.text.toString())) {
+        if (!Pattern.matches(
+                "^[a-z|A-Z|0-9|(!,@,#,$,&,*,(,))|]{8,15}",
+                etSignupmainPw.text.toString()
+            )
+        ) {
             tvSignupmainPwExpression.setTextColor(Color.parseColor("#FF0000"))
             tvSignupmainPwExpression.visibility = View.VISIBLE
             ivPwCheck.visibility = View.INVISIBLE
@@ -101,8 +105,8 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
 
     //아이디 textwatcher
-    private fun idTextWatcher()= with(binding) {
-        etSignupmainId.addTextChangedListener(object: TextWatcher {
+    private fun idTextWatcher() = with(binding) {
+        etSignupmainId.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -171,9 +175,9 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             tvSignupmainPwExpressionCheck.visibility = View.INVISIBLE
             tvSignupmainPwExpressionCheckTrue.visibility = View.VISIBLE
             tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
-            ivPwCheckCheck.visibility= View.VISIBLE
+            ivPwCheckCheck.visibility = View.VISIBLE
         } else {
-            if(etSignupmainPwCheck.text.toString()=="") {
+            if (etSignupmainPwCheck.text.toString() == "") {
                 tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
                 tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
                 tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
@@ -197,6 +201,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
     //id 중복체크
     private fun idDuplicationCheck() {
         val id = binding.etSignupmainId.text.toString()
+        Log.d("test", "" + binding.etSignupmainId.text.toString().javaClass)
         signViewModel.postIdDuplication(
             IdDuplicationCheckItem(id)
         )
@@ -204,8 +209,8 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //중복확인 버튼 클릭
     private fun duplicationClickEvent() {
-        if(binding.tvSignupmanIdDuplication.isSelected) {
-            binding.tvSignupmanIdDuplication.setOnClickListener {
+        binding.tvSignupmanIdDuplication.setOnClickListener {
+            if (binding.tvSignupmanIdDuplication.isSelected) {
                 idDuplicationCheck()
             }
         }
