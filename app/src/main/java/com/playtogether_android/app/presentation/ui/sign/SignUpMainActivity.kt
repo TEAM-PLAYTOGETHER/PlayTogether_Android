@@ -62,7 +62,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if (!Pattern.matches("^[a-z|0-9|]{3,15}\$", etSignupmainId.text.toString())) {
+        if (!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())) {
             tvSignupmainIdDuplication.isSelected = false
             tvSignupmainIdExpressionWarn.visibility = View.VISIBLE
             tvSignupmainIdExpression.visibility = View.INVISIBLE
@@ -79,10 +79,16 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
     //다음 버튼 활성화 클릭 리스너
     private fun actvieNextBtn() = with(binding) {
         tvSignupmainNext.setOnClickListener {
-            if (tvSignupmainIdDuplication.isSelected == true or tvSignupmainNext.isSelected) {
-                startActivity(Intent(this@SignUpMainActivity, SignInActivity::class.java))
+            if (tvSignupmainNext.isSelected) {
+                startActivity(Intent(this@SignUpMainActivity, SignUpInfoActivity::class.java))
                 finish()
             }
+        }
+    }
+
+    private fun allChecked() = with(binding) {
+        if(ivIdCheck.visibility == View.VISIBLE && ivPwCheck.visibility == View.VISIBLE && ivPwCheckCheck.visibility== View.VISIBLE) {
+            tvSignupmainNext.isSelected = true
         }
     }
 
@@ -127,6 +133,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                     binding.tvSignupmainIdDuplication.visibility = View.VISIBLE
                 }
                 isVaildRegistrationId()
+                allChecked()
             }
 
         })
@@ -152,6 +159,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                     isPwSame()
                 }
                 isValidRegistrationPw()
+                allChecked()
             }
 
         })
@@ -172,6 +180,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                     isPwSame()
 
                 }
+                allChecked()
             }
         })
     }
@@ -194,7 +203,9 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                 tvSignupmainPwExpressionCheckFalse.visibility = View.VISIBLE
                 ivPwCheckCheck.visibility = View.INVISIBLE
             }
+            allChecked()
         }
+
     }
 
     //이전 버튼
