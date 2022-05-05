@@ -32,8 +32,8 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //id editText 클릭 리스너
     private fun initIdTextField() = with(binding) {
-        etSignupmainId.setOnClickListener {
-            etSignupmainId.isFocused
+        if(etSignupmainId.text.toString() != "") {
+            etSignupmainId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
         }
     }
 
