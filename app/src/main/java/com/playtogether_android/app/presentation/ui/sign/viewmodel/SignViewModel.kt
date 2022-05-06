@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckData
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
+import com.playtogether_android.domain.model.sign.SignUpItem
 import com.playtogether_android.domain.usecase.sign.PostSignIdUseCase
 import kotlinx.coroutines.launch
 
 class SignViewModel(
-    val postSignIdUseCase: PostSignIdUseCase
+    val postSignIdUseCase: PostSignIdUseCase,
+    val postSignUpUseCase: PostSignIdUseCase
 ) : ViewModel() {
     var id = MutableLiveData<String>()
     var pw = MutableLiveData<String>()
@@ -21,6 +23,7 @@ class SignViewModel(
     val idDuplicationCheck: LiveData<IdDuplicationCheckData>
         get() = _idDuplicationCheck
 
+    //회원가입
 
 
 
@@ -38,5 +41,19 @@ class SignViewModel(
                     Log.d("IdDuplication", "서버 통신 실패")
                 }
         }
+    }
+
+    //회원가입
+    fun postSignUp(signUpItem: SignUpItem) {
+        viewModelScope.launch {
+            kotlin.runCatching { postSignUp(signUpItem) }
+                .onSuccess {
+
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("SignUp", "서버 통신 실패패")
+                }
+       }
     }
 }
