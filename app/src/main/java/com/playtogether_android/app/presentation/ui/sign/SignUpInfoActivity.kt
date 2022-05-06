@@ -13,7 +13,6 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpInfoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
-import com.playtogether_android.domain.model.sign.SignUpData
 import com.playtogether_android.domain.model.sign.SignUpItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.String
@@ -110,7 +109,8 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
     //이전 버튼
     private fun backBtn() {
         binding.ivSignupinfoBack.setOnClickListener {
-            startActivity(Intent(this, SignUpMainActivity::class.java))
+            val intent = Intent(this, SignUpMainActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }
@@ -136,7 +136,6 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
             }
 
 
-            //birth
             signViewModel.requestSignUp.birth = binding.etSignupinfoBirth.text.toString().replace(".","-")
             signViewModel.requestSignUp.gender = gender
 
@@ -153,7 +152,10 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
                     )
                 )
 
-                startActivity(Intent(this, SignUpFinishActivity::class.java))
+
+                val intent = Intent(this, SignUpFinishActivity::class.java)
+                intent.putExtra("userName", binding.etSignupinfoName.text.toString())
+                startActivity(intent)
                 finish()
             }
         }

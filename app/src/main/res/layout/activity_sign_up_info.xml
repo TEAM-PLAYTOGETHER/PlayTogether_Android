@@ -84,6 +84,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/signupinfo_input_name"
             android:lines="1"
+            android:maxLength="15"
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
