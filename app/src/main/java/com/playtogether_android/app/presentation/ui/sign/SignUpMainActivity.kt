@@ -14,6 +14,7 @@ import com.playtogether_android.app.presentation.ui.home.ThunderAppliedActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
+import com.playtogether_android.domain.model.sign.SignUpData
 import okhttp3.internal.platform.android.AndroidLogHandler.close
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -76,16 +77,23 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         }
     }
 
-    //다음 버튼 활성화 클릭 리스너
+    //다음 페이지로 이동
     private fun actvieNextBtn() = with(binding) {
+        signViewModel.requestSignUp.userLoginId = etSignupmainId.text.toString()
+        signViewModel.requestSignUp.password = etSignupmainPwCheck.text.toString()
+
         tvSignupmainNext.setOnClickListener {
             if (tvSignupmainNext.isSelected) {
-                startActivity(Intent(this@SignUpMainActivity, SignUpInfoActivity::class.java))
+                val intent = Intent(this@SignUpMainActivity, SignUpInfoActivity::class.java)
+                intent.putExtra("userLoginId",etSignupmainId.text.toString())
+                intent.putExtra("password", etSignupmainPwCheck.text.toString())
+                startActivity(intent)
                 finish()
             }
         }
     }
 
+    //다음 버튼 활성화
     private fun allChecked() = with(binding) {
         if(ivIdCheck.visibility == View.VISIBLE && ivPwCheck.visibility == View.VISIBLE && ivPwCheckCheck.visibility== View.VISIBLE) {
             tvSignupmainNext.isSelected = true

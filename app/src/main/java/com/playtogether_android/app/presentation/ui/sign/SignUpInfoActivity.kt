@@ -6,15 +6,23 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpInfoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.domain.model.sign.SignUpData
+import com.playtogether_android.domain.model.sign.SignUpItem
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.String
 import java.util.*
 
 class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.activity_sign_up_info) {
+
+    private val signViewModel: SignViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -115,7 +123,36 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
     //다음으로 이동
     private fun movePage() {
         binding.tvSignupinfoFinish.setOnClickListener {
+            signViewModel.requestSignUp.userName = binding.etSignupinfoName.text.toString()
+
+            //gender
+            var gender = ""
+            if(binding.tvSignupinfoMan.isSelected) {
+                gender = "남성"
+                Log.d("gender", gender)
+            } else {
+                gender = "여성"
+                Log.d("gender", gender)
+            }
+
+
+            //birth
+            signViewModel.requestSignUp.birth = binding.etSignupinfoBirth.text.toString().replace(".","-")
+            signViewModel.requestSignUp.gender = gender
+
             if(binding.tvSignupinfoFinish.isSelected) {
+
+                signViewModel.postSignUp(
+                    SignUpItem(
+                        intent.getStringExtra("userLoginId").toString(),
+                        intent.getStringExtra("password").toString(),
+                        signViewModel.requestSignUp.userName,
+                        signViewModel.requestSignUp.gender,
+                        signViewModel.requestSignUp.birth,
+                        "ESFJ"
+                    )
+                )
+
                 startActivity(Intent(this, SignUpFinishActivity::class.java))
                 finish()
             }
