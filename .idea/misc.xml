@@ -6,8 +6,13 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_rectangle_fill_gray02_to_fill_green.xml" value="0.108" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_black01.xml" value="0.108" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_white.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_chat.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_mypage.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_thunder.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/inset_horizontal_58.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_bottom_navi_icon_home.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_border_gray03_to_gray01.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_gray01_to_black01_check.xml" value="0.132" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.1" />
@@ -25,6 +30,7 @@
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_home_hot.xml" value="0.11398176291793313" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_home_new.xml" value="0.11398176291793313" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_message_room.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/menu/menu.xml" value="0.125" />
       </map>
     </option>
   </component>

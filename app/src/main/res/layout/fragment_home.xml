@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
 
-        <com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
+        <!--<com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
             android:id="@+id/lsrl_home_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -233,7 +233,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <!--        </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>-->
+        &lt;!&ndash;        </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>&ndash;&gt;-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
