@@ -44,6 +44,7 @@ object Versions {
 
 object KotlinDependencies {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
+    const val kapt = "org.jetbrains.kotlin.kapt:${Versions.glide_version2}"
 }
 
 object AndroidXDependencies {
@@ -80,7 +81,7 @@ object MaterialDesignDependencies {
 object KaptDependencies {
     const val glideCompiler =
         "com.github.bumptech.glide:compiler:${Versions.glide_compiler_version}"
-    const val glide = "org.jetbrains.kotlin.kapt:${Versions.glide_version2}"
+    //const val glide = "org.jetbrains.kotlin.kapt:${Versions.glide_version2}"
 
 }
 

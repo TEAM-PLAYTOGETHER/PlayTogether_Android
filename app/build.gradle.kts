@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+import KotlinDependencies.kapt
 
 plugins {
     id("com.android.application")
@@ -162,6 +162,6 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
 
     //Kapt
-    kapt(KaptDependencies.glide)
+    kapt(KotlinDependencies.kapt)
 
 }

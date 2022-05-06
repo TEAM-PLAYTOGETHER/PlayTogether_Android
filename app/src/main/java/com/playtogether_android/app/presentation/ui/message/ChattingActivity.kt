@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.message
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -19,6 +20,17 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
             addChat()
             binding.etMessage.text.clear()
             removeTimePart()
+        }
+    }
+
+    private fun changeSendImage(){
+        if(binding.etMessage.text.isNullOrEmpty()){
+            binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
+            binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this ,R.color.gray_gray03))
+        }
+        else{
+            binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message_black)
+            binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this ,R.color.main_green))
         }
     }
 
@@ -49,11 +61,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
         while(true){
             if(adapter.chatList[tempSize].messageType==adapter.chatList[nowSize].messageType){
-                Log.d("sdf", "여긴 들어오나?")
                 if(adapter.chatList[nowSize].time==adapter.chatList[tempSize].time){
-                    Log.d("sdf", "여긴..?")
                     adapter.chatList[tempSize].timeVisible=false
-                    Log.d("sdf", "${adapter.chatList[tempSize].content}, ${tempSize}")
                 }
             }
             else
@@ -73,11 +82,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
         while(true){
             if(adapter.chatList[tempSize].messageType==adapter.chatList[nowSize].messageType){
-                Log.d("sdf", "여긴 들어오나?")
                 if(adapter.chatList[nowSize].time==adapter.chatList[tempSize].time){
-                    Log.d("sdf", "여긴..?")
                     adapter.chatList[tempSize].timeVisible=false
-                    Log.d("sdf", "${adapter.chatList[tempSize].content}, ${tempSize}")
                     tempSize--
                 }
                 else
