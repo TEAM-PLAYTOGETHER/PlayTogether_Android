@@ -1,13 +1,12 @@
 package com.playtogether_android.data.mapper.sign
 
 import com.playtogether_android.data.model.request.sign.RequestSignId
+import com.playtogether_android.data.model.request.sign.RequestSignIn
 import com.playtogether_android.data.model.request.sign.RequestSignUp
 import com.playtogether_android.data.model.response.sign.ResponseSignId
+import com.playtogether_android.data.model.response.sign.ResponseSignIn
 import com.playtogether_android.data.model.response.sign.ResponseSignUp
-import com.playtogether_android.domain.model.sign.IdDuplicationCheckData
-import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
-import com.playtogether_android.domain.model.sign.SignUpData
-import com.playtogether_android.domain.model.sign.SignUpItem
+import com.playtogether_android.domain.model.sign.*
 
 object SignMapper {
 
@@ -33,7 +32,7 @@ object SignMapper {
     }
 
     //회원가입 request
-    fun mapperToSignupItem(signUpItem: SignUpItem) : RequestSignUp {
+    fun mapperToSignupItem(signUpItem: SignUpItem): RequestSignUp {
         return RequestSignUp(
             userLoginId = signUpItem.userLoginId,
             password = signUpItem.password,
@@ -41,6 +40,23 @@ object SignMapper {
             gender = signUpItem.gender,
             birth = signUpItem.birth,
             mbti = signUpItem.mbti
+        )
+    }
+
+    //로그인 response
+    fun mapperToSignInData(responseSignIn: ResponseSignIn): SignInData {
+        return SignInData(
+            jwtToken = responseSignIn.data.jwtToken,
+            userLoginId = responseSignIn.data.userLoginId,
+            userName = responseSignIn.data.userName
+        )
+    }
+
+    //로그인 request
+    fun mapperToSignInItem(signInItem: SignInItem) : RequestSignIn {
+        return RequestSignIn(
+            userLoginId = signInItem.userLoginId,
+            password = signInItem.password
         )
     }
 }
