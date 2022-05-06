@@ -37,6 +37,8 @@ object Versions {
     const val android_test_version = "1.1.2"
 
     const val jvm_version = "1.8"
+
+    const val glide_version2 = "1.6.21"
 }
 
 
@@ -78,6 +80,7 @@ object MaterialDesignDependencies {
 object KaptDependencies {
     const val glideCompiler =
         "com.github.bumptech.glide:compiler:${Versions.glide_compiler_version}"
+    const val glide = "org.jetbrains.kotlin.kapt:${Versions.glide_version2}"
 
 }
 
