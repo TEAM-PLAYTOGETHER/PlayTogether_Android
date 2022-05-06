@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 import java.util.regex.Pattern.compile
 
 plugins {
@@ -158,6 +159,5 @@ dependencies {
 
     //update
     implementation("com.google.android.play:core:1.10.3")
-
 
 }
