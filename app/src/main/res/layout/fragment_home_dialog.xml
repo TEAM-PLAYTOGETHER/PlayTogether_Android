@@ -50,6 +50,15 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/iv_homedialog_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/ic_icn_gray_exit"
+                app:layout_constraintBottom_toTopOf="@id/tv_homedialog_group_title"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView

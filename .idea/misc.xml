@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_icn_clear.xml" value="0.217" />
+        <entry key="app/src/main/res/drawable/ic_img_do_inactive.xml" value="0.217" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.151" />
         <entry key="app/src/main/res/drawable/ic_vector_9.xml" value="0.151" />
         <entry key="app/src/main/res/drawable/rectangle_fill_gray_black02_radius_14.xml" value="0.217" />
