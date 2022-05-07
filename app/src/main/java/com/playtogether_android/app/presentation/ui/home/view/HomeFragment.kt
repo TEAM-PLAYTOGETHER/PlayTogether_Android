@@ -1,9 +1,8 @@
-package com.playtogether_android.app.presentation.ui.home
+package com.playtogether_android.app.presentation.ui.home.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentHomeBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
@@ -19,9 +18,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun initView() {
         refreshView()
         initAdapter()
+        initBottomDialog()
     }
 
     private fun initAdapter() {
+        hotListAdapter()
+        newListAdaper()
+    }
+
+    private fun hotListAdapter() {
+
+    }
+
+    private fun newListAdaper() {
 
     }
 
@@ -35,6 +44,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 //                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
 //                lsrlHomeContainer.isRefreshing = false
 //            }
+        }
+    }
+
+    private fun initBottomDialog() {
+        binding.llHomeGroupTitleContainer.setOnClickListener {
+            val bottomSheetDialog = HomeFragmentDialog()
+            bottomSheetDialog.show(requireActivity().supportFragmentManager, "init bottom_sheet")
         }
     }
 
