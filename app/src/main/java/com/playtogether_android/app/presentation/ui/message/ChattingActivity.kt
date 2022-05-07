@@ -1,7 +1,8 @@
 package com.playtogether_android.app.presentation.ui.message
 
-import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
@@ -14,30 +15,51 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getIntentData()
+        changeSendImage()
         initAdapter()
         removeTimeAll()
+
         binding.ivSendMessage.setOnClickListener{
+            binding.ivSendMessage.isClickable = !binding.etMessage.text.isNullOrEmpty()
             addChat()
             binding.etMessage.text.clear()
             removeTimePart()
         }
+        binding.ivInChattingBack.setOnClickListener{
+            finish()
+        }
     }
 
-    private fun changeSendImage(){
-        if(binding.etMessage.text.isNullOrEmpty()){
-            binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
-            binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this ,R.color.gray_gray03))
-        }
-        else{
-            binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message_black)
-            binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this ,R.color.main_green))
-        }
+    private fun changeSendImage() {
+        binding.etMessage.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(binding.etMessage.text.isNullOrEmpty()){
+                    binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
+                    binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this@ChattingActivity, R.color.gray_gray03))
+                }
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(!binding.etMessage.text.isNullOrEmpty()){
+                    binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message_black)
+                    binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this@ChattingActivity, R.color.main_green))
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if(binding.etMessage.text.isNullOrEmpty()){
+                    binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
+                    binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this@ChattingActivity, R.color.gray_gray03))
+                }
+            }
+
+        })
     }
 
     private fun getIntentData(){
-        val intent = Intent()
         val roomId = intent.getIntExtra("roomId", -1)
         val name = intent.getStringExtra("name")
+        Log.d("getIntent", "${name}")
         binding.tvInChattingName.text=name
     }
 
@@ -99,6 +121,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     private fun initAdapter(){
         adapter= ChatAdapter()
         binding.rvInChattingChatting.adapter=adapter
+        binding.rvInChattingChatting.addItemDecoration(VerticalItemDecoration())
         adapter.chatList.addAll(
             listOf(
                 ChatData("안녕하세요", "22.04.23 오후 06:27", 0),
