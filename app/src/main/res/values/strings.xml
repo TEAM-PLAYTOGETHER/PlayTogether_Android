@@ -138,4 +138,10 @@
     <string name="thunder_item_title">선착순 곱창 5명 구함</string>
     <string name="thunder_item_people">인원 3/5</string>
     <string name="thunder_item_day">2022.04.13.신촌 14:00</string>
+
+    <!--    HomeDialog-->
+    <string name="home_dialog_group_title">동아리</string>
+    <string name="home_dialog_SOPT">SOPT</string>
+    <string name="home_dialog_button_text">추가하기</string>
+
 </resources>
