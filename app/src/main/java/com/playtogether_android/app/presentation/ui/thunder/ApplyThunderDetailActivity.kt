@@ -65,11 +65,12 @@ class ApplyThunderDetailActivity : BaseActivity<ActivityApplyThunderDetailBindin
 
         applicantListAdapter.applicantList = listOf(
             TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
+            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
         )
 
         applicantListAdapter.notifyDataSetChanged()
