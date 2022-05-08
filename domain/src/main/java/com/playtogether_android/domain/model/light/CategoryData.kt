@@ -16,3 +16,14 @@ data class CategoryData(
     val time: String,
     val title: String
 )
+//val category: String,
+//val date: String,
+//@SerializedName("light_id")
+//val lightId: String,
+//@SerializedName("LightMemberCnt")
+//val lightMemberCnt: String,
+//@SerializedName("people_cnt")
+//val peopleCnt: Int,
+//val place: String,
+//val time: String,
+//val title: String

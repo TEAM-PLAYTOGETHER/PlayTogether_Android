@@ -7,9 +7,9 @@ data class ResponseLightListCategory(
     val message: String,
     val status: Int,
     val success: Boolean,
-    val data: List<Category>,
+    val data: List<Data>,
 ) {
-    data class Category(
+    data class Data(
         val category: String,
         val date: String,
         @SerializedName("light_id")
