@@ -99,9 +99,9 @@
     <!--    AboutThunderTap-->
     <string name="cancel_application">신청 취소</string>
     <string name="my_thunder">나의 번개</string>
-    <string name="tap_apply">신청한</string>
-    <string name="tap_open">오픈한</string>
-    <string name="tap_like">찜한</string>
+    <string name="tab_apply">신청한</string>
+    <string name="tab_open">오픈한</string>
+    <string name="tab_like">찜한</string>
     <string name="thunder_members">인원</string>
 
     <!-- onBoarding -->

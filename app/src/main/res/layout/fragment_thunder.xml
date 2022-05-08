@@ -53,15 +53,26 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_thundertap_back"
                 android:layout_marginEnd="20dp"/>
 
-
-
-
-
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_thunder_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cl_thundertap_top"
+            android:background="@color/gray_black"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:tabSelectedTextColor="@color/main_green"
+            app:tabIndicatorColor="@color/main_green">
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_thunder_tab"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/tl_thunder_tab"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

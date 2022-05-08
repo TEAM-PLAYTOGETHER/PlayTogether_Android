@@ -3,16 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_rectangle_fill_gray02_to_fill_green.xml" value="0.108" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_black01.xml" value="0.108" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_white.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_chat.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_mypage.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_thunder.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/inset_horizontal_58.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_bottom_navi_icon_home.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_second_onboarding.xml" value="0.264" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_electric_bolt_24.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.1" />
@@ -45,16 +35,28 @@
         <entry key="app/src/main/res/drawable/line_dotted_white.xml" value="0.1165" />
         <entry key="app/src/main/res/drawable/rectangle_fill_gray_black_radius_10.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/rectangle_fill_white_border_black01_radius10.xml" value="0.196" />
+        <entry key="app/src/main/res/drawable/rectangle_popup_menu_bg_radius_10.xml" value="0.184" />
         <entry key="app/src/main/res/layout/activity_applied.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/activity_apply_thunder_detail.xml" value="0.18348693847656253" />
         <entry key="app/src/main/res/layout/activity_create_thunder.xml" value="0.3390625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_open_thunder_detail.xml" value="0.29590504964192704" />
         <entry key="app/src/main/res/layout/activity_thunder_detail.xml" value="0.20993957519531253" />
+        <entry key="app/src/main/res/layout/activity_thunder_list.xml" value="0.2694691975911458" />
         <entry key="app/src/main/res/layout/dialog_check.xml" value="0.36185201009114576" />
         <entry key="app/src/main/res/layout/dialog_yes_no.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/fragment_thunder.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/item_thunder_applicant_list.xml" value="0.2923055013020833" />
+        <entry key="app/src/main/res/layout/item_thunder_list.xml" value="0.28489430745442706" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/menu/menu_popup.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
 </project>
