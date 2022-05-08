@@ -35,8 +35,6 @@
     <string name="text_check">확인</string>
     <string name="text_slash">/</string>
     <string name="text_read_detail">자세히 보기</string>
-    <string name="text_check">확인</string>
->>>>>>>>> Temporary merge branch 2
 
     <!--createThunder-->
     <string name="createthunder_openthunder">번개를\n오픈해 볼까요?</string>
