@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_electric_bolt_24.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.1" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1135" />
-        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1135" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_rectangle_fill_gray02_to_fill_green.xml" value="0.108" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_black01.xml" value="0.108" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-hdpi/selector_text_gray01_to_white.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_chat.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_mypage.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable-xhdpi/selector_bottom_navi_icon_thunder.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/inset_horizontal_58.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/rectangle_border_gray01_radius_10.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_bottom_navi_icon_home.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_icon.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_nav_menu_text.xml" value="0.1" />
         <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_create_thunder.xml" value="0.23385416666666667" />
@@ -43,13 +47,33 @@
         <entry key="app/src/main/res/layout/dialog_yes_no.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/fragment_thunder.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/item_thunder_applicant_list.xml" value="0.2923055013020833" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_border_gray03_to_gray01.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/drawable/selector_rectangle_gray01_to_black01_check.xml" value="0.132" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_first_on_boarding.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_join_on_boarding.xml" value="0.152" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_second_onboarding.xml" value="0.2" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_finish.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_info.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/activity_sign_up_main.xml" value="0.1157548125633232" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/dialog_one_question.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/dialog_yes_no.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_home.xml" value="0.13489583333333333" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.264" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/fragment_my_page.xml" value="0.19723865877712032" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_home_hot.xml" value="0.11398176291793313" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_home_new.xml" value="0.11398176291793313" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/layout/item_message_room.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/menu/menu.xml" value="0.125" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/82104/PlayTogether_Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/activity_chatting.xml" value="0.1" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/fragment_message.xml" value="0.1" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_message_room.xml" value="0.14855072463768115" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_my_chat.xml" value="0.264" />
+        <entry key="..\:/Users/brian/AndroidStudioProjects/PlayTogether_Android/app/src/main/res/layout/item_other_chat.xml" value="0.2" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

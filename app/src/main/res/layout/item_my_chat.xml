@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.playtogether_android.domain.model.message.ChatData" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_mychat_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/rectangle_radius_10"
+            android:backgroundTint="@color/gray_gray05"
+            android:text="@{data.content}"
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:scrollbarSize="14sp"
+            android:textColor="@color/gray_black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="안녕하세요" />
+
+        <TextView
+            android:id="@+id/tv_mychat_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:visibility="@{data.timeVisible?View.VISIBLE:View.GONE}"
+            android:text="@{data.time}"
+            android:textSize="10sp"
+            android:textColor="@color/gray_gray02"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_mychat_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mychat_content"
+            tools:text="2022.04.13. 14:00" />
+
+        <!--<TextView
+            android:id="@+id/tv_mychat_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2022.04.13."
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:textSize="10sp"
+            android:textColor="@color/gray_gray02"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_mychat_time" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

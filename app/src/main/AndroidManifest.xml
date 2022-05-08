@@ -9,31 +9,40 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".presentation.ui.message.ChattingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.onboarding.JoinOnBoardingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.onboarding.SecondOnboardingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.home.ThunderAppliedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.onboarding.FirstOnBoardingActivity"
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignUpFinishActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignUpMainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.thunder.ApplyThunderDetailActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignUpInfoActivity"
             android:exported="true" />
-        <activity
-            android:name=".presentation.ui.home.AppliedActivity"
-            android:exported="false" />
         <activity
             android:name=".presentation.ui.home.ThunderDetailActivity"
             android:exported="true" />
@@ -46,7 +55,11 @@
         <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

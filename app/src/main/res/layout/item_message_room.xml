@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.playtogether_android.domain.model.message.MessageListData" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_message_room_profile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.111"
+            app:srcCompat="@drawable/ic_img_profile" />
+
+        <TextView
+            android:id="@+id/tv_message_room_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="3dp"
+            android:text="@{data.name}"
+            android:fontFamily="@font/pretendard_bold"
+            android:includeFontPadding="false"
+            android:textColor="@color/gray_black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_message_room_content"
+            app:layout_constraintStart_toEndOf="@+id/iv_message_room_profile"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/tv_message_room_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{data.content}"
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:textColor="@color/gray_black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_message_room_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message_room_name"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/tv_message_room_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            tools:text="14:00"
+            android:text="@{data.time}"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:textSize="12sp"
+            android:textColor="@color/gray_gray01"
+            app:layout_constraintBottom_toTopOf="@+id/tv_message_room_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--<TextView
+            android:id="@+id/tv_message_room_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            tools:text="2022.04.13."
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:textSize="12sp"
+            android:textColor="@color/gray_gray01"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_message_room_time"
+            app:layout_constraintEnd_toStartOf="@+id/tv_message_room_time"
+            app:layout_constraintTop_toTopOf="@+id/tv_message_room_time" />-->
+
+        <TextView
+            android:id="@+id/tv_message_room_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_gray03"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_message_room_spot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:visibility="@{data.read?View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_message_room_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_message_room_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_message_room_name"
+            app:srcCompat="@drawable/circle_main_green" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

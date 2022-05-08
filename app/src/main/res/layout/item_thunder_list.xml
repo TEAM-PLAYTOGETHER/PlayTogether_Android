@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_thunderlist_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rectangle_border_black01_radius_10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="21dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="25"
+            android:background="@drawable/ic_group_8925" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_right_fill_black01_radius_10"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_thunder_item_title"
+                style="@style/thunder_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="18dp"
+                tools:text="@string/thunder_item_title" />
+
+            <TextView
+                android:id="@+id/tv_thunder_item_date"
+                style="@style/thunder_item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/thunder_item_day" />
+
+            <TextView
+                android:id="@+id/tv_thunder_item_limit_count"
+                style="@style/thunder_item_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/thunder_item_people" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

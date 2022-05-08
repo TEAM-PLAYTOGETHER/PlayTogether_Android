@@ -37,6 +37,21 @@ class CustomDialog(context:Context, val title:String) {
         }
     }
 
+    fun showOneChoiceDialog(@LayoutRes layout : Int){
+        dialog.setContentView(layout)
+        dialog.findViewById<TextView>(R.id.tv_dialog_title).text=title
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        dialog.show()
+
+        dialog.findViewById<TextView>(R.id.tv_dialog_answer).setOnClickListener{
+            dialog.dismiss()
+        }
+    }
+
     fun showConfirmDialog(@LayoutRes layout : Int){
         dialog.setContentView(layout)
         dialog.findViewById<TextView>(R.id.tv_dialog_title).text=title

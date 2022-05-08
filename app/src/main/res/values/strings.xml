@@ -9,6 +9,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--    HomeFragment-->
+    <string name="home_group_name">SOPT</string>
+    <string name="home_more">more -></string>
+    <string name="home_new_title">✨ NEW</string>
+    <string name="home_hot_title">🔥 HOT</string>
+    <string name="home_eat">먹을래</string>
+    <string name="home_go">갈래</string>
+    <string name="home_do">할래</string>
+    <string name="home_searching">에서 찾는중</string>
+
+
     <!--common-->
     <string name="text_finish">완료</string>
     <string name="text_title">제목</string>
@@ -21,8 +32,9 @@
     <string name="text_posting_report"><u>게시글 신고</u></string>
     <string name="text_no">아니오</string>
     <string name="text_yes">네</string>
-    <string name="slash">/</string>
     <string name="text_check">확인</string>
+    <string name="text_slash">/</string>
+    <string name="text_read_detail">자세히 보기</string>
 
     <!--createThunder-->
     <string name="createthunder_openthunder">번개를\n오픈해 볼까요?</string>
@@ -53,6 +65,10 @@
     <!--thunderdetail-->
     <string name="thunderdetail_example">안녕하세요 저는 문수빈인데요. 제가 이번에 번개를 한 번 열어보려구 합니다. 장소는 저희 집이구요, 오실 때 귤 한 박스씩 사들고 오셔야 해요. 그럼 대문 활짝 열어두고 기다릴게요😊 아래 사진은 우리 집 오는 약도입니다. 다들 많은 신청 부탁드려요.\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크\n체크</string>
 
+    <!--applied complete-->
+    <string name="applied_complete">번개 신청을\n완료했어요!</string>
+    <string name="applied_applier">"번개 신청자"</string>
+
     <!--signUp-->
     <string name="signupinfo_main_message">안전한 번개를 위해\n정보를 입력해주세요</string>
     <string name="text_name">이름</string>
@@ -65,17 +81,71 @@
     <string name="signupmain_message">사용할 아이디와 비밀번호를\n입력해주세요</string>
     <string name="signupmain_input_id">아이디 입력</string>
     <string name="text_duplication_check">중복확인</string>
+    <string name="signupmain_id_duplication">사용 가능한 아이디입니다</string>
     <string name="signupmain_expression_id">8-15자 이내 소문자, 숫자 사용 가능</string>
+    <string name="signupmain_expression_id_warn">8-15자 이내 소문자, 숫자만 사용 가능합니다.</string>
     <string name="signupmain_input_pw">비밀번호 입력</string>
     <string name="signupmain_expression_pw">8-15자 이내 대문자, 소문자, 숫자, 특수문자 사용 가능</string>
     <string name="signupmain_check_pw">비밀번호 확인</string>
     <string name="signupmain_agreement_pw">비밀번호 일치</string>
+    <string name="signupmain_use_pw_ok">사용 가능한 비밀번호입니다</string>
+    <string name="signupmain_agreement_pw_true">비밀번호가 일치합니다</string>
+    <string name="signupmain_agreement_pw_false">비밀번호가 일치하지 않습니다</string>
     <string name="signup_finish_main">회원가입이 완료되었어요!</string>
     <string name="signup_finish_welcome">님, 반가워요</string>
     <string name="signup_finish_start">시작하기</string>
-    
-<!--    AboutThunderTap-->
-    <string name="cancel_application">신청 취소</string>
+    <string name="text_ok">확인</string>
 
+    <!--    AboutThunderTap-->
+    <string name="cancel_application">신청 취소</string>
+    <string name="my_thunder">나의 번개</string>
+    <string name="tap_apply">신청한</string>
+    <string name="tap_open">오픈한</string>
+    <string name="tap_like">찜한</string>
+    <string name="thunder_members">인원</string>
+
+    <!-- onBoarding -->
+    <string name="onboarding_user">님의</string>
+    <string name="onboarding_mbti">MBTI는 무엇인가요?</string>
+    <string name="onboarding_select_mbti">해당하는 MBTI를 선택해주세요</string>
+    <string name="onboarding_e">E</string>
+    <string name="onboarding_n">N</string>
+    <string name="onboarding_f">F</string>
+    <string name="onboarding_p">P</string>
+    <string name="onboarding_i">I</string>
+    <string name="onboarding_s">S</string>
+    <string name="onboarding_t">T</string>
+    <string name="onboarding_j">J</string>
+    <string name="text_next">다음</string>
+    <string name="text_get_start">시작하기</string>
+    <string name="text_no_relevant">해당사항 없음</string>
+    <string name="onboarding_start_thunder">번개를\n시작해볼까요?</string>
+    <string name="onboarding_select_option">개설과 참여 중 선택해주세요</string>
+    <string name="text_open">개설</string>
+    <string name="text_join">참여</string>
+    <string name="onboarding_open_message">번개를 열 동아리나 단체를 개설해요!</string>
+    <string name="onboarding_join_message">개설된 동아리나 단체에 참여해요!</string>
+    <string name="onboarding_join_input_code">초대코드를\n입력해주세요!</string>
+    <string name="onboarding_join_input_six">여섯 자리 코드를 입력해주세요</string>
+    <string name="onboarding_enter">입장하기</string>
+
+    <!-- message -->
+    <string name="messageBox">쪽지함</string>
+
+
+    <!--    ThunderListActivity-->
+
+    <string name="thunder_list_title">⚡️ 같이</string>
+    <string name="thunder_list_question">"?"</string>
+    <string name="thunder_list_align">최신순</string>
+
+    <!--    ThunderListItem-->
+    <string name="thunder_item_title">선착순 곱창 5명 구함</string>
+    <string name="thunder_item_people">인원 3/5</string>
+    <string name="thunder_item_day">2022.04.13.신촌 14:00</string>
+
+    <!--Mypage-->
+    <string name="mypage_dear">님</string>
+    <string name="mypage_age">세,</string>
 
 </resources>
