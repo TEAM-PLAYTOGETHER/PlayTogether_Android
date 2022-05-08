@@ -16,10 +16,10 @@ val viewModelModule = module {
     }
 
     //sign
-    viewModel { SignViewModel(get(), get()) }
+    viewModel { SignViewModel(get(), get(), get()) }
 
     //onboarding
-    viewModel {onBoardingViewModel()}
+    viewModel { onBoardingViewModel() }
 
 }
 
