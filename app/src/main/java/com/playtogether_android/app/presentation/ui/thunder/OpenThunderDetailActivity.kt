@@ -1,6 +1,10 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
 import android.os.Bundle
+import android.view.ContextThemeWrapper
+import android.view.Gravity
+import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenThunderDetailBinding
@@ -18,7 +22,7 @@ class OpenThunderDetailActivity : BaseActivity<ActivityOpenThunderDetailBinding>
         initAdapter()
 
         binding.ivOpenthunderdetailOption.setOnClickListener {
-            showDeleteDialog()
+            showOptionPopup(binding.ivOpenthunderdetailOption)
         }
     }
 
@@ -74,9 +78,30 @@ class OpenThunderDetailActivity : BaseActivity<ActivityOpenThunderDetailBinding>
         applicantListAdapter.notifyDataSetChanged()
     }
 
+    // 팝업 메뉴 보여주는 메소드
+    private fun showOptionPopup(v: View) {
+//        val themeWrapper = ContextThemeWrapper(this, R.style.MyPopupMenu)
+//        val popup = PopupMenu(themeWrapper, v, Gravity.END, 0, R.style.MyPopupMenu)
+        val popup = PopupMenu(this, v)
+        popup.menuInflater.inflate(R.menu.menu_popup, popup.menu)
+        popup.setOnMenuItemClickListener {
+            when (it?.itemId) {
+                R.id.edit -> {
+                    // TODO: 수정처리
+                    Toast.makeText(this, "수정페이지로 넘어가보겠슴다~", Toast.LENGTH_LONG).show()
+                    return@setOnMenuItemClickListener  true
+                }
+                R.id.delete -> {
+                    //삭제 다이어로그 띄워주기
+                    showDeleteDialog()
+                    return@setOnMenuItemClickListener true
+                }
 
-
-
+            }
+            return@setOnMenuItemClickListener false
+        }
+        popup.show()
+    }
 
 }
 
