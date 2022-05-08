@@ -22,6 +22,9 @@ class HomeFragmentDialog :
     }
 
     private fun initAdapter() {
+        //회원이 가입한 동아리 리스트 조회
+
+
 
     }
 }

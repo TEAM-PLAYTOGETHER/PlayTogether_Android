@@ -6,10 +6,15 @@ import androidx.fragment.app.activityViewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentHomeBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.home.adapter.HomeHotAdapter
+import com.playtogether_android.app.presentation.ui.home.adapter.HomeNewAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
+import com.playtogether_android.app.util.viewPagerAnimation
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeVieModel: HomeViewModel by activityViewModels()
+    private lateinit var hotAdapter: HomeHotAdapter
+    private lateinit var newAdapter: HomeNewAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -27,11 +32,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun hotListAdapter() {
-
+        with(binding.vpHomeHotContainer) {
+            adapter = hotAdapter
+            requireActivity().viewPagerAnimation(binding.vpHomeHotContainer)
+        }
     }
 
     private fun newListAdaper() {
-
+        with(binding.vpHomeNewContainer) {
+            adapter = newAdapter
+            requireActivity().viewPagerAnimation(binding.vpHomeNewContainer)
+        }
     }
 
     private fun initData() {
