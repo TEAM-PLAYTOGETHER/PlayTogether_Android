@@ -1,6 +1,5 @@
 package com.playtogether_android.app.presentation.ui.sign
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpFinishBinding
@@ -10,5 +9,12 @@ class SignUpFinishActivity : BaseActivity<ActivitySignUpFinishBinding>(R.layout.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initName()
+
+    }
+
+    private fun initName() {
+        //val name = intent.getStringExtra("userName").toString()
+        binding.tvSignupFinishNickname.setText(intent.getStringExtra("userName").toString())
     }
 }

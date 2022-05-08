@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
+            android:background="@drawable/selector_rectangle_border_gray03_to_black02"
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/signin_input_id"
             android:paddingStart="19dp"
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
+            android:background="@drawable/selector_rectangle_border_gray03_to_black02"
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/signin_input_pw"
             android:inputType="textPassword"
@@ -138,7 +138,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/text_sign_in_signup"
+                android:id="@+id/text_sign_in_find_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_medium"
@@ -156,7 +156,7 @@
                 android:layout_marginStart="16dp"
                 android:background="@drawable/rectangle_fill_grayadadad_radius_0"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/text_sign_in_signup"
+                app:layout_constraintStart_toEndOf="@+id/text_sign_in_find_id"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -168,9 +168,9 @@
                 android:text="@string/signin_change_pw"
                 android:textColor="@color/gray_adadad"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/text_sign_in_signup"
+                app:layout_constraintBottom_toBottomOf="@+id/text_sign_in_find_id"
                 app:layout_constraintStart_toEndOf="@+id/text_sign_in_horizontal_bar1"
-                app:layout_constraintTop_toTopOf="@+id/text_sign_in_signup" />
+                app:layout_constraintTop_toTopOf="@+id/text_sign_in_find_id" />
 
             <TextView
                 android:id="@+id/text_sign_in_horizontal_bar2"
@@ -184,7 +184,7 @@
 
 
             <TextView
-                android:id="@+id/text_sign_in_question"
+                android:id="@+id/text_sign_in_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -198,6 +198,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/tv_sign_in_log_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_rectangle_fill_gray03_to_black"

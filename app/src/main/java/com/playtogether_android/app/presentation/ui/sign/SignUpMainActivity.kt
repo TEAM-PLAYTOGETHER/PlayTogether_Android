@@ -5,10 +5,14 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -25,15 +29,17 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         initPwCheckTextField()
         pwCheckTextWatcher()
         pwTextWatcher()
-        actvieDuplicationBtn()
+        actvieNextBtn()
         idTextWatcher()
+        backBtn()
+        duplicationClickEvent()
     }
 
 
     //id editText 클릭 리스너
     private fun initIdTextField() = with(binding) {
-        etSignupmainId.setOnClickListener {
-            etSignupmainId.isFocused
+        if (etSignupmainId.text.toString() != "") {
+            etSignupmainId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
         }
     }
 
@@ -54,34 +60,51 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if(!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())){
-            tvSignupmanIdDuplication.isSelected = false
+        if (!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())) {
+            tvSignupmainIdDuplication.isSelected = false
             tvSignupmainIdExpressionWarn.visibility = View.VISIBLE
             tvSignupmainIdExpression.visibility = View.INVISIBLE
             Timber.d("정규식 맞지 않음")
         } else {
-            tvSignupmanIdDuplication.isSelected = true
+            tvSignupmainIdDuplication.isSelected = true
             tvSignupmainIdExpressionWarn.visibility = View.INVISIBLE
             tvSignupmainIdExpression.visibility = View.INVISIBLE
-            tvSignupmanIdDuplication.isSelected = true
+            tvSignupmainIdDuplication.isSelected = true
             Timber.d("정규식 맞지 않음")
         }
     }
 
-    //중복 확인 버튼 활성화 클릭 리스너
-    private fun actvieDuplicationBtn() = with(binding) {
+    //다음 페이지로 이동
+    private fun actvieNextBtn() = with(binding) {
+        signViewModel.requestSignUp.userLoginId = etSignupmainId.text.toString()
+        signViewModel.requestSignUp.password = etSignupmainPwCheck.text.toString()
+
         tvSignupmainNext.setOnClickListener {
-            if (tvSignupmanIdDuplication.isSelected == true or tvSignupmainNext.isSelected) {
-                startActivity(Intent(this@SignUpMainActivity, SignInActivity::class.java))
+            if (tvSignupmainNext.isSelected) {
+                val intent = Intent(this@SignUpMainActivity, SignUpInfoActivity::class.java)
+                intent.putExtra("userLoginId",etSignupmainId.text.toString())
+                intent.putExtra("password", etSignupmainPwCheck.text.toString())
+                startActivity(intent)
                 finish()
             }
+        }
+    }
+
+    //다음 버튼 활성화
+    private fun allChecked() = with(binding) {
+        if(ivIdCheck.visibility == View.VISIBLE && ivPwCheck.visibility == View.VISIBLE && ivPwCheckCheck.visibility== View.VISIBLE) {
+            tvSignupmainNext.isSelected = true
         }
     }
 
 
     //비밀번호 정규식
     private fun isValidRegistrationPw() = with(binding) {
-        if (!Pattern.matches("^[a-z|A-Z|0-9|(!,@,#,$,&,*,(,))|]{8,15}", etSignupmainPw.text.toString())) {
+        if (!Pattern.matches(
+                "^[a-z|A-Z|0-9|(!,@,#,$,&,*,(,))|]{8,15}",
+                etSignupmainPw.text.toString()
+            )
+        ) {
             tvSignupmainPwExpression.setTextColor(Color.parseColor("#FF0000"))
             tvSignupmainPwExpression.visibility = View.VISIBLE
             ivPwCheck.visibility = View.INVISIBLE
@@ -96,8 +119,8 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
 
     //아이디 textwatcher
-    private fun idTextWatcher()= with(binding) {
-        etSignupmainId.addTextChangedListener(object: TextWatcher {
+    private fun idTextWatcher() = with(binding) {
+        etSignupmainId.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -107,10 +130,15 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (signViewModel.id.value != etSignupmainId.text.toString()) {
+                val id = signViewModel.id.value
 
+                if (id != etSignupmainId.text.toString()) {
+                    binding.ivIdCheck.visibility = View.INVISIBLE
+                    binding.tvSignmainIdDuplication.visibility = View.INVISIBLE
+                    binding.tvSignupmainIdDuplication.visibility = View.VISIBLE
                 }
                 isVaildRegistrationId()
+                allChecked()
             }
 
         })
@@ -136,6 +164,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                     isPwSame()
                 }
                 isValidRegistrationPw()
+                allChecked()
             }
 
         })
@@ -156,6 +185,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                     isPwSame()
 
                 }
+                allChecked()
             }
         })
     }
@@ -166,10 +196,9 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             tvSignupmainPwExpressionCheck.visibility = View.INVISIBLE
             tvSignupmainPwExpressionCheckTrue.visibility = View.VISIBLE
             tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
-            ivPwCheckCheck.visibility= View.VISIBLE
-            Timber.d("비밀번호 일치")
+            ivPwCheckCheck.visibility = View.VISIBLE
         } else {
-            if(etSignupmainPwCheck.text.toString()=="") {
+            if (etSignupmainPwCheck.text.toString() == "") {
                 tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
                 tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
                 tvSignupmainPwExpressionCheckFalse.visibility = View.INVISIBLE
@@ -178,8 +207,57 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
                 tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
                 tvSignupmainPwExpressionCheckFalse.visibility = View.VISIBLE
                 ivPwCheckCheck.visibility = View.INVISIBLE
-                Timber.d("비밀번호 일치하지 않음")
+            }
+            allChecked()
+        }
+
+    }
+
+    //이전 버튼
+    private fun backBtn() {
+        binding.ivSignupmainBack.setOnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+        }
+    }
+
+    //id 중복체크
+    private fun idDuplicationCheck() {
+        val id = binding.etSignupmainId.text.toString()
+        signViewModel.postIdDuplication(
+            IdDuplicationCheckItem(id)
+        )
+
+        signViewModel.idDuplicationCheck.observe(this) {
+            if(it.isUser == true) {
+                Log.d("중복확인", "중복되는 아이디 있음")
+                showApplyDialog()
+            } else {
+                Log.d("중복확인", "중복되는 아이디 없음")
+                binding.ivIdCheck.visibility = View.VISIBLE
+                binding.tvSignmainIdDuplication.visibility = View.VISIBLE
+                binding.tvSignupmainIdDuplication.visibility = View.INVISIBLE
+            }
+        }
+
+    }
+
+    //중복확인 버튼 클릭
+    private fun duplicationClickEvent() {
+        binding.tvSignupmainIdDuplication.setOnClickListener {
+            if (binding.tvSignupmainIdDuplication.isSelected) {
+                idDuplicationCheck()
             }
         }
     }
+
+
+    //customDialog
+    private fun showApplyDialog(){
+        val title = "중복된 아이디입니다"
+        val dialog= CustomDialog(this, title)
+        dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+    }
+
+
 }
