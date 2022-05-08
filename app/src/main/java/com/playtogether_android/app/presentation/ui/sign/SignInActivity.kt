@@ -28,7 +28,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         initIdTextField()
         initPwTextField()
         initSignIn()
-        observeSignIn()
 
     }
 
@@ -66,30 +65,31 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     //로그인
     private fun initSignIn() {
-        if (binding.tvSignInLogIn.isSelected) {
-            binding.tvSignInLogIn.setOnClickListener {
+        binding.tvSignInLogIn.setOnClickListener {
+            signViewModel.requestSignIn.userLoginId = binding.etSigninId.text.toString()
+            signViewModel.requestSignIn.password = binding.etSigninPw.text.toString()
+            if (binding.tvSignInLogIn.isSelected) {
                 signViewModel.postSignIn(
                     SignInItem(
-                        signViewModel.id.value.toString(),
-                        signViewModel.pw.value.toString()
+                        signViewModel.requestSignIn.userLoginId,
+                        signViewModel.requestSignIn.password
                     )
                 )
-                Log.d("로그인", "Test")
-
+                observeSignIn()
             }
+
         }
 
     }
 
     //로그인
     private fun observeSignIn() {
-        signViewModel.signUp.observe(this) {
-            if (signViewModel.signUp.value?.success == true) {
-                Log.d("성공", "로그인")
-                //val intent = Intent(this, MainActivity::class.java)
-                //startActivity(intent)
-                //finish()
-            } else {
+        signViewModel.signIn.observe(this) {
+            if (it.success) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else if(!it.success){
                 showApplyDialog()
             }
         }
@@ -100,6 +100,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         val title = "아이디 혹은 비밀번호를\n확인해주세요"
         val dialog = CustomDialog(this, title)
         dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+        Log.d("Test", "CustomDialog")
     }
 
     //아이디 textwatcher

@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.sign.*
 import com.playtogether_android.domain.usecase.sign.PostSignIdUseCase
-import com.playtogether_android.domain.usecase.sign.PostSignInUseCaes
+import com.playtogether_android.domain.usecase.sign.PostSignInUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignUpUseCaes
 import kotlinx.coroutines.launch
 
 class SignViewModel(
     val postSignIdUseCase: PostSignIdUseCase,
     val postSignUpUseCase: PostSignUpUseCaes,
-    val postSignInUseCaes: PostSignInUseCaes
+    val postSignInUseCase: PostSignInUseCase
 ) : ViewModel() {
 
     //로그인 시 필요한 값
@@ -23,6 +23,9 @@ class SignViewModel(
 
     //회원가입 request
     var requestSignUp = SignUpItem("","","","","","")
+
+    //로그인 request
+    var requestSignIn = SignInItem("","")
 
 
     //아이디 중복 체크 변수
@@ -36,7 +39,7 @@ class SignViewModel(
         get() = _signUp
 
     //로그인
-    private val _signIn = MutableLiveData<SignInData>()
+    private var _signIn = MutableLiveData<SignInData>()
     val signIn: LiveData<SignInData>
         get() = _signIn
 
@@ -75,14 +78,16 @@ class SignViewModel(
     //로그인
     fun postSignIn(signInItem: SignInItem) {
         viewModelScope.launch {
-            kotlin.runCatching { postSignInUseCaes(signInItem) }
+            kotlin.runCatching { postSignInUseCase(signInItem) }
                 .onSuccess {
                     _signIn.value = it
                     Log.d("SignIn", "서버 통신 성공")
                 }
                 .onFailure {
                     it.printStackTrace()
+                    _signIn.value = SignInData(false,"","","")
                     Log.d("SignIn", "서버 통신 실패")
+                    Log.d("SignIn", "" + it.message)
                 }
         }
     }

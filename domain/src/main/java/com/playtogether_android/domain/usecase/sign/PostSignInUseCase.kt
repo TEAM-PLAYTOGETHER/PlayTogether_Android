@@ -7,7 +7,7 @@ import com.playtogether_android.domain.model.sign.SignUpItem
 import com.playtogether_android.domain.repository.sign.SignRepository
 
 //회원가입
-class PostSignInUseCaes(private val repository: SignRepository) {
+class PostSignInUseCase(private val repository: SignRepository) {
     suspend operator fun invoke(signInItem: SignInItem) : SignInData {
         return repository.postSignIn(signInItem)
     }

@@ -46,6 +46,7 @@ object SignMapper {
     //로그인 response
     fun mapperToSignInData(responseSignIn: ResponseSignIn): SignInData {
         return SignInData(
+            success = responseSignIn.success,
             jwtToken = responseSignIn.data.jwtToken,
             userLoginId = responseSignIn.data.userLoginId,
             userName = responseSignIn.data.userName

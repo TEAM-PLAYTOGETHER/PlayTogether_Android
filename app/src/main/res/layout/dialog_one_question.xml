@@ -12,6 +12,7 @@
         android:fontFamily="@font/pretendard_regular"
         android:includeFontPadding="false"
         android:textSize="16sp"
+        android:textAlignment="center"
         android:textColor="@color/gray_black"
         android:paddingVertical="59dp"
         app:layout_constraintEnd_toEndOf="parent"
