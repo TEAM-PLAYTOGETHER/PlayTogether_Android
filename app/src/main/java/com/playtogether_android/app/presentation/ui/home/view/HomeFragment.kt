@@ -26,9 +26,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initBottomDialog()
     }
 
+    private fun initData() {
+
+    }
+
     private fun initAdapter() {
         hotListAdapter()
-        newListAdaper()
+        newListAdapter()
     }
 
     private fun hotListAdapter() {
@@ -38,15 +42,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private fun newListAdaper() {
+    private fun newListAdapter() {
         with(binding.vpHomeNewContainer) {
             adapter = newAdapter
             requireActivity().viewPagerAnimation(binding.vpHomeNewContainer)
         }
-    }
-
-    private fun initData() {
-
     }
 
     private fun refreshView() {
