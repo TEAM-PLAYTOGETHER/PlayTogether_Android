@@ -309,7 +309,7 @@
             android:textColor="@color/gray_black"
             android:fontFamily="@font/pretendard_bold"
             android:textSize="15sp"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_marginBottom="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/cl_first_onboarding_mbti"
@@ -317,7 +317,7 @@
 
         <TextView
             android:id="@+id/tv_first_onboarding_relevant"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
             android:text="@string/text_no_relevant"

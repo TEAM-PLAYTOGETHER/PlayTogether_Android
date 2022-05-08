@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_join_onboarding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.onboarding.SecondOnboardingActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_join_onboarding_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_black"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_join_onboarding_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_icn_back" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:id="@+id/view_join_onboarding_progressbar_green"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/rectangle_fill_green_radius_0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_join_onboarding_top" />
+
+
+        <TextView
+            android:id="@+id/tv_join_onboarding_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/onboarding_join_input_code"
+            android:textColor="@color/gray_black"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_join_onboarding_progressbar_green" />
+
+
+        <TextView
+            android:id="@+id/tv_join_onboarding_request_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/onboarding_join_input_six"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/gray_black02"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_join_onboarding_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_join_onboarding_name" />
+
+        <EditText
+            android:id="@+id/et_join_onboarding"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="162dp"
+            android:textSize="16dp"
+            android:maxLength="6"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/gray_black"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textAlignment="center"
+            android:background="@drawable/selector_rectangle_border_gray03_to_black02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_join_onboarding_request_code"
+            tools:text="FIGMAA"/>
+
+
+        <TextView
+            android:id="@+id/tv_join_onboarding_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/rectangle_fill_gray03_10dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:paddingTop="19dp"
+            android:paddingBottom="19dp"
+            android:text="@string/text_next"
+            android:textAlignment="center"
+            android:textColor="@color/gray_gray01"
+            android:textSize="15sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_join_onboarding_enter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/rectangle_fill_green_border_black_radius_10"
+            android:fontFamily="@font/pretendard_bold"
+            android:paddingTop="19dp"
+            android:paddingBottom="19dp"
+            android:text="@string/onboarding_enter"
+            android:textAlignment="center"
+            android:visibility="invisible"
+            android:textColor="@color/gray_black"
+            android:textSize="15sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

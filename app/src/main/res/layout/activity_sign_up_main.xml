@@ -86,6 +86,7 @@
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
+            android:maxLength="15"
             android:textColorHint="@color/gray_gray01"
             android:textSize="14sp"
             android:lines="1"
@@ -95,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_signupmain_id" />
 
         <TextView
-            android:id="@+id/tv_signupman_id_duplication"
+            android:id="@+id/tv_signupmain_id_duplication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="13dp"
@@ -148,6 +149,19 @@
             app:layout_constraintTop_toBottomOf="@+id/et_signupmain_id" />
 
         <TextView
+            android:id="@+id/tv_signmain_id_duplication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/signupmain_id_duplication"
+            android:textColor="@color/main_green"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/et_signupmain_id"
+            app:layout_constraintTop_toBottomOf="@+id/et_signupmain_id" />
+
+        <TextView
             android:id="@+id/tv_signupmain_pw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -170,6 +184,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/signupmain_input_pw"
             android:paddingStart="19dp"
+            android:maxLength="15"
             android:inputType="textPassword"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -228,6 +243,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/signupmain_check_pw"
             android:paddingStart="19dp"
+            android:maxLength="15"
             android:inputType="textPassword"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"

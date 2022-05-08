@@ -75,13 +75,6 @@ object MaterialDesignDependencies {
         "com.google.android.material:material:${Versions.material_design_version}"
 }
 
-object KaptDependencies {
-    const val glideCompiler =
-        "com.github.bumptech.glide:compiler:${Versions.glide_compiler_version}"
-
-}
-
-
 object ThirdPartyDependencies {
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide_version}"
     const val gson = "com.google.code.gson:gson:${Versions.gson_version}"

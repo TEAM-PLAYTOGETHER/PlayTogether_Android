@@ -81,6 +81,7 @@
     <string name="signupmain_message">사용할 아이디와 비밀번호를\n입력해주세요</string>
     <string name="signupmain_input_id">아이디 입력</string>
     <string name="text_duplication_check">중복확인</string>
+    <string name="signupmain_id_duplication">사용 가능한 아이디입니다</string>
     <string name="signupmain_expression_id">8-15자 이내 소문자, 숫자 사용 가능</string>
     <string name="signupmain_expression_id_warn">8-15자 이내 소문자, 숫자만 사용 가능합니다.</string>
     <string name="signupmain_input_pw">비밀번호 입력</string>
@@ -93,6 +94,7 @@
     <string name="signup_finish_main">회원가입이 완료되었어요!</string>
     <string name="signup_finish_welcome">님, 반가워요</string>
     <string name="signup_finish_start">시작하기</string>
+    <string name="text_ok">확인</string>
 
     <!--    AboutThunderTap-->
     <string name="cancel_application">신청 취소</string>
@@ -122,7 +124,10 @@
     <string name="text_open">개설</string>
     <string name="text_join">참여</string>
     <string name="onboarding_open_message">번개를 열 동아리나 단체를 개설해요!</string>
-    <string name="onboarding_join_message">개설된 동아리나 다네에 참여해요!</string>
+    <string name="onboarding_join_message">개설된 동아리나 단체에 참여해요!</string>
+    <string name="onboarding_join_input_code">초대코드를\n입력해주세요!</string>
+    <string name="onboarding_join_input_six">여섯 자리 코드를 입력해주세요</string>
+    <string name="onboarding_enter">입장하기</string>
 
     <!-- message -->
     <string name="messageBox">쪽지함</string>
@@ -143,5 +148,10 @@
     <string name="home_dialog_group_title">동아리</string>
     <string name="home_dialog_SOPT">SOPT</string>
     <string name="home_dialog_button_text">추가하기</string>
+
+
+    <!--Mypage-->
+    <string name="mypage_dear">님</string>
+    <string name="mypage_age">세,</string>
 
 </resources>
