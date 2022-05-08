@@ -409,7 +409,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pretendard_bold"
-                        android:text="@string/slash"
+                        android:text="@string/text_slash"
                         android:textColor="@color/gray_black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@id/tv_current_applicant"
