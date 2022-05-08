@@ -33,6 +33,7 @@
     <string name="text_posting_report"><u>게시글 신고</u></string>
     <string name="text_no">아니오</string>
     <string name="text_yes">네</string>
+    <string name="text_check">확인</string>
     <string name="text_slash">/</string>
     <string name="text_read_detail">자세히 보기</string>
 
