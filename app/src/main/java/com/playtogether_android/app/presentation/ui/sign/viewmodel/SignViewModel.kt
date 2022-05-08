@@ -13,15 +13,16 @@ import kotlinx.coroutines.launch
 
 class SignViewModel(
     val postSignIdUseCase: PostSignIdUseCase,
-    val postSignUpUseCase: PostSignUpUseCaes
-    //val postSignInUseCaes: PostSignInUseCaes
+    val postSignUpUseCase: PostSignUpUseCaes,
+    val postSignInUseCaes: PostSignInUseCaes
 ) : ViewModel() {
+
+    //로그인 시 필요한 값
     var id = MutableLiveData<String>()
     var pw = MutableLiveData<String>()
 
     //회원가입 request
     var requestSignUp = SignUpItem("","","","","","")
-
 
 
     //아이디 중복 체크 변수
@@ -32,8 +33,12 @@ class SignViewModel(
     //회원가입
     private val _signUp = MutableLiveData<SignUpData>()
     val signUp : LiveData<SignUpData>
-    get() = _signUp
+        get() = _signUp
 
+    //로그인
+    private val _signIn = MutableLiveData<SignInData>()
+    val signIn: LiveData<SignInData>
+        get() = _signIn
 
     //아이디 중복 체크
     fun postIdDuplication(idDuplicationCheckItem: IdDuplicationCheckItem) {
@@ -70,14 +75,15 @@ class SignViewModel(
     //로그인
     fun postSignIn(signInItem: SignInItem) {
         viewModelScope.launch {
-//            kotlin.runCatching { postSignInUseCaes(signInItem) }
-//                .onSuccess {
-//
-//                }
-//                .onFailure {
-//                    it.printStackTrace()
-//                    Log.d("SignIn", "서버 통신 실패")
-//                }
+            kotlin.runCatching { postSignInUseCaes(signInItem) }
+                .onSuccess {
+                    _signIn.value = it
+                    Log.d("SignIn", "서버 통신 성공")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("SignIn", "서버 통신 실패")
+                }
         }
     }
 }
