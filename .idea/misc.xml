@@ -8,8 +8,17 @@
         <entry key="app/src/main/res/drawable/line_dotted_black.xml" value="0.13" />
         <entry key="app/src/main/res/drawable/line_dotted_white.xml" value="0.13" />
         <entry key="app/src/main/res/drawable/rectangle_border_black01_radius_10.xml" value="0.13" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/rectangle_fill_black02_radius_14.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_fill_gray_black02_radius_14.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_fill_gray_black_radius_10.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_radius_10.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_right_fill_black01_radius_10.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_thunder_list.xml" value="0.2324074074074074" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_home_dialog.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/item_home_hot.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_home_new.xml" value="0.2770083102493075" />
+        <entry key="app/src/main/res/layout/item_thunder_list.xml" value="0.1" />
       </map>
     </option>
   </component>
