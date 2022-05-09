@@ -1,7 +1,9 @@
 package com.playtogether_android.app.di
 
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.playtogether_android.app.util.AuthInterceptor
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,10 +27,24 @@ val apiModule = module {
         OkHttpClient.Builder()
             .run {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-                //addInterceptor(get())
+                addInterceptor(get<Interceptor>())
                 addInterceptor(AuthInterceptor(BASE_URL))
                 build()
             }
 
+    }
+
+    single<Interceptor> {
+        Interceptor { chain ->
+            with(chain) {
+                val newRequest = request().newBuilder()
+                    .addHeader("Authorization",
+                        PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context()))
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                Log.d("testJwt", ""+PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context()))
+                proceed(newRequest)
+            }
+        }
     }
 }

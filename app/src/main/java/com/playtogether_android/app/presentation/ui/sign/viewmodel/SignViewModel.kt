@@ -43,6 +43,8 @@ class SignViewModel(
     val signIn: LiveData<SignInData>
         get() = _signIn
 
+
+
     //아이디 중복 체크
     fun postIdDuplication(idDuplicationCheckItem: IdDuplicationCheckItem) {
         viewModelScope.launch {

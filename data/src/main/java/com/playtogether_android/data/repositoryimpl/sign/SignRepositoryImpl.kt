@@ -7,7 +7,7 @@ import com.playtogether_android.domain.repository.sign.SignRepository
 
 class SignRepositoryImpl(private val signDataSource: SignDataSource) : SignRepository {
 
-    //아이디 중복확인g
+    //아이디 중복확인
     override suspend fun postSignId(idDuplicationCheckItem: IdDuplicationCheckItem): IdDuplicationCheckData {
         return SignMapper.mapperToIdDuplicationData(signDataSource.postSignId(
             SignMapper.mapperToIdDuplicationItem(idDuplicationCheckItem)

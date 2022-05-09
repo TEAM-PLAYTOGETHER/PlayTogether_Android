@@ -11,6 +11,7 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.domain.model.sign.SignInItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -86,6 +87,12 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun observeSignIn() {
         signViewModel.signIn.observe(this) {
             if (it.success) {
+                PlayTogetherSharedPreference.setJwtToken(
+                    this,
+                    SignViewModel.
+                    .value?.accessToken ?: ""
+                )
+                Log.d("test jwt", "" + signViewModel.signIn.value?.jwtToken)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
