@@ -150,6 +150,14 @@
     <string name="home_dialog_SOPT">SOPT</string>
     <string name="home_dialog_button_text">추가하기</string>
 
+<!--    HomeFragmentItem-->
+    <string name="home_item_title">문수빈네 집에서 붉닭\n볶음면 먹기</string>
+    <string name="home_item_eat_text">먹을래</string>
+    <string name="home_item_do_text">갈래</string>
+    <string name="home_item_people_cnt_now">4</string>
+    <string name="home_item_people_cnt_all">6</string>
+    <string name="home_item_tool_people_cnt">4/6</string>
+    <string name="home_item_tool_date">2022.03.10 신촌 14:00</string>
 
     <!--Mypage-->
     <string name="mypage_dear">님</string>

@@ -20,14 +20,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initView()
     }
 
+    private fun initData() {
+//        homeVieModel.tempList
+    }
+
     private fun initView() {
+        binding.btnHomeFloat.layoutParams.apply {
+            width = resources.getDimension(R.dimen.fab_home_size).toInt()
+            height = resources.getDimension(R.dimen.fab_home_size).toInt()
+        }
         refreshView()
         initAdapter()
         initBottomDialog()
-    }
-
-    private fun initData() {
-
     }
 
     private fun initAdapter() {
@@ -36,17 +40,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun hotListAdapter() {
+        hotAdapter = HomeHotAdapter()
         with(binding.vpHomeHotContainer) {
             adapter = hotAdapter
             requireActivity().viewPagerAnimation(binding.vpHomeHotContainer)
         }
+
+        hotAdapter.submitList(homeVieModel.tempList)
     }
 
     private fun newListAdapter() {
+        newAdapter = HomeNewAdapter()
         with(binding.vpHomeNewContainer) {
             adapter = newAdapter
             requireActivity().viewPagerAnimation(binding.vpHomeNewContainer)
         }
+        newAdapter.submitList(homeVieModel.tempList)
     }
 
     private fun refreshView() {
