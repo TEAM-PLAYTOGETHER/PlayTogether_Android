@@ -16,6 +16,10 @@ data class CategoryData(
     val time: String,
     val title: String
 )
+
+data class Test(
+    val list : List<CategoryData>
+)
 //val category: String,
 //val date: String,
 //@SerializedName("light_id")

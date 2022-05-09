@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/dialog_drop_shadow.xml" value="0.148" />
+        <entry key="app/src/main/res/drawable/ic_vector_247.xml" value="0.13" />
+        <entry key="app/src/main/res/drawable/line_dotted_black.xml" value="0.13" />
+        <entry key="app/src/main/res/drawable/line_dotted_white.xml" value="0.13" />
+        <entry key="app/src/main/res/drawable/rectangle_border_black01_radius_10.xml" value="0.13" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_home_dialog.xml" value="0.75" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
