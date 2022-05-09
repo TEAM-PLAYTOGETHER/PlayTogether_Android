@@ -42,7 +42,6 @@ val apiModule = module {
                         PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context()))
                     .addHeader("Content-Type", "application/json")
                     .build()
-                Log.d("testJwt", ""+PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context()))
                 proceed(newRequest)
             }
         }
