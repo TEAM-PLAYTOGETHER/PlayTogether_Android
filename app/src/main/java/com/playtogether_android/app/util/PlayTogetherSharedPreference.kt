@@ -9,13 +9,15 @@ object PlayTogetherSharedPreference {
     fun getJwtToken(context: Context): String {
         val preferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
         return preferences.getString(JWT_TOKEN, "") ?: ""
-        Log.d("test", preferences.getString(JWT_TOKEN, "") ?: "")
+        Log.d("testGet", preferences.getString(JWT_TOKEN, "") ?: "")
     }
 
     fun setJwtToken(context: Context, value: String) {
         val preferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
         preferences.edit().putString(JWT_TOKEN, value).apply()
-        Log.d("test", preferences.getString(JWT_TOKEN, "") ?: "")
+        val data = preferences.all.values
+        Log.d("testSet", preferences.getString(JWT_TOKEN, "") ?: "")
+        Log.d("testSET", "" + data)
     }
 
     fun removeJwtToken(context: Context) {
