@@ -63,7 +63,8 @@
             android:background="@color/gray_black"
             tools:ignore="SpeakableTextPresentCheck"
             app:tabSelectedTextColor="@color/main_green"
-            app:tabIndicatorColor="@color/main_green">
+            app:tabIndicatorColor="@color/main_green"
+            app:tabTextColor="@color/white">
 
         </com.google.android.material.tabs.TabLayout>
 
