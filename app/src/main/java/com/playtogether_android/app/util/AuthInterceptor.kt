@@ -1,5 +1,6 @@
 package com.playtogether_android.app.util
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber
@@ -20,8 +21,10 @@ class AuthInterceptor(
         val response = chain.proceed(request)
         Timber.d("response : $response")
         Timber.d("response header: ${response.headers}")
-
+        Log.d("response", "" + response)
+        Log.d("response header", "" + response.headers)
         return response
-
     }
 }
+
+

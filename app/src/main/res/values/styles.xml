@@ -130,4 +130,9 @@
 
 
 
+    <style name="MyPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/rectangle_popup_menu_bg_radius_10</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>
