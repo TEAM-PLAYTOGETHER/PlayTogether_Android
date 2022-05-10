@@ -20,7 +20,6 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         removeTimeAll()
 
         binding.ivSendMessage.setOnClickListener{
-            binding.ivSendMessage.isClickable = !binding.etMessage.text.isNullOrEmpty()
             addChat()
             binding.etMessage.text.clear()
             removeTimePart()
@@ -36,6 +35,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
                 if(binding.etMessage.text.isNullOrEmpty()){
                     binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
                     binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this@ChattingActivity, R.color.gray_gray03))
+                    binding.ivSendMessage.isClickable=false
                 }
             }
 
@@ -43,6 +43,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
                 if(!binding.etMessage.text.isNullOrEmpty()){
                     binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message_black)
                     binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this@ChattingActivity, R.color.main_green))
+                    binding.ivSendMessage.isClickable=true
                 }
             }
 
@@ -50,6 +51,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
                 if(binding.etMessage.text.isNullOrEmpty()){
                     binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
                     binding.ivSendMessage.setBackgroundColor(ContextCompat.getColor(this@ChattingActivity, R.color.gray_gray03))
+                    binding.ivSendMessage.isClickable=false
                 }
             }
 
