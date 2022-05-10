@@ -10,12 +10,9 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.home.ThunderAppliedActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
-import com.playtogether_android.domain.model.sign.SignUpData
-import okhttp3.internal.platform.android.AndroidLogHandler.close
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.regex.Pattern
