@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.playtogether_android.domain.model.onboarding.RegisterCrewData
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+import com.playtogether_android.domain.model.sign.SignInData
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
 import kotlinx.coroutines.launch
 
@@ -53,6 +54,7 @@ class OnBoardingViewModel(
                     Log.d("RegisterCrew", "서버 통신 성공")
                 }
                 .onFailure {
+                    _registerCrew.value = RegisterCrewData(false,"")
                     it.printStackTrace()
                     Log.d("RegisterCrew", "서버 통신 실패")
                 }

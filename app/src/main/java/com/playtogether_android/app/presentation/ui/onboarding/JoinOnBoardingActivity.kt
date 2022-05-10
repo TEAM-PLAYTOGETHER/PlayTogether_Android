@@ -92,8 +92,6 @@ class JoinOnBoardingActivity :
     }
 
     private fun initRegisterCrew() {
-
-        Log.d("Test", ""+onBoardingViewModel.crewCode.crewCode)
         binding.tvJoinOnboardingEnter.setOnClickListener {
             onBoardingViewModel.crewCode.crewCode = binding.etJoinOnboarding.text.toString()
             onBoardingViewModel.postRegisterCrew(
@@ -101,7 +99,6 @@ class JoinOnBoardingActivity :
                     onBoardingViewModel.crewCode.crewCode
                 )
             )
-            Log.d("Test2", ""+onBoardingViewModel.crewCode.crewCode)
             observeRegisterCrew()
         }
     }
