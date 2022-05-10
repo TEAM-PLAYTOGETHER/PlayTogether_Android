@@ -51,6 +51,7 @@
         <item name="android:textColor">@color/gray_gray01</item>
         <item name="fontFamily">@font/pretendard_medium</item>
         <item name="android:textSize">14sp</item>
+        <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -109,7 +110,7 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-<!--    homefargment item-->
+    <!--    homefargment item-->
     <style name="home_item_title">
         <item name="android:textColor">@color/main_green</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
@@ -128,7 +129,26 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="sort_title">
+        <item name="android:textColor">@color/gray_black</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 
+    <style name="sort_select_item">
+        <item name="android:textColor">@color/gray_black02</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="sort_unselect_item">
+        <item name="android:textColor">@color/gray_gray02</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 
     <style name="MyPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@drawable/rectangle_popup_menu_bg_radius_10</item>

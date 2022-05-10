@@ -1,6 +1,7 @@
 package com.playtogether_android.app.util
 
 import android.content.Context
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -12,6 +13,10 @@ fun Context.getPageTransformer(): ViewPager2.PageTransformer {
     compositePageTransformer.addTransformer(MarginPageTransformer((20 * resources.displayMetrics.density).roundToInt()))
 
     return compositePageTransformer
+}
+
+fun Context.shortToast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
 fun Context.viewPagerAnimation(viewpager: ViewPager2) {

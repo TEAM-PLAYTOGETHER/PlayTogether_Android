@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="thunderViewModel"
+            type="com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:src="@drawable/ic_previous"
+                tools:src="@drawable/icn_before_false"
                 app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintEnd_toStartOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title" />
@@ -58,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:src="@drawable/ic_next"
+                tools:src="@drawable/icn_next_true"
                 app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintStart_toEndOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title" />
@@ -75,14 +78,23 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/tv_thunderlist_title"
             style="@style/thunder_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
+            android:text="@string/thunder_list_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_thunderlist_tool_container"
-            tools:text="@string/thunder_list_title" />
+            app:layout_constraintTop_toBottomOf="@id/cl_thunderlist_tool_container" />
+
+        <TextView
+            android:id="@+id/tv_thunderlist_category_title"
+            style="@style/thunder_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_thunderlist_title"
+            app:layout_constraintTop_toTopOf="@id/tv_thunderlist_title" />
 
         <LinearLayout
             android:id="@+id/ll_thunder_align_container"
