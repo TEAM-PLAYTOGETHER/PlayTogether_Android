@@ -6,12 +6,12 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityFirstOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.onBoardingViewModel
+import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.layout.activity_first_on_boarding) {
 
-    private val onBoardingViewModel: onBoardingViewModel by viewModel()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

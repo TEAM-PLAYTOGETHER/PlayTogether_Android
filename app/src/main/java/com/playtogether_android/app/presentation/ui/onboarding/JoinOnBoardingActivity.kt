@@ -75,17 +75,13 @@ class JoinOnBoardingActivity :
 
     //동아리 가입
     private fun observeRegisterCrew() {
-        binding.tvJoinOnboardingEnter.setOnClickListener {
-            onBoardingViewModel.registerCrew.observe(this) {
-                if (it.success) {
-                    Log.d("성공", "동아리가입")
-                } else {
-                    Log.d("실패", "동아리가입")
-                }
+        onBoardingViewModel.registerCrew.observe(this) {
+            if (it.success) {
+                Log.d("성공", "동아리가입")
+            } else {
+                Log.d("실패", "동아리가입")
             }
-
         }
-
     }
 
     private fun initRegisterCrew() {
