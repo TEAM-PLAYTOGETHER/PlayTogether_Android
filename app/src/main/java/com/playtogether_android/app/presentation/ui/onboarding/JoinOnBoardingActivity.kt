@@ -9,15 +9,22 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityJoinOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class JoinOnBoardingActivity :
     BaseActivity<ActivityJoinOnBoardingBinding>(R.layout.activity_join_on_boarding) {
+
+    private val onBoardingViewModel: OnBoardingViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initBackBtn()
         initEditText()
         editTextWatcher()
+        initRegisterCrew()
     }
 
     //뒤로가기 버튼 클릭 리스너
@@ -64,6 +71,34 @@ class JoinOnBoardingActivity :
             }
 
         })
+    }
+
+    //동아리 가입
+    private fun observeRegisterCrew() {
+        binding.tvJoinOnboardingEnter.setOnClickListener {
+            onBoardingViewModel.registerCrew.observe(this) {
+                if (it.success) {
+                    Log.d("성공", "동아리가입")
+                } else {
+                    Log.d("실패", "동아리가입")
+                }
+            }
+
+        }
+
+    }
+
+    private fun initRegisterCrew() {
+        onBoardingViewModel.crewCode.crewName = binding.etJoinOnboarding.text.toString()
+        binding.tvJoinOnboardingEnter.setOnClickListener {
+            onBoardingViewModel.postRegisterCrew(
+                RegisterCrewItem(
+                    onBoardingViewModel.crewCode.crewName
+                )
+
+            )
+            observeRegisterCrew()
+        }
     }
 }
 

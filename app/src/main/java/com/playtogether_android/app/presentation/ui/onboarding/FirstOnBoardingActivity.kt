@@ -6,6 +6,7 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityFirstOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.onBoardingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.layout.activity_first_on_boarding) {
