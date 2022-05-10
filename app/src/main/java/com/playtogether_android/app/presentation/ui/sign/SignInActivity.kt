@@ -90,13 +90,13 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
             if (it.success) {
                 PlayTogetherSharedPreference.setJwtToken(
                     this,
-                    signViewModel.signInToken.value?.jwtToken ?: ""
+                    //signViewModel.signInToken.value?.jwtToken ?: ""
+                    it.jwtToken
                 )
-
                 val intent = Intent(this, FirstOnBoardingActivity::class.java)
                 startActivity(intent)
                 finish()
-            } else if(!it.success){
+            } else if (!it.success) {
                 showApplyDialog()
             }
         }

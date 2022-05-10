@@ -9,14 +9,15 @@ object OnBoardingMapper {
     //동아리 참여 : Response
     fun mapperToRegisterCrewData(responseRegisterCrew: ResponseRegisterCrew) : RegisterCrewData {
         return RegisterCrewData(
-            success = responseRegisterCrew.success
+            success = responseRegisterCrew.success,
+            crewName = responseRegisterCrew.data.crewName
         )
     }
 
     //동아리 참여 : Request
     fun mapperToRegisterCrewItem(registerCrewItem: RegisterCrewItem) : RequestRegisterCrew {
         return RequestRegisterCrew(
-            crewName = registerCrewItem.crewName
+            crewCode = registerCrewItem.crewCode
         )
     }
 }
