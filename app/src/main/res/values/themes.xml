@@ -32,4 +32,10 @@
         <item name="colorControlHighlight">@color/gray_black</item>
     </style>
 
+    <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/gray_black</item>
+        <item name="android:textColorPrimary">@color/gray_black</item><!-- text color -->
+        <item name="colorControlNormal">@color/gray_black</item><!-- divider color -->
+    </style>
+
 </resources>
