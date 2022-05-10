@@ -5,16 +5,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.tabs.TabLayoutMediator
 import com.playtogether_android.app.R
+import com.playtogether_android.app.databinding.FragmentThunderBinding
+import com.playtogether_android.app.presentation.base.BaseFragment
 
 
-class ThunderFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_thunder, container, false)
+class ThunderFragment : BaseFragment<FragmentThunderBinding>(R.layout.fragment_thunder) {
+
+    private lateinit var thunderTabViewPagerAdapter : ThunderTabViewPagerAdapter
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        initAdapter()
+        initTabLayout()
+
     }
+
+    private fun initAdapter() {
+        val fragmentList = listOf(TabApplyFragment(), TabOpenFragment(), TabLikeFragment())
+
+        thunderTabViewPagerAdapter = ThunderTabViewPagerAdapter(this)
+        thunderTabViewPagerAdapter.fragments.addAll(fragmentList)
+
+        binding.vpThunderTab.adapter = thunderTabViewPagerAdapter
+    }
+
+    private fun initTabLayout() {
+        // TODO: 탭 글자크기, font 적용 
+        val tabLabel = listOf("신청한", "오픈한", "찜한")
+
+        TabLayoutMediator(binding.tlThunderTab,binding.vpThunderTab) { tab, position ->
+            tab.text = tabLabel[position]
+        }.attach()
+    }
+
 
 }

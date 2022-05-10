@@ -40,10 +40,15 @@
         <entry key="app/src/main/res/layout/activity_apply_thunder_detail.xml" value="0.18348693847656253" />
         <entry key="app/src/main/res/layout/activity_create_thunder.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/activity_open_thunder_detail.xml" value="0.29590504964192704" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_open_thunder_detail.xml" value="0.29590504964192704" />
         <entry key="app/src/main/res/layout/activity_thunder_detail.xml" value="0.20993957519531253" />
         <entry key="app/src/main/res/layout/activity_thunder_list.xml" value="0.2694691975911458" />
         <entry key="app/src/main/res/layout/dialog_check.xml" value="0.36185201009114576" />
         <entry key="app/src/main/res/layout/dialog_yes_no.xml" value="0.3390625" />
+        <entry key="app/src/main/res/layout/fragment_tab_apply.xml" value="0.20591125488281248" />
+        <entry key="app/src/main/res/layout/fragment_tab_like.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_tab_open.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_thunder.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/item_thunder_applicant_list.xml" value="0.2923055013020833" />
         <entry key="app/src/main/res/layout/item_thunder_list.xml" value="0.28489430745442706" />
