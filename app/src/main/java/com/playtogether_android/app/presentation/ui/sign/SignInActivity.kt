@@ -92,6 +92,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                     this,
                     signViewModel.signInToken.value?.jwtToken ?: ""
                 )
+
                 val intent = Intent(this, FirstOnBoardingActivity::class.java)
                 startActivity(intent)
                 finish()
