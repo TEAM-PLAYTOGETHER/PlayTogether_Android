@@ -11,4 +11,5 @@ interface LightService {
         @Path("category") category: String,
         @Path("sort") sort: String
     ): ResponseLightListCategory
+
 }

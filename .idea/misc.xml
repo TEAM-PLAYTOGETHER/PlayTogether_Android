@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/item_home_hot.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_home_new.xml" value="0.2770083102493075" />
         <entry key="app/src/main/res/layout/item_thunder_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_thunder_list_category.xml" value="0.2671875" />
       </map>
     </option>
   </component>

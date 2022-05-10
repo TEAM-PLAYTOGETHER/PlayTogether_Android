@@ -18,19 +18,4 @@ object LightMapper {
             )
         }
     }
-
-//    fun mapperToData(data: ResponseLightListCategory.Category): List<CategoryData> {
-//        return listOf(
-//            CategoryData(
-//                category = data.category,
-//                date = data.date,
-//                lightMemberCnt = data.lightMemberCnt,
-//                lightId = data.lightId,
-//                peopleCnt = data.peopleCnt,
-//                place = data.place,
-//                time = data.time,
-//                title = data.title
-//            )
-//        )
-//    }
 }

@@ -19,6 +19,7 @@
         <activity
             android:name=".presentation.ui.onboarding.JoinOnBoardingActivity"
             android:exported="true" />
+        //dsfadsf
         <activity
             android:name=".presentation.ui.onboarding.SecondOnboardingActivity"
             android:exported="true" />
