@@ -56,6 +56,8 @@ class OnBoardingViewModel(
                     it.printStackTrace()
                     Log.d("RegisterCrew", "서버 통신 실패")
                 }
+
+
         }
     }
 }
