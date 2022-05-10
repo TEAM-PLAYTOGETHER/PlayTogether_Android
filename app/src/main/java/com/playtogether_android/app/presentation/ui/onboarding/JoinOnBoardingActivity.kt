@@ -9,15 +9,24 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityJoinOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.main.MainActivity
+import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class JoinOnBoardingActivity :
     BaseActivity<ActivityJoinOnBoardingBinding>(R.layout.activity_join_on_boarding) {
+
+    private val onBoardingViewModel: OnBoardingViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initBackBtn()
         initEditText()
         editTextWatcher()
+        initRegisterCrew()
     }
 
     //뒤로가기 버튼 클릭 리스너
@@ -53,7 +62,6 @@ class JoinOnBoardingActivity :
                 if (input.length == 5) {
                     binding.tvJoinOnboardingNext.visibility = View.VISIBLE
                     binding.tvJoinOnboardingEnter.visibility = View.INVISIBLE
-                    Log.d("test", " " + input.length)
                 } else {
                     binding.tvJoinOnboardingNext.visibility = View.INVISIBLE
                     binding.tvJoinOnboardingEnter.visibility = View.VISIBLE
@@ -64,6 +72,35 @@ class JoinOnBoardingActivity :
             }
 
         })
+    }
+
+    //동아리 가입
+    private fun observeRegisterCrew() {
+        onBoardingViewModel.registerCrew.observe(this) {
+            if (it.success) {
+                Log.d("성공", "동아리가입")
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Log.d("실패", "동아리가입")
+                val title = "존재하지 않는 코드입니다"
+                val dialog= CustomDialog(this, title)
+                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+            }
+        }
+    }
+
+    private fun initRegisterCrew() {
+        binding.tvJoinOnboardingEnter.setOnClickListener {
+            onBoardingViewModel.crewCode.crewCode = binding.etJoinOnboarding.text.toString()
+            onBoardingViewModel.postRegisterCrew(
+                RegisterCrewItem(
+                    onBoardingViewModel.crewCode.crewCode
+                )
+            )
+            observeRegisterCrew()
+        }
     }
 }
 

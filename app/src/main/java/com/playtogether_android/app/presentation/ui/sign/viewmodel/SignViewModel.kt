@@ -91,7 +91,6 @@ class SignViewModel(
                     it.printStackTrace()
                     _signIn.value = SignInData(false,"","","")
                     Log.d("SignIn", "서버 통신 실패")
-                    Log.d("SignIn", "" + it.message)
                 }
         }
     }
