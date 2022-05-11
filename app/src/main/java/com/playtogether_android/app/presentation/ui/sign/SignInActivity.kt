@@ -9,6 +9,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignInBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
+import com.playtogether_android.app.presentation.ui.onboarding.FirstOnBoardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.PlayTogetherSharedPreference
@@ -89,12 +90,13 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
             if (it.success) {
                 PlayTogetherSharedPreference.setJwtToken(
                     this,
-                    signViewModel.signInToken.value?.jwtToken ?: ""
+                    //signViewModel.signInToken.value?.jwtToken ?: ""
+                    it.jwtToken
                 )
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, FirstOnBoardingActivity::class.java)
                 startActivity(intent)
                 finish()
-            } else if(!it.success){
+            } else if (!it.success) {
                 showApplyDialog()
             }
         }
