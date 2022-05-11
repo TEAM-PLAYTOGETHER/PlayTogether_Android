@@ -10,9 +10,9 @@ import org.koin.dsl.module
 val useCaseModule = module {
 
     //sign
-    single {PostSignIdUseCase(get())}
-    single {PostSignUpUseCaes(get())}
-    single {PostSignInUseCase(get())}
+//    single {PostSignIdUseCase(get())}
+//    single {PostSignUpUseCaes(get())}
+//    single {PostSignInUseCase(get())}
 
     //onboarding
     single {PostRegisterCrewUseCase(get())}

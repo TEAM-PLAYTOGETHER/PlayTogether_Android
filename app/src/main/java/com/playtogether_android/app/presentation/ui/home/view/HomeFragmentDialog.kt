@@ -17,14 +17,15 @@ class HomeFragmentDialog :
     }
 
     override fun initView() {
-        (dialog as BottomSheetDialog).behavior.state = BottomSheetBehavior.STATE_EXPANDED
+//        (dialog as BottomSheetDialog).behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        (dialog as? BottomSheetDialog)?.behavior?.apply {
+            isFitToContents = false
+//            state = BottomSheetBehavior.STATE_EXPANDED
+        }
         initAdapter()
     }
 
     private fun initAdapter() {
         //회원이 가입한 동아리 리스트 조회
-
-
-
     }
 }

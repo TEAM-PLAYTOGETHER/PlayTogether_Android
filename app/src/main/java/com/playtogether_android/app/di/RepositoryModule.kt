@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<SignRepository> { SignRepositoryImpl(get()) }
     single<LightRepository> { LightRepositoryImpl(get()) }
-    single<SignRepository>{ SignRepositoryImpl(get()) }
+//    single<SignRepository>{ SignRepositoryImpl(get()) }
 
     single<OnBoardingRepository>{OnBoardingRepositoryImpl(get())}
 }
