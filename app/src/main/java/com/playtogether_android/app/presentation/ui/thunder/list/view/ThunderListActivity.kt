@@ -10,9 +10,7 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
-import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class ThunderListActivity :
     BaseActivity<ActivityThunderListBinding>(R.layout.activity_thunder_list) {
@@ -43,7 +41,9 @@ class ThunderListActivity :
 
     @SuppressLint("SetTextI18n")
     private fun initData() {
-        thunderListViewModel.getLightCategoryList()
+        val category = intent.getStringExtra("category")
+        val variableCategory = thunderListViewModel.category.value ?: category
+        thunderListViewModel.getLightCategoryList(variableCategory!!)
         thunderListViewModel.category.observe(this) {
             binding.tvThunderlistToolTitle.text = it
             binding.tvThunderlistCategoryTitle.text = it + getString(R.string.thunder_list_question)
@@ -70,6 +70,13 @@ class ThunderListActivity :
         floatButtonClickListener()
         setPreCategoryClickListener()
         setAfterCategoryClickListener()
+        setPreButtonListener()
+    }
+
+    private fun setPreButtonListener() {
+        binding.ivThunderlistBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setPreCategoryClickListener() {
@@ -91,8 +98,6 @@ class ThunderListActivity :
                             getLightCategoryList(CATEGORY_GO)
                         }
                     }
-                    shortToast("category$category")
-                    Timber.d("message : ${category == CATEGORY_EAT}")
                 }
             }
         }
@@ -118,7 +123,6 @@ class ThunderListActivity :
                                 getLightCategoryList(CATEGORY_DO)
                             }
                         }
-                        shortToast("category : $category")
                     }
                 }
             }
