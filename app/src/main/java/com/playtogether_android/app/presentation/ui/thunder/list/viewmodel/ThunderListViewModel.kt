@@ -13,18 +13,42 @@ class ThunderListViewModel(
     val getThunderCategoryUseCase: GetThunderCategoryUseCase,
 ) : ViewModel() {
 
-    private val _categoryList = MutableLiveData<List<CategoryData>>()
-    val categoryList: LiveData<List<CategoryData>> = _categoryList
+    private val _categoryItemList = MutableLiveData<List<CategoryData>>()
+    val categoryItemList: LiveData<List<CategoryData>> = _categoryItemList
 
-    fun getLightList(category: String, sort: String) {
+    private val _category = MutableLiveData<String>()
+    val category: LiveData<String> = _category
+
+    private val _sortType = MutableLiveData<String>()
+    val sortType: LiveData<String> = _sortType
+
+    fun getLightCategoryList(category: String = DEFAULT_CATEGORY, sort: String = DEFAULT_SORT) {
         viewModelScope.launch {
             kotlin.runCatching {
                 getThunderCategoryUseCase(category, sort)
             }.onSuccess {
-                _categoryList.value = it
+                _categoryItemList.value = it
+                it.map {
+                    _category.value = it.category
+                }
+                _sortType.value = sort
+                Timber.d("viewmodel category : $category")
             }.onFailure {
-                Timber.e("error $it")
+                Timber.e("getLightList error : $it")
             }
         }
+    }
+
+    fun setSortType(type: String) {
+        _sortType.value = type
+    }
+
+    fun setCategory(category: String) {
+        _category.value = category
+    }
+
+    companion object {
+        const val DEFAULT_CATEGORY = "먹을래"
+        const val DEFAULT_SORT = "createdAt"
     }
 }

@@ -15,3 +15,7 @@ data class CategoryData(
     val time: String,
     val title: String
 )
+
+data class TestData(
+    val list: List<CategoryData>
+)

@@ -2,6 +2,7 @@ package com.playtogether_android.data.mapper.light
 
 import com.playtogether_android.data.model.response.light.ResponseLightListCategory
 import com.playtogether_android.domain.model.light.CategoryData
+import com.playtogether_android.domain.model.light.TestData
 
 object LightMapper {
     fun mapperToCategoryData(data: ResponseLightListCategory): List<CategoryData> {

@@ -16,10 +16,11 @@ class ThunderCategoryListAdapter :
         fun onBind(data: CategoryData) {
             with(binding) {
                 tvThunderItemTitle.text = data.title
-                tvThunderItemDate.text = stringBuilder(listOf(data.date, data.place, data.time))
+                tvThunderItemDate.text =
+                    stringBuilder(listOf("${data.date} ", "${data.place} ", data.time))
                 tvThunderItemLimitCount.text =
                     stringBuilder(
-                        listOf(PERSON, data.lightMemberCnt, "/", data.peopleCnt.toString())
+                        listOf(PERSON, data.lightMemberCnt, " / ", data.peopleCnt.toString())
                     )
             }
         }
@@ -59,7 +60,7 @@ class ThunderCategoryListAdapter :
     }
 
     companion object {
-        const val PERSON = "인원"
+        const val PERSON = "인원 "
     }
 
 }

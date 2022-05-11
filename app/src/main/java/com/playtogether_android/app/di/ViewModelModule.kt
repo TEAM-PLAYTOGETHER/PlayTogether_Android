@@ -23,9 +23,7 @@ val viewModelModule = module {
     viewModel { onBoardingViewModel() }
 
     //ThunderList
-    viewModel {
-        ThunderListViewModel(get())
-    }
+    viewModel { ThunderListViewModel(get()) }
 
 }
 

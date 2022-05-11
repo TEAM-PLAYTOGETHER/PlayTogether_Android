@@ -51,20 +51,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                tools:src="@drawable/icn_before_false"
                 app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintEnd_toStartOf="@id/tv_thunderlist_tool_title"
-                app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title" />
+                app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title"
+                tools:src="@drawable/icn_before_false" />
 
             <ImageView
                 android:id="@+id/iv_thunderlist_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                tools:src="@drawable/icn_next_true"
                 app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintStart_toEndOf="@id/tv_thunderlist_tool_title"
-                app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title" />
+                app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title"
+                tools:src="@drawable/icn_next_true" />
 
             <ImageView
                 android:id="@+id/iv_thunderlist_search"
