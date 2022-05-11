@@ -6,9 +6,22 @@ import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinC
 
 class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSource {
 
+    //번개탭-신청한 번개 리스트
     override suspend fun getApplyList(): ResThunderTabListData {
         return service.getApplyList()
     }
+
+    //번개탭-오픈한 번개 리스트
+    override suspend fun getOpenList(): ResThunderTabListData {
+        return service.getOpenList()
+    }
+
+    //번개탭-찜한 번개 리스트
+    override suspend fun getLikeList(): ResThunderTabListData {
+        return service.getLikeList()
+    }
+    
+    
 
     override suspend fun postThunderJoinCancel(thunderId: String): ResponseThunderJoinCancel {
         return service.postThunderJoinCancel(thunderId)

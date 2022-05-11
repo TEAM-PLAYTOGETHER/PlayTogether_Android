@@ -9,8 +9,16 @@ import retrofit2.http.Path
 interface ThunderService {
     //번개탭-신청한 번개 리스트
     @GET("light/enter")
-    suspend fun getApplyList(): ResThunderTabListData
+    suspend fun getApplyList() : ResThunderTabListData
 
+    //번개탭-오픈한 번개 리스트
+    @GET("light/open")
+    suspend fun getOpenList() : ResThunderTabListData
+
+    //번개탭-찜한 번개 리스트
+    @GET("light/scrap")
+    suspend fun getLikeList() : ResThunderTabListData
+    
     @POST("light/enter/{thunderId}")
     suspend fun postThunderJoinCancel(
         @Path("thunderId") thunderId: String

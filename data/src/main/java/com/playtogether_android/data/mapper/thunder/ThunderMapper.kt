@@ -25,6 +25,7 @@ object ThunderMapper {
         )
     }
 
+
     fun mapperToThunderJoinCancel(it: ResponseThunderJoinCancel): ThunderJoinCancel {
         return ThunderJoinCancel(
             status = it.status,
