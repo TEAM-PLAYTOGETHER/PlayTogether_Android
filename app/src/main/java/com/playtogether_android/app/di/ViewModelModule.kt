@@ -2,6 +2,7 @@ package com.playtogether_android.app.di
 
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
+import com.playtogether_android.app.presentation.ui.message.viewmodel.MessageViewModel
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
@@ -22,6 +23,9 @@ val viewModelModule = module {
 
     //onboarding
     viewModel { OnBoardingViewModel(get()) }
+
+    //message
+    viewModel { MessageViewModel(get()) }
 
     //ThunderList
     viewModel { ThunderListViewModel(get()) }
