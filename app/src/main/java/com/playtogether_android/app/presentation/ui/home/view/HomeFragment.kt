@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentHomeBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeHotAdapter
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeNewAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
@@ -46,6 +47,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         startActivity(intent)
     }
 
+    private fun setCreateThunderActivity() {
+        val intent = Intent(requireActivity(), CreateThunderActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun setClickListener() {
         binding.ivHomeEat.setOnClickListener {
             setThunderListActivity(CATEGORY_EAT)
@@ -55,6 +61,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
         binding.ivHomeDo.setOnClickListener {
             setThunderListActivity(CATEGORY_DO)
+        }
+        binding.btnHomeFloat.setOnClickListener {
+            setCreateThunderActivity()
         }
     }
 
