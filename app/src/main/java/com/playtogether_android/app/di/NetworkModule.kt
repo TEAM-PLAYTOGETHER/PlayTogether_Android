@@ -1,6 +1,5 @@
 package com.playtogether_android.app.di
 
-import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.sign.SignService
@@ -17,9 +16,6 @@ val networkModule = module {
         get<Retrofit>().create(OnboardingService::class.java)
     }
 
-    single<MessageService>{
-        get<Retrofit>().create(MessageService::class.java)
-    }
     single<LightService> {
         get<Retrofit>().create(LightService::class.java)
     }
