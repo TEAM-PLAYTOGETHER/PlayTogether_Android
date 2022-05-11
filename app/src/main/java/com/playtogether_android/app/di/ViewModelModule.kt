@@ -5,6 +5,7 @@ import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -27,7 +28,10 @@ val viewModelModule = module {
     viewModel { ThunderListViewModel(get()) }
 
     //thunder
-    viewModel { ThunderViewModel(get())}
+    viewModel { ThunderViewModel(get()) }
+
+//    ThunderDetail
+    viewModel { ThunderDetailViewModel(get()) }
 
 }
 
