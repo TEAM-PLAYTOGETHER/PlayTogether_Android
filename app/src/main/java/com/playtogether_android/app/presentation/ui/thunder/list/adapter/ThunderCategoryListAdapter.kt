@@ -1,11 +1,14 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemThunderListBinding
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity
 import com.playtogether_android.domain.model.light.CategoryData
 import java.lang.StringBuilder
 
@@ -22,6 +25,12 @@ class ThunderCategoryListAdapter :
                     stringBuilder(
                         listOf(PERSON, data.lightMemberCnt, " / ", data.peopleCnt.toString())
                     )
+
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
+                    intent.putExtra("thunderId", data.lightId)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }
