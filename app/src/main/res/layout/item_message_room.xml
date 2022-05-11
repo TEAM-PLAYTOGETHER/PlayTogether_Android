@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.playtogether_android.domain.model.message.MessageListData" />
+            type="com.playtogether_android.domain.model.message.MessageData" />
         <import type="android.view.View"/>
     </data>
 

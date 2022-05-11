@@ -1,18 +1,17 @@
 package com.playtogether_android.app.presentation.ui.message
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemMessageRoomBinding
-import com.playtogether_android.domain.model.message.MessageListData
+import com.playtogether_android.domain.model.message.MessageData
 
-class MessageListAdapter(val itemClick: (MessageListData) -> Unit) : RecyclerView.Adapter<MessageListAdapter.MessageListViewHolder>() {
+class MessageListAdapter(val itemClick: (MessageData) -> Unit) : RecyclerView.Adapter<MessageListAdapter.MessageListViewHolder>() {
 
-    val messageList = mutableListOf<MessageListData>()
+    val messageList = mutableListOf<MessageData>()
 
-    class MessageListViewHolder(private val binding : ItemMessageRoomBinding, val itemClick: (MessageListData) -> Unit) : RecyclerView.ViewHolder(binding.root){
-        fun onBind(data:MessageListData){
+    class MessageListViewHolder(private val binding : ItemMessageRoomBinding, val itemClick: (MessageData) -> Unit) : RecyclerView.ViewHolder(binding.root){
+        fun onBind(data:MessageData){
             binding.data=data
             itemView.setOnClickListener{
                 itemClick(data)
