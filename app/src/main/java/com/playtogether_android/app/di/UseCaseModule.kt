@@ -25,11 +25,8 @@ val useCaseModule = module {
     single { PostSignUpUseCaes(get()) }
     single { PostSignInUseCase(get()) }
 
-    //onboarding
-    single {PostRegisterCrewUseCase(get())}
-
     //message
-    single {GetMessageUseCase(get())}
+    single { GetMessageUseCase(get()) }
     //thunderList
     single { GetThunderCategoryUseCase(get()) }
 
@@ -41,6 +38,7 @@ val useCaseModule = module {
     
 //    thunderDetail
     single { PostThunderJoinCancelUseCase(get()) }
+
 }
 
 

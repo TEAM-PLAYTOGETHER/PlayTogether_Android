@@ -7,6 +7,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMessageBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.message.viewmodel.MessageViewModel
+import com.playtogether_android.domain.model.message.MessageData
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MessageFragment :
@@ -28,7 +29,7 @@ class MessageFragment :
         adapter= MessageListAdapter {
             val intent = Intent(requireContext(), ChattingActivity::class.java)
             intent.putExtra("roomId", it.roomId)
-            intent.putExtra("name", it.name)
+            intent.putExtra("name", it.roomId)
             startActivity(intent)
         }
         binding.rvMessageRoom.adapter=adapter

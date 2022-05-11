@@ -60,7 +60,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if (!Pattern.matches("^[a-z|0-9|]{8,15}\$", etSignupmainId.text.toString())) {
+        if (!Pattern.matches("^[a-z|0-9|]{5,20}\$", etSignupmainId.text.toString())) {
             tvSignupmainIdDuplication.isSelected = false
             tvSignupmainIdExpressionWarn.visibility = View.VISIBLE
             tvSignupmainIdExpression.visibility = View.INVISIBLE

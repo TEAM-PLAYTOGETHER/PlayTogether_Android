@@ -8,6 +8,6 @@ import com.playtogether_android.domain.repository.message.MessageRepository
 class MessageRepositoryImpl(private val messageDataSource: MessageDataSource) : MessageRepository {
 
     override suspend fun getMessageData(): List<MessageData> {
-        return MessageMapper.mapperToDomainMessage(messageDataSource.getMessageData())
+        return MessageMapper.mapperToDomainMessage(messageDataSource.getMessageData().data)
     }
 }
