@@ -1,11 +1,13 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderListBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.util.shortToast
@@ -126,14 +128,15 @@ class ThunderListActivity :
     private fun sortListClickListener() {
         binding.llThunderAlignContainer.setOnClickListener {
             val category = thunderListViewModel.category.value
-            val bottomSheetDialog = SortDialog(thunderListViewModel,category)
+            val bottomSheetDialog = SortDialog(thunderListViewModel, category)
             bottomSheetDialog.show(supportFragmentManager, "init bottom_sheet")
         }
     }
 
     private fun floatButtonClickListener() {
         binding.fabThunderlist.setOnClickListener {
-            shortToast("어디로?")
+            val intent = Intent(this, CreateThunderActivity::class.java)
+            startActivity(intent)
         }
     }
 
