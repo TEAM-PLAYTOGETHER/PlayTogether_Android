@@ -4,6 +4,7 @@ import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -20,6 +21,9 @@ val viewModelModule = module {
 
     //onboarding
     viewModel { OnBoardingViewModel(get()) }
+
+    //thunder
+    viewModel { ThunderViewModel(get())}
 
 }
 
