@@ -6,4 +6,10 @@ interface ThunderRepository {
 
     //번개탭-신청한 번개 리스트
     suspend fun getApplyList() : ThunderTabListData
+
+    //번개탭-오픈한 번개 리스트
+    suspend fun getOpenList() : ThunderTabListData
+
+    //번개탭-찜한 번개 리스트
+    suspend fun getLikeList() : ThunderTabListData
 }

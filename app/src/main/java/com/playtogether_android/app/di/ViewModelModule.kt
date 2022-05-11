@@ -27,8 +27,9 @@ val viewModelModule = module {
     viewModel { ThunderListViewModel(get()) }
 
     //thunder
-    viewModel { ThunderViewModel(get())}
+    viewModel { ThunderViewModel(get(), get(), get()) }
 
 }
+
 
 

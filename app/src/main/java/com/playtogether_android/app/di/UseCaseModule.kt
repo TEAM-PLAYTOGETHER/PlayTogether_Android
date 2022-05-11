@@ -6,6 +6,8 @@ import com.playtogether_android.domain.usecase.sign.PostSignIdUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignInUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignUpUseCaes
 import com.playtogether_android.domain.usecase.thunder.GetApplyListUseCase
+import com.playtogether_android.domain.usecase.thunder.GetLikeListUseCase
+import com.playtogether_android.domain.usecase.thunder.GetOpenListUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -26,6 +28,8 @@ val useCaseModule = module {
 
     //thunder
     single {GetApplyListUseCase(get())}
+    single {GetOpenListUseCase(get())}
+    single {GetLikeListUseCase(get())}
 }
 
 
