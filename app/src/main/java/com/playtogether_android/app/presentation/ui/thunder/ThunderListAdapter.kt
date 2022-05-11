@@ -1,15 +1,22 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemThunderListBinding
+import com.playtogether_android.domain.model.thunder.ThunderTabListData
 
 class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListViewHolder>() {
 
-    private val _thunderList = mutableListOf<TempThunderListData.ThunderList>()
+    private val _thunderList = mutableListOf<ThunderTabListData.Data>()
 
-    var thunderList: List<TempThunderListData.ThunderList> = _thunderList
+    var thunderList: List<ThunderTabListData.Data> = _thunderList
+        set(value) {
+            _thunderList.clear()
+            _thunderList.addAll(value)
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,18 +30,19 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
     }
 
     override fun onBindViewHolder(holder: ThunderListViewHolder, position: Int) {
-        holder.onBind(thunderList[position])
+        holder.onBind(_thunderList[position])
     }
 
-    override fun getItemCount(): Int = thunderList.size
+    override fun getItemCount(): Int = _thunderList.size
 
 
     class ThunderListViewHolder(private val binding : ItemThunderListBinding)
         : RecyclerView.ViewHolder(binding.root) {
-            fun onBind(data: TempThunderListData.ThunderList) {
+            fun onBind(data : ThunderTabListData.Data) {
                 binding.tvThunderItemTitle.text = data.title
-                binding.tvThunderItemDate.text = data.date + data.place + data.time
-                binding.tvThunderItemLimitCount.text = "인원" + data.lightMemberCnt + "/" + data.peopleCnt
+                binding.tvThunderItemDate.text = data.date + " " + data.place + " " + data.time
+                binding.tvThunderItemLimitCount.text = "인원 " + data.lightMemberCnt + " / " + data.peopleCnt
+                Log.d("Adapter-connect", data.lightId)
             }
         }
 

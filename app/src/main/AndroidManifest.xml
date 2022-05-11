@@ -53,10 +53,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
-            android:exported="true" />
-        <activity
-            android:name=".presentation.ui.createThunder.CreateThunderActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,9 +61,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".presentation.ui.createThunder.CreateThunderActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
-
         </activity>
     </application>
 
