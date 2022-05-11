@@ -2,8 +2,7 @@ package com.playtogether_android.data.repositoryimpl.thunder
 
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
 import com.playtogether_android.data.mapper.thunder.ThunderMapper
-import com.playtogether_android.domain.model.thunder.ThunderJoinCancel
-import com.playtogether_android.domain.model.thunder.ThunderTabListData
+import com.playtogether_android.domain.model.thunder.*
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
 
 class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : ThunderRepository {
@@ -24,11 +23,25 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
     }
 
 
-    override suspend fun postThunderJoinCancel(thunderId: String): ThunderJoinCancel {
+    override suspend fun postThunderJoinCancel(thunderId: String): ThunderJoinCancelData {
         return ThunderMapper.mapperToThunderJoinCancel(
             thunderDataSource.postThunderJoinCancel(
                 thunderId
             )
         )
+    }
+
+    override suspend fun getThunderDetail(thunderId: Int): List<ThunderDetailData> {
+        return ThunderMapper.mapperToThunderDetail(
+            thunderDataSource.getThunderDetail(thunderId)
+        )
+    }
+
+    override suspend fun getMemberThunderDetail(thunderId: Int): Member {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getOrganizerThunderDetail(thunderId: Int): Organizer {
+        TODO("Not yet implemented")
     }
 }

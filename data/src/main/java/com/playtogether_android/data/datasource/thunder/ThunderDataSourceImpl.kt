@@ -1,6 +1,7 @@
 package com.playtogether_android.data.datasource.thunder
 
 import com.playtogether_android.data.api.thunder.ThunderService
+import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
 import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
 
@@ -20,10 +21,13 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
     override suspend fun getLikeList(): ResThunderTabListData {
         return service.getLikeList()
     }
-    
-    
+
 
     override suspend fun postThunderJoinCancel(thunderId: String): ResponseThunderJoinCancel {
         return service.postThunderJoinCancel(thunderId)
+    }
+
+    override suspend fun getThunderDetail(thunderId: Int): ResThunderDetailData {
+        return service.getThunderDetail(thunderId)
     }
 }

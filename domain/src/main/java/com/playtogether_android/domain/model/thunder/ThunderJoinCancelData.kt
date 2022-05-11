@@ -1,6 +1,6 @@
 package com.playtogether_android.domain.model.thunder
 
-data class ThunderJoinCancel(
+data class ThunderJoinCancelData(
     val status: Int,
     val success: Boolean,
     val message: String,
