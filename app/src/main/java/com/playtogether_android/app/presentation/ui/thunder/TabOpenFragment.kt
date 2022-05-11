@@ -18,31 +18,31 @@ class TabOpenFragment : BaseFragment<FragmentTabOpenBinding>(R.layout.fragment_t
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdapter()
+//        initAdapter()
     }
 
-    private fun initAdapter() {
-        thunderListAdapter = ThunderListAdapter()
-
-        thunderListAdapter.thunderList = listOf(
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
-
-            )
-
-        with(binding.rvOpenThunderList){
-            layoutManager = LinearLayoutManager(requireActivity())
-            adapter = thunderListAdapter
-        }
-
-        thunderListAdapter.notifyDataSetChanged()
-    }
+//    private fun initAdapter() {
+//        thunderListAdapter = ThunderListAdapter()
+//
+//        thunderListAdapter.thunderList = listOf(
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//            TempThunderListData.ThunderList("37", "신촌 곱창 선착 5명 구함", "2022.04.13", "14:00", 6, "신촌","1"),
+//
+//            )
+//
+//        with(binding.rvOpenThunderList){
+//            layoutManager = LinearLayoutManager(requireActivity())
+//            adapter = thunderListAdapter
+//        }
+//
+//        thunderListAdapter.notifyDataSetChanged()
+//    }
 
 
 }

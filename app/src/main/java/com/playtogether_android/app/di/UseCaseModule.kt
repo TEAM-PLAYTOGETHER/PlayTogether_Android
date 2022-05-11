@@ -5,6 +5,7 @@ import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCas
 import com.playtogether_android.domain.usecase.sign.PostSignIdUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignInUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignUpUseCaes
+import com.playtogether_android.domain.usecase.thunder.GetApplyListUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -22,6 +23,9 @@ val useCaseModule = module {
 
     //thunderList
     single { GetThunderCategoryUseCase(get()) }
+
+    //thunder
+    single {GetApplyListUseCase(get())}
 }
 
 
