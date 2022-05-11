@@ -25,7 +25,6 @@ class SortDialog(
 
     private fun initData() {
         val sortType = thunderListViewModel.sortType.value
-        requireActivity().shortToast(sortType.toString())
         if (sortType == CREATE_AT) {
             binding.tvSortCreateAt.setTextAppearance(R.style.sort_select_item)
         } else {
