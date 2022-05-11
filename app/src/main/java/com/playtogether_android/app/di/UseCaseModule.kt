@@ -17,21 +17,18 @@ val useCaseModule = module {
 //    single {PostSignInUseCase(get())}
 
     //onboarding
-    single {PostRegisterCrewUseCase(get())}
+    single { PostRegisterCrewUseCase(get()) }
     single { PostSignIdUseCase(get()) }
     single { PostSignUpUseCaes(get()) }
     single { PostSignInUseCase(get()) }
 
-    //onboarding
-    single {PostRegisterCrewUseCase(get())}
-
     //message
-    single {GetMessageUseCase(get())}
+    single { GetMessageUseCase(get()) }
     //thunderList
     single { GetThunderCategoryUseCase(get()) }
 
     //thunder
-    single {GetApplyListUseCase(get())}
+    single { GetApplyListUseCase(get()) }
 }
 
 

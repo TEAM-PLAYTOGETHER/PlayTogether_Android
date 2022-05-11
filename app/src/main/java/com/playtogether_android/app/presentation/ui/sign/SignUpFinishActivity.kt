@@ -25,7 +25,7 @@ class SignUpFinishActivity : BaseActivity<ActivitySignUpFinishBinding>(R.layout.
     //화면 이동
     private fun initMove() {
         binding.tvSignupFinishStart.setOnClickListener {
-            startActivity(Intent(this, FirstOnBoardingActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
             finish()
         }
     }

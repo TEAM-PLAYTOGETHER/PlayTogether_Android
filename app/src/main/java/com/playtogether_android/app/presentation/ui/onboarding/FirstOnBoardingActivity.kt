@@ -81,8 +81,9 @@ class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.l
     //이름세팅
     private fun settingName() {
         signInViewModel.signIn.value?.userName = binding.tvFirstOnboardingName.text.toString()
-        signInViewModel.signIn.observe(this) {
-            it.userName
+
+        signInViewModel.signIn.observe(this){
+            it.userName = binding.tvFirstOnboardingName.text.toString()
         }
 
         Log.d("testName", "" + signInViewModel.signIn.value?.userName )
