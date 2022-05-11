@@ -4,7 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     //kotlin("kapt")
-    //id("kotlin-kapt")
+//    id("kotlin-kapt")
 }
 
 android {
@@ -156,7 +156,7 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:4.2")
 
     //Timber
-    implementation("com.jakewharton.timber:timber:4.7.1")
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     //update
     implementation("com.google.android.play:core:1.10.3")
