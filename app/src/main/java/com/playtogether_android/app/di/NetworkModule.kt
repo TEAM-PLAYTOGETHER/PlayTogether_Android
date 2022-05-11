@@ -1,13 +1,15 @@
 package com.playtogether_android.app.di
 
 import com.playtogether_android.data.api.message.MessageService
+import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.sign.SignService
+import com.playtogether_android.data.api.thunder.ThunderService
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val networkModule = module{
-    single<SignService>{
+val networkModule = module {
+    single<SignService> {
         get<Retrofit>().create(SignService::class.java)
     }
 
@@ -17,5 +19,12 @@ val networkModule = module{
 
     single<MessageService>{
         get<Retrofit>().create(MessageService::class.java)
+    }
+    single<LightService> {
+        get<Retrofit>().create(LightService::class.java)
+    }
+
+    single<ThunderService>{
+        get<Retrofit>().create(ThunderService::class.java)
     }
 }

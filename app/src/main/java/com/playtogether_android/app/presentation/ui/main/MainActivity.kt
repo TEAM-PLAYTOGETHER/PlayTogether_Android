@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.home.HomeFragment
+import com.playtogether_android.app.presentation.ui.home.view.HomeFragment
 import com.playtogether_android.app.presentation.ui.message.MessageFragment
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment

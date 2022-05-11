@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="thunderListViewModel"
+            type="com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_sort_top_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rectangle_fill_white_left_right_radius_20"
+        android:paddingBottom="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_sort_create_attitle"
+            style="@style/sort_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/sort_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_sort_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_icn_gray_exit"
+            app:layout_constraintBottom_toTopOf="@id/tv_sort_create_attitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sort_create_at"
+            style="@style/sort_unselect_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sort_createdAt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_sort_create_attitle"
+            app:layout_constraintTop_toBottomOf="@id/tv_sort_create_attitle"
+            tools:style="sort_select_item" />
+
+        <TextView
+            android:id="@+id/tv_sort_people_cnt"
+            style="@style/sort_unselect_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sort_peopleCnt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_sort_create_attitle"
+            app:layout_constraintTop_toBottomOf="@id/tv_sort_create_at"
+            tools:style="sort_unselect_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
