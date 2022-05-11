@@ -3,6 +3,8 @@ package com.playtogether_android.app.presentation.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
+import android.text.InputFilter.AllCaps
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -14,6 +16,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class JoinOnBoardingActivity :
     BaseActivity<ActivityJoinOnBoardingBinding>(R.layout.activity_join_on_boarding) {
@@ -43,6 +46,7 @@ class JoinOnBoardingActivity :
         binding.etJoinOnboarding.setOnClickListener {
             binding.etJoinOnboarding.isSelected = true
         }
+        binding.etJoinOnboarding.setFilters(arrayOf<InputFilter>(AllCaps()))
     }
 
 
