@@ -7,20 +7,21 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.playtogether_android.app.R
 
-class CustomDialog(context:Context, val title:String) {
+class CustomDialog(context: Context, val title: String) {
     private val dialog = Dialog(context)
-    private lateinit var onClickedListener : ButtonClickListener
+    private lateinit var onClickedListener: ButtonClickListener
 
-    interface ButtonClickListener{
-        fun onClicked(num:Int)
-    }
-    fun setOnClickedListener(listener:ButtonClickListener){
-        onClickedListener=listener
+    interface ButtonClickListener {
+        fun onClicked(num: Int)
     }
 
-    fun showChoiceDialog(@LayoutRes layout : Int){
+    fun setOnClickedListener(listener: ButtonClickListener) {
+        onClickedListener = listener
+    }
+
+    fun showChoiceDialog(@LayoutRes layout: Int) {
         dialog.setContentView(layout)
-        dialog.findViewById<TextView>(R.id.tv_dialog_title).text=title
+        dialog.findViewById<TextView>(R.id.tv_dialog_title).text = title
         dialog.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
@@ -28,18 +29,18 @@ class CustomDialog(context:Context, val title:String) {
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
         dialog.show()
 
-        dialog.findViewById<TextView>(R.id.tv_dialog_no).setOnClickListener{
+        dialog.findViewById<TextView>(R.id.tv_dialog_no).setOnClickListener {
             dialog.dismiss()
         }
-        dialog.findViewById<TextView>(R.id.tv_dialog_yes).setOnClickListener{
+        dialog.findViewById<TextView>(R.id.tv_dialog_yes).setOnClickListener {
             onClickedListener.onClicked(1)
             dialog.dismiss()
         }
     }
 
-    fun showOneChoiceDialog(@LayoutRes layout : Int){
+    fun showOneChoiceDialog(@LayoutRes layout: Int) {
         dialog.setContentView(layout)
-        dialog.findViewById<TextView>(R.id.tv_dialog_title).text=title
+        dialog.findViewById<TextView>(R.id.tv_dialog_title).text = title
         dialog.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
@@ -47,14 +48,14 @@ class CustomDialog(context:Context, val title:String) {
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
         dialog.show()
 
-        dialog.findViewById<TextView>(R.id.tv_dialog_answer).setOnClickListener{
+        dialog.findViewById<TextView>(R.id.tv_dialog_answer).setOnClickListener {
             dialog.dismiss()
         }
     }
 
-    fun showConfirmDialog(@LayoutRes layout : Int){
+    fun showConfirmDialog(@LayoutRes layout: Int) {
         dialog.setContentView(layout)
-        dialog.findViewById<TextView>(R.id.tv_dialog_title).text=title
+        dialog.findViewById<TextView>(R.id.tv_dialog_title).text = title
         dialog.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
@@ -62,7 +63,7 @@ class CustomDialog(context:Context, val title:String) {
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
         dialog.show()
 
-        dialog.findViewById<TextView>(R.id.tv_dialog_check).setOnClickListener{
+        dialog.findViewById<TextView>(R.id.tv_dialog_check).setOnClickListener {
 //            onClickedListener.onClicked(1)
             dialog.dismiss()
         }

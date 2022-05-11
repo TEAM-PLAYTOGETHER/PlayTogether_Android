@@ -2,22 +2,27 @@ package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityFirstOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.layout.activity_first_on_boarding) {
 
     private val onBoardingViewModel: OnBoardingViewModel by viewModel()
+    private val signInViewModel : SignViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initSelectMbti()
         actvieNextBtn()
         moveNextBtn()
+        settingName()
     }
 
     //라디오 버튼 클릭 리스너
@@ -71,6 +76,16 @@ class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.l
             onBoardingViewModel.forthMbtiClick.value = true
         }
 
+    }
+
+    //이름세팅
+    private fun settingName() {
+        signInViewModel.signIn.value?.userName = binding.tvFirstOnboardingName.text.toString()
+        signInViewModel.signIn.observe(this) {
+            it.userName
+        }
+
+        Log.d("testName", "" + signInViewModel.signIn.value?.userName )
     }
 
     //다음 버튼 활성화
