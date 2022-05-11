@@ -27,10 +27,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         initSignUpBtn()
         idTextWatcher()
         pwTextWatcher()
-        initIdTextField()
-        initPwTextField()
-        initSignIn()
-
+        nullCheck()
     }
 
     //회원가입 클릭 리스너
@@ -41,28 +38,45 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         }
     }
 
-    //아이디 TextField 클릭
-    private fun initIdTextField() {
-        binding.etSigninId.setOnClickListener {
-            if (binding.etSigninPw.text.toString() != "") {
-                binding.etSigninPw.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-            }
-        }
-    }
-
-    //비밀번호 TextField 클릭
-    private fun initPwTextField() {
+    //빈칸 체크
+    private fun nullCheck() {
         binding.etSigninPw.setOnClickListener {
-            if (binding.etSigninId.text.toString() != "") {
-                binding.etSigninId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-            }
+            initTextFieldCheck()
+        }
+
+        binding.etSigninId.setOnClickListener {
+            initTextFieldCheck()
         }
     }
 
-    //다음버튼 활성화
+
+    //TextField 빈칸 체크
+    private fun initTextFieldCheck() {
+        if (binding.etSigninPw.text.toString() != "") {
+            binding.etSigninPw.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+        }
+        else {
+            binding.etSigninPw.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
+        }
+
+        if (binding.etSigninId.text.toString() != "") {
+            binding.etSigninId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+        }
+        else {
+            binding.etSigninId.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
+        }
+
+    }
+
+    //로그인 버튼 활성화
     private fun nextBtnActive() {
-        binding.tvSignInLogIn.isSelected =
-            binding.etSigninId.text.toString() != "" && binding.etSigninId.text.toString() != ""
+        if (binding.etSigninId.text.toString() == "" || binding.etSigninPw.text.toString() == "") {
+            binding.tvSignInLogIn.isSelected = false
+
+        } else {
+            binding.tvSignInLogIn.isSelected = true
+            initSignIn()
+        }
     }
 
     //로그인
@@ -90,7 +104,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
             if (it.success) {
                 PlayTogetherSharedPreference.setJwtToken(
                     this,
-                    //signViewModel.signInToken.value?.jwtToken ?: ""
                     it.jwtToken
                 )
                 val intent = Intent(this, FirstOnBoardingActivity::class.java)
@@ -124,15 +137,17 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
             override fun afterTextChanged(p0: Editable?) {
                 etSigninId.isSelected = etSigninId.text.toString() != ""
                 nextBtnActive()
+                initTextFieldCheck()
             }
 
         })
+
 
     }
 
     //비밀번호 textwatcher
     private fun pwTextWatcher() = with(binding) {
-        etSigninId.addTextChangedListener(object : TextWatcher {
+        etSigninPw.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -144,6 +159,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
             override fun afterTextChanged(p0: Editable?) {
                 etSigninPw.isSelected = etSigninPw.text.toString() != ""
                 nextBtnActive()
+                initTextFieldCheck()
             }
 
         })

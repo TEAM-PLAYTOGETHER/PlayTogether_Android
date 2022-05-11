@@ -1,10 +1,7 @@
 package com.playtogether_android.app.presentation.ui.sign.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.playtogether_android.domain.model.sign.*
 import com.playtogether_android.domain.usecase.sign.PostSignIdUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignInUseCase
@@ -42,7 +39,6 @@ class SignViewModel(
     private var _signIn = MutableLiveData<SignInData>()
     val signIn: LiveData<SignInData>
         get() = _signIn
-
 
     //jwt토큰 set
     var signInToken : MutableLiveData<SignInData> = MutableLiveData()
@@ -86,6 +82,7 @@ class SignViewModel(
                 .onSuccess {
                     _signIn.value = it
                     Log.d("SignIn", "서버 통신 성공")
+                    Log.d("SignName", "" + _signIn.value!!.userName)
                 }
                 .onFailure {
                     it.printStackTrace()

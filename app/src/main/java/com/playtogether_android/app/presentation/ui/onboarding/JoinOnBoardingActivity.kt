@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.AllCaps
+import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -46,7 +47,7 @@ class JoinOnBoardingActivity :
         binding.etJoinOnboarding.setOnClickListener {
             binding.etJoinOnboarding.isSelected = true
         }
-        binding.etJoinOnboarding.setFilters(arrayOf<InputFilter>(AllCaps()))
+        binding.etJoinOnboarding.setFilters(arrayOf(AllCaps(), LengthFilter(6)))
     }
 
 
