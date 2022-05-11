@@ -7,16 +7,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
 import com.playtogether_android.domain.usecase.thunder.GetApplyListUseCase
+import com.playtogether_android.domain.usecase.thunder.GetLikeListUseCase
+import com.playtogether_android.domain.usecase.thunder.GetOpenListUseCase
 import kotlinx.coroutines.launch
 
 class ThunderViewModel(
-    val getApplyListUseCase: GetApplyListUseCase
+    val getApplyListUseCase: GetApplyListUseCase,
+    val getOpenListUseCase: GetOpenListUseCase,
+    val getLikeListUseCase: GetLikeListUseCase
 ) : ViewModel() {
 
-    //번개탭-신청한 번개 리스트
     private val _thunderTabListData = MutableLiveData<ThunderTabListData>()
     val thundertabListData: LiveData<ThunderTabListData>
     get() = _thunderTabListData
+
 
     //번개탭-신청한 번개 리스트
     fun getApplyList() = viewModelScope.launch {
@@ -30,5 +34,33 @@ class ThunderViewModel(
                 Log.d("getApplyList-fail", "fail")
             }
     }
+
+    //번개탭-오픈한 번개 리스트
+    fun getOpenList() = viewModelScope.launch {
+        kotlin.runCatching { getOpenListUseCase() }
+            .onSuccess {
+                _thunderTabListData.postValue(it)
+                Log.d("getOpenList", it.toString())
+            }
+            .onFailure {
+                it.printStackTrace()
+                Log.d("getOpenList-fail", "fail")
+            }
+    }
+
+    //번개탭-찜한 번개 리스트
+    fun getLikeList() = viewModelScope.launch {
+        kotlin.runCatching { getLikeListUseCase() }
+            .onSuccess {
+                _thunderTabListData.postValue(it)
+                Log.d("getLikeList", it.toString())
+            }
+            .onFailure {
+                it.printStackTrace()
+                Log.d("getOpenList-fail", "fail")
+            }
+    }
+
+
 
 }

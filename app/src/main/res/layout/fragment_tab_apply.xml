@@ -14,9 +14,11 @@
 
       <androidx.core.widget.NestedScrollView
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="0dp"
           app:layout_constraintTop_toTopOf="parent"
           android:layout_marginTop="28dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          android:layout_marginBottom="10dp"
           android:fillViewport="true">
 
             <androidx.recyclerview.widget.RecyclerView

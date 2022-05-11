@@ -6,8 +6,9 @@ import android.view.WindowManager
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.playtogether_android.app.R
+import com.playtogether_android.app.presentation.ui.thunder.ApplyThunderDetailActivity
 
-class CustomDialog(context: Context, val title: String) {
+class CustomDialog(private val context: Context, val title: String) {
     private val dialog = Dialog(context)
     private lateinit var onClickedListener: ButtonClickListener
 
@@ -66,6 +67,7 @@ class CustomDialog(context: Context, val title: String) {
         dialog.findViewById<TextView>(R.id.tv_dialog_check).setOnClickListener {
 //            onClickedListener.onClicked(1)
             dialog.dismiss()
+            (context as ApplyThunderDetailActivity).finish()
         }
     }
 }
