@@ -12,10 +12,12 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
         return ThunderMapper.mapperToThunderTabListData(thunderDataSource.getApplyList())
     }
 
+    //번개탭-오픈한 번개 리스트
     override suspend fun getOpenList(): ThunderTabListData {
         return ThunderMapper.mapperToThunderTabListData(thunderDataSource.getOpenList())
     }
 
+    //번개탭-찜한 번개 리스트
     override suspend fun getLikeList(): ThunderTabListData {
         return ThunderMapper.mapperToThunderTabListData(thunderDataSource.getLikeList())
     }
