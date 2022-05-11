@@ -24,6 +24,8 @@ class SignViewModel(
     //로그인 request
     var requestSignIn = SignInItem("","")
 
+    var name = MutableLiveData<String>()
+
 
     //아이디 중복 체크 변수
     private val _idDuplicationCheck = MutableLiveData<IdDuplicationCheckData>()

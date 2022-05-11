@@ -109,7 +109,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                 val intent = Intent(this, FirstOnBoardingActivity::class.java)
                 startActivity(intent)
                 finish()
-            } else if (!it.success) {
+            } else  {
                 showApplyDialog()
             }
         }
@@ -122,6 +122,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         dialog.showOneChoiceDialog(R.layout.dialog_one_question)
         Log.d("Test", "CustomDialog")
     }
+
 
     //아이디 textwatcher
     private fun idTextWatcher() = with(binding) {

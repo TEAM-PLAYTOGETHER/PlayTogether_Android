@@ -4,5 +4,5 @@ data class SignInData(
     var success: Boolean,
     val jwtToken: String,
     val userLoginId: String,
-    val userName: String
+    var userName: String
 )

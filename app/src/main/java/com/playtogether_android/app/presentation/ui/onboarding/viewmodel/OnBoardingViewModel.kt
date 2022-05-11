@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.playtogether_android.domain.model.onboarding.RegisterCrewData
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import com.playtogether_android.domain.model.sign.SignInData
+import com.playtogether_android.domain.model.sign.SignInItem
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
 import kotlinx.coroutines.launch
 
@@ -16,6 +17,7 @@ class OnBoardingViewModel(
     private val _registerCrew = MutableLiveData<RegisterCrewData>()
     val registerCrew : LiveData<RegisterCrewData>
     get() = _registerCrew
+
 
     //동아리 참여
     var crewCode = RegisterCrewItem("")
