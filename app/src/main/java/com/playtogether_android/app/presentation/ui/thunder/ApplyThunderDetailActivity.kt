@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.net.Uri
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
@@ -9,6 +10,8 @@ import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDet
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.http.Url
+import java.net.URL
 
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
@@ -34,11 +37,16 @@ class ApplyThunderDetailActivity :
         thunderDetailViewModel.thunderDetailMember(thunderId)
         thunderDetailViewModel.thunderDetailOrganizer(thunderId)
 
-        thunderDetailViewModel.detailImg.observe(this) {
+        thunderDetailViewModel.detailItemList.observe(this) {
+            binding.detailData = it
             Glide
                 .with(this)
-                .load(it)
+                .load(it.image)
                 .into(binding.ivApplythunderdetailImage)
+        }
+
+        thunderDetailViewModel.organizerInfo.observe(this) {
+            binding.organizer = it
         }
     }
 

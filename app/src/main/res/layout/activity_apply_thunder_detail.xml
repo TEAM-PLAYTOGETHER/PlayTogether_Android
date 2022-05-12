@@ -10,6 +10,14 @@
             name="viewModel"
             type="com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel" />
 
+        <variable
+            name="detailData"
+            type="com.playtogether_android.domain.model.thunder.ThunderDetailData" />
+
+        <variable
+            name="organizer"
+            type="com.playtogether_android.domain.model.thunder.Organizer" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,13 +61,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
             app:layout_constraintTop_toBottomOf="@id/cl_applythunderdetail_top">
-
 
             // 스크롤 감쌀 부분
 
@@ -98,7 +104,7 @@
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/pretendard_bold"
                         android:paddingVertical="16dp"
-                        android:text="@{viewModel.organizerName}"
+                        android:text="@{organizer.name}"
                         android:textColor="@color/gray_black"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@id/iv_opener_profile"
@@ -171,7 +177,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/pretendard_bold"
-                        android:text="@{viewModel.title}"
+                        android:text="@{detailData.title}"
                         android:textColor="@color/main_green"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -197,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
-                        android:text="@{viewModel.date}"
+                        android:text="@{detailData.date}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_date"
@@ -223,7 +229,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
-                        android:text="@{viewModel.time}"
+                        android:text="@{detailData.time}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_time"
@@ -249,7 +255,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
-                        android:text="@{viewModel.place}"
+                        android:text="@{detailData.place}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_place"
@@ -275,7 +281,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
-                        android:text="@{viewModel.category}"
+                        android:text="@{detailData.category}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_category"
@@ -298,7 +304,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/pretendard_regular"
-                        android:text="@{viewModel.description}"
+                        android:text="@{detailData.description}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -381,7 +387,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="@{String.valueOf(viewModel.lightMemberCnt)}"
+                            android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
                             app:layout_constraintStart_toEndOf="@id/tv_thunder_applicant_title"
@@ -404,7 +410,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="@{String.valueOf(viewModel.peopleCnt)}"
+                            android:text="@{String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
