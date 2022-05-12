@@ -7,7 +7,7 @@ class GetThunderDetailOrganizerUseCase(
     private val repo: ThunderRepository
 ) {
     suspend operator fun invoke(thunderId: Int): Organizer {
-        var data = Organizer("", 0)
+        lateinit var data: Organizer
         repo.getThunderDetailOrganizer(thunderId).map { data = Organizer(it.name, it.organizerId) }
         return data
     }
