@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -12,21 +13,42 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
 
-    private lateinit var applicantListAdapter: ApplicantListAdapter
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
+    private lateinit var applicantListAdapter: ApplicantListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val thunderId = intent.getStringExtra("thunderId")
-        testData()
+        val thunderId = intent.getIntExtra("thunderId", -1)
+        initData(thunderId)
+//        testData()
         initAdapter()
-
         binding.tvCancelApplication.setOnClickListener {
-            showCancelDialog(thunderId!!)
+            showCancelDialog(thunderId)
+        }
+        setClickListener()
+    }
+
+    private fun initData(thunderId: Int) {
+        binding.viewModel = thunderDetailViewModel
+        thunderDetailViewModel.thunderDetail(thunderId)
+        thunderDetailViewModel.thunderDetailMember(thunderId)
+        thunderDetailViewModel.thunderDetailOrganizer(thunderId)
+
+        thunderDetailViewModel.detailImg.observe(this) {
+            Glide
+                .with(this)
+                .load(it)
+                .into(binding.ivApplythunderdetailImage)
         }
     }
 
-    private fun showCancelDialog(thunderId: String) {
+    private fun setClickListener() {
+        binding.clThunderOpenerMessage.setOnClickListener {
+//           쪽지 보내기로 이동
+        }
+    }
+
+    private fun showCancelDialog(thunderId: Int) {
         val title = "신청을 취소할까요?"
         val dialog = CustomDialog(this, title)
         dialog.showChoiceDialog(R.layout.dialog_yes_no)
@@ -69,20 +91,22 @@ class ApplyThunderDetailActivity :
 
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
-
         binding.rvThunderApplicantList.adapter = applicantListAdapter
 
-        applicantListAdapter.applicantList = listOf(
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
-        )
+        thunderDetailViewModel.memberList.observe(this) {
+            applicantListAdapter.applicantList.addAll(it)
+            applicantListAdapter.notifyDataSetChanged()
+        }
+//        applicantListAdapter.applicantList = listOf(
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
+//        )
 
-        applicantListAdapter.notifyDataSetChanged()
     }
 
 

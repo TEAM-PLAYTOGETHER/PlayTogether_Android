@@ -65,15 +65,15 @@ class OpenThunderDetailActivity : BaseActivity<ActivityOpenThunderDetailBinding>
 
         binding.rvThunderApplicantList.adapter = applicantListAdapter
 
-        applicantListAdapter.applicantList = listOf(
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
-        )
+//        applicantListAdapter.applicantList = listOf(
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
+//        )
 
         applicantListAdapter.notifyDataSetChanged()
     }

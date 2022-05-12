@@ -45,7 +45,7 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
             binding.tvThunderItemDate.text = data.date + " " + data.place + " " + data.time
             binding.tvThunderItemLimitCount.text =
                 "인원 " + data.lightMemberCnt + " / " + data.peopleCnt
-            Log.d("Adapter-connect", data.lightId)
+            Log.d("Adapter-connect", data.lightId.toString())
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, ApplyThunderDetailActivity::class.java)
