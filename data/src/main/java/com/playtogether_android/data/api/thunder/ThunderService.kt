@@ -22,7 +22,7 @@ interface ThunderService {
 
     @POST("light/enter/{thunderId}")
     suspend fun postThunderJoinCancel(
-        @Path("thunderId") thunderId: String
+        @Path("thunderId") thunderId: Int
     ): ResponseThunderJoinCancel
 
     @GET("light/{thunderId}")

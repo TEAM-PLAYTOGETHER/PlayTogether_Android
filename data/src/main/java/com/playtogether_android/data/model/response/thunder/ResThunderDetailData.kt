@@ -33,7 +33,6 @@ data class ResThunderDetailData(
         val organizerId: Int
     )
 
-
     data class Member(
         val age: Int,
         val gender: String,
@@ -42,4 +41,5 @@ data class ResThunderDetailData(
         @SerializedName("user_id")
         val userId: Int
     )
+
 }

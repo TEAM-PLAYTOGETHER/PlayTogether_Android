@@ -15,7 +15,7 @@ interface ThunderDataSource {
     //번개탭-찜한 번개 리스트
     suspend fun getLikeList(): ResThunderTabListData
 
-    suspend fun postThunderJoinCancel(thunderId: String): ResponseThunderJoinCancel
+    suspend fun postThunderJoinCancel(thunderId: Int): ResponseThunderJoinCancel
 
     //번개 상세 뷰
     suspend fun getThunderDetail(thunderId: Int): ResThunderDetailData

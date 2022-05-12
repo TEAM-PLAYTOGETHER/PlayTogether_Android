@@ -33,6 +33,22 @@ object ThunderMapper {
         )
     }
 
+    fun mapperToThunderDetailMember(it: List<ResThunderDetailData.Data>): List<Member> {
+        val list = mutableListOf<Member>()
+        it.map {
+            list.addAll(it.members.map { Member(it.age, it.gender, it.mbti, it.name, it.userId) })
+        }
+        return list
+    }
+
+    fun mapperToThunderDetailOrganizer(it: List<ResThunderDetailData.Data>): List<Organizer> {
+        val list = mutableListOf<Organizer>()
+        it.map {
+            list.addAll(it.organizer.map { Organizer(it.name, it.organizerId) })
+        }
+        return list
+    }
+
     fun mapperToThunderDetail(it: ResThunderDetailData): List<ThunderDetailData> {
         return it.data.map {
             ThunderDetailData(
@@ -49,23 +65,4 @@ object ThunderMapper {
             )
         }
     }
-
-    fun mapperToMemberThunderDetail(it: ResThunderDetailData.Member): Member {
-        return Member(
-            it.age,
-            it.gender,
-            it.mbti,
-            it.name,
-            it.userId,
-        )
-    }
-
-    fun mapperToOrganizerThunderDetail(it: ResThunderDetailData.Organizer): Organizer {
-        return Organizer(
-            it.name,
-            it.organizerId,
-        )
-    }
-
-
 }

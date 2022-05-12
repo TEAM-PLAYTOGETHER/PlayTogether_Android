@@ -15,7 +15,7 @@ data class ResThunderTabListData(
 ) {
     data class Data(
         @SerializedName("light_id")
-        val lightId: String,
+        val lightId: Int,
         @SerializedName("title")
         val title: String,
         @SerializedName("date")
@@ -27,6 +27,6 @@ data class ResThunderTabListData(
         @SerializedName("place")
         val place: String,
         @SerializedName("LightMemberCnt")
-        val lightMemberCnt: String
+        val lightMemberCnt: Int
     )
 }
