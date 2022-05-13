@@ -2,12 +2,14 @@ package com.playtogether_android.app.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
+import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
@@ -97,11 +99,11 @@ class ThunderDetailActivity :
         // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
         // 개설자 프로필로 이동
         binding.ivThunderdetailIcon.setOnClickListener {
-            var organizerId = -1
+            var organizerId = "leejejune"
             thunderDetailViewModel.organizerInfo.observe(this) {
-                organizerId = it.organizerId
+                organizerId = it.organizerId.toString()
             }
-            var intent = Intent(this, MyPageFragment::class.java)
+            var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             startActivity(intent)
         }

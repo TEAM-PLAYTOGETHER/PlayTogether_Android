@@ -33,7 +33,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     //회원가입 클릭 리스너
     private fun initSignUpBtn() {
         binding.textSignInSignup.setOnClickListener {
-            startActivity(Intent(this, SignUpMainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

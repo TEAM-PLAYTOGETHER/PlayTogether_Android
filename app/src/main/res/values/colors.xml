@@ -24,5 +24,6 @@
     <color name="red_FF0000">#FF0000</color>
     <color name="gray_gray05">#c4c4c4</color>
     <color name="gray_bdbdbd">#BDBDBD</color>
+    <color name="gray_ebebeb">#EBEBEB</color>
 
 </resources>

@@ -4,6 +4,7 @@ import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
 import com.playtogether_android.data.api.message.MessageSendService
+import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.sign.SignService
 import com.playtogether_android.data.api.thunder.ThunderService
@@ -36,5 +37,9 @@ val networkModule = module {
 
     single<ChatService>{
         get<Retrofit>().create(ChatService::class.java)
+    }
+
+    single<MyPageService>{
+        get<Retrofit>().create(MyPageService::class.java)
     }
 }
