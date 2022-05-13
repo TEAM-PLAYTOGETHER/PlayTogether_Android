@@ -27,8 +27,8 @@ val useCaseModule = module {
 
     //message
     single { GetMessageUseCase(get()) }
-    single{PostSendMessageUseCase(get())}
-    single{GetChatUseCase(get())}
+    single { PostSendMessageUseCase(get()) }
+    single { GetChatUseCase(get()) }
 
     //thunderList
     single { GetThunderCategoryUseCase(get()) }
@@ -45,7 +45,8 @@ val useCaseModule = module {
     single { GetThunderDetailMemberUseCase(get()) }
     single { GetThunderDetailOrganizerUseCase(get()) }
 
-    //main
+
+    //mypage
     single { GetUserCheckUseCase(get()) }
 
 }

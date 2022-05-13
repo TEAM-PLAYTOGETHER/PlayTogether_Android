@@ -9,6 +9,7 @@ import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBindin
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
+import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
@@ -78,7 +79,7 @@ class ApplyThunderDetailActivity :
             thunderDetailViewModel.organizerInfo.observe(this) {
                 organizerId = it.organizerId
             }
-            var intent = Intent(this, MyPageFragment::class.java)
+            var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             startActivity(intent)
         }

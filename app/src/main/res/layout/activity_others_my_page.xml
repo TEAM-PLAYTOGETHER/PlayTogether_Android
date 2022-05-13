@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
                     android:includeFontPadding="false"
-                    android:text="이혜빈"
+                    android:text="@{user.name}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -90,7 +90,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/gray_black"
             android:textSize="16sp"
-            android:text="이혜빈"
+            android:text="@{user.name}"
             android:layout_marginStart="15dp"
             app:layout_constraintStart_toEndOf="@+id/iv_other_mypage"
             app:layout_constraintTop_toTopOf="@+id/iv_other_mypage" />
@@ -117,6 +117,7 @@
             android:layout_marginTop="6dp"
             android:textColor="@color/gray_bdbdbd"
             android:textSize="13sp"
+            android:text="@{Integer.toString(user.age)}"
             app:layout_constraintStart_toStartOf="@+id/tv_other_mypage_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_other_mypage_name"
             tools:text="23"/>
@@ -150,30 +151,16 @@
             tools:text="여" />
 
         <TextView
-            android:id="@+id/tv_other_mypage_age_coma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:includeFontPadding="false"
-            android:text="@string/text_coma"
-            android:textColor="@color/gray_bdbdbd"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_other_mypage_age"
-            app:layout_constraintStart_toEndOf="@+id/tv_other_mypage_age_gender"
-            app:layout_constraintTop_toTopOf="@+id/tv_other_mypage_age" />
-
-        <TextView
             android:id="@+id/tv_other_mypage_mbti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:includeFontPadding="false"
-            android:text="@string/text_coma"
+            android:text="@{user.mbti}"
             android:textColor="@color/gray_bdbdbd"
             android:textSize="13sp"
-            android:layout_marginStart="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_other_mypage_age"
-            app:layout_constraintStart_toEndOf="@+id/tv_other_mypage_age_coma"
+            app:layout_constraintStart_toEndOf="@+id/tv_other_mypage_age_gender"
             app:layout_constraintTop_toTopOf="@+id/tv_other_mypage_age"
             tools:text="ESTJ" />
 
