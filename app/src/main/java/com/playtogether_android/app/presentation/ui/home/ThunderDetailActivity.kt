@@ -10,6 +10,7 @@ import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThunderDetailActivity :
@@ -43,6 +44,7 @@ class ThunderDetailActivity :
 
     private fun initData() {
         val thunderId = intent.getIntExtra("thunderId", -1)
+        shortToast("$thunderId")
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)
