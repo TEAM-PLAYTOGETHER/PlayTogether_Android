@@ -7,7 +7,7 @@ data class ThunderTabListData(
 ) {
     data class Data(
         @SerializedName("light_id")
-        val lightId: String,
+        val lightId: Int,
         @SerializedName("title")
         val title: String,
         @SerializedName("date")
@@ -19,7 +19,7 @@ data class ThunderTabListData(
         @SerializedName("place")
         val place: String,
         @SerializedName("LightMemberCnt")
-        val lightMemberCnt: String
+        val lightMemberCnt: Int
 
     )
 }

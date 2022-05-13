@@ -1,32 +1,90 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.message.ChattingActivity
+import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.http.Url
+import java.net.URL
+import java.util.function.ToDoubleBiFunction
 
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
 
-    private lateinit var applicantListAdapter: ApplicantListAdapter
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
+    private lateinit var applicantListAdapter: ApplicantListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val thunderId = intent.getStringExtra("thunderId")
-        testData()
+        val thunderId = intent.getIntExtra("thunderId", -1)
+        initData(thunderId)
+//        testData()
         initAdapter()
-
         binding.tvCancelApplication.setOnClickListener {
-            showCancelDialog(thunderId!!)
+            showCancelDialog(thunderId)
+        }
+        setClickListener()
+    }
+
+    private fun initData(thunderId: Int) {
+//        binding.viewModel = thunderDetailViewModel
+        thunderDetailViewModel.thunderDetail(thunderId)
+        thunderDetailViewModel.thunderDetailMember(thunderId)
+        thunderDetailViewModel.thunderDetailOrganizer(thunderId)
+
+        thunderDetailViewModel.detailItemList.observe(this) {
+            binding.detailData = it
+            Glide
+                .with(this)
+                .load(it.image)
+                .into(binding.ivApplythunderdetailImage)
+        }
+        thunderDetailViewModel.organizerInfo.observe(this) {
+            binding.organizer = it
         }
     }
 
-    private fun showCancelDialog(thunderId: String) {
+    private fun setClickListener() {
+
+        binding.clThunderOpenerMessage.setOnClickListener {
+//           쪽지 보내기로 이동
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
+        }
+
+        // 뒤로가기 버튼
+        binding.ivApplythunderdetailBack.setOnClickListener {
+            finish()
+        }
+
+        // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
+        // 개설자 프로필로 이동
+        binding.ivOpenerProfile.setOnClickListener {
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            var intent = Intent(this, MyPageFragment::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
+        }
+    }
+
+    private fun showCancelDialog(thunderId: Int) {
         val title = "신청을 취소할까요?"
         val dialog = CustomDialog(this, title)
         dialog.showChoiceDialog(R.layout.dialog_yes_no)
@@ -69,20 +127,22 @@ class ApplyThunderDetailActivity :
 
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
-
         binding.rvThunderApplicantList.adapter = applicantListAdapter
 
-        applicantListAdapter.applicantList = listOf(
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
-        )
+        thunderDetailViewModel.memberList.observe(this) {
+            applicantListAdapter.applicantList.addAll(it)
+            applicantListAdapter.notifyDataSetChanged()
+        }
+//        applicantListAdapter.applicantList = listOf(
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
+//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
+//        )
 
-        applicantListAdapter.notifyDataSetChanged()
     }
 
 
