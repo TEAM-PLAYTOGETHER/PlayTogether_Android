@@ -1,9 +1,10 @@
 package com.playtogether_android.domain.model.message
 
 data class ChatData(
+    val messageId: Int,
     val content:String,
     val time:String,
-    val messageType:Int,
+    val messageType:Boolean,
     var timeVisible:Boolean=true
 ){
     companion object{

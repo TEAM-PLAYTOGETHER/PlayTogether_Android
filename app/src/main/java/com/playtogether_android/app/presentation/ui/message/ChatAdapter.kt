@@ -40,7 +40,10 @@ class ChatAdapter : RecyclerView.Adapter<ChatViewHolder<*>>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return chatList[position].messageType
+        if(chatList[position].messageType)
+            return 0
+        else
+            return 1
     }
 
     class MyChatViewHolder(private val binding : ItemMyChatBinding) : ChatViewHolder<ChatData>(binding.root){
