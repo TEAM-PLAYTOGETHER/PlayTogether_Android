@@ -1,5 +1,6 @@
 package com.playtogether_android.app.di
 
+import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.usecase.message.GetMessageUseCase
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
@@ -36,6 +37,7 @@ val useCaseModule = module {
     single { GetApplyListUseCase(get()) }
     single { GetOpenListUseCase(get()) }
     single { GetLikeListUseCase(get()) }
+    single { PostThunderCreateUseCase(get()) }
 
 
 //    thunderDetail

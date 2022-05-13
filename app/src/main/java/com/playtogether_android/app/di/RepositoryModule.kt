@@ -6,6 +6,7 @@ import com.playtogether_android.data.repositoryimpl.message.ChatRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.message.SendMessageRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.onboarding.OnBoardingRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.sign.SignRepositoryImpl
+import com.playtogether_android.data.repositoryimpl.thunder.ThunderCreateRepositoryImpl
 import com.playtogether_android.domain.repository.message.MessageRepository
 import com.playtogether_android.domain.repository.light.LightRepository
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderRepositoryImpl
@@ -13,6 +14,7 @@ import com.playtogether_android.domain.repository.message.ChatRepository
 import com.playtogether_android.domain.repository.message.MessageSendReposiotry
 import com.playtogether_android.domain.repository.onboarding.OnBoardingRepository
 import com.playtogether_android.domain.repository.sign.SignRepository
+import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
 import org.koin.dsl.module
 
@@ -27,4 +29,5 @@ val repositoryModule = module {
     single<ThunderRepository>{ThunderRepositoryImpl(get())}
     single<MessageSendReposiotry>{SendMessageRepositoryImpl(get())}
     single<ChatRepository>{ChatRepositoryImpl(get())}
+    single<ThunderCreateRepository>{ThunderCreateRepositoryImpl(get())}
 }

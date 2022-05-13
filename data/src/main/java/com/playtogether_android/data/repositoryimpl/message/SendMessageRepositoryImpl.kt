@@ -12,5 +12,4 @@ class SendMessageRepositoryImpl(private val sendMessageDataSource: SendMessageDa
             SendMessageMapper.mapperToPostSendMessageData(postSendMessageData)
         ))
     }
-
 }

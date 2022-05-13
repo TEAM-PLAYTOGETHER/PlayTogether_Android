@@ -3,21 +3,27 @@ package com.playtogether_android.app.presentation.ui.createThunder
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import java.lang.String
+import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
+import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import java.util.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateThunderActivity : BaseActivity<ActivityCreateThunderBinding>(R.layout.activity_create_thunder) {
     private var imageClicked = false
     private var infiniteChecked = false
+    private val createThunderViewModel : CreateThunderViewModel by viewModel()
     private lateinit var inputMethodManager:InputMethodManager
+    private lateinit var category : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,41 @@ class CreateThunderActivity : BaseActivity<ActivityCreateThunderBinding>(R.layou
         checkThunderPlace()
         checkTunderMember()
         checkTunderExplanation()
+        clickComplete()
+    }
+
+    private fun clickComplete(){
+        binding.tvCreatethunderFinish.setOnClickListener{
+            val date = binding.tvCreatethunderDate.text.toString().replace(".","-")
+            val time = binding.tvCreatethunderTime.text.toString()
+            val title = binding.etCreatethunderName.text.toString()
+            val place = binding.etCreatethunderPlace.text.toString()
+            var peopleCnt=0
+            if(binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
+                peopleCnt=-1
+            else
+                peopleCnt=binding.etCreatethunderPeopleNumber.text.toString().toInt()
+            val description = binding.etCreatethunderExplanation.text.toString()
+            createThunderViewModel.postThunderCreate(PostThunderCreateData(title, category, date, time, place, peopleCnt, description))
+            Log.d("createThunder", title)
+            Log.d("createThunder", category)
+            Log.d("createThunder", date)
+            Log.d("createThunder", time)
+            Log.d("createThunder", place)
+            Log.d("createThunder", "$peopleCnt")
+            Log.d("createThunder", description)
+        }
+
+        createThunderViewModel.getThunderCreateData.observe(this){
+            if(it.success){
+                val intent = Intent(this, OpenThunderDetailActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            else{
+                Log.d("createThunder", "번개 생성 안됨")
+            }
+        }
     }
 
     private fun clickInfinite(){
@@ -117,6 +158,7 @@ class CreateThunderActivity : BaseActivity<ActivityCreateThunderBinding>(R.layou
                 ivCreatethunderEat.setImageResource(R.drawable.ic_img_eat_inactive)
                 ivCreatethunderEat.isSelected=false
                 imageClicked=true
+                category="할래"
                 btnActive()
             }
             ivCreatethunderGo.setOnClickListener{
@@ -127,6 +169,7 @@ class CreateThunderActivity : BaseActivity<ActivityCreateThunderBinding>(R.layou
                 ivCreatethunderEat.setImageResource(R.drawable.ic_img_eat_inactive)
                 ivCreatethunderEat.isSelected=false
                 imageClicked=true
+                category="갈래"
                 btnActive()
             }
             ivCreatethunderEat.setOnClickListener{
@@ -137,6 +180,7 @@ class CreateThunderActivity : BaseActivity<ActivityCreateThunderBinding>(R.layou
                 ivCreatethunderEat.setImageResource(R.drawable.ic_img_eat_active)
                 ivCreatethunderEat.isSelected=true
                 imageClicked=true
+                category="먹을래"
                 btnActive()
             }
         }
