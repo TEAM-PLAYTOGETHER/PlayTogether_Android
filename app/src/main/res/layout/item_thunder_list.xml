@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="category"
+            type="com.playtogether_android.domain.model.thunder.ThunderTabListData.Data" />
 
     </data>
 
@@ -21,7 +26,10 @@
             android:layout_marginStart="7dp"
             android:layout_marginEnd="4dp"
             android:layout_weight="25"
-            android:background="@drawable/ic_group_8925" />
+            android:background="@drawable/ic_group_8925"/>
+<!--            categoryImage="@{category.category}"-->
+<!--            android:background="@drawable/img_do"-->
+
 
         <LinearLayout
             android:layout_width="match_parent"

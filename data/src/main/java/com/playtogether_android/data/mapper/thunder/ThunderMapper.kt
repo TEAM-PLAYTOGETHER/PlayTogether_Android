@@ -7,13 +7,14 @@ import com.playtogether_android.domain.model.thunder.*
 
 object ThunderMapper {
 
-    //번개탭-신청한 번개 리스트
+    //번개탭-번개 리스트
     fun mapperToThunderTabListData(resThunderTabListData: ResThunderTabListData): ThunderTabListData {
         return ThunderTabListData(
             data = resThunderTabListData.data.map {
                 ThunderTabListData.Data(
                     it.lightId,
                     it.title,
+                    it.category,
                     it.date,
                     it.time,
                     it.peopleCnt,

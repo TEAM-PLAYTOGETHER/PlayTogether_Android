@@ -1,16 +1,30 @@
 package com.playtogether_android.app.util
 
-import android.widget.EditText
+import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.playtogether_android.app.R
 
-@BindingAdapter("app:imageSelecter")
-fun bindImageSelecter(editText: EditText, imageView: ImageView) {
-    if (editText.text.isNullOrEmpty()) {
-        imageView.setImageResource(R.drawable.ic_icn_message)
-    } else {
-        imageView.setImageResource(R.drawable.ic_icn_message_black)
+object BindingAdapter {
+    @JvmStatic
+    @BindingAdapter("categoryImage")
+    fun setCategoryImage(imageView: ImageView, category: String?) {
+        with(imageView) {
+            when(category.toString()) {
+                "먹을래" -> {
+                    setImageResource(R.drawable.img_eat)
+                    visibility = View.VISIBLE
+                }
+                "갈래" -> {
+                    setImageResource(R.drawable.img_go)
+                    visibility = View.VISIBLE
+                }
+                "할래" -> {
+                    setImageResource(R.drawable.img_do)
+                    visibility = View.VISIBLE
+                }
+
+            }
+        }
     }
 }
