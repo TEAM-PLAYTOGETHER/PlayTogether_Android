@@ -6,6 +6,8 @@ import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.message.ChattingActivity
+import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -17,6 +19,7 @@ class ThunderDetailActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData()
+        setClickListener()
         binding.clThunderdetailApplyBtn.setOnClickListener {
             showApplyDialog()
         }
@@ -69,4 +72,38 @@ class ThunderDetailActivity :
 //        }
 
     }
+
+    private fun setClickListener() {
+
+        binding.clThunderdetailMessage.setOnClickListener {
+//           쪽지 보내기로 이동
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
+        }
+
+        // 뒤로가기 버튼
+        binding.ivThunderdetailBack.setOnClickListener {
+            finish()
+        }
+
+
+        // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
+        // 개설자 프로필로 이동
+        binding.ivThunderdetailIcon.setOnClickListener {
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            var intent = Intent(this, MyPageFragment::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
+        }
+
+    }
+
 }
