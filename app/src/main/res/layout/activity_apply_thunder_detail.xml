@@ -7,17 +7,12 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel" />
+            name="organizer"
+            type="com.playtogether_android.domain.model.thunder.Organizer" />
 
         <variable
             name="detailData"
             type="com.playtogether_android.domain.model.thunder.ThunderDetailData" />
-
-        <variable
-            name="organizer"
-            type="com.playtogether_android.domain.model.thunder.Organizer" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,11 +56,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:fillViewport="true"
+            android:layout_marginBottom="10dp"
             app:layout_constraintTop_toBottomOf="@id/cl_applythunderdetail_top">
+
 
             // 스크롤 감쌀 부분
 
@@ -318,10 +317,10 @@
                         android:layout_height="91dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="30dp"
+                        android:src="@drawable/ic_img_profile"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@id/tv_applythunderdetail_description"
-                        app:layout_constraintTop_toBottomOf="@id/tv_applythunderdetail_description"
-                        tools:src="@drawable/ic_img_profile" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_applythunderdetail_description" />
 
                     <TextView
                         android:id="@+id/tv_applythunderdetail_report"

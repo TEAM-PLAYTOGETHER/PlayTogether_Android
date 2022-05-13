@@ -32,7 +32,7 @@ class ApplyThunderDetailActivity :
     }
 
     private fun initData(thunderId: Int) {
-        binding.viewModel = thunderDetailViewModel
+//        binding.viewModel = thunderDetailViewModel
         thunderDetailViewModel.thunderDetail(thunderId)
         thunderDetailViewModel.thunderDetailMember(thunderId)
         thunderDetailViewModel.thunderDetailOrganizer(thunderId)
