@@ -1,5 +1,7 @@
 package com.playtogether_android.app.di
 
+import com.playtogether_android.data.datasource.home.HomeDataSource
+import com.playtogether_android.data.datasource.home.HomeDataSourceImpl
 import com.playtogether_android.data.datasource.light.LightDataSource
 import com.playtogether_android.data.datasource.light.LightDataSourceImpl
 import com.playtogether_android.data.datasource.message.*
@@ -22,4 +24,5 @@ val dataSourceModule = module {
     single<SendMessageDataSource>{SendMessageDataSourceImpl(get())}
     single<ChatDataSource>{ChatDataSourceImpl(get())}
     single<MyPageDataSource> {MyPageDataSourceImpl(get())}
+    single<HomeDataSource>{HomeDataSourceImpl(get())}
 }

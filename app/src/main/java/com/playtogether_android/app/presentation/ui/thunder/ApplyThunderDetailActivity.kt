@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.thunder
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
@@ -79,6 +80,7 @@ class ApplyThunderDetailActivity :
             thunderDetailViewModel.organizerInfo.observe(this) {
                 organizerId = it.organizerId
             }
+            Log.d("뭐가 문제일까", ""+organizerId)
             var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             startActivity(intent)

@@ -1,5 +1,6 @@
 package com.playtogether_android.app.di
 
+import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
 import com.playtogether_android.domain.usecase.message.GetMessageUseCase
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
@@ -48,6 +49,9 @@ val useCaseModule = module {
 
     //mypage
     single { GetUserCheckUseCase(get()) }
+
+    //home
+    single {PostJoinThunderUseCase(get())}
 
 }
 
