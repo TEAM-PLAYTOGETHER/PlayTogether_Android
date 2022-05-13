@@ -18,6 +18,7 @@ class ApplyThunderDetailActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val thunderId = intent.getStringExtra("thunderId")
+
         testData()
         initAdapter()
 
