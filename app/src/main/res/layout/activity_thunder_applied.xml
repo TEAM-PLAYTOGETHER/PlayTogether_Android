@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <variable
+            name="thunder"
+            type="com.playtogether_android.domain.model.home.ThunderJoinEndData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,6 +121,7 @@
                         android:includeFontPadding="false"
                         android:textColor="@color/gray_black"
                         android:textSize="20sp"
+                        android:text="@{thunder.data.title}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"

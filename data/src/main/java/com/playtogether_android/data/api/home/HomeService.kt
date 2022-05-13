@@ -1,6 +1,7 @@
 package com.playtogether_android.data.api.home
 
 import com.playtogether_android.data.model.response.home.ResponseJoinThunder
+import com.playtogether_android.data.model.response.home.ResponseThunderJoinEnd
 import com.playtogether_android.data.model.response.light.ResponseLightJoinCancel
 import com.playtogether_android.data.model.response.light.ResponseLightListCategory
 import com.playtogether_android.data.model.response.mypage.ResponseUserCheck
@@ -16,4 +17,10 @@ interface HomeService {
     suspend fun JoinThunder(
         @Path("lightId") lightId: Int,
     ): ResponseJoinThunder
+
+    //번개 참여 상세
+    @GET("light/{lightId}")
+    suspend fun thunderThunderEnd(
+        @Path("lightId") lightId: Int
+    ) : ResponseThunderJoinEnd
 }
