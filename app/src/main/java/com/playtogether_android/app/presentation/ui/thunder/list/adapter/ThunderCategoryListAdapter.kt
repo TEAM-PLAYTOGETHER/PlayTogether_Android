@@ -23,7 +23,12 @@ class ThunderCategoryListAdapter :
                     stringBuilder(listOf("${data.date} ", "${data.place} ", data.time))
                 tvThunderItemLimitCount.text =
                     stringBuilder(
-                        listOf(PERSON, data.lightMemberCnt, " / ", data.peopleCnt.toString())
+                        listOf(
+                            PERSON,
+                            data.lightMemberCnt.toString(),
+                            " / ",
+                            data.peopleCnt.toString()
+                        )
                     )
 
                 itemView.setOnClickListener {
