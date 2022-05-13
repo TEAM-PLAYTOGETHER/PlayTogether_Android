@@ -20,10 +20,8 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
     override suspend fun getLikeList(): ResThunderTabListData {
         return service.getLikeList()
     }
-    
-    
 
-    override suspend fun postThunderJoinCancel(thunderId: String): ResponseThunderJoinCancel {
+    override suspend fun postThunderJoinCancel(thunderId: Int): ResponseThunderJoinCancel {
         return service.postThunderJoinCancel(thunderId)
     }
 }

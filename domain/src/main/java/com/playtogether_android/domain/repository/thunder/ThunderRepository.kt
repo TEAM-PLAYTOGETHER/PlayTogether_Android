@@ -14,5 +14,5 @@ interface ThunderRepository {
     //번개탭-찜한 번개 리스트
     suspend fun getLikeList() : ThunderTabListData
     
-    suspend fun postThunderJoinCancel(thunderId: String): ThunderJoinCancel
+    suspend fun postThunderJoinCancel(thunderId: Int): ThunderJoinCancel
 }

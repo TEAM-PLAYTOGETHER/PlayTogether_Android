@@ -24,7 +24,7 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
     }
 
 
-    override suspend fun postThunderJoinCancel(thunderId: String): ThunderJoinCancel {
+    override suspend fun postThunderJoinCancel(thunderId: Int): ThunderJoinCancel {
         return ThunderMapper.mapperToThunderJoinCancel(
             thunderDataSource.postThunderJoinCancel(
                 thunderId

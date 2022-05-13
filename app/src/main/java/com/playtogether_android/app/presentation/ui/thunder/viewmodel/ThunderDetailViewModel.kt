@@ -16,7 +16,7 @@ class ThunderDetailViewModel(
     private val _isConfirm = MutableLiveData<Boolean>()
     val isConfirm: LiveData<Boolean> = _isConfirm
 
-    fun joinAndCancel(thunderId: String) {
+    fun joinAndCancel(thunderId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
                 thunderJoinCancelUseCase(thunderId)
