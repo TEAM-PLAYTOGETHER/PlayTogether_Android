@@ -4,6 +4,7 @@ import com.playtogether_android.domain.usecase.message.GetMessageUseCase
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
 import com.playtogether_android.domain.usecase.message.PostSendMessageUseCase
+import com.playtogether_android.domain.usecase.mypage.GetUserCheckUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignIdUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignInUseCase
@@ -43,6 +44,9 @@ val useCaseModule = module {
     
 //    thunderDetail
     single { PostThunderJoinCancelUseCase(get()) }
+
+    //main
+    single { GetUserCheckUseCase(get()) }
 
 }
 

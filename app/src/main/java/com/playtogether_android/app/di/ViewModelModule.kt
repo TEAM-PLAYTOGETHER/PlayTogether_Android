@@ -17,7 +17,7 @@ val viewModelModule = module {
 
     //main
     viewModel {
-        MainViewModel()
+        MainViewModel(get())
         HomeViewModel()
     }
 
