@@ -5,7 +5,13 @@
     tools:ignore="MissingDefaultResource">
 
     <data>
+        <variable
+            name="organizer"
+            type="com.playtogether_android.domain.model.thunder.Organizer" />
 
+        <variable
+            name="detailData"
+            type="com.playtogether_android.domain.model.thunder.ThunderDetailData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,10 +57,11 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
             app:layout_constraintTop_toBottomOf="@id/cl_openthunderdetail_top"
             android:fillViewport="true">
-
 
             // 스크롤 감쌀 부분
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,6 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="문수제비"
+                        android:text="@{organizer.name}"
                         android:fontFamily="@font/pretendard_bold"
                         android:textSize="14sp"
                         android:textColor="@color/gray_black"
@@ -130,6 +138,7 @@
                         android:id="@+id/tv_openthunderdetail_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:text="@{detailData.title}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -157,6 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="2022.04.15"
+                        android:text="@{detailData.date}"
                         android:fontFamily="@font/pretendard_medium"
                         android:textColor="@color/white"
                         android:textSize="14sp"
@@ -181,6 +191,7 @@
                         android:id="@+id/tv_openthunderdetail_time_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{detailData.time}"
                         tools:text="18:00 ~"
                         android:fontFamily="@font/pretendard_medium"
                         android:textColor="@color/white"
@@ -208,6 +219,7 @@
                         android:layout_height="wrap_content"
                         tools:text="우리집"
                         android:fontFamily="@font/pretendard_medium"
+                        android:text="@{detailData.place}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintStart_toEndOf="@id/tv_openthunderdetail_place"
@@ -234,6 +246,7 @@
                         tools:text="음식"
                         android:fontFamily="@font/pretendard_medium"
                         android:textColor="@color/white"
+                        android:text="@{detailData.category}"
                         android:textSize="14sp"
                         app:layout_constraintStart_toEndOf="@id/tv_openthunderdetail_category"
                         app:layout_constraintTop_toTopOf="@id/tv_openthunderdetail_category"
@@ -255,6 +268,7 @@
                         tools:text="스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
                         android:fontFamily="@font/pretendard_regular"
                         android:textColor="@color/white"
+                        android:text="@{detailData.description}"
                         android:textSize="14sp"
                         app:layout_constraintTop_toBottomOf="@id/tv_openthunderdetail_dotted_line"
                         app:layout_constraintStart_toStartOf="parent"
@@ -336,6 +350,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
+                            android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                             app:layout_constraintStart_toEndOf="@id/tv_thunder_applicant_title"
                             app:layout_constraintTop_toTopOf="@id/tv_thunder_applicant_title"
                             tools:text="2" />
@@ -358,6 +373,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
+                            android:text="@{String.valueOf(detailData.peopleCnt)}"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
                             app:layout_constraintTop_toTopOf="@id/tv_applicant_slash"
                             tools:text="6" />

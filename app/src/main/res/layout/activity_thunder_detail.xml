@@ -2,7 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
+        <variable
+            name="organizer"
+            type="com.playtogether_android.domain.model.thunder.Organizer" />
+
+        <variable
+            name="detailData"
+            type="com.playtogether_android.domain.model.thunder.ThunderDetailData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,26 +30,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="24dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/rectangle_fill_green_border_black_radius_10"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/tv_thunderdetail_apply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="신청하기 ("
-                    android:fontFamily="@font/pretendard_bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/gray_black"
                     android:layout_marginVertical="18dp"
-                    app:layout_constraintHorizontal_chainStyle="packed"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="신청하기 ("
+                    android:textColor="@color/gray_black"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_current"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
+                    android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                     android:textColor="@color/gray_black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_apply"
@@ -77,6 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
+                    android:text="@{String.valueOf(detailData.peopleCnt)}"
                     android:textColor="@color/gray_black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_thunderdetail_apply"
@@ -150,8 +161,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:overScrollMode="never"
-            app:layout_constraintTop_toBottomOf="@id/cl_thunderdetail_top"
-            app:layout_constraintBottom_toTopOf="@id/cl_thunderdeatil_bottom">
+            app:layout_constraintBottom_toTopOf="@id/cl_thunderdeatil_bottom"
+            app:layout_constraintTop_toBottomOf="@id/cl_thunderdetail_top">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_thunderdetail_middle"
@@ -188,6 +199,7 @@
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/pretendard_bold"
                         android:includeFontPadding="false"
+                        android:text="@{organizer.name}"
                         android:textColor="@color/gray_black"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@id/iv_thunderdetail_icon"
@@ -246,9 +258,9 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/rectangle_fill_gray_black_radius_10"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_border_line">
 
                     <TextView
@@ -259,6 +271,7 @@
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/pretendard_bold"
                         android:includeFontPadding="false"
+                        android:text="@{detailData.title}"
                         android:textColor="@color/main_green"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -286,6 +299,7 @@
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:includeFontPadding="false"
+                        android:text="@{detailData.date}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_date"
@@ -313,6 +327,7 @@
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:includeFontPadding="false"
+                        android:text="@{detailData.time}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_time"
@@ -340,6 +355,7 @@
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:includeFontPadding="false"
+                        android:text="@{detailData.place}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_place"
@@ -367,6 +383,7 @@
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:includeFontPadding="false"
+                        android:text="@{detailData.category}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_category"
@@ -390,6 +407,7 @@
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/pretendard_regular"
                         android:includeFontPadding="false"
+                        android:text="@{detailData.description}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
