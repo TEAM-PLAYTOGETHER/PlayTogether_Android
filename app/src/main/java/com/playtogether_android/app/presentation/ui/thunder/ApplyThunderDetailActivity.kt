@@ -25,6 +25,7 @@ class ApplyThunderDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val thunderId = intent.getIntExtra("thunderId", -1)
         initData(thunderId)
 //        testData()
@@ -104,6 +105,7 @@ class ApplyThunderDetailActivity :
         })
     }
 
+
     private fun showConfirmDialog() {
         val title = "신청 취소되었습니다."
         val dialog = CustomDialog(this@ApplyThunderDetailActivity, title)
@@ -111,19 +113,19 @@ class ApplyThunderDetailActivity :
     }
 
 
-    private fun testData() {
-        with(binding) {
-            tvApplythunderdetailOpenerName.text = "문수제비"
-            tvApplythunderdetailTitle.text = "우리집에서 피자 먹기"
-            tvApplythunderdetailDateContent.text = "2022.04.15"
-            tvApplythunderdetailTimeContent.text = "18:00 ~"
-            tvApplythunderdetailPlaceContent.text = "우리집"
-            tvApplythunderdetailCategoryContent.text = "음식"
-            tvApplythunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
-            tvCurrentApplicant.text = "2"
-            tvMaxApplicant.text = "6"
-        }
-    }
+//    private fun testData() {
+//        with(binding) {
+//            tvApplythunderdetailOpenerName.text = "문수제비"
+//            tvApplythunderdetailTitle.text = "우리집에서 피자 먹기"
+//            tvApplythunderdetailDateContent.text = "2022.04.15"
+//            tvApplythunderdetailTimeContent.text = "18:00 ~"
+//            tvApplythunderdetailPlaceContent.text = "우리집"
+//            tvApplythunderdetailCategoryContent.text = "음식"
+//            tvApplythunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
+//            tvCurrentApplicant.text = "2"
+//            tvMaxApplicant.text = "6"
+//        }
+//    }
 
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
@@ -143,6 +145,10 @@ class ApplyThunderDetailActivity :
 //            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
 //        )
 
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 

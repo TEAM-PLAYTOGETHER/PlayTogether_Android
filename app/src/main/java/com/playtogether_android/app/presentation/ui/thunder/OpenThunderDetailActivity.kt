@@ -14,17 +14,21 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OpenThunderDetailActivity :
     BaseActivity<ActivityOpenThunderDetailBinding>(R.layout.activity_open_thunder_detail) {
+
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
     private lateinit var applicantListAdapter: ApplicantListAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initData()
+        val thunderId = intent.getIntExtra("thunderId", -1)
+        initData(thunderId)
         initAdapter()
         setClickListener()
 
@@ -33,8 +37,8 @@ class OpenThunderDetailActivity :
         }
     }
 
-    private fun initData() {
-        val thunderId = intent.getIntExtra("thunderId", -1)
+    private fun initData(thunderId: Int) {
+
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)
@@ -62,16 +66,20 @@ class OpenThunderDetailActivity :
         }
     }
 
-    private fun showDeleteDialog() {
+    private fun showThunderDeleteDialog(thunderId: Int) {
         val title = "게시글을 삭제할까요?"
         val dialog = CustomDialog(this, title)
         dialog.showChoiceDialog(R.layout.dialog_yes_no)
         dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
             override fun onClicked(num: Int) {
                 if (num == 1) {
-                    showConfirmDialog()
-                    Toast.makeText(this@OpenThunderDetailActivity, "게시글삭제완료", Toast.LENGTH_LONG)
-                        .show()
+                    thunderDetailViewModel.thunderDelete(thunderId)
+                    thunderDetailViewModel.isDelete.observe(this@OpenThunderDetailActivity) { success ->
+                        if(success) {
+                            showConfirmDialog()
+                        } else
+                            shortToast("실패")
+                    }
                 }
             }
         })
@@ -79,8 +87,8 @@ class OpenThunderDetailActivity :
 
     private fun showConfirmDialog() {
         val title = "게시글이 삭제되었습니다."
-        val dialog = CustomDialog(this, title)
-        dialog.showConfirmDialog(R.layout.dialog_check)
+        val dialog = CustomDialog(this@OpenThunderDetailActivity, title)
+        dialog.showDeleteDialog(R.layout.dialog_check)
     }
 
 //    private fun testData() {
@@ -122,6 +130,7 @@ class OpenThunderDetailActivity :
     private fun showOptionPopup(v: View) {
 //        val themeWrapper = ContextThemeWrapper(this, R.style.MyPopupMenu)
 //        val popup = PopupMenu(themeWrapper, v, Gravity.END, 0, R.style.MyPopupMenu)
+        val thunderId = intent.getIntExtra("thunderId", -1)
         val popup = PopupMenu(this, v)
         popup.menuInflater.inflate(R.menu.menu_popup, popup.menu)
         popup.setOnMenuItemClickListener {
@@ -133,7 +142,8 @@ class OpenThunderDetailActivity :
                 }
                 R.id.delete -> {
                     //삭제 다이어로그 띄워주기
-                    showDeleteDialog()
+                    // 여기 코드 나중에 꼭 수정ㅋㅋㅋ
+                    showThunderDeleteDialog(thunderId)
                     return@setOnMenuItemClickListener true
                 }
 
