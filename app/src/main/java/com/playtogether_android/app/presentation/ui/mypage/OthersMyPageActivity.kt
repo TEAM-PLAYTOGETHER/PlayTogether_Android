@@ -31,9 +31,6 @@ class OthersMyPageActivity : BaseActivity<ActivityOthersMyPageBinding>(R.layout.
             myPageViewModel.getUserCheck(it.userLoginId)
         }
 
-        val name = intent.getStringExtra("userName").toString()
-        binding.tvOtherMypageName.setText(name)
-
         val userLoginId = intent.getStringExtra("organizerId").toString()
         Log.d("testUserIdTest", "" + userLoginId)
 

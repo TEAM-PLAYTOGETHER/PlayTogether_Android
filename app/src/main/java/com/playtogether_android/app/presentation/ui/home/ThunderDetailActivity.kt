@@ -99,9 +99,9 @@ class ThunderDetailActivity :
         // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
         // 개설자 프로필로 이동
         binding.ivThunderdetailIcon.setOnClickListener {
-            var organizerId = "leejejune"
+            var organizerId = -1
             thunderDetailViewModel.organizerInfo.observe(this) {
-                organizerId = it.organizerId.toString()
+                organizerId = it.organizerId
             }
             var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
