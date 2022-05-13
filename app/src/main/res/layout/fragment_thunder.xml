@@ -19,38 +19,29 @@
             app:layout_constraintTop_toTopOf="parent"
             android:background="@color/gray_black">
 
-           <ImageView
-               android:id="@+id/iv_thundertap_back"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:src="@drawable/ic_icn_back"
-               app:layout_constraintTop_toTopOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintBottom_toBottomOf="parent"
-               android:layout_marginTop="11dp"
-               android:layout_marginStart="20dp"
-               android:layout_marginBottom="17dp"/>
-
             <TextView
+                android:id="@+id/tv_thundertap_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/my_thunder"
                 android:fontFamily="@font/pretendard_bold"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@id/iv_thundertap_back"
-                app:layout_constraintTop_toTopOf="@id/iv_thundertap_back"
-                app:layout_constraintBottom_toBottomOf="@id/iv_thundertap_back"
-                app:layout_constraintEnd_toStartOf="@id/iv_thundertap_search"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="17dp"/>
 
             <ImageView
                 android:id="@+id/iv_thundertap_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_icn_search"
-                app:layout_constraintTop_toTopOf="@id/iv_thundertap_back"
+                app:layout_constraintTop_toTopOf="@id/tv_thundertap_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/iv_thundertap_back"
+                app:layout_constraintBottom_toBottomOf="@id/tv_thundertap_title"
                 android:layout_marginEnd="20dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

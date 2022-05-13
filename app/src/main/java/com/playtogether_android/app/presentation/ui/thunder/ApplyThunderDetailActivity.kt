@@ -8,12 +8,14 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
+import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.http.Url
 import java.net.URL
+import java.util.function.ToDoubleBiFunction
 
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
@@ -60,6 +62,23 @@ class ApplyThunderDetailActivity :
                 organizerId = it.organizerId
             }
             val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
+        }
+
+        // 뒤로가기 버튼
+        binding.ivApplythunderdetailBack.setOnClickListener {
+            finish()
+        }
+
+        // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
+        // 개설자 프로필로 이동
+        binding.ivOpenerProfile.setOnClickListener {
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            var intent = Intent(this, MyPageFragment::class.java)
             intent.putExtra("organizerId", organizerId)
             startActivity(intent)
         }
