@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentTabApplyBinding
 import com.playtogether_android.app.databinding.FragmentTabLikeBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +36,14 @@ class TabLikeFragment : BaseFragment<FragmentTabLikeBinding>(R.layout.fragment_t
         with(binding.rvLikeThunderList) {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = thunderListAdapter
+        }
+        //리스트 클릭시 오픈 상세뷰로 이동
+        thunderListAdapter!!.itemClick = object : ThunderListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int, thunderId: Int) {
+                val intent = Intent(context, ThunderDetailActivity::class.java)
+                intent.putExtra("thunderId", thunderId)
+                startActivity(intent)
+            }
         }
     }
 

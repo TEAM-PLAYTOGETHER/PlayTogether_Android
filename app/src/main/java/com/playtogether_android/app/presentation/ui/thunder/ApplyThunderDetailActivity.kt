@@ -1,11 +1,13 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
@@ -44,15 +46,22 @@ class ApplyThunderDetailActivity :
                 .load(it.image)
                 .into(binding.ivApplythunderdetailImage)
         }
-
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
     }
 
     private fun setClickListener() {
+
         binding.clThunderOpenerMessage.setOnClickListener {
 //           쪽지 보내기로 이동
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
         }
     }
 
