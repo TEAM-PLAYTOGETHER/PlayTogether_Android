@@ -8,13 +8,25 @@ import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel
+import com.playtogether_android.app.presentation.ui.message.viewmodel.SendMessageViewModel
 import com.playtogether_android.domain.model.message.ChatData
+import com.playtogether_android.domain.model.message.PostSendMessageData
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.DateFormat
+import java.util.*
 
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
-    private lateinit var adapter:ChatAdapter
+    private lateinit var adapter2:ChatAdapter2
+    private var roomId = -1
+    private lateinit var name : String
+    private var audienceId = -1
+    private val sendMessageViewModel : SendMessageViewModel by viewModel()
+    private val getChatViewModel : ChatViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getIntentData()
+        getChatAll()
         changeSendImage()
         initAdapter()
         removeTimeAll()
@@ -59,34 +71,59 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun getIntentData(){
-        val roomId = intent.getIntExtra("roomId", -1)
-        val name = intent.getStringExtra("name")
+        roomId = intent.getIntExtra("roomId", -1)
+        Log.d("messageServer", "$roomId")
+        name = intent.getStringExtra("name")!!
+        audienceId = intent.getIntExtra("audienceId", -1)
         Log.d("getIntent", "${name}")
         binding.tvInChattingName.text=name
     }
 
     private fun scrollToBottom(){
-        val size = adapter.chatList.size-1
+        Log.d("message", "scrollToBottom 호출됨")
+        val size = adapter2.currentList.size-1
+        Log.d("message", "위치 ${size}")
         binding.rvInChattingChatting.scrollToPosition(size)
     }
 
-    private fun addChat(){
-        adapter.chatList.add(ChatData(binding.etMessage.text.toString(), "22.05.06 오후 06:27", 0))
-        adapter.notifyDataSetChanged()
-        scrollToBottom()
+    private fun getChatAll(){
+        getChatViewModel.getChatList(roomId)
+        getChatViewModel.chatData.observe(this){
+            adapter2.submitList(it){
+                scrollToBottom()
+            }
+        }
     }
 
+    private fun observeGetSendMessage(){
+        sendMessageViewModel.getSendMessage.observe(this){
+            if(it.success){
+                getChatAll()
+            }
+            else{
+                Log.d("messageServer", "아직 메시지 전송 처리 안 끝남")
+            }
+        }
+    }
+
+    private fun addChat(){
+        sendMessageViewModel.postSendMessage(PostSendMessageData(binding.etMessage.text.toString(), audienceId))
+        observeGetSendMessage()
+    }
+
+
+
     private fun removeTimeAll(){
-        var nowSize = adapter.chatList.size-1
+        var nowSize = adapter2.currentList.size-1
         var tempSize = nowSize-1
 
         if(tempSize<0)
             return
 
         while(true){
-            if(adapter.chatList[tempSize].messageType==adapter.chatList[nowSize].messageType){
-                if(adapter.chatList[nowSize].time==adapter.chatList[tempSize].time){
-                    adapter.chatList[tempSize].timeVisible=false
+            if(adapter2.currentList[tempSize].messageType==adapter2.currentList[nowSize].messageType){
+                if(adapter2.currentList[nowSize].time==adapter2.currentList[tempSize].time){
+                    adapter2.currentList[tempSize].timeVisible=false
                 }
             }
             else
@@ -95,19 +132,20 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
             tempSize--
             if(tempSize<0) break
         }
-        adapter.notifyDataSetChanged()
+        adapter2.submitList(adapter2.currentList)
     }
+
     private fun removeTimePart(){
-        val nowSize = adapter.chatList.size-1
+        val nowSize = adapter2.currentList.size-1
         var tempSize = nowSize-1
 
         if(tempSize<0)
             return
 
         while(true){
-            if(adapter.chatList[tempSize].messageType==adapter.chatList[nowSize].messageType){
-                if(adapter.chatList[nowSize].time==adapter.chatList[tempSize].time){
-                    adapter.chatList[tempSize].timeVisible=false
+            if(adapter2.currentList[tempSize].messageType==adapter2.currentList[nowSize].messageType){
+                if(adapter2.currentList[nowSize].time==adapter2.currentList[tempSize].time){
+                    adapter2.currentList[tempSize].timeVisible=false
                     tempSize--
                 }
                 else
@@ -118,23 +156,12 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
             if(tempSize<0) break
         }
-        adapter.notifyDataSetChanged()
+        adapter2.submitList(adapter2.currentList)
     }
     private fun initAdapter(){
-        adapter= ChatAdapter()
-        binding.rvInChattingChatting.adapter=adapter
+        adapter2 = ChatAdapter2()
+        binding.rvInChattingChatting.adapter=adapter2
         binding.rvInChattingChatting.addItemDecoration(VerticalItemDecoration())
-        adapter.chatList.addAll(
-            listOf(
-                ChatData("안녕하세요", "22.04.23 오후 06:27", 0),
-                ChatData("안녕하세요","22.04.23 오후 06:27", 1),
-                ChatData("네 식사는 하셨나요?", "22.04.23 오후 06:27",0),
-                ChatData("네 점심 먹었어요", "22.04.23 오후 06:28",1),
-                ChatData("용민님도 점심 드셨나요?", "22.04.23 오후 06:28",1),
-                ChatData("아니요 굶었습니다", "22.04.23 오후 06:28",0),
-                ChatData("네 좋습니다!", "22.04.23 오후 06:28",1)
-            )
-        )
         scrollToBottom()
     }
 }

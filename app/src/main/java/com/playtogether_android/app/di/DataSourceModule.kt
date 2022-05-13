@@ -2,8 +2,7 @@ package com.playtogether_android.app.di
 
 import com.playtogether_android.data.datasource.light.LightDataSource
 import com.playtogether_android.data.datasource.light.LightDataSourceImpl
-import com.playtogether_android.data.datasource.message.MessageDataSource
-import com.playtogether_android.data.datasource.message.MessageDataSourceImpl
+import com.playtogether_android.data.datasource.message.*
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSource
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSourceImpl
 import com.playtogether_android.data.datasource.sign.SignDataSource
@@ -18,4 +17,6 @@ val dataSourceModule = module {
     single<OnBoardingDataSource>{OnBoardingDataSourceImpl(get())}
     single<ThunderDataSource>{ThunderDataSourceImpl(get())}
     single<MessageDataSource>{MessageDataSourceImpl(get())}
+    single<SendMessageDataSource>{SendMessageDataSourceImpl(get())}
+    single<ChatDataSource>{ChatDataSourceImpl(get())}
 }

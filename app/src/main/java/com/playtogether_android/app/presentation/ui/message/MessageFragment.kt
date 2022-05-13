@@ -29,7 +29,8 @@ class MessageFragment :
         adapter= MessageListAdapter {
             val intent = Intent(requireContext(), ChattingActivity::class.java)
             intent.putExtra("roomId", it.roomId)
-            intent.putExtra("name", it.roomId)
+            intent.putExtra("name", it.audience)
+            intent.putExtra("audienceId", it.audienceId)
             startActivity(intent)
         }
         binding.rvMessageRoom.adapter=adapter
