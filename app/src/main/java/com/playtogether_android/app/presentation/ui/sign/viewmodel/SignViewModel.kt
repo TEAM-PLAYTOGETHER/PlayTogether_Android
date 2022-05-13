@@ -84,7 +84,7 @@ class SignViewModel(
                 .onSuccess {
                     _signIn.value = it
                     Log.d("SignIn", "서버 통신 성공")
-                    Log.d("SignName", "" + _signIn.value!!.userName)
+                    Log.d("SignName", "" + signIn.value!!.userName)
                 }
                 .onFailure {
                     it.printStackTrace()

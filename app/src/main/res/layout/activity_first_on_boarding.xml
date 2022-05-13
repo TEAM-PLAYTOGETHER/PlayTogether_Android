@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="User"
+            name="data"
             type="com.playtogether_android.domain.model.sign.SignInData" />
 
     </data>
@@ -57,8 +57,7 @@
             android:textSize="22sp"
             android:text="text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_first_onboarding_progressbar_green"
-            tools:text="이혜빈" />
+            app:layout_constraintTop_toBottomOf="@+id/view_first_onboarding_progressbar_green" />
 
         <TextView
             android:id="@+id/tv_firt_onboarding_user"

@@ -106,7 +106,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                     this,
                     it.jwtToken
                 )
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, FirstOnBoardingActivity::class.java)
+                intent.putExtra("userName", signViewModel.signIn.value!!.userName)
                 startActivity(intent)
                 finish()
             } else  {
