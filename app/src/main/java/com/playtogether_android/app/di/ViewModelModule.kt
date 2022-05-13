@@ -19,7 +19,7 @@ val viewModelModule = module {
     //main
     viewModel {
         MainViewModel()
-        HomeViewModel()
+        HomeViewModel(get())
     }
 
     //sign
@@ -43,6 +43,8 @@ val viewModelModule = module {
     viewModel { ThunderDetailViewModel(get(), get(), get(), get()) }
 
     viewModel {MyPageViewModel(get())}
+
+
 }
 
 

@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
@@ -18,6 +19,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ThunderDetailActivity :
     BaseActivity<ActivityThunderDetailBinding>(R.layout.activity_thunder_detail) {
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by viewModel()
+
+    //val lightId = intent.getIntExtra("thunderId",0)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +31,7 @@ class ThunderDetailActivity :
         binding.clThunderdetailApplyBtn.setOnClickListener {
             showApplyDialog()
         }
+
     }
 
     private fun showApplyDialog() {
@@ -35,10 +41,18 @@ class ThunderDetailActivity :
         dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
             override fun onClicked(num: Int) {
                 if (num == 1) {
-                    val intent =
-                        Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
-                    startActivity(intent)
-                    this@ThunderDetailActivity.finish()
+                    val thunderId = intent.getIntExtra("thunderId", -1)
+                    homeViewModel.postJoinThunder(thunderId)
+                    homeViewModel.joinThunder.observe(this@ThunderDetailActivity) {
+                        if(it.success) {
+                            val intent =
+                                Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
+                            startActivity(intent)
+                            this@ThunderDetailActivity.finish()
+                        } else {
+                            Log.d("번개참여", "실패")
+                        }
+                    }
                 }
             }
         })
@@ -63,6 +77,8 @@ class ThunderDetailActivity :
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
+
+
 //        with(binding){
 //            tvThunderdetailCurrent.text="1"
 //            tvThunderdetailMax.text="6"
@@ -109,5 +125,6 @@ class ThunderDetailActivity :
         }
 
     }
+
 
 }

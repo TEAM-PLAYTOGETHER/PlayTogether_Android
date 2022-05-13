@@ -17,7 +17,7 @@ import com.playtogether_android.app.util.viewPagerAnimation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val homeVieModel: HomeViewModel by activityViewModels()
+    private val homeVieModel: HomeViewModel by viewModel()
     private val thunderListViewModel: ThunderListViewModel by viewModel()
     private lateinit var hotAdapter: HomeHotAdapter
     private lateinit var newAdapter: HomeNewAdapter
