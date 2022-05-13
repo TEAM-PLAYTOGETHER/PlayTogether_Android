@@ -1,13 +1,11 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemThunderListBinding
-import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
 
 class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListViewHolder>() {
@@ -22,7 +20,7 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
         }
 
     interface ItemClick {
-        fun onClick(view: View, position: Int)
+        fun onClick(view: View, position: Int,thunderId : Int)
     }
 
     var itemClick: ItemClick? = null
@@ -39,11 +37,12 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
     }
 
     override fun onBindViewHolder(holder: ThunderListViewHolder, position: Int) {
-        holder.onBind(_thunderList[position])
+        val item = _thunderList[position]
+        holder.onBind(item)
 
         if (itemClick != null) {
             holder?.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
-                itemClick?.onClick(it, position)
+                itemClick?.onClick(it, position,item.lightId)
             })
         }
     }
@@ -58,7 +57,7 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
             binding.tvThunderItemDate.text = data.date + " " + data.place + " " + data.time
             binding.tvThunderItemLimitCount.text =
                 "인원 " + data.lightMemberCnt + " / " + data.peopleCnt
-            Log.d("Adapter-connect", data.lightId)
+//            Log.d("Adapter-connect", data.lightId)
 
 //            itemView.setOnClickListener {
 //                val intent = Intent(itemView.context, ApplyThunderDetailActivity::class.java)

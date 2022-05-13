@@ -17,17 +17,17 @@ class ApplyThunderDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val thunderId = intent.getStringExtra("thunderId")
+        val thunderId = intent.getIntExtra("thunderId",-1)
 
         testData()
         initAdapter()
 
         binding.tvCancelApplication.setOnClickListener {
-            showCancelDialog(thunderId!!)
+            showCancelDialog(thunderId)
         }
     }
 
-    private fun showCancelDialog(thunderId: String) {
+    private fun showCancelDialog(thunderId: Int) {
         val title = "신청을 취소할까요?"
         val dialog = CustomDialog(this, title)
         dialog.showChoiceDialog(R.layout.dialog_yes_no)
