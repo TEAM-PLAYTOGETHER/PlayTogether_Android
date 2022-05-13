@@ -173,4 +173,6 @@
     <string name="mypage_dear">님</string>
     <string name="mypage_age">세,</string>
 
+    <!--타인 Mypage-->
+    <string name="other_mypage_title">님의 마이페이지</string>
 </resources>
