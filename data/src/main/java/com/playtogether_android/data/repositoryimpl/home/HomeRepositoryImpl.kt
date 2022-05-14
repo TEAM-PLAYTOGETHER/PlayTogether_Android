@@ -8,6 +8,8 @@ import com.playtogether_android.data.mapper.mypage.MyPageMapper
 import com.playtogether_android.data.mapper.sign.SignMapper
 import com.playtogether_android.domain.model.home.JoinThunderData
 import com.playtogether_android.domain.model.home.ThunderJoinEndData
+import com.playtogether_android.domain.model.home.ThunderJoinEndMember
+import com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer
 import com.playtogether_android.domain.model.mypage.UserCheckData
 import com.playtogether_android.domain.model.sign.*
 import com.playtogether_android.domain.repository.home.HomeRepository
@@ -19,7 +21,15 @@ class HomeRepositoryImpl(private val homeDataSource: HomeDataSource) : HomeRepos
         return HomeMapper.mapperToJoinThunder(homeDataSource.postJoinThunder(lightId))
     }
 
-    override suspend fun getThunderJoinEnd(lightId: Int): ThunderJoinEndData {
+    override suspend fun getThunderJoinEnd(lightId: Int): List<ThunderJoinEndData> {
         return HomeMapper.mapperToThunderJoinEnd(homeDataSource.getThunderJoinEnd(lightId))
+    }
+
+    override suspend fun getThunderJoinEndMember(lightId: Int): List<ThunderJoinEndMember> {
+        return HomeMapper.mapperToThunderJoinEndMember(homeDataSource.getThunderJoinEnd(lightId).data)
+    }
+
+    override suspend fun getThunderJoinEndOrganizer(lightId: Int): List<ThunderJoinEndOrganizer> {
+        return HomeMapper.mapperToThunderJoinEndOrganizer(homeDataSource.getThunderJoinEnd(lightId).data)
     }
 }

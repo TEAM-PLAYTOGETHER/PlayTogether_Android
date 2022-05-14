@@ -19,7 +19,7 @@ val viewModelModule = module {
     //main
     viewModel {
         MainViewModel()
-        HomeViewModel(get(),get())
+        HomeViewModel(get(),get(),get(),get())
     }
 
     //sign

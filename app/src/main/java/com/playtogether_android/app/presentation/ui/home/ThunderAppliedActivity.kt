@@ -18,6 +18,7 @@ class ThunderAppliedActivity : BaseActivity<ActivityThunderAppliedBinding>(R.lay
         super.onCreate(savedInstanceState)
 
         initData()
+        initbackBtn()
     }
 
     private fun initData() {
@@ -25,8 +26,16 @@ class ThunderAppliedActivity : BaseActivity<ActivityThunderAppliedBinding>(R.lay
         homeViewModel.getThunderJoinEnd(thunderId)
         homeViewModel.endThunder.observe(this){
             binding.thunder = it
-            //binding.thunder?.title = binding.tvThunderdetailTitle.toString()
-            //Log.d("test", ""+binding.thunder?.title)
+        }
+
+        homeViewModel.organizerInfo.observe(this) {
+            binding.organizer = it
+        }
+    }
+
+    private fun initbackBtn() {
+        binding.ivThunderdetailBack.setOnClickListener {
+            finish()
         }
     }
 }

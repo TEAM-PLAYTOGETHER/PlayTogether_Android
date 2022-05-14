@@ -6,6 +6,10 @@
         <variable
             name="thunder"
             type="com.playtogether_android.domain.model.home.ThunderJoinEndData" />
+
+        <variable
+            name="organizer"
+            type="com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -121,7 +125,7 @@
                         android:includeFontPadding="false"
                         android:textColor="@color/gray_black"
                         android:textSize="20sp"
-                        android:text="@{thunder.data.title}"
+                        android:text="@{thunder.title}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -149,6 +153,7 @@
                         android:includeFontPadding="false"
                         android:textColor="@color/gray_black"
                         android:textSize="14sp"
+                        android:text="@{thunder.date}"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_date"
                         app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_date"
                         app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_date"
@@ -176,6 +181,7 @@
                         android:includeFontPadding="false"
                         android:textColor="@color/gray_black"
                         android:textSize="14sp"
+                        android:text="@{thunder.time}"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_time"
                         app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_time"
                         app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_time"
@@ -203,6 +209,7 @@
                         android:includeFontPadding="false"
                         android:textColor="@color/gray_black"
                         android:textSize="14sp"
+                        android:text="@{thunder.place}"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_place"
                         app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_place"
                         app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_place"
@@ -230,6 +237,7 @@
                         android:includeFontPadding="false"
                         android:textColor="@color/gray_black"
                         android:textSize="14sp"
+                        android:text="@{thunder.category}"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_category"
                         app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_category"
                         app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_category"
