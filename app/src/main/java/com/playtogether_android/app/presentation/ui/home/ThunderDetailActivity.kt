@@ -101,11 +101,14 @@ class ThunderDetailActivity :
         binding.clThunderdetailMessage.setOnClickListener {
 //           쪽지 보내기로 이동
             var organizerId = -1
+            var name = "null"
             thunderDetailViewModel.organizerInfo.observe(this) {
                 organizerId = it.organizerId
+                name = it.name
             }
             val intent = Intent(this, ChattingActivity::class.java)
-            intent.putExtra("organizerId", organizerId)
+            intent.putExtra("audienceId", organizerId)
+            intent.putExtra("name", name)
             startActivity(intent)
         }
 
