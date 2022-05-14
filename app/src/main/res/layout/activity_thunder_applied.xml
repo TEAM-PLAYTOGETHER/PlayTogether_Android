@@ -84,15 +84,17 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
                     android:includeFontPadding="false"
+                    android:layout_marginStart="2dp"
                     android:textColor="@color/gray_black"
                     android:textSize="16sp"
-                    android:text="@{thunder.people_cnt + '/' + thunder.LightMemberCnt}"
+                    android:text="@{thunder.people_cnt + @string/other_mypage_slash + thunder.LightMemberCnt}"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_applied_applier"
                     app:layout_constraintStart_toEndOf="@+id/tv_applied_applier"
                     app:layout_constraintTop_toTopOf="@+id/tv_applied_applier"
                     tools:text="(2/6)" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_thunderdetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"

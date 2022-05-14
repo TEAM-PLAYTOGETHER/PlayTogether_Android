@@ -4,14 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="thunder"
-            type="com.playtogether_android.domain.model.home.ThunderJoinEndData" />
-
-        <variable
-            name="organizer"
-            type="com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer" />
+            name="member"
+            type="com.playtogether_android.domain.model.home.ThunderJoinEndMember" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +37,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:text="@{member.name}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_item_members_profile"
             app:layout_constraintStart_toEndOf="@+id/iv_item_members_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_item_members_profile"
@@ -56,6 +52,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:text="@{member.age + @string/other_mypage_age_slash + member.mbti}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_item_members_arrow"
             app:layout_constraintEnd_toStartOf="@+id/iv_item_members_arrow"
             app:layout_constraintTop_toTopOf="@+id/iv_item_members_arrow"

@@ -112,7 +112,7 @@ class HomeViewModel(
         }
     }
 
-    fun thunderDetailOrganizer(lightId: Int) {
+    fun thunderJoinEndOrganizer(lightId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
                 getThunderJoinEndOrganizerUseCase(lightId)
@@ -125,7 +125,7 @@ class HomeViewModel(
         }
     }
 
-    fun thunderDetailMember(lightId: Int) {
+    fun thunderJoinEndMember(lightId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
                 getThunderJoinEndMemberUseCase(lightId)

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemThunderApplicantListBinding
+import com.playtogether_android.domain.model.home.ThunderJoinEndMember
 import com.playtogether_android.domain.model.thunder.Member
 
 class ApplicantListAdapter : RecyclerView.Adapter<ApplicantListAdapter.ApplicantListViewHolder>() {
@@ -12,7 +13,6 @@ class ApplicantListAdapter : RecyclerView.Adapter<ApplicantListAdapter.Applicant
 //    var applicantList: List<TempApplicantData.UserList> = _applicantList
 
     val applicantList = mutableListOf<Member>()
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
