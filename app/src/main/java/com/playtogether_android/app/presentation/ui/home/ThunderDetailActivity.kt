@@ -21,8 +21,6 @@ class ThunderDetailActivity :
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
     private val homeViewModel: HomeViewModel by viewModel()
 
-    //val lightId = intent.getIntExtra("thunderId",0)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +42,12 @@ class ThunderDetailActivity :
                     val thunderId = intent.getIntExtra("thunderId", -1)
                     homeViewModel.postJoinThunder(thunderId)
                     homeViewModel.joinThunder.observe(this@ThunderDetailActivity) {
-                        if(it.success) {
+                        if (it.success) {
                             val intent =
-                                Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
+                                Intent(
+                                    this@ThunderDetailActivity, ThunderAppliedActivity::class.java
+                                )
+                            intent.putExtra("thunderId", thunderId)
                             startActivity(intent)
                             this@ThunderDetailActivity.finish()
                         } else {
@@ -60,7 +61,6 @@ class ThunderDetailActivity :
 
     private fun initData() {
         val thunderId = intent.getIntExtra("thunderId", -1)
-        shortToast("$thunderId")
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)
