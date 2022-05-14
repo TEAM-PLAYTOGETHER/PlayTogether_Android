@@ -10,6 +10,7 @@ data class ThunderTabListData(
         val lightId: Int,
         @SerializedName("title")
         val title: String,
+        val category : String,
         @SerializedName("date")
         val date: String,
         @SerializedName("time")

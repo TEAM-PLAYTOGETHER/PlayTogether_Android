@@ -1,15 +1,19 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.adapter
 
 import android.content.Intent
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity
 import com.playtogether_android.domain.model.light.CategoryData
 import java.lang.StringBuilder
 
@@ -32,6 +36,8 @@ class ThunderCategoryListAdapter :
                         )
                     )
 
+                ivThunderlistImage.setImageResource(setImageView(data.category))
+
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
                     intent.putExtra("thunderId", data.lightId)
@@ -39,6 +45,15 @@ class ThunderCategoryListAdapter :
                     itemView.context.startActivity(intent)
                 }
             }
+        }
+    }
+
+    private fun setImageView(category: String): Int {
+        when (category) {
+            CATEGORY_EAT -> return R.drawable.img_eat_list
+            CATEGORY_GO -> return R.drawable.img_go_list
+            CATEGORY_DO -> return R.drawable.img_go_list
+            else -> return -1
         }
     }
 
@@ -77,6 +92,9 @@ class ThunderCategoryListAdapter :
 
     companion object {
         const val PERSON = "인원 "
+        const val CATEGORY_EAT = "먹을래"
+        const val CATEGORY_GO = "갈래"
+        const val CATEGORY_DO = "할래"
     }
 
 }
