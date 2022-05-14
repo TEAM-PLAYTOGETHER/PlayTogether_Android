@@ -70,8 +70,8 @@ class ThunderDetailViewModel(
                 _organizerInfo.value = it
                 Log.d("thunderDetailOriganizer-Success", "${it.userLoginId}")
             }.onFailure {
-                Log.e("thunderDetailOrganizer", "failure")
-
+                it.printStackTrace()
+                Log.e("thunderDetailOrganizer", "failure : ${it.message}")
             }
         }
     }
@@ -84,8 +84,8 @@ class ThunderDetailViewModel(
                 _memberList.value = it
                 Log.d("thunderDetailMember", "success : $it")
             }.onFailure {
-                Log.e("thunderDetailMember", "failure")
-
+                it.printStackTrace()
+                Log.e("member", "failure : ${it.message}")
             }
         }
     }
