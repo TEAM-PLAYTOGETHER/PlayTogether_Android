@@ -99,10 +99,12 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun getChatAll() {
-        getChatViewModel.getChatList(roomId)
-        getChatViewModel.chatData.observe(this) {
-            adapter2.submitList(it) {
-                scrollToBottom()
+        if(roomId!=-1){
+            getChatViewModel.getChatList(roomId)
+            getChatViewModel.chatData.observe(this) {
+                adapter2.submitList(it) {
+                    scrollToBottom()
+                }
             }
         }
     }
@@ -110,6 +112,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     private fun observeGetSendMessage() {
         sendMessageViewModel.getSendMessage.observe(this) {
             if (it.success) {
+                roomId = it.roomId.toString().toInt()
                 getChatAll()
             } else {
                 Log.d("messageServer", "아직 메시지 전송 처리 안 끝남")
