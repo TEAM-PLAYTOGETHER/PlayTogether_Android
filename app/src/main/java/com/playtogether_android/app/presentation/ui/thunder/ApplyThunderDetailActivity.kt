@@ -71,13 +71,12 @@ class ApplyThunderDetailActivity :
         // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
         // 개설자 프로필로 이동
         binding.ivOpenerProfile.setOnClickListener {
-            var organizerId = -1
+            var userLoginId: String? = null
             thunderDetailViewModel.organizerInfo.observe(this) {
-                organizerId = it.organizerId
+                userLoginId = it.userLoginId.toString()
             }
-            Log.d("뭐가 문제일까", "" + organizerId)
             var intent = Intent(this, OthersMyPageActivity::class.java)
-            intent.putExtra("organizerId", organizerId)
+            intent.putExtra("userLoginId", userLoginId)
             startActivity(intent)
         }
     }

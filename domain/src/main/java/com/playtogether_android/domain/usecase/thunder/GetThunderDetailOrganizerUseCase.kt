@@ -8,7 +8,7 @@ class GetThunderDetailOrganizerUseCase(
 ) {
     suspend operator fun invoke(thunderId: Int): Organizer {
         lateinit var data: Organizer
-        repo.getThunderDetailOrganizer(thunderId).map { data = Organizer(it.name, it.organizerId) }
+        repo.getThunderDetailOrganizer(thunderId).map { data = Organizer(it.name, it.organizerId, it.userLoginId) }
         return data
     }
 }
