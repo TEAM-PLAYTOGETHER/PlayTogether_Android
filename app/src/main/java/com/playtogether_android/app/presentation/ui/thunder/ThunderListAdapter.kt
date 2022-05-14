@@ -1,7 +1,5 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +43,7 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
         holder.onBind(item)
 
         if (itemClick != null) {
-            holder?.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
+            holder.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
                 itemClick?.onClick(it, position, item.lightId)
             })
         }

@@ -1,10 +1,10 @@
 package com.playtogether_android.app.di
 
 import com.playtogether_android.data.api.home.HomeService
-import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
 import com.playtogether_android.data.api.message.MessageSendService
+import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.sign.SignService
@@ -18,38 +18,38 @@ val networkModule = module {
         get<Retrofit>().create(SignService::class.java)
     }
 
-    single<OnboardingService>{
+    single<OnboardingService> {
         get<Retrofit>().create(OnboardingService::class.java)
     }
 
-    single<MessageService>{
+    single<MessageService> {
         get<Retrofit>().create(MessageService::class.java)
     }
     single<LightService> {
         get<Retrofit>().create(LightService::class.java)
     }
 
-    single<ThunderService>{
+    single<ThunderService> {
         get<Retrofit>().create(ThunderService::class.java)
     }
 
-    single<MessageSendService>{
+    single<MessageSendService> {
         get<Retrofit>().create(MessageSendService::class.java)
     }
 
-    single<ChatService>{
+    single<ChatService> {
         get<Retrofit>().create(ChatService::class.java)
     }
 
-    single<ThunderCreateService>{
+    single<ThunderCreateService> {
         get<Retrofit>().create(ThunderCreateService::class.java)
     }
 
-    single<MyPageService>{
+    single<MyPageService> {
         get<Retrofit>().create(MyPageService::class.java)
     }
 
-    single<HomeService>{
+    single<HomeService> {
         get<Retrofit>().create(HomeService::class.java)
     }
 }

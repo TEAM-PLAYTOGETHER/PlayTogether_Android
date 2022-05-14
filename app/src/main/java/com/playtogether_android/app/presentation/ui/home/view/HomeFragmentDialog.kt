@@ -7,7 +7,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentHomeDialogBinding
 import com.playtogether_android.app.presentation.base.BaseBottomDialogFragment
-import com.playtogether_android.app.presentation.base.BaseFragment
 import kotlin.math.roundToInt
 
 class HomeFragmentDialog :

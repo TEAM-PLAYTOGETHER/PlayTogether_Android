@@ -3,7 +3,6 @@ package com.playtogether_android.app.presentation.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.InputFilter.AllCaps
 import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
@@ -47,7 +46,7 @@ class JoinOnBoardingActivity :
         binding.etJoinOnboarding.setOnClickListener {
             binding.etJoinOnboarding.isSelected = true
         }
-        binding.etJoinOnboarding.setFilters(arrayOf(AllCaps(), LengthFilter(6)))
+        binding.etJoinOnboarding.filters = arrayOf(AllCaps(), LengthFilter(6))
     }
 
 
@@ -63,7 +62,7 @@ class JoinOnBoardingActivity :
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                val input = binding.etJoinOnboarding.getText().toString()
+                val input = binding.etJoinOnboarding.text.toString()
                 if (input.length == 5) {
                     binding.tvJoinOnboardingNext.visibility = View.VISIBLE
                     binding.tvJoinOnboardingEnter.visibility = View.INVISIBLE
@@ -90,7 +89,7 @@ class JoinOnBoardingActivity :
             } else {
                 Log.d("실패", "동아리가입")
                 val title = "존재하지 않는 코드입니다"
-                val dialog= CustomDialog(this, title)
+                val dialog = CustomDialog(this, title)
                 dialog.showOneChoiceDialog(R.layout.dialog_one_question)
             }
         }

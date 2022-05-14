@@ -42,4 +42,12 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
         val data = thunderDataSource.getThunderDetail(thunderId).data
         return ThunderMapper.mapperToThunderDetailOrganizer(data)
     }
+
+    override suspend fun postThunderDelete(thunderId: Int): ThunderDeleteData {
+        return ThunderMapper.mapperToThunderDelete(
+            thunderDataSource.postThunderDelete(
+                thunderId
+            )
+        )
+    }
 }

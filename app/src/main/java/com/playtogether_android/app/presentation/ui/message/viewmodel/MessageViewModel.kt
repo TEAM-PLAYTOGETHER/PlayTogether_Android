@@ -13,18 +13,26 @@ class MessageViewModel(
     val getMessageUseCase: GetMessageUseCase
 ) : ViewModel() {
     private val _messageData = MutableLiveData<List<MessageData>>()
-    val messageData : LiveData<List<MessageData>> get() = _messageData
+    val messageData: LiveData<List<MessageData>> get() = _messageData
 
-    fun getMessageList(){
+    fun getMessageList() {
         viewModelScope.launch {
             kotlin.runCatching { getMessageUseCase() }
                 .onSuccess {
-                    if(it!=null){
+                    if (it != null) {
                         Log.d("messageServer", "성공!!")
-                        _messageData.value = it
-                    }
-                    else
-                        Log.d("messageServer", "가져온게 없어서 null")}
+                        var tempList: List<MessageData> = it
+                        for (i in it.indices) {
+                            var date = it[i].createdAt.slice(IntRange(0, 9))
+                            date = date.replace("-", ".")
+                            val time = it[i].createdAt.slice(IntRange(11, 15))
+                            val dateTime = date + "  " + time
+                            tempList[i].createdAt = dateTime
+                        }
+                        _messageData.value = tempList
+                    } else
+                        Log.d("messageServer", "가져온게 없어서 null")
+                }
                 .onFailure { error -> Log.d("messageServer", "$error") }
         }
     }

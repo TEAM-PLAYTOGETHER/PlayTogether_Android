@@ -5,7 +5,7 @@ data class MessageData(
     val audience: String,
     val audienceId: Int,
     val content: String,
-    val createdAt: String,
+    var createdAt: String,
     val read: Boolean,
     val roomId: Int,
     val send: Boolean

@@ -2,7 +2,6 @@ package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityFirstOnBoardingBinding
@@ -11,10 +10,11 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.layout.activity_first_on_boarding) {
+class FirstOnBoardingActivity :
+    BaseActivity<ActivityFirstOnBoardingBinding>(R.layout.activity_first_on_boarding) {
 
     private val onBoardingViewModel: OnBoardingViewModel by viewModel()
-    private val signInViewModel : SignViewModel by viewModel()
+    private val signInViewModel: SignViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +26,10 @@ class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.l
     }
 
     //라디오 버튼 클릭 리스너
-    private fun initSelectMbti() = with(binding){
-        rgFirstOnboardingFirstMbti.setOnCheckedChangeListener {group, checkedId ->
+    private fun initSelectMbti() = with(binding) {
+        rgFirstOnboardingFirstMbti.setOnCheckedChangeListener { group, checkedId ->
 
-            when(checkedId) {
+            when (checkedId) {
                 R.id.radio_I -> {
 
                 }
@@ -40,8 +40,8 @@ class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.l
             onBoardingViewModel.firstMbtiClick.value = true
         }
 
-        rgFirstOnboardingSecondMbti.setOnCheckedChangeListener {group, checkedId ->
-            when(checkedId) {
+        rgFirstOnboardingSecondMbti.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
                 R.id.radio_N -> {
 
                 }
@@ -52,8 +52,8 @@ class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.l
             onBoardingViewModel.secondMbtiClick.value = true
         }
 
-        rgFirstOnboardingThirdMbti.setOnCheckedChangeListener {group, checkedId ->
-            when(checkedId) {
+        rgFirstOnboardingThirdMbti.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
                 R.id.radio_F -> {
 
                 }
@@ -64,8 +64,8 @@ class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.l
             onBoardingViewModel.thirdMbtiClick.value = true
         }
 
-        rgFirstOnboardingForthMbti.setOnCheckedChangeListener() {group, checkedId ->
-            when(checkedId) {
+        rgFirstOnboardingForthMbti.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
                 R.id.radio_J -> {
 
                 }
@@ -81,14 +81,14 @@ class FirstOnBoardingActivity : BaseActivity<ActivityFirstOnBoardingBinding>(R.l
     //이름세팅
     private fun settingName() {
         val name = intent.getStringExtra("userName").toString()
-        binding.tvFirstOnboardingName.setText(name)
+        binding.tvFirstOnboardingName.text = name
     }
 
     //다음 버튼 활성화
     private fun actvieNextBtn() {
         onBoardingViewModel.selectedAll.observe(this) {
             binding.tvFirstOnboardingNext.isSelected = it
-            if(binding.tvFirstOnboardingNext.isSelected) {
+            if (binding.tvFirstOnboardingNext.isSelected) {
                 binding.tvFirstOnboardingNext.visibility = View.INVISIBLE
                 binding.tvFirstOnboardingStart.visibility = View.VISIBLE
             }

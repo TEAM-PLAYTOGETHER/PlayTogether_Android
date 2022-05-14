@@ -3,8 +3,6 @@ package com.playtogether_android.app.presentation.ui.home.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.marginTop
-import androidx.fragment.app.activityViewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentHomeBinding
 import com.playtogether_android.app.presentation.base.BaseFragment

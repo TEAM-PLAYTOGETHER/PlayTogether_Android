@@ -1,5 +1,6 @@
 package com.playtogether_android.data.mapper.thunder
 
+import com.playtogether_android.data.model.response.thunder.ResThunderDeleteData
 import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
 import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
@@ -45,7 +46,7 @@ object ThunderMapper {
     fun mapperToThunderDetailOrganizer(it: List<ResThunderDetailData.Data>): List<Organizer> {
         val list = mutableListOf<Organizer>()
         it.map {
-            list.addAll(it.organizer.map { Organizer(it.name, it.organizerId) })
+            list.addAll(it.organizer.map { Organizer(it.name, it.organizerId, it.userLoginId) })
         }
         return list
     }
@@ -56,6 +57,7 @@ object ThunderMapper {
                 it.category,
                 it.date,
                 it.description,
+                it.image,
                 it.lightId,
                 it.lightMemberCnt,
                 it.peopleCnt,
@@ -64,6 +66,15 @@ object ThunderMapper {
                 it.title
             )
         }
+    }
+
+    //번개 삭제
+    fun mapperToThunderDelete(it: ResThunderDeleteData): ThunderDeleteData {
+        return ThunderDeleteData(
+            status = it.status,
+            success = it.success,
+            message = it.message
+        )
     }
 
 }

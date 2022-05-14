@@ -13,6 +13,7 @@ data class ResThunderDetailData(
         val category: String,
         val date: String,
         val description: String,
+        val image: String?,
         @SerializedName("light_id")
         val lightId: Int,
         @SerializedName("LightMemberCnt")
@@ -29,7 +30,8 @@ data class ResThunderDetailData(
     data class Organizer(
         val name: String,
         @SerializedName("organizer_id")
-        val organizerId: Int
+        val organizerId: Int,
+        val userLoginId: String
     )
 
     data class Member(

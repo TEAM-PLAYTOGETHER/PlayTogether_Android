@@ -7,7 +7,7 @@
 
         <variable
             name="member"
-            type="com.playtogether_android.domain.model.thunder.Member" />
+            type="com.playtogether_android.domain.model.home.ThunderJoinEndMember" />
 
     </data>
 

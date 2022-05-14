@@ -16,8 +16,8 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
-import java.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class CreateThunderActivity :
     BaseActivity<ActivityCreateThunderBinding>(R.layout.activity_create_thunder) {

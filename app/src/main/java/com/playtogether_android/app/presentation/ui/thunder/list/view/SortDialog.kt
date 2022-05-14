@@ -6,7 +6,6 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.DialogSortBinding
 import com.playtogether_android.app.presentation.base.BaseBottomDialogFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
-import com.playtogether_android.app.util.shortToast
 
 class SortDialog(
     private val thunderListViewModel: ThunderListViewModel,

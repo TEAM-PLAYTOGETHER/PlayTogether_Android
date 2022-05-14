@@ -6,21 +6,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemMessageRoomBinding
 import com.playtogether_android.domain.model.message.MessageData
 
-class MessageListAdapter(val itemClick: (MessageData) -> Unit) : RecyclerView.Adapter<MessageListAdapter.MessageListViewHolder>() {
+class MessageListAdapter(val itemClick: (MessageData) -> Unit) :
+    RecyclerView.Adapter<MessageListAdapter.MessageListViewHolder>() {
 
     val messageList = mutableListOf<MessageData>()
 
-    class MessageListViewHolder(private val binding : ItemMessageRoomBinding, val itemClick: (MessageData) -> Unit) : RecyclerView.ViewHolder(binding.root){
-        fun onBind(data:MessageData){
-            binding.data=data
-            itemView.setOnClickListener{
+    class MessageListViewHolder(
+        private val binding: ItemMessageRoomBinding,
+        val itemClick: (MessageData) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun onBind(data: MessageData) {
+            binding.data = data
+            itemView.setOnClickListener {
                 itemClick(data)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageListViewHolder {
-        val binding = ItemMessageRoomBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemMessageRoomBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MessageListViewHolder(binding, itemClick)
     }
 

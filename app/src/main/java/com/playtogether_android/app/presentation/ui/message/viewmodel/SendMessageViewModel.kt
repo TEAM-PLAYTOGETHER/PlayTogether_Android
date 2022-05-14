@@ -14,16 +14,20 @@ class SendMessageViewModel(
     val postSendMessageUseCase: PostSendMessageUseCase
 ) : ViewModel() {
     private val _getSendMessage = MutableLiveData<GetSendMessageData>()
-    val getSendMessage : LiveData<GetSendMessageData> get() = _getSendMessage
+    val getSendMessage: LiveData<GetSendMessageData> get() = _getSendMessage
 
-    fun postSendMessage(postSendMessageData: PostSendMessageData){
+    fun postSendMessage(postSendMessageData: PostSendMessageData) {
         viewModelScope.launch {
             kotlin.runCatching { postSendMessageUseCase(postSendMessageData) }
-                .onSuccess { _getSendMessage.value = it
-                    Log.d("messageServer", "메시지 보내기 서버통신 성공")}
-                .onFailure { _getSendMessage.value = GetSendMessageData("false", false)
+                .onSuccess {
+                    _getSendMessage.value = it
+                    Log.d("messageServer", "메시지 보내기 서버통신 성공")
+                }
+                .onFailure {
+                    _getSendMessage.value = GetSendMessageData("false", false)
                     it.printStackTrace()
-                    Log.d("messageServer", "메시지 보내기 서버통신 실패")}
+                    Log.d("messageServer", "메시지 보내기 서버통신 실패")
+                }
         }
     }
 }

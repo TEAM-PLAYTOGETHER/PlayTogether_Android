@@ -12,7 +12,6 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.domain.model.light.CategoryData
-import java.lang.StringBuilder
 
 class ThunderCategoryListAdapter :
     ListAdapter<CategoryData, ThunderCategoryListAdapter.ViewHolder>(ListComparator()) {

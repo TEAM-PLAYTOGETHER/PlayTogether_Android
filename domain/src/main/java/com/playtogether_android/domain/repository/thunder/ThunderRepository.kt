@@ -21,4 +21,7 @@ interface ThunderRepository {
     suspend fun getThunderDetailMember(thunderId: Int): List<Member>
 
     suspend fun getThunderDetailOrganizer(thunderId: Int): List<Organizer>
+
+    //번개 삭제
+    suspend fun postThunderDelete(thunderId: Int): ThunderDeleteData
 }

@@ -3,13 +3,9 @@ package com.playtogether_android.app.presentation.ui.thunder
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
-import com.playtogether_android.app.databinding.FragmentTabApplyBinding
 import com.playtogether_android.app.databinding.FragmentTabOpenBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
@@ -38,7 +34,7 @@ class TabOpenFragment : BaseFragment<FragmentTabOpenBinding>(R.layout.fragment_t
             adapter = thunderListAdapter
         }
         //리스트 클릭시 오픈 상세뷰로 이동
-        thunderListAdapter!!.itemClick = object : ThunderListAdapter.ItemClick {
+        thunderListAdapter.itemClick = object : ThunderListAdapter.ItemClick {
             override fun onClick(view: View, position: Int, thunderId: Int) {
                 val intent = Intent(context, OpenThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", thunderId)

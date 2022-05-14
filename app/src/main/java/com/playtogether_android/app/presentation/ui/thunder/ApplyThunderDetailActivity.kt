@@ -1,23 +1,17 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
-import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import retrofit2.http.Url
-import java.net.URL
-import java.util.function.ToDoubleBiFunction
 
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
@@ -27,6 +21,7 @@ class ApplyThunderDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val thunderId = intent.getIntExtra("thunderId", -1)
         initData(thunderId)
 //        testData()
@@ -45,10 +40,10 @@ class ApplyThunderDetailActivity :
 
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
-//            Glide
-//                .with(this)
-//                .load(it.image)
-//                .into(binding.ivApplythunderdetailImage)
+            Glide
+                .with(this)
+                .load(it.image)
+                .into(binding.ivApplythunderdetailImage)
         }
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
@@ -78,13 +73,12 @@ class ApplyThunderDetailActivity :
         // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
         // 개설자 프로필로 이동
         binding.ivOpenerProfile.setOnClickListener {
-            var organizerId = -1
+            var userLoginId: String? = null
             thunderDetailViewModel.organizerInfo.observe(this) {
-                organizerId = it.organizerId
+                userLoginId = it.userLoginId.toString()
             }
-            Log.d("뭐가 문제일까", "" + organizerId)
             var intent = Intent(this, OthersMyPageActivity::class.java)
-            intent.putExtra("organizerId", organizerId)
+            intent.putExtra("userLoginId", userLoginId)
             startActivity(intent)
         }
     }
@@ -108,6 +102,7 @@ class ApplyThunderDetailActivity :
             }
         })
     }
+
 
     private fun showConfirmDialog() {
         val title = "신청 취소되었습니다."

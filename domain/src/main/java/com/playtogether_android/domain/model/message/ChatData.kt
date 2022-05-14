@@ -3,7 +3,7 @@ package com.playtogether_android.domain.model.message
 data class ChatData(
     val messageId: Int,
     val content:String,
-    val time:String,
+    var time:String,
     val messageType:Boolean,
     var timeVisible:Boolean=true
 ){

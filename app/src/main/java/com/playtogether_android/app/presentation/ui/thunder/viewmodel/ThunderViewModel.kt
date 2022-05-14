@@ -19,7 +19,7 @@ class ThunderViewModel(
 
     private val _thunderTabListData = MutableLiveData<ThunderTabListData>()
     val thundertabListData: LiveData<ThunderTabListData>
-    get() = _thunderTabListData
+        get() = _thunderTabListData
 
 
     //번개탭-신청한 번개 리스트
@@ -60,7 +60,6 @@ class ThunderViewModel(
                 Log.d("getOpenList-fail", "fail")
             }
     }
-
 
 
 }
