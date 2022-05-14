@@ -44,7 +44,7 @@ object ThunderMapper {
     fun mapperToThunderDetailOrganizer(it: List<ResThunderDetailData.Data>): List<Organizer> {
         val list = mutableListOf<Organizer>()
         it.map {
-            list.addAll(it.organizer.map { Organizer(it.name, it.organizerId) })
+            list.addAll(it.organizer.map { Organizer(it.name, it.organizerId, it.userLoginId) })
         }
         return list
     }
