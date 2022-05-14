@@ -26,12 +26,11 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         getChatAll()
         changeSendImage()
         initAdapter()
-        removeTimeAll()
+        //removeTimeAll()
 
         binding.ivSendMessage.setOnClickListener {
             addChat()
             binding.etMessage.text.clear()
-            removeTimePart()
         }
         binding.ivInChattingBack.setOnClickListener {
             finish()
@@ -104,6 +103,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
             getChatViewModel.chatData.observe(this) {
                 adapter2.submitList(it) {
                     scrollToBottom()
+                    Log.d("messageServer", "여기 안들어와?")
+                    removeTimeAll()
                 }
             }
         }
@@ -132,27 +133,41 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
 
     private fun removeTimeAll() {
+        Log.d("messageServer", "removeAll 호출됨1")
+        Log.d("messageServer", "왜 currentList가 비어있지1 ${adapter2.currentList.size}")
         var nowSize = adapter2.currentList.size - 1
         var tempSize = nowSize - 1
+        Log.d("messageServer", "왜 currentList가 비어있지2 ${tempSize}")
 
         if (tempSize < 0)
             return
 
         while (true) {
+            if(adapter2.currentList[tempSize].timeVisible==false){
+                break
+            }
+            Log.d("messageServer", "제일 끝 ${adapter2.currentList[nowSize].messageType}")
+            Log.d("messageServer", "움직이는 ${adapter2.currentList[tempSize].messageType}")
             if (adapter2.currentList[tempSize].messageType == adapter2.currentList[nowSize].messageType) {
+                Log.d("messageServer", "메시지 타입 동일")
+                Log.d("messageServer", "제일 끝 ${adapter2.currentList[nowSize].time}")
+                Log.d("messageServer", "움직이는 ${adapter2.currentList[tempSize].time}")
                 if (adapter2.currentList[nowSize].time == adapter2.currentList[tempSize].time) {
                     adapter2.currentList[tempSize].timeVisible = false
                 }
-            } else
-                nowSize = tempSize
-
+            }
+            nowSize = tempSize
             tempSize--
             if (tempSize < 0) break
         }
-        adapter2.submitList(adapter2.currentList)
+        Log.d("messageServer", "removeAll 호출됨2")
+        adapter2.submitList(adapter2.currentList){
+            Log.d("messageServer", "removeAll 호출됨3")
+        }
     }
 
-    private fun removeTimePart() {
+    /*private fun removeTimePart() {
+        Log.d("chatServer", "size : ${adapter2.currentList.size}")
         val nowSize = adapter2.currentList.size - 1
         var tempSize = nowSize - 1
 
@@ -161,8 +176,12 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
         while (true) {
             if (adapter2.currentList[tempSize].messageType == adapter2.currentList[nowSize].messageType) {
+                Log.d("chatServer", "messageType 같음")
+                Log.d("chatServer", "tempSize : ${adapter2.currentList[tempSize].time}")
+                Log.d("chatServer", "nowSize : ${adapter2.currentList[nowSize].time}")
                 if (adapter2.currentList[nowSize].time == adapter2.currentList[tempSize].time) {
                     adapter2.currentList[tempSize].timeVisible = false
+                    Log.d("chatServer", "time 같음")
                     tempSize--
                 } else
                     break
@@ -171,8 +190,11 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
             if (tempSize < 0) break
         }
-        adapter2.submitList(adapter2.currentList)
-    }
+        Log.d("chatServer", "한 번 클릭 끝")
+        adapter2.submitList(adapter2.currentList){
+            Log.d("messageServer", "removePart 호출됨")
+        }
+    }*/
 
     private fun initAdapter() {
         adapter2 = ChatAdapter2()
