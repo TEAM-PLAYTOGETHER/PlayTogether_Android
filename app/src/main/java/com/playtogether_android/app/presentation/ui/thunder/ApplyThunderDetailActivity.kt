@@ -1,21 +1,18 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
-import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
+import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import retrofit2.http.Url
-import java.net.URL
-import java.util.function.ToDoubleBiFunction
 
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
@@ -25,6 +22,7 @@ class ApplyThunderDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val thunderId = intent.getIntExtra("thunderId", -1)
         initData(thunderId)
 //        testData()
@@ -78,7 +76,7 @@ class ApplyThunderDetailActivity :
             thunderDetailViewModel.organizerInfo.observe(this) {
                 userLoginId = it.userLoginId.toString()
             }
-            var intent = Intent(this, MyPageFragment::class.java)
+            var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("userLoginId", userLoginId)
             startActivity(intent)
         }
@@ -104,6 +102,7 @@ class ApplyThunderDetailActivity :
         })
     }
 
+
     private fun showConfirmDialog() {
         val title = "신청 취소되었습니다."
         val dialog = CustomDialog(this@ApplyThunderDetailActivity, title)
@@ -111,19 +110,19 @@ class ApplyThunderDetailActivity :
     }
 
 
-    private fun testData() {
-        with(binding) {
-            tvApplythunderdetailOpenerName.text = "문수제비"
-            tvApplythunderdetailTitle.text = "우리집에서 피자 먹기"
-            tvApplythunderdetailDateContent.text = "2022.04.15"
-            tvApplythunderdetailTimeContent.text = "18:00 ~"
-            tvApplythunderdetailPlaceContent.text = "우리집"
-            tvApplythunderdetailCategoryContent.text = "음식"
-            tvApplythunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
-            tvCurrentApplicant.text = "2"
-            tvMaxApplicant.text = "6"
-        }
-    }
+//    private fun testData() {
+//        with(binding) {
+//            tvApplythunderdetailOpenerName.text = "문수제비"
+//            tvApplythunderdetailTitle.text = "우리집에서 피자 먹기"
+//            tvApplythunderdetailDateContent.text = "2022.04.15"
+//            tvApplythunderdetailTimeContent.text = "18:00 ~"
+//            tvApplythunderdetailPlaceContent.text = "우리집"
+//            tvApplythunderdetailCategoryContent.text = "음식"
+//            tvApplythunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
+//            tvCurrentApplicant.text = "2"
+//            tvMaxApplicant.text = "6"
+//        }
+//    }
 
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
@@ -143,6 +142,10 @@ class ApplyThunderDetailActivity :
 //            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
 //        )
 
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 

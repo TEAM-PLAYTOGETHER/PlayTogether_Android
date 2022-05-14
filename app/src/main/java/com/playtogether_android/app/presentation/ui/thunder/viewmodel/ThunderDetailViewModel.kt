@@ -8,17 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.thunder.Member
 import com.playtogether_android.domain.model.thunder.Organizer
 import com.playtogether_android.domain.model.thunder.ThunderDetailData
-import com.playtogether_android.domain.usecase.thunder.GetThunderDetailMemberUseCase
-import com.playtogether_android.domain.usecase.thunder.GetThunderDetailOrganizerUseCase
-import com.playtogether_android.domain.usecase.thunder.GetThunderDetailUseCase
-import com.playtogether_android.domain.usecase.thunder.PostThunderJoinCancelUseCase
+import com.playtogether_android.domain.usecase.thunder.*
 import kotlinx.coroutines.launch
 
 class ThunderDetailViewModel(
     private val thunderJoinCancelUseCase: PostThunderJoinCancelUseCase,
     private val thunderDetailUseCase: GetThunderDetailUseCase,
     private val thunderDetailMemberUseCase: GetThunderDetailMemberUseCase,
-    private val thunderDetailOrganizerUseCase: GetThunderDetailOrganizerUseCase
+    private val thunderDetailOrganizerUseCase: GetThunderDetailOrganizerUseCase,
+    private val thunderDeleteUseCase: PostThunderDeleteUseCase
 ) : ViewModel() {
 
     private val _isConfirm = MutableLiveData<Boolean>()
@@ -32,6 +30,10 @@ class ThunderDetailViewModel(
 
     private val _organizerInfo = MutableLiveData<Organizer>()
     val organizerInfo: LiveData<Organizer> = _organizerInfo
+
+    //번개 삭제
+    private val _isDelete = MutableLiveData<Boolean>()
+    val isDelete: LiveData<Boolean> = _isDelete
 
     fun joinAndCancel(thunderId: Int) {
         viewModelScope.launch {
@@ -53,9 +55,9 @@ class ThunderDetailViewModel(
                 thunderDetailUseCase(thunderId)
             }.onSuccess {
                 _detailItemList.value = it
-                Log.d("img", "${it.image}")
+                Log.d("thunderDetail-Success", "${it.image}")
             }.onFailure {
-                Log.e("thunderDetail", "failure")
+                Log.e("thunderDetail-Failure", "${it.message}")
             }
         }
     }
@@ -66,6 +68,7 @@ class ThunderDetailViewModel(
                 thunderDetailOrganizerUseCase(thunderId)
             }.onSuccess {
                 _organizerInfo.value = it
+                Log.d("thunderDetailOriganizer-Success", "${it.userLoginId}")
             }.onFailure {
                 Log.e("thunderDetailOrganizer", "failure")
 
@@ -83,6 +86,21 @@ class ThunderDetailViewModel(
             }.onFailure {
                 Log.e("thunderDetailMember", "failure")
 
+            }
+        }
+    }
+
+    //번개 삭제
+    fun thunderDelete(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                thunderDeleteUseCase(thunderId)
+            }.onSuccess {
+                _isDelete.value = true
+                Log.d("OnSuccess-thunderDel", "${it.message}")
+            }.onFailure {
+                _isDelete.value = false
+                Log.e("onFailure-thunderDel", "${it.message}")
             }
         }
     }

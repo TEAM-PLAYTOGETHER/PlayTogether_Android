@@ -1,7 +1,6 @@
 package com.playtogether_android.app.presentation.ui.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -23,11 +22,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
             finish()
-        },DURATION)
+        }, DURATION)
 
     }
+
     companion object {
-        private const val DURATION : Long = 2000
+        private const val DURATION: Long = 2000
     }
 
 }
