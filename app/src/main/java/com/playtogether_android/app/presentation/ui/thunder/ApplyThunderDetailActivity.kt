@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.thunder
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
@@ -11,6 +12,7 @@ import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.imageNullCheck
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,7 +27,6 @@ class ApplyThunderDetailActivity :
 
         val thunderId = intent.getIntExtra("thunderId", -1)
         initData(thunderId)
-//        testData()
         initAdapter()
         binding.tvCancelApplication.setOnClickListener {
             showCancelDialog(thunderId)
@@ -34,17 +35,13 @@ class ApplyThunderDetailActivity :
     }
 
     private fun initData(thunderId: Int) {
-//        binding.viewModel = thunderDetailViewModel
         thunderDetailViewModel.thunderDetail(thunderId)
         thunderDetailViewModel.thunderDetailMember(thunderId)
         thunderDetailViewModel.thunderDetailOrganizer(thunderId)
 
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
-            Glide
-                .with(this)
-                .load(it.image)
-                .into(binding.ivApplythunderdetailImage)
+            imageNullCheck(it.image, binding.ivApplythunderdetailImage)
         }
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
@@ -56,11 +53,13 @@ class ApplyThunderDetailActivity :
         binding.clThunderOpenerMessage.setOnClickListener {
 //           쪽지 보내기로 이동
             var organizerId = -1
+            val thunderId = intent.getIntExtra("thunderId", -1)
             thunderDetailViewModel.organizerInfo.observe(this) {
                 organizerId = it.organizerId
             }
             val intent = Intent(this, ChattingActivity::class.java)
             intent.putExtra("organizerId", organizerId)
+            intent.putExtra("thunderId", thunderId)
             startActivity(intent)
         }
 
@@ -75,6 +74,7 @@ class ApplyThunderDetailActivity :
             var userLoginId: String? = null
             var organizerName: String? = null
             var organizerId: Int? = null
+
             thunderDetailViewModel.organizerInfo.observe(this) {
                 userLoginId = it.userLoginId.toString()
                 organizerId = it.organizerId
@@ -83,7 +83,8 @@ class ApplyThunderDetailActivity :
             var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("userLoginId", userLoginId)
             intent.putExtra("organizerId", organizerId)
-            intent.putExtra("organizerName",organizerName)
+            intent.putExtra("organizerName", organizerName)
+
             startActivity(intent)
         }
     }
@@ -99,8 +100,6 @@ class ApplyThunderDetailActivity :
                     thunderDetailViewModel.isConfirm.observe(this@ApplyThunderDetailActivity) { success ->
                         if (success) {
                             showConfirmDialog()
-                        } else {
-                            shortToast("실패")
                         }
                     }
                 }
@@ -116,20 +115,6 @@ class ApplyThunderDetailActivity :
     }
 
 
-//    private fun testData() {
-//        with(binding) {
-//            tvApplythunderdetailOpenerName.text = "문수제비"
-//            tvApplythunderdetailTitle.text = "우리집에서 피자 먹기"
-//            tvApplythunderdetailDateContent.text = "2022.04.15"
-//            tvApplythunderdetailTimeContent.text = "18:00 ~"
-//            tvApplythunderdetailPlaceContent.text = "우리집"
-//            tvApplythunderdetailCategoryContent.text = "음식"
-//            tvApplythunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
-//            tvCurrentApplicant.text = "2"
-//            tvMaxApplicant.text = "6"
-//        }
-//    }
-
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
         binding.rvThunderApplicantList.adapter = applicantListAdapter
@@ -138,21 +123,5 @@ class ApplyThunderDetailActivity :
             applicantListAdapter.applicantList.addAll(it)
             applicantListAdapter.notifyDataSetChanged()
         }
-//        applicantListAdapter.applicantList = listOf(
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
-//        )
-
     }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-
 }

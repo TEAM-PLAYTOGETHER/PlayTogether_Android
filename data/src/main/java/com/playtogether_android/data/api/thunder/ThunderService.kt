@@ -36,4 +36,5 @@ interface ThunderService {
     suspend fun postThunderDelete(
         @Path("thunderId") thunderId: Int
     ): ResThunderDeleteData
+
 }

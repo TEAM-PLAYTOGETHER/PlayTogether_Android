@@ -10,6 +10,7 @@ import com.playtogether_android.app.databinding.ActivityOpenThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.imageNullCheck
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,10 +44,12 @@ class OpenThunderDetailActivity :
 
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
-            Glide
-                .with(this)
-                .load(it.image)
-                .into(binding.ivOpenthunderdetailImage)
+            imageNullCheck(it.image, binding.ivOpenthunderdetailImage)
+
+//            Glide
+//                .with(this)
+//                .load(it.image)
+//                .into(binding.ivOpenthunderdetailImage)
         }
 
         thunderDetailViewModel.organizerInfo.observe(this) {
@@ -71,10 +74,9 @@ class OpenThunderDetailActivity :
                 if (num == 1) {
                     thunderDetailViewModel.thunderDelete(thunderId)
                     thunderDetailViewModel.isDelete.observe(this@OpenThunderDetailActivity) { success ->
-                        if(success) {
+                        if (success) {
                             showConfirmDialog()
-                        } else
-                            shortToast("실패")
+                        }
                     }
                 }
             }
@@ -87,19 +89,6 @@ class OpenThunderDetailActivity :
         dialog.showDeleteDialog(R.layout.dialog_check)
     }
 
-//    private fun testData() {
-//        with(binding) {
-//            tvApplythunderdetailOpenerName.text = "문수제비"
-//            tvOpenthunderdetailTitle.text = "우리집에서 피자 먹기"
-//            tvOpenthunderdetailDateContent.text = "2022.04.15"
-//            tvOpenthunderdetailTimeContent.text = "18:00 ~"
-//            tvOpenthunderdetailPlaceContent.text = "우리집"
-//            tvOpenthunderdetailCategoryContent.text = "음식"
-//            tvOpenthunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
-//            tvCurrentApplicant.text = "2"
-//            tvMaxApplicant.text = "6"
-//        }
-//    }
 
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
@@ -109,16 +98,6 @@ class OpenThunderDetailActivity :
             applicantListAdapter.applicantList.addAll(it)
             applicantListAdapter.notifyDataSetChanged()
         }
-
-//        applicantListAdapter.applicantList = listOf(
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
-//        )
 
     }
 
