@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:includeFontPadding="false"
-            android:text="@string/mypage_age"
+            android:text="@{user.gender}"
             android:layout_marginStart="2dp"
             android:textColor="@color/gray_bdbdbd"
             android:textSize="13sp"

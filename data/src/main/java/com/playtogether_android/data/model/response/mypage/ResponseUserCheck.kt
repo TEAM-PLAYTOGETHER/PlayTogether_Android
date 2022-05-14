@@ -10,6 +10,7 @@ data class ResponseUserCheck(
         val age: Int,
         val mbti: String,
         val name: String,
+        val gender: String,
         val userLoginId: String
     )
 }
