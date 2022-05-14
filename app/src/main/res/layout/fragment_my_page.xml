@@ -65,7 +65,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/gray_black"
             android:textSize="16sp"
-            android:text="@string/mypage_dear"
+            android:text="@string/dummy_name"
             android:layout_marginStart="15dp"
             app:layout_constraintStart_toEndOf="@+id/iv_mypage_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile" />
@@ -88,7 +88,7 @@
             android:textColor="@color/gray_bdbdbd"
             android:textSize="13sp"
             android:layout_marginTop="6dp"
-            android:text="@string/mypage_age"
+            android:text="@string/dummy_sub"
             app:layout_constraintStart_toStartOf="@+id/tv_mypage_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
