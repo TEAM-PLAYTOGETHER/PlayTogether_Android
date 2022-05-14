@@ -55,6 +55,9 @@ class TabApplyFragment : BaseFragment<FragmentTabApplyBinding>(R.layout.fragment
             thunderListAdapter.thunderList = thunderTabListData
 
             Log.d("connect-test", it.toString())
+
+            // 신청한 리스트 정렬(임시)
+            thunderTabListData.sortBy { it.date }
         }
     }
 
