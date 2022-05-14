@@ -170,8 +170,8 @@
     <string name="sort_peopleCnt">인원순</string>
 
     <!--Mypage-->
-    <string name="mypage_dear">님</string>
-    <string name="mypage_age">세,</string>
+    <string name="mypage_dear">김세훈님</string>
+    <string name="mypage_age">25세, 남, ENFJ</string>
     <string name="text_coma">,</string>
 
     <!--타인 Mypage-->
