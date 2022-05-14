@@ -45,10 +45,8 @@ class ThunderDetailActivity :
                         if (it.success) {
                             val intent =
                                 Intent(
-                                    this@ThunderDetailActivity,
-                                    ThunderAppliedActivity::class.java
+                                    this@ThunderDetailActivity, ThunderAppliedActivity::class.java
                                 )
-                                Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
                             intent.putExtra("thunderId", thunderId)
                             startActivity(intent)
                             this@ThunderDetailActivity.finish()
@@ -63,7 +61,6 @@ class ThunderDetailActivity :
 
     private fun initData() {
         val thunderId = intent.getIntExtra("thunderId", -1)
-        shortToast("$thunderId")
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)

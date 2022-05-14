@@ -10,6 +10,7 @@ import com.playtogether_android.app.databinding.ActivityOpenThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.imageNullCheck
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,10 +44,12 @@ class OpenThunderDetailActivity :
 
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
-            Glide
-                .with(this)
-                .load(it.image)
-                .into(binding.ivOpenthunderdetailImage)
+            imageNullCheck(it.image, binding.ivOpenthunderdetailImage)
+
+//            Glide
+//                .with(this)
+//                .load(it.image)
+//                .into(binding.ivOpenthunderdetailImage)
         }
 
         thunderDetailViewModel.organizerInfo.observe(this) {
@@ -71,10 +74,9 @@ class OpenThunderDetailActivity :
                 if (num == 1) {
                     thunderDetailViewModel.thunderDelete(thunderId)
                     thunderDetailViewModel.isDelete.observe(this@OpenThunderDetailActivity) { success ->
-                        if(success) {
+                        if (success) {
                             showConfirmDialog()
-                        } else
-                            shortToast("실패")
+                        }
                     }
                 }
             }

@@ -15,6 +15,7 @@ object ThunderMapper {
                 ThunderTabListData.Data(
                     it.lightId,
                     it.title,
+                    it.category,
                     it.date,
                     it.time,
                     it.peopleCnt,
@@ -75,4 +76,5 @@ object ThunderMapper {
             message = it.message
         )
     }
+
 }

@@ -35,4 +35,5 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
     override suspend fun postThunderDelete(thunderId: Int): ResThunderDeleteData {
         return service.postThunderDelete(thunderId)
     }
+
 }
