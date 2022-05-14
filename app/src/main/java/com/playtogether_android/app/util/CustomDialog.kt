@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.playtogether_android.app.R
+import com.playtogether_android.app.presentation.ui.sign.SignInActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplyThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import okhttp3.internal.notify
@@ -95,5 +96,25 @@ class CustomDialog(private val context: Context, val title: String) {
             (context as OpenThunderDetailActivity).finish()
         }
     }
+
+
+    //번개 삭제 다이어로그
+    fun showSignDialog(@LayoutRes layout: Int) {
+        dialog.setContentView(layout)
+        dialog.findViewById<TextView>(R.id.tv_dialog_title).text = title
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        dialog.show()
+
+        dialog.findViewById<TextView>(R.id.tv_dialog_check).setOnClickListener {
+//            onClickedListener.onClicked(1)
+            dialog.dismiss()
+            (context as SignInActivity).finish()
+        }
+    }
+
 
 }

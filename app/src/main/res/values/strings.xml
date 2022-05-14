@@ -86,8 +86,8 @@
     <string name="signupmain_input_id">아이디 입력</string>
     <string name="text_duplication_check">중복확인</string>
     <string name="signupmain_id_duplication">사용 가능한 아이디입니다</string>
-    <string name="signupmain_expression_id">8-15자 이내 소문자, 숫자 사용 가능</string>
-    <string name="signupmain_expression_id_warn">8-15자 이내 소문자, 숫자만 사용 가능합니다.</string>
+    <string name="signupmain_expression_id">5-20자 이내 소문자, 숫자 사용 가능</string>
+    <string name="signupmain_expression_id_warn">5-20자 이내 소문자, 숫자만 사용 가능합니다.</string>
     <string name="signupmain_input_pw">비밀번호 입력</string>
     <string name="signupmain_expression_pw">8-15자 이내 대문자, 소문자, 숫자, 특수문자 사용 가능</string>
     <string name="signupmain_check_pw">비밀번호 확인</string>
@@ -173,6 +173,8 @@
     <string name="mypage_dear">님</string>
     <string name="mypage_age">세,</string>
     <string name="text_coma">,</string>
+    <string name="dummy_name">김세훈 님</string>
+    <string name="dummy_sub">25세, 남, ENFJ</string>
 
     <!--타인 Mypage-->
     <string name="other_mypage_title">님의 마이페이지</string>

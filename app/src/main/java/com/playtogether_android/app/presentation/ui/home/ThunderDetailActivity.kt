@@ -61,6 +61,7 @@ class ThunderDetailActivity :
 
     private fun initData() {
         val thunderId = intent.getIntExtra("thunderId", -1)
+
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)
@@ -119,12 +120,18 @@ class ThunderDetailActivity :
         // 개설자 프로필로 이동
         binding.ivThunderdetailIcon.setOnClickListener {
             var userLoginId: String? = null
+            var organizerName: String? = null
+            var organizerId: Int? = null
             thunderDetailViewModel.organizerInfo.observe(this) {
-                userLoginId = it.userLoginId
+                userLoginId = it.userLoginId.toString()
+                organizerId = it.organizerId
+                organizerName = it.name
             }
             var intent = Intent(this, OthersMyPageActivity::class.java)
-            intent.putExtra("userLoginId", userLoginId!!)
-            Log.d("userLoginId-putExtra-Detail", userLoginId!!)
+            intent.putExtra("userLoginId", userLoginId)
+            intent.putExtra("organizerId", organizerId)
+            intent.putExtra("organizerName",organizerName)
+
             startActivity(intent)
         }
 

@@ -9,12 +9,12 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_message"
+        android:id="@+id/cl_mypage"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_message_top"
+            android:id="@+id/cl_mypage_top"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@color/gray_black"
@@ -22,7 +22,7 @@
 
 
             <TextView
-                android:id="@+id/tv_message_title"
+                android:id="@+id/tv_mypage_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
@@ -34,42 +34,62 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icn_setting"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/iv_mypage_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_img_profile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_message_top" />
+            app:layout_constraintTop_toBottomOf="@+id/cl_mypage_top" />
 
         <TextView
-            android:id="@+id/tv_message_room_name"
+            android:id="@+id/tv_mypage_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_bold"
             android:includeFontPadding="false"
             android:textColor="@color/gray_black"
             android:textSize="16sp"
-            android:text="@{':' + @string/mypage_dear}"
+            android:text="@string/dummy_name"
             android:layout_marginStart="15dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+            app:layout_constraintStart_toEndOf="@+id/iv_mypage_profile"
+            app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_icn_edit"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_mypage_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile" />
 
         <TextView
-            android:id="@+id/tv_message_room_content"
+            android:id="@+id/tv_mypage_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
             android:includeFontPadding="false"
             android:textColor="@color/gray_bdbdbd"
             android:textSize="13sp"
-            android:text="@{@string/mypage_age}"
-            app:layout_constraintStart_toStartOf="@+id/tv_message_room_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_message_room_name" />
+            android:layout_marginTop="6dp"
+            android:text="@string/dummy_sub"
+            app:layout_constraintStart_toStartOf="@+id/tv_mypage_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

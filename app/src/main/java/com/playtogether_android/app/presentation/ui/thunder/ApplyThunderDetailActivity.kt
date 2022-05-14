@@ -27,7 +27,6 @@ class ApplyThunderDetailActivity :
 
         val thunderId = intent.getIntExtra("thunderId", -1)
         initData(thunderId)
-//        testData()
         initAdapter()
         binding.tvCancelApplication.setOnClickListener {
             showCancelDialog(thunderId)
@@ -36,7 +35,6 @@ class ApplyThunderDetailActivity :
     }
 
     private fun initData(thunderId: Int) {
-//        binding.viewModel = thunderDetailViewModel
         thunderDetailViewModel.thunderDetail(thunderId)
         thunderDetailViewModel.thunderDetailMember(thunderId)
         thunderDetailViewModel.thunderDetailOrganizer(thunderId)
@@ -49,7 +47,6 @@ class ApplyThunderDetailActivity :
             binding.organizer = it
         }
     }
-
 
     private fun setClickListener() {
 
@@ -75,12 +72,19 @@ class ApplyThunderDetailActivity :
         // 개설자 프로필로 이동
         binding.ivOpenerProfile.setOnClickListener {
             var userLoginId: String? = null
+            var organizerName: String? = null
+            var organizerId: Int? = null
+
             thunderDetailViewModel.organizerInfo.observe(this) {
-                userLoginId = it.userLoginId
+                userLoginId = it.userLoginId.toString()
+                organizerId = it.organizerId
+                organizerName = it.name
             }
             var intent = Intent(this, OthersMyPageActivity::class.java)
-            intent.putExtra("userLoginId", userLoginId!!)
-            Log.d("userLoginId-putExtra-Aplly", userLoginId!!)
+            intent.putExtra("userLoginId", userLoginId)
+            intent.putExtra("organizerId", organizerId)
+            intent.putExtra("organizerName", organizerName)
+
             startActivity(intent)
         }
     }
@@ -111,20 +115,6 @@ class ApplyThunderDetailActivity :
     }
 
 
-    private fun testData() {
-        with(binding) {
-            tvApplythunderdetailOpenerName.text = "문수제비"
-            tvApplythunderdetailTitle.text = "우리집에서 피자 먹기"
-            tvApplythunderdetailDateContent.text = "2022.04.15"
-            tvApplythunderdetailTimeContent.text = "18:00 ~"
-            tvApplythunderdetailPlaceContent.text = "우리집"
-            tvApplythunderdetailCategoryContent.text = "음식"
-            tvApplythunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
-            tvCurrentApplicant.text = "2"
-            tvMaxApplicant.text = "6"
-        }
-    }
-
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
         binding.rvThunderApplicantList.adapter = applicantListAdapter
@@ -133,17 +123,5 @@ class ApplyThunderDetailActivity :
             applicantListAdapter.applicantList.addAll(it)
             applicantListAdapter.notifyDataSetChanged()
         }
-//        applicantListAdapter.applicantList = listOf(
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
-//        )
-
     }
-
-
 }

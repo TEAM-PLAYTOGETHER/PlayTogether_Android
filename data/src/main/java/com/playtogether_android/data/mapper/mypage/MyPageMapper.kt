@@ -9,6 +9,7 @@ object MyPageMapper {
             age = responseUserCheck.data.age,
             mbti = responseUserCheck.data.mbti,
             name = responseUserCheck.data.name,
+            gender = responseUserCheck.data.gender,
             userLoginId = responseUserCheck.data.userLoginId
         )
     }

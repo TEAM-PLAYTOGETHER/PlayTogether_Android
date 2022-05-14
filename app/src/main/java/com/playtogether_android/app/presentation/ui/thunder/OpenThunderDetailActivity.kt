@@ -89,19 +89,6 @@ class OpenThunderDetailActivity :
         dialog.showDeleteDialog(R.layout.dialog_check)
     }
 
-//    private fun testData() {
-//        with(binding) {
-//            tvApplythunderdetailOpenerName.text = "문수제비"
-//            tvOpenthunderdetailTitle.text = "우리집에서 피자 먹기"
-//            tvOpenthunderdetailDateContent.text = "2022.04.15"
-//            tvOpenthunderdetailTimeContent.text = "18:00 ~"
-//            tvOpenthunderdetailPlaceContent.text = "우리집"
-//            tvOpenthunderdetailCategoryContent.text = "음식"
-//            tvOpenthunderdetailDescription.text = "스크롤뷰 적용 후 스티링 더 길게 테스트 예정임다"
-//            tvCurrentApplicant.text = "2"
-//            tvMaxApplicant.text = "6"
-//        }
-//    }
 
     private fun initAdapter() {
         applicantListAdapter = ApplicantListAdapter()
@@ -111,16 +98,6 @@ class OpenThunderDetailActivity :
             applicantListAdapter.applicantList.addAll(it)
             applicantListAdapter.notifyDataSetChanged()
         }
-
-//        applicantListAdapter.applicantList = listOf(
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("김세후니", 25, "ENFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ"),
-//            TempApplicantData.UserList("권용민 바보", 26, "ESFJ")
-//        )
 
     }
 
