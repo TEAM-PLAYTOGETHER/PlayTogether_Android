@@ -32,7 +32,7 @@ val viewModelModule = module {
     //message
     viewModel { MessageViewModel(get()) }
     viewModel { SendMessageViewModel(get()) }
-    viewModel{ChatViewModel(get())}
+    viewModel{ ChatViewModel(get()) }
 
     //ThunderList
     viewModel { ThunderListViewModel(get()) }
