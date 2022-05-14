@@ -32,7 +32,7 @@ class OthersMyPageActivity :
             myPageViewModel.getUserCheck(it.userLoginId)
         }
 
-        val userLoginId = intent.getStringExtra("organizerId").toString()
+        val userLoginId = intent.getStringExtra("userLoginId").toString()
         Log.d("testUserIdTest", "" + userLoginId)
 
         myPageViewModel.getUserCheck(userLoginId)
@@ -49,15 +49,12 @@ class OthersMyPageActivity :
     }
 
     private fun setClickListener() {
-
+        val organizerId = intent.getIntExtra("organizerId", -1)
+        val organizerName = intent.getStringExtra("organizerName")
         binding.ivOtherMypageMessage.setOnClickListener {
 //           쪽지 보내기로 이동
-            var organizerId = -1
-            var name = "null"
-            thunderDetailViewModel.organizerInfo.observe(this) {
-                organizerId = it.organizerId
-                name = it.name
-            }
+            var organizerId = organizerId
+            var name = organizerName
             val intent = Intent(this, ChattingActivity::class.java)
             intent.putExtra("audienceId", organizerId)
             intent.putExtra("name", name)
