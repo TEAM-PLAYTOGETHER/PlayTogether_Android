@@ -47,6 +47,7 @@ class ThunderDetailActivity :
                         if(it.success) {
                             val intent =
                                 Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
+                            intent.putExtra("thunderId", thunderId)
                             startActivity(intent)
                             this@ThunderDetailActivity.finish()
                         } else {
