@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.home.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.marginTop
 import androidx.fragment.app.activityViewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentHomeBinding
@@ -24,18 +25,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        refreshView()
+
     }
 
-    private fun initData() {
-//        homeVieModel.tempList
-    }
 
     private fun initView() {
         binding.btnHomeFloat.layoutParams.apply {
             width = resources.getDimension(R.dimen.fab_home_size).toInt()
             height = resources.getDimension(R.dimen.fab_home_size).toInt()
         }
-        refreshView()
         initAdapter()
         initBottomDialog()
         setClickListener()
@@ -93,10 +92,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun refreshView() {
         with(binding) {
-//            lsrlHomeContainer.setOnRefreshListener {
-//                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
-//                lsrlHomeContainer.isRefreshing = false
-//            }
+            lsrlHomeContainer.setOnRefreshListener {
+                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
+                initAdapter()
+                lsrlHomeContainer.isRefreshing = false
+            }
         }
     }
 

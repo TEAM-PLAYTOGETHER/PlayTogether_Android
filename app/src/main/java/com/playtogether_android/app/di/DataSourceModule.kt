@@ -11,6 +11,8 @@ import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSource
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSourceImpl
 import com.playtogether_android.data.datasource.sign.SignDataSource
 import com.playtogether_android.data.datasource.sign.SignDataSourceImpl
+import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSource
+import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSourceImpl
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderDataSourceImpl
 import org.koin.dsl.module
@@ -23,6 +25,7 @@ val dataSourceModule = module {
     single<MessageDataSource>{MessageDataSourceImpl(get())}
     single<SendMessageDataSource>{SendMessageDataSourceImpl(get())}
     single<ChatDataSource>{ChatDataSourceImpl(get())}
+    single<ThunderCreateDataSource>{ThunderCreateDataSourceImpl(get())}
     single<MyPageDataSource> {MyPageDataSourceImpl(get())}
     single<HomeDataSource>{HomeDataSourceImpl(get())}
 }
