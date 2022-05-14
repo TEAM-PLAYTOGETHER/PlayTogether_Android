@@ -19,9 +19,11 @@ class CreateThunderViewModel(
     fun postThunderCreate(postThunderCreateData: PostThunderCreateData){
         viewModelScope.launch {
             kotlin.runCatching { postThunderCreateUseCase(crewId, postThunderCreateData) }
-                .onSuccess { _getThunderCreateData.value = it
+                .onSuccess {
+                    _getThunderCreateData.value = it
                     Log.d("writingServer", "글쓰기 뷰 성공")}
-                .onFailure { _getThunderCreateData.value = GetThunderCreateData("false", -1, false)
+                .onFailure {
+//                    _getThunderCreateData.value = GetThunderCreateData("false", -1, false)
                     it.printStackTrace()
                     Log.d("writingServer", "${it.message}")}
         }
