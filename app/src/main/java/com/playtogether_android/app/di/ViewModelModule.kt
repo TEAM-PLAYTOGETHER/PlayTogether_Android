@@ -42,7 +42,7 @@ val viewModelModule = module {
     viewModel { CreateThunderViewModel(get()) }
 
 //    ThunderDetail
-    viewModel { ThunderDetailViewModel(get(), get(), get(), get()) }
+    viewModel { ThunderDetailViewModel(get(), get(), get(), get(), get()) }
 
     viewModel { MyPageViewModel(get()) }
 
