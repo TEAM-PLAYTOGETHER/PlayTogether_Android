@@ -2,6 +2,8 @@ package com.playtogether_android.app.presentation.ui.thunder
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
@@ -10,6 +12,7 @@ import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.imageNullCheck
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,15 +43,13 @@ class ApplyThunderDetailActivity :
 
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
-            Glide
-                .with(this)
-                .load(it.image)
-                .into(binding.ivApplythunderdetailImage)
+            imageNullCheck(it.image, binding.ivApplythunderdetailImage)
         }
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
     }
+
 
     private fun setClickListener() {
 
