@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.Gravity
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,6 +26,7 @@ class OpenThunderDetailActivity :
 
         initData()
         initAdapter()
+        setClickListener()
 
         binding.ivOpenthunderdetailOption.setOnClickListener {
             showOptionPopup(binding.ivOpenthunderdetailOption)
@@ -48,6 +51,14 @@ class OpenThunderDetailActivity :
 
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
+        }
+    }
+
+    private fun setClickListener() {
+
+        // 뒤로가기 버튼
+        binding.ivOpenthunderdetailBack.setOnClickListener {
+            finish()
         }
     }
 

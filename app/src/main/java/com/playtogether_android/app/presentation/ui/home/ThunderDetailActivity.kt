@@ -2,24 +2,36 @@ package com.playtogether_android.app.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
+import com.playtogether_android.app.presentation.ui.message.ChattingActivity
+import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
+import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThunderDetailActivity :
     BaseActivity<ActivityThunderDetailBinding>(R.layout.activity_thunder_detail) {
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by viewModel()
+
+    //val lightId = intent.getIntExtra("thunderId",0)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData()
+        setClickListener()
         binding.clThunderdetailApplyBtn.setOnClickListener {
             showApplyDialog()
         }
+
     }
 
     private fun showApplyDialog() {
@@ -29,10 +41,18 @@ class ThunderDetailActivity :
         dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
             override fun onClicked(num: Int) {
                 if (num == 1) {
-                    val intent =
-                        Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
-                    startActivity(intent)
-                    this@ThunderDetailActivity.finish()
+                    val thunderId = intent.getIntExtra("thunderId", -1)
+                    homeViewModel.postJoinThunder(thunderId)
+                    homeViewModel.joinThunder.observe(this@ThunderDetailActivity) {
+                        if(it.success) {
+                            val intent =
+                                Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
+                            startActivity(intent)
+                            this@ThunderDetailActivity.finish()
+                        } else {
+                            Log.d("번개참여", "실패")
+                        }
+                    }
                 }
             }
         })
@@ -40,6 +60,7 @@ class ThunderDetailActivity :
 
     private fun initData() {
         val thunderId = intent.getIntExtra("thunderId", -1)
+        shortToast("$thunderId")
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)
@@ -56,6 +77,8 @@ class ThunderDetailActivity :
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
+
+
 //        with(binding){
 //            tvThunderdetailCurrent.text="1"
 //            tvThunderdetailMax.text="6"
@@ -69,4 +92,39 @@ class ThunderDetailActivity :
 //        }
 
     }
+
+    private fun setClickListener() {
+
+        binding.clThunderdetailMessage.setOnClickListener {
+//           쪽지 보내기로 이동
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
+        }
+
+        // 뒤로가기 버튼
+        binding.ivThunderdetailBack.setOnClickListener {
+            finish()
+        }
+
+
+        // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
+        // 개설자 프로필로 이동
+        binding.ivThunderdetailIcon.setOnClickListener {
+            var organizerId = -1
+            thunderDetailViewModel.organizerInfo.observe(this) {
+                organizerId = it.organizerId
+            }
+            var intent = Intent(this, OthersMyPageActivity::class.java)
+            intent.putExtra("organizerId", organizerId)
+            startActivity(intent)
+        }
+
+    }
+
+
 }

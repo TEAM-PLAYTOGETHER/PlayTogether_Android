@@ -15,6 +15,9 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.mypage.OthersMyPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.main.SplashActivity"
             android:exported="true" >
 
@@ -57,11 +60,10 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
@@ -71,7 +73,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

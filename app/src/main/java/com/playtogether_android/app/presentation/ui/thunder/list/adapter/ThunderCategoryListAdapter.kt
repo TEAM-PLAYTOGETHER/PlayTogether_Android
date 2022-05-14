@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -23,12 +24,18 @@ class ThunderCategoryListAdapter :
                     stringBuilder(listOf("${data.date} ", "${data.place} ", data.time))
                 tvThunderItemLimitCount.text =
                     stringBuilder(
-                        listOf(PERSON, data.lightMemberCnt, " / ", data.peopleCnt.toString())
+                        listOf(
+                            PERSON,
+                            data.lightMemberCnt.toString(),
+                            " / ",
+                            data.peopleCnt.toString()
+                        )
                     )
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
                     intent.putExtra("thunderId", data.lightId)
+                    Log.d("TestThunderId", "" + data.lightId)
                     itemView.context.startActivity(intent)
                 }
             }
