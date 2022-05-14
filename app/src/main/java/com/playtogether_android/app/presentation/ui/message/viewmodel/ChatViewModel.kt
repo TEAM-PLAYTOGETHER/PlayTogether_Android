@@ -13,16 +13,25 @@ class ChatViewModel(
     val getChatUseCase: GetChatUseCase
 ) : ViewModel() {
     private var _chatData = MutableLiveData<List<ChatData>>()
-    val chatData : LiveData<List<ChatData>> get() = _chatData
+    val chatData: LiveData<List<ChatData>> get() = _chatData
 
-    fun getChatList(roomId : Int){
+    fun getChatList(roomId: Int) {
         viewModelScope.launch {
             kotlin.runCatching { getChatUseCase(roomId) }
                 .onSuccess {
-                    _chatData.value=it
+                    //_chatData.value=it
+                    var tempList: List<ChatData> = it
+                    for (i in it.indices) {
+                        var date = it[i].time.slice(IntRange(0, 9))
+                        date = date.replace("-", ".")
+                        val time = it[i].time.slice(IntRange(11, 15))
+                        val dateTime = date + "  " + time
+                        tempList[i].time = dateTime
+                    }
+                    _chatData.value = tempList
                 }
-                .onFailure {
-                    error -> Log.d("messageServer", "채팅 읽어오기 실패")
+                .onFailure { error ->
+                    Log.d("messageServer", "채팅 읽어오기 실패")
                 }
         }
     }

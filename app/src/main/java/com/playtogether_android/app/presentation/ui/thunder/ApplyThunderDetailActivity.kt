@@ -1,7 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
@@ -9,15 +8,11 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
-import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import retrofit2.http.Url
-import java.net.URL
-import java.util.function.ToDoubleBiFunction
 
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
@@ -80,7 +75,7 @@ class ApplyThunderDetailActivity :
             thunderDetailViewModel.organizerInfo.observe(this) {
                 organizerId = it.organizerId
             }
-            Log.d("뭐가 문제일까", ""+organizerId)
+            Log.d("뭐가 문제일까", "" + organizerId)
             var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             startActivity(intent)

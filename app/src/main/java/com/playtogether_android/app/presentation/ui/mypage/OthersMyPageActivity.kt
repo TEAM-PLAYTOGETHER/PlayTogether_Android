@@ -1,19 +1,15 @@
 package com.playtogether_android.app.presentation.ui.mypage
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import com.playtogether_android.app.R
-import com.playtogether_android.app.databinding.ActivityFirstOnBoardingBinding
 import com.playtogether_android.app.databinding.ActivityOthersMyPageBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
 import com.playtogether_android.app.presentation.ui.mypage.viewModel.MyPageViewModel
-import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OthersMyPageActivity : BaseActivity<ActivityOthersMyPageBinding>(R.layout.activity_others_my_page) {
+class OthersMyPageActivity :
+    BaseActivity<ActivityOthersMyPageBinding>(R.layout.activity_others_my_page) {
 
     private val myPageViewModel: MyPageViewModel by viewModel()
 

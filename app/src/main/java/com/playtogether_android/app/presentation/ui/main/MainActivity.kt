@@ -74,7 +74,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if(prevSelectedItem != 1) {
+        if (prevSelectedItem != 1) {
             binding.btNvMain.selectedItemId = R.id.navigation_home
         }
     }

@@ -1,6 +1,5 @@
 package com.playtogether_android.app.di
 
-import android.util.Log
 import com.google.gson.GsonBuilder
 import com.playtogether_android.app.util.AuthInterceptor
 import com.playtogether_android.app.util.PlayTogetherSharedPreference
@@ -38,8 +37,10 @@ val apiModule = module {
         Interceptor { chain ->
             with(chain) {
                 val newRequest = request().newBuilder()
-                    .addHeader("Authorization",
-                        PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context()))
+                    .addHeader(
+                        "Authorization",
+                        PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context())
+                    )
                     .addHeader("Content-Type", "application/json")
                     .build()
                 proceed(newRequest)

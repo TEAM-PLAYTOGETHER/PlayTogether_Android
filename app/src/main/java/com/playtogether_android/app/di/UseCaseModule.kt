@@ -5,9 +5,9 @@ import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCa
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
 import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
-import com.playtogether_android.domain.usecase.message.GetMessageUseCase
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
+import com.playtogether_android.domain.usecase.message.GetMessageUseCase
 import com.playtogether_android.domain.usecase.message.PostSendMessageUseCase
 import com.playtogether_android.domain.usecase.mypage.GetUserCheckUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
@@ -19,11 +19,6 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
 
-    //sign
-//    single {PostSignIdUseCase(get())}
-//    single {PostSignUpUseCaes(get())}
-//    single {PostSignInUseCase(get())}
-
     //onboarding
     single { PostRegisterCrewUseCase(get()) }
     single { PostSignIdUseCase(get()) }
@@ -32,8 +27,8 @@ val useCaseModule = module {
 
     //message
     single { GetMessageUseCase(get()) }
-    single{PostSendMessageUseCase(get())}
-    single{GetChatUseCase(get())}
+    single { PostSendMessageUseCase(get()) }
+    single { GetChatUseCase(get()) }
 
     //thunderList
     single { GetThunderCategoryUseCase(get()) }

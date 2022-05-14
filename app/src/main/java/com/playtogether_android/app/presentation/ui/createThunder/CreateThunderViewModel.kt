@@ -14,18 +14,20 @@ class CreateThunderViewModel(
     val postThunderCreateUseCase: PostThunderCreateUseCase
 ) : ViewModel() {
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()
-    val getThunderCreateData : LiveData<GetThunderCreateData> get() = _getThunderCreateData
+    val getThunderCreateData: LiveData<GetThunderCreateData> get() = _getThunderCreateData
     val crewId = 1
-    fun postThunderCreate(postThunderCreateData: PostThunderCreateData){
+    fun postThunderCreate(postThunderCreateData: PostThunderCreateData) {
         viewModelScope.launch {
             kotlin.runCatching { postThunderCreateUseCase(crewId, postThunderCreateData) }
                 .onSuccess {
                     _getThunderCreateData.value = it
-                    Log.d("writingServer", "글쓰기 뷰 성공")}
+                    Log.d("writingServer", "글쓰기 뷰 성공")
+                }
                 .onFailure {
 //                    _getThunderCreateData.value = GetThunderCreateData("false", -1, false)
                     it.printStackTrace()
-                    Log.d("writingServer", "${it.message}")}
+                    Log.d("writingServer", "${it.message}")
+                }
         }
     }
 }

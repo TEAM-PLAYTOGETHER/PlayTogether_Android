@@ -53,14 +53,17 @@ class SecondOnboardingActivity :
     }
 
 
-
-    private fun movePage() = with(binding){
+    private fun movePage() = with(binding) {
         tvSecondOnboardingNext.setOnClickListener {
-            if(tvSecondOnboardingNext.isSelected and clSecondOnboardingOpen.isSelected) {
+            if (tvSecondOnboardingNext.isSelected and clSecondOnboardingOpen.isSelected) {
                 Timber.d("개설로 이동")
-            }
-            else if(tvSecondOnboardingNext.isSelected and clSecondOnboardingJoinSelect.isSelected) {
-                startActivity(Intent(this@SecondOnboardingActivity, JoinOnBoardingActivity::class.java))
+            } else if (tvSecondOnboardingNext.isSelected and clSecondOnboardingJoinSelect.isSelected) {
+                startActivity(
+                    Intent(
+                        this@SecondOnboardingActivity,
+                        JoinOnBoardingActivity::class.java
+                    )
+                )
                 finish()
             }
         }

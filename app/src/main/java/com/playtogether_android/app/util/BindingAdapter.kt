@@ -2,7 +2,6 @@ package com.playtogether_android.app.util
 
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.playtogether_android.app.R
 

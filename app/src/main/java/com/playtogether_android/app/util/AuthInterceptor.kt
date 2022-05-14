@@ -1,7 +1,5 @@
 package com.playtogether_android.app.util
 
-import android.util.Log
-import com.playtogether_android.domain.repository.sign.SignRepository
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber

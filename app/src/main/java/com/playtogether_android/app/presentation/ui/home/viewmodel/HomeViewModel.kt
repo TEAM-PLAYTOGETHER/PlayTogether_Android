@@ -17,7 +17,6 @@ import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCa
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
 import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
-import com.playtogether_android.domain.usecase.thunder.PostThunderJoinCancelUseCase
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -84,7 +83,7 @@ class HomeViewModel(
         }
     }
 
-    fun postJoinThunder(lightId : Int) {
+    fun postJoinThunder(lightId: Int) {
         viewModelScope.launch {
             kotlin.runCatching { postJoinThunderUseCase(lightId) }
                 .onSuccess {

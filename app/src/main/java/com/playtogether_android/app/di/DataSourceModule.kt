@@ -20,12 +20,12 @@ import org.koin.dsl.module
 val dataSourceModule = module {
     single<SignDataSource> { SignDataSourceImpl(get()) }
     single<LightDataSource> { LightDataSourceImpl(get()) }
-    single<OnBoardingDataSource>{OnBoardingDataSourceImpl(get())}
-    single<ThunderDataSource>{ThunderDataSourceImpl(get())}
-    single<MessageDataSource>{MessageDataSourceImpl(get())}
-    single<SendMessageDataSource>{SendMessageDataSourceImpl(get())}
-    single<ChatDataSource>{ChatDataSourceImpl(get())}
-    single<ThunderCreateDataSource>{ThunderCreateDataSourceImpl(get())}
-    single<MyPageDataSource> {MyPageDataSourceImpl(get())}
-    single<HomeDataSource>{HomeDataSourceImpl(get())}
+    single<OnBoardingDataSource> { OnBoardingDataSourceImpl(get()) }
+    single<ThunderDataSource> { ThunderDataSourceImpl(get()) }
+    single<MessageDataSource> { MessageDataSourceImpl(get()) }
+    single<SendMessageDataSource> { SendMessageDataSourceImpl(get()) }
+    single<ChatDataSource> { ChatDataSourceImpl(get()) }
+    single<ThunderCreateDataSource> { ThunderCreateDataSourceImpl(get()) }
+    single<MyPageDataSource> { MyPageDataSourceImpl(get()) }
+    single<HomeDataSource> { HomeDataSourceImpl(get()) }
 }

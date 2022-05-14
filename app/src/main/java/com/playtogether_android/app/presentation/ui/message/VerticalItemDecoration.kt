@@ -13,8 +13,8 @@ class VerticalItemDecoration : RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildAdapterPosition(view)
-        if(position==0){
-            outRect.top=32
+        if (position == 0) {
+            outRect.top = 32
         }
     }
 }
