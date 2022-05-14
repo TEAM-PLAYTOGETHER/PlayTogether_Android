@@ -43,10 +43,10 @@ class OpenThunderDetailActivity :
 
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
-            Glide
-                .with(this)
-                .load(it.image)
-                .into(binding.ivOpenthunderdetailImage)
+//            Glide
+//                .with(this)
+//                .load(it.image)
+//                .into(binding.ivOpenthunderdetailImage)
         }
 
         thunderDetailViewModel.organizerInfo.observe(this) {

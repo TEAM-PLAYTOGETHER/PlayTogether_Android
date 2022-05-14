@@ -11,7 +11,6 @@ class GetThunderDetailUseCase(private val repo: ThunderRepository) {
                 it.category,
                 it.date,
                 it.description,
-                it.image,
                 it.lightId,
                 it.lightMemberCnt,
                 it.peopleCnt,

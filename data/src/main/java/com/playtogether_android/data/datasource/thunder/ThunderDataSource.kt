@@ -1,6 +1,5 @@
 package com.playtogether_android.data.datasource.thunder
 
-import com.playtogether_android.data.model.response.thunder.ResTempThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
 import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
@@ -20,6 +19,4 @@ interface ThunderDataSource {
 
     //번개 상세 뷰
     suspend fun getThunderDetail(thunderId: Int): ResThunderDetailData
-
-    suspend fun getTempThunderDetail(thunderId: Int) : ResTempThunderDetailData
 }

@@ -1,6 +1,5 @@
 package com.playtogether_android.data.mapper.thunder
 
-import com.playtogether_android.data.model.response.thunder.ResTempThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
 import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
@@ -56,7 +55,6 @@ object ThunderMapper {
                 it.category,
                 it.date,
                 it.description,
-                it.image,
                 it.lightId,
                 it.lightMemberCnt,
                 it.peopleCnt,
@@ -66,19 +64,5 @@ object ThunderMapper {
             )
         }
     }
-    fun mapperToTempThunderDetail(it: ResTempThunderDetailData): List<ThunderTempDetailData> {
-        return it.data.map {
-            ThunderTempDetailData(
-                it.category,
-                it.date,
-                it.description,
-                it.lightId,
-                it.lightMemberCnt,
-                it.peopleCnt,
-                it.place,
-                it.time,
-                it.title
-            )
-        }
-    }
+
 }

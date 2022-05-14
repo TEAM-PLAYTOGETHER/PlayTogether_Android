@@ -18,8 +18,6 @@ interface ThunderRepository {
     //    번개 상세 뷰
     suspend fun getThunderDetail(thunderId: Int): List<ThunderDetailData>
 
-    suspend fun getTempThunderDetail(thunderId: Int): List<ThunderTempDetailData>
-
     suspend fun getThunderDetailMember(thunderId: Int): List<Member>
 
     suspend fun getThunderDetailOrganizer(thunderId: Int): List<Organizer>

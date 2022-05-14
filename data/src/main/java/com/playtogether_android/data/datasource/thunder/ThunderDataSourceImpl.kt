@@ -1,7 +1,6 @@
 package com.playtogether_android.data.datasource.thunder
 
 import com.playtogether_android.data.api.thunder.ThunderService
-import com.playtogether_android.data.model.response.thunder.ResTempThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
 import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
@@ -32,7 +31,4 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
         return service.getThunderDetail(thunderId)
     }
 
-    override suspend fun getTempThunderDetail(thunderId: Int): ResTempThunderDetailData {
-        return service.getTempThunderDetail(thunderId)
-    }
 }
