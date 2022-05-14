@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.message
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -39,7 +40,7 @@ class ChatAdapter2 : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) 
         val layoutInflater = LayoutInflater.from(parent.context)
         val bindingMyChat = ItemMyChatBinding.inflate(layoutInflater, parent, false)
         val bindingOtherChat = ItemOtherChatBinding.inflate(layoutInflater, parent, false)
-
+        Log.d("checkViewType", "${viewType}")
         return when (viewType) {
             ChatData.TYPE_MY_MESSAGE -> ChatAdapter.MyChatViewHolder(bindingMyChat)
             ChatData.TYPE_FRIEND_MESSAGE -> ChatAdapter.OtherChatViewHolder(bindingOtherChat)
@@ -54,5 +55,9 @@ class ChatAdapter2 : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) 
             is ChatAdapter.OtherChatViewHolder -> holder.bind(item)
             else -> throw IllegalArgumentException()
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position).getViewType()
     }
 }

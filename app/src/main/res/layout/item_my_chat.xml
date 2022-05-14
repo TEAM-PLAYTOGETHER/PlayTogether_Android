@@ -23,6 +23,7 @@
             android:background="@drawable/rectangle_radius_10"
             android:backgroundTint="@color/gray_gray05"
             android:text="@{data.content}"
+            android:maxEms="20"
             android:fontFamily="@font/pretendard_medium"
             android:includeFontPadding="false"
             android:paddingHorizontal="12dp"

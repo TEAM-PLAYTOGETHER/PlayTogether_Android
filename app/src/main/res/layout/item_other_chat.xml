@@ -21,6 +21,7 @@
             android:background="@drawable/rectangle_radius_10"
             android:backgroundTint="@color/gray_black"
             android:text="@{data.content}"
+            android:maxEms="20"
             android:fontFamily="@font/pretendard_medium"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"

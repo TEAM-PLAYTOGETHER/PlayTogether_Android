@@ -10,6 +10,7 @@ import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel
 import com.playtogether_android.app.presentation.ui.message.viewmodel.SendMessageViewModel
+import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.message.PostSendMessageData
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,7 +27,6 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         getChatAll()
         changeSendImage()
         initAdapter()
-        //removeTimeAll()
 
         binding.ivSendMessage.setOnClickListener {
             addChat()
@@ -34,6 +34,10 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         }
         binding.ivInChattingBack.setOnClickListener {
             finish()
+        }
+        binding.ivInChattingRefresh.setOnClickListener{
+            getChatAll()
+            shortToast("새로고침 되었습니다")
         }
     }
 
