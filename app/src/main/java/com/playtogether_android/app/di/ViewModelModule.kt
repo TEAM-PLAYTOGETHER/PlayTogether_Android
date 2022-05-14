@@ -1,5 +1,6 @@
 package com.playtogether_android.app.di
 
+import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderViewModel
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
 import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel
@@ -38,6 +39,7 @@ val viewModelModule = module {
 
     //thunder
     viewModel { ThunderViewModel(get(), get(), get()) }
+    viewModel { CreateThunderViewModel(get())}
 
 //    ThunderDetail
     viewModel { ThunderDetailViewModel(get(), get(), get(), get()) }

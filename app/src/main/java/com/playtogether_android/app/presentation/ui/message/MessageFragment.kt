@@ -7,7 +7,6 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMessageBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.message.viewmodel.MessageViewModel
-import com.playtogether_android.domain.model.message.MessageData
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MessageFragment :
