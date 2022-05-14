@@ -52,7 +52,7 @@ class ThunderCategoryListAdapter :
         when (category) {
             CATEGORY_EAT -> return R.drawable.img_eat_list
             CATEGORY_GO -> return R.drawable.img_go_list
-            CATEGORY_DO -> return R.drawable.img_go_list
+            CATEGORY_DO -> return R.drawable.img_do_list
             else -> return -1
         }
     }

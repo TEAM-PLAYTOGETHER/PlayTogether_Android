@@ -68,7 +68,7 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
             when (category) {
                 ThunderCategoryListAdapter.CATEGORY_EAT -> return R.drawable.img_eat_list
                 ThunderCategoryListAdapter.CATEGORY_GO -> return R.drawable.img_go_list
-                ThunderCategoryListAdapter.CATEGORY_DO -> return R.drawable.img_go_list
+                ThunderCategoryListAdapter.CATEGORY_DO -> return R.drawable.img_do_list
                 else -> return -1
             }
         }
