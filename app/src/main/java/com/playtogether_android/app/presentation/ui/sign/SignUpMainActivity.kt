@@ -24,8 +24,6 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initIdTextField()
-        initPwTextField()
         initPwCheckTextField()
         pwCheckTextWatcher()
         pwTextWatcher()
@@ -33,22 +31,46 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         idTextWatcher()
         backBtn()
         duplicationClickEvent()
+        nullCheck()
     }
 
 
-    //id editText 클릭 리스너
-    private fun initIdTextField() = with(binding) {
-        if (etSignupmainId.text.toString() != "") {
-            etSignupmainId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+
+    //빈칸 체크 클릭 리스너
+    private fun nullCheck() {
+        binding.etSignupmainId.setOnClickListener {
+            initTextFieldCheck()
+        }
+
+        binding.etSignupmainPw.setOnClickListener {
+            initTextFieldCheck()
+        }
+
+        binding.etSignupmainPwCheck.setOnClickListener {
+            initTextFieldCheck()
         }
     }
 
-
-    //pw editText 클릭 리스너
-    private fun initPwTextField() = with(binding) {
-        etSignupmainPw.setOnClickListener {
-            etSignupmainPw.isFocused
+    //빈칸 체크
+    private fun initTextFieldCheck() {
+        if (binding.etSignupmainPw.text.toString() != "") {
+            binding.etSignupmainPw.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+        } else {
+            binding.etSignupmainPw.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
         }
+
+        if (binding.etSignupmainId.text.toString() != "") {
+            binding.etSignupmainId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+        } else {
+            binding.etSignupmainId.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
+        }
+
+        if (binding.etSignupmainPwCheck.text.toString() != "") {
+            binding.etSignupmainPwCheck.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+        } else {
+            binding.etSignupmainPwCheck.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
+        }
+
     }
 
     //pw check editText 클릭 리스너
@@ -130,6 +152,9 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             }
 
             override fun afterTextChanged(p0: Editable?) {
+
+                initTextFieldCheck()
+
                 val id = signViewModel.id.value
 
                 if (id != etSignupmainId.text.toString()) {
@@ -157,6 +182,8 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
             override fun afterTextChanged(p0: Editable?) {
 
+                initTextFieldCheck()
+
                 if (etSignupmainPw.text.toString() == "") {
                     tvSignupmainPwExpression.visibility = View.VISIBLE
                     tvSignupmainPwExpressionOk.visibility = View.INVISIBLE
@@ -176,6 +203,9 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
+
+                initTextFieldCheck()
+
                 if (etSignupmainPwCheck.text.toString() == "") {
                     tvSignupmainPwExpressionCheck.visibility = View.VISIBLE
                     tvSignupmainPwExpressionCheckTrue.visibility = View.INVISIBLE
