@@ -54,6 +54,9 @@ class TabOpenFragment : BaseFragment<FragmentTabOpenBinding>(R.layout.fragment_t
             thunderListAdapter.thunderList = thunderTabListData
 
             Log.d("connect-test", it.toString())
+
+            // 오픈한 리스트 정렬(임시)
+            thunderTabListData.sortBy { it.date }
         }
     }
 
