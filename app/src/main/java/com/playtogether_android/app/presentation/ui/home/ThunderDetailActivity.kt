@@ -48,6 +48,8 @@ class ThunderDetailActivity :
                                     this@ThunderDetailActivity,
                                     ThunderAppliedActivity::class.java
                                 )
+                                Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
+                            intent.putExtra("thunderId", thunderId)
                             startActivity(intent)
                             this@ThunderDetailActivity.finish()
                         } else {

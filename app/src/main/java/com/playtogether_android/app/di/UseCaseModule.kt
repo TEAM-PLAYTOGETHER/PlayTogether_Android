@@ -1,5 +1,9 @@
 package com.playtogether_android.app.di
 
+
+import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCase
+import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
+import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
 import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
@@ -53,6 +57,10 @@ val useCaseModule = module {
 
     //home
     single { PostJoinThunderUseCase(get()) }
+    single { PostJoinThunderUseCase(get()) }
+    single { GetThunderJoinEndUseCase(get()) }
+    single { GetThunderJoinEndMemberUseCase(get()) }
+    single { GetThunderJoinEndOrganizerUseCase(get()) }
 
 }
 
