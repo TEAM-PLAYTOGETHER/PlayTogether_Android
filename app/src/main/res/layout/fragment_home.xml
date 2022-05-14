@@ -79,7 +79,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_editor_absoluteX="0dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_my_page_main"
@@ -102,6 +104,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toStartOf="@id/iv_home_go"
                             android:layout_marginTop="32dp"
                             android:background="@drawable/img_eat"
                             android:src="@drawable/ic_home_stoke"
@@ -131,10 +135,11 @@
                             android:id="@+id/iv_home_go"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginHorizontal="10dp"
                             android:background="@drawable/img_go"
                             android:src="@drawable/ic_home_stoke"
                             app:layout_constraintStart_toEndOf="@id/iv_home_eat"
+                            app:layout_constraintEnd_toStartOf="@id/iv_home_do"
                             app:layout_constraintTop_toTopOf="@id/iv_home_eat" />
 
                         <TextView
@@ -161,7 +166,9 @@
                             android:id="@+id/iv_home_do"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             android:background="@drawable/img_do"
                             android:src="@drawable/ic_home_stoke"
                             app:layout_constraintStart_toEndOf="@id/iv_home_go"
@@ -228,7 +235,6 @@
 
         </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>
 
-        <!--        </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
