@@ -8,6 +8,7 @@ import com.playtogether_android.data.api.message.MessageSendService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.sign.SignService
+import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.api.thunder.ThunderService
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -38,6 +39,10 @@ val networkModule = module {
 
     single<ChatService>{
         get<Retrofit>().create(ChatService::class.java)
+    }
+
+    single<ThunderCreateService>{
+        get<Retrofit>().create(ThunderCreateService::class.java)
     }
 
     single<MyPageService>{
