@@ -35,7 +35,6 @@ class ThunderAppliedActivity :
     private fun initData() {
         thunderDetailViewModel.thunderDetail(getThunderId())
         thunderDetailViewModel.thunderDetailMember(getThunderId())
-        shortToast("thunderId : ${getThunderId()}")
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
             binding.tvAppliedMemberCnt.text =

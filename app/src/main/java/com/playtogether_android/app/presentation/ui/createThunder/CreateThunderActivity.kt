@@ -78,7 +78,6 @@ class CreateThunderActivity :
             if (it.success) {
                 val intent = Intent(this, OpenThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", it.lightId)
-                shortToast("thunderId : ${it.lightId}")
                 startActivity(intent)
                 finish()
             } else {

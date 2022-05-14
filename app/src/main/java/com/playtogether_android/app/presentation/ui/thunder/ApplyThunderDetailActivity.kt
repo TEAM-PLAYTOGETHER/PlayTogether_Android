@@ -94,8 +94,6 @@ class ApplyThunderDetailActivity :
                     thunderDetailViewModel.isConfirm.observe(this@ApplyThunderDetailActivity) { success ->
                         if (success) {
                             showConfirmDialog()
-                        } else {
-                            shortToast("실패")
                         }
                     }
                 }

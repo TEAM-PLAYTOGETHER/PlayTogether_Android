@@ -71,10 +71,9 @@ class OpenThunderDetailActivity :
                 if (num == 1) {
                     thunderDetailViewModel.thunderDelete(thunderId)
                     thunderDetailViewModel.isDelete.observe(this@OpenThunderDetailActivity) { success ->
-                        if(success) {
+                        if (success) {
                             showConfirmDialog()
-                        } else
-                            shortToast("실패")
+                        }
                     }
                 }
             }
