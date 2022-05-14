@@ -1,5 +1,6 @@
 package com.playtogether_android.data.api.thunder
 
+import com.playtogether_android.data.model.response.thunder.ResTempThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
 import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
@@ -29,4 +30,9 @@ interface ThunderService {
     suspend fun getThunderDetail(
         @Path("thunderId") thunderId: Int,
     ): ResThunderDetailData
+
+    @GET("light/{thunderId}")
+    suspend fun getTempThunderDetail(
+        @Path("thunderId") thunderId: Int,
+    ): ResTempThunderDetailData
 }

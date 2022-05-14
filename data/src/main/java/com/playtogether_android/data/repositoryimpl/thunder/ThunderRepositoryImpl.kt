@@ -33,6 +33,14 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
         return ThunderMapper.mapperToThunderDetail(thunderDataSource.getThunderDetail(thunderId))
     }
 
+    override suspend fun getTempThunderDetail(thunderId: Int): List<ThunderTempDetailData> {
+        return ThunderMapper.mapperToTempThunderDetail(
+            thunderDataSource.getTempThunderDetail(
+                thunderId
+            )
+        )
+    }
+
     override suspend fun getThunderDetailMember(thunderId: Int): List<Member> {
         val data = thunderDataSource.getThunderDetail(thunderId).data
         return ThunderMapper.mapperToThunderDetailMember(data)

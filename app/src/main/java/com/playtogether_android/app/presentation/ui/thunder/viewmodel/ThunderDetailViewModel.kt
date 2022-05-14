@@ -8,17 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.thunder.Member
 import com.playtogether_android.domain.model.thunder.Organizer
 import com.playtogether_android.domain.model.thunder.ThunderDetailData
-import com.playtogether_android.domain.usecase.thunder.GetThunderDetailMemberUseCase
-import com.playtogether_android.domain.usecase.thunder.GetThunderDetailOrganizerUseCase
-import com.playtogether_android.domain.usecase.thunder.GetThunderDetailUseCase
-import com.playtogether_android.domain.usecase.thunder.PostThunderJoinCancelUseCase
+import com.playtogether_android.domain.model.thunder.ThunderTempDetailData
+import com.playtogether_android.domain.usecase.thunder.*
 import kotlinx.coroutines.launch
 
 class ThunderDetailViewModel(
     private val thunderJoinCancelUseCase: PostThunderJoinCancelUseCase,
     private val thunderDetailUseCase: GetThunderDetailUseCase,
     private val thunderDetailMemberUseCase: GetThunderDetailMemberUseCase,
-    private val thunderDetailOrganizerUseCase: GetThunderDetailOrganizerUseCase
+    private val thunderDetailOrganizerUseCase: GetThunderDetailOrganizerUseCase,
+    private val thunderDetailTempUseCase: GetThunderTempDetailUseCase
 ) : ViewModel() {
 
     private val _isConfirm = MutableLiveData<Boolean>()
@@ -26,6 +25,9 @@ class ThunderDetailViewModel(
 
     private val _detailItemList = MutableLiveData<ThunderDetailData>()
     val detailItemList: LiveData<ThunderDetailData> = _detailItemList
+
+    private val _detailTempItemList = MutableLiveData<ThunderTempDetailData>()
+    val detailTempItemList: LiveData<ThunderTempDetailData> = _detailTempItemList
 
     private val _memberList = MutableLiveData<List<Member>>()
     val memberList: LiveData<List<Member>> = _memberList
@@ -54,6 +56,18 @@ class ThunderDetailViewModel(
             }.onSuccess {
                 _detailItemList.value = it
                 Log.d("img", "${it.image}")
+            }.onFailure {
+                Log.e("thunderDetail", "failure")
+            }
+        }
+    }
+
+    fun thunderDetailTemp(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                thunderDetailTempUseCase(thunderId)
+            }.onSuccess {
+                _detailTempItemList.value = it
             }.onFailure {
                 Log.e("thunderDetail", "failure")
             }

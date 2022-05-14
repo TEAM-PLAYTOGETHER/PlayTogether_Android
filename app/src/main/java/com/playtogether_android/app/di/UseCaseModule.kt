@@ -45,13 +45,14 @@ val useCaseModule = module {
     single { GetThunderDetailUseCase(get()) }
     single { GetThunderDetailMemberUseCase(get()) }
     single { GetThunderDetailOrganizerUseCase(get()) }
+    single { GetThunderTempDetailUseCase(get()) }
 
 
     //mypage
     single { GetUserCheckUseCase(get()) }
 
     //home
-    single {PostJoinThunderUseCase(get())}
+    single { PostJoinThunderUseCase(get()) }
 
 }
 
