@@ -373,7 +373,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
-                            android:text="@{String.valueOf(detailData.peopleCnt)}"
+                            android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
                             app:layout_constraintTop_toTopOf="@id/tv_applicant_slash"
                             tools:text="6" />

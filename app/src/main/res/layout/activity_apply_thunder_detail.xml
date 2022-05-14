@@ -409,7 +409,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="@{String.valueOf(detailData.peopleCnt)}"
+                            android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
