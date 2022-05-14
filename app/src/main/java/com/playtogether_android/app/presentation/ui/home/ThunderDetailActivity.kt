@@ -3,13 +3,11 @@ package com.playtogether_android.app.presentation.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
-import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
@@ -44,9 +42,12 @@ class ThunderDetailActivity :
                     val thunderId = intent.getIntExtra("thunderId", -1)
                     homeViewModel.postJoinThunder(thunderId)
                     homeViewModel.joinThunder.observe(this@ThunderDetailActivity) {
-                        if(it.success) {
+                        if (it.success) {
                             val intent =
-                                Intent(this@ThunderDetailActivity, ThunderAppliedActivity::class.java)
+                                Intent(
+                                    this@ThunderDetailActivity,
+                                    ThunderAppliedActivity::class.java
+                                )
                             startActivity(intent)
                             this@ThunderDetailActivity.finish()
                         } else {

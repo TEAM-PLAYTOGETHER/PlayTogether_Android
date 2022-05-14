@@ -82,7 +82,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         tvSignupmainNext.setOnClickListener {
             if (tvSignupmainNext.isSelected) {
                 val intent = Intent(this@SignUpMainActivity, SignUpInfoActivity::class.java)
-                intent.putExtra("userLoginId",etSignupmainId.text.toString())
+                intent.putExtra("userLoginId", etSignupmainId.text.toString())
                 intent.putExtra("password", etSignupmainPwCheck.text.toString())
                 startActivity(intent)
                 finish()
@@ -92,7 +92,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     //다음 버튼 활성화
     private fun allChecked() = with(binding) {
-        if(ivIdCheck.visibility == View.VISIBLE && ivPwCheck.visibility == View.VISIBLE && ivPwCheckCheck.visibility== View.VISIBLE) {
+        if (ivIdCheck.visibility == View.VISIBLE && ivPwCheck.visibility == View.VISIBLE && ivPwCheckCheck.visibility == View.VISIBLE) {
             tvSignupmainNext.isSelected = true
         }
     }
@@ -229,7 +229,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         )
 
         signViewModel.idDuplicationCheck.observe(this) {
-            if(it.isUser == true) {
+            if (it.isUser == true) {
                 Log.d("중복확인", "중복되는 아이디 있음")
                 showApplyDialog()
             } else {
@@ -253,9 +253,9 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
 
     //customDialog
-    private fun showApplyDialog(){
+    private fun showApplyDialog() {
         val title = "중복된 아이디입니다"
-        val dialog= CustomDialog(this, title)
+        val dialog = CustomDialog(this, title)
         dialog.showOneChoiceDialog(R.layout.dialog_one_question)
     }
 

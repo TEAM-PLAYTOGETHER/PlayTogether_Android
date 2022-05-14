@@ -32,19 +32,19 @@ val viewModelModule = module {
     //message
     viewModel { MessageViewModel(get()) }
     viewModel { SendMessageViewModel(get()) }
-    viewModel{ ChatViewModel(get()) }
+    viewModel { ChatViewModel(get()) }
 
     //ThunderList
     viewModel { ThunderListViewModel(get()) }
 
     //thunder
     viewModel { ThunderViewModel(get(), get(), get()) }
-    viewModel { CreateThunderViewModel(get())}
+    viewModel { CreateThunderViewModel(get()) }
 
 //    ThunderDetail
     viewModel { ThunderDetailViewModel(get(), get(), get(), get()) }
 
-    viewModel {MyPageViewModel(get())}
+    viewModel { MyPageViewModel(get()) }
 
 
 }

@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeHotBinding
 import com.playtogether_android.app.presentation.ui.home.temp.TempData
 
-class HomeHotAdapter(
-
-) : ListAdapter<TempData, HomeHotAdapter.ViewHolder>(HomeComparator()) {
+class HomeHotAdapter : ListAdapter<TempData, HomeHotAdapter.ViewHolder>(HomeComparator()) {
     inner class ViewHolder(private val binding: ItemHomeHotBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: TempData) {

@@ -54,15 +54,13 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun initTextFieldCheck() {
         if (binding.etSigninPw.text.toString() != "") {
             binding.etSigninPw.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-        }
-        else {
+        } else {
             binding.etSigninPw.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
         }
 
         if (binding.etSigninId.text.toString() != "") {
             binding.etSigninId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-        }
-        else {
+        } else {
             binding.etSigninId.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
         }
 
@@ -110,7 +108,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                 intent.putExtra("userName", signViewModel.signIn.value!!.userName)
                 startActivity(intent)
                 finish()
-            } else  {
+            } else {
                 showApplyDialog()
             }
         }

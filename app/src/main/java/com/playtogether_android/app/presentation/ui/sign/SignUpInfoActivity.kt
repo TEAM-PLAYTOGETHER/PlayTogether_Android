@@ -48,7 +48,7 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
     private fun initGender() = with(binding) {
         tvSignupinfoMan.setOnClickListener {
             tvSignupinfoMan.isSelected = true
-            if(tvSignupinfoWoman.isSelected) {
+            if (tvSignupinfoWoman.isSelected) {
                 tvSignupinfoWoman.isSelected = false
                 activeNextBtn()
             }
@@ -56,7 +56,7 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
 
         tvSignupinfoWoman.setOnClickListener {
             tvSignupinfoWoman.isSelected = true
-            if(tvSignupinfoMan.isSelected) {
+            if (tvSignupinfoMan.isSelected) {
                 tvSignupinfoMan.isSelected = false
             }
             activeNextBtn()
@@ -116,8 +116,9 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
     }
 
     //다음 버튼 활성화
-    private fun activeNextBtn() = with(binding){
-        tvSignupinfoFinish.isSelected = etSignupinfoName.text.toString() != "" && etSignupinfoBirth.text.toString() != "" && (tvSignupinfoWoman.isSelected == true || tvSignupinfoMan.isSelected == true)
+    private fun activeNextBtn() = with(binding) {
+        tvSignupinfoFinish.isSelected =
+            etSignupinfoName.text.toString() != "" && etSignupinfoBirth.text.toString() != "" && (tvSignupinfoWoman.isSelected == true || tvSignupinfoMan.isSelected == true)
     }
 
     //다음으로 이동
@@ -127,7 +128,7 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
 
             //gender
             var gender = ""
-            if(binding.tvSignupinfoMan.isSelected) {
+            if (binding.tvSignupinfoMan.isSelected) {
                 gender = "남성"
                 Log.d("gender", gender)
             } else {
@@ -136,10 +137,11 @@ class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.acti
             }
 
 
-            signViewModel.requestSignUp.birth = binding.etSignupinfoBirth.text.toString().replace(".","-")
+            signViewModel.requestSignUp.birth =
+                binding.etSignupinfoBirth.text.toString().replace(".", "-")
             signViewModel.requestSignUp.gender = gender
 
-            if(binding.tvSignupinfoFinish.isSelected) {
+            if (binding.tvSignupinfoFinish.isSelected) {
 
                 signViewModel.postSignUp(
                     SignUpItem(
