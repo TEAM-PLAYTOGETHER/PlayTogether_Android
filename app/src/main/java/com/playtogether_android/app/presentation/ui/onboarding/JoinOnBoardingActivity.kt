@@ -88,9 +88,12 @@ class JoinOnBoardingActivity :
                 finish()
             } else {
                 Log.d("실패", "동아리가입")
-                val title = "존재하지 않는 코드입니다"
-                val dialog = CustomDialog(this, title)
-                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+//                val title = "존재하지 않는 코드입니다"
+//                val dialog = CustomDialog(this, title)
+//                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
             }
         }
     }
