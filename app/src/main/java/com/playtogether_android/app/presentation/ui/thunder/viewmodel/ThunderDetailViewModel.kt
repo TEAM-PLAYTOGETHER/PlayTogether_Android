@@ -55,9 +55,9 @@ class ThunderDetailViewModel(
                 thunderDetailUseCase(thunderId)
             }.onSuccess {
                 _detailItemList.value = it
-                Log.d("img", "${it.image}")
+                Log.d("thunderDetail-Success", "${it.image}")
             }.onFailure {
-                Log.e("thunderDetail", "${it.message}")
+                Log.e("thunderDetail-Failure", "${it.message}")
             }
         }
     }
@@ -68,6 +68,7 @@ class ThunderDetailViewModel(
                 thunderDetailOrganizerUseCase(thunderId)
             }.onSuccess {
                 _organizerInfo.value = it
+                Log.d("thunderDetailOriganizer-Success", "${it.userLoginId}")
             }.onFailure {
                 Log.e("thunderDetailOrganizer", "failure")
 
