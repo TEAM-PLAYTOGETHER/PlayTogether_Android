@@ -24,19 +24,17 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initPwCheckTextField()
+        nullCheck()
         pwCheckTextWatcher()
         pwTextWatcher()
         actvieNextBtn()
         idTextWatcher()
         backBtn()
         duplicationClickEvent()
-        nullCheck()
     }
 
 
-
-    //빈칸 체크 클릭 리스너
+    //빈칸 체크
     private fun nullCheck() {
         binding.etSignupmainId.setOnClickListener {
             initTextFieldCheck()
@@ -51,18 +49,19 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
         }
     }
 
-    //빈칸 체크
-    private fun initTextFieldCheck() {
-        if (binding.etSignupmainPw.text.toString() != "") {
-            binding.etSignupmainPw.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-        } else {
-            binding.etSignupmainPw.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
-        }
 
+    //TextField 빈칸 체크
+    private fun initTextFieldCheck() {
         if (binding.etSignupmainId.text.toString() != "") {
             binding.etSignupmainId.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
         } else {
             binding.etSignupmainId.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
+        }
+
+        if (binding.etSignupmainPw.text.toString() != "") {
+            binding.etSignupmainPw.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+        } else {
+            binding.etSignupmainPw.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
         }
 
         if (binding.etSignupmainPwCheck.text.toString() != "") {
@@ -73,12 +72,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
 
     }
 
-    //pw check editText 클릭 리스너
-    private fun initPwCheckTextField() = with(binding) {
-        etSignupmainPwCheck.setOnClickListener {
-            etSignupmainPwCheck.isFocused
-        }
-    }
+
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
