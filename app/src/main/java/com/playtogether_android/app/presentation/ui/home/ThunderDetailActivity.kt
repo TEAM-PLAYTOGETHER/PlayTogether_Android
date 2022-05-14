@@ -123,10 +123,11 @@ class ThunderDetailActivity :
         binding.ivThunderdetailIcon.setOnClickListener {
             var userLoginId: String? = null
             thunderDetailViewModel.organizerInfo.observe(this) {
-                userLoginId = it.userLoginId.toString()
+                userLoginId = it.userLoginId
             }
             var intent = Intent(this, OthersMyPageActivity::class.java)
-            intent.putExtra("userLoginId", userLoginId)
+            intent.putExtra("userLoginId", userLoginId!!)
+            Log.d("userLoginId-putExtra-Detail", userLoginId!!)
             startActivity(intent)
         }
 
