@@ -19,11 +19,6 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
 
-    //sign
-//    single {PostSignIdUseCase(get())}
-//    single {PostSignUpUseCaes(get())}
-//    single {PostSignInUseCase(get())}
-
     //onboarding
     single { PostRegisterCrewUseCase(get()) }
     single { PostSignIdUseCase(get()) }
@@ -56,7 +51,6 @@ val useCaseModule = module {
     single { GetUserCheckUseCase(get()) }
 
     //home
-    single { PostJoinThunderUseCase(get()) }
     single { PostJoinThunderUseCase(get()) }
     single { GetThunderJoinEndUseCase(get()) }
     single { GetThunderJoinEndMemberUseCase(get()) }
