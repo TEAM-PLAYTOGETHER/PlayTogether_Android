@@ -18,9 +18,16 @@ class MessageFragment :
         super.onViewCreated(view, savedInstanceState)
         messageViewModel.getMessageList()
         initAdapter()
+        refreshView()
+    }
+
+    override fun onResume() {
+        super.onResume()
         messageViewModel.messageData.observe(viewLifecycleOwner) {
-            adapter.messageList.addAll(it)
-            adapter.notifyDataSetChanged()
+            if(adapter.messageList!=it){
+                adapter.messageList.addAll(it)
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -33,5 +40,20 @@ class MessageFragment :
             startActivity(intent)
         }
         binding.rvMessageRoom.adapter = adapter
+
+        messageViewModel.messageData.observe(viewLifecycleOwner) {
+            adapter.messageList.addAll(it)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun refreshView() {
+        with(binding) {
+            lsrlMessageContainer.setOnRefreshListener {
+                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
+                initAdapter()
+                lsrlMessageContainer.isRefreshing = false
+            }
+        }
     }
 }
