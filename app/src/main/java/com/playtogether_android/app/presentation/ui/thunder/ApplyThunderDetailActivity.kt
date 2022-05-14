@@ -60,11 +60,13 @@ class ApplyThunderDetailActivity :
         binding.clThunderOpenerMessage.setOnClickListener {
 //           쪽지 보내기로 이동
             var organizerId = -1
+            val thunderId = intent.getIntExtra("thunderId", -1)
             thunderDetailViewModel.organizerInfo.observe(this) {
                 organizerId = it.organizerId
             }
             val intent = Intent(this, ChattingActivity::class.java)
             intent.putExtra("organizerId", organizerId)
+            intent.putExtra("thunderId", thunderId)
             startActivity(intent)
         }
 
@@ -80,7 +82,7 @@ class ApplyThunderDetailActivity :
             thunderDetailViewModel.organizerInfo.observe(this) {
                 organizerId = it.organizerId
             }
-            Log.d("뭐가 문제일까", ""+organizerId)
+            Log.d("뭐가 문제일까", "" + organizerId)
             var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             startActivity(intent)
