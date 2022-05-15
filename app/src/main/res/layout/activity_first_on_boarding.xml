@@ -149,11 +149,10 @@
                 android:id="@+id/rg_first_onboarding_second_mbti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/rg_first_onboarding_first_mbti"
                 app:layout_constraintEnd_toStartOf="@+id/rg_first_onboarding_third_mbti"
+                app:layout_constraintStart_toEndOf="@+id/rg_first_onboarding_first_mbti"
                 app:layout_constraintTop_toTopOf="parent">
 
 
@@ -189,7 +188,6 @@
                 android:id="@+id/rg_first_onboarding_third_mbti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rg_first_onboarding_forth_mbti"
