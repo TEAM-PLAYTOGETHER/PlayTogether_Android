@@ -13,6 +13,7 @@ class ThunderCreateDataSourceImpl(private val service : ThunderCreateService) : 
         val a = service.postThunderCreate(crewId, requestThunderCreate)
         Log.d("createThunder", "datasourceImpl")
         Log.d("createThunder", "${a.message}")
+        Log.d("createThunder", "crewId${crewId}")
         return a
     }
 }
