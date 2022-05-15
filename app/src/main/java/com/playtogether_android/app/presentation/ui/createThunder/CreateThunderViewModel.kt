@@ -15,7 +15,7 @@ class CreateThunderViewModel(
 ) : ViewModel() {
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()
     val getThunderCreateData: LiveData<GetThunderCreateData> get() = _getThunderCreateData
-    val crewId = 1
+    val crewId = 56
     fun postThunderCreate(postThunderCreateData: PostThunderCreateData) {
         viewModelScope.launch {
             kotlin.runCatching { postThunderCreateUseCase(crewId, postThunderCreateData) }
