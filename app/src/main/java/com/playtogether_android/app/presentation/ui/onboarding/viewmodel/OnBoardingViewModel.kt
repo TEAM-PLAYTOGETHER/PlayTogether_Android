@@ -5,9 +5,12 @@ import androidx.lifecycle.*
 import com.playtogether_android.domain.model.onboarding.RegisterCrewData
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class OnBoardingViewModel(
+@HiltViewModel
+class OnBoardingViewModel @Inject constructor(
     val postRegisterCrewUseCase: PostRegisterCrewUseCase
 ) : ViewModel() {
 

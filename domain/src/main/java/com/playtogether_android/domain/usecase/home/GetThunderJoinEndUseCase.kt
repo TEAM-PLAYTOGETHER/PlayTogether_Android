@@ -3,9 +3,10 @@ package com.playtogether_android.domain.usecase.home
 import com.playtogether_android.domain.model.home.ThunderJoinEndData
 import com.playtogether_android.domain.model.thunder.ThunderDetailData
 import com.playtogether_android.domain.repository.home.HomeRepository
+import javax.inject.Inject
 
-class GetThunderJoinEndUseCase(private val repository: HomeRepository) {
-    suspend operator fun invoke(lightId : Int) : ThunderJoinEndData {
+class GetThunderJoinEndUseCase @Inject constructor(private val repository: HomeRepository) {
+    suspend operator fun invoke(lightId: Int): ThunderJoinEndData {
         lateinit var data: ThunderJoinEndData
         repository.getThunderJoinEnd(lightId).map {
             data = ThunderJoinEndData(

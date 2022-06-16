@@ -5,25 +5,25 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignInBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.FirstOnBoardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.domain.model.sign.SignInItem
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
-
+@AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
 
-    private val signViewModel: SignViewModel by viewModel()
+    private val signViewModel: SignViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initSignUpBtn()
         idTextWatcher()
         pwTextWatcher()

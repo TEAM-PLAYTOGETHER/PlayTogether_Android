@@ -10,16 +10,16 @@ import com.playtogether_android.domain.model.home.JoinThunderData
 import com.playtogether_android.domain.model.home.ThunderJoinEndData
 import com.playtogether_android.domain.model.home.ThunderJoinEndMember
 import com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer
-import com.playtogether_android.domain.model.mypage.UserCheckData
-import com.playtogether_android.domain.model.thunder.Member
-import com.playtogether_android.domain.model.thunder.Organizer
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
 import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     val postJoinThunderUseCase: PostJoinThunderUseCase,
     val getThunderJoinEndUseCase: GetThunderJoinEndUseCase,
     val getThunderJoinEndMemberUseCase: GetThunderJoinEndMemberUseCase,
@@ -137,6 +137,5 @@ class HomeViewModel(
             }
         }
     }
-
 
 }

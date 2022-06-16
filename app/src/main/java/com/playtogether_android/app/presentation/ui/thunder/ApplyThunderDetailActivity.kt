@@ -14,12 +14,14 @@ import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDet
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.imageNullCheck
 import com.playtogether_android.app.util.shortToast
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
 
+@AndroidEntryPoint
 class ApplyThunderDetailActivity :
     BaseActivity<ActivityApplyThunderDetailBinding>(R.layout.activity_apply_thunder_detail) {
 
-    private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
+    private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
     private lateinit var applicantListAdapter: ApplicantListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

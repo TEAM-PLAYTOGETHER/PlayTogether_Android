@@ -8,9 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.message.GetSendMessageData
 import com.playtogether_android.domain.model.message.PostSendMessageData
 import com.playtogether_android.domain.usecase.message.PostSendMessageUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SendMessageViewModel(
+@HiltViewModel
+class SendMessageViewModel @Inject constructor(
     val postSendMessageUseCase: PostSendMessageUseCase
 ) : ViewModel() {
     private val _getSendMessage = MutableLiveData<GetSendMessageData>()

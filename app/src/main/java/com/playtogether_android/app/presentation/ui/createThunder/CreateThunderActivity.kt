@@ -16,14 +16,16 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class CreateThunderActivity :
     BaseActivity<ActivityCreateThunderBinding>(R.layout.activity_create_thunder) {
     private var imageClicked = false
     private var infiniteChecked = false
-    private val createThunderViewModel: CreateThunderViewModel by viewModel()
+    private val createThunderViewModel: CreateThunderViewModel by viewModels()
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var category: String
 

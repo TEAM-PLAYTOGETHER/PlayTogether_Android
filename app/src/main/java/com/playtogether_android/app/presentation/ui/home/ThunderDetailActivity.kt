@@ -12,12 +12,14 @@ import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ThunderDetailActivity :
     BaseActivity<ActivityThunderDetailBinding>(R.layout.activity_thunder_detail) {
-    private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
-    private val homeViewModel: HomeViewModel by viewModel()
+    private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     //val lightId = intent.getIntExtra("thunderId",0)
 
@@ -130,7 +132,7 @@ class ThunderDetailActivity :
             var intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("userLoginId", userLoginId)
             intent.putExtra("organizerId", organizerId)
-            intent.putExtra("organizerName",organizerName)
+            intent.putExtra("organizerName", organizerName)
 
             startActivity(intent)
         }

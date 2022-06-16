@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentTabLikeBinding
@@ -11,13 +12,14 @@ import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TabLikeFragment : BaseFragment<FragmentTabLikeBinding>(R.layout.fragment_tab_like) {
 
     private lateinit var thunderListAdapter: ThunderListAdapter
 
-    private val thunderViewModel: ThunderViewModel by viewModel()
+    private val thunderViewModel: ThunderViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

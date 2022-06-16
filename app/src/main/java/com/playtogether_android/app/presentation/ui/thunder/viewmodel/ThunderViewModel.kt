@@ -9,9 +9,12 @@ import com.playtogether_android.domain.model.thunder.ThunderTabListData
 import com.playtogether_android.domain.usecase.thunder.GetApplyListUseCase
 import com.playtogether_android.domain.usecase.thunder.GetLikeListUseCase
 import com.playtogether_android.domain.usecase.thunder.GetOpenListUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ThunderViewModel(
+@HiltViewModel
+class ThunderViewModel @Inject constructor(
     val getApplyListUseCase: GetApplyListUseCase,
     val getOpenListUseCase: GetOpenListUseCase,
     val getLikeListUseCase: GetLikeListUseCase

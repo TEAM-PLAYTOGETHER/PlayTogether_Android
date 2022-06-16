@@ -9,9 +9,12 @@ import com.playtogether_android.domain.model.thunder.Member
 import com.playtogether_android.domain.model.thunder.Organizer
 import com.playtogether_android.domain.model.thunder.ThunderDetailData
 import com.playtogether_android.domain.usecase.thunder.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ThunderDetailViewModel(
+@HiltViewModel
+class ThunderDetailViewModel @Inject constructor(
     private val thunderJoinCancelUseCase: PostThunderJoinCancelUseCase,
     private val thunderDetailUseCase: GetThunderDetailUseCase,
     private val thunderDetailMemberUseCase: GetThunderDetailMemberUseCase,

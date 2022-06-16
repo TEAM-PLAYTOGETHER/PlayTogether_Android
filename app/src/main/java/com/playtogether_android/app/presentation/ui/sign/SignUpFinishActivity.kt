@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpFinishBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFinishActivity :
     BaseActivity<ActivitySignUpFinishBinding>(R.layout.activity_sign_up_finish) {
     override fun onCreate(savedInstanceState: Bundle?) {

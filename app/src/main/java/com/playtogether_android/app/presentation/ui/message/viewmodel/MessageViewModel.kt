@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.message.MessageData
 import com.playtogether_android.domain.usecase.message.GetMessageUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MessageViewModel(
+@HiltViewModel
+class MessageViewModel @Inject constructor(
     val getMessageUseCase: GetMessageUseCase
 ) : ViewModel() {
     private val _messageData = MutableLiveData<List<MessageData>>()

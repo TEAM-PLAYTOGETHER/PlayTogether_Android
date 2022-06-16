@@ -8,19 +8,21 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpInfoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.domain.model.sign.SignUpItem
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.String
 import java.util.*
 
+@AndroidEntryPoint
 class SignUpInfoActivity : BaseActivity<ActivitySignUpInfoBinding>(R.layout.activity_sign_up_info) {
 
-    private val signViewModel: SignViewModel by viewModel()
+    private val signViewModel: SignViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

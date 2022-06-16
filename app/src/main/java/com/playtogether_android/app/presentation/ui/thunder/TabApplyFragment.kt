@@ -10,13 +10,16 @@ import com.playtogether_android.app.databinding.FragmentTabApplyBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 
+@AndroidEntryPoint
 class TabApplyFragment : BaseFragment<FragmentTabApplyBinding>(R.layout.fragment_tab_apply) {
 
     private lateinit var thunderListAdapter: ThunderListAdapter
 
-    private val thunderViewModel: ThunderViewModel by viewModel()
+    private val thunderViewModel: ThunderViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

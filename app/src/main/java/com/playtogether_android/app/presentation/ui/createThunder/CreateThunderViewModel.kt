@@ -8,9 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import com.playtogether_android.domain.usecase.thunder.PostThunderCreateUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CreateThunderViewModel(
+@HiltViewModel
+class CreateThunderViewModel @Inject constructor(
     val postThunderCreateUseCase: PostThunderCreateUseCase
 ) : ViewModel() {
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()

@@ -11,6 +11,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import timber.log.Timber
 
 @HiltAndroidApp
 class PlayTogetherApplication : Application(), Application.ActivityLifecycleCallbacks {
@@ -31,6 +32,7 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(this)
+        initLogger()
 
 //        startKoin {
 //            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
@@ -42,6 +44,15 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
 //            modules(useCaseModule)
 //            modules(apiModule)
 //        }
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        unregisterActivityLifecycleCallbacks(this)
+    }
+
+    private fun initLogger() {
+        Timber.plant(Timber.DebugTree())
     }
 
     override fun onActivityCreated(p0: Activity, p1: Bundle?) {

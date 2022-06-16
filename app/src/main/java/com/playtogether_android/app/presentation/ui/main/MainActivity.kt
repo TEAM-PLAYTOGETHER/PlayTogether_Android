@@ -10,7 +10,9 @@ import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

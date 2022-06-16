@@ -94,6 +94,7 @@ object RepositoryModule {
         return HomeRepositoryImpl(dataSource)
     }
 
+    @Provides
     @Singleton
     fun provideThunderCreateRepository(dataSource: ThunderCreateDataSource): ThunderCreateRepository {
         return ThunderCreateRepositoryImpl(dataSource)

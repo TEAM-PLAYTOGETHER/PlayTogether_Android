@@ -15,13 +15,14 @@ import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class JoinOnBoardingActivity :
     BaseActivity<ActivityJoinOnBoardingBinding>(R.layout.activity_join_on_boarding) {
 
-    private val onBoardingViewModel: OnBoardingViewModel by viewModel()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

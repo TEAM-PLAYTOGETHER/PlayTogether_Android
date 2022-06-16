@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class ThunderListViewModel(
+@HiltViewModel
+class ThunderListViewModel @Inject constructor(
     val getThunderCategoryUseCase: GetThunderCategoryUseCase,
 ) : ViewModel() {
 

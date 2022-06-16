@@ -8,7 +8,9 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySplashBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.sign.SignInActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

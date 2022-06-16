@@ -11,13 +11,15 @@ import com.playtogether_android.app.presentation.ui.thunder.ThunderListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.shortToast
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.StringBuilder
 
+@AndroidEntryPoint
 class ThunderAppliedActivity :
     BaseActivity<ActivityThunderAppliedBinding>(R.layout.activity_thunder_applied) {
 
-    private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
+    private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
     private lateinit var adapter: ApplicantListAdapter
 
     // TODO: 이슈 번호 116

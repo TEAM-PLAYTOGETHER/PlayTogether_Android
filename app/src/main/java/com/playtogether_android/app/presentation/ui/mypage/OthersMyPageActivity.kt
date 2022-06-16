@@ -9,13 +9,15 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.viewModel.MyPageViewModel
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OthersMyPageActivity :
     BaseActivity<ActivityOthersMyPageBinding>(R.layout.activity_others_my_page) {
 
-    private val myPageViewModel: MyPageViewModel by viewModel()
-    private val thunderDetailViewModel: ThunderDetailViewModel by viewModel()
+    private val myPageViewModel: MyPageViewModel by viewModels()
+    private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

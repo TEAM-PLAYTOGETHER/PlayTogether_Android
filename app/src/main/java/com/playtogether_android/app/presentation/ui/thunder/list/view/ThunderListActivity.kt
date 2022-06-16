@@ -10,13 +10,15 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
 
+@AndroidEntryPoint
 class ThunderListActivity :
     BaseActivity<ActivityThunderListBinding>(R.layout.activity_thunder_list) {
 
     private lateinit var thunderCategoryListAdapter: ThunderCategoryListAdapter
-    private val thunderListViewModel: ThunderListViewModel by viewModel()
+    private val thunderListViewModel: ThunderListViewModel by viewModels()
     private val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

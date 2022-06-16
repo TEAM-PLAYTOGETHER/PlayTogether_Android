@@ -18,5 +18,4 @@ abstract class BaseActivity<T : ViewDataBinding>(
         _binding = DataBindingUtil.setContentView(this, layoutResId)
 
     }
-
 }

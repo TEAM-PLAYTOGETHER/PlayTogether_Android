@@ -12,15 +12,17 @@ import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewMo
 import com.playtogether_android.app.presentation.ui.message.viewmodel.SendMessageViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.message.PostSendMessageData
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
     private lateinit var adapter2: ChatAdapter2
     private var roomId = -1
     private lateinit var name: String
     private var audienceId = -1
-    private val sendMessageViewModel: SendMessageViewModel by viewModel()
-    private val getChatViewModel: ChatViewModel by viewModel()
+    private val sendMessageViewModel: SendMessageViewModel by viewModels()
+    private val getChatViewModel: ChatViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getIntentData()

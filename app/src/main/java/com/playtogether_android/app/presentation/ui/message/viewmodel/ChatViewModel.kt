@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.message.ChatData
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChatViewModel(
+@HiltViewModel
+class ChatViewModel @Inject constructor(
     val getChatUseCase: GetChatUseCase
 ) : ViewModel() {
     private var _chatData = MutableLiveData<List<ChatData>>()

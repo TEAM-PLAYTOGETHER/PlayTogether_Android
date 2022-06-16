@@ -2,10 +2,11 @@ package com.playtogether_android.domain.usecase.thunder
 
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
+import javax.inject.Inject
 
-class GetOpenListUseCase(private val repository: ThunderRepository) {
+class GetOpenListUseCase @Inject constructor(private val repository: ThunderRepository) {
 
-    suspend operator fun invoke() : ThunderTabListData {
+    suspend operator fun invoke(): ThunderTabListData {
         return repository.getOpenList()
     }
 }

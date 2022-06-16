@@ -6,8 +6,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentThunderBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ThunderFragment : BaseFragment<FragmentThunderBinding>(R.layout.fragment_thunder) {
 
     private lateinit var thunderTabViewPagerAdapter: ThunderTabViewPagerAdapter

@@ -9,9 +9,12 @@ import com.playtogether_android.domain.model.sign.*
 import com.playtogether_android.domain.usecase.sign.PostSignIdUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignInUseCase
 import com.playtogether_android.domain.usecase.sign.PostSignUpUseCaes
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignViewModel(
+@HiltViewModel
+class SignViewModel @Inject constructor(
     val postSignIdUseCase: PostSignIdUseCase,
     val postSignUpUseCase: PostSignUpUseCaes,
     val postSignInUseCase: PostSignInUseCase

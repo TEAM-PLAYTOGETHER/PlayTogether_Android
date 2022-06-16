@@ -8,13 +8,15 @@ import com.playtogether_android.app.databinding.ActivityFirstOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FirstOnBoardingActivity :
     BaseActivity<ActivityFirstOnBoardingBinding>(R.layout.activity_first_on_boarding) {
 
-    private val onBoardingViewModel: OnBoardingViewModel by viewModel()
-    private val signInViewModel: SignViewModel by viewModel()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
+    private val signInViewModel: SignViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

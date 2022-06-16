@@ -7,19 +7,21 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.activity_sign_up_main) {
 
-    private val signViewModel: SignViewModel by viewModel()
+    private val signViewModel: SignViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

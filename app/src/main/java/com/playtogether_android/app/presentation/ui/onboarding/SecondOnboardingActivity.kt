@@ -5,8 +5,10 @@ import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySecondOnboardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class SecondOnboardingActivity :
     BaseActivity<ActivitySecondOnboardingBinding>(R.layout.activity_second_onboarding) {
     override fun onCreate(savedInstanceState: Bundle?) {

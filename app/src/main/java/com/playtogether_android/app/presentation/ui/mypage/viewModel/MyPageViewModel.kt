@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.mypage.UserCheckData
 import com.playtogether_android.domain.usecase.mypage.GetUserCheckUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MyPageViewModel(
+@HiltViewModel
+class MyPageViewModel @Inject constructor(
     val getUserCheckUseCase: GetUserCheckUseCase
 ) : ViewModel() {
     //유저 조회
