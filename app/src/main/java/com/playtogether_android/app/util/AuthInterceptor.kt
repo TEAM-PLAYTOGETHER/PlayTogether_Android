@@ -4,9 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber
 
-class AuthInterceptor(
-    private val baseUrl: String
-) : Interceptor {
+class AuthInterceptor : Interceptor {
 
     companion object {
         const val TAG = "okhttp"
