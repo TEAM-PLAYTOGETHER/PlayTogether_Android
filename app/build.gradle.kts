@@ -1,11 +1,14 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
+
+
 
 android {
     compileSdk = Apps.compileSdk
@@ -18,6 +21,7 @@ android {
         versionCode = Apps.versionCode
         versionName = Apps.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
     }
 
     buildTypes {
@@ -51,6 +55,14 @@ android {
     }
 }
 
+fun getBaseUrl(value: String): String {
+    return gradleLocalProperties(rootDir).getProperty(value)
+}
+
+//fun getApiKey(propertyKey: String): String {
+//    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+//}
+
 dependencies {
 
     implementation(KotlinDependencies.kotlin)
@@ -63,6 +75,16 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(project(":data"))
+
+    //moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+    implementation("com.squareup.moshi:moshi:1.12.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.moshi:moshi:1.12.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+
 
     //ViewModel
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
@@ -131,6 +153,10 @@ dependencies {
 //annotation
     implementation("org.jetbrains:annotations:15.0")
     implementation("androidx.annotation:annotation:1.3.0")
+
+//    hilt
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
 //koin
     implementation("io.insert-koin:koin-core:3.1.2")
