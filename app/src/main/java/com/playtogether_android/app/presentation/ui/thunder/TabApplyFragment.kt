@@ -12,6 +12,7 @@ import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderVie
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 
 @AndroidEntryPoint

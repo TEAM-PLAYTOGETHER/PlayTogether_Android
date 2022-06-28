@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentTabLikeBinding
@@ -19,7 +20,7 @@ class TabLikeFragment : BaseFragment<FragmentTabLikeBinding>(R.layout.fragment_t
 
     private lateinit var thunderListAdapter: ThunderListAdapter
 
-    private val thunderViewModel: ThunderViewModel by activityViewModels()
+    private val thunderViewModel: ThunderViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
