@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
@@ -12,7 +13,6 @@ import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewMo
 import com.playtogether_android.app.presentation.ui.message.viewmodel.SendMessageViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.message.PostSendMessageData
-import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +37,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         binding.ivInChattingBack.setOnClickListener {
             finish()
         }
-        binding.ivInChattingRefresh.setOnClickListener{
+        binding.ivInChattingRefresh.setOnClickListener {
             getChatAll()
             shortToast("새로고침 되었습니다")
         }
@@ -104,12 +104,11 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun getChatAll() {
-        if(roomId!=-1){
+        if (roomId != -1) {
             getChatViewModel.getChatList(roomId)
             getChatViewModel.chatData.observe(this) {
                 adapter2.submitList(it) {
                     scrollToBottom()
-                    Log.d("messageServer", "여기 안들어와?")
                     removeTimeAll()
                 }
             }
@@ -139,25 +138,17 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
 
     private fun removeTimeAll() {
-        Log.d("messageServer", "removeAll 호출됨1")
-        Log.d("messageServer", "왜 currentList가 비어있지1 ${adapter2.currentList.size}")
         var nowSize = adapter2.currentList.size - 1
         var tempSize = nowSize - 1
-        Log.d("messageServer", "왜 currentList가 비어있지2 ${tempSize}")
 
         if (tempSize < 0)
             return
 
         while (true) {
-            if(adapter2.currentList[tempSize].timeVisible==false){
+            if (adapter2.currentList[tempSize].timeVisible == false) {
                 break
             }
-            Log.d("messageServer", "제일 끝 ${adapter2.currentList[nowSize].messageType}")
-            Log.d("messageServer", "움직이는 ${adapter2.currentList[tempSize].messageType}")
             if (adapter2.currentList[tempSize].messageType == adapter2.currentList[nowSize].messageType) {
-                Log.d("messageServer", "메시지 타입 동일")
-                Log.d("messageServer", "제일 끝 ${adapter2.currentList[nowSize].time}")
-                Log.d("messageServer", "움직이는 ${adapter2.currentList[tempSize].time}")
                 if (adapter2.currentList[nowSize].time == adapter2.currentList[tempSize].time) {
                     adapter2.currentList[tempSize].timeVisible = false
                 }
@@ -166,9 +157,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
             tempSize--
             if (tempSize < 0) break
         }
-        Log.d("messageServer", "removeAll 호출됨2")
-        adapter2.submitList(adapter2.currentList){
-            Log.d("messageServer", "removeAll 호출됨3")
+        adapter2.submitList(adapter2.currentList) {
         }
     }
 
