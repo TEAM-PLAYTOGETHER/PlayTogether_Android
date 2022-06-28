@@ -4,13 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import androidx.databinding.ktx.BuildConfig
 import com.playtogether_android.app.util.PixelRatio
 import dagger.hilt.android.HiltAndroidApp
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
 import timber.log.Timber
 
 @HiltAndroidApp
