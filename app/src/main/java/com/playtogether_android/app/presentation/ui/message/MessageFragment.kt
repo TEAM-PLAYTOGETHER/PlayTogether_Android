@@ -4,15 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMessageBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.message.viewmodel.MessageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MessageFragment :
     BaseFragment<FragmentMessageBinding>(R.layout.fragment_message) {
     private lateinit var adapter: MessageListAdapter
-    private val messageViewModel: MessageViewModel by activityViewModels()
+    private val messageViewModel: MessageViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
