@@ -1,12 +1,18 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.playtogether_android.app.R
+import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
+import com.playtogether_android.app.presentation.base.BaseActivity
 
-class OpenCrewOnBoardingActivity : AppCompatActivity() {
+class OpenCrewOnBoardingActivity : BaseActivity<ActivityOpenCrewOnBoardingBinding>(R.layout.activity_open_crew_on_boarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_open_crew_on_boarding)
+
     }
+
+    private fun backBtnListener() {
+        
+    }
+
 }
