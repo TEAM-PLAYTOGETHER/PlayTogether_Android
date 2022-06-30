@@ -3,14 +3,15 @@ package com.playtogether_android.app.presentation.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import com.playtogether_android.app.R
-import com.playtogether_android.app.databinding.ActivitySecondOnboardingBinding
+import com.playtogether_android.app.databinding.ActivitySelectOnboardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.sign.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SecondOnboardingActivity :
-    BaseActivity<ActivitySecondOnboardingBinding>(R.layout.activity_second_onboarding) {
+class SelectOnboardingActivity :
+    BaseActivity<ActivitySelectOnboardingBinding>(R.layout.activity_select_onboarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,7 +25,7 @@ class SecondOnboardingActivity :
     //뒤로가기 버튼 클릭 리스너
     private fun initBackBtn() {
         binding.ivSecondOnboardingBack.setOnClickListener {
-            startActivity(Intent(this, FirstOnBoardingActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
             finish()
         }
     }
@@ -62,7 +63,7 @@ class SecondOnboardingActivity :
             } else if (tvSecondOnboardingNext.isSelected and clSecondOnboardingJoinSelect.isSelected) {
                 startActivity(
                     Intent(
-                        this@SecondOnboardingActivity,
+                        this@SelectOnboardingActivity,
                         JoinOnBoardingActivity::class.java
                     )
                 )

@@ -36,7 +36,7 @@ class JoinOnBoardingActivity :
     //뒤로가기 버튼 클릭 리스너
     private fun initBackBtn() {
         binding.ivJoinOnboardingBack.setOnClickListener {
-            startActivity(Intent(this, SecondOnboardingActivity::class.java))
+            startActivity(Intent(this, SelectOnboardingActivity::class.java))
             finish()
         }
     }
