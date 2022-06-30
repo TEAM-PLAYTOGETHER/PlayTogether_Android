@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_oepn_onboarding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.onboarding.SecondOnboardingActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_open_onboarding_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_black"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_open_onboarding_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_icn_back" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:id="@+id/view_open_onboarding_progressbar_green"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/rectangle_fill_green_radius_0"
+            app:layout_constraintEnd_toStartOf="@+id/view_open_onboarding_progressbar_gray"
+            app:layout_constraintHorizontal_weight="6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_open_onboarding_top" />
+
+
+        <View
+            android:id="@+id/view_open_onboarding_progressbar_gray"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/rectangle_fill_gray3_radius_0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/view_open_onboarding_progressbar_green"
+            app:layout_constraintTop_toBottomOf="@+id/view_open_onboarding_progressbar_green" />
+
+        <TextView
+            android:id="@+id/tv_open_onboarding_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/onboarding_start_thunder"
+            android:textColor="@color/gray_black"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_open_onboarding_progressbar_green" />
+
+        <TextView
+            android:id="@+id/tv_signupinfo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/text_name"
+            android:textColor="@color/gray_black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_open_onboarding_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_open_onboarding_title" />
+
+
+        <EditText
+            android:id="@+id/et_signupinfo_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/selector_rectangle_border_gray03_to_gray01"
+            android:fontFamily="@font/pretendard_regular"
+            android:hint="@string/signupinfo_input_name"
+            android:lines="1"
+            android:maxLength="15"
+            android:paddingStart="19dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:singleLine="true"
+            android:textColorHint="@color/gray_gray01"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_signupinfo_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signupinfo_name" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
