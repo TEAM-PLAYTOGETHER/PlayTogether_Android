@@ -132,6 +132,13 @@
     <string name="onboarding_join_input_code">초대코드를\n입력해주세요!</string>
     <string name="onboarding_join_input_six">여섯 자리 코드를 입력해주세요</string>
     <string name="onboarding_enter">입장하기</string>
+    <string name="onboarding_open_intro">개설할 동아리를\n소개해주세요!</string>
+    <string name="onboarding_crew_name">동아리명</string>
+    <string name="onboarding_crew_name_input">동아리명 입력</string>
+    <string name="onboarding_crew_condition">1~15(공백포함) 이내 한글, 영문, 숫자 사용 가능</string>
+    <string name="onboarding_crew_approve">사용 가능한 동아리명입니다</string>
+    <string name="onboarding_crew_intro">한 줄 소개</string>
+    <string name="onboarding_crew_intro_input">한 줄 소개를 입력해주세요 (15자 이내)</string>
 
     <!-- message -->
     <string name="messageBox">쪽지함</string>

@@ -42,7 +42,7 @@
             android:layout_height="4dp"
             android:background="@drawable/rectangle_fill_green_radius_0"
             app:layout_constraintEnd_toStartOf="@+id/view_second_onboarding_progressbar_gray"
-            app:layout_constraintHorizontal_weight="6"
+            app:layout_constraintHorizontal_weight="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_second_onboarding_top" />
 
@@ -53,7 +53,7 @@
             android:layout_height="4dp"
             android:background="@drawable/rectangle_fill_gray3_radius_0"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="6"
             app:layout_constraintStart_toEndOf="@+id/view_second_onboarding_progressbar_green"
             app:layout_constraintTop_toBottomOf="@+id/cl_second_onboarding_top" />
 
@@ -91,10 +91,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="28dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/selector_rectangle_border_gray0_to_fill_black"
+            android:background="@drawable/selector_rectangle_border_gray0_to_black01"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_second_onboarding_sub_title">
 
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@string/text_open"
-                android:textColor="@drawable/selector_text_gray01_to_main_green"
+                android:textColor="@drawable/selector_text_gray01_to_black01"
                 android:textSize="16sp"
                 android:layout_marginTop="23dp"
                 android:layout_marginStart="24dp"
@@ -118,7 +118,7 @@
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/pretendard_medium"
                 android:text="@string/onboarding_open_message"
-                android:textColor="@drawable/selector_text_gray01_to_white"
+                android:textColor="@drawable/selector_text_gray01_to_black01"
                 android:textSize="14sp"
                 android:layout_marginBottom="23dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -136,7 +136,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/selector_rectangle_border_gray0_to_fill_black"
+            android:background="@drawable/selector_rectangle_border_gray0_to_black01"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_second_onboarding_open">
@@ -149,7 +149,7 @@
                 android:layout_marginTop="23dp"
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@string/text_join"
-                android:textColor="@drawable/selector_text_gray01_to_main_green"
+                android:textColor="@drawable/selector_text_gray01_to_black01"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -162,7 +162,7 @@
                 android:layout_marginBottom="23dp"
                 android:fontFamily="@font/pretendard_medium"
                 android:text="@string/onboarding_join_message"
-                android:textColor="@drawable/selector_text_gray01_to_white"
+                android:textColor="@drawable/selector_text_gray01_to_black01"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_second_onboarding_join"

@@ -9,13 +9,12 @@ import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignInBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.onboarding.FirstOnBoardingActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.domain.model.sign.SignInItem
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
@@ -104,8 +103,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                     this,
                     it.jwtToken
                 )
-                val intent = Intent(this, FirstOnBoardingActivity::class.java)
-                intent.putExtra("userName", signViewModel.signIn.value!!.userName)
+                val intent = Intent(this, SelectOnboardingActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
