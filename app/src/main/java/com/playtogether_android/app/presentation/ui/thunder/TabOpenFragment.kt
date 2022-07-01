@@ -20,7 +20,7 @@ class TabOpenFragment : BaseFragment<FragmentTabOpenBinding>(R.layout.fragment_t
 
     private lateinit var thunderListAdapter: ThunderListAdapter
 
-    private val thunderViewModel: ThunderViewModel by activityViewModels()
+    private val thunderViewModel: ThunderViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

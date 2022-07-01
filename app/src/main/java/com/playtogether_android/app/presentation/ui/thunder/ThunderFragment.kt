@@ -24,10 +24,8 @@ class ThunderFragment : BaseFragment<FragmentThunderBinding>(R.layout.fragment_t
 
     private fun initAdapter() {
         val fragmentList = listOf(TabApplyFragment(), TabOpenFragment(), TabLikeFragment())
-
-        thunderTabViewPagerAdapter = ThunderTabViewPagerAdapter(this)
+        thunderTabViewPagerAdapter = ThunderTabViewPagerAdapter(requireActivity())
         thunderTabViewPagerAdapter.fragments.addAll(fragmentList)
-
         binding.vpThunderTab.adapter = thunderTabViewPagerAdapter
     }
 

@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
-    private lateinit var adapter2: ChatAdapter2
+    private lateinit var chatAdapter: ChatAdapter
     private var roomId = -1
     private lateinit var name: String
     private var audienceId = -1
@@ -95,7 +95,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun scrollToBottom() {
-        val size = adapter2.currentList.size - 1
+        val size = chatAdapter.currentList.size - 1
         binding.rvInChattingChatting.scrollToPosition(size)
     }
 
@@ -103,7 +103,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         if (roomId != -1) {
             getChatViewModel.getChatList(roomId)
             getChatViewModel.chatData.observe(this) {
-                adapter2.submitList(it) {
+                chatAdapter.submitList(it) {
                     scrollToBottom()
                     removeTimeAll()
                 }
@@ -135,26 +135,27 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
 
     private fun removeTimeAll() {
-        var nowSize = adapter2.currentList.size - 1
+        var nowSize = chatAdapter.currentList.size - 1
         var tempSize = nowSize - 1
 
         if (tempSize < 0)
             return
 
         while (true) {
-            if (adapter2.currentList[tempSize].timeVisible == false) {
+            if (chatAdapter.currentList[tempSize].timeVisible == false) {
                 break
             }
-            if (adapter2.currentList[tempSize].messageType == adapter2.currentList[nowSize].messageType) {
-                if (adapter2.currentList[nowSize].time == adapter2.currentList[tempSize].time) {
-                    adapter2.currentList[tempSize].timeVisible = false
+            if (chatAdapter.currentList[tempSize].messageType == chatAdapter.currentList[nowSize].messageType) {
+                if (chatAdapter.currentList[nowSize].time == chatAdapter.currentList[tempSize].time) {
+                    chatAdapter.currentList[tempSize].timeVisible = false
                 }
             }
             nowSize = tempSize
             tempSize--
             if (tempSize < 0) break
         }
-        adapter2.submitList(adapter2.currentList)
+        chatAdapter.submitList(chatAdapter.currentList) {
+        }
     }
 
     /*private fun removeTimePart() {
@@ -188,8 +189,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }*/
 
     private fun initAdapter() {
-        adapter2 = ChatAdapter2()
-        binding.rvInChattingChatting.adapter = adapter2
+        chatAdapter = ChatAdapter()
+        binding.rvInChattingChatting.adapter = chatAdapter
         binding.rvInChattingChatting.addItemDecoration(VerticalItemDecoration())
         scrollToBottom()
     }
