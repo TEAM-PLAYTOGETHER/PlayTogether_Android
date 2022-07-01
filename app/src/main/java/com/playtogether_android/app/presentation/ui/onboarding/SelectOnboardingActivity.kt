@@ -60,6 +60,13 @@ class SelectOnboardingActivity :
         tvSecondOnboardingNext.setOnClickListener {
             if (tvSecondOnboardingNext.isSelected and clSecondOnboardingOpen.isSelected) {
                 Timber.d("개설로 이동")
+                startActivity(
+                    Intent(
+                        this@SelectOnboardingActivity,
+                        OpenCrewOnBoardingActivity::class.java
+                    )
+                )
+                finish()
             } else if (tvSecondOnboardingNext.isSelected and clSecondOnboardingJoinSelect.isSelected) {
                 startActivity(
                     Intent(
