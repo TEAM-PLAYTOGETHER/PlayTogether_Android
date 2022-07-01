@@ -155,8 +155,8 @@ dependencies {
     implementation("androidx.annotation:annotation:1.3.0")
 
 //    hilt
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.41")
+    kapt("com.google.dagger:hilt-android-compiler:2.41")
 
 //koin
     implementation("io.insert-koin:koin-core:3.1.2")
