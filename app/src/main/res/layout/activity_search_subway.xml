@@ -136,8 +136,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_intro_onboarding_next"
         app:layout_constraintEnd_toEndOf="@+id/chip_subway_onboarding"
         app:layout_constraintStart_toStartOf="@+id/chip_subway_onboarding"
-        app:layout_constraintTop_toBottomOf="@+id/chip_subway_onboarding"
-        tools:listitem="@layout/item_home_applicant_list" />
+        app:layout_constraintTop_toBottomOf="@+id/chip_subway_onboarding" />
 
 
     <TextView
