@@ -24,6 +24,7 @@ class OpenCrewOnBoardingActivity :
         nullCheck()
         nameTextWatcher()
         introTextWatcher()
+        nextBtnClickListener()
     }
 
     //뒤로가기 버튼 리스너
@@ -95,5 +96,15 @@ class OpenCrewOnBoardingActivity :
                 initTextFieldCheck()
             }
         })
+    }
+
+    private fun nextBtnClickListener() {
+        binding.tvOpenOnboardingNext.setOnClickListener {
+            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+            intent.putExtra("crewName", binding.etOpenOnboardingName.text.toString())
+            intent.putExtra("crewIntroduce", binding.etOpenOnboardingIntro.text.toString())
+            startActivity(intent)
+            finish()
+        }
     }
 }
