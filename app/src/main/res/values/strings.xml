@@ -139,6 +139,11 @@
     <string name="onboarding_crew_approve">사용 가능한 동아리명입니다</string>
     <string name="onboarding_crew_intro">한 줄 소개</string>
     <string name="onboarding_crew_intro_input">한 줄 소개를 입력해주세요 (15자 이내)</string>
+    <string name="onboarding_open_end_top">님, 반가워요!</string>
+    <string name="onboarding_open_end_start">번개를 시작해볼까요?</string>
+    <string name="onboarding_open_share_code">초대코드 공유하기</string>
+    <string name="onboarding_open_code">초대코드</string>
+    <string name="onboarding_open_introduce">한줄소개</string>
 
     <!-- message -->
     <string name="messageBox">쪽지함</string>
