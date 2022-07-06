@@ -132,6 +132,22 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_intro_onboarding_name" />
 
         <TextView
+            android:id="@+id/tv_signupmain_id_duplication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/selector_rectangle_fill_gray03_to_black01"
+            android:paddingStart="13dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp"
+            android:text="@string/text_duplication_check"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/et_intro_onboarding_name"
+            app:layout_constraintEnd_toEndOf="@+id/et_intro_onboarding_name"
+            app:layout_constraintTop_toTopOf="@+id/et_intro_onboarding_name" />
+
+        <TextView
             android:id="@+id/tv_intro_onboarding_condition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -196,7 +212,8 @@
             android:hint="@string/onboarding_intro_simple_input"
             android:inputType="textMultiLine"
             android:lines="3"
-            android:maxLength="100"
+            android:maxLength="200"
+            android:scrollbars = "vertical"
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingEnd="19dp"

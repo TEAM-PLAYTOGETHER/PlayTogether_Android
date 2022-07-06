@@ -152,7 +152,7 @@
     <string name="onboarding_intro_warn">이미 사용중인 닉네임입니다</string>
     <string name="onboarding_intro_access">사용 가능한 닉네임입니다</string>
     <string name="onboarding_intro_simple">간단 소개</string>
-    <string name="onboarding_intro_simple_input">간단 소개 입력 (100자 이내)</string>
+    <string name="onboarding_intro_simple_input">간단 소개 입력 (200자 이내)</string>
     <string name="onboarding_intro_subway">선호하는 지하철역</string>
     <string name="onboarding_intro_subway_two">(최대 2개 추가 가능)</string>
     <string name="onboarding_intro_add">추가하기</string>

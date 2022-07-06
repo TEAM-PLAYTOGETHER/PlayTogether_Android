@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewEndOnBoardingBinding
@@ -20,11 +21,12 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
         binding.tvOpenEndOnboardingCrew.setText(crewName)
         binding.tvOpenEndOnboardingCrewName.setText(crewName)
         binding.tvOpenEndOnboardingIntroAnswer.setText(crewIntroduce)
-    }
 
-    private fun initStartBtnListener() {
         binding.tvOpenOnboardingNext.setOnClickListener {
-
+            val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+            intent.putExtra("crewName", crewName)
+            startActivity(intent)
+            finish()
         }
     }
 }
