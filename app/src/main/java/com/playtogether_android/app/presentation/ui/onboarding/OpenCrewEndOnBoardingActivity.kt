@@ -21,4 +21,10 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
         binding.tvOpenEndOnboardingCrewName.setText(crewName)
         binding.tvOpenEndOnboardingIntroAnswer.setText(crewIntroduce)
     }
+
+    private fun initStartBtnListener() {
+        binding.tvOpenOnboardingNext.setOnClickListener {
+
+        }
+    }
 }
