@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class OpenCrewOnBoardingActivity :
@@ -70,12 +72,23 @@ class OpenCrewOnBoardingActivity :
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val name = p0.toString()
+                if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|]{1,15}\$", name)) {
+                    binding.tvOpenOnboardingApprove.visibility = View.INVISIBLE
+                    binding.tvOpenOnboardingWarn.visibility = View.VISIBLE
+                } else {
+                    binding.tvOpenOnboardingApprove.visibility = View.VISIBLE
+                    binding.tvOpenOnboardingWarn.visibility = View.INVISIBLE
 
+                }
+                initBtnActive()
             }
 
             override fun afterTextChanged(p0: Editable?) {
                 etOpenOnboardingName.isSelected = etOpenOnboardingName.text.toString() != ""
                 initTextFieldCheck()
+                initBtnActive()
+
             }
         })
     }
@@ -94,17 +107,25 @@ class OpenCrewOnBoardingActivity :
             override fun afterTextChanged(p0: Editable?) {
                 etOpenOnboardingIntro.isSelected = etOpenOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
+                initBtnActive()
             }
         })
     }
 
+    private fun initBtnActive() {
+        binding.tvOpenOnboardingNext.isSelected =
+            (binding.tvOpenOnboardingApprove.isVisible) && binding.etOpenOnboardingIntro.text.toString() != ""
+    }
+
     private fun nextBtnClickListener() {
         binding.tvOpenOnboardingNext.setOnClickListener {
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
-            intent.putExtra("crewName", binding.etOpenOnboardingName.text.toString())
-            intent.putExtra("crewIntroduce", binding.etOpenOnboardingIntro.text.toString())
-            startActivity(intent)
-            finish()
+            if (binding.tvOpenOnboardingNext.isSelected) {
+                val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+                intent.putExtra("crewName", binding.etOpenOnboardingName.text.toString())
+                intent.putExtra("crewIntroduce", binding.etOpenOnboardingIntro.text.toString())
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

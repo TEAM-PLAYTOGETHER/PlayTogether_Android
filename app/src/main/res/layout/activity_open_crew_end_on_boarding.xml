@@ -89,14 +89,14 @@
             android:id="@+id/tv_open_end_onboarding_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:fontFamily="@font/pretendard_regular"
             android:lineSpacingExtra="4dp"
             android:text="@string/onboarding_open_end_start"
             android:textColor="@color/gray_black"
             android:textSize="22sp"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_open_end_onboarding_crew"
-            app:layout_constraintStart_toEndOf="@+id/tv_open_end_onboarding_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_open_end_onboarding_crew"
             app:layout_constraintTop_toBottomOf="@+id/tv_open_end_onboarding_name" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
