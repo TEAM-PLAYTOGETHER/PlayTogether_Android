@@ -16,11 +16,13 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
     private fun initSetting() {
         val crewName = intent.getStringExtra("crewName")
         val crewIntroduce = intent.getStringExtra("crewIntroduce")
+        val crewCode = intent.getStringExtra("crewCode")
 
         //binding.tvOpenEndOnboardingName.setText(crewName)
         binding.tvOpenEndOnboardingCrew.setText(crewName)
         binding.tvOpenEndOnboardingCrewName.setText(crewName)
         binding.tvOpenEndOnboardingIntroAnswer.setText(crewIntroduce)
+        binding.tvOpenEndOnboardingCodeAnswer.setText(crewCode)
 
         binding.tvOpenOnboardingNext.setOnClickListener {
             val intent = Intent(this, OnBoardingIntroduceActivity::class.java)

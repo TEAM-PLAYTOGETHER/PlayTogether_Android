@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
@@ -11,6 +12,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.domain.model.onboarding.CrewItem
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
@@ -120,11 +122,28 @@ class OpenCrewOnBoardingActivity :
     private fun nextBtnClickListener() {
         binding.tvOpenOnboardingNext.setOnClickListener {
             if (binding.tvOpenOnboardingNext.isSelected) {
-                val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
-                intent.putExtra("crewName", binding.etOpenOnboardingName.text.toString())
-                intent.putExtra("crewIntroduce", binding.etOpenOnboardingIntro.text.toString())
-                startActivity(intent)
-                finish()
+                onBoardingViewModel.requestCew.crewName = binding.etOpenOnboardingName.text.toString()
+                onBoardingViewModel.requestCew.description = binding.etOpenOnboardingIntro.text.toString()
+                onBoardingViewModel.postCrew(
+                    CrewItem(
+                        onBoardingViewModel.requestCew.crewName,
+                        onBoardingViewModel.requestCew.description
+                    )
+                )
+
+                onBoardingViewModel.crew.observe(this) {
+                    var code = it.code
+                    Log.d("Test", code.toString())
+                    val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+                    intent.putExtra("crewName", binding.etOpenOnboardingName.text.toString())
+                    intent.putExtra("crewIntroduce", binding.etOpenOnboardingIntro.text.toString())
+                    intent.putExtra("crewCode", code)
+                    startActivity(intent)
+                    finish()
+                }
+
+
+
             }
         }
     }

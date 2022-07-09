@@ -1,7 +1,9 @@
 package com.playtogether_android.data.api.onboarding
 
+import com.playtogether_android.data.model.request.onboarding.RequestCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
 import com.playtogether_android.data.model.request.sign.RequestSignId
+import com.playtogether_android.data.model.response.onboarding.ResponseCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
 import com.playtogether_android.data.model.response.sign.ResponseSignId
 import retrofit2.http.Body
@@ -13,4 +15,10 @@ interface OnboardingService {
     suspend fun postRegisterCrew(
         @Body requestRegisterCrew: RequestRegisterCrew
     ): ResponseRegisterCrew
+
+    //동아리 개설
+    @POST("crew")
+    suspend fun postCrew(
+        @Body requestCrew: RequestCrew
+    ) : ResponseCrew
 }
