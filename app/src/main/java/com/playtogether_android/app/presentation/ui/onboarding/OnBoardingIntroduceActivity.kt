@@ -4,13 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.View
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
+
+    private val signViewModel: SignViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -18,7 +29,58 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         nullCheck()
         nameTextWatcher()
         introTextWatcher()
+        initSetting()
+        duplicationClickEvent()
 
+    }
+
+    //id 중복체크
+    private fun idDuplicationCheck() {
+        val id = binding.etIntroOnboardingName.text.toString()
+        signViewModel.postIdDuplication(
+            IdDuplicationCheckItem(id)
+        )
+
+        signViewModel.idDuplicationCheck.observe(this) {
+            if (it.isUser == true) {
+                Log.d("중복확인", "중복되는 아이디 있음")
+                binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
+                binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
+                binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
+            } else {
+                Log.d("중복확인", "중복되는 아이디 없음")
+                binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
+                binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
+                binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
+            }
+        }
+
+    }
+
+    //아이디 정규식
+    private fun isVaildRegistrationId() = with(binding) {
+        if (!Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())) {
+            tvSignupmainIdDuplication.isSelected = false
+            Timber.d("정규식 맞지 않음")
+        } else {
+            tvSignupmainIdDuplication.isSelected = true
+            Timber.d("정규식 맞지 않음")
+        }
+    }
+
+
+    //중복확인 버튼 클릭
+    private fun duplicationClickEvent() {
+        binding.tvSignupmainIdDuplication.setOnClickListener {
+            if (binding.tvSignupmainIdDuplication.isSelected) {
+                idDuplicationCheck()
+            }
+        }
+    }
+
+    private fun initSetting() {
+        val crewName = intent.getStringExtra("crewName")
+        binding.tvIntroOnboardingCrewName.setText(crewName)
     }
 
     //뒤로가기 버튼 리스너
@@ -69,6 +131,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingName.isSelected = etIntroOnboardingName.text.toString() != ""
                 initTextFieldCheck()
+                isVaildRegistrationId()
             }
         })
     }

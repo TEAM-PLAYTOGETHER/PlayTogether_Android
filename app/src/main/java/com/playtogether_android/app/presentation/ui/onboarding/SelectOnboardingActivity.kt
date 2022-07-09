@@ -2,6 +2,7 @@ package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySelectOnboardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -33,6 +34,9 @@ class SelectOnboardingActivity :
     private fun initOpenBtnClickListener() = with(binding) {
         clSecondOnboardingOpen.setOnClickListener {
             clSecondOnboardingOpen.isSelected = true
+            ivSecondOnboardingJoinSelect.visibility = View.INVISIBLE
+            ivSecondOnboardingOpenSelect.visibility = View.VISIBLE
+
 
             if (clSecondOnboardingJoinSelect.isSelected) {
                 clSecondOnboardingOpen.isSelected = true
@@ -46,6 +50,8 @@ class SelectOnboardingActivity :
     private fun initJoinBtnClickListener() = with(binding) {
         clSecondOnboardingJoinSelect.setOnClickListener {
             clSecondOnboardingJoinSelect.isSelected = true
+            ivSecondOnboardingJoinSelect.visibility = View.VISIBLE
+            ivSecondOnboardingOpenSelect.visibility = View.INVISIBLE
 
             if (clSecondOnboardingOpen.isSelected) {
                 clSecondOnboardingJoinSelect.isSelected = true
