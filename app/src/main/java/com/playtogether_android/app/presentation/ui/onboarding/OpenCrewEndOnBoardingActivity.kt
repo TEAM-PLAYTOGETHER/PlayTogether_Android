@@ -30,5 +30,18 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
             startActivity(intent)
             finish()
         }
+
+        binding.tvOpenEndOnboardingShare.setOnClickListener{
+/*
+            val message = "crewName"
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, message)
+            intent.setPackage("com.kakao.talk")
+            startActivity(intent)
+
+ */
+        }
     }
+
 }
