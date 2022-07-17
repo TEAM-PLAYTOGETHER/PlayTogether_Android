@@ -211,4 +211,6 @@
 
     <!--    loginActivity-->
     <string name="login_title">함께놀아요\nPLAY TOGETHER</string>
+    <string name="login_problem">문제가 있으신가요?</string>
+    <string name="login_ask"><u>문의하기</u></string>
 </resources>
