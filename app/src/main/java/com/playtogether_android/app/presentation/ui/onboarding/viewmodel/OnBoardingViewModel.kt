@@ -2,25 +2,24 @@ package com.playtogether_android.app.presentation.ui.onboarding.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.playtogether_android.domain.model.onboarding.CrewData
-import com.playtogether_android.domain.model.onboarding.CrewItem
+import com.playtogether_android.domain.model.onboarding.MakeCrewData
+import com.playtogether_android.domain.model.onboarding.MakeCrewItem
 import com.playtogether_android.domain.model.onboarding.RegisterCrewData
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
-import com.playtogether_android.domain.usecase.onboarding.PostCrewUseCase
+import com.playtogether_android.domain.usecase.onboarding.PostMakeCrewUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
     val postRegisterCrewUseCase: PostRegisterCrewUseCase,
-    val postCrewUseCase: PostCrewUseCase
+    val postMakeCrewUseCase: PostMakeCrewUseCase
+
 ) : ViewModel() {
 
-    //동아리 생성
-    var requestCew = CrewItem("", "")
-    var code : String = ""
 
     //동아리 참여 변수
     private val _registerCrew = MutableLiveData<RegisterCrewData>()
@@ -28,9 +27,14 @@ class OnBoardingViewModel @Inject constructor(
         get() = _registerCrew
 
     //동아리 개설 변수
-    private val _crew = MutableLiveData<CrewData>()
-    val crew: LiveData<CrewData>
-        get() = _crew
+    private val _makeCrew = MutableLiveData<MakeCrewData>()
+    val makeCrew : LiveData<MakeCrewData>
+    get() = _makeCrew
+
+
+    //동아리 개설 request
+    var requestMakeCrew = MakeCrewItem("", "")
+
 
     //동아리 참여
     var crewCode = RegisterCrewItem("")
@@ -73,25 +77,22 @@ class OnBoardingViewModel @Inject constructor(
                     it.printStackTrace()
                     Log.d("RegisterCrew", "서버 통신 실패")
                 }
-
-
         }
     }
 
     //동아리 개설
-    fun postCrew(crewItem: CrewItem) {
+    fun postMakeCrew(makeCrewItem: MakeCrewItem) {
         viewModelScope.launch {
-            kotlin.runCatching { postCrewUseCase(crewItem) }
+            kotlin.runCatching { postMakeCrewUseCase(makeCrewItem) }
                 .onSuccess {
-                    _crew.value = it
-                    Log.d("Crew", "서버 통신 성공")
-                    Log.d("Crew", crew.value!!.code)
-                    code = crew.value!!.code
+                    _makeCrew.value = it
+                    Timber.d("동아리 개설 : 서버 통신 성공")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("Crew", "서버 통신 실패")
+                    Timber.d("동아리 개설 : 서버 통신 실패")
                 }
         }
     }
+
 }

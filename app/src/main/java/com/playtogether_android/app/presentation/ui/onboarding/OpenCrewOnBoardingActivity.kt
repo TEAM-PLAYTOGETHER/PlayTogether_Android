@@ -3,7 +3,9 @@ package com.playtogether_android.app.presentation.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
+import android.widget.Toast
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
@@ -12,9 +14,11 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
-import com.playtogether_android.domain.model.onboarding.CrewItem
+import com.playtogether_android.domain.model.onboarding.MakeCrewItem
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.regex.Pattern
+
 
 @AndroidEntryPoint
 class OpenCrewOnBoardingActivity :
@@ -28,7 +32,11 @@ class OpenCrewOnBoardingActivity :
         nullCheck()
         nameTextWatcher()
         introTextWatcher()
-        nextBtnClickListener()
+
+        openCrewNetwork()
+        activeBtn()
+
+
     }
 
     //뒤로가기 버튼 리스너
@@ -47,6 +55,15 @@ class OpenCrewOnBoardingActivity :
 
         binding.etOpenOnboardingIntro.setOnClickListener {
             initTextFieldCheck()
+        }
+    }
+
+    private fun activeBtn() {
+        if (binding.etOpenOnboardingName.text.toString() == "" || binding.etOpenOnboardingIntro.text.toString() == "") {
+            binding.tvOpenOnboardingNext.isSelected = false
+        } else {
+            binding.tvOpenOnboardingNext.isSelected = true
+            openCrewNetwork()
         }
     }
 
@@ -83,16 +100,29 @@ class OpenCrewOnBoardingActivity :
                     binding.tvOpenOnboardingWarn.visibility = View.INVISIBLE
 
                 }
-                initBtnActive()
+
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                block()
                 etOpenOnboardingName.isSelected = etOpenOnboardingName.text.toString() != ""
                 initTextFieldCheck()
-                initBtnActive()
+
+                activeBtn()
 
             }
         })
+    }
+
+    private fun block() {
+        binding.etOpenOnboardingName.setFilters(arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+            for (i in start until end) {
+                if (!Character.isLetterOrDigit(source[i])) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }))
     }
 
     //소개 textWatcher
@@ -109,40 +139,42 @@ class OpenCrewOnBoardingActivity :
             override fun afterTextChanged(p0: Editable?) {
                 etOpenOnboardingIntro.isSelected = etOpenOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
-                initBtnActive()
+
+                activeBtn()
+
             }
         })
     }
 
-    private fun initBtnActive() {
-        binding.tvOpenOnboardingNext.isSelected =
-            (binding.tvOpenOnboardingApprove.isVisible) && binding.etOpenOnboardingIntro.text.toString() != ""
+
+    //동아리 개설 서버통신
+    private fun openCrewNetwork() {
+        binding.tvOpenOnboardingNext.setOnClickListener {
+            onBoardingViewModel.requestMakeCrew.crewName =
+                binding.etOpenOnboardingName.text.toString()
+            onBoardingViewModel.requestMakeCrew.description =
+                binding.etOpenOnboardingIntro.text.toString()
+
+            onBoardingViewModel.postMakeCrew(
+                MakeCrewItem(
+                    onBoardingViewModel.requestMakeCrew.crewName,
+                    onBoardingViewModel.requestMakeCrew.description
+                )
+            )
+            observeOpenCrew()
+        }
     }
 
-    private fun nextBtnClickListener() {
-        binding.tvOpenOnboardingNext.setOnClickListener {
-            if (binding.tvOpenOnboardingNext.isSelected) {
-                onBoardingViewModel.requestCew.crewName = binding.etOpenOnboardingName.text.toString()
-                onBoardingViewModel.requestCew.description = binding.etOpenOnboardingIntro.text.toString()
-                onBoardingViewModel.postCrew(
-                    CrewItem(
-                        onBoardingViewModel.requestCew.crewName,
-                        onBoardingViewModel.requestCew.description
-                    )
-                )
-
-                onBoardingViewModel.crew.observe(this) {
-                    var code = it.code
-                    Log.d("Test", code.toString())
-                    val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
-                    intent.putExtra("crewName", binding.etOpenOnboardingName.text.toString())
-                    intent.putExtra("crewIntroduce", binding.etOpenOnboardingIntro.text.toString())
-                    intent.putExtra("crewCode", code)
-                    startActivity(intent)
-                    finish()
-                }
-
-
+    //동아리 개설 observe
+    private fun observeOpenCrew() {
+        onBoardingViewModel.makeCrew.observe(this) {
+            if (it.success) {
+                Timber.d("${it.code}")
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "동아리 개설이 실패되었습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
 
             }
         }

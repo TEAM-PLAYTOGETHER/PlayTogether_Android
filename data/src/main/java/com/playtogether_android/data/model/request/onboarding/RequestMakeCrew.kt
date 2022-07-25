@@ -1,6 +1,6 @@
 package com.playtogether_android.data.model.request.onboarding
 
-data class RequestCrew(
+data class RequestMakeCrew(
     val crewName: String,
     val description: String
 )

@@ -1,6 +1,6 @@
 package com.playtogether_android.data.model.response.onboarding
 
-data class ResponseCrew(
+data class ResponseMakeCrew(
     val data: Data,
     val message: String,
     val status: Int,

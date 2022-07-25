@@ -1,13 +1,11 @@
 package com.playtogether_android.data.mapper.onboarding
 
-import com.playtogether_android.data.model.request.onboarding.RequestCrew
+
+import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
-import com.playtogether_android.data.model.response.onboarding.ResponseCrew
+import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
-import com.playtogether_android.domain.model.onboarding.CrewData
-import com.playtogether_android.domain.model.onboarding.CrewItem
-import com.playtogether_android.domain.model.onboarding.RegisterCrewData
-import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+import com.playtogether_android.domain.model.onboarding.*
 
 object OnBoardingMapper {
     //동아리 참여 : Response
@@ -25,19 +23,22 @@ object OnBoardingMapper {
         )
     }
 
-    //동아리 생성 : Response
-    fun mapperToCrewData(responseCrew: ResponseCrew) : CrewData {
-        return CrewData(
-            code = responseCrew.data.code,
-            id = responseCrew.data.id,
-            name = responseCrew.data.name
+
+    //동아리 개설 response
+    fun mapperToMakeCrewData(responseMakeCrew: ResponseMakeCrew) : MakeCrewData {
+        return MakeCrewData(
+            success = responseMakeCrew.success,
+            code = responseMakeCrew.data.code,
+            id = responseMakeCrew.data.id,
+            name = responseMakeCrew.data.name
         )
     }
 
-    fun mapperToCrewItem(crewItem: CrewItem) : RequestCrew {
-        return RequestCrew(
-            crewName = crewItem.crewName,
-            description = crewItem.description
+    //동아리 개설 request
+    fun mapperToMakeCrewItem(makeCrewItem: MakeCrewItem) : RequestMakeCrew{
+        return RequestMakeCrew(
+            crewName = makeCrewItem.crewName,
+            description = makeCrewItem.description
         )
     }
 }
