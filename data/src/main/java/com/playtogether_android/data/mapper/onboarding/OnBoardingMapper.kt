@@ -1,13 +1,11 @@
 package com.playtogether_android.data.mapper.onboarding
 
+
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
-import com.playtogether_android.domain.model.onboarding.MakeCrewData
-import com.playtogether_android.domain.model.onboarding.MakeCrewItem
-import com.playtogether_android.domain.model.onboarding.RegisterCrewData
-import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+import com.playtogether_android.domain.model.onboarding.*
 
 object OnBoardingMapper {
     //동아리 참여 : Response
@@ -24,6 +22,7 @@ object OnBoardingMapper {
             crewCode = registerCrewItem.crewCode
         )
     }
+
 
     //동아리 개설 response
     fun mapperToMakeCrewData(responseMakeCrew: ResponseMakeCrew) : MakeCrewData {

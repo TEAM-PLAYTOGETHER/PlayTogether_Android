@@ -6,7 +6,10 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.widget.Toast
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -14,6 +17,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.domain.model.onboarding.MakeCrewItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.util.regex.Pattern
 
 
 @AndroidEntryPoint
@@ -28,8 +32,11 @@ class OpenCrewOnBoardingActivity :
         nullCheck()
         nameTextWatcher()
         introTextWatcher()
+
         openCrewNetwork()
         activeBtn()
+
+
     }
 
     //뒤로가기 버튼 리스너
@@ -84,6 +91,15 @@ class OpenCrewOnBoardingActivity :
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val name = p0.toString()
+                if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|]{1,15}\$", name)) {
+                    binding.tvOpenOnboardingApprove.visibility = View.INVISIBLE
+                    binding.tvOpenOnboardingWarn.visibility = View.VISIBLE
+                } else {
+                    binding.tvOpenOnboardingApprove.visibility = View.VISIBLE
+                    binding.tvOpenOnboardingWarn.visibility = View.INVISIBLE
+
+                }
 
             }
 
@@ -91,7 +107,9 @@ class OpenCrewOnBoardingActivity :
                 block()
                 etOpenOnboardingName.isSelected = etOpenOnboardingName.text.toString() != ""
                 initTextFieldCheck()
+
                 activeBtn()
+
             }
         })
     }
@@ -121,10 +139,13 @@ class OpenCrewOnBoardingActivity :
             override fun afterTextChanged(p0: Editable?) {
                 etOpenOnboardingIntro.isSelected = etOpenOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
+
                 activeBtn()
+
             }
         })
     }
+
 
     //동아리 개설 서버통신
     private fun openCrewNetwork() {
@@ -154,6 +175,7 @@ class OpenCrewOnBoardingActivity :
                 finish()
             } else {
                 Toast.makeText(this, "동아리 개설이 실패되었습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
+
             }
         }
     }

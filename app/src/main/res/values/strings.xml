@@ -139,6 +139,11 @@
     <string name="onboarding_crew_approve">사용 가능한 동아리명입니다</string>
     <string name="onboarding_crew_intro">한 줄 소개</string>
     <string name="onboarding_crew_intro_input">한 줄 소개를 입력해주세요 (15자 이내)</string>
+    <string name="onboarding_open_end_top">님, 반가워요!</string>
+    <string name="onboarding_open_end_start">번개를 시작해볼까요?</string>
+    <string name="onboarding_open_share_code">초대코드 공유하기</string>
+    <string name="onboarding_open_code">초대코드</string>
+    <string name="onboarding_open_introduce">한줄소개</string>
     <string name="onboarding_crew_at">에서</string>
     <string name="onboarding_intro_title">나는 어떤 사람인가요?</string>
     <string name="onboarding_intro_nickname">닉네임</string>
@@ -147,10 +152,14 @@
     <string name="onboarding_intro_warn">이미 사용중인 닉네임입니다</string>
     <string name="onboarding_intro_access">사용 가능한 닉네임입니다</string>
     <string name="onboarding_intro_simple">간단 소개</string>
-    <string name="onboarding_intro_simple_input">간단 소개 입력 (100자 이내)</string>
+    <string name="onboarding_intro_simple_input">간단 소개 입력 (200자 이내)</string>
     <string name="onboarding_intro_subway">선호하는 지하철역</string>
     <string name="onboarding_intro_subway_two">(최대 2개 추가 가능)</string>
     <string name="onboarding_intro_add">추가하기</string>
+    <string name="onboarding_subway_title">선호하는 지하철역을\n알려주세요!</string>
+    <string name="onboarding_subway">지하철역</string>
+    <string name="onboarding_subway_input">지하철역 검색</string>
+
 
     <!-- message -->
     <string name="messageBox">쪽지함</string>

@@ -17,7 +17,9 @@ import javax.inject.Inject
 class OnBoardingViewModel @Inject constructor(
     val postRegisterCrewUseCase: PostRegisterCrewUseCase,
     val postMakeCrewUseCase: PostMakeCrewUseCase
+
 ) : ViewModel() {
+
 
     //동아리 참여 변수
     private val _registerCrew = MutableLiveData<RegisterCrewData>()
@@ -32,6 +34,7 @@ class OnBoardingViewModel @Inject constructor(
 
     //동아리 개설 request
     var requestMakeCrew = MakeCrewItem("", "")
+
 
     //동아리 참여
     var crewCode = RegisterCrewItem("")
@@ -91,4 +94,5 @@ class OnBoardingViewModel @Inject constructor(
                 }
         }
     }
+
 }

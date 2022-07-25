@@ -8,17 +8,24 @@ import com.playtogether_android.domain.model.onboarding.RegisterCrewData
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import com.playtogether_android.domain.repository.onboarding.OnBoardingRepository
 
-class OnBoardingRepositoryImpl (private val onBoardingDataSource: OnBoardingDataSource) : OnBoardingRepository {
+class OnBoardingRepositoryImpl(private val onBoardingDataSource: OnBoardingDataSource) :
+    OnBoardingRepository {
 
     override suspend fun postRegisterCrew(registerCrewItem: RegisterCrewItem): RegisterCrewData {
-        return OnBoardingMapper.mapperToRegisterCrewData(onBoardingDataSource.postRegisterCrew(
-            OnBoardingMapper.mapperToRegisterCrewItem(registerCrewItem)
-        ))
+        return OnBoardingMapper.mapperToRegisterCrewData(
+            onBoardingDataSource.postRegisterCrew(
+                OnBoardingMapper.mapperToRegisterCrewItem(registerCrewItem)
+            )
+        )
     }
 
+
     override suspend fun postMakeCrew(makeCrewItem: MakeCrewItem): MakeCrewData {
-        return OnBoardingMapper.mapperToMakeCrewData(onBoardingDataSource.postMakeCrew(
-            OnBoardingMapper.mapperToMakeCrewItem(makeCrewItem)
-        ))
+        return OnBoardingMapper.mapperToMakeCrewData(
+            onBoardingDataSource.postMakeCrew(
+                OnBoardingMapper.mapperToMakeCrewItem(makeCrewItem)
+
+            )
+        )
     }
 }

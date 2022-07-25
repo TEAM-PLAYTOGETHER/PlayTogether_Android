@@ -2,10 +2,8 @@ package com.playtogether_android.data.datasource.onboarding
 
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
-import com.playtogether_android.data.model.request.sign.RequestSignId
 import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
-import com.playtogether_android.data.model.response.sign.ResponseSignId
 
 interface OnBoardingDataSource {
 
