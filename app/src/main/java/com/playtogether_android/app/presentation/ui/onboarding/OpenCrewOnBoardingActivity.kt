@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.widget.Toast
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.view.isVisible
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -32,10 +30,8 @@ class OpenCrewOnBoardingActivity :
         nullCheck()
         nameTextWatcher()
         introTextWatcher()
-
         openCrewNetwork()
         activeBtn()
-
 
     }
 
@@ -171,6 +167,9 @@ class OpenCrewOnBoardingActivity :
             if (it.success) {
                 Timber.d("${it.code}")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("crewName" , it.name)
+                intent.putExtra("crewCode", it.code)
+                intent.putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
                 startActivity(intent)
                 finish()
             } else {
