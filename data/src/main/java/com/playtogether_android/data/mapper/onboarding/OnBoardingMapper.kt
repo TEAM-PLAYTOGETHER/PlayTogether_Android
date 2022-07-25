@@ -28,6 +28,7 @@ object OnBoardingMapper {
     //동아리 개설 response
     fun mapperToMakeCrewData(responseMakeCrew: ResponseMakeCrew) : MakeCrewData {
         return MakeCrewData(
+            success = responseMakeCrew.success,
             code = responseMakeCrew.data.code,
             id = responseMakeCrew.data.id,
             name = responseMakeCrew.data.name
