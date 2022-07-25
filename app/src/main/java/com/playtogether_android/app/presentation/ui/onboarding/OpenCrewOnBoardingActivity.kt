@@ -3,8 +3,8 @@ package com.playtogether_android.app.presentation.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
@@ -14,6 +14,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.domain.model.onboarding.MakeCrewItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+
 
 @AndroidEntryPoint
 class OpenCrewOnBoardingActivity :
@@ -87,11 +88,23 @@ class OpenCrewOnBoardingActivity :
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                block()
                 etOpenOnboardingName.isSelected = etOpenOnboardingName.text.toString() != ""
                 initTextFieldCheck()
                 activeBtn()
             }
         })
+    }
+
+    private fun block() {
+        binding.etOpenOnboardingName.setFilters(arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+            for (i in start until end) {
+                if (!Character.isLetterOrDigit(source[i])) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }))
     }
 
     //소개 textWatcher
