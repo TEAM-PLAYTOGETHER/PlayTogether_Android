@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="crew"
+            type="com.playtogether_android.domain.model.onboarding.CrewListData.Data.CrewList" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,11 +34,12 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="23dp"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="@string/text_join"
                 android:textColor="@drawable/selector_text_gray01_to_black01"
                 android:textSize="16sp"
+                android:text="@{crew.name}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="참여" />
 
             <TextView
                 android:id="@+id/tv_second_onboarding_join_message"
@@ -43,12 +48,13 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="23dp"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="@string/onboarding_join_message"
+                android:text="@{crew.name}"
                 android:textColor="@drawable/selector_text_gray01_to_black01"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_second_onboarding_join"
-                app:layout_constraintTop_toBottomOf="@+id/tv_second_onboarding_join" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_second_onboarding_join"
+                tools:text="@string/onboarding_join_message" />
 
             <ImageView
                 android:id="@+id/iv_second_onboarding_join_select"
