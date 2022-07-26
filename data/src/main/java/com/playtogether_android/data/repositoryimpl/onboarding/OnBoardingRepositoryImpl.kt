@@ -2,10 +2,7 @@ package com.playtogether_android.data.repositoryimpl.onboarding
 
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSource
 import com.playtogether_android.data.mapper.onboarding.OnBoardingMapper
-import com.playtogether_android.domain.model.onboarding.MakeCrewData
-import com.playtogether_android.domain.model.onboarding.MakeCrewItem
-import com.playtogether_android.domain.model.onboarding.RegisterCrewData
-import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+import com.playtogether_android.domain.model.onboarding.*
 import com.playtogether_android.domain.repository.onboarding.OnBoardingRepository
 
 class OnBoardingRepositoryImpl(private val onBoardingDataSource: OnBoardingDataSource) :
@@ -26,6 +23,12 @@ class OnBoardingRepositoryImpl(private val onBoardingDataSource: OnBoardingDataS
                 OnBoardingMapper.mapperToMakeCrewItem(makeCrewItem)
 
             )
+        )
+    }
+
+    override suspend fun getCrewList(): CrewListData {
+        return OnBoardingMapper.mapperToGetList(
+            onBoardingDataSource.getListCrew()
         )
     }
 }

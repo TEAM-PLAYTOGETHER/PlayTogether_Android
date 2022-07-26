@@ -3,6 +3,7 @@ package com.playtogether_android.data.mapper.onboarding
 
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
+import com.playtogether_android.data.model.response.onboarding.ResponseGetList
 import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
 import com.playtogether_android.domain.model.onboarding.*
@@ -41,4 +42,20 @@ object OnBoardingMapper {
             description = makeCrewItem.description
         )
     }
+
+    //동아리 리스트 조회 response
+    fun mapperToGetList(responseGetList: ResponseGetList) :CrewListData{
+        return CrewListData(
+            data = CrewListData.Data(
+                crewList = responseGetList.data.crewList.map {
+                    CrewListData.Data.CrewList(
+                        id = it.id,
+                        name = it.name
+                    )
+                }
+            ),
+            success = responseGetList.success
+        )
+    }
+
 }
