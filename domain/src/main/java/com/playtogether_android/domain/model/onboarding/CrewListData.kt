@@ -9,7 +9,8 @@ data class CrewListData(
     ) {
         data class CrewList(
             val id: Int,
-            val name: String
+            val name: String,
+            val description : String?
         )
     }
 }

@@ -50,7 +50,8 @@ object OnBoardingMapper {
                 crewList = responseGetList.data.crewList.map {
                     CrewListData.Data.CrewList(
                         id = it.id,
-                        name = it.name
+                        name = it.name,
+                        description = it.description ?: ""
                     )
                 }
             ),
