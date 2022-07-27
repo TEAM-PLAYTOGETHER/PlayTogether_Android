@@ -167,7 +167,7 @@
 
     <!--    ThunderListActivity-->
 
-    <string name="thunder_list_title">⚡️ 같이&#160;</string>
+    <string name="thunder_list_title">같이&#160;</string>
     <string name="thunder_list_question">"?"</string>
     <string name="thunder_list_align">최신순</string>
 
