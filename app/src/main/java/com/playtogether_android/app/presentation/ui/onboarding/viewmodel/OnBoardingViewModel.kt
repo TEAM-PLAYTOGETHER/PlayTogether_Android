@@ -2,10 +2,8 @@ package com.playtogether_android.app.presentation.ui.onboarding.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.playtogether_android.domain.model.onboarding.MakeCrewData
-import com.playtogether_android.domain.model.onboarding.MakeCrewItem
-import com.playtogether_android.domain.model.onboarding.RegisterCrewData
-import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+import com.playtogether_android.domain.model.onboarding.*
+import com.playtogether_android.domain.usecase.onboarding.GetCrewListUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostMakeCrewUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,9 +14,15 @@ import javax.inject.Inject
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
     val postRegisterCrewUseCase: PostRegisterCrewUseCase,
-    val postMakeCrewUseCase: PostMakeCrewUseCase
+    val postMakeCrewUseCase: PostMakeCrewUseCase,
+    val getCrewListUseCase: GetCrewListUseCase
 
 ) : ViewModel() {
+
+    //동아리 리스트
+    private val _getCrewList = MutableLiveData<CrewListData>()
+    val getCrewList: LiveData<CrewListData>
+        get() = _getCrewList
 
 
     //동아리 참여 변수
@@ -28,8 +32,8 @@ class OnBoardingViewModel @Inject constructor(
 
     //동아리 개설 변수
     private val _makeCrew = MutableLiveData<MakeCrewData>()
-    val makeCrew : LiveData<MakeCrewData>
-    get() = _makeCrew
+    val makeCrew: LiveData<MakeCrewData>
+        get() = _makeCrew
 
 
     //동아리 개설 request
@@ -91,6 +95,21 @@ class OnBoardingViewModel @Inject constructor(
                 .onFailure {
                     it.printStackTrace()
                     Timber.d("동아리 개설 : 서버 통신 실패")
+                }
+        }
+    }
+
+    //동아리 리스트 조회
+    fun getCrewList() {
+        viewModelScope.launch {
+            kotlin.runCatching { getCrewListUseCase() }
+                .onSuccess {
+                    _getCrewList.value = it
+                    Timber.d("동아리 리스트 조회 : 서버 통신 성공")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("동아리 리스트 조회 : 서버 통신 실패")
                 }
         }
     }

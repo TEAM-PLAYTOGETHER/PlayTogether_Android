@@ -159,6 +159,8 @@
     <string name="onboarding_subway_title">선호하는 지하철역을\n알려주세요!</string>
     <string name="onboarding_subway">지하철역</string>
     <string name="onboarding_subway_input">지하철역 검색</string>
+    <string name="onboarding_redown_title">PLAY TOGETHER,\n다시 만나서 기뻐요!</string>
+    <string name="onboarding_redown_subtitle">어떤 동아리의 번개가 궁금하세요?</string>
 
 
     <!-- message -->
