@@ -47,7 +47,7 @@ object OnBoardingMapper {
     fun mapperToGetList(responseGetList: ResponseGetList) :CrewListData{
         return CrewListData(
             data = CrewListData.Data(
-                crewList = responseGetList.data.crewList.map {
+                crewList = responseGetList.data.list.map {
                     CrewListData.Data.CrewList(
                         id = it.id,
                         name = it.name,
