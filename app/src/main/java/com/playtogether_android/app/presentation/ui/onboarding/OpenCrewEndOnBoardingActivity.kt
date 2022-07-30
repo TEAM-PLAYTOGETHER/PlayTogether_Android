@@ -15,10 +15,11 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
 
     private fun initSetting() {
         val crewName = intent.getStringExtra("crewName")
-        val crewIntroduce = intent.getStringExtra("crewIntroduce")
+        val crewIntroduce = intent.getStringExtra("crewIntro")
         val crewCode = intent.getStringExtra("crewCode")
+        val userName = intent.getStringExtra("userName")
 
-        //binding.tvOpenEndOnboardingName.setText(crewName)
+        binding.tvOpenEndOnboardingName.setText(userName)
         binding.tvOpenEndOnboardingCrew.setText(crewName)
         binding.tvOpenEndOnboardingCrewName.setText(crewName)
         binding.tvOpenEndOnboardingIntroAnswer.setText(crewIntroduce)
@@ -31,17 +32,16 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
             finish()
         }
 
+        /*
         binding.tvOpenEndOnboardingShare.setOnClickListener{
-/*
+
             val message = "crewName"
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
             intent.putExtra(Intent.EXTRA_TEXT, message)
             intent.setPackage("com.kakao.talk")
             startActivity(intent)
-
- */
         }
+         */
     }
-
 }
