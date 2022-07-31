@@ -94,11 +94,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun refreshView() {
         with(binding) {
-            lsrlHomeContainer.setOnRefreshListener {
-                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
-                initAdapter()
-                lsrlHomeContainer.isRefreshing = false
-            }
+//            lsrlHomeContainer.setOnRefreshListener {
+//                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
+//                initAdapter()
+//                lsrlHomeContainer.isRefreshing = false
+//            }
         }
     }
 

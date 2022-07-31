@@ -38,6 +38,7 @@ class ThunderListViewModel @Inject constructor(
                 Timber.d("viewmodel category : $category")
             }.onFailure {
                 Timber.e("getLightList error : $it")
+                Timber.e("getLightList error : ${it.message}")
             }
         }
     }
