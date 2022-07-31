@@ -1,11 +1,14 @@
 package com.playtogether_android.app.presentation.ui.home.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeHotBinding
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.domain.model.light.HomeLightningData
 
 class HomeHotAdapter : ListAdapter<HomeLightningData, HomeHotAdapter.ViewHolder>(HomeComparator()) {
@@ -29,6 +32,12 @@ class HomeHotAdapter : ListAdapter<HomeLightningData, HomeHotAdapter.ViewHolder>
     override fun onBindViewHolder(holder: HomeHotAdapter.ViewHolder, position: Int) {
         val item = getItem(position)
         holder.onBind(item)
+        holder.itemView.setOnClickListener {
+            Intent(it.context, ThunderDetailActivity::class.java).apply {
+                putExtra("thunderId", item.id)
+                it.context.startActivity(this)
+            }
+        }
     }
 
     class HomeComparator : DiffUtil.ItemCallback<HomeLightningData>() {

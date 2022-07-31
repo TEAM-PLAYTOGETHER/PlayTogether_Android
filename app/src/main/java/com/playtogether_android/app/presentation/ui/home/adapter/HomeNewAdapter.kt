@@ -1,11 +1,13 @@
 package com.playtogether_android.app.presentation.ui.home.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeNewBinding
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.domain.model.light.HomeLightningData
 
 class HomeNewAdapter : ListAdapter<HomeLightningData, HomeNewAdapter.ViewHolder>(HomeComparator()) {
@@ -28,15 +30,27 @@ class HomeNewAdapter : ListAdapter<HomeLightningData, HomeNewAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: HomeNewAdapter.ViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            Intent(it.context, ThunderDetailActivity::class.java).apply {
+                putExtra("thunderId", item.id)
+                it.context.startActivity(this)
+            }
+        }
         holder.onBind(item)
     }
 
     class HomeComparator : DiffUtil.ItemCallback<HomeLightningData>() {
-        override fun areItemsTheSame(oldItem: HomeLightningData, newItem: HomeLightningData): Boolean {
+        override fun areItemsTheSame(
+            oldItem: HomeLightningData,
+            newItem: HomeLightningData
+        ): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: HomeLightningData, newItem: HomeLightningData): Boolean {
+        override fun areContentsTheSame(
+            oldItem: HomeLightningData,
+            newItem: HomeLightningData
+        ): Boolean {
             return oldItem == newItem
         }
 
