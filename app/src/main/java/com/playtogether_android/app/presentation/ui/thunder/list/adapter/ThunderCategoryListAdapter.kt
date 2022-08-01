@@ -36,7 +36,7 @@ class ThunderCategoryListAdapter :
                         )
                     )
 
-                ivThunderlistImage.setImageResource(setImageView(data.category))
+//                ivThunderlistImage.setImageResource(setImageView(data.category))
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
