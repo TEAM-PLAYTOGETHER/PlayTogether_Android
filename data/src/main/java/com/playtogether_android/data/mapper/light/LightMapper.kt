@@ -8,7 +8,7 @@ import com.playtogether_android.domain.model.light.TestData
 
 object LightMapper {
     fun mapperToCategoryData(data: ResponseLightListCategory): List<CategoryData> {
-        return data.data.map {
+        return data.data.lightData.map {
             CategoryData(
                 category = it.category,
                 date = it.date,
@@ -18,8 +18,21 @@ object LightMapper {
                 place = it.place,
                 time = it.time,
                 title = it.title,
+                likeCount = it.scpCnt
             )
         }
+//        return data.data.map {
+//            CategoryData(
+//                category = it.category,
+//                date = it.date,
+//                lightId = it.lightId,
+//                lightMemberCnt = it.lightMemberCnt,
+//                peopleCnt = it.peopleCnt,
+//                place = it.place,
+//                time = it.time,
+//                title = it.title,
+//            )
+//        }
     }
 
     fun mapperToHomeLightningData(data: ResponseHomeLightning): List<HomeLightningData> {

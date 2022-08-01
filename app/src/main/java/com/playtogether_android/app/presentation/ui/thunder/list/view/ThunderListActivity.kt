@@ -12,6 +12,7 @@ import com.playtogether_android.app.presentation.ui.thunder.list.adapter.Thunder
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import com.playtogether_android.app.util.SpaceItemDecorationVertical
 
 @AndroidEntryPoint
 class ThunderListActivity :
@@ -63,6 +64,7 @@ class ThunderListActivity :
 
         with(binding.rvThunderlistContainer) {
             layoutManager = LinearLayoutManager(this@ThunderListActivity)
+            addItemDecoration(SpaceItemDecorationVertical())
             adapter = thunderCategoryListAdapter
         }
     }
