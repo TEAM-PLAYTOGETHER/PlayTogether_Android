@@ -20,17 +20,18 @@ import androidx.fragment.app.viewModels
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val homeVieModel: HomeViewModel by viewModels()
-//    private val thunderListViewModel: ThunderListViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
+
+    //    private val thunderListViewModel: ThunderListViewModel by viewModels()
     private lateinit var hotAdapter: HomeHotAdapter
     private lateinit var newAdapter: HomeNewAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initData()
         initView()
         refreshView()
-
     }
-
 
     private fun initView() {
         binding.btnHomeFloat.layoutParams.apply {
@@ -75,21 +76,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun hotListAdapter() {
         hotAdapter = HomeHotAdapter()
+
+        homeViewModel.hotList.observe(viewLifecycleOwner) {
+            hotAdapter.submitList(it)
+        }
+
         with(binding.vpHomeHotContainer) {
             adapter = hotAdapter
             requireActivity().viewPagerAnimation(binding.vpHomeHotContainer)
         }
-
-        hotAdapter.submitList(homeVieModel.tempList)
     }
 
     private fun newListAdapter() {
         newAdapter = HomeNewAdapter()
+
+        homeViewModel.newList.observe(viewLifecycleOwner) {
+            newAdapter.submitList(it)
+        }
         with(binding.vpHomeNewContainer) {
             adapter = newAdapter
             requireActivity().viewPagerAnimation(binding.vpHomeNewContainer)
         }
-        newAdapter.submitList(homeVieModel.tempList)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
+    }
+
+    private fun initData() {
+        binding.viewmodel = homeViewModel
+        homeViewModel.getHotList()
+        homeViewModel.getNewList()
     }
 
     private fun refreshView() {

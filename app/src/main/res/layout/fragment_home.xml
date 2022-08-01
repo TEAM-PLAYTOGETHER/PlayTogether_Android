@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -186,7 +188,7 @@
                             app:layout_constraintTop_toBottomOf="@id/view_home_under_line" />
 
                         <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/vp_home_new_container"
+                            android:id="@+id/vp_home_hot_container"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="12dp"
@@ -203,10 +205,10 @@
                             android:layout_marginTop="24dp"
                             android:text="@string/home_new_title"
                             app:layout_constraintStart_toStartOf="@id/tv_home_new_title"
-                            app:layout_constraintTop_toBottomOf="@id/vp_home_new_container" />
+                            app:layout_constraintTop_toBottomOf="@id/vp_home_hot_container" />
 
                         <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/vp_home_hot_container"
+                            android:id="@+id/vp_home_new_container"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="12dp"
