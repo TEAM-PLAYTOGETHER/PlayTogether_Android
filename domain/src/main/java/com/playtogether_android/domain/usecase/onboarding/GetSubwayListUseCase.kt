@@ -6,7 +6,7 @@ import com.playtogether_android.domain.repository.onboarding.SubwayRepository
 import javax.inject.Inject
 
 class GetSubwayListUseCase @Inject constructor(private val repository: SubwayRepository) {
-    suspend operator fun invoke() : SubwayListData {
+    suspend operator fun invoke() : List<SubwayListData> {
         return repository.getSubwayList()
     }
 }

@@ -10,7 +10,7 @@ class SubwayRepositoryImpl(
 ) :
     SubwayRepository {
 
-    override suspend fun getSubwayList(): SubwayListData {
+    override suspend fun getSubwayList(): List<SubwayListData> {
         return OnBoardingMapper.mapperToSubwayList(
             subwayInfoService.getSubwayList()
         )

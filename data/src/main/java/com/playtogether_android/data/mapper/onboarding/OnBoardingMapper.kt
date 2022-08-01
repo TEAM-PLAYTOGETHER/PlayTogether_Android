@@ -62,7 +62,17 @@ object OnBoardingMapper {
 
 
     //지하철 조회 response
-    fun mapperToSubwayList(responseSubwayList: ResponseSubwayList) : SubwayListData{
+    fun mapperToSubwayList(responseSubwayList: ResponseSubwayList) : List<SubwayListData> {
+        return responseSubwayList.SearchSTNBySubwayLineInfo.row.map {
+            SubwayListData(
+                FR_CODE = it.FR_CODE,
+                LINE_NUM = it.LINE_NUM,
+                STATION_CD = it.STATION_CD,
+                STATION_NM = it.STATION_NM,
+                STATION_NM_ENG = it.STATION_NM_ENG
+            )
+        }
+        /*
         return SubwayListData(
             SubwayListData.searchSTNBySubwayLineInfo(
                 SubwayListData.searchSTNBySubwayLineInfo.result(
@@ -82,6 +92,8 @@ object OnBoardingMapper {
                 }
             )
         )
+
+         */
     }
 
 }

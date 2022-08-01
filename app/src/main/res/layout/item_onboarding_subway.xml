@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="data"
-            type="com.playtogether_android.domain.model.onboarding.SubwayListData.searchSTNBySubwayLineInfo.Row" />
+            name="subway"
+            type="com.playtogether_android.domain.model.onboarding.SubwayListData" />
 
         <import type="android.view.View" />
     </data>
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:text="@{data.STATION_NM}"
+            android:text="@{subway.STATION_NM}"
             android:textColor="@color/gray_black02"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

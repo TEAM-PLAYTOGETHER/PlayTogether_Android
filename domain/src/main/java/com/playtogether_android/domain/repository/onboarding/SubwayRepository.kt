@@ -5,6 +5,6 @@ import com.playtogether_android.domain.model.onboarding.SubwayListData
 
 interface SubwayRepository {
 
-    suspend fun getSubwayList() : SubwayListData
+    suspend fun getSubwayList() : List<SubwayListData>
 
 }

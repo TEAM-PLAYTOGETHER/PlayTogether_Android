@@ -38,9 +38,8 @@ class OnBoardingViewModel @Inject constructor(
         get() = _makeCrew
 
     //지하철 정보 조회
-    private val _subwayList = MutableLiveData<SubwayListData>()
-    val subwayList : LiveData<SubwayListData>
-    get() = _subwayList
+    private val _subwayList = MutableLiveData<List<SubwayListData>>()
+    val subwayList = _subwayList
 
 
     //동아리 개설 request
