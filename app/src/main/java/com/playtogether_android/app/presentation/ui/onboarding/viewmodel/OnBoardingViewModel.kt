@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.playtogether_android.domain.model.onboarding.*
 import com.playtogether_android.domain.usecase.onboarding.GetCrewListUseCase
+import com.playtogether_android.domain.usecase.onboarding.GetSubwayListUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostMakeCrewUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 class OnBoardingViewModel @Inject constructor(
     val postRegisterCrewUseCase: PostRegisterCrewUseCase,
     val postMakeCrewUseCase: PostMakeCrewUseCase,
-    val getCrewListUseCase: GetCrewListUseCase
+    val getCrewListUseCase: GetCrewListUseCase,
+    val getSubwayListUseCase: GetSubwayListUseCase
 
 ) : ViewModel() {
 
@@ -34,6 +36,11 @@ class OnBoardingViewModel @Inject constructor(
     private val _makeCrew = MutableLiveData<MakeCrewData>()
     val makeCrew: LiveData<MakeCrewData>
         get() = _makeCrew
+
+    //지하철 정보 조회
+    private val _subwayList = MutableLiveData<SubwayListData>()
+    val subwayList : LiveData<SubwayListData>
+    get() = _subwayList
 
 
     //동아리 개설 request
@@ -110,6 +117,21 @@ class OnBoardingViewModel @Inject constructor(
                 .onFailure {
                     it.printStackTrace()
                     Timber.d("동아리 리스트 조회 : 서버 통신 실패")
+                }
+        }
+    }
+
+    //지하철 정보 조회
+    fun getSubwayList() {
+        viewModelScope.launch {
+            kotlin.runCatching { getSubwayListUseCase() }
+                .onSuccess {
+                    _subwayList.value = it
+                    Timber.d("지하철 리스트 조회 : 서버 통신 성공")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("지하철 리스트 조회 : 서버 통신 실패")
                 }
         }
     }

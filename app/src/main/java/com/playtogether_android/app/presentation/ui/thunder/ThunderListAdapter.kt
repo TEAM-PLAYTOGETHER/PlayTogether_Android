@@ -42,11 +42,11 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
         val item = _thunderList[position]
         holder.onBind(item)
 
-        if (itemClick != null) {
-            holder.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
-                itemClick?.onClick(it, position, item.lightId)
-            })
-        }
+//        if (itemClick != null) {
+//            holder.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
+//                itemClick?.onClick(it, position, item.lightId)
+//            })
+//        }
     }
 
     override fun getItemCount(): Int = _thunderList.size
@@ -58,7 +58,7 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
             binding.tvThunderItemDate.text = data.date + " " + data.place + " " + data.time
             binding.tvThunderItemLimitCount.text =
                 "인원 " + data.lightMemberCnt + " / " + data.peopleCnt
-            binding.ivThunderlistImage.setImageResource(setImageView(data.category))
+//            binding.ivThunderlistImage.setImageResource(setImageView(data.category))
             //여기서 먹갈할 카테고리를 몰라서 먹갈할 구분이 불가능할거같은데?
         }
 

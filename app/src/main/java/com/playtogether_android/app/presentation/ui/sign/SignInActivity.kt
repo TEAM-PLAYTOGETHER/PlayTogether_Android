@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignInBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.OnBoardingIntroduceActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
@@ -104,7 +105,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                     this,
                     it.jwtToken
                 )
-                val intent = Intent(this, SelectOnboardingActivity::class.java)
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
