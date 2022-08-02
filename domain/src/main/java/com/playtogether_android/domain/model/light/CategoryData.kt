@@ -13,7 +13,9 @@ data class CategoryData(
     val peopleCnt: Int,
     val place: String,
     val time: String,
-    val title: String
+    val title: String,
+    @SerializedName("scp_cnt")
+    val likeCount : Int
 )
 
 data class TestData(
