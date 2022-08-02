@@ -114,6 +114,7 @@
                 android:src="@drawable/ic_icn_align" />
 
             <TextView
+                android:id="@+id/tv_thunderlist_sort_type"
                 style="@style/thunder_align"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

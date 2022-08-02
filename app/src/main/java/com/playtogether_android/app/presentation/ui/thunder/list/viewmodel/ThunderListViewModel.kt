@@ -43,8 +43,11 @@ class ThunderListViewModel @Inject constructor(
         }
     }
 
-    fun setSortType(type: String) {
-        _sortType.value = type
+    fun setSortType(type: String): String {
+        return if (type == DEFAULT_SORT)
+            DEFAULT_SORT_KR
+        else
+            LIKECNT_KR
     }
 
     fun setCategory(category: String) {
@@ -54,5 +57,7 @@ class ThunderListViewModel @Inject constructor(
     companion object {
         const val DEFAULT_CATEGORY = "먹을래"
         const val DEFAULT_SORT = "createdAt"
+        const val DEFAULT_SORT_KR = "최신순"
+        const val LIKECNT_KR = "찜 많은순"
     }
 }

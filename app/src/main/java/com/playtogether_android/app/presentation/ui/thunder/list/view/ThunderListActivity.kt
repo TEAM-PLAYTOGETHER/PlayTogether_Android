@@ -23,6 +23,7 @@ class ThunderListActivity :
     private val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.thunderViewModel = thunderListViewModel
         initView()
     }
 
@@ -50,6 +51,10 @@ class ThunderListActivity :
         thunderListViewModel.category.observe(this) {
             binding.tvThunderlistToolTitle.text = it
             binding.tvThunderlistCategoryTitle.text = it + getString(R.string.thunder_list_question)
+        }
+
+        thunderListViewModel.sortType.observe(this) {
+            binding.tvThunderlistSortType.text = thunderListViewModel.setSortType(it)
         }
     }
 
