@@ -1,19 +1,22 @@
 package com.playtogether_android.app.presentation.ui.message
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel
-import com.playtogether_android.app.presentation.ui.message.viewmodel.SendMessageViewModel
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.message.PostSendMessageData
 import dagger.hilt.android.AndroidEntryPoint
+import io.socket.client.IO
+import io.socket.client.Socket
+import io.socket.emitter.Emitter
+import java.net.URISyntaxException
 
 @AndroidEntryPoint
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
@@ -21,22 +24,75 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     private var roomId = -1
     private lateinit var name: String
     private var audienceId = -1
-    private val sendMessageViewModel: SendMessageViewModel by viewModels()
-    private val getChatViewModel: ChatViewModel by viewModels()
+    private val chatViewModel: ChatViewModel by viewModels()
+    private lateinit var socket: Socket
+    private val gson = Gson()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding.viewmodel = chatViewModel
+        binding.lifecycleOwner = this
+
         getIntentData()
         getChatAll()
-        changeSendImage()
         initAdapter()
+        changeSendImage()
+        //initSocket(roomId)
 
+        clickSendMessage()
+        clickBackArrow()
+        clickRefresh()
+    }
+
+    fun initSocket(roomId: Int) {
+        try {
+            socket = IO.socket("ws://13.125.232.150:5500")
+            Log.d("asdf", "Connection success : ${socket.id()}")
+        } catch (e: URISyntaxException) {
+            e.printStackTrace()
+            Log.d("asdf", "Connection Fail")
+        }
+
+        val connection = Emitter.Listener {
+            val auth = PlayTogetherSharedPreference.getJwtToken(this)
+            // auth = gson.toJson(auth)
+            socket.emit("subscribe", auth)
+        }
+        val subscribe = Emitter.Listener {
+            val data = SubscribeSocket(roomId, audienceId)
+            val jsonData = gson.toJson(data)
+            socket.emit("subscribe", jsonData)
+        }
+
+        socket.connect()
+        socket.emit("connection", connection)
+        socket.emit("subscribe", subscribe)
+        Log.d(
+            "asdf",
+            "${
+                socket.on(
+                    Socket.EVENT_CONNECT,
+                    Emitter.Listener { socket.emit("connection", connection) })
+            }"
+        )
+        //socket.on("")
+    }
+
+    private fun clickSendMessage(){
         binding.ivSendMessage.setOnClickListener {
             addChat()
             binding.etMessage.text.clear()
         }
+    }
+
+    private fun clickBackArrow(){
         binding.ivInChattingBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun clickRefresh(){
         binding.ivInChattingRefresh.setOnClickListener {
             getChatAll()
             shortToast("새로고침 되었습니다")
@@ -44,47 +100,26 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun changeSendImage() {
-        binding.etMessage.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (binding.etMessage.text.isNullOrEmpty()) {
-                    binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
-                    binding.ivSendMessage.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this@ChattingActivity,
-                            R.color.gray_gray03
-                        )
-                    )
-                    binding.ivSendMessage.isClickable = false
-                }
-            }
+        chatViewModel.inputMessage.observe(this) {
+            if (it.isNullOrEmpty()) cantSend()
+            else canSend()
+        }
+    }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (!binding.etMessage.text.isNullOrEmpty()) {
-                    binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message_black)
-                    binding.ivSendMessage.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this@ChattingActivity,
-                            R.color.main_green
-                        )
-                    )
-                    binding.ivSendMessage.isClickable = true
-                }
-            }
+    private fun cantSend() {
+        binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
+        binding.ivSendMessage.setBackgroundColor(
+            ContextCompat.getColor(this@ChattingActivity, R.color.gray_gray03)
+        )
+        binding.ivSendMessage.isClickable = false
+    }
 
-            override fun afterTextChanged(p0: Editable?) {
-                if (binding.etMessage.text.isNullOrEmpty()) {
-                    binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message)
-                    binding.ivSendMessage.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this@ChattingActivity,
-                            R.color.gray_gray03
-                        )
-                    )
-                    binding.ivSendMessage.isClickable = false
-                }
-            }
-
-        })
+    private fun canSend() {
+        binding.ivSendMessage.setImageResource(R.drawable.ic_icn_message_black)
+        binding.ivSendMessage.setBackgroundColor(
+            ContextCompat.getColor(this@ChattingActivity, R.color.main_green)
+        )
+        binding.ivSendMessage.isClickable = true
     }
 
     private fun getIntentData() {
@@ -101,8 +136,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
     private fun getChatAll() {
         if (roomId != -1) {
-            getChatViewModel.getChatList(roomId)
-            getChatViewModel.chatData.observe(this) {
+            chatViewModel.getChatList(roomId)
+            chatViewModel.chatData.observe(this) {
                 chatAdapter.submitList(it) {
                     scrollToBottom()
                     removeTimeAll()
@@ -112,7 +147,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun observeGetSendMessage() {
-        sendMessageViewModel.getSendMessage.observe(this) {
+        chatViewModel.getSendMessage.observe(this) {
             if (it.success) {
                 roomId = it.roomId.toInt()
                 getChatAll()
@@ -124,12 +159,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun addChat() {
-        sendMessageViewModel.postSendMessage(
-            PostSendMessageData(
-                binding.etMessage.text.toString(),
-                audienceId
-            )
-        )
+        chatViewModel.postSendMessage(
+            PostSendMessageData(binding.etMessage.text.toString(), audienceId))
         observeGetSendMessage()
     }
 
@@ -157,36 +188,6 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         chatAdapter.submitList(chatAdapter.currentList) {
         }
     }
-
-    /*private fun removeTimePart() {
-        Log.d("chatServer", "size : ${adapter2.currentList.size}")
-        val nowSize = adapter2.currentList.size - 1
-        var tempSize = nowSize - 1
-
-        if (tempSize < 0)
-            return
-
-        while (true) {
-            if (adapter2.currentList[tempSize].messageType == adapter2.currentList[nowSize].messageType) {
-                Log.d("chatServer", "messageType 같음")
-                Log.d("chatServer", "tempSize : ${adapter2.currentList[tempSize].time}")
-                Log.d("chatServer", "nowSize : ${adapter2.currentList[nowSize].time}")
-                if (adapter2.currentList[nowSize].time == adapter2.currentList[tempSize].time) {
-                    adapter2.currentList[tempSize].timeVisible = false
-                    Log.d("chatServer", "time 같음")
-                    tempSize--
-                } else
-                    break
-            } else
-                break
-
-            if (tempSize < 0) break
-        }
-        Log.d("chatServer", "한 번 클릭 끝")
-        adapter2.submitList(adapter2.currentList){
-            Log.d("messageServer", "removePart 호출됨")
-        }
-    }*/
 
     private fun initAdapter() {
         chatAdapter = ChatAdapter()
