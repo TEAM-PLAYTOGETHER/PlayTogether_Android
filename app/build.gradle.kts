@@ -190,4 +190,12 @@ dependencies {
     //Kapt
     //kapt(KaptDependencies.glide)
 
+    //Socket.io
+    implementation ("io.socket:socket.io-client:2.0.0"){
+        exclude("org.json", "json")
+    }
+
+    //gson
+    implementation ("com.google.code.gson:gson:2.9.0")
+
 }

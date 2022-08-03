@@ -88,10 +88,4 @@ dependencies {
     //coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
-
-
-    //Socket.io
-    implementation ("io.socket:socket.io-client:2.0.0"){
-        exclude("org.json", "json")
-    }
 }
