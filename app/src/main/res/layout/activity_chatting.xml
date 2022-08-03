@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="image"
-            type="android.R" />
-        <import type="android.R.drawable"/>
+            name="viewmodel"
+            type="com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:includeFontPadding="false"
                 android:textColor="@color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,9 +44,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
                 android:layout_marginStart="10dp"
+                android:clickable="false"
                 android:padding="10dp"
                 android:src="@drawable/ic_icn_back"
-                android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -90,10 +90,10 @@
                 android:id="@+id/iv_send_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="8dp"
-                android:src="@drawable/ic_icn_message"
                 android:background="@color/gray_gray03"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="10dp"
+                android:src="@drawable/ic_icn_message"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -102,14 +102,15 @@
                 android:id="@+id/et_message"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:inputType="textMultiLine"
                 android:layout_marginVertical="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/white"
                 android:fontFamily="@font/pretendard_regular"
-                android:textSize="14sp"
+                android:inputType="textMultiLine"
+                android:text="@={viewmodel.inputMessage}"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_send_message"
                 app:layout_constraintStart_toStartOf="parent"
