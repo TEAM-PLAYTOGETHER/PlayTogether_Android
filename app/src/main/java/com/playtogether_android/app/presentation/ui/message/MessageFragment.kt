@@ -31,9 +31,7 @@ class MessageFragment :
     }
 
     private fun initAdapter() {
-        adapter = MessageListAdapter {
-            clickItem(it)
-        }
+        adapter = MessageListAdapter { clickItem(it) }
         binding.rvMessageRoom.adapter = adapter
     }
 
@@ -55,7 +53,7 @@ class MessageFragment :
         with(binding) {
             lsrlMessageContainer.setOnRefreshListener {
                 //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
-                initAdapter()
+                messageViewModel.getMessageList()
                 lsrlMessageContainer.isRefreshing = false
             }
         }
