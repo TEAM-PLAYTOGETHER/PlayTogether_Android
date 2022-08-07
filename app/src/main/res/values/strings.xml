@@ -139,6 +139,29 @@
     <string name="onboarding_crew_approve">사용 가능한 동아리명입니다</string>
     <string name="onboarding_crew_intro">한 줄 소개</string>
     <string name="onboarding_crew_intro_input">한 줄 소개를 입력해주세요 (15자 이내)</string>
+    <string name="onboarding_open_end_top">님, 반가워요!</string>
+    <string name="onboarding_open_end_start">번개를 시작해볼까요?</string>
+    <string name="onboarding_open_share_code">초대코드 공유하기</string>
+    <string name="onboarding_open_code">초대코드</string>
+    <string name="onboarding_open_introduce">한줄소개</string>
+    <string name="onboarding_crew_at">에서</string>
+    <string name="onboarding_intro_title">나는 어떤 사람인가요?</string>
+    <string name="onboarding_intro_nickname">닉네임</string>
+    <string name="onboarding_intro_nickname_input">닉네임 입력</string>
+    <string name="onboarding_intro_condition">1~10(공백제외) 이내 한글, 영문, 숫자, 특수문자 사용 가능</string>
+    <string name="onboarding_intro_warn">이미 사용중인 닉네임입니다</string>
+    <string name="onboarding_intro_access">사용 가능한 닉네임입니다</string>
+    <string name="onboarding_intro_simple">간단 소개</string>
+    <string name="onboarding_intro_simple_input">간단 소개 입력 (200자 이내)</string>
+    <string name="onboarding_intro_subway">선호하는 지하철역</string>
+    <string name="onboarding_intro_subway_two">(최대 2개 추가 가능)</string>
+    <string name="onboarding_intro_add">추가하기</string>
+    <string name="onboarding_subway_title">선호하는 지하철역을\n알려주세요!</string>
+    <string name="onboarding_subway">지하철역</string>
+    <string name="onboarding_subway_input">지하철역 검색</string>
+    <string name="onboarding_redown_title">PLAY TOGETHER,\n다시 만나서 기뻐요!</string>
+    <string name="onboarding_redown_subtitle">어떤 동아리의 번개가 궁금하세요?</string>
+
 
     <!-- message -->
     <string name="messageBox">쪽지함</string>
@@ -146,7 +169,7 @@
 
     <!--    ThunderListActivity-->
 
-    <string name="thunder_list_title">⚡️ 같이&#160;</string>
+    <string name="thunder_list_title">같이&#160;</string>
     <string name="thunder_list_question">"?"</string>
     <string name="thunder_list_align">최신순</string>
 
@@ -174,7 +197,7 @@
     <!--    SortDialog-->
     <string name="sort_title">정렬 순서</string>
     <string name="sort_createdAt">최신순</string>
-    <string name="sort_peopleCnt">인원순</string>
+    <string name="sort_likeCnt">찜 많은순</string>
 
     <!--Mypage-->
     <string name="mypage_dear">님</string>
@@ -187,4 +210,9 @@
     <string name="other_mypage_title">님의 마이페이지</string>
     <string name="other_mypage_age_slash">세 / </string>
     <string name="other_mypage_slash">/</string>
+
+    <!--    loginActivity-->
+    <string name="login_title">함께놀아요\nPLAY TOGETHER</string>
+    <string name="login_problem">문제가 있으신가요?</string>
+    <string name="login_ask"><u>문의하기</u></string>
 </resources>

@@ -11,7 +11,6 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.ApplicantListViewHo
 
     val applicantList = mutableListOf<ThunderJoinEndMember>()
 
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

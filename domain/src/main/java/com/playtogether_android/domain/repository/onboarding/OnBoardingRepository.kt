@@ -1,8 +1,13 @@
 package com.playtogether_android.domain.repository.onboarding
 
-import com.playtogether_android.domain.model.onboarding.RegisterCrewData
-import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
+
+import com.playtogether_android.domain.model.onboarding.*
 
 interface OnBoardingRepository {
     suspend fun postRegisterCrew(registerCrewItem: RegisterCrewItem) : RegisterCrewData
+
+    suspend fun postMakeCrew(makeCrewItem: MakeCrewItem) : MakeCrewData
+
+    suspend fun getCrewList() : CrewListData
+
 }

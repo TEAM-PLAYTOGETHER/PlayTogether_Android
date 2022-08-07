@@ -3,14 +3,20 @@ package com.playtogether_android.app.presentation.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
-import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.domain.model.onboarding.MakeCrewItem
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.util.regex.Pattern
+
 
 @AndroidEntryPoint
 class OpenCrewOnBoardingActivity :
@@ -24,6 +30,9 @@ class OpenCrewOnBoardingActivity :
         nullCheck()
         nameTextWatcher()
         introTextWatcher()
+        openCrewNetwork()
+        activeBtn()
+
     }
 
     //뒤로가기 버튼 리스너
@@ -42,6 +51,15 @@ class OpenCrewOnBoardingActivity :
 
         binding.etOpenOnboardingIntro.setOnClickListener {
             initTextFieldCheck()
+        }
+    }
+
+    private fun activeBtn() {
+        if (binding.etOpenOnboardingName.text.toString() == "" || binding.etOpenOnboardingIntro.text.toString() == "") {
+            binding.tvOpenOnboardingNext.isSelected = false
+        } else {
+            binding.tvOpenOnboardingNext.isSelected = true
+            openCrewNetwork()
         }
     }
 
@@ -69,14 +87,38 @@ class OpenCrewOnBoardingActivity :
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val name = p0.toString()
+                if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|]{1,15}\$", name)) {
+                    binding.tvOpenOnboardingApprove.visibility = View.INVISIBLE
+                    binding.tvOpenOnboardingWarn.visibility = View.VISIBLE
+                } else {
+                    binding.tvOpenOnboardingApprove.visibility = View.VISIBLE
+                    binding.tvOpenOnboardingWarn.visibility = View.INVISIBLE
+
+                }
 
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                block()
                 etOpenOnboardingName.isSelected = etOpenOnboardingName.text.toString() != ""
                 initTextFieldCheck()
+
+                activeBtn()
+
             }
         })
+    }
+
+    private fun block() {
+        binding.etOpenOnboardingName.setFilters(arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+            for (i in start until end) {
+                if (!Character.isLetterOrDigit(source[i])) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }))
     }
 
     //소개 textWatcher
@@ -93,7 +135,47 @@ class OpenCrewOnBoardingActivity :
             override fun afterTextChanged(p0: Editable?) {
                 etOpenOnboardingIntro.isSelected = etOpenOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
+
+                activeBtn()
+
             }
         })
+    }
+
+
+    //동아리 개설 서버통신
+    private fun openCrewNetwork() {
+        binding.tvOpenOnboardingNext.setOnClickListener {
+            onBoardingViewModel.requestMakeCrew.crewName =
+                binding.etOpenOnboardingName.text.toString()
+            onBoardingViewModel.requestMakeCrew.description =
+                binding.etOpenOnboardingIntro.text.toString()
+
+            onBoardingViewModel.postMakeCrew(
+                MakeCrewItem(
+                    onBoardingViewModel.requestMakeCrew.crewName,
+                    onBoardingViewModel.requestMakeCrew.description
+                )
+            )
+            observeOpenCrew()
+        }
+    }
+
+    //동아리 개설 observe
+    private fun observeOpenCrew() {
+        onBoardingViewModel.makeCrew.observe(this) {
+            if (it.success) {
+                Timber.d("${it.code}")
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("crewName" , it.name)
+                intent.putExtra("crewCode", it.code)
+                intent.putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "동아리 개설이 실패되었습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
+
+            }
+        }
     }
 }

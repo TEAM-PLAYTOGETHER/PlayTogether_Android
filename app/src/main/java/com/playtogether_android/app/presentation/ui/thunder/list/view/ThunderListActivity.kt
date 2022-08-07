@@ -12,6 +12,7 @@ import com.playtogether_android.app.presentation.ui.thunder.list.adapter.Thunder
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import com.playtogether_android.app.util.SpaceItemDecorationVertical
 
 @AndroidEntryPoint
 class ThunderListActivity :
@@ -22,6 +23,7 @@ class ThunderListActivity :
     private val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.thunderViewModel = thunderListViewModel
         initView()
     }
 
@@ -50,6 +52,10 @@ class ThunderListActivity :
             binding.tvThunderlistToolTitle.text = it
             binding.tvThunderlistCategoryTitle.text = it + getString(R.string.thunder_list_question)
         }
+
+        thunderListViewModel.sortType.observe(this) {
+            binding.tvThunderlistSortType.text = thunderListViewModel.setSortType(it)
+        }
     }
 
     private fun initAdapter() {
@@ -63,6 +69,7 @@ class ThunderListActivity :
 
         with(binding.rvThunderlistContainer) {
             layoutManager = LinearLayoutManager(this@ThunderListActivity)
+            addItemDecoration(SpaceItemDecorationVertical())
             adapter = thunderCategoryListAdapter
         }
     }
