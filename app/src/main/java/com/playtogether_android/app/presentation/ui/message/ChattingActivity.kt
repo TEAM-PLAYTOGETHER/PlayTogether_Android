@@ -16,15 +16,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import okhttp3.OkHttpClient
 import java.net.URISyntaxException
 
 @AndroidEntryPoint
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
+    private val chatViewModel: ChatViewModel by viewModels()
     private lateinit var chatAdapter: ChatAdapter
     private var roomId = -1
-    private lateinit var name: String
     private var audienceId = -1
-    private val chatViewModel: ChatViewModel by viewModels()
+    private lateinit var name: String
     private lateinit var socket: Socket
     private val gson = Gson()
 
@@ -38,50 +39,55 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         getChatAll()
         initAdapter()
         changeSendImage()
-        //initSocket(roomId)
+        initSocket()
 
         clickSendMessage()
         clickBackArrow()
         clickRefresh()
     }
 
-    fun initSocket(roomId: Int) {
+    override fun onPause() {
+        super.onPause()
+        socket.disconnect()
+    }
+
+    fun initSocket() {
         try {
-            socket = IO.socket("ws://13.125.232.150:5500")
+            val auth = PlayTogetherSharedPreference.getJwtToken(this)
+            val options = IO.Options()
+            options.query=auth
+            socket = IO.socket("http://13.125.232.150:5500", options)
             Log.d("asdf", "Connection success : ${socket.id()}")
         } catch (e: URISyntaxException) {
             e.printStackTrace()
             Log.d("asdf", "Connection Fail")
         }
 
-        val connection = Emitter.Listener {
-            val auth = PlayTogetherSharedPreference.getJwtToken(this)
-            // auth = gson.toJson(auth)
-            socket.emit("subscribe", auth)
-        }
-        val subscribe = Emitter.Listener {
-            val data = SubscribeSocket(roomId, audienceId)
-            val jsonData = gson.toJson(data)
-            socket.emit("subscribe", jsonData)
-        }
-
         socket.connect()
-        socket.emit("connection", connection)
-        socket.emit("subscribe", subscribe)
-        Log.d(
-            "asdf",
-            "${
-                socket.on(
-                    Socket.EVENT_CONNECT,
-                    Emitter.Listener { socket.emit("connection", connection) })
-            }"
-        )
-        //socket.on("")
+        emitSubscribe()
+
+        /*Log.d("asdf",
+            "${socket.on(Socket.EVENT_CONNECT,
+                { socket.emit("connection", connection) })}")*/
+    }
+
+    private fun emitSubscribe(){
+        Log.d("asdf", "id : $roomId $audienceId}")
+        val data = SubscribeSocket(roomId, audienceId)
+        val jsonData = gson.toJson(data)
+        socket.emit("subscribe", jsonData)
+    }
+
+    private fun sendMessageSocket(){
+        val message = SendMessageSocket(binding.etMessage.text.toString())
+        val jsonData = gson.toJson(message)
+        socket.emit("sendMessage", jsonData)
     }
 
     private fun clickSendMessage(){
         binding.ivSendMessage.setOnClickListener {
-            addChat()
+            //addChat()
+            sendMessageSocket()
             binding.etMessage.text.clear()
         }
     }
@@ -163,7 +169,6 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
             PostSendMessageData(binding.etMessage.text.toString(), audienceId))
         observeGetSendMessage()
     }
-
 
     private fun removeTimeAll() {
         var nowSize = chatAdapter.currentList.size - 1

@@ -195,6 +195,9 @@ dependencies {
         exclude("org.json", "json")
     }
 
+    //okhttp websocket
+    implementation ("com.squareup.okhttp3:okhttp:3.12.12")
+
     //gson
     implementation ("com.google.code.gson:gson:2.9.0")
 

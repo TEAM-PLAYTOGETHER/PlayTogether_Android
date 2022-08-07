@@ -27,7 +27,7 @@ class ChatViewModel @Inject constructor(
 
     val inputMessage = MutableLiveData<String>()
 
-    private fun refineChatList(list: List<ChatData>): List<ChatData> {
+    private fun refineChatListDate(list: List<ChatData>): List<ChatData> {
         val tempList: List<ChatData> = list
         for (i in list.indices)
             tempList[i].time = changeDateFormat(list[i].time)
@@ -46,7 +46,7 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching { getChatUseCase(roomId) }
                 .onSuccess {
-                    _chatData.value = refineChatList(it)
+                    _chatData.value = refineChatListDate(it)
                 }
                 .onFailure { error ->
                     Log.d("messageServer", "채팅 읽어오기 실패")
