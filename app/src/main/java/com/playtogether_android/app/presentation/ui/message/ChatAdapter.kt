@@ -42,8 +42,8 @@ class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
         val bindingOtherChat = ItemOtherChatBinding.inflate(layoutInflater, parent, false)
         Log.d("checkViewType", "${viewType}")
         return when (viewType) {
-            ChatData.TYPE_MY_MESSAGE -> ChatAdapter.MyChatViewHolder(bindingMyChat)
-            ChatData.TYPE_FRIEND_MESSAGE -> ChatAdapter.OtherChatViewHolder(bindingOtherChat)
+            ChatData.TYPE_MY_MESSAGE -> MyChatViewHolder(bindingMyChat)
+            ChatData.TYPE_FRIEND_MESSAGE -> OtherChatViewHolder(bindingOtherChat)
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
@@ -51,13 +51,20 @@ class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
     override fun onBindViewHolder(holder: ChatViewHolder<*>, position: Int) {
         val item = getItem(position)
         when (holder) {
-            is ChatAdapter.MyChatViewHolder -> holder.bind(item)
-            is ChatAdapter.OtherChatViewHolder -> holder.bind(item)
+            is MyChatViewHolder -> holder.bind(item)
+            is OtherChatViewHolder -> holder.bind(item)
             else -> throw IllegalArgumentException()
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).getViewType()
+    }
+
+    fun addChat(chat: ChatData) {
+        val chatList = mutableListOf<ChatData>()
+        chatList.addAll(currentList)
+        chatList.add(chat)
+        submitList(chatList)
     }
 }
