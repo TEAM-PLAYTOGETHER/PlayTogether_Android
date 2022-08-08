@@ -18,6 +18,7 @@ import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
@@ -31,17 +32,32 @@ class CreateThunderActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        checkTunderName()
-        imageSelected()
+        setTextChangeListener()
+        setClickListener()
+    }
+
+    private fun setTextChangeListener() {
         initDatePickerDialog()
         initTimePickerDialog()
-        clickInfinite()
+        checkTunderName()
         checkThunderPlace()
         checkTunderMember()
         checkTunderExplanation()
+    }
+
+    private fun setClickListener() {
+        imageSelected()
+        clickInfinite()
         clickComplete()
+        imageSelected()
+        uploadImageClickListener()
+    }
+
+    private fun uploadImageClickListener() {
+        binding.clCreatethunderPhoto.setOnClickListener {
+            Timber.d("imageclick : ")
+        }
     }
 
     private fun clickComplete() {
@@ -67,13 +83,13 @@ class CreateThunderActivity :
                     description
                 )
             )
-            Log.d("createThunder", title)
-            Log.d("createThunder", category)
-            Log.d("createThunder", date)
-            Log.d("createThunder", time)
-            Log.d("createThunder", place)
-            Log.d("createThunder", "$peopleCnt")
-            Log.d("createThunder", description)
+//            Log.d("createThunder", title)
+//            Log.d("createThunder", category)
+//            Log.d("createThunder", date)
+//            Log.d("createThunder", time)
+//            Log.d("createThunder", place)
+//            Log.d("createThunder", "$peopleCnt")
+//            Log.d("createThunder", description)
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
