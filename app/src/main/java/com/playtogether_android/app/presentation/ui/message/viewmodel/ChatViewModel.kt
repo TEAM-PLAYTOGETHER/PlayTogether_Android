@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.playtogether_android.app.presentation.ui.message.ChatAdapter
-import com.playtogether_android.app.presentation.ui.message.SendMessageSocket
-import com.playtogether_android.app.presentation.ui.message.SubscribeSocket
+import com.playtogether_android.app.presentation.ui.message.data.SendMessageSocket
+import com.playtogether_android.app.presentation.ui.message.SocketChatData
+import com.playtogether_android.app.presentation.ui.message.data.SubscribeSocket
 import com.playtogether_android.app.util.AuthInterceptor
 import com.playtogether_android.domain.model.message.ChatData
-import com.playtogether_android.domain.model.message.PostSendMessageData
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.socket.client.IO
@@ -97,8 +97,8 @@ class ChatViewModel @Inject constructor(
 
     private fun onUpdateChat(chatAdapter: ChatAdapter) { //상대방이 보내는 채팅을 소켓으로 받는다.
         val onUpdateChat = Emitter.Listener {
-            val chat: PostSendMessageData =
-                gson.fromJson(it[0].toString(), PostSendMessageData::class.java)
+            val chat: SocketChatData =
+                gson.fromJson(it[0].toString(), SocketChatData::class.java)
             val getChat = ChatData(
                 null,
                 content = chat.content,

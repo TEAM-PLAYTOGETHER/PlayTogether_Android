@@ -3,7 +3,6 @@ package com.playtogether_android.app.testdi
 import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
-import com.playtogether_android.data.api.message.MessageSendService
 import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
@@ -49,12 +48,6 @@ object ApiModule {
     @Singleton
     fun provideThunderService(@RetrofitModule.GsonConverter retrofit: Retrofit): ThunderService {
         return retrofit.create(ThunderService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideMessageSendService(@RetrofitModule.GsonConverter retrofit: Retrofit): MessageSendService {
-        return retrofit.create(MessageSendService::class.java)
     }
 
     @Provides

@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.message
+package com.playtogether_android.app.presentation.ui.message.data
 
 data class SubscribeSocket(
     val roomId: Int,
