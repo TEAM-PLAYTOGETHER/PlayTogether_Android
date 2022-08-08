@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
   <data>
+    <variable
+        name="viewModel"
+        type="com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel" />
 
   </data>
 
@@ -105,6 +108,7 @@
         android:fontFamily="@font/pretendard_regular"
         android:hint="@string/onboarding_subway_input"
         android:lines="1"
+        android:text="@={viewModel.searchingWord}"
         android:maxLength="15"
         android:paddingStart="19dp"
         android:paddingTop="20dp"

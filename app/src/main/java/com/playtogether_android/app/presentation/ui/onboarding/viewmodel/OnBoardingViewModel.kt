@@ -21,6 +21,8 @@ class OnBoardingViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+    var searchingWord = MutableLiveData<String>()
+
     //동아리 리스트
     private val _getCrewList = MutableLiveData<CrewListData>()
     val getCrewList: LiveData<CrewListData>
@@ -40,6 +42,10 @@ class OnBoardingViewModel @Inject constructor(
     //지하철 정보 조회
     private val _subwayList = MutableLiveData<List<SubwayListData>>()
     val subwayList = _subwayList
+
+    //지하철 검색 정보 조회
+    private val _subwaySearchList = MutableLiveData<List<SubwayData>>()
+    val subwaySearchList =  _subwaySearchList
 
 
     //동아리 개설 request
