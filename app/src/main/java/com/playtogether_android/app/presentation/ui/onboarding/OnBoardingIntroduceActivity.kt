@@ -180,6 +180,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         binding.tvOpenOnboardingAdd.setOnClickListener {
             val intent = Intent(this, SearchSubwayActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

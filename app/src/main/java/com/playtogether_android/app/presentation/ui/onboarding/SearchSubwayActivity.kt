@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,7 +24,32 @@ class SearchSubwayActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getList()
+        backBtnListener()
+        nullCheck()
 
+    }
+
+    private fun backBtnListener() {
+        binding.ivSubwayOnboardingBack.setOnClickListener {
+            val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun initTextFieldCheck() {
+        if(binding.etSubwayOnboardingName.text.toString() != "") {
+            binding.etSubwayOnboardingName.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
+        } else {
+            binding.etSubwayOnboardingName.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
+
+        }
+    }
+
+    private fun nullCheck() {
+        binding.etSubwayOnboardingName.setOnClickListener {
+            initTextFieldCheck()
+        }
     }
 
 
@@ -56,6 +82,7 @@ class SearchSubwayActivity :
             override fun afterTextChanged(p0: Editable?) {
                 val input = binding.etSubwayOnboardingName.text.toString()
                 searchingRecipes(input)
+                initTextFieldCheck()
             }
         })
     }
