@@ -3,11 +3,15 @@ package com.playtogether_android.app.presentation.ui.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.AuthErrorCause
@@ -28,16 +32,26 @@ import timber.log.Timber
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
     private val signViewModel: SignViewModel by viewModels()
-    private lateinit var client: GoogleSignInOptions
+    private lateinit var client: GoogleSignInClient
     private lateinit var startForActivity: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         KakaoSdk.init(this, BuildConfig.KAKAOKEY)
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        startForActivity =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK) {
+                    val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+                    var account: GoogleSignInAccount? = null
+                    startActivity(Intent(this, MainActivity::class.java))
+                    try {
+                        account = task.getResult(ApiException::class.java)
+
+                    } catch (e: ApiException) {
+                        shortToast("로그인 실패")
+                    }
+                }
+            }
         initView()
     }
 
@@ -58,12 +72,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun btnGoogleListener() {
-//        startForActivity =
-//            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//                if (result.resultCode == Activity.RESULT_OK) {
-//                    val intent = result.data
-//                }
-//            }
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        client = GoogleSignIn.getClient(this, gso)
+        binding.ivLoginGoogle.setOnClickListener {
+            startForActivity.launch(client.signInIntent)
+        }
     }
 
     private fun setTestKakao() {
