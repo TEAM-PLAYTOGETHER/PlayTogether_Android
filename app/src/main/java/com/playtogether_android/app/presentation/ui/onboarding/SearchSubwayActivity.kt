@@ -51,18 +51,10 @@ class SearchSubwayActivity :
             Timber.d("AddList : ${onBoardingViewModel.searchSubwayList}")
             addList()
         }
-
-//        onBoardingViewModel.listAddAll.observe(this) {
-//            Timber.d("11111111111: $it")
-//            if(it == true) {
-//                observingWord()
-//            }
-//        }
     }
 
     private fun addList() {
         onBoardingViewModel.listAddAll.observe(this) {
-            Timber.d("11111111111: $it")
             if (it == true) {
                 observingWord()
             }
@@ -90,8 +82,10 @@ class SearchSubwayActivity :
                 tmpList.add(searchSubwayList.get(i))
             }
         }
-        recipeAdapter.findText = text
-//        recipeAdapter.submitList(tmpList)
+//        recipeAdapter.findText = text
+        recipeAdapter = SearchAfterAdapter()
+        binding.rvOnboardingSubway.adapter = recipeAdapter
+        recipeAdapter.setCrewList(tmpList)
     }
 
 
