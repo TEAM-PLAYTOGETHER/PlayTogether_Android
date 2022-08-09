@@ -18,8 +18,14 @@ class SortDialog(
     }
 
     override fun initView() {
+        binding.thunderListViewModel = thunderListViewModel
         initData()
         setClickListener()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        //todo Result ok callback 넣어야함
     }
 
     private fun initData() {

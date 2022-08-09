@@ -6,6 +6,7 @@ buildscript {
         google()
         mavenCentral()
         maven("https://plugins.gradle.org/m2/")
+
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.1")

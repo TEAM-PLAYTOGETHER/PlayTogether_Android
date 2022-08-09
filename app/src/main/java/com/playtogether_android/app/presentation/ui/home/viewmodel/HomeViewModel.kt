@@ -5,17 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.playtogether_android.app.presentation.ui.home.temp.TempData
 import com.playtogether_android.domain.model.home.JoinThunderData
 import com.playtogether_android.domain.model.home.ThunderJoinEndData
 import com.playtogether_android.domain.model.home.ThunderJoinEndMember
 import com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer
+import com.playtogether_android.domain.model.light.HomeLightningData
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
 import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
+import com.playtogether_android.domain.usecase.light.GetHotListUseCase
+import com.playtogether_android.domain.usecase.light.GetNewListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +26,9 @@ class HomeViewModel @Inject constructor(
     val postJoinThunderUseCase: PostJoinThunderUseCase,
     val getThunderJoinEndUseCase: GetThunderJoinEndUseCase,
     val getThunderJoinEndMemberUseCase: GetThunderJoinEndMemberUseCase,
-    val getThunderJoinEndOrganizerUseCase: GetThunderJoinEndOrganizerUseCase
+    val getThunderJoinEndOrganizerUseCase: GetThunderJoinEndOrganizerUseCase,
+    val getHotListUseCase: GetHotListUseCase,
+    val getNewListUseCase: GetNewListUseCase
 ) : ViewModel() {
     private val _refreshView = MutableLiveData<Boolean>()
     val refreshView: LiveData<Boolean> = _refreshView
@@ -44,36 +49,11 @@ class HomeViewModel @Inject constructor(
     private val _organizerInfo = MutableLiveData<ThunderJoinEndOrganizer>()
     val organizerInfo: LiveData<ThunderJoinEndOrganizer> = _organizerInfo
 
-    val tempList = listOf(
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-    )
+    private val _hotList = MutableLiveData<List<HomeLightningData>>()
+    val hotList: LiveData<List<HomeLightningData>> = _hotList
+
+    private val _newList = MutableLiveData<List<HomeLightningData>>()
+    val newList: LiveData<List<HomeLightningData>> = _newList
 
     fun testData() {
         viewModelScope.launch {
@@ -134,6 +114,30 @@ class HomeViewModel @Inject constructor(
             }.onFailure {
                 Log.e("thunderDetailMember", "failure")
 
+            }
+        }
+    }
+
+    fun getHotList() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getHotListUseCase()
+            }.onSuccess {
+                _hotList.value = it
+            }.onFailure {
+                Timber.e("getHotList : $it")
+            }
+        }
+    }
+
+    fun getNewList() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getNewListUseCase()
+            }.onSuccess {
+                _newList.value = it
+            }.onFailure {
+                Timber.e("getNewList : $it")
             }
         }
     }
