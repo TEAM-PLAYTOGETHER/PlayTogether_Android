@@ -8,6 +8,8 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
+
+
 android {
     compileSdk = Apps.compileSdk
     buildToolsVersion = "30.0.3"
@@ -18,8 +20,11 @@ android {
         targetSdk = Apps.targetSdk
         versionCode = Apps.versionCode
         versionName = Apps.versionName
+        manifestPlaceholders["kakaokey"] = getApiKey("kakao_key_manifest")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
+        buildConfigField("String", "KAKAOKEY", getApiKey("kakao_key"))
+
     }
 
     buildTypes {
@@ -57,9 +62,9 @@ fun getBaseUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }
 
-//fun getApiKey(propertyKey: String): String {
-//    return gradleLocalProperties(rootDir).getProperty(propertyKey)
-//}
+fun getApiKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+}
 
 dependencies {
 
@@ -74,8 +79,11 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
-    //kakao
+    //kakao login
     implementation("com.kakao.sdk:v2-user:2.9.0")
+
+    //google login
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
 
     //moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
