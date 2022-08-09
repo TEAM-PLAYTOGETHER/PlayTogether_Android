@@ -23,6 +23,10 @@ class OnBoardingViewModel @Inject constructor(
 ) : ViewModel() {
 
 
+    // 동아리명
+    var crewName = MutableLiveData<String>()
+
+
     var searchingWord = MutableLiveData<String>()
 
     //동아리 리스트

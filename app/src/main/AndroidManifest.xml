@@ -30,7 +30,13 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewOnBoardingActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.ui.mypage.OthersMyPageActivity"
             android:exported="false" />
@@ -85,11 +91,7 @@
         <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.ui.login.LoginActivity"
