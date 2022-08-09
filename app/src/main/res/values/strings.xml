@@ -198,7 +198,7 @@
     <!--    SortDialog-->
     <string name="sort_title">정렬 순서</string>
     <string name="sort_createdAt">최신순</string>
-    <string name="sort_peopleCnt">인원순</string>
+    <string name="sort_likeCnt">찜 많은순</string>
 
     <!--Mypage-->
     <string name="mypage_dear">님</string>
@@ -211,4 +211,9 @@
     <string name="other_mypage_title">님의 마이페이지</string>
     <string name="other_mypage_age_slash">세 / </string>
     <string name="other_mypage_slash">/</string>
+
+    <!--    loginActivity-->
+    <string name="login_title">함께놀아요\nPLAY TOGETHER</string>
+    <string name="login_problem">문제가 있으신가요?</string>
+    <string name="login_ask"><u>문의하기</u></string>
 </resources>

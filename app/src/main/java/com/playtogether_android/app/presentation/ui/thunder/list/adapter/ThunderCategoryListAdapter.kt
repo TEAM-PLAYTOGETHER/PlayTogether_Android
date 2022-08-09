@@ -19,7 +19,7 @@ class ThunderCategoryListAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: CategoryData) {
             with(binding) {
-                tvThunderItemTitle.text = data.title
+                categoryData = data
                 tvThunderItemDate.text =
                     stringBuilder(
                         itemView.context,
@@ -81,7 +81,7 @@ class ThunderCategoryListAdapter :
 
     }
 
-    private fun stringBuilder(context: Context, stringList: List<String>): String {
+     fun stringBuilder(context: Context, stringList: List<String>): String {
         val sb = StringBuilder()
 
         for (it in stringList) {

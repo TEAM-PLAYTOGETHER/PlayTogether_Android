@@ -5,13 +5,22 @@
 
     <data>
 
+        <variable
+            name="categoryData"
+            type="com.playtogether_android.domain.model.light.CategoryData" />
+
+        <variable
+            name="categoryAdapter"
+            type="com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_thunderlist_item_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/rectangle_right_fill_black01_radius_10"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_fill_black_radius_10"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
 
         <TextView
             android:id="@+id/tv_thunder_item_title"
@@ -20,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
+            android:text="@{categoryData.title}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginTop="16dp"
@@ -31,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@{categoryData.date}"
             app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
             app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_title"
             tools:text="@string/thunder_item_day" />
@@ -62,31 +73,31 @@
                 style="@style/home_item_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{categoryData.category}"
                 tools:text="@string/home_item_do_text" />
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_thunder_item_fill_like"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:background="@drawable/icn_like_filled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_icn_like_filled"
             app:layout_constraintBottom_toBottomOf="@id/tv_thunder_item_limit_count"
             app:layout_constraintStart_toStartOf="@id/ll_thunder_item_tag_container"
             app:layout_constraintTop_toTopOf="@id/tv_thunder_item_limit_count" />
 
         <TextView
+            android:id="@+id/tv_thunder_item_like_count"
+            style="@style/thunder_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/thunder_item_date"
-            android:id="@+id/tv_thunder_item_like_count"
-            app:layout_constraintStart_toEndOf="@id/iv_thunder_item_fill_like"
-            tools:text="123"
-            app:layout_constraintTop_toTopOf="@id/iv_thunder_item_fill_like"
+            android:layout_marginStart="2dp"
+            android:text="@{String.valueOf(categoryData.likeCount)}"
             app:layout_constraintBottom_toBottomOf="@id/iv_thunder_item_fill_like"
-            />
-
-
+            app:layout_constraintStart_toEndOf="@id/iv_thunder_item_fill_like"
+            app:layout_constraintTop_toTopOf="@id/iv_thunder_item_fill_like"
+            tools:text="123" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
