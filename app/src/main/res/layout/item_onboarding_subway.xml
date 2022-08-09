@@ -29,7 +29,20 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="광명사거리" />
 
+        <ImageView
+            android:id="@+id/iv_subway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_subway_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="12dp"
+            subwayLine="@{subway.LINE_NUM}"
+            app:layout_constraintTop_toTopOf="@+id/tv_subway_name"
+            tools:src="@drawable/sub_airport" />
+
+
         <View
+            android:id="@+id/view2"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="19dp"
