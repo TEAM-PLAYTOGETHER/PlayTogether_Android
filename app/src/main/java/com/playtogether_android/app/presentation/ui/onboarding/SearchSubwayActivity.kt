@@ -31,7 +31,6 @@ class SearchSubwayActivity :
         onBoardingViewModel.getSubwayList()
         onBoardingViewModel.subwayList.observe(this) {
             onBoardingViewModel.searchSubwayList.addAll(it)
-            Timber.d("AddList : ${onBoardingViewModel.searchSubwayList}")
             addList()
         }
     }
@@ -57,7 +56,6 @@ class SearchSubwayActivity :
 
             override fun afterTextChanged(p0: Editable?) {
                 val input = binding.etSubwayOnboardingName.text.toString()
-
                 searchingRecipes(input)
             }
         })
