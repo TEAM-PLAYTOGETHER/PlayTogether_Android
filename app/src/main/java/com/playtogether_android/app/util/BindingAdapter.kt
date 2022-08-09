@@ -23,9 +23,17 @@ object BindingAdapter {
             "북한산우이" -> imageView.setImageResource(R.drawable.sub_wooe)
             "김포공항" -> imageView.setImageResource(R.drawable.sub_gimpo_gold)
             "김포도시철도" -> imageView.setImageResource(R.drawable.sub_gimpo_gold)
-            "수인분당선" -> imageView.setImageResource(R.drawable.sub_shinbundang)
+            "수인분당선" -> imageView.setImageResource(R.drawable.sub_suin)
             "서해선" -> imageView.setImageResource(R.drawable.sub_west_sea)
+            "의정부경전철" -> imageView.setImageResource(R.drawable.sub_uijeongbu)
             "경의선" -> imageView.setImageResource(R.drawable.sub_gyeongui_center)
+            "신림선" -> imageView.setImageResource(R.drawable.sub_sillim)
+            "신분당선" -> imageView.setImageResource(R.drawable.sub_shinbundang)
+            "공항철도" -> imageView.setImageResource(R.drawable.sub_airport)
+            "인천2호선" -> imageView.setImageResource(R.drawable.sub_incheon_2)
+            "인천선" -> imageView.setImageResource(R.drawable.sub_incheon_1)
+            "경강선" -> imageView.setImageResource(R.drawable.sub_gyeonggang)
+            "경춘선" -> imageView.setImageResource(R.drawable.sub_gyeongchun)
             else -> imageView.setImageResource(R.drawable.sub_incheon_2)
         }
     }

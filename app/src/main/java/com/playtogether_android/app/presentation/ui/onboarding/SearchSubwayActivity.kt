@@ -38,7 +38,6 @@ class SearchSubwayActivity :
     private fun addList() {
         onBoardingViewModel.listAddAll.observe(this) {
             if (it == true) {
-                //observingWord()
                 editTextWatcher()
             }
         }
