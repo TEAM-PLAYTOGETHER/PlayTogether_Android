@@ -9,6 +9,7 @@ import com.playtogether_android.domain.usecase.onboarding.PostMakeCrewUseCase
 import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,6 +21,7 @@ class OnBoardingViewModel @Inject constructor(
     val getSubwayListUseCase: GetSubwayListUseCase
 
 ) : ViewModel() {
+
 
     var searchingWord = MutableLiveData<String>()
 
@@ -39,13 +41,15 @@ class OnBoardingViewModel @Inject constructor(
     val makeCrew: LiveData<MakeCrewData>
         get() = _makeCrew
 
+
     //지하철 정보 조회
     private val _subwayList = MutableLiveData<List<SubwayListData>>()
     val subwayList = _subwayList
 
-    //지하철 검색 정보 조회
-    private val _subwaySearchList = MutableLiveData<List<SubwayData>>()
-    val subwaySearchList =  _subwaySearchList
+    //지하철 정보 조회
+    var searchSubwayList = ArrayList<SubwayListData>()
+
+    var listAddAll = MutableLiveData<Boolean>(false)
 
 
     //동아리 개설 request
@@ -132,6 +136,7 @@ class OnBoardingViewModel @Inject constructor(
             kotlin.runCatching { getSubwayListUseCase() }
                 .onSuccess {
                     _subwayList.value = it
+                    listAddAll.value = true
                     Timber.d("지하철 리스트 조회 : 서버 통신 성공")
                 }
                 .onFailure {
@@ -140,5 +145,6 @@ class OnBoardingViewModel @Inject constructor(
                 }
         }
     }
+
 
 }
