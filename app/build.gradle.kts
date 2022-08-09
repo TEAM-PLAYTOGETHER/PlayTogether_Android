@@ -20,8 +20,11 @@ android {
         targetSdk = Apps.targetSdk
         versionCode = Apps.versionCode
         versionName = Apps.versionName
+        manifestPlaceholders["kakaokey"] = getApiKey("kakao_key_manifest")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
+        buildConfigField("String", "KAKAOKEY", getApiKey("kakao_key"))
+
     }
 
     buildTypes {
@@ -59,9 +62,9 @@ fun getBaseUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }
 
-//fun getApiKey(propertyKey: String): String {
-//    return gradleLocalProperties(rootDir).getProperty(propertyKey)
-//}
+fun getApiKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+}
 
 dependencies {
 

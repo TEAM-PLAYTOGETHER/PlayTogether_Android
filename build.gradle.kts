@@ -6,7 +6,6 @@ buildscript {
         google()
         mavenCentral()
         maven("https://plugins.gradle.org/m2/")
-
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.1")
@@ -22,7 +21,7 @@ allprojects {
         mavenCentral()
         //LottieSwipeRefreshLayout
         maven("https://jitpack.io")
-        maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
+        maven("https://devrepo.kakao.com/nexus/content/groups/public/")
     }
 }
 
