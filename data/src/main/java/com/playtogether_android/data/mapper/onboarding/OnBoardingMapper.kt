@@ -6,6 +6,7 @@ import com.playtogether_android.data.model.request.onboarding.RequestRegisterCre
 import com.playtogether_android.data.model.response.onboarding.ResponseGetList
 import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
+import com.playtogether_android.data.model.response.onboarding.ResponseSubwayList
 import com.playtogether_android.domain.model.onboarding.*
 
 object OnBoardingMapper {
@@ -57,6 +58,42 @@ object OnBoardingMapper {
             ),
             success = responseGetList.success
         )
+    }
+
+
+    //지하철 조회 response
+    fun mapperToSubwayList(responseSubwayList: ResponseSubwayList) : List<SubwayListData> {
+        return responseSubwayList.SearchSTNBySubwayLineInfo.row.map {
+            SubwayListData(
+                FR_CODE = it.FR_CODE,
+                LINE_NUM = it.LINE_NUM,
+                STATION_CD = it.STATION_CD,
+                STATION_NM = it.STATION_NM,
+                STATION_NM_ENG = it.STATION_NM_ENG
+            )
+        }
+        /*
+        return SubwayListData(
+            SubwayListData.searchSTNBySubwayLineInfo(
+                SubwayListData.searchSTNBySubwayLineInfo.result(
+                    CODE = responseSubwayList.SearchSTNBySubwayLineInfo.RESULT.CODE,
+                    MESSAGE = responseSubwayList.SearchSTNBySubwayLineInfo.RESULT.MESSAGE
+                ),
+                list_total_count = responseSubwayList.SearchSTNBySubwayLineInfo.list_total_count,
+                row = responseSubwayList.SearchSTNBySubwayLineInfo.row.map {
+                    SubwayListData.searchSTNBySubwayLineInfo.Row(
+                        FR_CODE = it.FR_CODE,
+                        LINE_NUM = it.LINE_NUM,
+                        STATION_CD = it.STATION_CD,
+                        STATION_NM = it.STATION_NM,
+                        STATION_NM_ENG = it.STATION_NM_ENG
+
+                    )
+                }
+            )
+        )
+
+         */
     }
 
 }
