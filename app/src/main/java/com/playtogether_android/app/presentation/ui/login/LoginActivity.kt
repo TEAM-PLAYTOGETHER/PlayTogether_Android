@@ -1,14 +1,18 @@
 package com.playtogether_android.app.presentation.ui.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.R
@@ -20,14 +24,20 @@ import com.playtogether_android.app.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
-
     private val signViewModel: SignViewModel by viewModels()
+    private lateinit var client: GoogleSignInOptions
+    private lateinit var startForActivity: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         KakaoSdk.init(this, BuildConfig.KAKAOKEY)
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         initView()
     }
 
@@ -48,10 +58,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun btnGoogleListener() {
-        binding.ivLoginGoogle.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+//        startForActivity =
+//            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//                if (result.resultCode == Activity.RESULT_OK) {
+//                    val intent = result.data
+//                }
+//            }
     }
 
     private fun setTestKakao() {

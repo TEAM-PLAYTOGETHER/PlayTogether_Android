@@ -79,8 +79,11 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
-    //kakao
-    implementation ("com.kakao.sdk:v2-user:2.9.0")
+    //kakao login
+    implementation("com.kakao.sdk:v2-user:2.9.0")
+
+    //google login
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
 
     //moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
