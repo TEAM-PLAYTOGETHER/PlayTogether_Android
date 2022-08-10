@@ -1,6 +1,8 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,16 +10,17 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderListBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
-import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
+import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.util.SpaceItemDecorationVertical
 
 @AndroidEntryPoint
 class ThunderListActivity :
     BaseActivity<ActivityThunderListBinding>(R.layout.activity_thunder_list) {
-
+    private lateinit var thunderCategoryListItemAdapter: ThunderCategoryListItemAdapter
     private lateinit var thunderCategoryListAdapter: ThunderCategoryListAdapter
     private val thunderListViewModel: ThunderListViewModel by viewModels()
     private val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
@@ -32,6 +35,24 @@ class ThunderListActivity :
         initData()
     }
 
+    private fun setClickListener() {
+        sortListClickListener()
+        floatButtonClickListener()
+        searchButtonClickListener()
+//        setPreCategoryClickListener()
+//        setAfterCategoryClickListener()
+        setPreButtonListener()
+    }
+
+    private fun searchButtonClickListener() {
+        binding.ivThunderlistSearch.setOnClickListener {
+            //todo coming soon
+//        val intent = Intent(this,SearchActivity::class.java)
+//        intentActivity(intent)
+        }
+    }
+
+
     private fun initView() {
         binding.fabThunderlist.layoutParams.apply {
             width = resources.getDimension(R.dimen.fab_size).toInt()
@@ -39,8 +60,32 @@ class ThunderListActivity :
         }
 
         initData()
-        initAdapter()
+//        initAdapter()
+        initFragment()
         setClickListener()
+    }
+
+
+//        private fun initAdapter() {
+//            thunderCategoryListItemAdapter = ThunderCategoryListItemAdapter()
+//
+//            with(thunderListViewModel) {
+//                categoryItemList.observe(this@ThunderListActivity) { it ->
+//                    thunderCategoryListItemAdapter.submitList(it)
+//                }
+//            }
+//
+//            with(binding.rvThunderlistContainer) {
+//                layoutManager = LinearLayoutManager(this@ThunderListActivity)
+//                addItemDecoration(SpaceItemDecorationVertical())
+//                adapter = thunderCategoryListItemAdapter
+//            }
+//        }
+    private fun initFragment() {
+        val fragmentList = listOf(ThunderEatFragment(), ThunderGoFragment(), ThunderDoFragment())
+        thunderCategoryListAdapter = ThunderCategoryListAdapter(this)
+        thunderCategoryListAdapter.fragmentList.addAll(fragmentList)
+        binding.vpThunderlistContainer.adapter = thunderCategoryListAdapter
     }
 
     @SuppressLint("SetTextI18n")
@@ -58,29 +103,7 @@ class ThunderListActivity :
         }
     }
 
-    private fun initAdapter() {
-        thunderCategoryListAdapter = ThunderCategoryListAdapter()
-
-        with(thunderListViewModel) {
-            categoryItemList.observe(this@ThunderListActivity) { it ->
-                thunderCategoryListAdapter.submitList(it)
-            }
-        }
-
-        with(binding.rvThunderlistContainer) {
-            layoutManager = LinearLayoutManager(this@ThunderListActivity)
-            addItemDecoration(SpaceItemDecorationVertical())
-            adapter = thunderCategoryListAdapter
-        }
-    }
-
-    private fun setClickListener() {
-        sortListClickListener()
-        floatButtonClickListener()
-        setPreCategoryClickListener()
-        setAfterCategoryClickListener()
-        setPreButtonListener()
-    }
+//    }
 
     private fun setPreButtonListener() {
         binding.ivThunderlistBack.setOnClickListener {
@@ -88,55 +111,55 @@ class ThunderListActivity :
         }
     }
 
-    private fun setPreCategoryClickListener() {
-        var category = ""
-        thunderListViewModel.category.observe(this) {
-            category = it
-        }
-        if (category == CATEGORY_EAT) {
-            binding.ivThunderlistPrevious.setImageResource(R.drawable.icn_before_false)
-        } else {
-            binding.ivThunderlistPrevious.setImageResource(R.drawable.icn_before_true)
-            with(thunderListViewModel) {
-                binding.ivThunderlistPrevious.setOnClickListener {
-                    when (categoryTitleList.indexOf(category)) {
-                        1 -> {
-                            getLightCategoryList(CATEGORY_EAT)
-                        }
-                        2 -> {
-                            getLightCategoryList(CATEGORY_GO)
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    private fun setPreCategoryClickListener() {
+//        var category = ""
+//        thunderListViewModel.category.observe(this) {
+//            category = it
+//        }
+//        if (category == CATEGORY_EAT) {
+//            binding.ivThunderlistPrevious.setImageResource(R.drawable.icn_before_false)
+//        } else {
+//            binding.ivThunderlistPrevious.setImageResource(R.drawable.icn_before_true)
+//            with(thunderListViewModel) {
+//                binding.ivThunderlistPrevious.setOnClickListener {
+//                    when (categoryTitleList.indexOf(category)) {
+//                        1 -> {
+//                            getLightCategoryList(CATEGORY_EAT)
+//                        }
+//                        2 -> {
+//                            getLightCategoryList(CATEGORY_GO)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    private fun setAfterCategoryClickListener() {
-        var category = ""
-        thunderListViewModel.category.observe(this) {
-            category = it
-        }
-        with(binding.ivThunderlistNext) {
-            if (category.equals(CATEGORY_DO)) {
-                setImageResource(R.drawable.icn_next_false)
-            } else {
-                setImageResource(R.drawable.icn_next_true)
-                with(thunderListViewModel) {
-                    setOnClickListener {
-                        when (categoryTitleList.indexOf(category)) {
-                            0 -> {
-                                getLightCategoryList(CATEGORY_GO)
-                            }
-                            1 -> {
-                                getLightCategoryList(CATEGORY_DO)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    private fun setAfterCategoryClickListener() {
+//        var category = ""
+//        thunderListViewModel.category.observe(this) {
+//            category = it
+//        }
+//        with(binding.ivThunderlistNext) {
+//            if (category.equals(CATEGORY_DO)) {
+//                setImageResource(R.drawable.icn_next_false)
+//            } else {
+//                setImageResource(R.drawable.icn_next_true)
+//                with(thunderListViewModel) {
+//                    setOnClickListener {
+//                        when (categoryTitleList.indexOf(category)) {
+//                            0 -> {
+//                                getLightCategoryList(CATEGORY_GO)
+//                            }
+//                            1 -> {
+//                                getLightCategoryList(CATEGORY_DO)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     private fun sortListClickListener() {
         binding.llThunderAlignContainer.setOnClickListener {
@@ -149,8 +172,12 @@ class ThunderListActivity :
     private fun floatButtonClickListener() {
         binding.fabThunderlist.setOnClickListener {
             val intent = Intent(this, CreateThunderActivity::class.java)
-            startActivity(intent)
+            intentActivity(intent)
         }
+    }
+
+    private fun intentActivity(intent: Intent) {
+        startActivity(intent)
     }
 
     companion object {

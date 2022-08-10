@@ -11,7 +11,7 @@
 
         <variable
             name="categoryAdapter"
-            type="com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter" />
+            type="com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
