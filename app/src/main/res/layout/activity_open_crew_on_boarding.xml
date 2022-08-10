@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintStart_toEndOf="@+id/view_open_onboarding_progressbar_green"
-            app:layout_constraintTop_toBottomOf="@+id/view_open_onboarding_progressbar_green" />
+            app:layout_constraintTop_toTopOf="@+id/view_open_onboarding_progressbar_green" />
 
         <TextView
             android:id="@+id/tv_open_onboarding_title"
