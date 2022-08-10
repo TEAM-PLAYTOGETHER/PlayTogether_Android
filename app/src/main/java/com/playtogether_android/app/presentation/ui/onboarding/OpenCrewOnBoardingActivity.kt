@@ -92,7 +92,7 @@ class OpenCrewOnBoardingActivity :
                 if (name.length > 15) {
                     binding.tvOpenOnboardingCheck.isSelected = false
                     binding.tvOpenOnboardingWarn.setTextColor(Color.parseColor("#FF0000"))
-                } else if (name.length == 0) {
+                } else if (name.isEmpty()) {
                     binding.tvOpenOnboardingCheck.isSelected = false
                     binding.tvOpenOnboardingWarn.setTextColor(Color.parseColor("#C5C5C5"))
                 } else {

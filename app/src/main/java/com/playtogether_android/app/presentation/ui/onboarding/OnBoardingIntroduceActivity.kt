@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
@@ -18,9 +20,11 @@ import timber.log.Timber
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
-class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
+class OnBoardingIntroduceActivity :
+    BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
 
     private val signViewModel: SignViewModel by viewModels()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,13 +67,11 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         )
 
         signViewModel.idDuplicationCheck.observe(this) {
-            if (it.isUser == true) {
-                Log.d("중복확인", "중복되는 아이디 있음")
+            if (it.isUser) {
                 binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
                 binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
                 binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
             } else {
-                Log.d("중복확인", "중복되는 아이디 없음")
                 binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
                 binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
@@ -147,13 +149,37 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                val name = p0.toString()
+                if (name.isEmpty()) {
+                    binding.tvSignupmainIdDuplication.isSelected = false
+                    binding.tvSignupmainIdDuplication.isClickable = false
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
+                } else if (name.length > 10 || name.contains(" ")) {
+                    binding.tvSignupmainIdDuplication.isSelected = false
+                    binding.tvSignupmainIdDuplication.isClickable = false
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#FF0000"))
+                } else {
+                    binding.tvSignupmainIdDuplication.isSelected = true
+                    binding.tvSignupmainIdDuplication.isClickable = true
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                val id = p0.toString()
+                binding.tvSignupmainIdDuplication.setOnClickListener {
+                        onBoardingViewModel.userId.value = p0.toString()
+                }
+
+                val userId = onBoardingViewModel.userId.value
+                if(userId != etIntroOnboardingName.text.toString()) {
+                    tvIntroOnboardingWarn.visibility = View.INVISIBLE
+                    tvIntroOnboardingApprove.visibility = View.INVISIBLE
+                }
+
                 etIntroOnboardingName.isSelected = etIntroOnboardingName.text.toString() != ""
                 initTextFieldCheck()
-                isVaildRegistrationId()
+                //isVaildRegistrationId()
             }
         })
     }
