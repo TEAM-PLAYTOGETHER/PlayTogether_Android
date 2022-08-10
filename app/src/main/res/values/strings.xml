@@ -155,12 +155,13 @@
     <string name="onboarding_intro_simple_input">간단 소개 입력 (200자 이내)</string>
     <string name="onboarding_intro_subway">선호하는 지하철역</string>
     <string name="onboarding_intro_subway_two">(최대 2개 추가 가능)</string>
-    <string name="onboarding_intro_add">추가하기</string>
+    <string name="onboarding_intro_add">+ 추가하기</string>
     <string name="onboarding_subway_title">선호하는 지하철역을\n알려주세요!</string>
     <string name="onboarding_subway">지하철역</string>
     <string name="onboarding_subway_input">지하철역 검색</string>
     <string name="onboarding_redown_title">PLAY TOGETHER,\n다시 만나서 기뻐요!</string>
     <string name="onboarding_redown_subtitle">어떤 동아리의 번개가 궁금하세요?</string>
+    <string name="onboarding_plto_subway">플투역 1호선</string>
 
 
     <!-- message -->
@@ -197,7 +198,7 @@
     <!--    SortDialog-->
     <string name="sort_title">정렬 순서</string>
     <string name="sort_createdAt">최신순</string>
-    <string name="sort_peopleCnt">인원순</string>
+    <string name="sort_likeCnt">찜 많은순</string>
 
     <!--Mypage-->
     <string name="mypage_dear">님</string>
@@ -210,4 +211,9 @@
     <string name="other_mypage_title">님의 마이페이지</string>
     <string name="other_mypage_age_slash">세 / </string>
     <string name="other_mypage_slash">/</string>
+
+    <!--    loginActivity-->
+    <string name="login_title">함께놀아요\nPLAY TOGETHER</string>
+    <string name="login_problem">문제가 있으신가요?</string>
+    <string name="login_ask"><u>문의하기</u></string>
 </resources>

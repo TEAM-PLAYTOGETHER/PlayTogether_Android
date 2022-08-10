@@ -22,6 +22,7 @@ android {
         versionName = Apps.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
+        buildConfigField("String", "SUBWAY_URL", getBaseUrl("SUBWAY_URL"))
     }
 
     buildTypes {
@@ -59,9 +60,9 @@ fun getBaseUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }
 
-//fun getApiKey(propertyKey: String): String {
-//    return gradleLocalProperties(rootDir).getProperty(propertyKey)
-//}
+fun getSubwayUrl(value: String): String {
+    return gradleLocalProperties(rootDir).getProperty(value)
+}
 
 dependencies {
 
@@ -75,6 +76,9 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(project(":data"))
+
+    //kakao
+    implementation ("com.kakao.sdk:v2-user:2.9.0")
 
     //moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")

@@ -1,5 +1,6 @@
 package com.playtogether_android.app.testdi
 
+import com.playtogether_android.app.BuildConfig.SUBWAY_URL
 import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
@@ -7,6 +8,7 @@ import com.playtogether_android.data.api.message.MessageSendService
 import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
+import com.playtogether_android.data.api.onboarding.SubwayInfoService
 import com.playtogether_android.data.api.sign.SignService
 import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.api.thunder.ThunderService
@@ -15,11 +17,22 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object ApiModule {
+
+    @Singleton
+    @Provides
+    fun provideSubwayService() : SubwayInfoService {
+        return Retrofit.Builder()
+            .baseUrl(SUBWAY_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(SubwayInfoService::class.java)
+    }
 
     @Provides
     @Singleton

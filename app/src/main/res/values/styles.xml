@@ -167,4 +167,26 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+<!--    loginActivity-->
+    <style name="login_title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/gray_black</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="login_prob">
+        <item name="android:textSize">14sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/gray_gray01</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="login_ask">
+        <item name="android:textSize">14sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/gray_gray01</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
 </resources>
