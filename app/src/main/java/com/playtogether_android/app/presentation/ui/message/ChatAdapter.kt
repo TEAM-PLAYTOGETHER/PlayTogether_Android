@@ -62,9 +62,13 @@ class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
     }
 
     fun addChat(chat: ChatData) {
+        Log.d("asdf", "addChat 진입 ${chat.content}")
         val chatList = mutableListOf<ChatData>()
         chatList.addAll(currentList)
         chatList.add(chat)
-        submitList(chatList)
+        Log.d("asdf", "addChat 1, ${chatList.last()}, ${chatList.size}, ${currentList.size}")
+        submitList(ArrayList(chatList)){
+            Log.d("asdf", "addChat 2, ${currentList.last()}, ${chatList.size}, ${currentList.size}")
+        }
     }
 }
