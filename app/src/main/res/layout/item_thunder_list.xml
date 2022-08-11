@@ -30,10 +30,12 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
             android:text="@{categoryData.title}"
+            android:textColor="@{categoryData.open ? @color/main_green : @color/gray_gray04}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginTop="16dp"
-            tools:text="@string/thunder_item_title" />
+            tools:text="@string/thunder_item_title"
+            tools:textColor="@color/main_green" />
 
         <TextView
             android:id="@+id/tv_thunder_item_date"
@@ -82,10 +84,11 @@
             android:id="@+id/iv_thunder_item_fill_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_icn_like_filled"
+            android:background="@{categoryData.open ? @drawable/ic_icn_like_filled : @drawable/ic_icn_like_unfilled}"
             app:layout_constraintBottom_toBottomOf="@id/tv_thunder_item_limit_count"
             app:layout_constraintStart_toStartOf="@id/ll_thunder_item_tag_container"
-            app:layout_constraintTop_toTopOf="@id/tv_thunder_item_limit_count" />
+            app:layout_constraintTop_toTopOf="@id/tv_thunder_item_limit_count"
+            tools:background="@drawable/ic_icn_like_filled" />
 
         <TextView
             android:id="@+id/tv_thunder_item_like_count"

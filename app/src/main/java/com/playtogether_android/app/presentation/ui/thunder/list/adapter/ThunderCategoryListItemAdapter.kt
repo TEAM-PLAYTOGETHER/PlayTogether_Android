@@ -66,7 +66,10 @@ class ThunderCategoryListItemAdapter :
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ThunderCategoryListItemAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ThunderCategoryListItemAdapter.ViewHolder,
+        position: Int
+    ) {
         holder.onBind(getItem(position))
     }
 
@@ -81,7 +84,7 @@ class ThunderCategoryListItemAdapter :
 
     }
 
-     fun stringBuilder(context: Context, stringList: List<String>): String {
+    fun stringBuilder(context: Context, stringList: List<String>): String {
         val sb = StringBuilder()
 
         for (it in stringList) {
