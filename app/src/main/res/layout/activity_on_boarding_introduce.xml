@@ -213,11 +213,11 @@
             android:inputType="textMultiLine"
             android:lines="3"
             android:maxLength="200"
-            android:scrollbars = "vertical"
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingEnd="19dp"
             android:paddingBottom="20dp"
+            android:scrollbars="vertical"
             android:scrollHorizontally="false"
             android:singleLine="true"
             android:textColorHint="@color/gray_gray01"
@@ -297,13 +297,23 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_impressive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_intro_onboarding_subway" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_open_onboarding_plto_subway"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:visibility="visible"
             android:background="@drawable/rectangle_border_dotted_gray03_radius_50"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@+id/tv_intro_onboarding_subway"
             app:layout_constraintTop_toBottomOf="@+id/tv_intro_onboarding_subway">
 
@@ -312,29 +322,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="@string/onboarding_plto_subway"
-                android:textColor="@color/gray_gray02"
-                android:textSize="14sp"
                 android:paddingStart="14dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                android:text="@string/onboarding_plto_subway"
+                android:textColor="@color/gray_gray02"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="12dp"
                 android:src="@drawable/icn_exit"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_onboarding_plto"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="12dp"
                 app:layout_constraintStart_toEndOf="@+id/tv_onboarding_plto"
                 app:layout_constraintTop_toTopOf="@+id/tv_onboarding_plto" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-            
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

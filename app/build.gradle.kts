@@ -194,4 +194,5 @@ dependencies {
     //Kapt
     //kapt(KaptDependencies.glide)
 
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
 }
