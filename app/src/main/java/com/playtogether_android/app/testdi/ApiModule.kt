@@ -5,6 +5,7 @@ import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
 import com.playtogether_android.data.api.message.MessageService
+import com.playtogether_android.data.api.message.RoomIdService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.onboarding.SubwayInfoService
@@ -49,6 +50,12 @@ object ApiModule {
     @Singleton
     fun provideMessageService(@RetrofitModule.GsonConverter retrofit: Retrofit): MessageService {
         return retrofit.create(MessageService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRoomIdService(@RetrofitModule.GsonConverter retrofit: Retrofit) : RoomIdService{
+        return retrofit.create(RoomIdService::class.java)
     }
 
     @Provides
