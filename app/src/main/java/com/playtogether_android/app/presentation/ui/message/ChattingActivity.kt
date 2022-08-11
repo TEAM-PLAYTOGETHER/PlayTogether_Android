@@ -50,11 +50,13 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     override fun onResume() {
         super.onResume()
         initSocket(roomId, audienceId)
+        Log.d("asdf", "socket connected")
     }
 
     override fun onPause() {
         super.onPause()
         socket.disconnect()
+        Log.d("asdf", "socket disconnected")
     }
 
     fun initSocket(roomId: Int, audienceId: Int) {
@@ -66,7 +68,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         }
         socket.connect()
         emitSubscribe(roomId, audienceId)
-        onUpdateChat()
+        onUpdateChat(chatAdapter)
     }
 
     private fun onConnect() { //서버에 jwt token을 넘겨주며 연결한다.
@@ -78,7 +80,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         Log.d("asdf", "Connection success : ${socket.id()}")
     }
 
-    private fun onUpdateChat() { //상대방이 보내는 채팅을 소켓으로 받는다.
+    private fun onUpdateChat(chatAdapter: ChatAdapter) { //상대방이 보내는 채팅을 소켓으로 받는다.
         val onUpdateChat = Emitter.Listener {
             val chat: SocketChatData =
                 gson.fromJson(it[0].toString(), SocketChatData::class.java)
@@ -178,41 +180,40 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         if (roomId != -1) {
             chatViewModel.getChatList(roomId)
             chatViewModel.chatData.observe(this) {
-                chatAdapter.submitList(it) {
-                    scrollToBottom()
-                    removeTimeAll()
-                }
+                chatAdapter.chatList.addAll(it)
+                chatAdapter.notifyDataSetChanged()
+                scrollToBottom()
+                removeTimeAll()
             }
         }
     }
 
     private fun scrollToBottom() {
-        val size = chatAdapter.currentList.size - 1
+        val size = chatAdapter.chatList.size - 1
         binding.rvInChattingChatting.scrollToPosition(size)
     }
 
     private fun removeTimeAll() {
-        var nowSize = chatAdapter.currentList.size - 1
+        var nowSize = chatAdapter.chatList.size - 1
         var tempSize = nowSize - 1
 
         if (tempSize < 0)
             return
 
         while (true) {
-            if (chatAdapter.currentList[tempSize].timeVisible == false) {
+            if (chatAdapter.chatList[tempSize].timeVisible == false) {
                 break
             }
-            if (chatAdapter.currentList[tempSize].messageType == chatAdapter.currentList[nowSize].messageType) {
-                if (chatAdapter.currentList[nowSize].time == chatAdapter.currentList[tempSize].time) {
-                    chatAdapter.currentList[tempSize].timeVisible = false
+            if (chatAdapter.chatList[tempSize].messageType == chatAdapter.chatList[nowSize].messageType) {
+                if (chatAdapter.chatList[nowSize].time == chatAdapter.chatList[tempSize].time) {
+                    chatAdapter.chatList[tempSize].timeVisible = false
                 }
             }
             nowSize = tempSize
             tempSize--
             if (tempSize < 0) break
         }
-        chatAdapter.submitList(chatAdapter.currentList) {
-        }
+        chatAdapter.notifyDataSetChanged()
     }
 
     private fun initAdapter() {
