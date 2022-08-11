@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,8 +23,12 @@ class ThunderDoFragment : BaseFragment<FragmentThunderDoBinding>(R.layout.fragme
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("111 : dodo")
         initView()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Timber.d("111 do")
     }
 
     private fun initView() {
@@ -34,7 +39,7 @@ class ThunderDoFragment : BaseFragment<FragmentThunderDoBinding>(R.layout.fragme
     private fun initAdapter() {
         listAdapter = ThunderCategoryListItemAdapter()
         with(thunderListViewModel) {
-            _categoryDoList.observe(viewLifecycleOwner) {
+            categoryDoList.observe(viewLifecycleOwner) {
                 listAdapter.submitList(it)
             }
         }

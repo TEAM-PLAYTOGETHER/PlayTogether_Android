@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="listViewModel"
+            type="com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

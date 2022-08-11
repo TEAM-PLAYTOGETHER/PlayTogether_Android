@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.viewmodel
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,15 +26,9 @@ class ThunderListViewModel @Inject constructor(
     private val _sortType = MutableLiveData<String>()
     val sortType: LiveData<String> = _sortType
 
-    val _categoryEatList = MutableLiveData<List<CategoryData>>()
-//    val categoryEatList: LiveData<CategoryData> = _categoryEatList
-
-    val _categoryGoList = MutableLiveData<List<CategoryData>>()
-//    val categoryGoList: LiveData<CategoryData> = _categoryGoList
-
-    val _categoryDoList = MutableLiveData<List<CategoryData>>()
-//    val categoryDoList: LiveData<CategoryData> = _categoryDoList
-
+    val categoryEatList = MutableLiveData<List<CategoryData>>()
+    val categoryGoList = MutableLiveData<List<CategoryData>>()
+    val categoryDoList = MutableLiveData<List<CategoryData>>()
 
     fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
         viewModelScope.launch {
@@ -42,9 +37,9 @@ class ThunderListViewModel @Inject constructor(
             }.onSuccess {
                 _categoryItemList.value = it
                 when (category) {
-                    CATEGORY_EAT -> _categoryEatList.value = it
-                    CATEGORY_GO -> _categoryGoList.value = it
-                    CATEGORY_DO -> _categoryDoList.value = it
+                    CATEGORY_EAT -> categoryEatList.value = it
+                    CATEGORY_GO -> categoryGoList.value = it
+                    CATEGORY_DO -> categoryDoList.value = it
                 }
                 it.map {
                     _category.value = it.category
@@ -75,5 +70,8 @@ class ThunderListViewModel @Inject constructor(
         const val CATEGORY_EAT = "먹을래"
         const val CATEGORY_GO = "갈래"
         const val CATEGORY_DO = "할래"
+        const val CATEGORY_EAT_ORDER = 0
+        const val CATEGORY_GO_ORDER = 1
+        const val CATEGORY_DO_ORDER = 2
     }
 }

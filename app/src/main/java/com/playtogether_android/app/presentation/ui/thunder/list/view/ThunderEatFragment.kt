@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,8 +23,12 @@ class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.frag
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("111 : eateat")
         initView()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Timber.d("111 eat")
     }
 
     private fun initData() {
@@ -41,7 +46,7 @@ class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.frag
         listAdapter = ThunderCategoryListItemAdapter()
 
         with(thunderListViewModel) {
-            _categoryEatList.observe(viewLifecycleOwner) { it ->
+            categoryEatList.observe(viewLifecycleOwner) { it ->
                 listAdapter.submitList(it)
             }
         }

@@ -1,44 +1,34 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.activity.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderListBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
-import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
-import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import androidx.activity.viewModels
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
-import com.playtogether_android.app.util.SpaceItemDecorationVertical
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_DO
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_GO
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ThunderListActivity :
     BaseActivity<ActivityThunderListBinding>(R.layout.activity_thunder_list) {
-    private lateinit var thunderCategoryListItemAdapter: ThunderCategoryListItemAdapter
     private lateinit var thunderCategoryListAdapter: ThunderCategoryListAdapter
     private val thunderListViewModel: ThunderListViewModel by viewModels()
-
-    //    private val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
+    private val fragmentList =
+        listOf(ThunderEatFragment(), ThunderGoFragment(), ThunderDoFragment())
+    val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        binding.thunderViewModel = thunderListViewModel
+        initData()
         initView()
-        with(thunderListViewModel) {
-            getLightCategoryList(ThunderListViewModel.CATEGORY_EAT)
-            getLightCategoryList(ThunderListViewModel.CATEGORY_GO)
-            getLightCategoryList(ThunderListViewModel.CATEGORY_DO)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        initData()
     }
 
     private fun setClickListener() {
@@ -64,32 +54,36 @@ class ThunderListActivity :
             width = resources.getDimension(R.dimen.fab_size).toInt()
             height = resources.getDimension(R.dimen.fab_size).toInt()
         }
-
-//        initData()
-//        initAdapter()
         initFragment()
         setClickListener()
+        setCategory()
+        setUpdateCategory()
     }
 
+    private fun setUpdateCategory() {
+        binding.vpThunderlistContainer.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.tvThunderlistCategoryTitle.text = categoryTitleList[position]
+                binding.tvThunderlistToolTitle.text = categoryTitleList[position]
+            }
+        })
+    }
 
-//        private fun initAdapter() {
-//            thunderCategoryListItemAdapter = ThunderCategoryListItemAdapter()
-//
-//            with(thunderListViewModel) {
-//                categoryItemList.observe(this@ThunderListActivity) { it ->
-//                    thunderCategoryListItemAdapter.submitList(it)
-//                }
-//            }
-//
-//            with(binding.rvThunderlistContainer) {
-//                layoutManager = LinearLayoutManager(this@ThunderListActivity)
-//                addItemDecoration(SpaceItemDecorationVertical())
-//                adapter = thunderCategoryListItemAdapter
-//            }
-//        }
+    private fun setCategory() {
+        val category = intent.getStringExtra("category") ?: CATEGORY_EAT
+        val index = categoryTitleList.indexOf(category)
+
+        with(binding) {
+            tvThunderlistCategoryTitle.text = category
+            tvThunderlistToolTitle.text = category
+            vpThunderlistContainer.setCurrentItem(index, false)
+        }
+
+    }
 
     private fun initFragment() {
-        val fragmentList = listOf(ThunderEatFragment(), ThunderGoFragment(), ThunderDoFragment())
         thunderCategoryListAdapter = ThunderCategoryListAdapter(this)
         thunderCategoryListAdapter.fragmentList.addAll(fragmentList)
         binding.vpThunderlistContainer.adapter = thunderCategoryListAdapter
@@ -97,12 +91,13 @@ class ThunderListActivity :
 
     @SuppressLint("SetTextI18n")
     private fun initData() {
-        val category = intent.getStringExtra("category")
-        val variableCategory = thunderListViewModel.category.value ?: category
-        thunderListViewModel.getLightCategoryList(variableCategory!!)
-        thunderListViewModel.category.observe(this) {
-            binding.tvThunderlistToolTitle.text = it
-            binding.tvThunderlistCategoryTitle.text = it + getString(R.string.thunder_list_question)
+        binding.listViewModel = thunderListViewModel
+//        val category = intent.getStringExtra("category") ?: CATEGORY_EAT
+//        thunderListViewModel.getLightCategoryList(category)
+        with(thunderListViewModel) {
+            getLightCategoryList(CATEGORY_EAT)
+            getLightCategoryList(CATEGORY_GO)
+            getLightCategoryList(CATEGORY_DO)
         }
 
         thunderListViewModel.sortType.observe(this) {
@@ -118,7 +113,23 @@ class ThunderListActivity :
         }
     }
 
-//    private fun setPreCategoryClickListener() {
+    private fun floatButtonClickListener() {
+        binding.fabThunderlist.setOnClickListener {
+            val intent = Intent(this, CreateThunderActivity::class.java)
+            intentActivity(intent)
+        }
+    }
+
+    private fun intentActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
+    companion object {
+        const val SORT_PEOPLE_CNT = "peopleCnt"
+        const val SORT_CREATE_AT = "createdAt"
+    }
+
+    //    private fun setPreCategoryClickListener() {
 //        var category = ""
 //        thunderListViewModel.category.observe(this) {
 //            category = it
@@ -175,20 +186,4 @@ class ThunderListActivity :
 //            bottomSheetDialog.show(supportFragmentManager, "init bottom_sheet")
 //        }
 //    }
-
-    private fun floatButtonClickListener() {
-        binding.fabThunderlist.setOnClickListener {
-            val intent = Intent(this, CreateThunderActivity::class.java)
-            intentActivity(intent)
-        }
-    }
-
-    private fun intentActivity(intent: Intent) {
-        startActivity(intent)
-    }
-
-    companion object {
-        const val SORT_PEOPLE_CNT = "peopleCnt"
-        const val SORT_CREATE_AT = "createdAt"
-    }
 }

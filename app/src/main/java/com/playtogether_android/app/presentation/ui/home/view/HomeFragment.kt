@@ -20,7 +20,8 @@ import androidx.fragment.app.viewModels
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val thunderListViewModel: ThunderListViewModel by activityViewModels()
 
     //    private val thunderListViewModel: ThunderListViewModel by viewModels()
     private lateinit var hotAdapter: HomeHotAdapter
