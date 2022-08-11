@@ -7,6 +7,7 @@ import com.playtogether_android.data.api.message.MessageSendService
 import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
+import com.playtogether_android.data.api.onboarding.SubwayInfoService
 import com.playtogether_android.data.api.sign.SignService
 import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.api.thunder.ThunderService
@@ -19,6 +20,8 @@ import com.playtogether_android.data.datasource.mypage.MyPageDataSource
 import com.playtogether_android.data.datasource.mypage.MyPageDataSourceImpl
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSource
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSourceImpl
+import com.playtogether_android.data.datasource.onboarding.SubwayDataSource
+import com.playtogether_android.data.datasource.onboarding.SubwayDataSourceImpl
 import com.playtogether_android.data.datasource.sign.SignDataSource
 import com.playtogether_android.data.datasource.sign.SignDataSourceImpl
 import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSource
@@ -34,6 +37,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
+
+    @Provides
+    @Singleton
+    fun provideSubwayDataSource(service: SubwayInfoService) : SubwayDataSource{
+        return SubwayDataSourceImpl(service)
+    }
 
     @Provides
     @Singleton

@@ -6,6 +6,7 @@ import com.playtogether_android.data.model.request.onboarding.RequestRegisterCre
 import com.playtogether_android.data.model.response.onboarding.ResponseGetList
 import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
+import com.playtogether_android.data.model.response.onboarding.ResponseSubwayList
 
 class OnBoardingDataSourceImpl (private val service: OnboardingService): OnBoardingDataSource {
     override suspend fun postRegisterCrew(requestRegisterCrew: RequestRegisterCrew): ResponseRegisterCrew {

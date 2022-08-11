@@ -42,7 +42,9 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
             android:exported="false" />

@@ -42,11 +42,11 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
         val item = _thunderList[position]
         holder.onBind(item)
 
-        if (itemClick != null) {
-            holder.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
-                itemClick?.onClick(it, position, item.lightId)
-            })
-        }
+//        if (itemClick != null) {
+//            holder.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
+//                itemClick?.onClick(it, position, item.lightId)
+//            })
+//        }
     }
 
     override fun getItemCount(): Int = _thunderList.size
