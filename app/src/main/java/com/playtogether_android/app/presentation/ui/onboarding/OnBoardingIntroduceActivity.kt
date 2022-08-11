@@ -32,6 +32,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         initSetting()
         duplicationClickEvent()
         nextBtnClickListener()
+        subwayBtnListener()
 
     }
 
@@ -173,6 +174,14 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
                 initTextFieldCheck()
             }
         })
+    }
+
+    private fun subwayBtnListener() {
+        binding.tvOpenOnboardingAdd.setOnClickListener {
+            val intent = Intent(this, SearchSubwayActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 }

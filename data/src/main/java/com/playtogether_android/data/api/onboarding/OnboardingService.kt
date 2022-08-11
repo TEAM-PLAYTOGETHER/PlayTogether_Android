@@ -6,9 +6,11 @@ import com.playtogether_android.data.model.request.onboarding.RequestRegisterCre
 import com.playtogether_android.data.model.response.onboarding.ResponseGetList
 import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
+import com.playtogether_android.data.model.response.onboarding.ResponseSubwayList
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface OnboardingService {
     //아이디 중복확인
@@ -26,5 +28,7 @@ interface OnboardingService {
     //가입한 동아리 리스트
     @GET("crew/list")
     suspend fun getCrewList() : ResponseGetList
+
+
 
 }
