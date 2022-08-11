@@ -6,6 +6,7 @@ import com.playtogether_android.data.datasource.message.ChatDataSource
 import com.playtogether_android.data.datasource.message.MessageDataSource
 import com.playtogether_android.data.datasource.mypage.MyPageDataSource
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSource
+import com.playtogether_android.data.datasource.onboarding.SubwayDataSource
 import com.playtogether_android.data.datasource.sign.SignDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
@@ -15,6 +16,7 @@ import com.playtogether_android.data.repositoryimpl.message.ChatRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.message.MessageRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.mypage.MyPageRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.onboarding.OnBoardingRepositoryImpl
+import com.playtogether_android.data.repositoryimpl.onboarding.SubwayRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.sign.SignRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderCreateRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderRepositoryImpl
@@ -24,6 +26,7 @@ import com.playtogether_android.domain.repository.message.ChatRepository
 import com.playtogether_android.domain.repository.message.MessageRepository
 import com.playtogether_android.domain.repository.mypage.MyPageRepository
 import com.playtogether_android.domain.repository.onboarding.OnBoardingRepository
+import com.playtogether_android.domain.repository.onboarding.SubwayRepository
 import com.playtogether_android.domain.repository.sign.SignRepository
 import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
@@ -53,6 +56,12 @@ object RepositoryModule {
     @Singleton
     fun provideOnBoardingRepository(dataSource: OnBoardingDataSource): OnBoardingRepository {
         return OnBoardingRepositoryImpl(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSubwayRepository(dataSource: SubwayDataSource) : SubwayRepository {
+        return SubwayRepositoryImpl(dataSource)
     }
 
     @Provides
