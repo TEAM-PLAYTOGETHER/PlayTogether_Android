@@ -7,10 +7,7 @@ import com.playtogether_android.app.databinding.ActivityThunderAppliedBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.ApplyThunderDetailActivity
-import com.playtogether_android.app.presentation.ui.thunder.ThunderListAdapter
-import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
-import com.playtogether_android.app.util.shortToast
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.StringBuilder

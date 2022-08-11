@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="thunderViewModel"
+            name="listViewModel"
             type="com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel" />
     </data>
 
@@ -104,6 +104,7 @@
             android:layout_marginEnd="24dp"
             android:gravity="center"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_category_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_thunderlist_tool_container">
 
@@ -123,15 +124,24 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_thunderlist_container"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_thunderlist_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_thunder_align_container"
-            tools:listitem="@layout/item_thunder_list" />
+            app:layout_constraintTop_toBottomOf="@id/tv_thunderlist_category_title" />
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:id="@+id/rv_thunderlist_container"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginHorizontal="20dp"-->
+        <!--            android:layout_marginTop="24dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/ll_thunder_align_container"-->
+        <!--            tools:listitem="@layout/item_thunder_list" />-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fab_thunderlist"
