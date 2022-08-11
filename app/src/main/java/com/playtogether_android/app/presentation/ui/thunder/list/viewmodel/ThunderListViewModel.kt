@@ -25,17 +25,31 @@ class ThunderListViewModel @Inject constructor(
     private val _sortType = MutableLiveData<String>()
     val sortType: LiveData<String> = _sortType
 
-    fun getLightCategoryList(category: String = DEFAULT_CATEGORY, sort: String = DEFAULT_SORT) {
+    val _categoryEatList = MutableLiveData<List<CategoryData>>()
+//    val categoryEatList: LiveData<CategoryData> = _categoryEatList
+
+    val _categoryGoList = MutableLiveData<List<CategoryData>>()
+//    val categoryGoList: LiveData<CategoryData> = _categoryGoList
+
+    val _categoryDoList = MutableLiveData<List<CategoryData>>()
+//    val categoryDoList: LiveData<CategoryData> = _categoryDoList
+
+
+    fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
         viewModelScope.launch {
             kotlin.runCatching {
                 getThunderCategoryUseCase(category, sort)
             }.onSuccess {
                 _categoryItemList.value = it
+                when (category) {
+                    CATEGORY_EAT -> _categoryEatList.value = it
+                    CATEGORY_GO -> _categoryGoList.value = it
+                    CATEGORY_DO -> _categoryDoList.value = it
+                }
                 it.map {
                     _category.value = it.category
                 }
                 _sortType.value = sort
-                Timber.d("viewmodel category : $category")
             }.onFailure {
                 Timber.e("getLightList error : $it")
                 Timber.e("getLightList error : ${it.message}")
@@ -55,9 +69,11 @@ class ThunderListViewModel @Inject constructor(
     }
 
     companion object {
-        const val DEFAULT_CATEGORY = "먹을래"
         const val DEFAULT_SORT = "createdAt"
         const val DEFAULT_SORT_KR = "최신순"
         const val LIKECNT_KR = "찜 많은순"
+        const val CATEGORY_EAT = "먹을래"
+        const val CATEGORY_GO = "갈래"
+        const val CATEGORY_DO = "할래"
     }
 }

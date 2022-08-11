@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
@@ -14,31 +15,33 @@ import com.playtogether_android.app.presentation.ui.thunder.list.adapter.Thunder
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.SpaceItemDecorationVertical
+import timber.log.Timber
 
 class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.fragment_thunder_eat) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
-    private val thunderListViewModel: ThunderListViewModel by viewModels()
+    private val thunderListViewModel: ThunderListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Timber.d("111 : eateat")
         initView()
     }
 
     private fun initData() {
-        thunderListViewModel.getLightCategoryList(ThunderListActivity.CATEGORY_EAT)
+        thunderListViewModel.getLightCategoryList(ThunderListViewModel.CATEGORY_GO)
 //        thunderListViewModel.setCategory(ThunderListActivity.CATEGORY_EAT)
     }
 
     private fun initView() {
-        initData()
+//        initData()
         initAdapter()
     }
 
     //먹/갈/할 같이 사용할 메서드
-    fun initAdapter() {
+    private fun initAdapter() {
         listAdapter = ThunderCategoryListItemAdapter()
 
         with(thunderListViewModel) {
-            categoryItemList.observe(viewLifecycleOwner) { it ->
+            _categoryEatList.observe(viewLifecycleOwner) { it ->
                 listAdapter.submitList(it)
             }
         }

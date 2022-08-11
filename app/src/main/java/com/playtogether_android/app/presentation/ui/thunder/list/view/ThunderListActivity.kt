@@ -23,20 +23,26 @@ class ThunderListActivity :
     private lateinit var thunderCategoryListItemAdapter: ThunderCategoryListItemAdapter
     private lateinit var thunderCategoryListAdapter: ThunderCategoryListAdapter
     private val thunderListViewModel: ThunderListViewModel by viewModels()
-    private val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
+
+    //    private val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.thunderViewModel = thunderListViewModel
+//        binding.thunderViewModel = thunderListViewModel
         initView()
+        with(thunderListViewModel) {
+            getLightCategoryList(ThunderListViewModel.CATEGORY_EAT)
+            getLightCategoryList(ThunderListViewModel.CATEGORY_GO)
+            getLightCategoryList(ThunderListViewModel.CATEGORY_DO)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        initData()
+//        initData()
     }
 
     private fun setClickListener() {
-        sortListClickListener()
+//        sortListClickListener()
         floatButtonClickListener()
         searchButtonClickListener()
 //        setPreCategoryClickListener()
@@ -59,7 +65,7 @@ class ThunderListActivity :
             height = resources.getDimension(R.dimen.fab_size).toInt()
         }
 
-        initData()
+//        initData()
 //        initAdapter()
         initFragment()
         setClickListener()
@@ -81,6 +87,7 @@ class ThunderListActivity :
 //                adapter = thunderCategoryListItemAdapter
 //            }
 //        }
+
     private fun initFragment() {
         val fragmentList = listOf(ThunderEatFragment(), ThunderGoFragment(), ThunderDoFragment())
         thunderCategoryListAdapter = ThunderCategoryListAdapter(this)
@@ -161,13 +168,13 @@ class ThunderListActivity :
 //        }
 //    }
 
-    private fun sortListClickListener() {
-        binding.llThunderAlignContainer.setOnClickListener {
-            val category = thunderListViewModel.category.value
-            val bottomSheetDialog = SortDialog(thunderListViewModel, category)
-            bottomSheetDialog.show(supportFragmentManager, "init bottom_sheet")
-        }
-    }
+//    private fun sortListClickListener() {
+//        binding.llThunderAlignContainer.setOnClickListener {
+//            val category = thunderListViewModel.category.value
+//            val bottomSheetDialog = SortDialog(thunderListViewModel, category)
+//            bottomSheetDialog.show(supportFragmentManager, "init bottom_sheet")
+//        }
+//    }
 
     private fun floatButtonClickListener() {
         binding.fabThunderlist.setOnClickListener {
@@ -181,9 +188,6 @@ class ThunderListActivity :
     }
 
     companion object {
-        const val CATEGORY_EAT = "먹을래"
-        const val CATEGORY_GO = "갈래"
-        const val CATEGORY_DO = "할래"
         const val SORT_PEOPLE_CNT = "peopleCnt"
         const val SORT_CREATE_AT = "createdAt"
     }

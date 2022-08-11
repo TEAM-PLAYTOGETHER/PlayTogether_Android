@@ -15,9 +15,7 @@ data class CategoryData(
     val time: String,
     val title: String,
     @SerializedName("scp_cnt")
-    val likeCount : Int
-)
-
-data class TestData(
-    val list: List<CategoryData>
+    val likeCount: Int,
+    @SerializedName("is_opened")
+    val isOpen: Boolean,
 )
