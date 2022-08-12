@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySearchSubwayBinding
@@ -26,8 +27,11 @@ class SearchSubwayActivity :
         getList()
         backBtnListener()
         nullCheck()
+        setClickListener()
 
     }
+    
+
 
     private fun backBtnListener() {
         binding.ivSubwayOnboardingBack.setOnClickListener {
@@ -81,13 +85,13 @@ class SearchSubwayActivity :
 
             override fun afterTextChanged(p0: Editable?) {
                 val input = binding.etSubwayOnboardingName.text.toString()
-                searchingRecipes(input)
+                searchingSubway(input)
                 initTextFieldCheck()
             }
         })
     }
 
-    private fun searchingRecipes(text: String) {
+    private fun searchingSubway(text: String) {
         val tmpList = ArrayList<SubwayListData>()
         val searchSubwayList = onBoardingViewModel.searchSubwayList
         for (i in 0 until searchSubwayList.size) {
@@ -99,5 +103,25 @@ class SearchSubwayActivity :
         binding.rvOnboardingSubway.adapter = subwayAdapter
         subwayAdapter.findText = text
         subwayAdapter.setCrewList(tmpList)
+
+
+        subwayAdapter.setItemClickListener(
+            object : SubwayAdapter.ItemClickListener {
+                override fun onClick(view: View, position: Int) {
+                    val subwayName = subwayAdapter.dataList[position].STATION_NM
+                    val subwayLine = subwayAdapter.dataList[position].LINE_NUM
+
+                    Timber.d("TEST $subwayName")
+                    Timber.d("TEST : $subwayLine")
+                }
+            })
+    }
+
+    private fun setClickListener() {
+        subwayAdapter = SubwayAdapter()
+        binding.rvOnboardingSubway.adapter = subwayAdapter
+
+
+
     }
 }
