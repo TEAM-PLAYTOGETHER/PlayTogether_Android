@@ -26,7 +26,8 @@ class ThunderListActivity :
     val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding.thunderViewModel = thunderListViewModel
+//     binding.thunderViewModel = thunderListViewModel
+        binding.lifecycleOwner = this
         initData()
         initView()
     }
