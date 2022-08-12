@@ -30,6 +30,8 @@ class ThunderListViewModel @Inject constructor(
     val categoryGoList = MutableLiveData<List<CategoryData>>()
     val categoryDoList = MutableLiveData<List<CategoryData>>()
 
+    val pageOrder = MutableLiveData<Int>()
+
     fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
         viewModelScope.launch {
             kotlin.runCatching {
