@@ -1,6 +1,7 @@
+
+
 package com.playtogether_android.app.presentation.ui.thunder.list.viewmodel
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,9 +27,16 @@ class ThunderListViewModel @Inject constructor(
     private val _sortType = MutableLiveData<String>()
     val sortType: LiveData<String> = _sortType
 
-    val categoryEatList = MutableLiveData<List<CategoryData>>()
-    val categoryGoList = MutableLiveData<List<CategoryData>>()
-    val categoryDoList = MutableLiveData<List<CategoryData>>()
+    private val _categoryEatList = MutableLiveData<List<CategoryData>>()
+    val categoryEatList: LiveData<List<CategoryData>> = _categoryEatList
+
+    private val _categoryGoList = MutableLiveData<List<CategoryData>>()
+    val categoryGoList: LiveData<List<CategoryData>> = _categoryGoList
+
+    private val _categoryDoList = MutableLiveData<List<CategoryData>>()
+    val categoryDoList: LiveData<List<CategoryData>> = _categoryDoList
+
+    val pageOrder = MutableLiveData<Int>()
 
     fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
         viewModelScope.launch {
@@ -37,16 +45,15 @@ class ThunderListViewModel @Inject constructor(
             }.onSuccess {
                 _categoryItemList.value = it
                 when (category) {
-                    CATEGORY_EAT -> categoryEatList.value = it
-                    CATEGORY_GO -> categoryGoList.value = it
-                    CATEGORY_DO -> categoryDoList.value = it
+                    CATEGORY_EAT -> _categoryEatList.value = it
+                    CATEGORY_GO -> _categoryGoList.value = it
+                    CATEGORY_DO -> _categoryDoList.value = it
                 }
                 it.map {
                     _category.value = it.category
                 }
                 _sortType.value = sort
             }.onFailure {
-                Timber.e("getLightList error : $it")
                 Timber.e("getLightList error : ${it.message}")
             }
         }
@@ -57,10 +64,6 @@ class ThunderListViewModel @Inject constructor(
             DEFAULT_SORT_KR
         else
             LIKECNT_KR
-    }
-
-    fun setCategory(category: String) {
-        _category.value = category
     }
 
     companion object {
