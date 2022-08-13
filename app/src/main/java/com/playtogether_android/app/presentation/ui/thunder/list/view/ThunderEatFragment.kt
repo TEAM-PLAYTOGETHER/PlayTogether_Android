@@ -1,20 +1,15 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentThunderEatBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
-import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
 import com.playtogether_android.app.util.SpaceItemDecorationVertical
 import timber.log.Timber
 
@@ -23,21 +18,12 @@ class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.frag
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.listViewModel = thunderListViewModel
+        binding.lifecycleOwner = this
         initView()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Timber.d("111 eat")
-    }
-
-    private fun initData() {
-        thunderListViewModel.getLightCategoryList(ThunderListViewModel.CATEGORY_GO)
-//        thunderListViewModel.setCategory(ThunderListActivity.CATEGORY_EAT)
-    }
-
     private fun initView() {
-//        initData()
         initAdapter()
     }
 
@@ -46,7 +32,9 @@ class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.frag
         listAdapter = ThunderCategoryListItemAdapter()
 
         with(thunderListViewModel) {
+            Timber.e("observe not : ${thunderListViewModel.categoryEatList.value}")
             categoryEatList.observe(viewLifecycleOwner) { it ->
+                Timber.e("observe : ${thunderListViewModel.categoryEatList.value}")
                 listAdapter.submitList(it)
             }
         }

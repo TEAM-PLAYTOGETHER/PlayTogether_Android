@@ -9,7 +9,7 @@ import com.playtogether_android.domain.model.home.JoinThunderData
 import com.playtogether_android.domain.model.home.ThunderJoinEndData
 import com.playtogether_android.domain.model.home.ThunderJoinEndMember
 import com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer
-import com.playtogether_android.domain.model.light.HomeLightningData
+import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
 import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
@@ -49,11 +49,11 @@ class HomeViewModel @Inject constructor(
     private val _organizerInfo = MutableLiveData<ThunderJoinEndOrganizer>()
     val organizerInfo: LiveData<ThunderJoinEndOrganizer> = _organizerInfo
 
-    private val _hotList = MutableLiveData<List<HomeLightningData>>()
-    val hotList: LiveData<List<HomeLightningData>> = _hotList
+    private val _hotList = MutableLiveData<List<CategoryData>>()
+    val hotList: LiveData<List<CategoryData>> = _hotList
 
-    private val _newList = MutableLiveData<List<HomeLightningData>>()
-    val newList: LiveData<List<HomeLightningData>> = _newList
+    private val _newList = MutableLiveData<List<CategoryData>>()
+    val newList: LiveData<List<CategoryData>> = _newList
 
     fun testData() {
         viewModelScope.launch {

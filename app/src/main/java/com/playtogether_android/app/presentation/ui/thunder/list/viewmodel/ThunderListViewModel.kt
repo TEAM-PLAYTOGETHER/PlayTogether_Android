@@ -1,5 +1,3 @@
-
-
 package com.playtogether_android.app.presentation.ui.thunder.list.viewmodel
 
 import androidx.lifecycle.LiveData
@@ -35,8 +33,6 @@ class ThunderListViewModel @Inject constructor(
 
     private val _categoryDoList = MutableLiveData<List<CategoryData>>()
     val categoryDoList: LiveData<List<CategoryData>> = _categoryDoList
-
-    val pageOrder = MutableLiveData<Int>()
 
     val pageOrder = MutableLiveData<Int>()
 

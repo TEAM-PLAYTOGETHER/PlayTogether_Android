@@ -1,10 +1,8 @@
 package com.playtogether_android.data.repositoryimpl.light
 
-import android.hardware.lights.Light
 import com.playtogether_android.data.datasource.light.LightDataSource
 import com.playtogether_android.data.mapper.light.LightMapper
 import com.playtogether_android.domain.model.light.CategoryData
-import com.playtogether_android.domain.model.light.HomeLightningData
 import com.playtogether_android.domain.repository.light.LightRepository
 
 class LightRepositoryImpl(private val lightDataSource: LightDataSource) : LightRepository {
@@ -15,13 +13,13 @@ class LightRepositoryImpl(private val lightDataSource: LightDataSource) : LightR
         )
     }
 
-    override suspend fun getNewLightning(): List<HomeLightningData> {
+    override suspend fun getNewLightning(): List<CategoryData> {
         return LightMapper.mapperToHomeLightningData(
             lightDataSource.getNewLightning()
         )
     }
 
-    override suspend fun getHotLightning(): List<HomeLightningData> {
+    override suspend fun getHotLightning(): List<CategoryData> {
         return LightMapper.mapperToHomeLightningData(
             lightDataSource.getHotLightning()
         )
