@@ -8,6 +8,10 @@
         <variable
             name="listViewModel"
             type="com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel" />
+
+        <variable
+            name="thunderListActivity"
+            type="com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +35,8 @@
                 android:id="@+id/tv_thunderlist_tool_title"
                 style="@style/thunder_tool_title"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{thunderListActivity.categoryTitleList[listViewModel.pageOrder]}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -51,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
+                android:src="@{listViewModel.pageOrder==0 ? @drawable/icn_before_false : @drawable/icn_before_true}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintEnd_toStartOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title"
@@ -61,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:src="@{listViewModel.pageOrder==2 ? @drawable/icn_next_false : @drawable/icn_next_true}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintStart_toEndOf="@id/tv_thunderlist_tool_title"
                 app:layout_constraintTop_toTopOf="@id/tv_thunderlist_tool_title"
@@ -93,6 +100,7 @@
             style="@style/thunder_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{thunderListActivity.categoryTitleList[listViewModel.pageOrder]}"
             app:layout_constraintStart_toEndOf="@id/tv_thunderlist_title"
             app:layout_constraintTop_toTopOf="@id/tv_thunderlist_title" />
 

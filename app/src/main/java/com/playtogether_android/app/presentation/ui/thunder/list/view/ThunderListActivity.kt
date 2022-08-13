@@ -26,18 +26,19 @@ class ThunderListActivity :
     val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding.thunderViewModel = thunderListViewModel
+        binding.listViewModel = thunderListViewModel
+        binding.thunderListActivity = this
+        binding.lifecycleOwner = this
         initData()
         initView()
     }
 
     private fun setClickListener() {
-//        sortListClickListener()
         floatButtonClickListener()
         searchButtonClickListener()
-//        setPreCategoryClickListener()
-//        setAfterCategoryClickListener()
-        setPreButtonListener()
+        setBackButtonListener()
+        setPreButtonClick()
+        setNextButtonClick()
     }
 
     private fun searchButtonClickListener() {
@@ -47,7 +48,6 @@ class ThunderListActivity :
 //        intentActivity(intent)
         }
     }
-
 
     private fun initView() {
         binding.fabThunderlist.layoutParams.apply {
@@ -60,13 +60,32 @@ class ThunderListActivity :
         setUpdateCategory()
     }
 
+    private fun setPreButtonClick() {
+        binding.ivThunderlistPrevious.setOnClickListener {
+            val index = thunderListViewModel.pageOrder.value ?: 0
+            if (index != 0) {
+                thunderListViewModel.pageOrder.value = index - 1
+                binding.vpThunderlistContainer.setCurrentItem(index - 1, true)
+            }
+        }
+    }
+
+    private fun setNextButtonClick() {
+        binding.ivThunderlistNext.setOnClickListener {
+            val index = thunderListViewModel.pageOrder.value ?: 2
+            if (index != 2) {
+                thunderListViewModel.pageOrder.value = index + 1
+                binding.vpThunderlistContainer.setCurrentItem(index + 1, true)
+            }
+        }
+    }
+
     private fun setUpdateCategory() {
         binding.vpThunderlistContainer.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                binding.tvThunderlistCategoryTitle.text = categoryTitleList[position]
-                binding.tvThunderlistToolTitle.text = categoryTitleList[position]
+                thunderListViewModel.pageOrder.value = position
             }
         })
     }
@@ -74,13 +93,10 @@ class ThunderListActivity :
     private fun setCategory() {
         val category = intent.getStringExtra("category") ?: CATEGORY_EAT
         val index = categoryTitleList.indexOf(category)
-
         with(binding) {
-            tvThunderlistCategoryTitle.text = category
-            tvThunderlistToolTitle.text = category
+            thunderListViewModel.pageOrder.value = index
             vpThunderlistContainer.setCurrentItem(index, false)
         }
-
     }
 
     private fun initFragment() {
@@ -91,9 +107,6 @@ class ThunderListActivity :
 
     @SuppressLint("SetTextI18n")
     private fun initData() {
-        binding.listViewModel = thunderListViewModel
-//        val category = intent.getStringExtra("category") ?: CATEGORY_EAT
-//        thunderListViewModel.getLightCategoryList(category)
         with(thunderListViewModel) {
             getLightCategoryList(CATEGORY_EAT)
             getLightCategoryList(CATEGORY_GO)
@@ -105,9 +118,7 @@ class ThunderListActivity :
         }
     }
 
-//    }
-
-    private fun setPreButtonListener() {
+    private fun setBackButtonListener() {
         binding.ivThunderlistBack.setOnClickListener {
             finish()
         }
@@ -123,67 +134,4 @@ class ThunderListActivity :
     private fun intentActivity(intent: Intent) {
         startActivity(intent)
     }
-
-    companion object {
-        const val SORT_PEOPLE_CNT = "peopleCnt"
-        const val SORT_CREATE_AT = "createdAt"
-    }
-
-    //    private fun setPreCategoryClickListener() {
-//        var category = ""
-//        thunderListViewModel.category.observe(this) {
-//            category = it
-//        }
-//        if (category == CATEGORY_EAT) {
-//            binding.ivThunderlistPrevious.setImageResource(R.drawable.icn_before_false)
-//        } else {
-//            binding.ivThunderlistPrevious.setImageResource(R.drawable.icn_before_true)
-//            with(thunderListViewModel) {
-//                binding.ivThunderlistPrevious.setOnClickListener {
-//                    when (categoryTitleList.indexOf(category)) {
-//                        1 -> {
-//                            getLightCategoryList(CATEGORY_EAT)
-//                        }
-//                        2 -> {
-//                            getLightCategoryList(CATEGORY_GO)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-//    private fun setAfterCategoryClickListener() {
-//        var category = ""
-//        thunderListViewModel.category.observe(this) {
-//            category = it
-//        }
-//        with(binding.ivThunderlistNext) {
-//            if (category.equals(CATEGORY_DO)) {
-//                setImageResource(R.drawable.icn_next_false)
-//            } else {
-//                setImageResource(R.drawable.icn_next_true)
-//                with(thunderListViewModel) {
-//                    setOnClickListener {
-//                        when (categoryTitleList.indexOf(category)) {
-//                            0 -> {
-//                                getLightCategoryList(CATEGORY_GO)
-//                            }
-//                            1 -> {
-//                                getLightCategoryList(CATEGORY_DO)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-//    private fun sortListClickListener() {
-//        binding.llThunderAlignContainer.setOnClickListener {
-//            val category = thunderListViewModel.category.value
-//            val bottomSheetDialog = SortDialog(thunderListViewModel, category)
-//            bottomSheetDialog.show(supportFragmentManager, "init bottom_sheet")
-//        }
-//    }
 }
