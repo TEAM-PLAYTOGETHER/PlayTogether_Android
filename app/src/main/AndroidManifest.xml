@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".testdi.PlayTogetherApplication"
@@ -14,6 +19,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="${kakaokey}" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.ui.onboarding.OnboardingReDownLoadActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
             android:exported="false" />
@@ -86,6 +109,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.ui.login.LoginActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

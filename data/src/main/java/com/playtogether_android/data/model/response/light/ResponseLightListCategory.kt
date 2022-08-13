@@ -7,19 +7,27 @@ data class ResponseLightListCategory(
     val message: String,
     val status: Int,
     val success: Boolean,
-    val data: List<Data>,
+    val `data`: Data,
 ) {
     data class Data(
-        val category: String,
-        val date: String,
-        @SerializedName("light_id")
-        val lightId: Int,
-        @SerializedName("LightMemberCnt")
-        val lightMemberCnt: Int,
-        @SerializedName("people_cnt")
-        val peopleCnt: Int,
-        val place: String,
-        val time: String,
-        val title: String
-    )
+        val totalCount: Int,
+        val totalPage: Int,
+        val lightData: List<LightData>,
+    ) {
+        data class LightData(
+            val category: String,
+            val date: String,
+            @SerializedName("light_id")
+            val lightId: Int,
+            @SerializedName("LightMemberCnt")
+            val lightMemberCnt: Int,
+            @SerializedName("people_cnt")
+            val peopleCnt: Int,
+            val place: String,
+            @SerializedName("scp_cnt")
+            val scpCnt: Int,
+            val time: String,
+            val title: String
+        )
+    }
 }

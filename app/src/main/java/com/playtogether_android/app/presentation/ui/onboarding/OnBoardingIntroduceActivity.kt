@@ -31,7 +31,27 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         introTextWatcher()
         initSetting()
         duplicationClickEvent()
+        nextBtnClickListener()
 
+    }
+
+    private fun nextBtnClickListener() {
+        binding.tvIntroOnboardingNext.setOnClickListener {
+            val crewName = intent.getStringExtra("crewName")
+            val crewCode = intent.getStringExtra("crewCode")
+            val crewIntroduce = intent.getStringExtra("crewIntro")
+
+
+            val name = binding.etIntroOnboardingName.text.toString()
+            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+
+            intent.putExtra("userName", name)
+            intent.putExtra("crewName", crewName)
+            intent.putExtra("crewCode", crewCode)
+            intent.putExtra("crewIntro", crewIntroduce)
+            startActivity(intent)
+            finish()
+        }
     }
 
     //id 중복체크
@@ -86,7 +106,8 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
     //뒤로가기 버튼 리스너
     private fun backBtnListener() {
         binding.ivIntroOnboardingBack.setOnClickListener {
-            startActivity(Intent(this, SelectOnboardingActivity::class.java))
+            val intent = Intent(this, SelectOnboardingActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }
