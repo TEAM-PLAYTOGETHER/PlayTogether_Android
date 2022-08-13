@@ -4,11 +4,16 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
@@ -16,8 +21,8 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
-import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
@@ -28,20 +33,78 @@ class CreateThunderActivity :
     private val createThunderViewModel: CreateThunderViewModel by viewModels()
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var category: String
+    private val galleryItemList = mutableListOf<Uri>()
+    private lateinit var launcher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        checkTunderName()
-        imageSelected()
+
+        launcher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            Timber.d("rere result code: ${it.resultCode}")
+            Timber.d("rere RESULT CODE : ${RESULT_OK}")
+            if (it.resultCode == -1) {
+                galleryItemList.clear()
+                if (it.data?.clipData != null) {
+                    val count = it.data?.clipData!!.itemCount
+                    Timber.d("rere itemCount: $count")
+                    if (count > 3) {
+                        shortToast("사진은 최대 3장까지 가능합니다.")
+                        return@registerForActivityResult
+                    }
+                    for (i in 0 until count) {
+                        val imageUri = it.data?.clipData!!.getItemAt(i).uri
+                        galleryItemList.add(imageUri)
+                    }
+                } else {
+                    it.data?.data?.let { uri ->
+                        val imageUri = it.data?.data
+                        if (imageUri != null) {
+                            galleryItemList.add(imageUri)
+                        }
+                    }
+                }
+
+            }
+        }
+
+        setTextChangeListener()
+        setClickListener()
+    }
+
+
+    private fun setTextChangeListener() {
         initDatePickerDialog()
         initTimePickerDialog()
-        clickInfinite()
+        checkTunderName()
         checkThunderPlace()
         checkTunderMember()
         checkTunderExplanation()
+    }
+
+    private fun setClickListener() {
+        imageSelected()
+        clickInfinite()
         clickComplete()
+        imageSelected()
+        galleryPermissionListener()
+    }
+
+    private fun galleryPermissionListener() {
+        binding.clCreatethunderPhoto.setOnClickListener {
+            uploadImageListener()
+        }
+    }
+
+    private fun uploadImageListener() {
+        Intent(Intent.ACTION_PICK).apply {
+            type = MediaStore.Images.Media.CONTENT_TYPE
+            data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            launcher.launch(this)
+        }
     }
 
     private fun clickComplete() {
@@ -67,13 +130,13 @@ class CreateThunderActivity :
                     description
                 )
             )
-            Log.d("createThunder", title)
-            Log.d("createThunder", category)
-            Log.d("createThunder", date)
-            Log.d("createThunder", time)
-            Log.d("createThunder", place)
-            Log.d("createThunder", "$peopleCnt")
-            Log.d("createThunder", description)
+//            Log.d("createThunder", title)
+//            Log.d("createThunder", category)
+//            Log.d("createThunder", date)
+//            Log.d("createThunder", time)
+//            Log.d("createThunder", place)
+//            Log.d("createThunder", "$peopleCnt")
+//            Log.d("createThunder", description)
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
@@ -262,5 +325,10 @@ class CreateThunderActivity :
             timePickerDialog.getButton(TimePickerDialog.BUTTON_POSITIVE).setTextColor(textColor)
             timePickerDialog.getButton(TimePickerDialog.BUTTON_NEGATIVE).setTextColor(textColor)
         }
+    }
+
+    companion object {
+        const val MAX_PICTURE_COUNT = 5
+        const val RESULT_OK = 99
     }
 }
