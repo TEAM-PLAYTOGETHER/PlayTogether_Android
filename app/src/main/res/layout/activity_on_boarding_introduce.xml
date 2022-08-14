@@ -273,6 +273,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_intro_onboarding_subway" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/tv_intro_onboarding_subway_warn"
@@ -297,14 +298,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_impressive"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_mypage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="14dp"
-            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintStart_toStartOf="@+id/tv_intro_onboarding_subway"
             app:layout_constraintTop_toBottomOf="@+id/tv_intro_onboarding_subway" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
