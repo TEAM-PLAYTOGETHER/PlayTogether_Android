@@ -20,6 +20,10 @@ data class ResponseHomeLightning(
         val peopleCnt: Int,
         val place: String,
         val time: String,
-        val title: String
+        val title: String,
+        @SerializedName("is_opened")
+        val open: Boolean,
+        @SerializedName("scp_cnt")
+        val scpCnt: Int
     )
 }
