@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_createthunder_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.ui.createThunder.CreateThunderActivity">
@@ -22,14 +24,14 @@
                 android:id="@+id/tv_createthunder_finish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_finish"
-                android:textSize="16sp"
-                android:textColor="@color/gray_gray01"
-                android:paddingVertical="13dp"
-                android:paddingHorizontal="9dp"
-                android:layout_marginEnd="12dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
                 android:clickable="false"
+                android:paddingHorizontal="9dp"
+                android:paddingVertical="13dp"
+                android:text="@string/text_finish"
+                android:textColor="@color/gray_gray01"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,9 +39,9 @@
                 android:id="@+id/iv_createthunder_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="4dp"
+                android:padding="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_icn_back" />
@@ -48,17 +50,17 @@
                 android:id="@+id/tv_createthunder_openthunder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/createthunder_openthunder"
-                android:textSize="22sp"
-                android:textColor="@color/white"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/pretendard_regular"
                 android:includeFontPadding="false"
-                android:layout_marginTop="23dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="20dp"
+                android:text="@string/createthunder_openthunder"
+                android:textColor="@color/white"
+                android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_createthunder_back"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_createthunder_back" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -219,9 +221,9 @@
                         android:background="@drawable/rectangle_border_gray03_radius_10"
                         android:fontFamily="@font/pretendard_regular"
                         android:gravity="center"
+                        android:hint="@string/text_time_type"
                         android:includeFontPadding="false"
                         android:paddingVertical="20dp"
-                        android:hint="@string/text_time_type"
                         android:textColor="@color/gray_black"
                         android:textColorHint="@color/gray_gray01"
                         android:textSize="14sp"
@@ -251,11 +253,11 @@
                         android:background="@drawable/rectangle_border_gray03_radius_10"
                         android:fontFamily="@font/pretendard_regular"
                         android:gravity="center"
+                        android:hint="@string/text_place"
                         android:includeFontPadding="false"
                         android:paddingVertical="20dp"
-                        android:hint="@string/text_place"
-                        android:textColorHint="@color/gray_gray01"
                         android:textColor="@color/gray_black"
+                        android:textColorHint="@color/gray_gray01"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/tv_createthunder_where"
@@ -283,13 +285,13 @@
                         android:background="@drawable/rectangle_border_gray03_radius_10"
                         android:fontFamily="@font/pretendard_regular"
                         android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:paddingVertical="20dp"
                         android:hint="@string/createthunder_max20"
-                        android:textColorHint="@color/gray_gray01"
-                        android:textColor="@color/gray_black"
-                        android:textSize="14sp"
+                        android:includeFontPadding="false"
                         android:inputType="number"
+                        android:paddingVertical="20dp"
+                        android:textColor="@color/gray_black"
+                        android:textColorHint="@color/gray_gray01"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/tv_createthunder_howmany"
                         app:layout_constraintTop_toBottomOf="@+id/tv_createthunder_howmany" />
@@ -308,9 +310,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
-                            android:text="@string/no_constraint"
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
+                            android:text="@string/no_constraint"
                             android:textColor="@color/gray_gray01"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@+id/iv_createthunder_check"
@@ -373,28 +375,28 @@
                             android:id="@+id/tv_createthunder_current_photo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:layout_marginBottom="27dp"
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
-                            android:textSize="14sp"
+                            android:text="0"
                             android:textColor="@color/gray_gray01"
-                            android:layout_marginBottom="27dp"
+                            android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_slash"
+                            app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/iv_createthunder_camera"
-                            app:layout_constraintVertical_chainStyle="packed"
-                            app:layout_constraintHorizontal_chainStyle="packed"/>
+                            app:layout_constraintVertical_chainStyle="packed" />
 
                         <TextView
                             android:id="@+id/tv_createthunder_slash"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="/"
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
-                            android:textSize="14sp"
+                            android:text="/"
                             android:textColor="@color/gray_gray01"
+                            android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_createthunder_current_photo"
                             app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_max_photo"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -405,11 +407,11 @@
                             android:id="@+id/tv_createthunder_max_photo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1"
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
-                            android:textSize="14sp"
+                            android:text="3"
                             android:textColor="@color/gray_gray01"
+                            android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_createthunder_slash"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -418,6 +420,16 @@
                             app:layout_constraintTop_toBottomOf="@+id/iv_createthunder_camera" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_createthunder_photo_container"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="@id/cl_createthunder_photo"
+                        app:layout_constraintEnd_toEndOf="@id/iv_createthunder_go"
+                        app:layout_constraintStart_toStartOf="@id/iv_createthunder_do"
+                        app:layout_constraintTop_toTopOf="@id/cl_createthunder_photo"
+                        tools:listitem="2" />
 
                     <EditText
                         android:id="@+id/et_createthunder_explanation"
@@ -431,12 +443,12 @@
                         android:gravity="top"
                         android:hint="@string/createthunder_explaination"
                         android:includeFontPadding="false"
+                        android:minLines="11"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="20dp"
                         android:textColor="@color/gray_black"
                         android:textColorHint="@color/gray_gray01"
                         android:textSize="14sp"
-                        android:minLines="11"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/cl_createthunder_photo"

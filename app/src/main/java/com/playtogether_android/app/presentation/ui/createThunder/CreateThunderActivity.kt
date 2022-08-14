@@ -1,9 +1,11 @@
 package com.playtogether_android.app.presentation.ui.createThunder
 
+import android.Manifest
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,13 +13,21 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
@@ -34,22 +44,43 @@ class CreateThunderActivity :
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var category: String
     private val galleryItemList = mutableListOf<Uri>()
-    private lateinit var launcher: ActivityResultLauncher<Intent>
+    private lateinit var intentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var photoListAdapter: CreateThunderPhotoListAdapter
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                Timber.d("권한 승인")
+                uploadImageListener()
+            } else
+                shortToast("권한요청이 거절되었습니다.")
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTextChangeListener()
+        setClickListener()
+        uploadImageCallbackListener()
+    }
+
+    private fun initAdapter(list: MutableList<Uri>) {
+        photoListAdapter = CreateThunderPhotoListAdapter(list)
+        binding.rvCreatethunderPhotoContainer.layoutManager =
+            GridLayoutManager(this, 2, LinearLayout.VERTICAL, false)
+//todo 스크롤이 원하는 방향으로 가지 않는다.
+        binding.rvCreatethunderPhotoContainer.adapter = photoListAdapter
+    }
+
+    private fun uploadImageCallbackListener() {
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        launcher = registerForActivityResult(
+        intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-            Timber.d("rere result code: ${it.resultCode}")
-            Timber.d("rere RESULT CODE : ${RESULT_OK}")
-            if (it.resultCode == -1) {
+            if (it.resultCode == RESULT_OK) {
+                Timber.d("resultCode : OK")
                 galleryItemList.clear()
                 if (it.data?.clipData != null) {
                     val count = it.data?.clipData!!.itemCount
-                    Timber.d("rere itemCount: $count")
                     if (count > 3) {
                         shortToast("사진은 최대 3장까지 가능합니다.")
                         return@registerForActivityResult
@@ -66,14 +97,11 @@ class CreateThunderActivity :
                         }
                     }
                 }
-
+                initAdapter(galleryItemList)
+                binding.tvCreatethunderCurrentPhoto.text = galleryItemList.size.toString()
             }
         }
-
-        setTextChangeListener()
-        setClickListener()
     }
-
 
     private fun setTextChangeListener() {
         initDatePickerDialog()
@@ -89,12 +117,29 @@ class CreateThunderActivity :
         clickInfinite()
         clickComplete()
         imageSelected()
-        galleryPermissionListener()
+        uploadPhotoClickListener()
     }
 
-    private fun galleryPermissionListener() {
+    private fun uploadPhotoClickListener() {
         binding.clCreatethunderPhoto.setOnClickListener {
+            aboutPermission()
+        }
+    }
+
+    private fun aboutPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             uploadImageListener()
+            Timber.e("rere permission ok")
+        } else if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 
@@ -103,7 +148,8 @@ class CreateThunderActivity :
             type = MediaStore.Images.Media.CONTENT_TYPE
             data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            launcher.launch(this)
+            setResult(RESULT_OK)
+            intentLauncher.launch(this)
         }
     }
 
@@ -329,6 +375,5 @@ class CreateThunderActivity :
 
     companion object {
         const val MAX_PICTURE_COUNT = 5
-        const val RESULT_OK = 99
     }
 }
