@@ -11,7 +11,7 @@ import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySearchSubwayBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.onboarding.adapter.*
+import com.playtogether_android.app.presentation.ui.onboarding.adapter.SubwayAdapter
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.SubwayListData
@@ -30,6 +30,7 @@ class SearchSubwayActivity :
         getList()
         backBtnListener()
         nullCheck()
+        addListener()
     }
 
 
@@ -127,16 +128,31 @@ class SearchSubwayActivity :
                                 binding.chipSubwayOnboarding.removeView(
                                     this
                                 )
+                                addListener()
                             }
                         })
                     } else {
                         shortToast("최대 2개까지 추가할 수 있어요!")
                     }
-
-
+                    addListener()
                 }
 
             })
     }
+
+
+    //칩 추가 리스너
+    private fun addListener() {
+        val chipList = java.util.ArrayList<String>()
+        for (i: Int in 1..binding.chipSubwayOnboarding.childCount) {
+            val chip: Chip = binding.chipSubwayOnboarding.getChildAt(i - 1) as Chip
+            chipList.add(chip.text.toString())
+
+        }
+        onBoardingViewModel.selectedTags.value = chipList
+        binding.tvIntroOnboardingNext.isSelected = chipList.size != 0
+    }
+
+
 
 }
