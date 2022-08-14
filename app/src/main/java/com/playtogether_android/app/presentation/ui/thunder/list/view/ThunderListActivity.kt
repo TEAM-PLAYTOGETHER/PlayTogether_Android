@@ -24,6 +24,7 @@ class ThunderListActivity :
     private val fragmentList =
         listOf(ThunderEatFragment(), ThunderGoFragment(), ThunderDoFragment())
     val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
+    val test = "test"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.listViewModel = thunderListViewModel
