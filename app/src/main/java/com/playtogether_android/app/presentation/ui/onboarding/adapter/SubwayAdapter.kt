@@ -1,20 +1,17 @@
 package com.playtogether_android.app.presentation.ui.onboarding.adapter
 
-import android.content.Intent
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemOnboardingSubwayBinding
-import com.playtogether_android.app.presentation.ui.onboarding.SearchSubwayActivity
 import com.playtogether_android.domain.model.onboarding.SubwayListData
 import timber.log.Timber
 
 
-class SubwayAdapter() :
+class SubwayAdapter:
     RecyclerView.Adapter<SubwayAdapter.OnboardingListViewHolder>() {
     var dataList = mutableListOf<SubwayListData>()
     var findText = ""
@@ -30,31 +27,36 @@ class SubwayAdapter() :
     }
 
     override fun onBindViewHolder(holder: OnboardingListViewHolder, position: Int) {
-        holder.onBind(dataList[position], makeBold(dataList[position].STATION_NM, findText))
-        holder.itemView.setOnClickListener{
-            val subwayStation  = dataList[position].STATION_NM
-            val subwayLineNum = dataList[position].LINE_NUM
-            Timber.d("SubwayStation : ${dataList[position].STATION_NM}")
-            Timber.d("SubwayLineNume : ${dataList[position].LINE_NUM}")
-
+        holder.onBind(dataList[position])
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
         }
+//        holder.itemView.setOnClickListener{
+//            itemClickListener?.onClick(it, position)
+////            val subwayStation  = dataList[position].STATION_NM
+////            val subwayLineNum = dataList[position].LINE_NUM
+//            Timber.d("SubwayStation : ${dataList[position].STATION_NM}")
+//            Timber.d("SubwayLineNume : ${dataList[position].LINE_NUM}")
+//
+//        }
     }
 
     override fun getItemCount(): Int = dataList.size
 
-    class OnboardingListViewHolder(
+    inner class OnboardingListViewHolder(
         val binding: ItemOnboardingSubwayBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: SubwayListData, text: SpannableStringBuilder) {
+
+        fun onBind(data: SubwayListData) {
             binding.apply {
-                tvSubwayName.text = text
+                //tvSubwayName.text = text
                 subway = data
                 executePendingBindings()
             }
         }
     }
 
-
+/*
     fun makeBold(fulltext: String, findText: String): SpannableStringBuilder {
         val str = SpannableStringBuilder(fulltext)
         val startInt = fulltext.indexOf(findText)
@@ -67,12 +69,14 @@ class SubwayAdapter() :
         )
         return str
     }
-
-    private lateinit var itemClickListener: ItemClickListener
+ */
 
     interface ItemClickListener {
         fun onClick(view: View, position: Int)
     }
+
+    private lateinit var itemClickListener: ItemClickListener
+
 
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListener = itemClickListener
