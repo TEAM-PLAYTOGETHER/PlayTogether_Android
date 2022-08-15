@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.playtogether_android.app.presentation.ui.home.temp.TempData
 import com.playtogether_android.domain.model.home.JoinThunderData
 import com.playtogether_android.domain.model.home.ThunderJoinEndData
 import com.playtogether_android.domain.model.home.ThunderJoinEndMember
@@ -55,37 +54,6 @@ class HomeViewModel @Inject constructor(
 
     private val _newList = MutableLiveData<List<HomeLightningData>>()
     val newList: LiveData<List<HomeLightningData>> = _newList
-
-    val tempList = listOf(
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-        TempData(
-            3,
-            "다들 모여",
-            "잉어",
-            "4/6",
-            "22.05.09 세훈홈 14:00",
-        ),
-    )
 
     fun testData() {
         viewModelScope.launch {
