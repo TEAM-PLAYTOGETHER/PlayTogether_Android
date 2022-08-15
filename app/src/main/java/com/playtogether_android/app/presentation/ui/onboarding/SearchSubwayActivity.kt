@@ -16,7 +16,6 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.SubwayListData
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -98,7 +97,6 @@ class SearchSubwayActivity :
         subwayAdapter = SubwayAdapter()
         binding.rvOnboardingSubway.adapter = subwayAdapter
         subwayAdapter.findText = text1
-        Timber.d("TEST : ${subwayAdapter.findText}")
         subwayAdapter.setCrewList(tmpList)
 
         //adpater 클릭 리스너
@@ -107,7 +105,33 @@ class SearchSubwayActivity :
                 @SuppressLint("ResourceAsColor")
                 override fun onClick(view: View, position: Int) {
                     val subwayName = subwayAdapter.dataList[position].STATION_NM
-                    val subwayLine = subwayAdapter.dataList[position].LINE_NUM
+                    var subwayLine = subwayAdapter.dataList[position].LINE_NUM
+
+                    if(subwayLine.contains("0")) {
+                        subwayLine = subwayLine.replace("0","")
+                    }
+                    else if(subwayLine == "경의선") {
+                        subwayLine = subwayLine.replace("경의선","경의중앙선")
+                    }
+                    else if(subwayLine == "인천선") {
+                        subwayLine = subwayLine.replace("인천선","인천1호선")
+                    }
+                    else if(subwayLine == "우이신설경전철") {
+                        subwayLine = subwayLine.replace("우이신설경전철","우이신설선")
+                    }
+                    else if(subwayLine == "북한산우이") {
+                        subwayLine = subwayLine.replace("북한산우이","우이신설선")
+                    }
+                    else if(subwayLine == "김포공항") {
+                        subwayLine = subwayLine.replace("김포공항","김포골드라인")
+                    }
+                    else if(subwayLine=="김포도시철도"){
+                        subwayLine = subwayLine.replace("김포도시철도","김포골드라인")
+                    }
+                    else if(subwayLine=="용인경전철"){
+                        subwayLine = subwayLine.replace("용인경전철","에버라인")
+                    }
+
 
                     //칩버튼 커스텀
                     if (binding.chipSubwayOnboarding.childCount < 2) {
