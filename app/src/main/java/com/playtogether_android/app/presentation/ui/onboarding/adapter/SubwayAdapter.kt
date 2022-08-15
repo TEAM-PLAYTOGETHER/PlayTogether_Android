@@ -31,14 +31,6 @@ class SubwayAdapter:
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }
-//        holder.itemView.setOnClickListener{
-//            itemClickListener?.onClick(it, position)
-////            val subwayStation  = dataList[position].STATION_NM
-////            val subwayLineNum = dataList[position].LINE_NUM
-//            Timber.d("SubwayStation : ${dataList[position].STATION_NM}")
-//            Timber.d("SubwayLineNume : ${dataList[position].LINE_NUM}")
-//
-//        }
     }
 
     override fun getItemCount(): Int = dataList.size
@@ -56,7 +48,7 @@ class SubwayAdapter:
         }
     }
 
-/*
+
     fun makeBold(fulltext: String, findText: String): SpannableStringBuilder {
         val str = SpannableStringBuilder(fulltext)
         val startInt = fulltext.indexOf(findText)
@@ -69,7 +61,7 @@ class SubwayAdapter:
         )
         return str
     }
- */
+
 
     interface ItemClickListener {
         fun onClick(view: View, position: Int)

@@ -32,7 +32,7 @@ class SearchSubwayActivity :
         nullCheck()
         addBtnClickListener()
         initSetting()
-
+        activeBtn()
     }
 
 
@@ -107,13 +107,12 @@ class SearchSubwayActivity :
                     val subwayName = subwayAdapter.dataList[position].STATION_NM
                     val subwayLine = subwayAdapter.dataList[position].LINE_NUM
 
+                    //칩버튼 커스텀
                     if (binding.chipSubwayOnboarding.childCount < 2) {
                         binding.chipSubwayOnboarding.addView(Chip(this@SearchSubwayActivity).apply {
                             val string = "$subwayName $subwayLine"
                             text = string
-
                             setTextColor(getColorStateList(R.color.main_green))
-                            binding.tvIntroOnboardingNext.isSelected = chipList.size > 0
                             isCloseIconVisible = true
                             setCloseIconResource(R.drawable.icn_exit)
                             setCloseIconTintResource(R.color.gray_999999)
@@ -122,15 +121,14 @@ class SearchSubwayActivity :
                                 binding.chipSubwayOnboarding.removeView(
                                     this
                                 )
-                                binding.tvIntroOnboardingNext.isSelected = chipList.size > 0
+                                activeBtn()
                             }
                         })
                     } else {
                         shortToast("최대 2개까지 추가할 수 있어요!")
                     }
-
+                    activeBtn()
                 }
-
             })
     }
 
@@ -140,7 +138,6 @@ class SearchSubwayActivity :
             val chip: Chip = binding.chipSubwayOnboarding.getChildAt(i - 1) as Chip
             chipList.add(chip.text.toString())
         }
-        binding.tvIntroOnboardingNext.isSelected = chipList.size > 0
     }
 
 
@@ -166,7 +163,6 @@ class SearchSubwayActivity :
                 binding.chipSubwayOnboarding.addView(chip)
             }
         }
-
         binding.ivSubwayOnboardingBack.setOnClickListener {
             val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
             if (list != null) {
@@ -178,8 +174,6 @@ class SearchSubwayActivity :
             startActivity(intent)
             finish()
         }
-
-
     }
 
     private fun addBtnClickListener() {
@@ -190,6 +184,10 @@ class SearchSubwayActivity :
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun activeBtn() {
+        binding.tvIntroOnboardingNext.isSelected = binding.chipSubwayOnboarding.childCount > 0
     }
 
 }
