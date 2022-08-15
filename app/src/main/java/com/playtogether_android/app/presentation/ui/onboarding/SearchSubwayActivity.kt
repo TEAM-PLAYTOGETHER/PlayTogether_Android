@@ -28,25 +28,17 @@ class SearchSubwayActivity :
 
     private val chipList = java.util.ArrayList<String>()
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()
-    private val mainViewModel : MainViewModel by viewModels()
     private lateinit var subwayAdapter: SubwayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getList()
-        backBtnListener()
         nullCheck()
         addBtnClickListener()
+        initSetting()
+
     }
 
-
-    private fun backBtnListener() {
-        binding.ivSubwayOnboardingBack.setOnClickListener {
-            val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
 
     private fun initTextFieldCheck() {
         if (binding.etSubwayOnboardingName.text.toString() != "") {
@@ -125,7 +117,7 @@ class SearchSubwayActivity :
                             text = string
 
                             setTextColor(getColorStateList(R.color.main_green))
-
+                            binding.tvIntroOnboardingNext.isSelected = chipList.size > 0
                             isCloseIconVisible = true
                             setCloseIconResource(R.drawable.icn_exit)
                             setCloseIconTintResource(R.color.gray_999999)
@@ -134,7 +126,7 @@ class SearchSubwayActivity :
                                 binding.chipSubwayOnboarding.removeView(
                                     this
                                 )
-
+                                binding.tvIntroOnboardingNext.isSelected = chipList.size > 0
                             }
                         })
                     } else {
@@ -146,10 +138,49 @@ class SearchSubwayActivity :
             })
     }
 
+
     private fun addListener() {
         for (i: Int in 1..binding.chipSubwayOnboarding.childCount) {
             val chip: Chip = binding.chipSubwayOnboarding.getChildAt(i - 1) as Chip
             chipList.add(chip.text.toString())
+        }
+        binding.tvIntroOnboardingNext.isSelected = chipList.size > 0
+    }
+
+
+    private fun initSetting() {
+        val list = intent.getStringArrayListExtra("TEST")
+
+        if (list?.size != null) {
+            for (i in 0 until list.size) {
+                val chip = Chip(binding.chipSubwayOnboarding.context).apply {
+                    text = list[i]
+                    setTextColor(getColorStateList(R.color.main_green))
+
+                    isCloseIconVisible = true
+                    setCloseIconResource(R.drawable.icn_exit)
+                    setCloseIconTintResource(R.color.gray_999999)
+                    chipBackgroundColor = getColorStateList(R.color.black)
+                    setOnCloseIconClickListener {
+                        binding.chipSubwayOnboarding.removeView(
+                            this
+                        )
+                    }
+                }
+                binding.chipSubwayOnboarding.addView(chip)
+            }
+        }
+
+        binding.ivSubwayOnboardingBack.setOnClickListener {
+            val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+            if (list != null) {
+                if(list.size != 0 ) {
+                    intent.putExtra("TEST", list)
+                }
+            }
+
+            startActivity(intent)
+            finish()
         }
 
 

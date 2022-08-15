@@ -4,18 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import androidx.activity.viewModels
 import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
-import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
-import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -24,8 +20,9 @@ import java.util.regex.Pattern
 @AndroidEntryPoint
 class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
 
+    private val mainViewModel: MainViewModel by viewModels()
     private val signViewModel: SignViewModel by viewModels()
-    private val mainViewModel : MainViewModel by viewModels()
+    private val chipList = java.util.ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +38,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         setChipBtn()
 
     }
+
 
     private fun nextBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
@@ -182,7 +180,12 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
 
     private fun subwayBtnListener() {
         binding.tvOpenOnboardingAdd.setOnClickListener {
+            for (i: Int in 1..binding.chipMypage.childCount) {
+                val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
+                chipList.add(chip.text.toString())
+            }
             val intent = Intent(this, SearchSubwayActivity::class.java)
+            intent.putExtra("TEST", chipList)
             startActivity(intent)
             finish()
         }
@@ -191,7 +194,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
     //칩버튼 관리
     private fun setChipBtn() {
         val list = intent.getStringArrayListExtra("TEST")
-
+        Timber.d("2222222222 $list")
         if(list?.size != null) {
             binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
             for(i in 0 until list.size) {
