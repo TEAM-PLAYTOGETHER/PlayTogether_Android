@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="createThunderViewModel"
+            type="com.playtogether_android.app.presentation.ui.createThunder.CreateThunderViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -378,7 +381,7 @@
                             android:layout_marginBottom="27dp"
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
-                            android:text="0"
+                            android:text="@{String.valueOf(createThunderViewModel.photoList.size())}"
                             android:textColor="@color/gray_gray01"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -425,9 +428,11 @@
                         android:id="@+id/rv_createthunder_photo_container"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="@id/cl_createthunder_photo"
-                        app:layout_constraintEnd_toEndOf="@id/iv_createthunder_go"
-                        app:layout_constraintStart_toStartOf="@id/iv_createthunder_do"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toTopOf="@id/et_createthunder_explanation"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/cl_createthunder_photo"
                         app:layout_constraintTop_toTopOf="@id/cl_createthunder_photo"
                         tools:listitem="2" />
 

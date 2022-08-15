@@ -19,16 +19,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
+import com.playtogether_android.app.util.SpacesItemDecorationPhoto
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,17 +53,29 @@ class CreateThunderActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.createThunderViewModel = createThunderViewModel
+        binding.lifecycleOwner = this
+        initAdapter()
         setTextChangeListener()
         setClickListener()
         uploadImageCallbackListener()
     }
 
-    private fun initAdapter(list: MutableList<Uri>) {
-        photoListAdapter = CreateThunderPhotoListAdapter(list)
-        binding.rvCreatethunderPhotoContainer.layoutManager =
-            GridLayoutManager(this, 2, LinearLayout.VERTICAL, false)
-//todo 스크롤이 원하는 방향으로 가지 않는다.
-        binding.rvCreatethunderPhotoContainer.adapter = photoListAdapter
+    private fun initAdapter() {
+        photoListAdapter = CreateThunderPhotoListAdapter(createThunderViewModel)
+        //todo 스크롤이 원하는 방향으로 가지 않는다.
+
+        createThunderViewModel.photoList.observe(this) {
+            photoListAdapter.mutablePhotoList = it
+            photoListAdapter.notifyDataSetChanged()
+        }
+
+        with(binding.rvCreatethunderPhotoContainer) {
+            layoutManager =
+                GridLayoutManager(this@CreateThunderActivity, 2, LinearLayout.VERTICAL, false)
+            adapter = photoListAdapter
+            addItemDecoration(SpacesItemDecorationPhoto())
+        }
     }
 
     private fun uploadImageCallbackListener() {
@@ -97,8 +105,8 @@ class CreateThunderActivity :
                         }
                     }
                 }
-                initAdapter(galleryItemList)
-                binding.tvCreatethunderCurrentPhoto.text = galleryItemList.size.toString()
+                Timber.e("rere list : $galleryItemList")
+                createThunderViewModel.setPhotoList(galleryItemList)
             }
         }
     }

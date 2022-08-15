@@ -10,7 +10,7 @@ import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
-import com.playtogether_android.app.util.SpaceItemDecorationVertical
+import com.playtogether_android.app.util.SpaceItemDecoration
 import timber.log.Timber
 
 class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.fragment_thunder_eat) {
@@ -41,7 +41,7 @@ class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.frag
 
         with(binding.rvThundereatContainer) {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceItemDecorationVertical())
+            addItemDecoration(SpaceItemDecoration(0,10,0,0))
             adapter = listAdapter
         }
     }
