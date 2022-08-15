@@ -1,14 +1,15 @@
 package com.playtogether_android.app.presentation.ui.onboarding.adapter
 
+import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemOnboardingSubwayBinding
 import com.playtogether_android.domain.model.onboarding.SubwayListData
-import timber.log.Timber
 
 
 class SubwayAdapter:
@@ -27,7 +28,7 @@ class SubwayAdapter:
     }
 
     override fun onBindViewHolder(holder: OnboardingListViewHolder, position: Int) {
-        holder.onBind(dataList[position])
+        holder.onBind(dataList[position], makeBold(dataList[position].STATION_NM, findText))
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }
@@ -39,9 +40,9 @@ class SubwayAdapter:
         val binding: ItemOnboardingSubwayBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(data: SubwayListData) {
+        fun onBind(data: SubwayListData, text: SpannableStringBuilder) {
             binding.apply {
-                //tvSubwayName.text = text
+                tvSubwayName.text = text
                 subway = data
                 executePendingBindings()
             }
@@ -54,7 +55,7 @@ class SubwayAdapter:
         val startInt = fulltext.indexOf(findText)
         val endInt = startInt + findText.length
         str.setSpan(
-            android.text.style.StyleSpan(android.graphics.Color.RED),
+            ForegroundColorSpan(Color.parseColor("#2C77D4")),
             startInt,
             endInt,
             Spannable.SPAN_INCLUSIVE_EXCLUSIVE

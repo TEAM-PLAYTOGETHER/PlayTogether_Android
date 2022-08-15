@@ -16,6 +16,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.SubwayListData
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -96,7 +97,8 @@ class SearchSubwayActivity :
         }
         subwayAdapter = SubwayAdapter()
         binding.rvOnboardingSubway.adapter = subwayAdapter
-        //subwayAdapter.findText = text
+        subwayAdapter.findText = text1
+        Timber.d("TEST : ${subwayAdapter.findText}")
         subwayAdapter.setCrewList(tmpList)
 
         //adpater 클릭 리스너
