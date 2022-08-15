@@ -10,17 +10,14 @@ import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
 
-    private val mainViewModel: MainViewModel by viewModels()
     private val signViewModel: SignViewModel by viewModels()
     private val chipList = java.util.ArrayList<String>()
 
@@ -82,13 +79,8 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if (!Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())) {
-            tvSignupmainIdDuplication.isSelected = false
-            Timber.d("정규식 맞지 않음")
-        } else {
-            tvSignupmainIdDuplication.isSelected = true
-            Timber.d("정규식 맞지 않음")
-        }
+        tvSignupmainIdDuplication.isSelected =
+            Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())
     }
 
 
@@ -185,7 +177,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
                 chipList.add(chip.text.toString())
             }
             val intent = Intent(this, SearchSubwayActivity::class.java)
-            intent.putExtra("TEST", chipList)
+            intent.putExtra("ChipList", chipList)
             startActivity(intent)
             finish()
         }
@@ -193,8 +185,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
 
     //칩버튼 관리
     private fun setChipBtn() {
-        val list = intent.getStringArrayListExtra("TEST")
-        Timber.d("2222222222 $list")
+        val list = intent.getStringArrayListExtra("ChipList")
         if(list?.size != null) {
             binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
             for(i in 0 until list.size) {

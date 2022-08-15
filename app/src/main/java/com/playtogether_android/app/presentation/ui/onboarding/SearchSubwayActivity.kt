@@ -5,21 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySearchSubwayBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.main.viewmodel.MainViewModel
-import com.playtogether_android.app.presentation.ui.onboarding.adapter.*
+import com.playtogether_android.app.presentation.ui.onboarding.adapter.SubwayAdapter
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.SubwayListData
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -149,7 +145,7 @@ class SearchSubwayActivity :
 
 
     private fun initSetting() {
-        val list = intent.getStringArrayListExtra("TEST")
+        val list = intent.getStringArrayListExtra("ChipList")
 
         if (list?.size != null) {
             for (i in 0 until list.size) {
@@ -175,7 +171,7 @@ class SearchSubwayActivity :
             val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
             if (list != null) {
                 if(list.size != 0 ) {
-                    intent.putExtra("TEST", list)
+                    intent.putExtra("ChipList", list)
                 }
             }
 
@@ -190,7 +186,7 @@ class SearchSubwayActivity :
         binding.tvIntroOnboardingNext.setOnClickListener {
             addListener()
             val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-            intent.putExtra("TEST", chipList)
+            intent.putExtra("ChipList", chipList)
             startActivity(intent)
             finish()
         }
