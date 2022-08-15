@@ -28,7 +28,7 @@ class SubwayAdapter:
     }
 
     override fun onBindViewHolder(holder: OnboardingListViewHolder, position: Int) {
-        holder.onBind(dataList[position], makeBold(dataList[position].STATION_NM, findText))
+        holder.onBind(dataList[position], colorChange(dataList[position].STATION_NM, findText))
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }
@@ -50,7 +50,7 @@ class SubwayAdapter:
     }
 
 
-    fun makeBold(fulltext: String, findText: String): SpannableStringBuilder {
+    private fun colorChange(fulltext: String, findText: String): SpannableStringBuilder {
         val str = SpannableStringBuilder(fulltext)
         val startInt = fulltext.indexOf(findText)
         val endInt = startInt + findText.length
