@@ -11,6 +11,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
@@ -33,6 +34,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         nextBtnClickListener()
         subwayBtnListener()
         setChipBtn()
+
 
     }
 
@@ -172,16 +174,23 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
 
     private fun subwayBtnListener() {
         binding.tvOpenOnboardingAdd.setOnClickListener {
-            for (i: Int in 1..binding.chipMypage.childCount) {
-                val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
-                chipList.add(chip.text.toString())
+            if (binding.tvOpenOnboardingAdd.isSelected) {
+                shortToast("최대 2개까지 추가할 수 있어요!")
+            } else {
+                for (i: Int in 1..binding.chipMypage.childCount) {
+                    val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
+                    chipList.add(chip.text.toString())
+                }
+                val intent = Intent(this, SearchSubwayActivity::class.java)
+                intent.putExtra("ChipList", chipList)
+                startActivity(intent)
+                finish()
             }
-            val intent = Intent(this, SearchSubwayActivity::class.java)
-            intent.putExtra("ChipList", chipList)
-            startActivity(intent)
-            finish()
+
+
         }
     }
+
 
     //칩버튼 관리
     private fun setChipBtn() {
@@ -201,14 +210,22 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
                         binding.chipMypage.removeView(
                             this
                         )
+                        addBtnListener()
 
                     }
                 }
                 binding.chipMypage.addView(chip)
+                addBtnListener()
             }
         } else {
             binding.clOpenOnboardingPltoSubway.visibility = View.VISIBLE
         }
+    }
+
+
+    //칩버튼 추가하기
+    private fun addBtnListener() {
+        binding.tvOpenOnboardingAdd.isSelected = binding.chipMypage.childCount == 2
     }
 
 }

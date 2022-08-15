@@ -290,7 +290,7 @@
                 android:paddingEnd="11dp"
                 android:paddingBottom="4dp"
                 android:text="@string/onboarding_intro_add"
-                android:textColor="@color/gray_gray01"
+                android:textColor="@drawable/selector_text_gray01_to_gray03"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
