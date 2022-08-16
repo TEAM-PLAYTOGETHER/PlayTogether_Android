@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderListBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -14,6 +16,10 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_DO
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_GO
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT_KR
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.LIKECNT_KR
+import com.playtogether_android.app.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +30,7 @@ class ThunderListActivity :
     private val fragmentList =
         listOf(ThunderEatFragment(), ThunderGoFragment(), ThunderDoFragment())
     val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
-    val test = "test"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.listViewModel = thunderListViewModel
@@ -56,9 +62,16 @@ class ThunderListActivity :
             height = resources.getDimension(R.dimen.fab_size).toInt()
         }
         initFragment()
+        initTabLayout()
         setClickListener()
         setCategory()
         setUpdateCategory()
+    }
+
+    private fun initTabLayout() {
+        val tab = binding.tlThunderlistTabContainer
+        tab.addTab(tab.newTab().setText(DEFAULT_SORT_KR))
+        tab.addTab(tab.newTab().setText(LIKECNT_KR))
     }
 
     private fun setPreButtonClick() {
@@ -114,9 +127,9 @@ class ThunderListActivity :
             getLightCategoryList(CATEGORY_DO)
         }
 
-        thunderListViewModel.sortType.observe(this) {
-            binding.tvThunderlistSortType.text = thunderListViewModel.setSortType(it)
-        }
+//        thunderListViewModel.sortType.observe(this) {
+//            binding.tvThunderlistSortType.text = thunderListViewModel.setSortType(it)
+//        }
     }
 
     private fun setBackButtonListener() {

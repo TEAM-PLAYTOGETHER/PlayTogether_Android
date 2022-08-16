@@ -188,4 +188,19 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
+<!--    tablayout style-->
+    <style name="tab_item_selected">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/gray_gray01</item>
+        <item name="lineHeight">14dp</item>
+    </style>
+
+    <style name="tab_item_unselected">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/gray_gray02</item>
+        <item name="lineHeight">14dp</item>
+    </style>
+
 </resources>

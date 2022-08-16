@@ -12,7 +12,8 @@ import com.playtogether_android.app.util.ListComparator
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
-class HomeNewAdapter : ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListComparator<CategoryData>()) {
+class HomeNewAdapter :
+    ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemHomeNewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: CategoryData) {
@@ -45,23 +46,6 @@ class HomeNewAdapter : ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(List
             }
         }
         holder.onBind(item)
-    }
-
-    class HomeComparator : DiffUtil.ItemCallback<CategoryData>() {
-        override fun areItemsTheSame(
-            oldItem: CategoryData,
-            newItem: CategoryData
-        ): Boolean {
-            return oldItem.lightId == newItem.lightId
-        }
-
-        override fun areContentsTheSame(
-            oldItem: CategoryData,
-            newItem: CategoryData
-        ): Boolean {
-            return oldItem == newItem
-        }
-
     }
 
 }
