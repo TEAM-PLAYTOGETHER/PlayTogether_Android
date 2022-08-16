@@ -4,7 +4,6 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
@@ -15,7 +14,7 @@ import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
 class ThunderCategoryListItemAdapter :
-    ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListComparator()) {
+    ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: CategoryData) {

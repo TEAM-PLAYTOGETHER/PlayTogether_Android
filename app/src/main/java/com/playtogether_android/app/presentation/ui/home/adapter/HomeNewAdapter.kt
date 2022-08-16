@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeNewBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.util.ListComparator
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
-class HomeNewAdapter : ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(HomeComparator()) {
+class HomeNewAdapter : ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemHomeNewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: CategoryData) {
