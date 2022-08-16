@@ -79,6 +79,9 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    //sercurity
+    implementation ("androidx.security:security-crypto-ktx:1.1.0-alpha03")
+
     //kakao login
     implementation("com.kakao.sdk:v2-user:2.9.0")
 
@@ -123,6 +126,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation ("androidx.security:security-crypto:1.1.0-alpha03")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
 
 // Navigation

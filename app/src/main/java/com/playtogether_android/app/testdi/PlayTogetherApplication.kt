@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import com.playtogether_android.app.util.PixelRatio
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -28,7 +29,7 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
         super.onCreate()
         registerActivityLifecycleCallbacks(this)
         initLogger()
-
+        PlayTogetherRepository.init(this)
 //        startKoin {
 //            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
 //            androidContext(this@PlayTogetherApplication)
