@@ -33,4 +33,12 @@ class OnBoardingRepositoryImpl(
             onBoardingDataSource.getListCrew()
         )
     }
+
+    override suspend fun getNickNameDuplication(
+        crewId: Int,
+        nickname: String
+    ): NickNameDuplicationData {
+        return OnBoardingMapper.mapperToNicknameDuplication(onBoardingDataSource.getNickNameDuplication(crewId, nickname))
+    }
+
 }

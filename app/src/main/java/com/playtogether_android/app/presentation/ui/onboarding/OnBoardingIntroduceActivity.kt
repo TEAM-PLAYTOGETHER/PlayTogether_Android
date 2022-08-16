@@ -16,6 +16,7 @@ import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
@@ -28,18 +29,14 @@ class OnBoardingIntroduceActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         backBtnListener()
-        nullCheck()
         nameTextWatcher()
         introTextWatcher()
         initSetting()
-        duplicationClickEvent()
         nextBtnClickListener()
         subwayBtnListener()
         setChipBtn()
-
-
+        nullCheck()
     }
 
 
@@ -93,8 +90,8 @@ class OnBoardingIntroduceActivity :
     //중복확인 버튼 클릭
     private fun duplicationClickEvent() {
         binding.tvSignupmainIdDuplication.setOnClickListener {
-            if (binding.tvSignupmainIdDuplication.isSelected) {
-                idDuplicationCheck()
+            if(binding.tvSignupmainIdDuplication.isSelected) {
+                nicknameDuplicationCheck()
             }
         }
     }
@@ -166,11 +163,11 @@ class OnBoardingIntroduceActivity :
             override fun afterTextChanged(p0: Editable?) {
                 val id = p0.toString()
                 binding.tvSignupmainIdDuplication.setOnClickListener {
-                        onBoardingViewModel.userId.value = p0.toString()
+                    onBoardingViewModel.userId.value = p0.toString()
                 }
 
                 val userId = onBoardingViewModel.userId.value
-                if(userId != etIntroOnboardingName.text.toString()) {
+                if (userId != etIntroOnboardingName.text.toString()) {
                     tvIntroOnboardingWarn.visibility = View.INVISIBLE
                     tvIntroOnboardingApprove.visibility = View.INVISIBLE
                 }
@@ -178,6 +175,8 @@ class OnBoardingIntroduceActivity :
                 etIntroOnboardingName.isSelected = etIntroOnboardingName.text.toString() != ""
                 initTextFieldCheck()
                 //isVaildRegistrationId()
+
+                duplicationClickEvent()
             }
         })
     }
@@ -223,9 +222,9 @@ class OnBoardingIntroduceActivity :
     //칩버튼 관리
     private fun setChipBtn() {
         val list = intent.getStringArrayListExtra("ChipList")
-        if(list?.size != null) {
+        if (list?.size != null) {
             binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
-            for(i in 0 until list.size) {
+            for (i in 0 until list.size) {
                 val chip = Chip(binding.chipMypage.context).apply {
                     text = list[i]
                     setTextColor(getColorStateList(R.color.main_green))
@@ -255,10 +254,27 @@ class OnBoardingIntroduceActivity :
     private fun addBtnListener() {
         binding.tvOpenOnboardingAdd.isSelected = binding.chipMypage.childCount == 2
 
-        if(binding.chipMypage.childCount == 0) {
+        if (binding.chipMypage.childCount == 0) {
             binding.tvOnboardingPlto.visibility = View.VISIBLE
         } else {
             binding.tvOnboardingPlto.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun nicknameDuplicationCheck() {
+        val nickname : String = binding.etIntroOnboardingName.text.toString()
+
+        //TODO : crewId 고정값 취소
+        onBoardingViewModel.getNickNameDuplication(1, "$nickname")
+        onBoardingViewModel.nickNameDuplication.observe(this) {
+            Timber.d("Test NickName Duplication : $it")
+            if(it.success) {
+                binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
+                binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
+            } else {
+                binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
+                binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
+            }
         }
     }
 

@@ -3,10 +3,7 @@ package com.playtogether_android.app.presentation.ui.onboarding.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.playtogether_android.domain.model.onboarding.*
-import com.playtogether_android.domain.usecase.onboarding.GetCrewListUseCase
-import com.playtogether_android.domain.usecase.onboarding.GetSubwayListUseCase
-import com.playtogether_android.domain.usecase.onboarding.PostMakeCrewUseCase
-import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
+import com.playtogether_android.domain.usecase.onboarding.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -18,7 +15,8 @@ class OnBoardingViewModel @Inject constructor(
     val postRegisterCrewUseCase: PostRegisterCrewUseCase,
     val postMakeCrewUseCase: PostMakeCrewUseCase,
     val getCrewListUseCase: GetCrewListUseCase,
-    val getSubwayListUseCase: GetSubwayListUseCase
+    val getSubwayListUseCase: GetSubwayListUseCase,
+    val getNicknameDuplicationUseCase: GetNicknameDuplicationUseCase
 
 ) : ViewModel() {
 
@@ -31,6 +29,11 @@ class OnBoardingViewModel @Inject constructor(
 
 
     var searchingWord = MutableLiveData<String>()
+
+    //동아리 닉네임 체크
+    private val _nickNameDuplication = MutableLiveData<NickNameDuplicationData>()
+    val nickNameDuplication: LiveData<NickNameDuplicationData>
+        get() = _nickNameDuplication
 
     //동아리 리스트
     private val _getCrewList = MutableLiveData<CrewListData>()
@@ -152,5 +155,19 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
+    //닉네임 중복 체크
+    fun getNickNameDuplication(crewId: Int, nickname : String) {
+        viewModelScope.launch {
+            kotlin.runCatching { getNicknameDuplicationUseCase(crewId, nickname)}
+                .onSuccess {
+                    _nickNameDuplication.value = it
+                    Timber.d("닉네임 중복 체크 : 성공")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("닉네임 중복 체크 : 실패")
+                }
+        }
+    }
 
 }

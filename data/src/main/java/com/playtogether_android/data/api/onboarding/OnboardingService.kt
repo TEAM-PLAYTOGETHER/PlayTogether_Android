@@ -3,14 +3,8 @@ package com.playtogether_android.data.api.onboarding
 
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
-import com.playtogether_android.data.model.response.onboarding.ResponseGetList
-import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
-import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
-import com.playtogether_android.data.model.response.onboarding.ResponseSubwayList
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import com.playtogether_android.data.model.response.onboarding.*
+import retrofit2.http.*
 
 interface OnboardingService {
     //아이디 중복확인
@@ -28,6 +22,13 @@ interface OnboardingService {
     //가입한 동아리 리스트
     @GET("crew/list")
     suspend fun getCrewList() : ResponseGetList
+
+    //유저 닉네임 중복확인
+    @GET("user/crew/{crewId}")
+    suspend fun getNickNameDuplication(
+        @Path("crewId") crewId : Int,
+        @Query("nickname") nickname : String
+    ) : ResponseGetNickNameDuplication
 
 
 
