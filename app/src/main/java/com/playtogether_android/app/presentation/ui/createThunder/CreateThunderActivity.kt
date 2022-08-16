@@ -161,6 +161,14 @@ class CreateThunderActivity :
         }
     }
 
+    private fun transferImage(list: List<Uri>): List<String> {
+        val mut = mutableListOf<String>()
+        list.forEach {
+            mut.add(it.toString())
+        }
+        return mut
+    }
+
     private fun clickComplete() {
         binding.tvCreatethunderFinish.setOnClickListener {
             val date = binding.tvCreatethunderDate.text.toString().replace(".", "-")
@@ -168,6 +176,7 @@ class CreateThunderActivity :
             val title = binding.etCreatethunderName.text.toString()
             val place = binding.etCreatethunderPlace.text.toString()
             var peopleCnt = 0
+            val image = transferImage(photoListAdapter.mutablePhotoList)
             if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
                 peopleCnt = -1
             else
@@ -181,7 +190,8 @@ class CreateThunderActivity :
                     time,
                     place,
                     peopleCnt,
-                    description
+                    description,
+                    image
                 )
             )
 //            Log.d("createThunder", title)
