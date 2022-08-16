@@ -42,25 +42,29 @@ class OnBoardingIntroduceActivity :
 
     private fun nextBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
-            val crewName = intent.getStringExtra("crewName")
-            val crewCode = intent.getStringExtra("crewCode")
-            val crewIntroduce = intent.getStringExtra("crewIntro")
+            if (binding.tvIntroOnboardingNext.isSelected) {
+                val crewName = intent.getStringExtra("crewName")
+                val crewCode = intent.getStringExtra("crewCode")
+                val crewIntroduce = intent.getStringExtra("crewIntro")
 
 
-            val name = binding.etIntroOnboardingName.text.toString()
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+                val name = binding.etIntroOnboardingName.text.toString()
+                val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
 
-            intent.putExtra("userName", name)
-            intent.putExtra("crewName", crewName)
-            intent.putExtra("crewCode", crewCode)
-            intent.putExtra("crewIntro", crewIntroduce)
-            startActivity(intent)
-            finish()
+                intent.putExtra("userName", name)
+                intent.putExtra("crewName", crewName)
+                intent.putExtra("crewCode", crewCode)
+                intent.putExtra("crewIntro", crewIntroduce)
+                startActivity(intent)
+                finish()
+            }
+
         }
     }
 
     private fun nextBtnActive() {
-        binding.tvIntroOnboardingNext.isSelected = binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
+        binding.tvIntroOnboardingNext.isSelected =
+            binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
     }
 
     //id 중복체크
@@ -94,7 +98,7 @@ class OnBoardingIntroduceActivity :
     //중복확인 버튼 클릭
     private fun duplicationClickEvent() {
         binding.tvSignupmainIdDuplication.setOnClickListener {
-            if(binding.tvSignupmainIdDuplication.isSelected) {
+            if (binding.tvSignupmainIdDuplication.isSelected) {
                 nicknameDuplicationCheck()
             }
         }
@@ -267,14 +271,14 @@ class OnBoardingIntroduceActivity :
     }
 
     private fun nicknameDuplicationCheck() {
-        val nickname : String = binding.etIntroOnboardingName.text.toString()
+        val nickname: String = binding.etIntroOnboardingName.text.toString()
 
         //TODO : crewId 고정값 취소
         //TODO : duplication 이상함
         onBoardingViewModel.getNickNameDuplication(1, "$nickname")
         onBoardingViewModel.nickNameDuplication.observe(this) {
             Timber.d("Test NickName Duplication : $it")
-            if(it.success) {
+            if (it.success) {
                 binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
             } else {
