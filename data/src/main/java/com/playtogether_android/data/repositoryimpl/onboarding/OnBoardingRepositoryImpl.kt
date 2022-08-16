@@ -5,7 +5,9 @@ import com.playtogether_android.data.mapper.onboarding.OnBoardingMapper
 import com.playtogether_android.domain.model.onboarding.*
 import com.playtogether_android.domain.repository.onboarding.OnBoardingRepository
 
-class OnBoardingRepositoryImpl(private val onBoardingDataSource: OnBoardingDataSource) :
+class OnBoardingRepositoryImpl(
+    private val onBoardingDataSource: OnBoardingDataSource
+) :
     OnBoardingRepository {
 
     override suspend fun postRegisterCrew(registerCrewItem: RegisterCrewItem): RegisterCrewData {

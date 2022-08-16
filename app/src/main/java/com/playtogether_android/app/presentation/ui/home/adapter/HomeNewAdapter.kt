@@ -8,16 +8,24 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeNewBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.domain.model.light.HomeLightningData
+import com.playtogether_android.app.util.ListComparator
+import com.playtogether_android.app.util.stringListBuilder
+import com.playtogether_android.domain.model.light.CategoryData
 
-class HomeNewAdapter : ListAdapter<HomeLightningData, HomeNewAdapter.ViewHolder>(HomeComparator()) {
+class HomeNewAdapter : ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemHomeNewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(item: HomeLightningData) {
+        fun onBind(item: CategoryData) {
             with(binding) {
+                val context = itemView.context
+
                 tvHomenewTitle.text = item.title
-                tvHomenewDate.text = "${item.date} ${item.place} ${item.time}"
-                tvHomenewPeopleCnt.text = "${item.lightMemberCnt}/${item.peopleCnt}"
+                tvHomenewDate.text =
+                    context.stringListBuilder(context, listOf(item.date, item.place, item.time))
+                tvHomenewPeopleCnt.text = context.stringListBuilder(
+                    context,
+                    listOf(item.lightMemberCnt.toString(), "/", item.peopleCnt.toString())
+                )
             }
         }
     }
@@ -32,24 +40,24 @@ class HomeNewAdapter : ListAdapter<HomeLightningData, HomeNewAdapter.ViewHolder>
         val item = getItem(position)
         holder.itemView.setOnClickListener {
             Intent(it.context, ThunderDetailActivity::class.java).apply {
-                putExtra("thunderId", item.id)
+                putExtra("thunderId", item.lightId)
                 it.context.startActivity(this)
             }
         }
         holder.onBind(item)
     }
 
-    class HomeComparator : DiffUtil.ItemCallback<HomeLightningData>() {
+    class HomeComparator : DiffUtil.ItemCallback<CategoryData>() {
         override fun areItemsTheSame(
-            oldItem: HomeLightningData,
-            newItem: HomeLightningData
+            oldItem: CategoryData,
+            newItem: CategoryData
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.lightId == newItem.lightId
         }
 
         override fun areContentsTheSame(
-            oldItem: HomeLightningData,
-            newItem: HomeLightningData
+            oldItem: CategoryData,
+            newItem: CategoryData
         ): Boolean {
             return oldItem == newItem
         }

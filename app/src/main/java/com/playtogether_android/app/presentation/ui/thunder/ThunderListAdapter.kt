@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
-import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
-import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
 
 class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListViewHolder>() {
@@ -42,11 +41,11 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
         val item = _thunderList[position]
         holder.onBind(item)
 
-        if (itemClick != null) {
-            holder.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
-                itemClick?.onClick(it, position, item.lightId)
-            })
-        }
+//        if (itemClick != null) {
+//            holder.binding.llThunderlistItemContainer.setOnClickListener(View.OnClickListener {
+//                itemClick?.onClick(it, position, item.lightId)
+//            })
+//        }
     }
 
     override fun getItemCount(): Int = _thunderList.size
@@ -64,9 +63,9 @@ class ThunderListAdapter : RecyclerView.Adapter<ThunderListAdapter.ThunderListVi
 
         private fun setImageView(category: String): Int {
             when (category) {
-                ThunderCategoryListAdapter.CATEGORY_EAT -> return R.drawable.img_eat_list
-                ThunderCategoryListAdapter.CATEGORY_GO -> return R.drawable.img_go_list
-                ThunderCategoryListAdapter.CATEGORY_DO -> return R.drawable.img_do_list
+                ThunderCategoryListItemAdapter.CATEGORY_EAT -> return R.drawable.img_eat_list
+                ThunderCategoryListItemAdapter.CATEGORY_GO -> return R.drawable.img_go_list
+                ThunderCategoryListItemAdapter.CATEGORY_DO -> return R.drawable.img_do_list
                 else -> return -1
             }
         }

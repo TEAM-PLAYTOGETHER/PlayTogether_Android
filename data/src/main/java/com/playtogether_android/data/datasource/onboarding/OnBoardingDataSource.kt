@@ -5,6 +5,7 @@ import com.playtogether_android.data.model.request.onboarding.RequestRegisterCre
 import com.playtogether_android.data.model.response.onboarding.ResponseGetList
 import com.playtogether_android.data.model.response.onboarding.ResponseMakeCrew
 import com.playtogether_android.data.model.response.onboarding.ResponseRegisterCrew
+import com.playtogether_android.data.model.response.onboarding.ResponseSubwayList
 
 interface OnBoardingDataSource {
 
@@ -16,5 +17,6 @@ interface OnBoardingDataSource {
 
     //동아리 리스트 조회
     suspend fun getListCrew() : ResponseGetList
+
 
 }

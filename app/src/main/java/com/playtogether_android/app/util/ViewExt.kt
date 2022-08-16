@@ -52,3 +52,18 @@ fun Context.imageNullCheck(image: String?, imageView: ImageView) {
             .into(imageView)
     }
 }
+
+fun Context.stringListBuilder(context: Context, stringList: List<String?>): String {
+    val sb = StringBuilder()
+
+    for (it in stringList) {
+        if (it.isNullOrBlank()) {
+            sb.append("미정")
+        } else if (it == "-1") {
+            sb.append(context.getString(R.string.createthunder_infinite))
+        } else {
+            sb.append(it)
+        }
+    }
+    return sb.toString()
+}
