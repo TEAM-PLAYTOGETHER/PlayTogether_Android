@@ -14,7 +14,7 @@ import com.playtogether_android.app.databinding.FragmentThunderDoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
-import com.playtogether_android.app.util.SpaceItemDecorationVertical
+import com.playtogether_android.app.util.SpaceItemDecoration
 import timber.log.Timber
 
 
@@ -46,7 +46,7 @@ class ThunderDoFragment : BaseFragment<FragmentThunderDoBinding>(R.layout.fragme
 
         with(binding.rvThunderdoContainer) {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceItemDecorationVertical())
+            addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
             adapter = listAdapter
         }
     }
