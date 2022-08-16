@@ -10,13 +10,17 @@ data class ResponseLightListCategory(
     val `data`: Data,
 ) {
     data class Data(
+        val lightData: List<LightData>,
+        val limit: Int,
+        val offset: Int,
         val totalCount: Int,
         val totalPage: Int,
-        val lightData: List<LightData>,
     ) {
         data class LightData(
             val category: String,
             val date: String,
+            @SerializedName("is_opened")
+            val isOpened: Boolean,
             @SerializedName("light_id")
             val lightId: Int,
             @SerializedName("LightMemberCnt")

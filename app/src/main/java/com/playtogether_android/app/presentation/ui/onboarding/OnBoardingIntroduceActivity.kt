@@ -5,18 +5,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
-import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
@@ -25,6 +24,7 @@ class OnBoardingIntroduceActivity :
 
     private val signViewModel: SignViewModel by viewModels()
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()
+    private val chipList = java.util.ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +37,11 @@ class OnBoardingIntroduceActivity :
         duplicationClickEvent()
         nextBtnClickListener()
         subwayBtnListener()
+        setChipBtn()
+
 
     }
+
 
     private fun nextBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
@@ -82,13 +85,8 @@ class OnBoardingIntroduceActivity :
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if (!Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())) {
-            tvSignupmainIdDuplication.isSelected = false
-            Timber.d("정규식 맞지 않음")
-        } else {
-            tvSignupmainIdDuplication.isSelected = true
-            Timber.d("정규식 맞지 않음")
-        }
+        tvSignupmainIdDuplication.isSelected =
+            Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())
     }
 
 
@@ -154,7 +152,7 @@ class OnBoardingIntroduceActivity :
                     binding.tvSignupmainIdDuplication.isSelected = false
                     binding.tvSignupmainIdDuplication.isClickable = false
                     binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
-                } else if (name.length > 10 || name.contains(" ")) {
+                } else if (name.length > 10) {
                     binding.tvSignupmainIdDuplication.isSelected = false
                     binding.tvSignupmainIdDuplication.isClickable = false
                     binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#FF0000"))
@@ -204,9 +202,63 @@ class OnBoardingIntroduceActivity :
 
     private fun subwayBtnListener() {
         binding.tvOpenOnboardingAdd.setOnClickListener {
-            val intent = Intent(this, SearchSubwayActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (binding.tvOpenOnboardingAdd.isSelected) {
+                shortToast("최대 2개까지 추가할 수 있어요!")
+            } else {
+                for (i: Int in 1..binding.chipMypage.childCount) {
+                    val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
+                    chipList.add(chip.text.toString())
+                }
+                val intent = Intent(this, SearchSubwayActivity::class.java)
+                intent.putExtra("ChipList", chipList)
+                startActivity(intent)
+                finish()
+            }
+
+
+        }
+    }
+
+
+    //칩버튼 관리
+    private fun setChipBtn() {
+        val list = intent.getStringArrayListExtra("ChipList")
+        if(list?.size != null) {
+            binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
+            for(i in 0 until list.size) {
+                val chip = Chip(binding.chipMypage.context).apply {
+                    text = list[i]
+                    setTextColor(getColorStateList(R.color.main_green))
+
+                    isCloseIconVisible = true
+                    setCloseIconResource(R.drawable.icn_exit)
+                    setCloseIconTintResource(R.color.gray_999999)
+                    chipBackgroundColor = getColorStateList(R.color.black)
+                    setOnCloseIconClickListener {
+                        binding.chipMypage.removeView(
+                            this
+                        )
+                        addBtnListener()
+
+                    }
+                }
+                binding.chipMypage.addView(chip)
+                addBtnListener()
+            }
+        } else {
+            binding.clOpenOnboardingPltoSubway.visibility = View.VISIBLE
+        }
+    }
+
+
+    //칩버튼 추가하기
+    private fun addBtnListener() {
+        binding.tvOpenOnboardingAdd.isSelected = binding.chipMypage.childCount == 2
+
+        if(binding.chipMypage.childCount == 0) {
+            binding.tvOnboardingPlto.visibility = View.VISIBLE
+        } else {
+            binding.tvOnboardingPlto.visibility = View.INVISIBLE
         }
     }
 

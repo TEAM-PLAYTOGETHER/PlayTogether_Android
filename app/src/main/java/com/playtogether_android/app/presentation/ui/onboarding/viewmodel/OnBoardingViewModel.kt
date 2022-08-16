@@ -58,7 +58,6 @@ class OnBoardingViewModel @Inject constructor(
 
     var listAddAll = MutableLiveData<Boolean>(false)
 
-
     //동아리 개설 request
     var requestMakeCrew = MakeCrewItem("", "")
 

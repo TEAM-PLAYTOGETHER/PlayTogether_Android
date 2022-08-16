@@ -1,9 +1,15 @@
 package com.playtogether_android.app.util
 
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
+import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
+import com.playtogether_android.domain.model.light.CategoryData
+import timber.log.Timber
 
 object BindingAdapter {
     @JvmStatic
@@ -34,17 +40,36 @@ object BindingAdapter {
             "인천선" -> imageView.setImageResource(R.drawable.sub_incheon_1)
             "경강선" -> imageView.setImageResource(R.drawable.sub_gyeonggang)
             "경춘선" -> imageView.setImageResource(R.drawable.sub_gyeongchun)
+            "용인경전철" -> imageView.setImageResource(R.drawable.sub_ever)
             else -> imageView.setImageResource(R.drawable.sub_incheon_2)
         }
     }
-}
 
-@BindingAdapter("app:imageSelecter")
-fun bindImageSelecter(editText: EditText, imageView: ImageView) {
-    if (editText.text.isNullOrEmpty()) {
-        imageView.setImageResource(R.drawable.ic_icn_message)
-    } else {
-        imageView.setImageResource(R.drawable.ic_icn_message_black)
+    @BindingAdapter("app:imageSelecter")
+    @JvmStatic
+    fun bindImageSelecter(editText: EditText, imageView: ImageView) {
+        if (editText.text.isNullOrEmpty()) {
+            imageView.setImageResource(R.drawable.ic_icn_message)
+        } else {
+            imageView.setImageResource(R.drawable.ic_icn_message_black)
+        }
+    }
+
+    @BindingAdapter("bindData")
+    @JvmStatic
+    fun bindRecyclerView(
+        recyclerView: RecyclerView,
+        list: List<CategoryData>
+    ) {
+        //최초 연결
+        if (recyclerView.adapter == null) {
+            val adapter = ThunderCategoryListItemAdapter()
+            recyclerView.adapter = adapter
+        }
+
+        val mAdapter = recyclerView.adapter as ThunderCategoryListItemAdapter
+
+        mAdapter.submitList(list.toMutableList())
     }
 }
 
