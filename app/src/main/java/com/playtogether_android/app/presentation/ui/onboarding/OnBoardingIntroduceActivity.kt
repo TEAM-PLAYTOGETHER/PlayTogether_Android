@@ -59,6 +59,10 @@ class OnBoardingIntroduceActivity :
         }
     }
 
+    private fun nextBtnActive() {
+        binding.tvIntroOnboardingNext.isSelected = binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
+    }
+
     //id 중복체크
     private fun idDuplicationCheck() {
         val id = binding.etIntroOnboardingName.text.toString()
@@ -174,9 +178,9 @@ class OnBoardingIntroduceActivity :
 
                 etIntroOnboardingName.isSelected = etIntroOnboardingName.text.toString() != ""
                 initTextFieldCheck()
-                //isVaildRegistrationId()
-
                 duplicationClickEvent()
+                nextBtnActive()
+
             }
         })
     }
@@ -195,6 +199,7 @@ class OnBoardingIntroduceActivity :
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
+                nextBtnActive()
             }
         })
     }
@@ -265,6 +270,7 @@ class OnBoardingIntroduceActivity :
         val nickname : String = binding.etIntroOnboardingName.text.toString()
 
         //TODO : crewId 고정값 취소
+        //TODO : duplication 이상함
         onBoardingViewModel.getNickNameDuplication(1, "$nickname")
         onBoardingViewModel.nickNameDuplication.observe(this) {
             Timber.d("Test NickName Duplication : $it")
@@ -276,6 +282,7 @@ class OnBoardingIntroduceActivity :
                 binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
             }
         }
+        nextBtnActive()
     }
 
 }

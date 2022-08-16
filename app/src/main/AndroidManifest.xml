@@ -46,6 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,6 +59,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewOnBoardingActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
 
         </activity>

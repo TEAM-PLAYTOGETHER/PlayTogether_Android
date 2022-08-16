@@ -20,7 +20,6 @@ class OnBoardingViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-
     // 동아리명
     var crewName = MutableLiveData<String>()
 
@@ -162,6 +161,7 @@ class OnBoardingViewModel @Inject constructor(
                 .onSuccess {
                     _nickNameDuplication.value = it
                     Timber.d("닉네임 중복 체크 : 성공")
+
                 }
                 .onFailure {
                     it.printStackTrace()
