@@ -22,7 +22,8 @@ allprojects {
         mavenCentral()
         //LottieSwipeRefreshLayout
         maven("https://jitpack.io")
-        maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
+        maven("https://devrepo.kakao.com/nexus/content/groups/public/")
+        maven("https://maven.google.com")
     }
 }
 

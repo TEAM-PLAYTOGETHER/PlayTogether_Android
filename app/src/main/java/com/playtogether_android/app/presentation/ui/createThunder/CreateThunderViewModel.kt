@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.createThunder
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,14 @@ class CreateThunderViewModel @Inject constructor(
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()
     val getThunderCreateData: LiveData<GetThunderCreateData> get() = _getThunderCreateData
     val crewId = 56
+
+    private var _photoList = MutableLiveData<MutableList<Uri>>()
+    val photoList: LiveData<MutableList<Uri>> = _photoList
+
+    fun setPhotoList(list: MutableList<Uri>) {
+        _photoList.value = list
+    }
+
     fun postThunderCreate(postThunderCreateData: PostThunderCreateData) {
         viewModelScope.launch {
             kotlin.runCatching { postThunderCreateUseCase(crewId, postThunderCreateData) }
