@@ -1,6 +1,5 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.adapter
 
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.util.ListComparator
+import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
 class ThunderCategoryListItemAdapter :
@@ -21,12 +22,12 @@ class ThunderCategoryListItemAdapter :
             with(binding) {
                 categoryData = data
                 tvThunderItemDate.text =
-                    stringBuilder(
+                    itemView.context.stringListBuilder(
                         itemView.context,
-                        listOf("${data.date} ", "${data.place} ", data.time)
+                        listOf(data.date, data.place, data.time)
                     )
                 tvThunderItemLimitCount.text =
-                    stringBuilder(
+                    itemView.context.stringListBuilder(
                         itemView.context,
                         listOf(
                             PERSON,
@@ -35,9 +36,6 @@ class ThunderCategoryListItemAdapter :
                             data.peopleCnt.toString()
                         )
                     )
-
-//                ivThunderlistImage.setImageResource(setImageView(data.category))
-
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
                     intent.putExtra("thunderId", data.lightId)
@@ -71,30 +69,6 @@ class ThunderCategoryListItemAdapter :
         position: Int
     ) {
         holder.onBind(getItem(position))
-    }
-
-    class ListComparator : DiffUtil.ItemCallback<CategoryData>() {
-        override fun areItemsTheSame(oldItem: CategoryData, newItem: CategoryData): Boolean {
-            return oldItem.lightId == newItem.lightId
-        }
-
-        override fun areContentsTheSame(oldItem: CategoryData, newItem: CategoryData): Boolean {
-            return oldItem == newItem
-        }
-
-    }
-
-    fun stringBuilder(context: Context, stringList: List<String>): String {
-        val sb = StringBuilder()
-
-        for (it in stringList) {
-            if (it == "-1")
-                sb.append(context.getString(R.string.createthunder_infinite))
-            else {
-                sb.append(it)
-            }
-        }
-        return sb.toString()
     }
 
     companion object {
