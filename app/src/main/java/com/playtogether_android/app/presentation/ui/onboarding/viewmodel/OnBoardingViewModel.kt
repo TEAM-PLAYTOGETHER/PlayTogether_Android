@@ -3,10 +3,7 @@ package com.playtogether_android.app.presentation.ui.onboarding.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.playtogether_android.domain.model.onboarding.*
-import com.playtogether_android.domain.usecase.onboarding.GetCrewListUseCase
-import com.playtogether_android.domain.usecase.onboarding.GetSubwayListUseCase
-import com.playtogether_android.domain.usecase.onboarding.PostMakeCrewUseCase
-import com.playtogether_android.domain.usecase.onboarding.PostRegisterCrewUseCase
+import com.playtogether_android.domain.usecase.onboarding.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -18,12 +15,28 @@ class OnBoardingViewModel @Inject constructor(
     val postRegisterCrewUseCase: PostRegisterCrewUseCase,
     val postMakeCrewUseCase: PostMakeCrewUseCase,
     val getCrewListUseCase: GetCrewListUseCase,
-    val getSubwayListUseCase: GetSubwayListUseCase
+    val getSubwayListUseCase: GetSubwayListUseCase,
+    val getNicknameDuplicationUseCase: GetNicknameDuplicationUseCase,
+    val putAddProfileUseCase: PutAddProfileUseCase
 
 ) : ViewModel() {
 
+    //멀티 프로필 등록 put
+    var reqeustMutiProfile = AddProfileItem("", "", "", "")
+
+    // 동아리명
+    var crewName = MutableLiveData<String>()
+
+    //아이디
+    var userId = MutableLiveData<String>()
+
 
     var searchingWord = MutableLiveData<String>()
+
+    //동아리 닉네임 체크
+    private val _nickNameDuplication = MutableLiveData<NickNameDuplicationData>()
+    val nickNameDuplication: LiveData<NickNameDuplicationData>
+        get() = _nickNameDuplication
 
     //동아리 리스트
     private val _getCrewList = MutableLiveData<CrewListData>()
@@ -41,6 +54,10 @@ class OnBoardingViewModel @Inject constructor(
     val makeCrew: LiveData<MakeCrewData>
         get() = _makeCrew
 
+    //멀티 프로필
+    private val _addProfile = MutableLiveData<AddProfileData>()
+    val addProfile: LiveData<AddProfileData>
+        get() = _addProfile
 
     //지하철 정보 조회
     private val _subwayList = MutableLiveData<List<SubwayListData>>()
@@ -145,5 +162,35 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
+    //닉네임 중복 체크
+    fun getNickNameDuplication(crewId: Int, nickname: String) {
+        viewModelScope.launch {
+            kotlin.runCatching { getNicknameDuplicationUseCase(crewId, nickname) }
+                .onSuccess {
+                    _nickNameDuplication.value = it
+                    Timber.d("닉네임 중복 체크 : 성공")
+
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("닉네임 중복 체크 : 실패")
+                }
+        }
+    }
+
+    //멀티 프로필 등록
+    fun putAddProfile(addProfileItem: AddProfileItem, crewId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching { putAddProfileUseCase(addProfileItem, crewId) }
+                .onSuccess {
+                    _addProfile.value = it
+                    Timber.d("멀티 프로필 등록 : 성공")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("멀티 프로필 등록 : 실패")
+                }
+        }
+    }
 
 }
