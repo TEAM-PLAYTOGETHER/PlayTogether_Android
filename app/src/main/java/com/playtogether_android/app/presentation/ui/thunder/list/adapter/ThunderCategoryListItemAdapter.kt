@@ -4,17 +4,17 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.util.ListComparator
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
 class ThunderCategoryListItemAdapter :
-    ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListComparator()) {
+    ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: CategoryData) {
@@ -71,17 +71,6 @@ class ThunderCategoryListItemAdapter :
         position: Int
     ) {
         holder.onBind(getItem(position))
-    }
-
-    class ListComparator : DiffUtil.ItemCallback<CategoryData>() {
-        override fun areItemsTheSame(oldItem: CategoryData, newItem: CategoryData): Boolean {
-            return oldItem.lightId == newItem.lightId
-        }
-
-        override fun areContentsTheSame(oldItem: CategoryData, newItem: CategoryData): Boolean {
-            return oldItem == newItem
-        }
-
     }
 
     companion object {
