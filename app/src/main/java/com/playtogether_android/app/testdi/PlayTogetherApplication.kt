@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.playtogether_android.app.util.PixelRatio
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.HiltAndroidApp
