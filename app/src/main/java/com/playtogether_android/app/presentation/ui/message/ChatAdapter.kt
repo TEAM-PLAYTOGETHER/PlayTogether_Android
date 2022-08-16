@@ -5,22 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemMyChatBinding
 import com.playtogether_android.app.databinding.ItemOtherChatBinding
 import com.playtogether_android.domain.model.message.ChatData
 
-class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
+class ChatAdapter : RecyclerView.Adapter<ChatViewHolder<*>>() {
 
-    private class ChatComparator : DiffUtil.ItemCallback<ChatData>() {
-        override fun areItemsTheSame(oldItem: ChatData, newItem: ChatData): Boolean {
-            return oldItem.messageId == newItem.messageId
-        }
-
-        override fun areContentsTheSame(oldItem: ChatData, newItem: ChatData): Boolean {
-            return oldItem == newItem
-        }
-
-    }
+    val chatList = mutableListOf<ChatData>()
 
     class MyChatViewHolder(private val binding: ItemMyChatBinding) :
         ChatViewHolder<ChatData>(binding.root) {
@@ -42,22 +34,30 @@ class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
         val bindingOtherChat = ItemOtherChatBinding.inflate(layoutInflater, parent, false)
         Log.d("checkViewType", "${viewType}")
         return when (viewType) {
-            ChatData.TYPE_MY_MESSAGE -> ChatAdapter.MyChatViewHolder(bindingMyChat)
-            ChatData.TYPE_FRIEND_MESSAGE -> ChatAdapter.OtherChatViewHolder(bindingOtherChat)
+            ChatData.TYPE_MY_MESSAGE -> MyChatViewHolder(bindingMyChat)
+            ChatData.TYPE_FRIEND_MESSAGE -> OtherChatViewHolder(bindingOtherChat)
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder<*>, position: Int) {
-        val item = getItem(position)
+        val item = chatList[position]
         when (holder) {
-            is ChatAdapter.MyChatViewHolder -> holder.bind(item)
-            is ChatAdapter.OtherChatViewHolder -> holder.bind(item)
+            is MyChatViewHolder -> holder.bind(item)
+            is OtherChatViewHolder -> holder.bind(item)
             else -> throw IllegalArgumentException()
         }
     }
 
+    override fun getItemCount() = chatList.size
+
     override fun getItemViewType(position: Int): Int {
-        return getItem(position).getViewType()
+        return chatList[position].getViewType()
+    }
+
+    fun addChat(chat: ChatData) {
+        Log.d("asdf", "addChat 진입 ${chat.content}")
+        chatList.add(chat)
+        notifyItemInserted(chatList.size)
     }
 }

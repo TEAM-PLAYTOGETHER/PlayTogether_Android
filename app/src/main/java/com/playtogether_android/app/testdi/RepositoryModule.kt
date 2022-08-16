@@ -1,10 +1,10 @@
 package com.playtogether_android.app.testdi
 
+import com.playtogether_android.data.api.message.RoomIdService
 import com.playtogether_android.data.datasource.home.HomeDataSource
 import com.playtogether_android.data.datasource.light.LightDataSource
 import com.playtogether_android.data.datasource.message.ChatDataSource
 import com.playtogether_android.data.datasource.message.MessageDataSource
-import com.playtogether_android.data.datasource.message.SendMessageDataSource
 import com.playtogether_android.data.datasource.mypage.MyPageDataSource
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSource
 import com.playtogether_android.data.datasource.onboarding.SubwayDataSource
@@ -15,7 +15,7 @@ import com.playtogether_android.data.repositoryimpl.home.HomeRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.light.LightRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.message.ChatRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.message.MessageRepositoryImpl
-import com.playtogether_android.data.repositoryimpl.message.SendMessageRepositoryImpl
+import com.playtogether_android.data.repositoryimpl.message.RoomIdRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.mypage.MyPageRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.onboarding.OnBoardingRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.onboarding.SubwayRepositoryImpl
@@ -26,7 +26,7 @@ import com.playtogether_android.domain.repository.home.HomeRepository
 import com.playtogether_android.domain.repository.light.LightRepository
 import com.playtogether_android.domain.repository.message.ChatRepository
 import com.playtogether_android.domain.repository.message.MessageRepository
-import com.playtogether_android.domain.repository.message.MessageSendReposiotry
+import com.playtogether_android.domain.repository.message.RoomIdRepository
 import com.playtogether_android.domain.repository.mypage.MyPageRepository
 import com.playtogether_android.domain.repository.onboarding.OnBoardingRepository
 import com.playtogether_android.domain.repository.onboarding.SubwayRepository
@@ -81,14 +81,14 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMessageSendRepository(dataSource: SendMessageDataSource): MessageSendReposiotry {
-        return SendMessageRepositoryImpl(dataSource)
+    fun provideChatRepository(dataSource: ChatDataSource): ChatRepository {
+        return ChatRepositoryImpl(dataSource)
     }
 
     @Provides
     @Singleton
-    fun provideChatRepository(dataSource: ChatDataSource): ChatRepository {
-        return ChatRepositoryImpl(dataSource)
+    fun provideRoomIdRepository(service : RoomIdService):RoomIdRepository{
+        return RoomIdRepositoryImpl(service)
     }
 
     @Provides

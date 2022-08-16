@@ -19,21 +19,23 @@ class MessageFragment :
     private val messageViewModel: MessageViewModel by viewModels()
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            messageViewModel.getMessageList()
+            getMessageRoomList()
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        messageViewModel.getMessageList()
+        getMessageRoomList()
         initAdapter()
         initList()
         refreshView()
     }
 
+    private fun getMessageRoomList() {
+        messageViewModel.getMessageList()
+    }
+
     private fun initAdapter() {
-        adapter = MessageListAdapter {
-            clickItem(it)
-        }
+        adapter = MessageListAdapter { clickItem(it) }
         binding.rvMessageRoom.adapter = adapter
     }
 
@@ -54,8 +56,7 @@ class MessageFragment :
     private fun refreshView() {
         with(binding) {
             lsrlMessageContainer.setOnRefreshListener {
-                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
-                initAdapter()
+                getMessageRoomList()
                 lsrlMessageContainer.isRefreshing = false
             }
         }
