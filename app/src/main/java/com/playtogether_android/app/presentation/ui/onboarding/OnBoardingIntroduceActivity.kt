@@ -14,6 +14,7 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.domain.model.onboarding.AddProfileItem
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -26,6 +27,8 @@ class OnBoardingIntroduceActivity :
     private val signViewModel: SignViewModel by viewModels()
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()
     private val chipList = java.util.ArrayList<String>()
+    private lateinit var firstSubway : String
+    private lateinit var secondSubway: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +58,30 @@ class OnBoardingIntroduceActivity :
                 intent.putExtra("crewName", crewName)
                 intent.putExtra("crewCode", crewCode)
                 intent.putExtra("crewIntro", crewIntroduce)
+
+
+                val nickName = binding.etIntroOnboardingName.text.toString()
+                val description = binding.etIntroOnboardingIntro.text.toString()
+
+                val list = intent.getStringArrayListExtra("ChipList")
+                if (list?.size != null) {
+                    for (i in 0 until list.size) {
+                        val chip = Chip(binding.chipMypage.context).apply {
+                            text = list[i]
+
+                        }
+                        //firstSubway = text
+
+                    }
+
+                }
+
+                Timber.e("1 : $nickName")
+                Timber.e("2 : $description")
+
+
+                //onBoardingViewModel.putAddProfile(AddProfileItem())
+
                 startActivity(intent)
                 finish()
             }

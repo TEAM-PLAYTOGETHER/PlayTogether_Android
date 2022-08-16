@@ -1,5 +1,6 @@
 package com.playtogether_android.data.datasource.onboarding
 
+import com.playtogether_android.data.model.request.onboarding.RequestAddProfile
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
 import com.playtogether_android.data.model.response.onboarding.*
@@ -17,5 +18,5 @@ interface OnBoardingDataSource {
 
     suspend fun getNickNameDuplication(crewId : Int, nickname: String) : ResponseGetNickNameDuplication
 
-
+    suspend fun putAddProfile(requestAddProfile: RequestAddProfile, crewId: Int) : ResponseAddProfile
 }

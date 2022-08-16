@@ -1,6 +1,7 @@
 package com.playtogether_android.data.api.onboarding
 
 
+import com.playtogether_android.data.model.request.onboarding.RequestAddProfile
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
 import com.playtogether_android.data.model.response.onboarding.*
@@ -30,6 +31,12 @@ interface OnboardingService {
         @Query("nickname") nickname : String
     ) : ResponseGetNickNameDuplication
 
+    //멀티 프로필 등록
+    @PUT("user/{crewId}")
+    suspend fun putAddProfile(
+        @Body requestAddProfile: RequestAddProfile,
+        @Path("crewId") crewId : Int
+    ) : ResponseAddProfile
 
 
 }

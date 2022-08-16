@@ -16,9 +16,13 @@ class OnBoardingViewModel @Inject constructor(
     val postMakeCrewUseCase: PostMakeCrewUseCase,
     val getCrewListUseCase: GetCrewListUseCase,
     val getSubwayListUseCase: GetSubwayListUseCase,
-    val getNicknameDuplicationUseCase: GetNicknameDuplicationUseCase
+    val getNicknameDuplicationUseCase: GetNicknameDuplicationUseCase,
+    val putAddProfileUseCase: PutAddProfileUseCase
 
 ) : ViewModel() {
+
+    //멀티 프로필 등록 put
+    var reqeustMutiProfile = AddProfileItem("", "", "", "")
 
     // 동아리명
     var crewName = MutableLiveData<String>()
@@ -50,6 +54,10 @@ class OnBoardingViewModel @Inject constructor(
     val makeCrew: LiveData<MakeCrewData>
         get() = _makeCrew
 
+    //멀티 프로필
+    private val _addProfile = MutableLiveData<AddProfileData>()
+    val addProfile: LiveData<AddProfileData>
+        get() = _addProfile
 
     //지하철 정보 조회
     private val _subwayList = MutableLiveData<List<SubwayListData>>()
@@ -155,9 +163,9 @@ class OnBoardingViewModel @Inject constructor(
     }
 
     //닉네임 중복 체크
-    fun getNickNameDuplication(crewId: Int, nickname : String) {
+    fun getNickNameDuplication(crewId: Int, nickname: String) {
         viewModelScope.launch {
-            kotlin.runCatching { getNicknameDuplicationUseCase(crewId, nickname)}
+            kotlin.runCatching { getNicknameDuplicationUseCase(crewId, nickname) }
                 .onSuccess {
                     _nickNameDuplication.value = it
                     Timber.d("닉네임 중복 체크 : 성공")
@@ -166,6 +174,21 @@ class OnBoardingViewModel @Inject constructor(
                 .onFailure {
                     it.printStackTrace()
                     Timber.d("닉네임 중복 체크 : 실패")
+                }
+        }
+    }
+
+    //멀티 프로필 등록
+    fun putAddProfile(addProfileItem: AddProfileItem, crewId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching { putAddProfileUseCase(addProfileItem, crewId) }
+                .onSuccess {
+                    _addProfile.value = it
+                    Timber.d("멀티 프로필 등록 : 성공")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("멀티 프로필 등록 : 실패")
                 }
         }
     }

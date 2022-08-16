@@ -1,6 +1,7 @@
 package com.playtogether_android.data.mapper.onboarding
 
 
+import com.playtogether_android.data.model.request.onboarding.RequestAddProfile
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
 import com.playtogether_android.data.model.response.onboarding.*
@@ -79,4 +80,23 @@ object OnBoardingMapper {
         )
     }
 
+    //멀티 프로필 등록 response
+    fun mapperToAddProfileData(responseAddProfile: ResponseAddProfile) : AddProfileData {
+        return AddProfileData(
+            message = responseAddProfile.message,
+            status = responseAddProfile.status,
+            success = responseAddProfile.success
+        )
+    }
+
+
+    //멀티 프로필 등록 request
+    fun mapperToAddProfileItem(addProfileItem: AddProfileItem) : RequestAddProfile {
+        return RequestAddProfile(
+            description = addProfileItem.description,
+            firstStation = addProfileItem.firstStation,
+            nickname = addProfileItem.nickname,
+            secondStation = addProfileItem.secondStation
+        )
+    }
 }

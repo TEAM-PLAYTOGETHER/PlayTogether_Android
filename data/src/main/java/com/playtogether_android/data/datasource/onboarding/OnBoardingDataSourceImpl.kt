@@ -1,6 +1,7 @@
 package com.playtogether_android.data.datasource.onboarding
 
 import com.playtogether_android.data.api.onboarding.OnboardingService
+import com.playtogether_android.data.model.request.onboarding.RequestAddProfile
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
 import com.playtogether_android.data.model.response.onboarding.*
@@ -24,6 +25,13 @@ class OnBoardingDataSourceImpl (private val service: OnboardingService): OnBoard
         nickname: String
     ): ResponseGetNickNameDuplication {
         return service.getNickNameDuplication(crewId, nickname)
+    }
+
+    override suspend fun putAddProfile(
+        requestAddProfile: RequestAddProfile,
+        crewId: Int
+    ): ResponseAddProfile {
+        return service.putAddProfile(requestAddProfile, crewId)
     }
 
 }
