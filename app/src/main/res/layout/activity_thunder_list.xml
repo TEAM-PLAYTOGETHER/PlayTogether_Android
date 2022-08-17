@@ -110,10 +110,29 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_category_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_thunderlist_tool_container">
+            app:layout_constraintTop_toBottomOf="@id/cl_thunderlist_tool_container"
+            app:tabBackground="@drawable/bg_selector_tab_layout"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabPadding="0dp"
+            app:tabSelectedTextColor="@color/gray_gray01"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabTextColor="@color/gray_gray02">
 
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_thunderlist_createat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sort_createdAt"
+                android:textSize="12sp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_thunderlist_likecnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sort_likeCnt"
+                android:textSize="12sp" />
         </com.google.android.material.tabs.TabLayout>
 
         <!--        <LinearLayout-->

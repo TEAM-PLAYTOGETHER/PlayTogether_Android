@@ -166,7 +166,7 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-<!--    loginActivity-->
+    <!--    loginActivity-->
     <style name="login_title">
         <item name="android:textSize">24sp</item>
         <item name="android:includeFontPadding">false</item>
@@ -188,12 +188,12 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
-<!--    tablayout style-->
-    <style name="tab_item_selected">
-        <item name="fontFamily">@font/pretendard_medium</item>
+    <!--    tablayout style-->
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/gray_gray01</item>
         <item name="lineHeight">14dp</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="tab_item_unselected">

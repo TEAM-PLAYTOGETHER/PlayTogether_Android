@@ -18,6 +18,7 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_GO
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT_KR
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.LIKECNT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.LIKECNT_KR
 import com.playtogether_android.app.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,8 +37,8 @@ class ThunderListActivity :
         binding.listViewModel = thunderListViewModel
         binding.thunderListActivity = this
         binding.lifecycleOwner = this
-        initData()
         initView()
+        initData()
     }
 
     private fun setClickListener() {
@@ -69,9 +70,37 @@ class ThunderListActivity :
     }
 
     private fun initTabLayout() {
-        val tab = binding.tlThunderlistTabContainer
-        tab.addTab(tab.newTab().setText(DEFAULT_SORT_KR))
-        tab.addTab(tab.newTab().setText(LIKECNT_KR))
+        binding.tlThunderlistTabContainer.apply {
+            layoutParams.height = resources.getDimension(R.dimen.tab_sort_height).toInt()
+            tabRippleColor = null
+            clipToPadding = true
+            addOnTabSelectedListener(object :
+                TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> {
+                            initData(DEFAULT_SORT)
+                        }
+                        1 -> {
+                            initData(LIKECNT)
+                        }
+                    }
+//                finish()
+//                overridePendingTransition(0, 0)
+//                val intent = intent
+//                startActivity(intent)
+//                overridePendingTransition(0, 0)
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+//                tab?.setCustomView(R.drawable.bg_tab_unselected)
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+//                TODO("Not yet implemented")
+                }
+            })
+        }
     }
 
     private fun setPreButtonClick() {
@@ -120,16 +149,12 @@ class ThunderListActivity :
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initData() {
+    private fun initData(sortType: String = DEFAULT_SORT) {
         with(thunderListViewModel) {
-            getLightCategoryList(CATEGORY_EAT)
-            getLightCategoryList(CATEGORY_GO)
-            getLightCategoryList(CATEGORY_DO)
+            getLightCategoryList(CATEGORY_EAT, sortType)
+            getLightCategoryList(CATEGORY_GO, sortType)
+            getLightCategoryList(CATEGORY_DO, sortType)
         }
-
-//        thunderListViewModel.sortType.observe(this) {
-//            binding.tvThunderlistSortType.text = thunderListViewModel.setSortType(it)
-//        }
     }
 
     private fun setBackButtonListener() {
