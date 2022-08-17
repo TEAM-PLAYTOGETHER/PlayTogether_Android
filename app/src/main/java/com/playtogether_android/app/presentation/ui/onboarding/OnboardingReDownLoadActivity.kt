@@ -3,7 +3,10 @@ package com.playtogether_android.app.presentation.ui.onboarding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.MotionEvent
+import android.view.View
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnboardingReDownLoadBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -24,7 +27,7 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+       // initTouchListener()
 
     }
 
@@ -48,6 +51,56 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
             onboardingReDownAdapter.setCrewList((it.data.crewList) as MutableList<CrewListData.Data.CrewList>)
         }
 
+        onboardingReDownAdapter.setItemClickListener(
+            object : OnboardingReDownAdapter.ItemClickListener{
+                override fun onClick(view: View, position: Int) {
+                    val crewId = onboardingReDownAdapter.dataList[position].id
+                    Timber.d("CrewId : $crewId")
+                }
 
+            }
+        )
+
+
+    }
+
+    private fun initTouchListener() {
+        binding.rvLikeLinear.addOnItemTouchListener(object :
+            RecyclerView.OnItemTouchListener {
+            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                TODO("not implemented")
+            }
+
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+
+                if(e.action == MotionEvent.ACTION_MOVE){
+
+                }
+                else{
+
+                    val child = rv.findChildViewUnder(e.x, e.y)
+                    if(child != null){
+                        val position = rv.getChildAdapterPosition(child)
+                        val view = rv.layoutManager?.findViewByPosition(position)
+                        view?.isSelected = true
+
+                        for(i in 0..rv.adapter!!.itemCount){
+                            val otherView = rv.layoutManager?.findViewByPosition(i)
+                            if(otherView != view){
+                                otherView?.isSelected = false
+
+                            }
+                        }
+                    }
+                }
+
+                return false
+            }
+
+            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 }
