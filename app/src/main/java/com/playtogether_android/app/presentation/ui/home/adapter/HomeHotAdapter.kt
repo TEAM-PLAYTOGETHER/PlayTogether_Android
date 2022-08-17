@@ -3,17 +3,16 @@ package com.playtogether_android.app.presentation.ui.home.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeHotBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.app.util.ListComparator
+import com.playtogether_android.app.util.ListAdapterComparator
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
 class HomeHotAdapter :
-    ListAdapter<CategoryData, HomeHotAdapter.ViewHolder>(ListComparator<CategoryData>()) {
+    ListAdapter<CategoryData, HomeHotAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemHomeHotBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: CategoryData) {

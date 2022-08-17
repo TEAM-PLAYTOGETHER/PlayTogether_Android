@@ -3,6 +3,8 @@ package com.playtogether_android.data.mapper.sign
 import com.playtogether_android.data.model.request.sign.RequestSignId
 import com.playtogether_android.data.model.request.sign.RequestSignIn
 import com.playtogether_android.data.model.request.sign.RequestSignUp
+import com.playtogether_android.data.model.request.sign.RequestSocialLogin
+import com.playtogether_android.data.model.response.sign.ResSocialLogin
 import com.playtogether_android.data.model.response.sign.ResponseSignId
 import com.playtogether_android.data.model.response.sign.ResponseSignIn
 import com.playtogether_android.data.model.response.sign.ResponseSignUp
@@ -54,10 +56,25 @@ object SignMapper {
     }
 
     //로그인 request
-    fun mapperToSignInItem(signInItem: SignInItem) : RequestSignIn {
+    fun mapperToSignInItem(signInItem: SignInItem): RequestSignIn {
         return RequestSignIn(
             userLoginId = signInItem.userLoginId,
             password = signInItem.password
+        )
+    }
+
+    fun mapperToSocialItem(socialLoginItem: SocialLoginItem): RequestSocialLogin {
+        return RequestSocialLogin(
+            accessToken = socialLoginItem.accessToken,
+            fcmToken = socialLoginItem.fcmToken
+        )
+    }
+
+    fun mapperToSocialData(resSocialLogin: ResSocialLogin): SocialLoginData {
+        return SocialLoginData(
+            accessToken = resSocialLogin.data.accessToken,
+            refreshToken = resSocialLogin.data.refreshToken,
+            userName = resSocialLogin.data.userName
         )
     }
 }
