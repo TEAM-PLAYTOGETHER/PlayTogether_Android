@@ -41,11 +41,7 @@
         <activity
             android:name=".presentation.ui.onboarding.OnboardingReDownLoadActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
@@ -58,7 +54,14 @@
         </activity>
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewOnBoardingActivity"
             android:windowSoftInputMode="adjustPan"
