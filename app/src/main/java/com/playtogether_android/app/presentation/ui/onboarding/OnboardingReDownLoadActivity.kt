@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnboardingReDownLoadBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.adapter.OnboardingReDownAdapter
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.domain.model.onboarding.CrewListData
@@ -27,8 +29,7 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        enterBtnListener()
     }
 
     override fun onResume() {
@@ -39,11 +40,6 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
     private fun initList() {
         Timber.d("TEST CODE1")
         onBoardingViewModel.getCrewList()
-
-//        onBoardingViewModel.getCrewList.observe(this) {
-//            Timber.d("TEST CODE")
-//            onBoardingViewModel.getCrewList()
-//        }
 
         onboardingReDownAdapter = OnboardingReDownAdapter()
         binding.rvLikeLinear.adapter = onboardingReDownAdapter
@@ -63,5 +59,14 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
         )
 
 
+    }
+
+    private fun enterBtnListener() {
+        binding.tvIntroOnboardingNext.setOnClickListener {
+            if(binding.tvIntroOnboardingNext.isSelected) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }
     }
 }

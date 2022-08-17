@@ -40,10 +40,6 @@ class OnboardingReDownAdapter() :
             itemClickListener.onClick(v, position)
             notifyItemChanged(selectedPosition)
         }
-
-//        holder.itemView.setOnClickListener {
-//            itemClickListener.onClick(it, position)
-//        }
     }
 
     override fun getItemCount(): Int = dataList.size
@@ -54,8 +50,6 @@ class OnboardingReDownAdapter() :
         fun onBind(data: CrewListData.Data.CrewList) {
             binding.apply {
                 crew = data
-
-
                 executePendingBindings()
             }
         }
