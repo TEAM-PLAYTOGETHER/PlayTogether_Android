@@ -85,6 +85,7 @@ class ThunderListActivity :
                             initData(LIKECNT)
                         }
                     }
+                    thunderListViewModel.setTabPosition(tab?.position!!)
 //                finish()
 //                overridePendingTransition(0, 0)
 //                val intent = intent
