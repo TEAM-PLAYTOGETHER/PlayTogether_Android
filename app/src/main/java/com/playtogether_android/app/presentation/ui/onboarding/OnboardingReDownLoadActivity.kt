@@ -27,7 +27,7 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // initTouchListener()
+
 
     }
 
@@ -62,45 +62,5 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
         )
 
 
-    }
-
-    private fun initTouchListener() {
-        binding.rvLikeLinear.addOnItemTouchListener(object :
-            RecyclerView.OnItemTouchListener {
-            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-                TODO("not implemented")
-            }
-
-            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-
-                if(e.action == MotionEvent.ACTION_MOVE){
-
-                }
-                else{
-
-                    val child = rv.findChildViewUnder(e.x, e.y)
-                    if(child != null){
-                        val position = rv.getChildAdapterPosition(child)
-                        val view = rv.layoutManager?.findViewByPosition(position)
-                        view?.isSelected = true
-
-                        for(i in 0..rv.adapter!!.itemCount){
-                            val otherView = rv.layoutManager?.findViewByPosition(i)
-                            if(otherView != view){
-                                otherView?.isSelected = false
-
-                            }
-                        }
-                    }
-                }
-
-                return false
-            }
-
-            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-        })
     }
 }
