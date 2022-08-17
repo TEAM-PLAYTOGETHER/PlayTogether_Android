@@ -14,6 +14,7 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.adapter.OnboardingReDownAdapter
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.app.presentation.ui.sign.SignInActivity
 import com.playtogether_android.domain.model.onboarding.CrewListData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -30,6 +31,7 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enterBtnListener()
+        backBtnListener()
     }
 
     override fun onResume() {
@@ -37,8 +39,8 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
         initList()
     }
 
+    //리스트 세팅
     private fun initList() {
-        Timber.d("TEST CODE1")
         onBoardingViewModel.getCrewList()
 
         onboardingReDownAdapter = OnboardingReDownAdapter()
@@ -57,16 +59,23 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
 
             }
         )
-
-
     }
 
+    //입장하기버튼 클릭 리스너
     private fun enterBtnListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
             if(binding.tvIntroOnboardingNext.isSelected) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
+        }
+    }
+
+    //뒤로가기버튼 클릭 리스너
+    private fun backBtnListener() {
+        binding.ivIntroOnboardingBack.setOnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
     }
 }
