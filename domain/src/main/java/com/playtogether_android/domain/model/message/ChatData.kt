@@ -1,7 +1,7 @@
 package com.playtogether_android.domain.model.message
 
 data class ChatData(
-    val messageId: Int,
+    val messageId: Int?,
     val content:String,
     var time:String,
     val messageType:Boolean,

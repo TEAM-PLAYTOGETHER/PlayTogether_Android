@@ -40,9 +40,12 @@ object BindingAdapter {
             "인천선" -> imageView.setImageResource(R.drawable.sub_incheon_1)
             "경강선" -> imageView.setImageResource(R.drawable.sub_gyeonggang)
             "경춘선" -> imageView.setImageResource(R.drawable.sub_gyeongchun)
+            "용인경전철" -> imageView.setImageResource(R.drawable.sub_ever)
             else -> imageView.setImageResource(R.drawable.sub_incheon_2)
         }
     }
+
+
 
     @BindingAdapter("app:imageSelecter")
     @JvmStatic

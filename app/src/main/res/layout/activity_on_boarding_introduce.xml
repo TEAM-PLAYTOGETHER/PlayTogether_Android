@@ -120,7 +120,6 @@
             android:fontFamily="@font/pretendard_regular"
             android:hint="@string/onboarding_intro_nickname_input"
             android:lines="1"
-            android:maxLength="10"
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -135,30 +134,29 @@
             android:id="@+id/tv_signupmain_id_duplication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="13dp"
             android:background="@drawable/selector_rectangle_fill_gray03_to_black01"
-            android:paddingStart="13dp"
+            android:paddingStart="23dp"
             android:paddingTop="8dp"
-            android:paddingEnd="12dp"
+            android:paddingEnd="23dp"
+            android:layout_marginEnd="13dp"
             android:paddingBottom="8dp"
-            android:text="@string/text_duplication_check"
+            android:text="@string/text_ok"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/et_intro_onboarding_name"
             app:layout_constraintEnd_toEndOf="@+id/et_intro_onboarding_name"
             app:layout_constraintTop_toTopOf="@+id/et_intro_onboarding_name" />
-
         <TextView
             android:id="@+id/tv_intro_onboarding_condition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="6dp"
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/onboarding_intro_condition"
             android:textColor="@color/gray_gray02"
             android:textSize="12sp"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@+id/et_intro_onboarding_name"
-            app:layout_constraintTop_toBottomOf="@+id/et_intro_onboarding_name" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_intro_onboarding_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_intro_onboarding_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_intro_onboarding_name" />
 
         <TextView
             android:id="@+id/tv_intro_onboarding_approve"
@@ -199,6 +197,19 @@
             app:layout_constraintStart_toStartOf="@+id/tv_intro_onboarding_approve"
             app:layout_constraintTop_toBottomOf="@+id/tv_intro_onboarding_approve" />
 
+        <TextView
+            android:id="@+id/tv_intro_onboarding_text_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/onboarding_intro_subway_two"
+            android:textColor="@color/gray_gray02"
+            android:textSize="10sp"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_intro_onboarding_intro"
+            app:layout_constraintStart_toEndOf="@+id/tv_intro_onboarding_intro"
+            app:layout_constraintTop_toTopOf="@+id/tv_intro_onboarding_intro" />
+
 
         <EditText
             android:id="@+id/et_intro_onboarding_intro"
@@ -213,11 +224,11 @@
             android:inputType="textMultiLine"
             android:lines="3"
             android:maxLength="200"
-            android:scrollbars = "vertical"
             android:paddingStart="19dp"
             android:paddingTop="20dp"
             android:paddingEnd="19dp"
             android:paddingBottom="20dp"
+            android:scrollbars="vertical"
             android:scrollHorizontally="false"
             android:singleLine="true"
             android:textColorHint="@color/gray_gray01"
@@ -266,13 +277,14 @@
             android:layout_marginStart="7dp"
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/onboarding_intro_subway_two"
-            android:textColor="@color/gray_gray01"
+            android:textColor="@color/gray_gray02"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_intro_onboarding_subway"
             app:layout_constraintStart_toEndOf="@+id/tv_intro_onboarding_subway"
             app:layout_constraintTop_toTopOf="@+id/tv_intro_onboarding_subway" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/tv_intro_onboarding_subway_warn"
@@ -289,7 +301,7 @@
                 android:paddingEnd="11dp"
                 android:paddingBottom="4dp"
                 android:text="@string/onboarding_intro_add"
-                android:textColor="@color/gray_gray01"
+                android:textColor="@drawable/selector_text_gray01_to_gray03"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -297,13 +309,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_mypage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintStart_toStartOf="@+id/tv_intro_onboarding_subway"
+            app:layout_constraintTop_toBottomOf="@+id/tv_intro_onboarding_subway" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_open_onboarding_plto_subway"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:visibility="visible"
             android:background="@drawable/rectangle_border_dotted_gray03_radius_50"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@+id/tv_intro_onboarding_subway"
             app:layout_constraintTop_toBottomOf="@+id/tv_intro_onboarding_subway">
 
@@ -312,29 +333,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_medium"
+                android:paddingStart="14dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="8dp"
                 android:text="@string/onboarding_plto_subway"
                 android:textColor="@color/gray_gray02"
                 android:textSize="14sp"
-                android:paddingStart="14dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icn_exit"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_onboarding_plto"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="12dp"
-                app:layout_constraintStart_toEndOf="@+id/tv_onboarding_plto"
-                app:layout_constraintTop_toTopOf="@+id/tv_onboarding_plto" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-            
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

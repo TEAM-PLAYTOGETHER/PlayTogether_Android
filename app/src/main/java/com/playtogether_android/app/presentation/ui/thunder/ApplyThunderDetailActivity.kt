@@ -2,9 +2,7 @@ package com.playtogether_android.app.presentation.ui.thunder
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import com.bumptech.glide.Glide
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -15,7 +13,6 @@ import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.imageNullCheck
 import com.playtogether_android.app.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.activity.viewModels
 
 @AndroidEntryPoint
 class ApplyThunderDetailActivity :
@@ -23,6 +20,9 @@ class ApplyThunderDetailActivity :
 
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
     private lateinit var applicantListAdapter: ApplicantListAdapter
+    private var organizerId: Int = -1
+    private var name: String = "null"
+    private var roomId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,10 @@ class ApplyThunderDetailActivity :
             showCancelDialog(thunderId)
         }
         setClickListener()
+        clickSendMessage()
+
+        observeOrganizer()
+        observeRoomId()
     }
 
     private fun initData(thunderId: Int) {
@@ -50,21 +54,32 @@ class ApplyThunderDetailActivity :
         }
     }
 
-    private fun setClickListener() {
-
-        binding.clThunderOpenerMessage.setOnClickListener {
-//           쪽지 보내기로 이동
-            var organizerId = -1
-            val thunderId = intent.getIntExtra("thunderId", -1)
-            thunderDetailViewModel.organizerInfo.observe(this) {
-                organizerId = it.organizerId
-            }
-            val intent = Intent(this, ChattingActivity::class.java)
-            intent.putExtra("organizerId", organizerId)
-            intent.putExtra("thunderId", thunderId)
-            startActivity(intent)
+    private fun observeOrganizer() {
+        thunderDetailViewModel.organizerInfo.observe(this) {
+            organizerId = it.organizerId
+            name = it.name
+            thunderDetailViewModel.getRoomId(organizerId)
         }
+    }
 
+    private fun observeRoomId() {
+        thunderDetailViewModel.roomId.observe(this) {
+            roomId = it
+        }
+    }
+
+    private fun clickSendMessage() {
+        binding.clThunderOpenerMessage.setOnClickListener {
+            val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra("audienceId", organizerId)
+            intent.putExtra("roomId", roomId)
+            intent.putExtra("name", name)
+            if (roomId != -1) startActivity(intent)
+            else shortToast("실패했습니다")
+        }
+    }
+
+    private fun setClickListener() {
         // 뒤로가기 버튼
         binding.ivApplythunderdetailBack.setOnClickListener {
             finish()
@@ -78,11 +93,11 @@ class ApplyThunderDetailActivity :
             var organizerId: Int? = null
 
             thunderDetailViewModel.organizerInfo.observe(this) {
-                userLoginId = it.userLoginId.toString()
+                userLoginId = it.userLoginId
                 organizerId = it.organizerId
                 organizerName = it.name
             }
-            var intent = Intent(this, OthersMyPageActivity::class.java)
+            val intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("userLoginId", userLoginId)
             intent.putExtra("organizerId", organizerId)
             intent.putExtra("organizerName", organizerName)

@@ -209,4 +209,16 @@ dependencies {
     //Kapt
     //kapt(KaptDependencies.glide)
 
+    //Socket.io
+    implementation ("io.socket:socket.io-client:2.0.0"){
+        exclude("org.json", "json")
+    }
+
+    //okhttp websocket
+    implementation ("com.squareup.okhttp3:okhttp:3.12.12")
+
+    //gson
+    implementation ("com.google.code.gson:gson:2.9.0")
+
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
 }
