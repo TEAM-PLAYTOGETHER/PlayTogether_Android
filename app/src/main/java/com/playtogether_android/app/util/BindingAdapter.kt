@@ -45,6 +45,8 @@ object BindingAdapter {
         }
     }
 
+
+
     @BindingAdapter("app:imageSelecter")
     @JvmStatic
     fun bindImageSelecter(editText: EditText, imageView: ImageView) {
