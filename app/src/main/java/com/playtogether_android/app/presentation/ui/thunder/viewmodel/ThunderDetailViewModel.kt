@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.thunder.Member
 import com.playtogether_android.domain.model.thunder.Organizer
 import com.playtogether_android.domain.model.thunder.ThunderDetailData
+import com.playtogether_android.domain.usecase.message.GetRoomIdUseCase
 import com.playtogether_android.domain.usecase.thunder.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,7 +20,8 @@ class ThunderDetailViewModel @Inject constructor(
     private val thunderDetailUseCase: GetThunderDetailUseCase,
     private val thunderDetailMemberUseCase: GetThunderDetailMemberUseCase,
     private val thunderDetailOrganizerUseCase: GetThunderDetailOrganizerUseCase,
-    private val thunderDeleteUseCase: PostThunderDeleteUseCase
+    private val thunderDeleteUseCase: PostThunderDeleteUseCase,
+    private val getRoomIdUseCase: GetRoomIdUseCase
 ) : ViewModel() {
 
     private val _isConfirm = MutableLiveData<Boolean>()
@@ -34,9 +36,25 @@ class ThunderDetailViewModel @Inject constructor(
     private val _organizerInfo = MutableLiveData<Organizer>()
     val organizerInfo: LiveData<Organizer> = _organizerInfo
 
+    val roomId = MutableLiveData<Int>()
+
     //번개 삭제
     private val _isDelete = MutableLiveData<Boolean>()
     val isDelete: LiveData<Boolean> = _isDelete
+
+    fun getRoomId(organizerId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getRoomIdUseCase(organizerId)
+            }.onSuccess {
+                roomId.value = it.roomId
+                Log.d("asdf", "viewmodel roomId : ${it.roomId}")
+            }.onFailure {
+                roomId.value = -1
+                Log.d("asdf", "viewmodel roomId fail")
+            }
+        }
+    }
 
     fun joinAndCancel(thunderId: Int) {
         viewModelScope.launch {

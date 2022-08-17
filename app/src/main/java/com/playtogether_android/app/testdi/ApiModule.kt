@@ -4,8 +4,8 @@ import com.playtogether_android.app.BuildConfig.SUBWAY_URL
 import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
-import com.playtogether_android.data.api.message.MessageSendService
 import com.playtogether_android.data.api.message.MessageService
+import com.playtogether_android.data.api.message.RoomIdService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.onboarding.SubwayInfoService
@@ -54,6 +54,12 @@ object ApiModule {
 
     @Provides
     @Singleton
+    fun provideRoomIdService(@RetrofitModule.GsonConverter retrofit: Retrofit) : RoomIdService{
+        return retrofit.create(RoomIdService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideLightService(@RetrofitModule.GsonConverter retrofit: Retrofit): LightService {
         return retrofit.create(LightService::class.java)
     }
@@ -62,12 +68,6 @@ object ApiModule {
     @Singleton
     fun provideThunderService(@RetrofitModule.GsonConverter retrofit: Retrofit): ThunderService {
         return retrofit.create(ThunderService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideMessageSendService(@RetrofitModule.GsonConverter retrofit: Retrofit): MessageSendService {
-        return retrofit.create(MessageSendService::class.java)
     }
 
     @Provides
