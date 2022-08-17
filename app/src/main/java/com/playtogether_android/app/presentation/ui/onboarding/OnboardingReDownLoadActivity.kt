@@ -56,6 +56,7 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
                 override fun onClick(view: View, position: Int) {
                     val crewId = onboardingReDownAdapter.dataList[position].id
                     Timber.d("CrewId : $crewId")
+                    binding.tvIntroOnboardingNext.isSelected = true
                 }
 
             }

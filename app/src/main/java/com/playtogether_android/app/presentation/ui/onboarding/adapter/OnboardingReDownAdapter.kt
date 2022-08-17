@@ -1,10 +1,8 @@
 package com.playtogether_android.app.presentation.ui.onboarding.adapter
 
-import android.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemRedownOnboardingListBinding
 import com.playtogether_android.domain.model.onboarding.CrewListData
@@ -39,8 +37,13 @@ class OnboardingReDownAdapter() :
         holder.itemView.setOnClickListener { v ->
             if (selectedPosition >= 0) notifyItemChanged(selectedPosition)
             selectedPosition = holder.adapterPosition
+            itemClickListener.onClick(v, position)
             notifyItemChanged(selectedPosition)
         }
+
+//        holder.itemView.setOnClickListener {
+//            itemClickListener.onClick(it, position)
+//        }
     }
 
     override fun getItemCount(): Int = dataList.size
