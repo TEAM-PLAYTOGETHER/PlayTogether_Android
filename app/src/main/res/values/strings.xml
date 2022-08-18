@@ -148,7 +148,7 @@
     <string name="onboarding_intro_title">나는 어떤 사람인가요?</string>
     <string name="onboarding_intro_nickname">닉네임</string>
     <string name="onboarding_intro_nickname_input">닉네임 입력</string>
-    <string name="onboarding_intro_condition">10자 이내(공백 제외) 한글, 영문, 숫자, 특수문자</string>
+    <string name="onboarding_intro_condition">2 ~ 10자(공백 불가) 한글, 영문, 숫자, 언더바(_) 사용 가능</string>
     <string name="onboarding_intro_warn">이미 사용중인 닉네임입니다</string>
     <string name="onboarding_intro_access">사용 가능한 닉네임입니다</string>
     <string name="onboarding_intro_simple">간단 소개</string>

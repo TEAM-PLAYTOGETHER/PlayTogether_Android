@@ -169,6 +169,8 @@ class SearchSubwayActivity :
 
     private fun initSetting() {
         val list = intent.getStringArrayListExtra("ChipList")
+        val nickname = intent.getStringExtra("nickname")
+        val description = intent.getStringExtra("description")
 
         if (list?.size != null) {
             for (i in 0 until list.size) {
@@ -195,6 +197,8 @@ class SearchSubwayActivity :
                 if(list.size != 0 ) {
                     intent.putExtra("ChipList", list)
                 }
+                intent.putExtra("nickname", nickname)
+                intent.putExtra("description", description)
             }
 
             startActivity(intent)

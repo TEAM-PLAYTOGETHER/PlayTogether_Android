@@ -27,7 +27,7 @@ class OnBoardingIntroduceActivity :
     private val signViewModel: SignViewModel by viewModels()
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()
     private val chipList = java.util.ArrayList<String>()
-    private lateinit var firstSubway : String
+    private lateinit var firstSubway: String
     private lateinit var secondSubway: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +42,12 @@ class OnBoardingIntroduceActivity :
         nullCheck()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(binding.etIntroOnboardingName.text.toString() != "") {
+            nicknameDuplicationCheck()
+        }
+    }
 
     private fun nextBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
@@ -133,7 +139,13 @@ class OnBoardingIntroduceActivity :
 
     private fun initSetting() {
         val crewName = intent.getStringExtra("crewName")
+        val nickname = intent.getStringExtra("nickname")
+        val description = intent.getStringExtra("description")
         binding.tvIntroOnboardingCrewName.setText(crewName)
+
+        binding.etIntroOnboardingName.setText(nickname)
+        binding.etIntroOnboardingIntro.setText(description)
+
     }
 
     //뒤로가기 버튼 리스너
@@ -244,8 +256,12 @@ class OnBoardingIntroduceActivity :
                     val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
                     chipList.add(chip.text.toString())
                 }
+                val nickname = binding.etIntroOnboardingName.text.toString()
+                val description = binding.etIntroOnboardingIntro.text.toString()
                 val intent = Intent(this, SearchSubwayActivity::class.java)
                 intent.putExtra("ChipList", chipList)
+                intent.putExtra("nickname", nickname)
+                intent.putExtra("description", description)
                 startActivity(intent)
                 finish()
             }
@@ -303,16 +319,19 @@ class OnBoardingIntroduceActivity :
         //TODO : crewId 고정값 취소
         //TODO : duplication 이상함
         onBoardingViewModel.getNickNameDuplication(1, "$nickname")
-        onBoardingViewModel.nickNameDuplication.observe(this) {
+        onBoardingViewModel.nicknameDuplicationCheck.observe(this) {
             Timber.d("Test NickName Duplication : $it")
-            if (it.success) {
-                binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
-                binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
-            } else {
+            if (!it.success) {
                 binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
+                Timber.e("실패")
+            } else{
+                Timber.e("성공")
+                binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
+                binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
             }
         }
+
         nextBtnActive()
     }
 

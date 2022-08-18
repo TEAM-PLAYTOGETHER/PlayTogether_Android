@@ -74,7 +74,6 @@ object OnBoardingMapper {
 
     fun mapperToNicknameDuplication(responseGetNickNameDuplication: ResponseGetNickNameDuplication) : NickNameDuplicationData {
         return NickNameDuplicationData(
-            message = responseGetNickNameDuplication.message,
             status = responseGetNickNameDuplication.status,
             success = responseGetNickNameDuplication.success
         )
@@ -83,7 +82,6 @@ object OnBoardingMapper {
     //멀티 프로필 등록 response
     fun mapperToAddProfileData(responseAddProfile: ResponseAddProfile) : AddProfileData {
         return AddProfileData(
-            message = responseAddProfile.message,
             status = responseAddProfile.status,
             success = responseAddProfile.success
         )
