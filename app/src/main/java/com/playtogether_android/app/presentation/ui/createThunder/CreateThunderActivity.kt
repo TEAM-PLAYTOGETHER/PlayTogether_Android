@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -29,6 +30,7 @@ import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.io.File
 import java.util.*
 
 @AndroidEntryPoint
@@ -80,7 +82,6 @@ class CreateThunderActivity :
 
     private fun uploadImageCallbackListener() {
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
         intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
@@ -123,9 +124,58 @@ class CreateThunderActivity :
     private fun setClickListener() {
         imageSelected()
         clickInfinite()
-        clickComplete()
+//        clickComplete()
+        clickCompleteTest()
         imageSelected()
         uploadPhotoClickListener()
+    }
+
+    private fun clickCompleteTest() {
+        binding.tvCreatethunderFinish.setOnClickListener {
+            val date = binding.tvCreatethunderDate.text.toString().replace(".", "-")
+            val time = binding.tvCreatethunderTime.text.toString()
+            val title = binding.etCreatethunderName.text.toString()
+            val place = binding.etCreatethunderPlace.text.toString()
+            var peopleCnt = 0
+            val image = transferImage(photoListAdapter.mutablePhotoList)
+            if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
+                peopleCnt = -1
+            else
+                peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
+            val description = binding.etCreatethunderExplanation.text.toString()
+            createThunderViewModel.postMultipartThunderCreate(
+                PostThunderCreateData(
+                    title,
+                    category,
+                    date,
+                    time,
+                    place,
+                    peopleCnt,
+                    description,
+                    image
+                )
+            )
+        }
+
+        createThunderViewModel.getThunderCreateData.observe(this) {
+            if (it.success) {
+                val intent = Intent(this, OpenThunderDetailActivity::class.java)
+                intent.putExtra("thunderId", it.lightId)
+                startActivity(intent)
+                finish()
+            } else {
+                Timber.d("createThunder : 번개 생성 안됨")
+            }
+        }
+    }
+
+    private fun absolutePath(uri: Uri): String {
+        val proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        val c: Cursor? = contentResolver.query(uri, proj, null, null, null)
+        val index = c?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        c?.moveToFirst()
+        val result = c?.getString(index!!)
+        return result!!
     }
 
     private fun uploadPhotoClickListener() {
@@ -164,7 +214,9 @@ class CreateThunderActivity :
     private fun transferImage(list: List<Uri>): List<String> {
         val mut = mutableListOf<String>()
         list.forEach {
-            mut.add(it.toString())
+            val path = absolutePath(it)
+            Timber.e("rere path : $path")
+            mut.add(path)
         }
         return mut
     }
@@ -194,13 +246,6 @@ class CreateThunderActivity :
                     image
                 )
             )
-//            Log.d("createThunder", title)
-//            Log.d("createThunder", category)
-//            Log.d("createThunder", date)
-//            Log.d("createThunder", time)
-//            Log.d("createThunder", place)
-//            Log.d("createThunder", "$peopleCnt")
-//            Log.d("createThunder", description)
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
