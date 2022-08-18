@@ -50,16 +50,15 @@
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
+            android:exported="true">
         </activity>
 
         <activity
@@ -87,7 +86,8 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.onboarding.SelectOnboardingActivity"
-            android:exported="true" />
+            android:exported="true">
+        </activity>
         <activity
             android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
             android:exported="true" />
@@ -112,7 +112,6 @@
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
             android:exported="true" >
-
         </activity>
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"

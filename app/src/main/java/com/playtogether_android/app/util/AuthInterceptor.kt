@@ -31,6 +31,7 @@ class AuthInterceptor : Interceptor {
 
     private fun doRequest(chain: Interceptor.Chain): Response {
         val request = chain.request()
+        Timber.d("request : $request")
         val cookieSid = PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context())
         if (cookieSid != null) {
             return chain.proceed(
