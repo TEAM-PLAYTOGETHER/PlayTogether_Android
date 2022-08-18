@@ -67,6 +67,7 @@
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
 
+
         </activity>
         <activity
             android:name=".presentation.ui.mypage.OthersMyPageActivity"
@@ -110,7 +111,9 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
-            android:exported="true" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
             android:exported="true">
