@@ -101,17 +101,19 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     //로그인
     private fun observeSignIn() {
         signViewModel.signIn.observe(this) {
-            if (it.success) {
-                PlayTogetherSharedPreference.setJwtToken(
-                    this,
-                    it.jwtToken
-                )
-                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                showApplyDialog()
-            }
+            PlayTogetherSharedPreference.setJwtToken(
+                this,
+                it.jwtToken
+            )
+            val intent = Intent(this, SelectOnboardingActivity::class.java)
+            startActivity(intent)
+            finish()
+
+//            if (it.success) {
+//
+//            } else {
+//                showApplyDialog()
+//            }
         }
     }
 
@@ -120,7 +122,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         val title = "아이디 혹은 비밀번호를\n확인해주세요"
         val dialog = CustomDialog(this, title)
         dialog.showOneChoiceDialog(R.layout.dialog_one_question)
-        Log.d("Test", "CustomDialog")
     }
 
 
