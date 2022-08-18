@@ -140,6 +140,22 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="home_select_item_crew">
+        <item name="android:textColor">@color/gray_black02</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">19dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="home_unselect_item_crew">
+        <item name="android:textColor">@color/gray_gray02</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">16dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="sort_title">
         <item name="android:textColor">@color/gray_black</item>
         <item name="fontFamily">@font/pretendard_bold</item>
