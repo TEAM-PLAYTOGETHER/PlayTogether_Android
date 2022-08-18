@@ -77,7 +77,6 @@ class OnBoardingIntroduceActivity :
 
                         }
                         //firstSubway = text
-
                     }
 
                 }
@@ -98,37 +97,6 @@ class OnBoardingIntroduceActivity :
     private fun nextBtnActive() {
         binding.tvIntroOnboardingNext.isSelected =
             binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
-    }
-
-    //id 중복체크
-    private fun idDuplicationCheck() {
-        val id = binding.etIntroOnboardingName.text.toString()
-        signViewModel.postIdDuplication(
-            IdDuplicationCheckItem(id)
-        )
-
-        signViewModel.idDuplicationCheck.observe(this) {
-            if (it.isUser) {
-                binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
-                binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
-                binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
-            } else {
-                binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
-                binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
-                binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
-            }
-        }
-
-    }
-
-    //아이디 정규식
-    private fun isVaildRegistrationId() = with(binding) {
-        val pwPattern3 = "^(?=.*[0-9])(?=.*[$@$!%*#?&.])[[0-9]$@$!%*#?&.]{8,20}$"
-        tvSignupmainIdDuplication.isSelected =
-            Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())
-//        if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|0-9|_]{2,10}\$", nickname.text.toString())) {
-//
-//        }
     }
 
 
@@ -196,7 +164,6 @@ class OnBoardingIntroduceActivity :
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val name = p0.toString()
-
 
                 if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|0-9|_]{2,10}\$", name)) {
                     binding.tvSignupmainIdDuplication.isSelected = false
