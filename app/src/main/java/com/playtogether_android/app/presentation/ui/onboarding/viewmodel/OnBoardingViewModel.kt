@@ -2,9 +2,12 @@ package com.playtogether_android.app.presentation.ui.onboarding.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.playtogether_android.app.util.ResultWrapper
+import com.playtogether_android.app.util.safeApiCall
 import com.playtogether_android.domain.model.onboarding.*
 import com.playtogether_android.domain.usecase.onboarding.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import timber.log.Timber
@@ -33,10 +36,13 @@ class OnBoardingViewModel @Inject constructor(
 
     var searchingWord = MutableLiveData<String>()
 
-    //동아리 닉네임 체크
-    private val _nickNameDuplication = MutableLiveData<NickNameDuplicationData>()
-    val nickNameDuplication: LiveData<NickNameDuplicationData>
-        get() = _nickNameDuplication
+
+    var nicknameDuplicationCheck: MutableLiveData<NickNameDuplicationData> = MutableLiveData()
+
+//    //동아리 닉네임 체크
+//    private val _nickNameDuplication = MutableLiveData<NickNameDuplicationData>()
+//    val nickNameDuplication: LiveData<NickNameDuplicationData>
+//        get() = _nickNameDuplication
 
     //동아리 리스트
     private val _getCrewList = MutableLiveData<CrewListData>()
@@ -164,17 +170,33 @@ class OnBoardingViewModel @Inject constructor(
 
     //닉네임 중복 체크
     fun getNickNameDuplication(crewId: Int, nickname: String) {
-        viewModelScope.launch {
-            kotlin.runCatching { getNicknameDuplicationUseCase(crewId, nickname) }
-                .onSuccess {
-                    _nickNameDuplication.value = it
-                    Timber.d("닉네임 중복 체크 : 성공")
+//        viewModelScope.launch {
+//            kotlin.runCatching { getNicknameDuplicationUseCase(crewId, nickname) }
+//                .onSuccess {
+//                    _nickNameDuplication.value = it
+//                    Timber.d("닉네임 중복 체크 : 성공")
+//
+//                }
+//                .onFailure {
+//                    it.printStackTrace()
+//                    Timber.d("닉네임 중복 체크 : 실패")
+//                }
 
+//        }
+
+
+        viewModelScope.launch {
+            when(val nicknameDuplication =
+                safeApiCall(Dispatchers.IO) {getNicknameDuplicationUseCase(crewId, nickname) }) {
+                is ResultWrapper.Success -> nicknameDuplicationCheck.value =
+                    NickNameDuplicationData(200, true)
+                is ResultWrapper.GenericError -> {
+                    nicknameDuplicationCheck.value =
+                        NickNameDuplicationData(nicknameDuplication.code!!, false)
                 }
-                .onFailure {
-                    it.printStackTrace()
-                    Timber.d("닉네임 중복 체크 : 실패")
-                }
+            }
+            Timber.d("nicknameDuplication: ${nicknameDuplicationCheck.value.toString()}")
+
         }
     }
 
