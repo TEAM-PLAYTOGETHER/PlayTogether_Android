@@ -44,7 +44,7 @@ class OnBoardingIntroduceActivity :
 
     override fun onResume() {
         super.onResume()
-        if(binding.etIntroOnboardingName.text.toString() != "") {
+        if (binding.etIntroOnboardingName.text.toString() != "") {
             nicknameDuplicationCheck()
         }
     }
@@ -123,8 +123,12 @@ class OnBoardingIntroduceActivity :
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
+        val pwPattern3 = "^(?=.*[0-9])(?=.*[$@$!%*#?&.])[[0-9]$@$!%*#?&.]{8,20}$"
         tvSignupmainIdDuplication.isSelected =
             Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())
+//        if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|0-9|_]{2,10}\$", nickname.text.toString())) {
+//
+//        }
     }
 
 
@@ -192,14 +196,16 @@ class OnBoardingIntroduceActivity :
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val name = p0.toString()
-                if (name.isEmpty()) {
-                    binding.tvSignupmainIdDuplication.isSelected = false
-                    binding.tvSignupmainIdDuplication.isClickable = false
-                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
-                } else if (name.length > 10) {
+
+
+                if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|0-9|_]{2,10}\$", name)) {
                     binding.tvSignupmainIdDuplication.isSelected = false
                     binding.tvSignupmainIdDuplication.isClickable = false
                     binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#FF0000"))
+                } else if (name.isEmpty()) {
+                    binding.tvSignupmainIdDuplication.isSelected = false
+                    binding.tvSignupmainIdDuplication.isClickable = false
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
                 } else {
                     binding.tvSignupmainIdDuplication.isSelected = true
                     binding.tvSignupmainIdDuplication.isClickable = true
@@ -317,16 +323,12 @@ class OnBoardingIntroduceActivity :
         val nickname: String = binding.etIntroOnboardingName.text.toString()
 
         //TODO : crewId 고정값 취소
-        //TODO : duplication 이상함
         onBoardingViewModel.getNickNameDuplication(1, "$nickname")
         onBoardingViewModel.nicknameDuplicationCheck.observe(this) {
-            Timber.d("Test NickName Duplication : $it")
             if (!it.success) {
                 binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
-                Timber.e("실패")
-            } else{
-                Timber.e("성공")
+            } else {
                 binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
             }
