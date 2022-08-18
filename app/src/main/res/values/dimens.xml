@@ -2,4 +2,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fab_size">64dp</dimen>
     <dimen name="fab_home_size">60dp</dimen>
+    <dimen name="tab_sort_width">117dp</dimen>
+    <dimen name="tab_sort_height">24dp</dimen>
 </resources>

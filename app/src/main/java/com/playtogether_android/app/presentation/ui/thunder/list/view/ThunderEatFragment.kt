@@ -32,16 +32,14 @@ class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.frag
         listAdapter = ThunderCategoryListItemAdapter()
 
         with(thunderListViewModel) {
-            Timber.e("observe not : ${thunderListViewModel.categoryEatList.value}")
             categoryEatList.observe(viewLifecycleOwner) { it ->
-                Timber.e("observe : ${thunderListViewModel.categoryEatList.value}")
                 listAdapter.submitList(it)
             }
         }
 
         with(binding.rvThundereatContainer) {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceItemDecoration(0,10,0,0))
+            addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
             adapter = listAdapter
         }
     }

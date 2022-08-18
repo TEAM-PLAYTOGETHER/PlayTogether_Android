@@ -33,4 +33,23 @@ class OnBoardingRepositoryImpl(
             onBoardingDataSource.getListCrew()
         )
     }
+
+    override suspend fun getNickNameDuplication(
+        crewId: Int,
+        nickname: String
+    ): NickNameDuplicationData {
+        return OnBoardingMapper.mapperToNicknameDuplication(onBoardingDataSource.getNickNameDuplication(crewId, nickname))
+    }
+
+    override suspend fun putAddProfile(
+        addProfileItem: AddProfileItem,
+        crewId: Int
+    ): AddProfileData {
+        return OnBoardingMapper.mapperToAddProfileData(
+            onBoardingDataSource.putAddProfile(
+                OnBoardingMapper.mapperToAddProfileItem(addProfileItem), crewId
+            )
+        )
+    }
+
 }

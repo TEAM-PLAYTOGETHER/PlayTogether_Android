@@ -38,14 +38,32 @@
                     android:scheme="${kakaokey}" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".util.FirebaseMessagingServiceUtil"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+            </intent-filter>
+        </service>
+
+
         <activity
             android:name=".presentation.ui.onboarding.OnboardingReDownLoadActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
 
         </activity>
@@ -54,18 +72,16 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewOnBoardingActivity"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".presentation.ui.mypage.OthersMyPageActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.main.SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.ui.thunder.OpenThunderDetailActivity"
@@ -105,15 +121,13 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.ui.login.LoginActivity"

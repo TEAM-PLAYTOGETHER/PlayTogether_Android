@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -12,7 +13,6 @@ import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
-import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,18 +20,26 @@ class ThunderDetailActivity :
     BaseActivity<ActivityThunderDetailBinding>(R.layout.activity_thunder_detail) {
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
     private val homeViewModel: HomeViewModel by viewModels()
-
-    //val lightId = intent.getIntExtra("thunderId",0)
-
+    private var organizerId: Int = -1
+    private var name: String = "null"
+    private var roomId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData()
-        setClickListener()
+        clickProfile()
+        clickSendMessage()
+        clickApply()
+        clickBackArrow()
+
+        observeOrganizer()
+        observeRoomId()
+    }
+
+    private fun clickApply() {
         binding.clThunderdetailApplyBtn.setOnClickListener {
             showApplyDialog()
         }
-
     }
 
     private fun showApplyDialog() {
@@ -80,44 +88,40 @@ class ThunderDetailActivity :
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
-
-
-//        with(binding){
-//            tvThunderdetailCurrent.text="1"
-//            tvThunderdetailMax.text="6"
-//            tvThunderdetailName.text="문수제비"
-//            tvThunderdetailTitle.text="우리집에서 피자 먹기"
-//            tvThunderdetailDateContent.text="2022.04.15"
-//            tvThunderdetailTimeContent.text="18:00 ~"
-//            tvThunderdetailPlaceContent.text="우리집"
-//            tvThunderdetailCategoryContent.text="음식"
-//            tvThunderdetailDescription.text=resources.getString(R.string.thunderdetail_example)
-//        }
-
     }
 
-    private fun setClickListener() {
+    private fun observeOrganizer() {
+        thunderDetailViewModel.organizerInfo.observe(this) {
+            organizerId = it.organizerId
+            name = it.name
+            thunderDetailViewModel.getRoomId(organizerId)
+        }
+    }
 
+    private fun observeRoomId() {
+        thunderDetailViewModel.roomId.observe(this) {
+            roomId = it
+        }
+    }
+
+    private fun clickSendMessage() {
         binding.clThunderdetailMessage.setOnClickListener {
-//           쪽지 보내기로 이동
-            var organizerId = -1
-            var name = "null"
-            thunderDetailViewModel.organizerInfo.observe(this) {
-                organizerId = it.organizerId
-                name = it.name
-            }
             val intent = Intent(this, ChattingActivity::class.java)
             intent.putExtra("audienceId", organizerId)
+            intent.putExtra("roomId", roomId)
             intent.putExtra("name", name)
-            startActivity(intent)
+            if (roomId != -1) startActivity(intent)
+            else shortToast("실패했습니다")
         }
+    }
 
-        // 뒤로가기 버튼
+    private fun clickBackArrow() {
         binding.ivThunderdetailBack.setOnClickListener {
             finish()
         }
+    }
 
-
+    private fun clickProfile() {
         // TODO: 혜빈아 요기!!!!!!!!! 일단 코드가 지저분하지만.. 나중에 정리할게ㅋㅋㅋ
         // 개설자 프로필로 이동
         binding.ivThunderdetailIcon.setOnClickListener {
@@ -125,11 +129,11 @@ class ThunderDetailActivity :
             var organizerName: String? = null
             var organizerId: Int? = null
             thunderDetailViewModel.organizerInfo.observe(this) {
-                userLoginId = it.userLoginId.toString()
+                userLoginId = it.userLoginId
                 organizerId = it.organizerId
                 organizerName = it.name
             }
-            var intent = Intent(this, OthersMyPageActivity::class.java)
+            val intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("userLoginId", userLoginId)
             intent.putExtra("organizerId", organizerId)
             intent.putExtra("organizerName", organizerName)

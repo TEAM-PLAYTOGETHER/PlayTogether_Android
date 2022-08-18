@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -32,7 +33,6 @@ class OpenCrewOnBoardingActivity :
         introTextWatcher()
         openCrewNetwork()
         activeBtn()
-
     }
 
     //뒤로가기 버튼 리스너
@@ -55,11 +55,11 @@ class OpenCrewOnBoardingActivity :
     }
 
     private fun activeBtn() {
-        if (binding.etOpenOnboardingName.text.toString() == "" || binding.etOpenOnboardingIntro.text.toString() == "") {
-            binding.tvOpenOnboardingNext.isSelected = false
-        } else {
+        if (binding.tvOpenOnboardingApprove.visibility == View.VISIBLE && binding.etOpenOnboardingIntro.text.toString() != "") {
             binding.tvOpenOnboardingNext.isSelected = true
             openCrewNetwork()
+        } else {
+            binding.tvOpenOnboardingNext.isSelected = false
         }
     }
 
@@ -81,6 +81,7 @@ class OpenCrewOnBoardingActivity :
 
     //이름 textWatcher
     private fun nameTextWatcher() = with(binding) {
+
         etOpenOnboardingName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -88,19 +89,38 @@ class OpenCrewOnBoardingActivity :
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val name = p0.toString()
-                if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|]{1,15}\$", name)) {
-                    binding.tvOpenOnboardingApprove.visibility = View.INVISIBLE
-                    binding.tvOpenOnboardingWarn.visibility = View.VISIBLE
+                if (name.length > 15) {
+                    binding.tvOpenOnboardingCheck.isSelected = false
+                    binding.tvOpenOnboardingWarn.setTextColor(Color.parseColor("#FF0000"))
+                } else if (name.isEmpty()) {
+                    binding.tvOpenOnboardingCheck.isSelected = false
+                    binding.tvOpenOnboardingWarn.setTextColor(Color.parseColor("#C5C5C5"))
                 } else {
-                    binding.tvOpenOnboardingApprove.visibility = View.VISIBLE
-                    binding.tvOpenOnboardingWarn.visibility = View.INVISIBLE
+                    binding.tvOpenOnboardingCheck.isSelected = true
+                    binding.tvOpenOnboardingWarn.setTextColor(Color.parseColor("#C5C5C5"))
 
                 }
 
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                block()
+                //block()
+                val name = p0.toString()
+                binding.tvOpenOnboardingCheck.setOnClickListener {
+                    if (name.length < 15) {
+                        onBoardingViewModel.crewName.value = p0.toString()
+                        binding.tvOpenOnboardingApprove.visibility = View.VISIBLE
+                    }
+                    activeBtn()
+                }
+
+
+                val crewName = onBoardingViewModel.crewName.value
+
+                if (crewName != etOpenOnboardingName.text.toString()) {
+                    tvOpenOnboardingApprove.visibility = View.INVISIBLE
+                }
+
                 etOpenOnboardingName.isSelected = etOpenOnboardingName.text.toString() != ""
                 initTextFieldCheck()
 
@@ -167,7 +187,7 @@ class OpenCrewOnBoardingActivity :
             if (it.success) {
                 Timber.d("${it.code}")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-                intent.putExtra("crewName" , it.name)
+                intent.putExtra("crewName", it.name)
                 intent.putExtra("crewCode", it.code)
                 intent.putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
                 startActivity(intent)

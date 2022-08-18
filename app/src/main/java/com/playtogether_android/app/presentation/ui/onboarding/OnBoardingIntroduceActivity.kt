@@ -1,58 +1,97 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
-import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.domain.model.onboarding.AddProfileItem
 import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
-class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
+class OnBoardingIntroduceActivity :
+    BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
 
     private val signViewModel: SignViewModel by viewModels()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
+    private val chipList = java.util.ArrayList<String>()
+    private lateinit var firstSubway : String
+    private lateinit var secondSubway: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         backBtnListener()
-        nullCheck()
         nameTextWatcher()
         introTextWatcher()
         initSetting()
-        duplicationClickEvent()
         nextBtnClickListener()
         subwayBtnListener()
-
+        setChipBtn()
+        nullCheck()
     }
+
 
     private fun nextBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
-            val crewName = intent.getStringExtra("crewName")
-            val crewCode = intent.getStringExtra("crewCode")
-            val crewIntroduce = intent.getStringExtra("crewIntro")
+            if (binding.tvIntroOnboardingNext.isSelected) {
+                val crewName = intent.getStringExtra("crewName")
+                val crewCode = intent.getStringExtra("crewCode")
+                val crewIntroduce = intent.getStringExtra("crewIntro")
 
 
-            val name = binding.etIntroOnboardingName.text.toString()
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+                val name = binding.etIntroOnboardingName.text.toString()
+                val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
 
-            intent.putExtra("userName", name)
-            intent.putExtra("crewName", crewName)
-            intent.putExtra("crewCode", crewCode)
-            intent.putExtra("crewIntro", crewIntroduce)
-            startActivity(intent)
-            finish()
+                intent.putExtra("userName", name)
+                intent.putExtra("crewName", crewName)
+                intent.putExtra("crewCode", crewCode)
+                intent.putExtra("crewIntro", crewIntroduce)
+
+
+                val nickName = binding.etIntroOnboardingName.text.toString()
+                val description = binding.etIntroOnboardingIntro.text.toString()
+
+                val list = intent.getStringArrayListExtra("ChipList")
+                if (list?.size != null) {
+                    for (i in 0 until list.size) {
+                        val chip = Chip(binding.chipMypage.context).apply {
+                            text = list[i]
+
+                        }
+                        //firstSubway = text
+
+                    }
+
+                }
+
+                Timber.e("1 : $nickName")
+                Timber.e("2 : $description")
+
+
+                //onBoardingViewModel.putAddProfile(AddProfileItem())
+
+                startActivity(intent)
+                finish()
+            }
+
         }
+    }
+
+    private fun nextBtnActive() {
+        binding.tvIntroOnboardingNext.isSelected =
+            binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
     }
 
     //id 중복체크
@@ -63,13 +102,11 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
         )
 
         signViewModel.idDuplicationCheck.observe(this) {
-            if (it.isUser == true) {
-                Log.d("중복확인", "중복되는 아이디 있음")
+            if (it.isUser) {
                 binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
                 binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
                 binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
             } else {
-                Log.d("중복확인", "중복되는 아이디 없음")
                 binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
                 binding.tvIntroOnboardingCondition.visibility = View.INVISIBLE
@@ -80,13 +117,8 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
 
     //아이디 정규식
     private fun isVaildRegistrationId() = with(binding) {
-        if (!Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())) {
-            tvSignupmainIdDuplication.isSelected = false
-            Timber.d("정규식 맞지 않음")
-        } else {
-            tvSignupmainIdDuplication.isSelected = true
-            Timber.d("정규식 맞지 않음")
-        }
+        tvSignupmainIdDuplication.isSelected =
+            Pattern.matches("^[a-z|0-9|]{1,10}\$", etIntroOnboardingName.text.toString())
     }
 
 
@@ -94,7 +126,7 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
     private fun duplicationClickEvent() {
         binding.tvSignupmainIdDuplication.setOnClickListener {
             if (binding.tvSignupmainIdDuplication.isSelected) {
-                idDuplicationCheck()
+                nicknameDuplicationCheck()
             }
         }
     }
@@ -147,13 +179,39 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                val name = p0.toString()
+                if (name.isEmpty()) {
+                    binding.tvSignupmainIdDuplication.isSelected = false
+                    binding.tvSignupmainIdDuplication.isClickable = false
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
+                } else if (name.length > 10) {
+                    binding.tvSignupmainIdDuplication.isSelected = false
+                    binding.tvSignupmainIdDuplication.isClickable = false
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#FF0000"))
+                } else {
+                    binding.tvSignupmainIdDuplication.isSelected = true
+                    binding.tvSignupmainIdDuplication.isClickable = true
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                val id = p0.toString()
+                binding.tvSignupmainIdDuplication.setOnClickListener {
+                    onBoardingViewModel.userId.value = p0.toString()
+                }
+
+                val userId = onBoardingViewModel.userId.value
+                if (userId != etIntroOnboardingName.text.toString()) {
+                    tvIntroOnboardingWarn.visibility = View.INVISIBLE
+                    tvIntroOnboardingApprove.visibility = View.INVISIBLE
+                }
+
                 etIntroOnboardingName.isSelected = etIntroOnboardingName.text.toString() != ""
                 initTextFieldCheck()
-                isVaildRegistrationId()
+                duplicationClickEvent()
+                nextBtnActive()
+
             }
         })
     }
@@ -172,16 +230,90 @@ class OnBoardingIntroduceActivity : BaseActivity<ActivityOnBoardingIntroduceBind
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
+                nextBtnActive()
             }
         })
     }
 
     private fun subwayBtnListener() {
         binding.tvOpenOnboardingAdd.setOnClickListener {
-            val intent = Intent(this, SearchSubwayActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (binding.tvOpenOnboardingAdd.isSelected) {
+                shortToast("최대 2개까지 추가할 수 있어요!")
+            } else {
+                for (i: Int in 1..binding.chipMypage.childCount) {
+                    val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
+                    chipList.add(chip.text.toString())
+                }
+                val intent = Intent(this, SearchSubwayActivity::class.java)
+                intent.putExtra("ChipList", chipList)
+                startActivity(intent)
+                finish()
+            }
+
+
         }
+    }
+
+
+    //칩버튼 관리
+    private fun setChipBtn() {
+        val list = intent.getStringArrayListExtra("ChipList")
+        if (list?.size != null) {
+            binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
+            for (i in 0 until list.size) {
+                val chip = Chip(binding.chipMypage.context).apply {
+                    text = list[i]
+                    setTextColor(getColorStateList(R.color.main_green))
+
+                    isCloseIconVisible = true
+                    setCloseIconResource(R.drawable.icn_exit)
+                    setCloseIconTintResource(R.color.gray_999999)
+                    chipBackgroundColor = getColorStateList(R.color.black)
+                    setOnCloseIconClickListener {
+                        binding.chipMypage.removeView(
+                            this
+                        )
+                        addBtnListener()
+
+                    }
+                }
+                binding.chipMypage.addView(chip)
+                addBtnListener()
+            }
+        } else {
+            binding.clOpenOnboardingPltoSubway.visibility = View.VISIBLE
+        }
+    }
+
+
+    //칩버튼 추가하기
+    private fun addBtnListener() {
+        binding.tvOpenOnboardingAdd.isSelected = binding.chipMypage.childCount == 2
+
+        if (binding.chipMypage.childCount == 0) {
+            binding.tvOnboardingPlto.visibility = View.VISIBLE
+        } else {
+            binding.tvOnboardingPlto.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun nicknameDuplicationCheck() {
+        val nickname: String = binding.etIntroOnboardingName.text.toString()
+
+        //TODO : crewId 고정값 취소
+        //TODO : duplication 이상함
+        onBoardingViewModel.getNickNameDuplication(1, "$nickname")
+        onBoardingViewModel.nickNameDuplication.observe(this) {
+            Timber.d("Test NickName Duplication : $it")
+            if (it.success) {
+                binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
+                binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
+            } else {
+                binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
+                binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
+            }
+        }
+        nextBtnActive()
     }
 
 }

@@ -6,9 +6,9 @@ plugins {
     kotlin("kapt")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
-
-
 
 android {
     compileSdk = Apps.compileSdk
@@ -63,9 +63,11 @@ android {
 fun getApiKey(propertyKey: String): String {
     return gradleLocalProperties(rootDir).getProperty(propertyKey)
 }
+
 fun getSubwayUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }
+
 fun getBaseUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }
@@ -82,6 +84,9 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(project(":data"))
+
+    //sercurity
+    implementation("androidx.security:security-crypto-ktx:1.1.0-alpha03")
 
     //kakao login
     implementation("com.kakao.sdk:v2-user:2.9.0")
@@ -127,6 +132,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha03")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
 
 // Navigation
@@ -203,4 +209,16 @@ dependencies {
     //Kapt
     //kapt(KaptDependencies.glide)
 
+    //Socket.io
+    implementation ("io.socket:socket.io-client:2.0.0"){
+        exclude("org.json", "json")
+    }
+
+    //okhttp websocket
+    implementation ("com.squareup.okhttp3:okhttp:3.12.12")
+
+    //gson
+    implementation ("com.google.code.gson:gson:2.9.0")
+
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
 }

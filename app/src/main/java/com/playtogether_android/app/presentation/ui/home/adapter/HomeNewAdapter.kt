@@ -3,16 +3,16 @@ package com.playtogether_android.app.presentation.ui.home.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeNewBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.app.util.ListComparator
+import com.playtogether_android.app.util.ListAdapterComparator
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
-class HomeNewAdapter : ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListComparator<CategoryData>()) {
+class HomeNewAdapter :
+    ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemHomeNewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: CategoryData) {
@@ -45,23 +45,6 @@ class HomeNewAdapter : ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(List
             }
         }
         holder.onBind(item)
-    }
-
-    class HomeComparator : DiffUtil.ItemCallback<CategoryData>() {
-        override fun areItemsTheSame(
-            oldItem: CategoryData,
-            newItem: CategoryData
-        ): Boolean {
-            return oldItem.lightId == newItem.lightId
-        }
-
-        override fun areContentsTheSame(
-            oldItem: CategoryData,
-            newItem: CategoryData
-        ): Boolean {
-            return oldItem == newItem
-        }
-
     }
 
 }

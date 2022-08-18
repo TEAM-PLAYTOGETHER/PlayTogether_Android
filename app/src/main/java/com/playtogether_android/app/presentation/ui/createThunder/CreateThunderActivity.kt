@@ -71,8 +71,8 @@ class CreateThunderActivity :
         }
 
         with(binding.rvCreatethunderPhotoContainer) {
-            layoutManager =
-                GridLayoutManager(this@CreateThunderActivity, 2, LinearLayout.VERTICAL, false)
+//            layoutManager =
+//                GridLayoutManager(this@CreateThunderActivity, 2, LinearLayout.VERTICAL, false)
             adapter = photoListAdapter
             addItemDecoration(SpacesItemDecorationPhoto())
         }

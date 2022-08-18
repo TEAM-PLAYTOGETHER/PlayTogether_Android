@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.app.util.ListComparator
+import com.playtogether_android.app.util.ListAdapterComparator
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
 class ThunderCategoryListItemAdapter :
-    ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListComparator<CategoryData>()) {
+    ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: CategoryData) {

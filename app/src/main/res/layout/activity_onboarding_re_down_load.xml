@@ -19,6 +19,15 @@
             android:background="@color/gray_black"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/iv_intro_onboarding_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -28,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="@drawable/rectangle_fill_green_radius_0"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/view_intro_onboarding_progressbar_gray"
             app:layout_constraintHorizontal_weight="5"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="@drawable/rectangle_fill_gray3_radius_0"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="5"
             app:layout_constraintStart_toEndOf="@+id/view_intro_onboarding_progressbar_green"
@@ -52,20 +63,20 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/pretendard_regular"
             android:lineSpacingExtra="4dp"
+            android:text="@string/onboarding_redown_title"
             android:textColor="@color/gray_black"
             android:textSize="22sp"
-            android:text="@string/onboarding_redown_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_intro_onboarding_progressbar_green" />
+            app:layout_constraintTop_toBottomOf="@+id/cl_intro_onboarding_top" />
 
         <TextView
             android:id="@+id/tv_join_onboarding_request_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/pretendard_regular"
             android:lineSpacingExtra="4dp"
             android:text="@string/onboarding_redown_subtitle"
-            android:layout_marginTop="8dp"
             android:textColor="@color/gray_black02"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/tv_intro_onboarding_crew_name"
@@ -76,8 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="28dp"
-            android:orientation="vertical"
             android:layout_marginBottom="34dp"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/tv_intro_onboarding_next"
             app:layout_constraintTop_toBottomOf="@+id/tv_join_onboarding_request_code"

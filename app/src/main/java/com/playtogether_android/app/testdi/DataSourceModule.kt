@@ -3,7 +3,6 @@ package com.playtogether_android.app.testdi
 import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
-import com.playtogether_android.data.api.message.MessageSendService
 import com.playtogether_android.data.api.message.MessageService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
@@ -72,12 +71,6 @@ object DataSourceModule {
     @Singleton
     fun provideMessageDataSource(service: MessageService): MessageDataSource {
         return MessageDataSourceImpl(service)
-    }
-
-    @Provides
-    @Singleton
-    fun provideSendMessageDataSource(service: MessageSendService): SendMessageDataSource {
-        return SendMessageDataSourceImpl(service)
     }
 
     @Provides
