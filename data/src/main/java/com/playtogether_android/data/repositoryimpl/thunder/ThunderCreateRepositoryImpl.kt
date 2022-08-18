@@ -6,13 +6,27 @@ import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 
-class ThunderCreateRepositoryImpl(private val thunderCreateDataSource: ThunderCreateDataSource) : ThunderCreateRepository {
+class ThunderCreateRepositoryImpl(private val thunderCreateDataSource: ThunderCreateDataSource) :
+    ThunderCreateRepository {
     override suspend fun postThunderCreate(
         crewId: Int,
         postThunderCreateData: PostThunderCreateData
     ): GetThunderCreateData {
-        return ThunderCreateMapper.mapperToGetCreateThunder(thunderCreateDataSource.postThunderCreate(
-            crewId, ThunderCreateMapper.mapperToPostCreateThunder(postThunderCreateData)
-        ))
+        return ThunderCreateMapper.mapperToGetCreateThunder(
+            thunderCreateDataSource.postThunderCreate(
+                crewId, ThunderCreateMapper.mapperToPostCreateThunder(postThunderCreateData)
+            )
+        )
+    }
+
+    override suspend fun postMultipartThunderCreate(
+        crewId: Int,
+        postThunderCreateData: PostThunderCreateData
+    ): GetThunderCreateData {
+        return ThunderCreateMapper.mapperToGetCreateThunder(
+            thunderCreateDataSource.postMultipartThunderCreate(
+                crewId, ThunderCreateMapper.mapperToPostCreateThunder(postThunderCreateData)
+            )
+        )
     }
 }
