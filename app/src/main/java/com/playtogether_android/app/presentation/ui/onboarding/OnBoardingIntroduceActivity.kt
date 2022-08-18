@@ -57,6 +57,9 @@ class OnBoardingIntroduceActivity :
                 val crewIntroduce = intent.getStringExtra("crewIntro")
 
 
+
+
+
                 val name = binding.etIntroOnboardingName.text.toString()
                 val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
 
@@ -78,12 +81,10 @@ class OnBoardingIntroduceActivity :
                         }
                         //firstSubway = text
                     }
-
                 }
 
                 Timber.e("1 : $nickName")
                 Timber.e("2 : $description")
-
 
                 //onBoardingViewModel.putAddProfile(AddProfileItem())
 
