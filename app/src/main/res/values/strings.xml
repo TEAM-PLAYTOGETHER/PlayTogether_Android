@@ -217,4 +217,15 @@
     <string name="login_title">함께놀아요\nPLAY TOGETHER</string>
     <string name="login_problem">문제가 있으신가요?</string>
     <string name="login_ask"><u>문의하기</u></string>
+
+    <!-- MyPage Setting -->
+    <string name="mypage_setting">설정</string>
+    <string name="mypage_alarm_setting">알림 설정</string>
+    <string name="mypage_manage_accont">계정 관리</string>
+    <string name="mypage_setting_guide">이용 가이드</string>
+    <string name="mypage_setting_policy">정책 및 약관</string>
+    <string name="mypage_setting_warn">신고하기</string>
+    <string name="mypage_setting_version">버전 정보</string>
+    <string name="mypage_setting_developer">개발자 정보</string>
+    <string name="mypage_setting_logout">로그아웃</string>
 </resources>
