@@ -181,9 +181,9 @@
     <string name="thunder_item_day">2022.04.13.신촌 14:00</string>
 
     <!--    HomeDialog-->
-    <string name="home_dialog_group_title">동아리</string>
+    <string name="home_dialog_group_title">MY동아리</string>
     <string name="home_dialog_SOPT">SOPT</string>
-    <string name="home_dialog_button_text">추가하기</string>
+    <string name="home_dialog_button_text">+ 추가하기</string>
     <string name="home_dialog_create">개설하기</string>
     <string name="home_dialog_join">참여하기</string>
 
@@ -217,4 +217,15 @@
     <string name="login_title">함께놀아요\nPLAY TOGETHER</string>
     <string name="login_problem">문제가 있으신가요?</string>
     <string name="login_ask"><u>문의하기</u></string>
+
+    <!-- MyPage Setting -->
+    <string name="mypage_setting">설정</string>
+    <string name="mypage_alarm_setting">알림 설정</string>
+    <string name="mypage_manage_accont">계정 관리</string>
+    <string name="mypage_setting_guide">이용 가이드</string>
+    <string name="mypage_setting_policy">정책 및 약관</string>
+    <string name="mypage_setting_warn">신고하기</string>
+    <string name="mypage_setting_version">버전 정보</string>
+    <string name="mypage_setting_developer">개발자 정보</string>
+    <string name="mypage_setting_logout">로그아웃</string>
 </resources>

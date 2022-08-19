@@ -36,6 +36,13 @@ class ThunderListViewModel @Inject constructor(
 
     val pageOrder = MutableLiveData<Int>()
 
+    private var _tapPosition = 0
+    val tabPosition get() = _tapPosition
+
+    fun setTabPosition(position: Int) {
+        _tapPosition = position
+    }
+
     fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -68,11 +75,9 @@ class ThunderListViewModel @Inject constructor(
         const val DEFAULT_SORT = "createdAt"
         const val DEFAULT_SORT_KR = "최신순"
         const val LIKECNT_KR = "찜 많은순"
+        const val LIKECNT = "peopleCnt"
         const val CATEGORY_EAT = "먹을래"
         const val CATEGORY_GO = "갈래"
         const val CATEGORY_DO = "할래"
-        const val CATEGORY_EAT_ORDER = 0
-        const val CATEGORY_GO_ORDER = 1
-        const val CATEGORY_DO_ORDER = 2
     }
 }

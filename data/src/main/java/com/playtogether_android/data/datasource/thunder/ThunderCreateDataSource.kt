@@ -5,5 +5,13 @@ import com.playtogether_android.data.model.response.thunder.ResponseThunderCreat
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 
 interface ThunderCreateDataSource {
-    suspend fun postThunderCreate(crewId: Int, requestThunderCreate: RequestThunderCreate) : ResponseThunderCreate
+    suspend fun postThunderCreate(
+        crewId: Int,
+        requestThunderCreate: RequestThunderCreate
+    ): ResponseThunderCreate
+
+    suspend fun postMultipartThunderCreate(
+        crewId: Int,
+        requestThunderCreate: RequestThunderCreate
+    ): ResponseThunderCreate
 }

@@ -9,7 +9,7 @@ import com.playtogether_android.app.databinding.ItemMessageRoomBinding
 import com.playtogether_android.domain.model.message.MessageData
 
 class MessageListAdapter(val itemClick: (MessageData) -> Unit) :
-    ListAdapter<MessageData, MessageListAdapter.MessageListViewHolder>(MessageListComparator()) {
+    ListAdapter<MessageData, MessageListAdapter.MessageListViewHolder>(MessageListAdapterComparator()) {
 
     class MessageListViewHolder(
         private val binding: ItemMessageRoomBinding,
@@ -23,7 +23,7 @@ class MessageListAdapter(val itemClick: (MessageData) -> Unit) :
         }
     }
 
-    class MessageListComparator() : DiffUtil.ItemCallback<MessageData>() {
+    class MessageListAdapterComparator() : DiffUtil.ItemCallback<MessageData>() {
         override fun areItemsTheSame(oldItem: MessageData, newItem: MessageData): Boolean {
             return oldItem.roomId == newItem.roomId
         }

@@ -8,14 +8,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
+import com.playtogether_android.domain.usecase.thunder.PostMultipartThunderCreateUseCase
 import com.playtogether_android.domain.usecase.thunder.PostThunderCreateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateThunderViewModel @Inject constructor(
-    val postThunderCreateUseCase: PostThunderCreateUseCase
+    val postThunderCreateUseCase: PostThunderCreateUseCase,
+    val postMultipartThunderCreateUseCase: PostMultipartThunderCreateUseCase
 ) : ViewModel() {
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()
     val getThunderCreateData: LiveData<GetThunderCreateData> get() = _getThunderCreateData
@@ -40,6 +43,18 @@ class CreateThunderViewModel @Inject constructor(
                     it.printStackTrace()
                     Log.d("writingServer", "${it.message}")
                 }
+        }
+    }
+
+    fun postMultipartThunderCreate(postThunderCreateData: PostThunderCreateData) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postMultipartThunderCreateUseCase(crewId, postThunderCreateData)
+            }.onSuccess {
+                _getThunderCreateData.value = it
+            }.onFailure {
+                Timber.e("writingServer ${it.message}")
+            }
         }
     }
 }
