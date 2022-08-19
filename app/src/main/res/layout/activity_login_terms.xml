@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="signViewModel"
+            type="com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,9 +104,26 @@
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:paddingStart="16dp"
-                    android:text="@string/loginterms_terms2"
+                    android:text="@string/loginterms_must"
                     app:layout_constraintStart_toStartOf="@id/cb_loginterms_term1"
                     app:layout_constraintTop_toBottomOf="@id/cb_loginterms_term1" />
+
+                <TextView
+                    android:id="@+id/tv_loginterms_term2"
+                    style="@style/loginterms_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginterms_terms2"
+                    app:layout_constraintStart_toEndOf="@id/cb_loginterms_term2"
+                    app:layout_constraintTop_toTopOf="@id/cb_loginterms_term2" />
+
+                <TextView
+                    style="@style/loginterms_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginterms_agree"
+                    app:layout_constraintStart_toEndOf="@id/tv_loginterms_term2"
+                    app:layout_constraintTop_toTopOf="@id/tv_loginterms_term2" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cb_loginterms_term3"
@@ -115,9 +135,27 @@
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:paddingStart="16dp"
-                    android:text="@string/loginterms_terms3"
+                    android:text="@string/loginterms_must"
                     app:layout_constraintStart_toStartOf="@id/cb_loginterms_term1"
                     app:layout_constraintTop_toBottomOf="@id/cb_loginterms_term2" />
+
+
+                <TextView
+                    android:id="@+id/tv_loginterms_term3"
+                    style="@style/loginterms_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginterms_terms3"
+                    app:layout_constraintStart_toEndOf="@id/cb_loginterms_term3"
+                    app:layout_constraintTop_toTopOf="@id/cb_loginterms_term3" />
+
+                <TextView
+                    style="@style/loginterms_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginterms_agree"
+                    app:layout_constraintStart_toEndOf="@id/tv_loginterms_term3"
+                    app:layout_constraintTop_toTopOf="@id/tv_loginterms_term3" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cb_loginterms_term4"
@@ -129,12 +167,28 @@
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:paddingStart="16dp"
-                    android:text="@string/loginterms_terms4"
+                    android:text="@string/loginterms_select"
                     app:layout_constraintStart_toStartOf="@id/cb_loginterms_term1"
                     app:layout_constraintTop_toBottomOf="@id/cb_loginterms_term3" />
+
+                <TextView
+                    android:id="@+id/tv_loginterms_term4"
+                    style="@style/loginterms_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginterms_terms4"
+                    app:layout_constraintStart_toEndOf="@id/cb_loginterms_term4"
+                    app:layout_constraintTop_toTopOf="@id/cb_loginterms_term4" />
+
+                <TextView
+                    style="@style/loginterms_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginterms_agree"
+                    app:layout_constraintStart_toEndOf="@id/tv_loginterms_term4"
+                    app:layout_constraintTop_toTopOf="@id/tv_loginterms_term4" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_loginterms_access"
