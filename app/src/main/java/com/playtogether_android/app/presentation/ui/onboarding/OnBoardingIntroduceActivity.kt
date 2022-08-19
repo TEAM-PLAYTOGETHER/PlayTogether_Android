@@ -35,7 +35,7 @@ class OnBoardingIntroduceActivity :
         backBtnListener()
         nameTextWatcher()
         introTextWatcher()
-        initSetting()
+
         nextBtnClickListener()
         subwayBtnListener()
         setChipBtn()
@@ -44,9 +44,7 @@ class OnBoardingIntroduceActivity :
 
     override fun onResume() {
         super.onResume()
-        if (binding.etIntroOnboardingName.text.toString() != "") {
-            nicknameDuplicationCheck()
-        }
+        initSetting()
     }
 
     private fun nextBtnClickListener() {
@@ -55,9 +53,6 @@ class OnBoardingIntroduceActivity :
                 val crewName = intent.getStringExtra("crewName")
                 val crewCode = intent.getStringExtra("crewCode")
                 val crewIntroduce = intent.getStringExtra("crewIntro")
-
-
-
 
 
                 val name = binding.etIntroOnboardingName.text.toString()
@@ -114,10 +109,15 @@ class OnBoardingIntroduceActivity :
         val crewName = intent.getStringExtra("crewName")
         val nickname = intent.getStringExtra("nickname")
         val description = intent.getStringExtra("description")
-        binding.tvIntroOnboardingCrewName.setText(crewName)
+        val nicknameCheck = intent.getBooleanExtra("nicknameCheck", false)
 
+        binding.tvIntroOnboardingCrewName.setText(crewName)
         binding.etIntroOnboardingName.setText(nickname)
         binding.etIntroOnboardingIntro.setText(description)
+
+        if(nicknameCheck) {
+            nicknameDuplicationCheck()
+        }
 
     }
 
@@ -236,6 +236,11 @@ class OnBoardingIntroduceActivity :
                 intent.putExtra("ChipList", chipList)
                 intent.putExtra("nickname", nickname)
                 intent.putExtra("description", description)
+                if(binding.tvIntroOnboardingApprove.visibility == View.VISIBLE || binding.tvIntroOnboardingWarn.visibility == View.VISIBLE) {
+                    intent.putExtra("nicknameCheck", true)
+                } else {
+                    intent.putExtra("nicknameCheck", false)
+                }
                 startActivity(intent)
                 finish()
             }
