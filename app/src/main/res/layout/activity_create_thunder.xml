@@ -436,7 +436,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/cl_createthunder_photo"
                         app:layout_constraintTop_toTopOf="@id/cl_createthunder_photo"
-                        tools:listitem="2" />
+                        tools:listitem="@layout/item_create_thunder_photo" />
 
                     <EditText
                         android:id="@+id/et_createthunder_explanation"
