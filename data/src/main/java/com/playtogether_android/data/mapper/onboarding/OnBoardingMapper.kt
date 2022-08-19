@@ -94,7 +94,7 @@ object OnBoardingMapper {
             description = addProfileItem.description,
             firstStation = addProfileItem.firstStation,
             nickname = addProfileItem.nickname,
-            secondStation = addProfileItem.secondStation
+            secondStation = addProfileItem?.secondStation
         )
     }
 }

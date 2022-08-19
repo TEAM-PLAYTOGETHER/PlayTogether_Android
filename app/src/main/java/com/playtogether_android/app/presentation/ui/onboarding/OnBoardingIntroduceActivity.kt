@@ -12,10 +12,8 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
-import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.AddProfileItem
-import com.playtogether_android.domain.model.sign.IdDuplicationCheckItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -24,18 +22,16 @@ import java.util.regex.Pattern
 class OnBoardingIntroduceActivity :
     BaseActivity<ActivityOnBoardingIntroduceBinding>(R.layout.activity_on_boarding_introduce) {
 
-    private val signViewModel: SignViewModel by viewModels()
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()
     private val chipList = java.util.ArrayList<String>()
-    private lateinit var firstSubway: String
-    private lateinit var secondSubway: String
+    private var firstSubway: String? = null
+    private var secondSubway: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         backBtnListener()
         nameTextWatcher()
         introTextWatcher()
-
         nextBtnClickListener()
         subwayBtnListener()
         setChipBtn()
@@ -45,48 +41,53 @@ class OnBoardingIntroduceActivity :
     override fun onResume() {
         super.onResume()
         initSetting()
+        nextBtnActive()
     }
 
     private fun nextBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
             if (binding.tvIntroOnboardingNext.isSelected) {
-                val crewName = intent.getStringExtra("crewName")
-                val crewCode = intent.getStringExtra("crewCode")
-                val crewIntroduce = intent.getStringExtra("crewIntro")
+                nextBtnNetwork()
+            }
+        }
+    }
 
 
-                val name = binding.etIntroOnboardingName.text.toString()
-                val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+    private fun nextBtnNetwork() {
+        val nickName = binding.etIntroOnboardingName.text.toString()
+        val description = binding.etIntroOnboardingIntro.text.toString()
 
-                intent.putExtra("userName", name)
-                intent.putExtra("crewName", crewName)
-                intent.putExtra("crewCode", crewCode)
-                intent.putExtra("crewIntro", crewIntroduce)
-
-
-                val nickName = binding.etIntroOnboardingName.text.toString()
-                val description = binding.etIntroOnboardingIntro.text.toString()
-
-                val list = intent.getStringArrayListExtra("ChipList")
-                if (list?.size != null) {
-                    for (i in 0 until list.size) {
-                        val chip = Chip(binding.chipMypage.context).apply {
-                            text = list[i]
-
-                        }
-                        //firstSubway = text
+        val list = intent.getStringArrayListExtra("ChipList")
+        if (list?.size != null) {
+            for (i in 0 until list.size) {
+                val chip = Chip(binding.chipMypage.context).apply {
+                    text = list[i]
+                    Timber.e("TEST ${list[i]}")
+                    firstSubway = list[0]
+                    if (list.size < 2) {
+                        secondSubway = null
+                    } else {
+                        secondSubway = list[1]
                     }
                 }
-
-                Timber.e("1 : $nickName")
-                Timber.e("2 : $description")
-
-                //onBoardingViewModel.putAddProfile(AddProfileItem())
-
-                startActivity(intent)
-                finish()
             }
+        }
 
+        onBoardingViewModel.putAddProfile(AddProfileItem(description, firstSubway, nickName,secondSubway), 1)
+        onBoardingViewModel.addProfile.observe(this) {
+            val crewName = intent.getStringExtra("crewName")
+            val crewCode = intent.getStringExtra("crewCode")
+            val crewIntroduce = intent.getStringExtra("crewIntro")
+            val name = binding.etIntroOnboardingName.text.toString()
+
+            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
+            intent.putExtra("userName", name)
+            intent.putExtra("crewName", crewName)
+            intent.putExtra("crewCode", crewCode)
+            intent.putExtra("crewIntro", crewIntroduce)
+
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -115,7 +116,7 @@ class OnBoardingIntroduceActivity :
         binding.etIntroOnboardingName.setText(nickname)
         binding.etIntroOnboardingIntro.setText(description)
 
-        if(nicknameCheck) {
+        if (nicknameCheck) {
             nicknameDuplicationCheck()
         }
 
@@ -236,7 +237,7 @@ class OnBoardingIntroduceActivity :
                 intent.putExtra("ChipList", chipList)
                 intent.putExtra("nickname", nickname)
                 intent.putExtra("description", description)
-                if(binding.tvIntroOnboardingApprove.visibility == View.VISIBLE || binding.tvIntroOnboardingWarn.visibility == View.VISIBLE) {
+                if (binding.tvIntroOnboardingApprove.visibility == View.VISIBLE || binding.tvIntroOnboardingWarn.visibility == View.VISIBLE) {
                     intent.putExtra("nicknameCheck", true)
                 } else {
                     intent.putExtra("nicknameCheck", false)
@@ -269,7 +270,6 @@ class OnBoardingIntroduceActivity :
                             this
                         )
                         addBtnListener()
-
                     }
                 }
                 binding.chipMypage.addView(chip)
@@ -306,7 +306,6 @@ class OnBoardingIntroduceActivity :
                 binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
             }
         }
-
         nextBtnActive()
     }
 
