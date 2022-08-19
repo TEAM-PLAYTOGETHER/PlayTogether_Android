@@ -228,4 +228,14 @@
     <string name="mypage_setting_version">버전 정보</string>
     <string name="mypage_setting_developer">개발자 정보</string>
     <string name="mypage_setting_logout">로그아웃</string>
+
+    <!--    login terms activity-->
+    <string name="loginterms_title">PLAY TOGETHER\n약관 동의</string>
+    <string name="loginterms_about">서비스 이용을 위해 약관 동의가 필요해요!</string>
+    <string name="loginterms_all">전체 동의</string>
+    <string name="loginterms_terms1">(필수) 만 18세 이상</string>
+    <string name="loginterms_terms2">(필수) <b><u>이용약관</u></b> 동의</string>
+    <string name="loginterms_terms3">(필수) <b><u>개인정보 수집 및 이용</u></b> 동의</string>
+    <string name="loginterms_terms4">(선택) <b><u>마케팅 정보 수집 및 수신</u></b> 동의</string>
+    <string name="loginterms_access">확인</string>
 </resources>
