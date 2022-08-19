@@ -41,7 +41,6 @@ class OnBoardingIntroduceActivity :
     override fun onResume() {
         super.onResume()
         initSetting()
-        nextBtnActive()
     }
 
     private fun nextBtnClickListener() {
@@ -119,7 +118,6 @@ class OnBoardingIntroduceActivity :
         if (nicknameCheck) {
             nicknameDuplicationCheck()
         }
-
     }
 
     //뒤로가기 버튼 리스너
@@ -167,14 +165,14 @@ class OnBoardingIntroduceActivity :
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val name = p0.toString()
 
-                if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|0-9|_]{2,10}\$", name)) {
-                    binding.tvSignupmainIdDuplication.isSelected = false
-                    binding.tvSignupmainIdDuplication.isClickable = false
-                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#FF0000"))
-                } else if (name.isEmpty()) {
+                if (name.isEmpty() || binding.etIntroOnboardingName.text.toString() == "") {
                     binding.tvSignupmainIdDuplication.isSelected = false
                     binding.tvSignupmainIdDuplication.isClickable = false
                     binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
+                } else if (!Pattern.matches("^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z|0-9|0-9|_]{2,10}\$", name)) {
+                    binding.tvSignupmainIdDuplication.isSelected = false
+                    binding.tvSignupmainIdDuplication.isClickable = false
+                    binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#FF0000"))
                 } else {
                     binding.tvSignupmainIdDuplication.isSelected = true
                     binding.tvSignupmainIdDuplication.isClickable = true
