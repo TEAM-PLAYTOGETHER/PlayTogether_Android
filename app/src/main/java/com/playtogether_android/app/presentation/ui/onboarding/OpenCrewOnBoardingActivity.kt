@@ -178,6 +178,7 @@ class OpenCrewOnBoardingActivity :
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
                 intent.putExtra("crewName", it.name)
                 intent.putExtra("crewCode", it.code)
+                intent.putExtra("crewId", it.id)
                 intent.putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
                 startActivity(intent)
                 finish()

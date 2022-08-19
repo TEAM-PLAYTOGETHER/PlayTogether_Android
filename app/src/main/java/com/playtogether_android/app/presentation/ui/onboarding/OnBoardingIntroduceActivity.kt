@@ -26,6 +26,7 @@ class OnBoardingIntroduceActivity :
     private val chipList = java.util.ArrayList<String>()
     private var firstSubway: String? = null
     private var secondSubway: String? = null
+    private var crewCode : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,18 +73,20 @@ class OnBoardingIntroduceActivity :
             }
         }
 
-        onBoardingViewModel.putAddProfile(AddProfileItem(description, firstSubway, nickName,secondSubway), 1)
+        onBoardingViewModel.putAddProfile(AddProfileItem(description, firstSubway, nickName,secondSubway), intent.getIntExtra("crewId", 1))
         onBoardingViewModel.addProfile.observe(this) {
             val crewName = intent.getStringExtra("crewName")
             val crewCode = intent.getStringExtra("crewCode")
             val crewIntroduce = intent.getStringExtra("crewIntro")
             val name = binding.etIntroOnboardingName.text.toString()
 
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java)
-            intent.putExtra("userName", name)
-            intent.putExtra("crewName", crewName)
-            intent.putExtra("crewCode", crewCode)
-            intent.putExtra("crewIntro", crewIntroduce)
+            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
+                putExtra("userName", name)
+                putExtra("crewName", crewName)
+                putExtra("crewCode", crewCode)
+                putExtra("crewId", intent.getIntExtra("crewId", 1))
+                putExtra("crewIntro", crewIntroduce)
+            }
 
             startActivity(intent)
             finish()
