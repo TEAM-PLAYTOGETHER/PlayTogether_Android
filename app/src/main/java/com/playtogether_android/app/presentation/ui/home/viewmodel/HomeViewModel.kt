@@ -10,12 +10,11 @@ import com.playtogether_android.domain.model.home.ThunderJoinEndData
 import com.playtogether_android.domain.model.home.ThunderJoinEndMember
 import com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer
 import com.playtogether_android.domain.model.light.CategoryData
-import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCase
-import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
-import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
-import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
+import com.playtogether_android.domain.model.onboarding.CrewListData
+import com.playtogether_android.domain.usecase.home.*
 import com.playtogether_android.domain.usecase.light.GetHotListUseCase
 import com.playtogether_android.domain.usecase.light.GetNewListUseCase
+import com.playtogether_android.domain.usecase.onboarding.GetCrewListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -28,7 +27,8 @@ class HomeViewModel @Inject constructor(
     val getThunderJoinEndMemberUseCase: GetThunderJoinEndMemberUseCase,
     val getThunderJoinEndOrganizerUseCase: GetThunderJoinEndOrganizerUseCase,
     val getHotListUseCase: GetHotListUseCase,
-    val getNewListUseCase: GetNewListUseCase
+    val getNewListUseCase: GetNewListUseCase,
+    val getCrewListNameUseCase: GetCrewListNameUseCase,
 ) : ViewModel() {
     private val _refreshView = MutableLiveData<Boolean>()
     val refreshView: LiveData<Boolean> = _refreshView
@@ -55,10 +55,17 @@ class HomeViewModel @Inject constructor(
     private val _newList = MutableLiveData<List<CategoryData>>()
     val newList: LiveData<List<CategoryData>> = _newList
 
-    fun testData() {
+    private val _crewListName = MutableLiveData<List<String>>()
+    val crewListName: LiveData<List<String>> = _crewListName
+
+    fun getCrewListName() {
         viewModelScope.launch {
             kotlin.runCatching {
-
+                getCrewListNameUseCase()
+            }.onSuccess {
+                _crewListName.value = it
+            }.onFailure {
+                Timber.e("getCrewListName : ${it.message}")
             }
         }
     }

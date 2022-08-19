@@ -106,6 +106,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.viewmodel = homeViewModel
         homeViewModel.getHotList()
         homeViewModel.getNewList()
+        homeViewModel.getCrewListName()
     }
 
     private fun refreshView() {

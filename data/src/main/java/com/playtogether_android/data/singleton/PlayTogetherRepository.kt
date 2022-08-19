@@ -20,6 +20,10 @@ object PlayTogetherRepository {
     private const val NAVER_URT_KEY = "NAVER_URT_KEY"  //유저리프레시토큰 키
     private const val NAVER_ACCESS = "NAVER_ACCESS"  //유저리프레시토큰 키
 
+    //유저 동아리
+    private const val CREW_ID = "CREW_ID"
+    private const val CREW_NAME = "CREW_NAME"
+
     //getSharedPreferences
     private const val FB_KEY = "FB_TOKEN" //파이어베이슨 토큰 키
     private const val PREF_KEY = "PREF_KEY"  //authPreferences 키
@@ -58,6 +62,14 @@ object PlayTogetherRepository {
         operation(editor)
         editor.apply()
     }
+
+    var crewName: String
+        get() = authPreferences.getString(CREW_NAME, "") ?: ""
+        set(value) = authPreferences.edit { it.putString(CREW_NAME, value) }
+
+    var crewId: Int
+        get() = authPreferences.getInt(CREW_ID, -1) ?: -1
+        set(value) = authPreferences.edit { it.putInt(CREW_ID, value) }
 
     //현재 유저 토큰
     var userToken: String
