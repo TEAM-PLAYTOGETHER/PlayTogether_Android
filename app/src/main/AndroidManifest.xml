@@ -49,6 +49,17 @@
                     android:scheme="${kakaokey}" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".util.FirebaseMessagingServiceUtil"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+            </intent-filter>
+        </service>
+
+
         <activity
             android:name=".presentation.ui.onboarding.OnboardingReDownLoadActivity"
             android:exported="true" />

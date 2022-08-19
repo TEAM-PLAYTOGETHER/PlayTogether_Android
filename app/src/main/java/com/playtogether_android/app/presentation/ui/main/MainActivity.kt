@@ -1,6 +1,9 @@
 package com.playtogether_android.app.presentation.ui.main
 
 import android.os.Bundle
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -11,6 +14,7 @@ import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -19,11 +23,32 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         changeFragmentNoBackStack(R.id.fragment_container_main, HomeFragment())
         initBottomNav()
+        FirebaseApp.initializeApp(this)
+//        val token = FirebaseMessaging.getInstance().token
+        getFCMToken()
+//        Timber.e("firebase token :$token")
     }
 
 
     private var prevSelectedItem: Int = 1
 
+
+    private fun getFCMToken(): String? {
+        var token: String? = null
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+//                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            token = task.result
+            // Log and toast
+            Timber.e("FCM Token is ${token}")
+        })
+
+        return token
+    }
 
     //바텀네비
     private fun initBottomNav() {

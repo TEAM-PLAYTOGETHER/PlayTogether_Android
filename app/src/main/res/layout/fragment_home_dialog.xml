@@ -18,7 +18,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_homedialog_top_container"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -44,148 +45,37 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/iv_homedialog_cancel"
+                android:id="@+id/iv_homedialog_add_crew"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/ic_icn_gray_exit"
-                app:layout_constraintBottom_toTopOf="@id/tv_homedialog_group_title"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_icn_add_button_message"
+                app:layout_constraintBottom_toBottomOf="@id/tv_homedialog_group_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_homedialog_group_title" />
 
-            <LinearLayout
-                android:id="@+id/ll_homedialog_create_jon_container"
-                android:layout_marginHorizontal="2dp"
+            <View
+                android:id="@+id/view_homedialog_underbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="5dp"
                 android:layout_marginTop="24dp"
-                android:background="@color/white"
-                android:elevation="1dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toEndOf="@id/tv_homedialog_group_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_homedialog_group_title">
+                android:background="#EBEBEB"
+                app:layout_constraintTop_toBottomOf="@id/iv_homedialog_add_crew" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_homedialog_create_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/white"
-                    android:layout_marginHorizontal="1dp"
-                    android:elevation="3dp">
 
-                    <TextView
-                        style="@style/home_dialog_medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="12dp"
-                        android:layout_marginStart="24dp"
-                        android:text="@string/home_dialog_create"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/icn_show_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_homedialog_join_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="1dp"
-                    android:background="@color/white"
-                    android:elevation="3dp">
-
-                    <TextView
-                        style="@style/home_dialog_medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="12dp"
-                        android:layout_marginStart="24dp"
-                        android:text="@string/home_dialog_join"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/icn_show_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_homedialog_sopt"
-                style="@style/home_dialog_bold_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="17dp"
-                android:text="@string/home_dialog_SOPT"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_homedialog_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="24dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_homedialog_create_jon_container" />
-
-            <TextView
-                android:id="@+id/tv_homedialog_temp1"
-                style="@style/home_dialog_normal_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="17dp"
-                android:text="@string/home_dialog_SOPT"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_homedialog_sopt" />
-
-            <TextView
-                android:id="@+id/tv_homedialog_temp2"
-                style="@style/home_dialog_normal_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="17dp"
-                android:text="@string/home_dialog_SOPT"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_homedialog_temp1" />
-
-
-            <TextView
-                android:id="@+id/tv_homedialog_temp3"
-                style="@style/home_dialog_normal_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="17dp"
-                android:text="@string/home_dialog_SOPT"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_homedialog_temp2" />
-
+                app:layout_constraintTop_toBottomOf="@id/view_homedialog_underbar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:id="@+id/rv_home_container"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginTop="17dp"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/cl_homedialog_top_container" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
