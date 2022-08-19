@@ -1,8 +1,7 @@
-package com.playtogether_android.app.testdi
+package com.playtogether_android.app.di
 
 import com.google.gson.GsonBuilder
 import com.playtogether_android.app.BuildConfig
-import com.playtogether_android.app.testdi.RetrofitModule.BASE_URL
 import com.playtogether_android.app.util.AuthInterceptor
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.playtogether_android.app.testdi
+package com.playtogether_android.app.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
