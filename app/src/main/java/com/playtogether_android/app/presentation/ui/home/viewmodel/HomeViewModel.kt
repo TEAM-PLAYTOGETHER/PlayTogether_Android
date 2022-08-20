@@ -125,7 +125,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getHotList() {
+    fun getHotThunderList() {
         viewModelScope.launch {
             kotlin.runCatching {
                 getHotListUseCase()
@@ -137,7 +137,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getNewList() {
+    fun getNewThunderList() {
         viewModelScope.launch {
             kotlin.runCatching {
                 getNewListUseCase()

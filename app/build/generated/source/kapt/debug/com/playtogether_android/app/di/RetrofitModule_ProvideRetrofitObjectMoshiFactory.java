@@ -11,7 +11,7 @@ import javax.inject.Provider;
 import retrofit2.Retrofit;
 
 @ScopeMetadata("javax.inject.Singleton")
-@QualifierMetadata("com.playtogether_android.app.testdi.RetrofitModule.MoshiConverter")
+@QualifierMetadata("com.playtogether_android.app.di.RetrofitModule.MoshiConverter")
 @DaggerGenerated
 @Generated(
     value = "dagger.internal.codegen.ComponentProcessor",

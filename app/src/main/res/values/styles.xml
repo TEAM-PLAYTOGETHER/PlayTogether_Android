@@ -32,6 +32,14 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="home_empty_text">
+        <item name="android:textColor">@color/gray_gray02</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
 
     <!--    ThunderListActivity-->
     <style name="thunder_tool_title">
