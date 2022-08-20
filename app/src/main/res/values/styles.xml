@@ -219,4 +219,34 @@
         <item name="lineHeight">14dp</item>
     </style>
 
+<!--    login terms activity-->
+    <style name="loginterms_title">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/gray_black</item>
+        <item name="lineHeight">30dp</item>
+    </style>
+
+    <style name="loginterms_about">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_black02</item>
+        <item name="lineHeight">16dp</item>
+    </style>
+
+    <style name="loginterms_all">
+        <item name="fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_black</item>
+        <item name="lineHeight">19dp</item>
+    </style>
+
+    <style name="loginterms_terms">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_black02</item>
+        <item name="lineHeight">19dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
 </resources>
