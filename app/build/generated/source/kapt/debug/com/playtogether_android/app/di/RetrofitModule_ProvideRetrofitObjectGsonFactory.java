@@ -9,7 +9,7 @@ import javax.annotation.processing.Generated;
 import retrofit2.Retrofit;
 
 @ScopeMetadata("javax.inject.Singleton")
-@QualifierMetadata("com.playtogether_android.app.testdi.RetrofitModule.GsonConverter")
+@QualifierMetadata("com.playtogether_android.app.di.RetrofitModule.GsonConverter")
 @DaggerGenerated
 @Generated(
     value = "dagger.internal.codegen.ComponentProcessor",
