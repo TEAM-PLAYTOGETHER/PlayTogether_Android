@@ -24,6 +24,8 @@ class ThunderEatFragment : BaseFragment<FragmentThunderEatBinding>(R.layout.frag
     }
 
     private fun initView() {
+        binding.listViewModel = thunderListViewModel
+        binding.lifecycleOwner = this
         initAdapter()
     }
 

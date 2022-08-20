@@ -26,15 +26,12 @@ class ThunderGoFragment : BaseFragment<FragmentThunderGoBinding>(R.layout.fragme
         initView()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Timber.d("111 go")
-    }
-
     private fun initView() {
-//        initData()
+        binding.listViewModel = thunderListViewModel
+        binding.lifecycleOwner = this
         initAdapter()
     }
+
     private fun initAdapter() {
         listAdapter = ThunderCategoryListItemAdapter()
         with(thunderListViewModel) {
@@ -45,7 +42,7 @@ class ThunderGoFragment : BaseFragment<FragmentThunderGoBinding>(R.layout.fragme
 
         with(binding.rvThundergoContainer) {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceItemDecoration(0,10,0,0))
+            addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
             adapter = listAdapter
         }
     }
