@@ -15,7 +15,7 @@ interface OnboardingService {
     ): ResponseRegisterCrew
 
     //동아리 생성
-    @Headers("Content-Type:application/json", "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0IiwidXNlckxvZ2luSWQiOiJicmlhbmRyIiwiaWF0IjoxNjYwODk5MDU5LCJleHAiOjE2NjA5MDI2NTksImlzcyI6InBsYXl0b2dldGhlciJ9.SmQD99EJBo-uRnWBNzwki0Mud45HaEMBG3JfgIfuAXQ")
+    @Headers("Content-Type:application/json", "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0IiwidXNlckxvZ2luSWQiOiJicmlhbmRyIiwiaWF0IjoxNjYwOTc5NTc1LCJleHAiOjE2NjA5ODMxNzUsImlzcyI6InBsYXl0b2dldGhlciJ9.MO6jYVee1XEBx64x2yKaUIzHPSv_DUSjIuBIeDGziOw")
     @POST("crew")
     suspend fun postMakeCrew(
         @Body requestMakeCrew: RequestMakeCrew
@@ -33,7 +33,7 @@ interface OnboardingService {
     ) : ResponseGetNickNameDuplication
 
     //멀티 프로필 등록
-    @Headers("Content-Type:application/json", "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0IiwidXNlckxvZ2luSWQiOiJicmlhbmRyIiwiaWF0IjoxNjYwODk5MDU5LCJleHAiOjE2NjA5MDI2NTksImlzcyI6InBsYXl0b2dldGhlciJ9.SmQD99EJBo-uRnWBNzwki0Mud45HaEMBG3JfgIfuAXQ")
+    @Headers("Content-Type:application/json", "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0IiwidXNlckxvZ2luSWQiOiJicmlhbmRyIiwiaWF0IjoxNjYwOTc5NTc1LCJleHAiOjE2NjA5ODMxNzUsImlzcyI6InBsYXl0b2dldGhlciJ9.MO6jYVee1XEBx64x2yKaUIzHPSv_DUSjIuBIeDGziOw")
     @PUT("user/{crewId}")
     suspend fun putAddProfile(
         @Body requestAddProfile: RequestAddProfile,
