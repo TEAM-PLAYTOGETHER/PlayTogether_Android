@@ -169,6 +169,9 @@ class SearchSubwayActivity :
 
     private fun initSetting() {
         val list = intent.getStringArrayListExtra("ChipList")
+        val nickname = intent.getStringExtra("nickname")
+        val description = intent.getStringExtra("description")
+        val nicknameCheck = intent.getBooleanExtra("nicknameCheck", false)
 
         if (list?.size != null) {
             for (i in 0 until list.size) {
@@ -195,6 +198,9 @@ class SearchSubwayActivity :
                 if(list.size != 0 ) {
                     intent.putExtra("ChipList", list)
                 }
+                intent.putExtra("nickname", nickname)
+                intent.putExtra("description", description)
+                intent.putExtra("nicknameCheck", nicknameCheck)
             }
 
             startActivity(intent)
@@ -205,8 +211,14 @@ class SearchSubwayActivity :
     private fun addBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
             addListener()
+            val nickname = intent.getStringExtra("nickname")
+            val description = intent.getStringExtra("description")
+            val nicknameCheck = intent.getBooleanExtra("nicknameCheck", false)
             val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
             intent.putExtra("ChipList", chipList)
+            intent.putExtra("nickname", nickname)
+            intent.putExtra("description", description)
+            intent.putExtra("nicknameCheck", nicknameCheck)
             startActivity(intent)
             finish()
         }

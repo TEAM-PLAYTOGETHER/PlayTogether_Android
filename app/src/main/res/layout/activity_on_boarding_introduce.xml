@@ -202,7 +202,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
-            android:text="@string/onboarding_intro_subway_two"
+            android:text="@string/onboarding_intro_input_num"
             android:textColor="@color/gray_gray02"
             android:textSize="10sp"
             android:layout_marginStart="6dp"
