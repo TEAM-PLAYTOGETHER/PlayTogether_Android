@@ -25,8 +25,8 @@
         <TextView
             android:id="@+id/tv_thundereat_empty_text"
             style="@style/home_empty_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/home_empty_text"
             android:visibility="@{listViewModel.categoryEatList.size()==0 ? View.VISIBLE : View.INVISIBLE}"
