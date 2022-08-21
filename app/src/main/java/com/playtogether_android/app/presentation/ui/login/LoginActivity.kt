@@ -37,7 +37,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        KakaoSdk.init(this, BuildConfig.KAKAOKEY)
         startForActivity =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
@@ -87,7 +86,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 getErrorLog(error)
             } else if (token != null) {
                 shortToast("성공")
-                val fcmToken =
                 Timber.e("token access ${token.accessToken}")
                 Timber.e("token refresh ${token.refreshToken}")
                 UserApiClient.instance.me { _, error ->

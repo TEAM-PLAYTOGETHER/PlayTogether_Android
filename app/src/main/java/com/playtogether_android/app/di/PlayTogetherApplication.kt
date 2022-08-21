@@ -4,6 +4,11 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.kakao.sdk.common.KakaoSdk
+import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.util.PixelRatio
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.HiltAndroidApp
@@ -30,16 +35,24 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
         registerActivityLifecycleCallbacks(this)
         initLogger()
         PlayTogetherRepository.init(this)
-//        startKoin {
-//            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
-//            androidContext(this@PlayTogetherApplication)
-//            modules(viewModelModule)
-//            modules(networkModule)
-//            modules(dataSourceModule)
-//            modules(repositoryModule)
-//            modules(useCaseModule)
-//            modules(apiModule)
-//        }
+        initKakaoLogin()
+        getDeviceToken()
+    }
+
+    private fun getDeviceToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            val token = task.result
+            PlayTogetherRepository.fireBaseToken = token.toString()
+            Timber.d("token firebase : ${PlayTogetherRepository.fireBaseToken}")
+        })
+    }
+
+    private fun initKakaoLogin() {
+        val kakaoAppKey = BuildConfig.KAKAOKEY
+        KakaoSdk.init(this, kakaoAppKey)
     }
 
     override fun onTerminate() {

@@ -99,5 +99,13 @@ class SignViewModel @Inject constructor(
         }
     }
 
+    fun kakaoLogin() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+
+            }
+        }
+    }
+
 
 }
