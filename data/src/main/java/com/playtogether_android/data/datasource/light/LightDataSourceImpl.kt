@@ -13,11 +13,11 @@ class LightDataSourceImpl(private val lightService: LightService) : LightDataSou
         return lightService.getLightListCategory(category, sort)
     }
 
-    override suspend fun getNewLightning(): ResponseHomeLightning {
-        return lightService.getNewLightning()
+    override suspend fun getNewLightning(crewId: Int): ResponseHomeLightning {
+        return lightService.getNewLightning(crewId)
     }
 
-    override suspend fun getHotLightning(): ResponseHomeLightning {
-        return lightService.getHotLightning()
+    override suspend fun getHotLightning(crewId: Int): ResponseHomeLightning {
+        return lightService.getHotLightning(crewId)
     }
 }

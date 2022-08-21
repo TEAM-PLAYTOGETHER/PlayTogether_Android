@@ -13,6 +13,7 @@ import com.playtogether_android.app.presentation.ui.home.adapter.HomeNewAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity
 import com.playtogether_android.app.util.viewPagerAnimation
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +26,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = this@HomeFragment
-
         initData()
         initView()
         refreshView()
@@ -98,8 +98,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initData() {
-        homeViewModel.getHotThunderList()
-        homeViewModel.getNewThunderList()
+        val crewId = PlayTogetherRepository.crewId
+        homeViewModel.getHotThunderList(crewId)
+        homeViewModel.getNewThunderList(crewId)
         homeViewModel.getCrewListName()
     }
 

@@ -13,13 +13,6 @@ object PlayTogetherRepository {
     private const val KAKAO_URT_KEY = "KAKAO_URT_KEY"  //유저 리프레시토큰 키
     private const val KAKAO_ACCESS = "KAKAO_ACCESS" //
 
-    //네이버
-    private const val NAVER_USER_FIRST_NAME = "NAVER_USER_FIRST_NAME" //유저네임
-    private const val NAVER_USER_LOG_OUT = "NAVER_USER_LOG_OUT" //로그아웃 유무
-    private const val NAVER_UT_KEY = "NAVER_UT_KEY"  //유저토큰 키
-    private const val NAVER_URT_KEY = "NAVER_URT_KEY"  //유저리프레시토큰 키
-    private const val NAVER_ACCESS = "NAVER_ACCESS"  //유저리프레시토큰 키
-
     //유저 동아리
     private const val CREW_ID = "CREW_ID"
     private const val CREW_NAME = "CREW_NAME"
@@ -110,32 +103,6 @@ object PlayTogetherRepository {
     var kakaoUserlogOut: Boolean
         get() = preferences.getBoolean(KAKAO_USER_LOG_OUT, false)
         set(value) = preferences.edit { it.putBoolean(KAKAO_USER_LOG_OUT, value) }
-
-    //네이버 유저 토큰
-    var naverUserToken: String
-        get() = authPreferences.getString(NAVER_UT_KEY, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(NAVER_UT_KEY, value) }
-
-    //네이버 유저 리프레시 토큰
-    var naverUserRefreshToken: String
-        get() = authPreferences.getString(NAVER_URT_KEY, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(NAVER_URT_KEY, value) }
-
-
-    // 네이버 소셜 로그인시 토큰
-    var naverAccessToken: String
-        get() = authPreferences.getString(NAVER_ACCESS, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(NAVER_ACCESS, value) }
-
-    //네이버 유저 이름
-    var naverUserfirstName: String
-        get() = authPreferences.getString(NAVER_USER_FIRST_NAME, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(NAVER_USER_FIRST_NAME, value) }
-
-    //네이버 유저 로그아웃 유무
-    var naverUserlogOut: Boolean
-        get() = preferences.getBoolean(NAVER_USER_LOG_OUT, false)
-        set(value) = preferences.edit { it.putBoolean(NAVER_USER_LOG_OUT, value) }
 
     //파이어베이스 토큰
     var fireBaseToken: String
