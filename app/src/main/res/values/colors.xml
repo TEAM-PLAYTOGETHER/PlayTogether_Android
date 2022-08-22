@@ -26,5 +26,8 @@
     <color name="gray_bdbdbd">#BDBDBD</color>
     <color name="gray_ebebeb">#EBEBEB</color>
     <color name="green_3be200">#3BE200</color>
+    <color name="gray_white">#FFFFFF</color>
+
+    <color name="boundary">#EBEBEB</color>
 
 </resources>

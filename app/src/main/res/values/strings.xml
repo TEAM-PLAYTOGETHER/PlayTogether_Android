@@ -242,4 +242,13 @@
     <string name="loginterms_terms3"><b><u>개인정보 수집 및 이용</u></b></string>
     <string name="loginterms_terms4"><b><u>마케팅 정보 수집 및 수신</u></b></string>
     <string name="loginterms_access">확인</string>
+
+    <!--    userIfo-->
+    <string name="myInfo_title">마이페이지</string>
+    <string name="myInfo_profile_edit">프로필 수정하기</string>
+    <string name="myInfo_crew_manage">내 동아리 관리하기</string>
+    <string name="myInfo_notice">공지사항</string>
+    <string name="myInfo_event">이벤트</string>
+    <string name="myInfo_question">문의하기</string>
+
 </resources>
