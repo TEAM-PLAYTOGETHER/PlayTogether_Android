@@ -24,6 +24,9 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.search.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.login.view.LoginTermsActivity"
             android:exported="true" />
         <activity
@@ -31,7 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.mypage.MyPageSettingActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -93,7 +96,6 @@
         <activity
             android:name=".presentation.ui.onboarding.SelectOnboardingActivity"
             android:exported="true">
-
         </activity>
         <activity
             android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
@@ -124,7 +126,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
