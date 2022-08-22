@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.playtogether_android.domain.model.search.SearchData.LightData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_thunderlist_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_fill_black_radius_10"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/tv_thunder_item_title"
+            style="@style/thunder_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:text="@{model.title}"
+            android:textColor="@{model.open ? @color/main_green : @color/gray_gray04}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="16dp"
+            tools:text="@string/thunder_item_title"
+            tools:textColor="@color/main_green" />
+
+        <TextView
+            android:id="@+id/tv_thunder_item_date"
+            style="@style/thunder_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{model.date}"
+            app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_title"
+            tools:text="@string/thunder_item_day" />
+
+        <TextView
+            android:id="@+id/tv_thunder_item_limit_count"
+            style="@style/thunder_item_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/search_memberCnt + String.valueOf(model.lightMemberCnt)+'/'+String.valueOf(model.peopleCnt)}"
+            app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_date"
+            tools:text="@string/thunder_item_people" />
+
+        <LinearLayout
+            android:id="@+id/ll_thunder_item_tag_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ic_rectangle_home_tag"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_thunder_item_title">
+
+            <TextView
+                android:id="@+id/tv_thunder_item_tag"
+                style="@style/home_item_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.category}"
+                tools:text="@string/home_item_do_text" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_thunder_item_fill_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{model.open ? @drawable/ic_icn_like_filled : @drawable/ic_icn_like_unfilled}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_thunder_item_limit_count"
+            app:layout_constraintStart_toStartOf="@id/ll_thunder_item_tag_container"
+            app:layout_constraintTop_toTopOf="@id/tv_thunder_item_limit_count"
+            tools:background="@drawable/ic_icn_like_filled" />
+
+        <TextView
+            android:id="@+id/tv_thunder_item_like_count"
+            style="@style/thunder_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@{String.valueOf(model.scpCnt)}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_thunder_item_fill_like"
+            app:layout_constraintStart_toEndOf="@id/iv_thunder_item_fill_like"
+            app:layout_constraintTop_toTopOf="@id/iv_thunder_item_fill_like"
+            tools:text="123" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
