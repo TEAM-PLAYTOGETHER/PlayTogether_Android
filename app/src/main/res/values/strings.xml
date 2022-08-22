@@ -12,13 +12,14 @@
     <!--    HomeFragment-->
     <string name="home_group_name">SOPT</string>
     <string name="home_more">more -></string>
-    <string name="home_new_title">😎 NEW</string>
-    <string name="home_hot_title">🔥 HOT</string>
+    <string name="home_new_title">NEW</string>
+    <string name="home_hot_title">HOT</string>
     <string name="home_eat">먹을래</string>
     <string name="home_go">갈래</string>
     <string name="home_do">할래</string>
     <string name="home_searching">에서 찾는중</string>
     <string name="home_category">⚡️ 번개 카테고리</string>
+    <string name="home_empty_text">아직 만들어진 번개가 없어요!\n새로운 번개를 열어보세요</string>
 
 
     <!--common-->
@@ -123,7 +124,7 @@
     <string name="text_next">다음</string>
     <string name="text_get_start">시작하기</string>
     <string name="text_no_relevant">해당사항 없음</string>
-    <string name="onboarding_start_thunder">번개를\n시작해볼까요?</string>
+    <string name="onboarding_start_thunder">동아리를\n추가해볼까요?</string>
     <string name="onboarding_select_option">개설과 참여 중 선택해주세요</string>
     <string name="text_open">개설</string>
     <string name="text_join">참여</string>
@@ -148,7 +149,7 @@
     <string name="onboarding_intro_title">나는 어떤 사람인가요?</string>
     <string name="onboarding_intro_nickname">닉네임</string>
     <string name="onboarding_intro_nickname_input">닉네임 입력</string>
-    <string name="onboarding_intro_condition">10자 이내(공백 제외) 한글, 영문, 숫자, 특수문자</string>
+    <string name="onboarding_intro_condition">2 ~ 10자(공백 불가) 한글, 영문, 숫자, 언더바(_) 사용 가능</string>
     <string name="onboarding_intro_warn">이미 사용중인 닉네임입니다</string>
     <string name="onboarding_intro_access">사용 가능한 닉네임입니다</string>
     <string name="onboarding_intro_simple">간단 소개</string>
@@ -181,9 +182,9 @@
     <string name="thunder_item_day">2022.04.13.신촌 14:00</string>
 
     <!--    HomeDialog-->
-    <string name="home_dialog_group_title">동아리</string>
+    <string name="home_dialog_group_title">MY동아리</string>
     <string name="home_dialog_SOPT">SOPT</string>
-    <string name="home_dialog_button_text">추가하기</string>
+    <string name="home_dialog_button_text">+ 추가하기</string>
     <string name="home_dialog_create">개설하기</string>
     <string name="home_dialog_join">참여하기</string>
 
@@ -217,4 +218,28 @@
     <string name="login_title">함께놀아요\nPLAY TOGETHER</string>
     <string name="login_problem">문제가 있으신가요?</string>
     <string name="login_ask"><u>문의하기</u></string>
+
+    <!-- MyPage Setting -->
+    <string name="mypage_setting">설정</string>
+    <string name="mypage_alarm_setting">알림 설정</string>
+    <string name="mypage_manage_accont">계정 관리</string>
+    <string name="mypage_setting_guide">이용 가이드</string>
+    <string name="mypage_setting_policy">정책 및 약관</string>
+    <string name="mypage_setting_warn">신고하기</string>
+    <string name="mypage_setting_version">버전 정보</string>
+    <string name="mypage_setting_developer">개발자 정보</string>
+    <string name="mypage_setting_logout">로그아웃</string>
+
+    <!--    login terms activity-->
+    <string name="loginterms_title">PLAY TOGETHER\n약관 동의</string>
+    <string name="loginterms_about">서비스 이용을 위해 약관 동의가 필요해요!</string>
+    <string name="loginterms_all">전체 동의</string>
+    <string name="loginterms_must">(필수) &#160;</string>
+    <string name="loginterms_select">(선택)&#160;</string>
+    <string name="loginterms_terms1">(필수) 만 18세 이상</string>
+    <string name="loginterms_agree">&#160;동의</string>
+    <string name="loginterms_terms2"><b><u>이용약관</u></b></string>
+    <string name="loginterms_terms3"><b><u>개인정보 수집 및 이용</u></b></string>
+    <string name="loginterms_terms4"><b><u>마케팅 정보 수집 및 수신</u></b></string>
+    <string name="loginterms_access">확인</string>
 </resources>

@@ -8,4 +8,5 @@ data class PostThunderCreateData(
     val place: String,
     val peopleCnt: Int,
     val description: String,
+    val image: List<String>
 )

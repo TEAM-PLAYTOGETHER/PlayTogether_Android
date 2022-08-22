@@ -36,6 +36,7 @@ object ThunderCreateMapper {
             place = postThunderCreateData.place,
             peopleCnt = postThunderCreateData.peopleCnt,
             description = postThunderCreateData.description,
+            image = postThunderCreateData.image
         )
         Log.d(
             "createServerMapper",

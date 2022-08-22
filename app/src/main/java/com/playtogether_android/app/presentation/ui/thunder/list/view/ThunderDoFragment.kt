@@ -26,13 +26,9 @@ class ThunderDoFragment : BaseFragment<FragmentThunderDoBinding>(R.layout.fragme
         initView()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Timber.d("111 do")
-    }
-
     private fun initView() {
-//        initData()
+        binding.listViewModel = thunderListViewModel
+        binding.lifecycleOwner = this
         initAdapter()
     }
 

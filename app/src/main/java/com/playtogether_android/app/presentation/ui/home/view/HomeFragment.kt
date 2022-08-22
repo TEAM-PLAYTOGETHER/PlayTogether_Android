@@ -12,21 +12,20 @@ import com.playtogether_android.app.presentation.ui.home.adapter.HomeHotAdapter
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeNewAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity
-import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.util.viewPagerAnimation
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by activityViewModels()
-    //    private val thunderListViewModel: ThunderListViewModel by viewModels()
     private lateinit var hotAdapter: HomeHotAdapter
     private lateinit var newAdapter: HomeNewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.homeViewModel = homeViewModel
+        binding.lifecycleOwner = this@HomeFragment
+
         initData()
         initView()
         refreshView()
@@ -98,15 +97,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        initData()
-    }
-
     private fun initData() {
-        binding.viewmodel = homeViewModel
-        homeViewModel.getHotList()
-        homeViewModel.getNewList()
+        homeViewModel.getHotThunderList()
+        homeViewModel.getNewThunderList()
+        homeViewModel.getCrewListName()
     }
 
     private fun refreshView() {

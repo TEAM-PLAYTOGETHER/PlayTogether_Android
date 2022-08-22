@@ -1,6 +1,6 @@
 package com.playtogether_android.app.util
 
-import com.playtogether_android.app.testdi.PlayTogetherApplication
+import com.playtogether_android.app.di.PlayTogetherApplication
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber

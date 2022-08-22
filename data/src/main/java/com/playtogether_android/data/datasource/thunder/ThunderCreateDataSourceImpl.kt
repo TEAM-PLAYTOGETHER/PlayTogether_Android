@@ -5,7 +5,8 @@ import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
 
-class ThunderCreateDataSourceImpl(private val service : ThunderCreateService) : ThunderCreateDataSource {
+class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
+    ThunderCreateDataSource {
     override suspend fun postThunderCreate(
         crewId: Int,
         requestThunderCreate: RequestThunderCreate
@@ -15,5 +16,12 @@ class ThunderCreateDataSourceImpl(private val service : ThunderCreateService) : 
         Log.d("createThunder", "${a.message}")
         Log.d("createThunder", "crewId${crewId}")
         return a
+    }
+
+    override suspend fun postMultipartThunderCreate(
+        crewId: Int,
+        requestThunderCreate: RequestThunderCreate
+    ): ResponseThunderCreate {
+        return service.postMultipartThunderCreate(crewId, requestThunderCreate)
     }
 }

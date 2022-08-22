@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ListAdapter
 import androidx.annotation.Px
-import com.playtogether_android.app.testdi.PlayTogetherApplication
+import com.playtogether_android.app.di.PlayTogetherApplication
 import kotlin.math.roundToInt
 
 class PixelRatio(private val app: Application) {

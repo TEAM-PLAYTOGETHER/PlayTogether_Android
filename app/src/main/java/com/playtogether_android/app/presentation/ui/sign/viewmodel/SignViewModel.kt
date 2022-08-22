@@ -32,7 +32,6 @@ class SignViewModel @Inject constructor(
 
     var name = MutableLiveData<String>()
 
-
     //아이디 중복 체크 변수
     private val _idDuplicationCheck = MutableLiveData<IdDuplicationCheckData>()
     val idDuplicationCheck: LiveData<IdDuplicationCheckData>

@@ -6,12 +6,12 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewEndOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 
-class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoardingBinding>(R.layout.activity_open_crew_end_on_boarding) {
+class OpenCrewEndOnBoardingActivity :
+    BaseActivity<ActivityOpenCrewEndOnBoardingBinding>(R.layout.activity_open_crew_end_on_boarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initSetting()
-        shareBtnClick()
     }
 
     private fun initSetting() {
@@ -33,7 +33,7 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
             finish()
         }
 
-        binding.tvOpenEndOnboardingShare.setOnClickListener{
+        binding.tvOpenEndOnboardingShare.setOnClickListener {
 
             val text = "[Play Together!]\n" +
                     "\n" +
@@ -58,35 +58,5 @@ class OpenCrewEndOnBoardingActivity : BaseActivity<ActivityOpenCrewEndOnBoarding
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
         }
-
-
-    }
-
-    private fun shareBtnClick() {
-//        binding.tvOpenEndOnboardingShare.setOnClickListener{
-//
-//            val text = "[Play Together!]\n" +
-//                    "\n" +
-//                    "이혜빈 님이 'SOPT'에 당신을 초대했습니다!\n" +
-//                    "지금 바로 아래 초대 코드를 입력하고 'SOPT' 회원들이 개설한 번개에 참여해보세요!\n" +
-//                    "\n" +
-//                    "초대코드 : INVITE\n" +
-//                    "\n" +
-//                    "▶ 아직 플레이투게더를 설치하지 않으셨나요? \n" +
-//                    "안드로이드 플레이스토어 \n" +
-//                    "playstore.com/playtogether\n" +
-//                    "\n" +
-//                    "iOS 앱스토어\n" +
-//                    "appstore.com/playtogether"
-//
-//            val sendIntent: Intent = Intent().apply {
-//                action = Intent.ACTION_SEND
-//                putExtra(Intent.EXTRA_TEXT, text)
-//                type = "text/plain"
-//            }
-//
-//            val shareIntent = Intent.createChooser(sendIntent, null)
-//            startActivity(shareIntent)
-//        }
     }
 }

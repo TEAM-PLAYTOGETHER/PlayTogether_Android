@@ -15,7 +15,7 @@
         android:required="false" />
 
     <application
-        android:name=".testdi.PlayTogetherApplication"
+        android:name=".di.PlayTogetherApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".presentation.ui.login.view.LoginTermsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.main.WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.mypage.MyPageSettingActivity"
+            android:exported="true"></activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -38,42 +46,44 @@
                     android:scheme="${kakaokey}" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".util.FirebaseMessagingServiceUtil"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".presentation.ui.onboarding.OnboardingReDownLoadActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewOnBoardingActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.mypage.OthersMyPageActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.main.SplashActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.ui.thunder.OpenThunderDetailActivity"
@@ -87,6 +97,7 @@
         <activity
             android:name=".presentation.ui.onboarding.SelectOnboardingActivity"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
@@ -111,18 +122,13 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.sign.SignInActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.login.LoginActivity"
             android:exported="true" />
