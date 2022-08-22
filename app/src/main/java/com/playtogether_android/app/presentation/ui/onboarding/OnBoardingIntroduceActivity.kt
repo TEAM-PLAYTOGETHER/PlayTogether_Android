@@ -42,6 +42,7 @@ class OnBoardingIntroduceActivity :
     override fun onResume() {
         super.onResume()
         initSetting()
+        nextBtnActive()
     }
 
     private fun nextBtnClickListener() {
@@ -74,11 +75,14 @@ class OnBoardingIntroduceActivity :
         }
 
         onBoardingViewModel.putAddProfile(AddProfileItem(description, firstSubway, nickName,secondSubway), intent.getIntExtra("crewId", 1))
+        val crewName = intent.getStringExtra("crewName")
+        val crewCode = intent.getStringExtra("crewCode")
+        val crewIntroduce = intent.getStringExtra("crewIntro")
+        val name = binding.etIntroOnboardingName.text.toString()
         onBoardingViewModel.addProfile.observe(this) {
-            val crewName = intent.getStringExtra("crewName")
-            val crewCode = intent.getStringExtra("crewCode")
-            val crewIntroduce = intent.getStringExtra("crewIntro")
-            val name = binding.etIntroOnboardingName.text.toString()
+            binding.tvIntroOnboardingCrewName.text = crewName
+
+            Timber.e("TESTTET : $crewName , $crewCode, $crewIntroduce")
 
             val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
                 putExtra("userName", name)
@@ -309,5 +313,4 @@ class OnBoardingIntroduceActivity :
         }
         nextBtnActive()
     }
-
 }

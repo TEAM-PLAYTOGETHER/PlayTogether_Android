@@ -156,7 +156,7 @@
         android:fontFamily="@font/pretendard_bold"
         android:paddingTop="19dp"
         android:paddingBottom="19dp"
-        android:text="@string/home_dialog_button_text"
+        android:text="@string/onboarding_add"
         android:textAlignment="center"
         android:textColor="@drawable/selector_text_gray01_to_black01"
         android:textSize="15sp"
