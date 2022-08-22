@@ -9,6 +9,7 @@ import com.playtogether_android.data.api.message.RoomIdService
 import com.playtogether_android.data.api.mypage.MyPageService
 import com.playtogether_android.data.api.onboarding.OnboardingService
 import com.playtogether_android.data.api.onboarding.SubwayInfoService
+import com.playtogether_android.data.api.search.SearchService
 import com.playtogether_android.data.api.sign.SignService
 import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.api.thunder.ThunderService
@@ -94,4 +95,9 @@ object ApiModule {
         return retrofit.create(HomeService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideSearchService(@RetrofitModule.GsonConverter retrofit: Retrofit): SearchService {
+        return retrofit.create(SearchService::class.java)
+    }
 }

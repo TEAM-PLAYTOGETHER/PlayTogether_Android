@@ -243,6 +243,13 @@
     <string name="loginterms_terms4"><b><u>마케팅 정보 수집 및 수신</u></b></string>
     <string name="loginterms_access">확인</string>
 
+    <!--    searchActivity-->
+    <string name="search_hint">검색어를 입력해주세요</string>
+    <string name="search_eat">먹을래</string>
+    <string name="search_do">할래</string>
+    <string name="search_go">갈래</string>
+    <string name="search_memberCnt">인원&#160;</string>
+
     <!--    userIfo-->
     <string name="myInfo_title">마이페이지</string>
     <string name="myInfo_profile_edit">프로필 수정하기</string>
