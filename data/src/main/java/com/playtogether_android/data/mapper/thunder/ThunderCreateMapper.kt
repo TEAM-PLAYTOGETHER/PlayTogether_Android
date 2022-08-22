@@ -4,6 +4,7 @@ import android.util.Log
 import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
+import com.playtogether_android.domain.model.thunder.PostMultipartThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import kotlin.properties.Delegates
 
@@ -36,7 +37,6 @@ object ThunderCreateMapper {
             place = postThunderCreateData.place,
             peopleCnt = postThunderCreateData.peopleCnt,
             description = postThunderCreateData.description,
-            image = postThunderCreateData.image
         )
         Log.d(
             "createServerMapper",

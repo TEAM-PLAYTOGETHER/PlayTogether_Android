@@ -4,6 +4,7 @@ import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ThunderCreateService {
@@ -13,9 +14,11 @@ interface ThunderCreateService {
         @Body requestThunderCreate: RequestThunderCreate
     ): ResponseThunderCreate
 
+    @Multipart
     @POST("light/add/{crewId}")
     suspend fun postMultipartThunderCreate(
         @Path("crewId") crewId: Int,
-        @Body requestThunderCreate: RequestThunderCreate,
+        @PartMap body : HashMap<String,RequestBody>,
+        @Part image: MultipartBody.Part?
     ): ResponseThunderCreate
 }

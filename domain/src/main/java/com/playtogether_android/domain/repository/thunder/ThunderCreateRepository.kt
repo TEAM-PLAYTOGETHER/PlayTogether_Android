@@ -1,7 +1,10 @@
 package com.playtogether_android.domain.repository.thunder
 
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
+import com.playtogether_android.domain.model.thunder.PostMultipartThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 interface ThunderCreateRepository {
     suspend fun postThunderCreate(
@@ -11,6 +14,7 @@ interface ThunderCreateRepository {
 
     suspend fun postMultipartThunderCreate(
         crewId: Int,
-        postThunderCreateData: PostThunderCreateData
+        body: HashMap<String, RequestBody>,
+        image: MultipartBody.Part?
     ): GetThunderCreateData
 }
