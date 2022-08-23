@@ -92,7 +92,6 @@
 
         <TextView
             android:id="@+id/tv_thunder_item_like_count"
-            style="@style/thunder_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -100,7 +99,8 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_thunder_item_fill_like"
             app:layout_constraintStart_toEndOf="@id/iv_thunder_item_fill_like"
             app:layout_constraintTop_toTopOf="@id/iv_thunder_item_fill_like"
-            tools:text="123" />
+            tools:text="123"
+            android:textColor="@{categoryData.open ? @color/white : @color/gray_gray02}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
