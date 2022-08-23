@@ -26,6 +26,9 @@
     <color name="gray_bdbdbd">#BDBDBD</color>
     <color name="gray_ebebeb">#EBEBEB</color>
     <color name="green_3be200">#3BE200</color>
+    <color name="gray_white">#FFFFFF</color>
+
+    <color name="boundary">#EBEBEB</color>
 
     <color name="mtrl_textinput_default_box_stroke_color">@color/gray_gray01</color>
 </resources>

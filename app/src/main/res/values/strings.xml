@@ -249,4 +249,13 @@
     <string name="search_do">할래</string>
     <string name="search_go">갈래</string>
     <string name="search_memberCnt">인원&#160;</string>
+
+    <!--    userIfo-->
+    <string name="myInfo_title">마이페이지</string>
+    <string name="myInfo_profile_edit">프로필 수정하기</string>
+    <string name="myInfo_crew_manage">내 동아리 관리하기</string>
+    <string name="myInfo_notice">공지사항</string>
+    <string name="myInfo_event">이벤트</string>
+    <string name="myInfo_question">문의하기</string>
+
 </resources>
