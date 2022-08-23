@@ -309,7 +309,6 @@
     <style name="logininfo_btn_unselect_text">
         <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/gray_gray01</item>
         <item name="lineHeight">18dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -317,9 +316,13 @@
     <style name="logininfo_btn_select_text">
         <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/gray_black</item>
         <item name="lineHeight">19dp</item>
         <item name="android:includeFontPadding">false</item>
+    </style>
+
+<!--    number picker style-->
+    <style name="DefaultNumberPickerTheme" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
 </resources>
