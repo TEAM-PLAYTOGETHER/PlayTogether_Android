@@ -32,7 +32,7 @@
                 android:paddingVertical="15dp"/>
 
             <ImageView
-                android:id="@+id/iv_setting"
+                android:id="@+id/btn_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icn_setting"
