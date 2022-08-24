@@ -26,7 +26,6 @@ class JoinOnBoardingActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initBackBtn()
         initEditText()
         editTextWatcher()
@@ -44,9 +43,7 @@ class JoinOnBoardingActivity :
 
     //edittext 입력중일 때 텍스트 백그라운드 selected
     private fun initEditText() {
-        binding.etJoinOnboarding.setOnClickListener {
-            binding.etJoinOnboarding.isSelected = true
-        }
+        binding.etJoinOnboarding.setOnClickListener { binding.etJoinOnboarding.isSelected = true }
         binding.etJoinOnboarding.filters = arrayOf(AllCaps(), LengthFilter(6))
     }
 
@@ -54,14 +51,8 @@ class JoinOnBoardingActivity :
     //6자리 입력 해야 입장버튼 활성화
     private fun editTextWatcher() = with(binding) {
         etJoinOnboarding.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
                 val input = binding.etJoinOnboarding.text.toString()
                 if (input.length == 5) {
@@ -70,12 +61,8 @@ class JoinOnBoardingActivity :
                 } else {
                     binding.tvJoinOnboardingNext.visibility = View.INVISIBLE
                     binding.tvJoinOnboardingEnter.visibility = View.VISIBLE
-
-
                 }
-
             }
-
         })
     }
 

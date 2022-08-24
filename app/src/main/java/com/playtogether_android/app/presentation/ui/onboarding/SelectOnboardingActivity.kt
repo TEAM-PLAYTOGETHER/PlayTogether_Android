@@ -15,12 +15,10 @@ class SelectOnboardingActivity :
     BaseActivity<ActivitySelectOnboardingBinding>(R.layout.activity_select_onboarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initBackBtn()
         initOpenBtnClickListener()
         initJoinBtnClickListener()
         movePage()
-
     }
 
     //뒤로가기 버튼 클릭 리스너
@@ -36,7 +34,6 @@ class SelectOnboardingActivity :
             clSecondOnboardingOpen.isSelected = true
             ivSecondOnboardingJoinSelect.visibility = View.INVISIBLE
             ivSecondOnboardingOpenSelect.visibility = View.VISIBLE
-
 
             if (clSecondOnboardingJoinSelect.isSelected) {
                 clSecondOnboardingOpen.isSelected = true
@@ -83,6 +80,5 @@ class SelectOnboardingActivity :
                 finish()
             }
         }
-
     }
 }

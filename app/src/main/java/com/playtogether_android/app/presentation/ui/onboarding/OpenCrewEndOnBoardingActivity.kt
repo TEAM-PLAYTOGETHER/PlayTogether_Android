@@ -10,7 +10,6 @@ class OpenCrewEndOnBoardingActivity :
     BaseActivity<ActivityOpenCrewEndOnBoardingBinding>(R.layout.activity_open_crew_end_on_boarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initSetting()
     }
 

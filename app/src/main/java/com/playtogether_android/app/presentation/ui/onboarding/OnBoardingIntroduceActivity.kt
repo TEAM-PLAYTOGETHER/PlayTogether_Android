@@ -26,7 +26,6 @@ class OnBoardingIntroduceActivity :
     private val chipList = java.util.ArrayList<String>()
     private var firstSubway: String? = null
     private var secondSubway: String? = null
-    private var crewCode: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -212,7 +211,6 @@ class OnBoardingIntroduceActivity :
                 initTextFieldCheck()
                 duplicationClickEvent()
                 nextBtnActive()
-
             }
         })
     }
@@ -220,14 +218,8 @@ class OnBoardingIntroduceActivity :
     //간단소개 textWatcher
     private fun introTextWatcher() = with(binding) {
         etIntroOnboardingIntro.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()

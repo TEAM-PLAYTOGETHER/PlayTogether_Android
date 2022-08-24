@@ -172,7 +172,6 @@ class OpenCrewOnBoardingActivity :
                 finish()
             } else {
                 Toast.makeText(this, "동아리 개설이 실패되었습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
-
             }
         }
     }

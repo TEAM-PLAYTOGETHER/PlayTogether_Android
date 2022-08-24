@@ -70,14 +70,8 @@ class SearchSubwayActivity :
 
     private fun editTextWatcher() = with(binding) {
         etSubwayOnboardingName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
                 val input = binding.etSubwayOnboardingName.text.toString()
                 searchingSubway(input)
@@ -144,9 +138,7 @@ class SearchSubwayActivity :
                             setCloseIconTintResource(R.color.gray_999999)
                             chipBackgroundColor = getColorStateList(R.color.black)
                             setOnCloseIconClickListener {
-                                binding.chipSubwayOnboarding.removeView(
-                                    this
-                                )
+                                binding.chipSubwayOnboarding.removeView(this)
                                 activeBtn()
                             }
                         })
