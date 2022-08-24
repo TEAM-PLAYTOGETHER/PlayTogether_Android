@@ -27,9 +27,7 @@ class ThunderCreateRepositoryImpl(private val thunderCreateDataSource: ThunderCr
         crewId: Int,
         body: HashMap<String, RequestBody>,
         image: MultipartBody.Part?
-    ): GetThunderCreateData {
-        return ThunderCreateMapper.mapperToGetCreateThunder(
-            thunderCreateDataSource.postMultipartThunderCreate(crewId, body, image)
-        )
+    ) {
+
     }
 }

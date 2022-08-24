@@ -6,6 +6,7 @@ import com.playtogether_android.data.model.response.thunder.ResponseThunderCreat
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostMultipartThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
+import okhttp3.RequestBody
 import kotlin.properties.Delegates
 
 object ThunderCreateMapper {
@@ -42,6 +43,19 @@ object ThunderCreateMapper {
             "createServerMapper",
             "${r.title} ${r.category} ${r.date} ${r.time} ${r.place} ${r.peopleCnt} ${r.description}"
         )
+        return r
+    }
+
+    fun mapperToPostCreateThunderMultipart(postThunderCreateData: PostThunderCreateData): HashMap<String, RequestBody> {
+        val r = RequestThunderCreate(
+            title = postThunderCreateData.title,
+            category = postThunderCreateData.category,
+            date = postThunderCreateData.date,
+            time = postThunderCreateData.time,
+            place = postThunderCreateData.place,
+            peopleCnt = postThunderCreateData.peopleCnt,
+            description = postThunderCreateData.description,
+        ).toRequestBody()
         return r
     }
 }

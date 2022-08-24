@@ -16,5 +16,5 @@ interface ThunderCreateRepository {
         crewId: Int,
         body: HashMap<String, RequestBody>,
         image: MultipartBody.Part?
-    ): GetThunderCreateData
+    )
 }

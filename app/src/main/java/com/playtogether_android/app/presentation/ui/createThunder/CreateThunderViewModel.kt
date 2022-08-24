@@ -2,23 +2,22 @@ package com.playtogether_android.app.presentation.ui.createThunder
 
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
-import com.playtogether_android.domain.usecase.thunder.PostMultipartThunderCreateUseCase
+import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 import com.playtogether_android.domain.usecase.thunder.PostThunderCreateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateThunderViewModel @Inject constructor(
     val postThunderCreateUseCase: PostThunderCreateUseCase,
-    val postMultipartThunderCreateUseCase: PostMultipartThunderCreateUseCase
+    val repository: ThunderCreateRepository
 ) : ViewModel() {
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()
     val getThunderCreateData: LiveData<GetThunderCreateData> get() = _getThunderCreateData
@@ -46,14 +45,10 @@ class CreateThunderViewModel @Inject constructor(
         }
     }
 
-    fun postMultipartThunderCreate(postThunderCreateData: PostThunderCreateData) {
+    fun postMultipartBody(crewId : Int, body :MultipartBody.Part? = null, image : ) {
         viewModelScope.launch {
             kotlin.runCatching {
-                postMultipartThunderCreateUseCase(crewId, postThunderCreateData)
-            }.onSuccess {
-                _getThunderCreateData.value = it
-            }.onFailure {
-                Timber.e("writingServer ${it.message}")
+                repository.postMultipartThunderCreate()
             }
         }
     }

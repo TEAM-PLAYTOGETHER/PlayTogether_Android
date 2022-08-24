@@ -19,16 +19,26 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
+import com.playtogether_android.app.util.MultiPartResolver
 import com.playtogether_android.app.util.SpacesItemDecorationPhoto
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
 import java.util.*
@@ -44,6 +54,7 @@ class CreateThunderActivity :
     private val galleryItemList = mutableListOf<Uri>()
     private lateinit var intentLauncher: ActivityResultLauncher<Intent>
     private lateinit var photoListAdapter: CreateThunderPhotoListAdapter
+    private val multiPartResolver = MultiPartResolver(this)
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
@@ -137,24 +148,31 @@ class CreateThunderActivity :
             val title = binding.etCreatethunderName.text.toString()
             val place = binding.etCreatethunderPlace.text.toString()
             var peopleCnt = 0
-            val image = transferImage(photoListAdapter.mutablePhotoList)
+
             if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
                 peopleCnt = -1
             else
                 peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
             val description = binding.etCreatethunderExplanation.text.toString()
-            createThunderViewModel.postMultipartThunderCreate(
-                PostThunderCreateData(
-                    title,
-                    category,
-                    date,
-                    time,
-                    place,
-                    peopleCnt,
-                    description,
-                    image
-                )
-            )
+            val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
+            builder
+                .addFormDataPart("title", title)
+                .addFormDataPart("category", category)
+                .addFormDataPart("date", date)
+                .addFormDataPart("people_cnt", peopleCnt.toString())
+                .addFormDataPart("description", description)
+                .addFormDataPart("time", time)
+                .addFormDataPart("place", place)
+
+            val files = transferImage(galleryItemList)
+            val formList = mutableListOf<MultipartBody.Part>()
+            for (file in files) {
+                val requestBody = file.asRequestBody("text/plain".toMediaTypeOrNull())
+                val body = MultipartBody.Part.createFormData("file", file.name, requestBody)
+                formList.add(body)
+            }
+
+            Timber.e("rere multipart : $formList")
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
@@ -211,12 +229,13 @@ class CreateThunderActivity :
         }
     }
 
-    private fun transferImage(list: List<Uri>): List<String> {
-        val mut = mutableListOf<String>()
+    private fun transferImage(list: List<Uri>): List<File> {
+        val mut = mutableListOf<File>()
         list.forEach {
             val path = absolutePath(it)
+            val file = File(path)
             Timber.e("rere path : $path")
-            mut.add(path)
+            mut.add(file)
         }
         return mut
     }
@@ -234,18 +253,18 @@ class CreateThunderActivity :
             else
                 peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
             val description = binding.etCreatethunderExplanation.text.toString()
-            createThunderViewModel.postThunderCreate(
-                PostThunderCreateData(
-                    title,
-                    category,
-                    date,
-                    time,
-                    place,
-                    peopleCnt,
-                    description,
-                    image
-                )
-            )
+//            createThunderViewModel.postThunderCreate(
+//                PostThunderCreateData(
+//                    title,
+//                    category,
+//                    date,
+//                    time,
+//                    place,
+//                    peopleCnt,
+//                    description,
+//                    image
+//                )
+//            )
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
