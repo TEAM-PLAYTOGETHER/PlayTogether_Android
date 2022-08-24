@@ -41,7 +41,6 @@ class SearchSubwayActivity :
             binding.etSubwayOnboardingName.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
         } else {
             binding.etSubwayOnboardingName.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
-
         }
     }
 
@@ -165,6 +164,12 @@ class SearchSubwayActivity :
         val description = intent.getStringExtra("description")
         val nicknameCheck = intent.getBooleanExtra("nicknameCheck", false)
 
+        val crewName = intent.getStringExtra("crewName")
+        val crewCode = intent.getStringExtra("crewCode")
+        val crewIntroduce = intent.getStringExtra("crewIntro")
+        val crewId = intent.getIntExtra("crewId", 1)
+        val isOpener = intent.getBooleanExtra("isOpener", true)
+
         if (list?.size != null) {
             for (i in 0 until list.size) {
                 val chip = Chip(binding.chipSubwayOnboarding.context).apply {
@@ -193,8 +198,13 @@ class SearchSubwayActivity :
                 intent.putExtra("nickname", nickname)
                 intent.putExtra("description", description)
                 intent.putExtra("nicknameCheck", nicknameCheck)
-            }
 
+                intent.putExtra("crewId", crewId)
+                intent.putExtra("isOpener", isOpener)
+                intent.putExtra("crewCode", crewCode)
+                intent.putExtra("crewName", crewName)
+                intent.putExtra("crewIntro", crewIntroduce)
+            }
             startActivity(intent)
             finish()
         }
@@ -206,11 +216,24 @@ class SearchSubwayActivity :
             val nickname = intent.getStringExtra("nickname")
             val description = intent.getStringExtra("description")
             val nicknameCheck = intent.getBooleanExtra("nicknameCheck", false)
+
+            val crewName = intent.getStringExtra("crewName")
+            val crewCode = intent.getStringExtra("crewCode")
+            val crewIntroduce = intent.getStringExtra("crewIntro")
+            val crewId = intent.getIntExtra("crewId", 1)
+            val isOpener = intent.getBooleanExtra("isOpener", true)
+
             val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
             intent.putExtra("ChipList", chipList)
             intent.putExtra("nickname", nickname)
             intent.putExtra("description", description)
             intent.putExtra("nicknameCheck", nicknameCheck)
+            intent.putExtra("crewId", crewId)
+            intent.putExtra("crewCode", crewCode)
+            intent.putExtra("crewName", crewName)
+            intent.putExtra("crewIntro", crewIntroduce)
+            intent.putExtra("isOpener", isOpener)
+
             startActivity(intent)
             finish()
         }

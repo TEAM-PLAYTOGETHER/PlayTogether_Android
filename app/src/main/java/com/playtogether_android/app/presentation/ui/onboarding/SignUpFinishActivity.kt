@@ -1,10 +1,11 @@
-package com.playtogether_android.app.presentation.ui.sign
+package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
 import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpFinishBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.sign.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignUpInfoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SignUpFinishActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.domain.model.sign.SignUpItem
 import dagger.hilt.android.AndroidEntryPoint

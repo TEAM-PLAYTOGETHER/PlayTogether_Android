@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.sign.SignUpFinishActivity">
+        tools:context=".presentation.ui.onboarding.SignUpFinishActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_signup_finish_top"
