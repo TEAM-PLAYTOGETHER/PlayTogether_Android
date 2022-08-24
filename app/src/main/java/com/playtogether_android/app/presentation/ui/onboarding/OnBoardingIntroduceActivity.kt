@@ -26,7 +26,7 @@ class OnBoardingIntroduceActivity :
     private val chipList = java.util.ArrayList<String>()
     private var firstSubway: String? = null
     private var secondSubway: String? = null
-    private var crewCode : Int? = null
+    private var crewCode: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,28 +74,35 @@ class OnBoardingIntroduceActivity :
             }
         }
 
-        onBoardingViewModel.putAddProfile(AddProfileItem(description, firstSubway, nickName,secondSubway), intent.getIntExtra("crewId", 1))
+        onBoardingViewModel.putAddProfile(
+            AddProfileItem(
+                description,
+                firstSubway,
+                nickName,
+                secondSubway
+            ), intent.getIntExtra("crewId", 1)
+        )
         val crewName = intent.getStringExtra("crewName")
         val crewCode = intent.getStringExtra("crewCode")
         val crewIntroduce = intent.getStringExtra("crewIntro")
         val name = binding.etIntroOnboardingName.text.toString()
-        onBoardingViewModel.addProfile.observe(this) {
-            binding.tvIntroOnboardingCrewName.text = crewName
 
-            Timber.e("TESTTET : $crewName , $crewCode, $crewIntroduce")
+        binding.tvIntroOnboardingCrewName.text = crewName
 
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
-                putExtra("userName", name)
-                putExtra("crewName", crewName)
-                putExtra("crewCode", crewCode)
-                putExtra("crewId", intent.getIntExtra("crewId", 1))
-                putExtra("crewIntro", crewIntroduce)
-            }
+        Timber.e("TESTTET : $crewName , $crewCode, $crewIntroduce")
 
-            startActivity(intent)
-            finish()
+        val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
+            putExtra("userName", name)
+            putExtra("crewName", crewName)
+            putExtra("crewCode", crewCode)
+            putExtra("crewId", intent.getIntExtra("crewId", 1))
+            putExtra("crewIntro", crewIntroduce)
         }
+
+        startActivity(intent)
+        finish()
     }
+
 
     private fun nextBtnActive() {
         binding.tvIntroOnboardingNext.isSelected =
