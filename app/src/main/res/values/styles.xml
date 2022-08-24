@@ -320,9 +320,24 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
-<!--    number picker style-->
-    <style name="DefaultNumberPickerTheme" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/white</item>
+    <!--    number picker style-->
+    <style name="DefaultNumberPickerTheme">
+        <item name="android:textSize">22sp</item>
+        <item name="android:editTextColor">@color/gray_black</item>
+    </style>
+
+    <style name="date_dialog_access">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">24dp</item>
+        <item name="android:textColor">@color/gray_black</item>
+    </style>
+
+    <style name="date_dialog_cancel">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">24dp</item>
+        <item name="android:textColor">@color/gray_gray01</item>
     </style>
 
 </resources>

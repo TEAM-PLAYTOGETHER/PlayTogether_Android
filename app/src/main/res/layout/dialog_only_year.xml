@@ -8,24 +8,27 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingBottom="16dp"
         android:layout_height="wrap_content">
 
         <NumberPicker
+            android:descendantFocusability="blocksDescendants"
             android:id="@+id/np_dialog_picker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:selectionDividerHeight="0dp"
+            android:theme="@style/DefaultNumberPickerTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_dialog_access"
-            android:layout_width="wrap_content"
+            style="@style/date_dialog_access"
+            android:layout_width="89dp"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"
+            android:gravity="center"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
             android:text="@string/loginterms_access"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,15 +36,16 @@
 
         <TextView
             android:id="@+id/tv_dialog_cancel"
+            style="@style/date_dialog_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"
+            android:gravity="center"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
             android:text="@string/logininfo_cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_dialog_access"
             app:layout_constraintTop_toBottomOf="@id/np_dialog_picker" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

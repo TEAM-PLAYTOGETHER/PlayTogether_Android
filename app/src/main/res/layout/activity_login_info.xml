@@ -155,7 +155,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -166,6 +165,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="36dp"
             android:background="@drawable/selector_rectangle_fill_gray03_to_black"
+            android:clickable="false"
             android:minHeight="0dp"
             android:paddingVertical="18dp"
             android:text="@string/loginterms_access"
