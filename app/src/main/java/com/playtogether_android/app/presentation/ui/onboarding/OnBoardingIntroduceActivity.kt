@@ -42,7 +42,6 @@ class OnBoardingIntroduceActivity :
     override fun onResume() {
         super.onResume()
         initSetting()
-        nextBtnActive()
     }
 
     private fun nextBtnClickListener() {
@@ -105,8 +104,7 @@ class OnBoardingIntroduceActivity :
 
 
     private fun nextBtnActive() {
-        binding.tvIntroOnboardingNext.isSelected =
-            binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
+        binding.tvIntroOnboardingNext.isSelected = binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
     }
 
 
@@ -131,6 +129,10 @@ class OnBoardingIntroduceActivity :
 
         if (nicknameCheck) {
             nicknameDuplicationCheck()
+        }
+
+        if(description != "" && nicknameCheck) {
+            binding.tvIntroOnboardingNext.isSelected = true
         }
     }
 
@@ -257,8 +259,6 @@ class OnBoardingIntroduceActivity :
                 startActivity(intent)
                 finish()
             }
-
-
         }
     }
 
