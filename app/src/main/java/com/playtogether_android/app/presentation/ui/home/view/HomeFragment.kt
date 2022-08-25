@@ -11,6 +11,7 @@ import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderA
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeHotAdapter
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeNewAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
+import com.playtogether_android.app.presentation.ui.search.SearchActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity
 import com.playtogether_android.app.util.viewPagerAnimation
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -52,6 +53,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         startActivity(intent)
     }
 
+    private fun setSearchActivity() {
+        val intent = Intent(requireActivity(), SearchActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun setClickListener() {
         binding.ivHomeEat.setOnClickListener {
             setThunderListActivity(CATEGORY_EAT)
@@ -64,6 +70,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
         binding.btnHomeFloat.setOnClickListener {
             setCreateThunderActivity()
+        }
+        binding.ivHomeSearch.setOnClickListener{
+            setSearchActivity()
         }
     }
 
