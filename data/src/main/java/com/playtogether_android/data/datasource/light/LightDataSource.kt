@@ -5,11 +5,12 @@ import com.playtogether_android.data.model.response.light.ResponseHomeLightning
 
 interface LightDataSource {
     suspend fun getLightListCategory(
+        crewId: Int,
         category: String,
         sort: String,
     ): ResponseLightListCategory
 
-    suspend fun getNewLightning(crewId : Int) : ResponseHomeLightning
+    suspend fun getNewLightning(crewId: Int): ResponseHomeLightning
 
-    suspend fun getHotLightning(crewId : Int) : ResponseHomeLightning
+    suspend fun getHotLightning(crewId: Int): ResponseHomeLightning
 }
