@@ -71,7 +71,8 @@ class JoinOnBoardingActivity :
         onBoardingViewModel.registerCrew.observe(this) {
             if (it.success) {
                 Log.d("성공", "동아리가입")
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("isOpener", false)
                 startActivity(intent)
                 finish()
             } else {
@@ -79,7 +80,8 @@ class JoinOnBoardingActivity :
 //                val title = "존재하지 않는 코드입니다"
 //                val dialog = CustomDialog(this, title)
 //                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("isOpener", false)
                 startActivity(intent)
                 finish()
             }

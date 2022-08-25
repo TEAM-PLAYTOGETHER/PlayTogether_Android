@@ -89,18 +89,31 @@ class OnBoardingIntroduceActivity :
         val crewId = intent.getIntExtra("crewId", 1)
         val isOpener = intent.getBooleanExtra("isOpener", true)
 
+        Timber.e("111111: $isOpener")
+
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
 
-        val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
-            putExtra("nickname", name)
-            putExtra("crewName", crewName)
-            putExtra("crewCode", crewCode)
-            putExtra("crewId", crewId)
-            putExtra("crewIntro", crewIntroduce)
+        if(isOpener) {
+            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
+                putExtra("nickname", name)
+                putExtra("crewName", crewName)
+                putExtra("crewCode", crewCode)
+                putExtra("crewId", crewId)
+                putExtra("crewIntro", crewIntroduce)
+                putExtra("isOpener", isOpener)
+            }
+            startActivity(intent)
+            finish()
+        } else {
+            val intent = Intent(this, SignUpFinishActivity::class.java).apply {
+                putExtra("nickname", name)
+            }
+            startActivity(intent)
+            finish()
         }
-        startActivity(intent)
-        finish()
+
+
     }
 
 
@@ -228,7 +241,7 @@ class OnBoardingIntroduceActivity :
             val crewIntroduce = intent.getStringExtra("crewIntro")
             val crewId = intent.getIntExtra("crewId", 1)
             val isOpener = intent.getBooleanExtra("isOpener", true)
-
+            Timber.e("222222222: $isOpener")
             if (binding.tvOpenOnboardingAdd.isSelected) {
                 shortToast("최대 2개까지 추가할 수 있어요!")
             } else {
@@ -309,9 +322,7 @@ class OnBoardingIntroduceActivity :
     private fun nicknameDuplicationCheck() {
         val nickname: String = binding.etIntroOnboardingName.text.toString()
 
-        //TODO : crewId 고정값 취소
         val crewId = intent.getIntExtra("crewId", 1)
-        Timber.e("TESTETES : $crewId")
         onBoardingViewModel.getNickNameDuplication(crewId, "$nickname")
         onBoardingViewModel.nicknameDuplicationCheck.observe(this) {
             if (!it.success) {
