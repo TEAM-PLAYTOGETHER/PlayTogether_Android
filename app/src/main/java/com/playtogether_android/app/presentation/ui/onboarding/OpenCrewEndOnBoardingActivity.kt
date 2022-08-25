@@ -18,7 +18,7 @@ class OpenCrewEndOnBoardingActivity :
         val crewName = intent.getStringExtra("crewName")
         val crewIntroduce = intent.getStringExtra("crewIntro")
         val crewCode = intent.getStringExtra("crewCode")
-        val userName = intent.getStringExtra("userName")
+        val userName = intent.getStringExtra("nickname")
 
         binding.tvOpenEndOnboardingName.setText(userName)
         binding.tvOpenEndOnboardingCrew.setText(crewName)

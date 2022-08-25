@@ -28,8 +28,6 @@ class OnBoardingIntroduceActivity :
     private var secondSubway: String? = null
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         backBtnListener()
@@ -59,13 +57,6 @@ class OnBoardingIntroduceActivity :
         val nickName = binding.etIntroOnboardingName.text.toString()
         val description = binding.etIntroOnboardingIntro.text.toString()
 
-        val crewName = intent.getStringExtra("crewName")
-        val crewCode = intent.getStringExtra("crewCode")
-        val crewIntroduce = intent.getStringExtra("crewIntro")
-        val crewId = intent.getIntExtra("crewId", 1)
-        val isOpener = intent.getBooleanExtra("isOpener", true)
-
-
         val list = intent.getStringArrayListExtra("ChipList")
         if (list?.size != null) {
             for (i in 0 until list.size) {
@@ -92,29 +83,24 @@ class OnBoardingIntroduceActivity :
         )
 
 
+        val crewName = intent.getStringExtra("crewName")
+        val crewCode = intent.getStringExtra("crewCode")
+        val crewIntroduce = intent.getStringExtra("crewIntro")
+        val crewId = intent.getIntExtra("crewId", 1)
+        val isOpener = intent.getBooleanExtra("isOpener", true)
+
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
 
-        Timber.e("TESTTET : $crewName , $crewCode, $crewIntroduce, $crewId")
-
-        if (isOpener) {
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
-                putExtra("userName", name)
-                putExtra("crewName", crewName)
-                putExtra("crewCode", crewCode)
-                putExtra("crewId", crewId)
-                putExtra("crewIntro", crewIntroduce)
-            }
-
-            startActivity(intent)
-            finish()
-        } else {
-            val intent = Intent(this, SignUpFinishActivity::class.java)
-            intent.putExtra("userName", name)
-            startActivity(intent)
-            finish()
+        val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
+            putExtra("nickname", name)
+            putExtra("crewName", crewName)
+            putExtra("crewCode", crewCode)
+            putExtra("crewId", crewId)
+            putExtra("crewIntro", crewIntroduce)
         }
-
+        startActivity(intent)
+        finish()
     }
 
 
@@ -257,19 +243,16 @@ class OnBoardingIntroduceActivity :
                 binding.tvIntroOnboardingCrewName.text = crewName
 
                 val intent = Intent(this, SearchSubwayActivity::class.java).apply {
-                    putExtra("userName", name)
+                    putExtra("nickname", name)
                     putExtra("crewName", crewName)
                     putExtra("crewCode", crewCode)
                     putExtra("crewId", crewId)
                     putExtra("crewIntro", crewIntroduce)
                     putExtra("isOpener", isOpener)
 
-                    intent.putExtra("ChipList", chipList)
-                    intent.putExtra("description", description)
+                    putExtra("ChipList", chipList)
+                    putExtra("description", description)
                 }
-
-
-
 
                 if (binding.tvIntroOnboardingApprove.visibility == View.VISIBLE || binding.tvIntroOnboardingWarn.visibility == View.VISIBLE) {
                     intent.putExtra("nicknameCheck", true)
