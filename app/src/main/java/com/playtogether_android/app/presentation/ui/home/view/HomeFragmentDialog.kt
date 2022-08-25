@@ -12,6 +12,7 @@ import com.playtogether_android.app.presentation.base.BaseBottomDialogFragment
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeDialogAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
@@ -34,7 +35,7 @@ class HomeFragmentDialog :
         initAdapter()
     }
 
-     fun setChangeCrew(crewId: Int, name: String) {
+    fun setChangeCrew(crewId: Int, name: String) {
         with(PlayTogetherRepository) {
             PlayTogetherRepository.crewId = crewId
             crewName = name
@@ -47,7 +48,7 @@ class HomeFragmentDialog :
     private fun clickListener() {
         binding.ivHomedialogAddCrew.setOnClickListener {
             // TODO: 동아리 추가하기 화면 이동 intent이후 dismiss
-            Intent(requireActivity(), OnboardingReDownLoadActivity::class.java).apply {
+            Intent(requireActivity(), SelectOnboardingActivity::class.java).apply {
                 startActivity(this)
             }
             dismiss()
