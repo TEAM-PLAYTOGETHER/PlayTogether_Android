@@ -121,7 +121,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun showApplyDialog() {
         val title = "아이디 혹은 비밀번호를\n확인해주세요"
         val dialog = CustomDialog(this, title)
-        dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+        //dialog.showOneChoiceDialog(R.layout.dialog_one_question)
     }
 
 

@@ -282,7 +282,7 @@ class SignUpMainActivity : BaseActivity<ActivitySignUpMainBinding>(R.layout.acti
     private fun showApplyDialog() {
         val title = "중복된 아이디입니다"
         val dialog = CustomDialog(this, title)
-        dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+        //dialog.showOneChoiceDialog(R.layout.dialog_one_question)
     }
 
 

@@ -9,6 +9,7 @@ import retrofit2.http.*
 
 interface OnboardingService {
     //아이디 중복확인
+    @Headers("Content-Type:application/json", "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0IiwidXNlckxvZ2luSWQiOiJicmlhbmRyIiwiaWF0IjoxNjU5MjM2Mjg3LCJleHAiOjE2NjE4MjgyODcsImlzcyI6InBsYXl0b2dldGhlciJ9.N_qdonODmdOPpTdre-zY1RmZXnTFHeN72OTc3zYUTcY")
     @POST("crew/register")
     suspend fun postRegisterCrew(
         @Body requestRegisterCrew: RequestRegisterCrew

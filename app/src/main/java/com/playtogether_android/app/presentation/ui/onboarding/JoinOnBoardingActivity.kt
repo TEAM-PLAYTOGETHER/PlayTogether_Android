@@ -8,14 +8,13 @@ import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityJoinOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
-import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,28 +65,6 @@ class JoinOnBoardingActivity :
         })
     }
 
-    //동아리 가입
-    private fun observeRegisterCrew() {
-        onBoardingViewModel.registerCrew.observe(this) {
-            if (it.success) {
-                Log.d("성공", "동아리가입")
-                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-                intent.putExtra("isOpener", false)
-                startActivity(intent)
-                finish()
-            } else {
-                Log.d("실패", "동아리가입")
-//                val title = "존재하지 않는 코드입니다"
-//                val dialog = CustomDialog(this, title)
-//                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
-                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-                intent.putExtra("isOpener", false)
-                startActivity(intent)
-                finish()
-            }
-        }
-    }
-
     private fun initRegisterCrew() {
         binding.tvJoinOnboardingEnter.setOnClickListener {
             onBoardingViewModel.crewCode.crewCode = binding.etJoinOnboarding.text.toString()
@@ -96,7 +73,20 @@ class JoinOnBoardingActivity :
                     onBoardingViewModel.crewCode.crewCode
                 )
             )
-            observeRegisterCrew()
+        }
+        onBoardingViewModel.registerCrew.observe(this) {
+            if (!it.success) {
+                Log.d("실패", "동아리가입")
+                val title = "존재하지 않는 코드입니다"
+                val dialog = CustomDialog(this, title)
+                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+            } else {
+                Log.d("성공", "동아리가입")
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("isOpener", false)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }
