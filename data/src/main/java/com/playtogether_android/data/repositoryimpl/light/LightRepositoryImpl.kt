@@ -13,15 +13,15 @@ class LightRepositoryImpl(private val lightDataSource: LightDataSource) : LightR
         )
     }
 
-    override suspend fun getNewLightning(): List<CategoryData> {
+    override suspend fun getNewLightning(crewId: Int): List<CategoryData> {
         return LightMapper.mapperToHomeLightningData(
-            lightDataSource.getNewLightning()
+            lightDataSource.getNewLightning(crewId)
         )
     }
 
-    override suspend fun getHotLightning(): List<CategoryData> {
+    override suspend fun getHotLightning(crewId: Int): List<CategoryData> {
         return LightMapper.mapperToHomeLightningData(
-            lightDataSource.getHotLightning()
+            lightDataSource.getHotLightning(crewId)
         )
     }
 }

@@ -24,7 +24,10 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".OtherInfoActivity"
+            android:name=".presentation.ui.login.view.LoginInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.userInfo.OtherInfoActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.search.SearchActivity"
@@ -71,7 +74,7 @@
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
             android:exported="true" />
@@ -84,7 +87,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.main.SplashActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.thunder.OpenThunderDetailActivity"
             android:exported="true" />
@@ -96,7 +99,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.onboarding.SelectOnboardingActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.thunder.list.view.ThunderListActivity"
             android:exported="true" />

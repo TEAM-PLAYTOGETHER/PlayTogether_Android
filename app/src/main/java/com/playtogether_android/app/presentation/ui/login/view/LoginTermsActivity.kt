@@ -41,6 +41,13 @@ class LoginTermsActivity : BaseActivity<ActivityLoginTermsBinding>(R.layout.acti
         termsChecker(list)
         termsTextClickListener(textList)
         btnClickListener()
+        backBtnClickListener()
+    }
+
+    private fun backBtnClickListener() {
+        binding.ivLogintermBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun termsTextClickListener(textList: List<TextView>) {
