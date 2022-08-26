@@ -26,7 +26,7 @@ class OnBoardingIntroduceActivity :
     private val chipList = java.util.ArrayList<String>()
     private var firstSubway: String? = null
     private var secondSubway: String? = null
-    private var crewCode : Int? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,25 +73,49 @@ class OnBoardingIntroduceActivity :
             }
         }
 
-        onBoardingViewModel.putAddProfile(AddProfileItem(description, firstSubway, nickName,secondSubway), intent.getIntExtra("crewId", 1))
-        onBoardingViewModel.addProfile.observe(this) {
-            val crewName = intent.getStringExtra("crewName")
-            val crewCode = intent.getStringExtra("crewCode")
-            val crewIntroduce = intent.getStringExtra("crewIntro")
-            val name = binding.etIntroOnboardingName.text.toString()
+        onBoardingViewModel.putAddProfile(
+            AddProfileItem(
+                description,
+                firstSubway,
+                nickName,
+                secondSubway
+            ), intent.getIntExtra("crewId", 1)
+        )
 
+
+        val crewName = intent.getStringExtra("crewName")
+        val crewCode = intent.getStringExtra("crewCode")
+        val crewIntroduce = intent.getStringExtra("crewIntro")
+        val crewId = intent.getIntExtra("crewId", 1)
+        val isOpener = intent.getBooleanExtra("isOpener", true)
+
+        Timber.e("111111: $isOpener")
+
+        val name = binding.etIntroOnboardingName.text.toString()
+        binding.tvIntroOnboardingCrewName.text = crewName
+
+        if(isOpener) {
             val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
-                putExtra("userName", name)
+                putExtra("nickname", name)
                 putExtra("crewName", crewName)
                 putExtra("crewCode", crewCode)
-                putExtra("crewId", intent.getIntExtra("crewId", 1))
+                putExtra("crewId", crewId)
                 putExtra("crewIntro", crewIntroduce)
+                putExtra("isOpener", isOpener)
             }
-
+            startActivity(intent)
+            finish()
+        } else {
+            val intent = Intent(this, SignUpFinishActivity::class.java).apply {
+                putExtra("nickname", name)
+            }
             startActivity(intent)
             finish()
         }
+
+
     }
+
 
     private fun nextBtnActive() {
         binding.tvIntroOnboardingNext.isSelected =
@@ -121,6 +145,10 @@ class OnBoardingIntroduceActivity :
         if (nicknameCheck) {
             nicknameDuplicationCheck()
         }
+
+        if (description != "" && nicknameCheck) {
+            binding.tvIntroOnboardingNext.isSelected = true
+        }
     }
 
     //뒤로가기 버튼 리스너
@@ -134,13 +162,8 @@ class OnBoardingIntroduceActivity :
 
     //et 비었는지 체크
     private fun nullCheck() {
-        binding.etIntroOnboardingName.setOnClickListener {
-            initTextFieldCheck()
-        }
-
-        binding.etIntroOnboardingIntro.setOnClickListener {
-            initTextFieldCheck()
-        }
+        binding.etIntroOnboardingName.setOnClickListener { initTextFieldCheck() }
+        binding.etIntroOnboardingIntro.setOnClickListener { initTextFieldCheck() }
     }
 
     //backgroundresource 변경
@@ -161,13 +184,9 @@ class OnBoardingIntroduceActivity :
     //닉네임 textWatcher
     private fun nameTextWatcher() = with(binding) {
         etIntroOnboardingName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val name = p0.toString()
-
                 if (name.isEmpty() || binding.etIntroOnboardingName.text.toString() == "") {
                     binding.tvSignupmainIdDuplication.isSelected = false
                     binding.tvSignupmainIdDuplication.isClickable = false
@@ -184,7 +203,6 @@ class OnBoardingIntroduceActivity :
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                val id = p0.toString()
                 binding.tvSignupmainIdDuplication.setOnClickListener {
                     onBoardingViewModel.userId.value = p0.toString()
                 }
@@ -199,7 +217,6 @@ class OnBoardingIntroduceActivity :
                 initTextFieldCheck()
                 duplicationClickEvent()
                 nextBtnActive()
-
             }
         })
     }
@@ -207,14 +224,8 @@ class OnBoardingIntroduceActivity :
     //간단소개 textWatcher
     private fun introTextWatcher() = with(binding) {
         etIntroOnboardingIntro.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
@@ -225,6 +236,12 @@ class OnBoardingIntroduceActivity :
 
     private fun subwayBtnListener() {
         binding.tvOpenOnboardingAdd.setOnClickListener {
+            val crewName = intent.getStringExtra("crewName")
+            val crewCode = intent.getStringExtra("crewCode")
+            val crewIntroduce = intent.getStringExtra("crewIntro")
+            val crewId = intent.getIntExtra("crewId", 1)
+            val isOpener = intent.getBooleanExtra("isOpener", true)
+            Timber.e("222222222: $isOpener")
             if (binding.tvOpenOnboardingAdd.isSelected) {
                 shortToast("최대 2개까지 추가할 수 있어요!")
             } else {
@@ -232,12 +249,24 @@ class OnBoardingIntroduceActivity :
                     val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
                     chipList.add(chip.text.toString())
                 }
-                val nickname = binding.etIntroOnboardingName.text.toString()
+
+                val name = binding.etIntroOnboardingName.text.toString()
                 val description = binding.etIntroOnboardingIntro.text.toString()
-                val intent = Intent(this, SearchSubwayActivity::class.java)
-                intent.putExtra("ChipList", chipList)
-                intent.putExtra("nickname", nickname)
-                intent.putExtra("description", description)
+
+                binding.tvIntroOnboardingCrewName.text = crewName
+
+                val intent = Intent(this, SearchSubwayActivity::class.java).apply {
+                    putExtra("nickname", name)
+                    putExtra("crewName", crewName)
+                    putExtra("crewCode", crewCode)
+                    putExtra("crewId", crewId)
+                    putExtra("crewIntro", crewIntroduce)
+                    putExtra("isOpener", isOpener)
+
+                    putExtra("ChipList", chipList)
+                    putExtra("description", description)
+                }
+
                 if (binding.tvIntroOnboardingApprove.visibility == View.VISIBLE || binding.tvIntroOnboardingWarn.visibility == View.VISIBLE) {
                     intent.putExtra("nicknameCheck", true)
                 } else {
@@ -246,8 +275,6 @@ class OnBoardingIntroduceActivity :
                 startActivity(intent)
                 finish()
             }
-
-
         }
     }
 
@@ -285,7 +312,6 @@ class OnBoardingIntroduceActivity :
     //칩버튼 추가하기
     private fun addBtnListener() {
         binding.tvOpenOnboardingAdd.isSelected = binding.chipMypage.childCount == 2
-
         if (binding.chipMypage.childCount == 0) {
             binding.tvOnboardingPlto.visibility = View.VISIBLE
         } else {
@@ -296,8 +322,8 @@ class OnBoardingIntroduceActivity :
     private fun nicknameDuplicationCheck() {
         val nickname: String = binding.etIntroOnboardingName.text.toString()
 
-        //TODO : crewId 고정값 취소
-        onBoardingViewModel.getNickNameDuplication(1, "$nickname")
+        val crewId = intent.getIntExtra("crewId", 1)
+        onBoardingViewModel.getNickNameDuplication(crewId, "$nickname")
         onBoardingViewModel.nicknameDuplicationCheck.observe(this) {
             if (!it.success) {
                 binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
@@ -309,5 +335,4 @@ class OnBoardingIntroduceActivity :
         }
         nextBtnActive()
     }
-
 }

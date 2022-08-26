@@ -54,9 +54,10 @@ class CustomDialog(private val context: Context, val title: String) {
         )
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
         dialog.show()
-
+        dialog.setCancelable(false)
         dialog.findViewById<TextView>(R.id.tv_dialog_answer).setOnClickListener {
             dialog.dismiss()
+
         }
     }
 

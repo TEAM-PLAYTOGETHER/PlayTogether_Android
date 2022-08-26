@@ -158,6 +158,7 @@
     <string name="onboarding_intro_subway">선호하는 지하철역</string>
     <string name="onboarding_intro_subway_two">최대 2개 추가</string>
     <string name="onboarding_intro_add">+ 추가하기</string>
+    <string name="onboarding_add">추가하기</string>
     <string name="onboarding_subway_title">선호하는 지하철역을\n알려주세요!</string>
     <string name="onboarding_subway">지하철역</string>
     <string name="onboarding_subway_input">지하철역 검색</string>

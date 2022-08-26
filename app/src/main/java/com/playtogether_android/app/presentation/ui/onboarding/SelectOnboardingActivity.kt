@@ -15,12 +15,10 @@ class SelectOnboardingActivity :
     BaseActivity<ActivitySelectOnboardingBinding>(R.layout.activity_select_onboarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initBackBtn()
         initOpenBtnClickListener()
         initJoinBtnClickListener()
         movePage()
-
     }
 
     //뒤로가기 버튼 클릭 리스너
@@ -36,7 +34,6 @@ class SelectOnboardingActivity :
             clSecondOnboardingOpen.isSelected = true
             ivSecondOnboardingJoinSelect.visibility = View.INVISIBLE
             ivSecondOnboardingOpenSelect.visibility = View.VISIBLE
-
 
             if (clSecondOnboardingJoinSelect.isSelected) {
                 clSecondOnboardingOpen.isSelected = true
@@ -65,24 +62,14 @@ class SelectOnboardingActivity :
     private fun movePage() = with(binding) {
         tvSecondOnboardingNext.setOnClickListener {
             if (tvSecondOnboardingNext.isSelected and clSecondOnboardingOpen.isSelected) {
-                Timber.d("개설로 이동")
-                startActivity(
-                    Intent(
-                        this@SelectOnboardingActivity,
-                        OpenCrewOnBoardingActivity::class.java
-                    )
-                )
+                val intent = Intent(this@SelectOnboardingActivity, OpenCrewOnBoardingActivity::class.java)
+                startActivity(intent)
                 finish()
             } else if (tvSecondOnboardingNext.isSelected and clSecondOnboardingJoinSelect.isSelected) {
-                startActivity(
-                    Intent(
-                        this@SelectOnboardingActivity,
-                        JoinOnBoardingActivity::class.java
-                    )
-                )
+                val intent = Intent(this@SelectOnboardingActivity, JoinOnBoardingActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }
-
     }
 }
