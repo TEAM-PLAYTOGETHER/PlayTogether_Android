@@ -124,7 +124,7 @@ class OnBoardingViewModel @Inject constructor(
             when(val registerCrew =
                 safeApiCall(Dispatchers.IO) {postRegisterCrewUseCase(registerCrewItem)}) {
                 is ResultWrapper.Success -> _registerCrew.value =
-                    RegisterCrewData(true, _registerCrew.value?.crewName ?: "")
+                    RegisterCrewData(true, registerCrew.data.crewName)
                 is ResultWrapper.GenericError -> {
                     _registerCrew.value =
                         RegisterCrewData(false, registerCrew.message.toString() )

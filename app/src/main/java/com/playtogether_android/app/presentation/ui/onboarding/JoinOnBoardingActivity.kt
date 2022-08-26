@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.InputFilter.AllCaps
 import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
@@ -16,6 +15,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class JoinOnBoardingActivity :
@@ -76,13 +76,15 @@ class JoinOnBoardingActivity :
         }
         onBoardingViewModel.registerCrew.observe(this) {
             if (!it.success) {
-                Log.d("실패", "동아리가입")
+                Timber.d("실패 :동아리가입")
                 val title = "존재하지 않는 코드입니다"
                 val dialog = CustomDialog(this, title)
                 dialog.showOneChoiceDialog(R.layout.dialog_one_question)
             } else {
-                Log.d("성공", "동아리가입")
+                Timber.d("성공: 동아리가입")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("crewName", it.crewName)
+                Timber.e("2222: ${it.crewName}")
                 intent.putExtra("isOpener", false)
                 startActivity(intent)
                 finish()
