@@ -38,13 +38,24 @@
 
         <View
             android:id="@+id/view_join_onboarding_progressbar_green"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="@drawable/rectangle_fill_green_radius_0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="6"
+            app:layout_constraintEnd_toStartOf="@+id/view_join_onboarding_progressbar_gray"
+            app:layout_constraintHorizontal_weight="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_join_onboarding_top" />
+
+
+        <View
+            android:id="@+id/view_join_onboarding_progressbar_gray"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/rectangle_fill_gray3_radius_0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@+id/view_join_onboarding_progressbar_green"
+            app:layout_constraintTop_toBottomOf="@+id/view_join_onboarding_progressbar_green" />
 
 
         <TextView
