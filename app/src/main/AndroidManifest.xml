@@ -110,13 +110,7 @@
             android:name=".presentation.ui.onboarding.SignUpFinishActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.ui.sign.SignUpMainActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.ui.thunder.ApplyThunderDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".presentation.ui.sign.SignUpInfoActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.home.ThunderDetailActivity"
