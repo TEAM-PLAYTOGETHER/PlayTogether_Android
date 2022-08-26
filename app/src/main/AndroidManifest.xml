@@ -40,7 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.mypage.MyPageSettingActivity"
-            android:exported="false" />
+            android:exported="false"/>
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -77,7 +77,6 @@
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan"/>
-            
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
             android:exported="true" />
@@ -91,6 +90,7 @@
         <activity
             android:name=".presentation.ui.main.SplashActivity"
             android:exported="true">
+        </activity>
 
         <activity
             android:name=".presentation.ui.thunder.OpenThunderDetailActivity"
@@ -119,13 +119,7 @@
             android:name=".presentation.ui.onboarding.SignUpFinishActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.ui.sign.SignUpMainActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.ui.thunder.ApplyThunderDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".presentation.ui.sign.SignUpInfoActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.home.ThunderDetailActivity"
