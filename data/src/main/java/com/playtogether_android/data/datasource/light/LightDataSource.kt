@@ -9,7 +9,7 @@ interface LightDataSource {
         sort: String,
     ): ResponseLightListCategory
 
-    suspend fun getNewLightning() : ResponseHomeLightning
+    suspend fun getNewLightning(crewId : Int) : ResponseHomeLightning
 
-    suspend fun getHotLightning() : ResponseHomeLightning
+    suspend fun getHotLightning(crewId : Int) : ResponseHomeLightning
 }

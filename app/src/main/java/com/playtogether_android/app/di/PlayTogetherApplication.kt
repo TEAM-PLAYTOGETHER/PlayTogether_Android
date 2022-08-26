@@ -30,16 +30,6 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
         registerActivityLifecycleCallbacks(this)
         initLogger()
         PlayTogetherRepository.init(this)
-//        startKoin {
-//            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
-//            androidContext(this@PlayTogetherApplication)
-//            modules(viewModelModule)
-//            modules(networkModule)
-//            modules(dataSourceModule)
-//            modules(repositoryModule)
-//            modules(useCaseModule)
-//            modules(apiModule)
-//        }
     }
 
     override fun onTerminate() {

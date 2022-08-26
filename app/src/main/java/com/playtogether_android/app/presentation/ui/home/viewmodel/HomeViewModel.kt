@@ -125,10 +125,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getHotThunderList() {
+    fun getHotThunderList(crewId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                getHotListUseCase()
+                getHotListUseCase(crewId)
             }.onSuccess {
                 _hotList.value = it
             }.onFailure {
@@ -137,10 +137,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getNewThunderList() {
+    fun getNewThunderList(crewId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                getNewListUseCase()
+                getNewListUseCase(crewId)
             }.onSuccess {
                 _newList.value = it
             }.onFailure {

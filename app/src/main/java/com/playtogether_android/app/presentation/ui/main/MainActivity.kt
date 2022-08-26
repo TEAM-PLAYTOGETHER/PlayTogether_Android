@@ -11,6 +11,7 @@ import com.playtogether_android.app.presentation.ui.home.view.HomeFragment
 import com.playtogether_android.app.presentation.ui.message.MessageFragment
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
+import com.playtogether_android.app.presentation.ui.userInfo.MyInfoFragment
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,9 +87,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
                 R.id.navigation_mypage -> {
                     if (prevSelectedItem == 1) {
-                        changeFragment(R.id.fragment_container_main, MyPageFragment(), "MyPage")
+                        changeFragment(R.id.fragment_container_main, MyInfoFragment(), "MyPage")
                     } else {
-                        changeFragmentNoBackStack(R.id.fragment_container_main, MyPageFragment())
+                        changeFragmentNoBackStack(R.id.fragment_container_main, MyInfoFragment())
                     }
 
                     prevSelectedItem = 4
