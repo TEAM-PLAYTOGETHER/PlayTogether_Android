@@ -8,7 +8,7 @@ interface LightRepository {
         sort: String
     ): List<CategoryData>
 
-    suspend fun getNewLightning(): List<CategoryData>
+    suspend fun getNewLightning(crewId : Int): List<CategoryData>
 
-    suspend fun getHotLightning(): List<CategoryData>
+    suspend fun getHotLightning(crewId : Int): List<CategoryData>
 }
