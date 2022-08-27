@@ -45,11 +45,4 @@ class CreateThunderViewModel @Inject constructor(
         }
     }
 
-    fun postMultipartBody(crewId : Int, body :MultipartBody.Part? = null, image : ) {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                repository.postMultipartThunderCreate()
-            }
-        }
-    }
 }

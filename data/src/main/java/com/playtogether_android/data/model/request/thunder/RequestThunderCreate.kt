@@ -24,7 +24,7 @@ data class RequestThunderCreate(
             "peopleCnt" to peopleCnt.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
             "description" to description.toRequestBody("text/plain".toMediaTypeOrNull()),
             "time" to time.toRequestBody("text/plain".toMediaTypeOrNull()),
-            "place" to place.toRequestBody("text/plain".toMediaTypeOrNull())
+            "place" to place.toRequestBody("text/plain".toMediaTypeOrNull()),
         )
     }
 }

@@ -154,15 +154,15 @@ class CreateThunderActivity :
             else
                 peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
             val description = binding.etCreatethunderExplanation.text.toString()
-            val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-            builder
-                .addFormDataPart("title", title)
-                .addFormDataPart("category", category)
-                .addFormDataPart("date", date)
-                .addFormDataPart("people_cnt", peopleCnt.toString())
-                .addFormDataPart("description", description)
-                .addFormDataPart("time", time)
-                .addFormDataPart("place", place)
+//            val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
+//            builder
+//                .addFormDataPart("title", title)
+//                .addFormDataPart("category", category)
+//                .addFormDataPart("date", date)
+//                .addFormDataPart("people_cnt", peopleCnt.toString())
+//                .addFormDataPart("description", description)
+//                .addFormDataPart("time", time)
+//                .addFormDataPart("place", place)
 
             val files = transferImage(galleryItemList)
             val formList = mutableListOf<MultipartBody.Part>()

@@ -46,7 +46,7 @@ object ThunderCreateMapper {
         return r
     }
 
-    fun mapperToPostCreateThunderMultipart(postThunderCreateData: PostThunderCreateData): HashMap<String, RequestBody> {
+    fun mapperToMultipartPostCreateThunder(postThunderCreateData: PostThunderCreateData): RequestThunderCreate {
         val r = RequestThunderCreate(
             title = postThunderCreateData.title,
             category = postThunderCreateData.category,
@@ -55,7 +55,11 @@ object ThunderCreateMapper {
             place = postThunderCreateData.place,
             peopleCnt = postThunderCreateData.peopleCnt,
             description = postThunderCreateData.description,
-        ).toRequestBody()
+        )
+        Log.d(
+            "createServerMapper",
+            "${r.title} ${r.category} ${r.date} ${r.time} ${r.place} ${r.peopleCnt} ${r.description}"
+        )
         return r
     }
 }

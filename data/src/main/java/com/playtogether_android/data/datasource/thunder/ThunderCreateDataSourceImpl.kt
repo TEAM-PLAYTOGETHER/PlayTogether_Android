@@ -6,6 +6,7 @@ import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.Body
 
 class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
     ThunderCreateDataSource {
@@ -22,9 +23,9 @@ class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
 
     override suspend fun postMultipartThunderCreate(
         crewId: Int,
-        body: HashMap<String, RequestBody>,
-        image: MultipartBody.Part?
+        image: List<MultipartBody.Part?>,
+        requestThunderCreate: RequestThunderCreate
     ): ResponseThunderCreate {
-        return service.postMultipartThunderCreate(crewId, body, image)
+        return service.postMultipartThunderCreate(crewId, image, requestThunderCreate)
     }
 }
