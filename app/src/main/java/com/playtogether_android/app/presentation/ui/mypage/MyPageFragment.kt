@@ -1,7 +1,9 @@
 package com.playtogether_android.app.presentation.ui.mypage
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMyPageBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
