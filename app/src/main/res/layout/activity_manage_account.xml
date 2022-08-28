@@ -50,7 +50,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/tv_setting_alarm"
+            android:id="@+id/tv_quit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
