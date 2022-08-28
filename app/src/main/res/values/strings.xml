@@ -214,8 +214,7 @@
     <string name="string_real">정말</string>
     <string name="string_quit">탈퇴</string>
     <string name="mypage_question_quit">하시겠어요?</string>
-    <string name="mypage_quit_info">서비스를 탈퇴하시면 개인 정보, 동아리 정보를 비롯한
-모든 회원 정보가 삭제되며 다시 복구할 수 없습니다.</string>
+    <string name="mypage_quit_info">서비스를 탈퇴하시면 개인 정보, 동아리 정보를 비롯한\n모든 회원 정보가 삭제되며 다시 복구할 수 없습니다.</string>
     <string name="string_do_quit">탈퇴하기</string>
 
 

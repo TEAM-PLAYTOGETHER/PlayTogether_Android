@@ -24,6 +24,9 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MyPageQuitActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManageAccountActivity"
             android:exported="false" />
         <activity
@@ -91,7 +94,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.main.SplashActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.thunder.OpenThunderDetailActivity"
             android:exported="true" />
