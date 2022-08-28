@@ -47,5 +47,10 @@ class MyPageSettingActivity : BaseActivity<ActivityMyPageSettingBinding>(R.layou
         binding.tvSettingWarn.setOnClickListener {
             initIntent("https://forms.gle/7deZ5JgtVqrbTifG8")
         }
+
+        //계정 관리
+        binding.tvSettingAccont.setOnClickListener {
+            startActivity(Intent(this, ManageAccountActivity::class.java))
+        }
     }
 }
