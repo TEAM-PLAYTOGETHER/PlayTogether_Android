@@ -124,7 +124,7 @@
     <string name="text_next">다음</string>
     <string name="text_get_start">시작하기</string>
     <string name="text_no_relevant">해당사항 없음</string>
-    <string name="onboarding_start_thunder">번개를\n시작해볼까요?</string>
+    <string name="onboarding_start_thunder">동아리를\n추가해볼까요?</string>
     <string name="onboarding_select_option">개설과 참여 중 선택해주세요</string>
     <string name="text_open">개설</string>
     <string name="text_join">참여</string>
@@ -149,7 +149,7 @@
     <string name="onboarding_intro_title">나는 어떤 사람인가요?</string>
     <string name="onboarding_intro_nickname">닉네임</string>
     <string name="onboarding_intro_nickname_input">닉네임 입력</string>
-    <string name="onboarding_intro_condition">10자 이내(공백 제외) 한글, 영문, 숫자, 특수문자</string>
+    <string name="onboarding_intro_condition">2 ~ 10자(공백 불가) 한글, 영문, 숫자, 언더바(_) 사용 가능</string>
     <string name="onboarding_intro_warn">이미 사용중인 닉네임입니다</string>
     <string name="onboarding_intro_access">사용 가능한 닉네임입니다</string>
     <string name="onboarding_intro_simple">간단 소개</string>
@@ -242,4 +242,29 @@
     <string name="loginterms_terms3"><b><u>개인정보 수집 및 이용</u></b></string>
     <string name="loginterms_terms4"><b><u>마케팅 정보 수집 및 수신</u></b></string>
     <string name="loginterms_access">확인</string>
+
+    <!--    login info activity-->
+    <string name="logininfo_title">안전한 번개를 위해\n정보를 입력해주세요</string>
+    <string name="logininfo_about">아래 정보는 입력 완료 후 수정이 불가해요!</string>
+    <string name="logininfo_gender">성별</string>
+    <string name="logininfo_year">태어난 연도</string>
+    <string name="logininfo_year_hint">태어난 연도 선택</string>
+    <string name="logininfo_access">완료</string>
+    <string name="logininfo_cancel">취소</string>
+
+    <!--    searchActivity-->
+    <string name="search_hint">검색어를 입력해주세요</string>
+    <string name="search_eat">먹을래</string>
+    <string name="search_do">할래</string>
+    <string name="search_go">갈래</string>
+    <string name="search_memberCnt">인원&#160;</string>
+
+    <!--    userIfo-->
+    <string name="myInfo_title">마이페이지</string>
+    <string name="myInfo_profile_edit">프로필 수정하기</string>
+    <string name="myInfo_crew_manage">내 동아리 관리하기</string>
+    <string name="myInfo_notice">공지사항</string>
+    <string name="myInfo_event">이벤트</string>
+    <string name="myInfo_question">문의하기</string>
+
 </resources>

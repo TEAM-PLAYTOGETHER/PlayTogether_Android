@@ -8,7 +8,10 @@ object PlayTogetherSharedPreference {
 
     fun getJwtToken(context: Context): String {
         val preferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
-        return preferences.getString(JWT_TOKEN, "") ?: ""
+        val token =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0IiwidXNlckxvZ2luSWQiOiJicmlhbmRyIiwiaWF0IjoxNjU5MjM2Mjg3LCJleHAiOjE2NjE4MjgyODcsImlzcyI6InBsYXl0b2dldGhlciJ9.N_qdonODmdOPpTdre-zY1RmZXnTFHeN72OTc3zYUTcY"
+        return token
+//        return preferences.getString(JWT_TOKEN, "") ?: ""
         Log.d("testGet", preferences.getString(JWT_TOKEN, "") ?: "")
     }
 

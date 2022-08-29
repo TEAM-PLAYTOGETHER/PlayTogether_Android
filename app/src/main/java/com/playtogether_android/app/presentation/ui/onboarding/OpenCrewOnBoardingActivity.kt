@@ -130,17 +130,6 @@ class OpenCrewOnBoardingActivity :
         })
     }
 
-    private fun block() {
-        binding.etOpenOnboardingName.setFilters(arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
-            for (i in start until end) {
-                if (!Character.isLetterOrDigit(source[i])) {
-                    return@InputFilter ""
-                }
-            }
-            null
-        }))
-    }
-
     //소개 textWatcher
     private fun introTextWatcher() = with(binding) {
         etOpenOnboardingIntro.addTextChangedListener(object : TextWatcher {
@@ -189,6 +178,7 @@ class OpenCrewOnBoardingActivity :
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
                 intent.putExtra("crewName", it.name)
                 intent.putExtra("crewCode", it.code)
+                intent.putExtra("crewId", it.id)
                 intent.putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
                 startActivity(intent)
                 finish()

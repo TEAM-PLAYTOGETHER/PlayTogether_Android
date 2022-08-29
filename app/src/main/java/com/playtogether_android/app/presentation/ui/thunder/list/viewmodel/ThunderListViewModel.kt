@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,7 +47,8 @@ class ThunderListViewModel @Inject constructor(
     fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
         viewModelScope.launch {
             kotlin.runCatching {
-                getThunderCategoryUseCase(category, sort)
+                val crewId = PlayTogetherRepository.crewId
+                getThunderCategoryUseCase(crewId, category, sort)
             }.onSuccess {
                 _categoryItemList.value = it
                 when (category) {
@@ -64,17 +66,8 @@ class ThunderListViewModel @Inject constructor(
         }
     }
 
-    fun setSortType(type: String): String {
-        return if (type == DEFAULT_SORT)
-            DEFAULT_SORT_KR
-        else
-            LIKECNT_KR
-    }
-
     companion object {
         const val DEFAULT_SORT = "createdAt"
-        const val DEFAULT_SORT_KR = "최신순"
-        const val LIKECNT_KR = "찜 많은순"
         const val LIKECNT = "peopleCnt"
         const val CATEGORY_EAT = "먹을래"
         const val CATEGORY_GO = "갈래"

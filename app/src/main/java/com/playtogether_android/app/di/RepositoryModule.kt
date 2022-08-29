@@ -1,6 +1,7 @@
 package com.playtogether_android.app.di
 
 import com.playtogether_android.data.api.message.RoomIdService
+import com.playtogether_android.data.api.search.SearchService
 import com.playtogether_android.data.datasource.home.HomeDataSource
 import com.playtogether_android.data.datasource.light.LightDataSource
 import com.playtogether_android.data.datasource.message.ChatDataSource
@@ -19,6 +20,7 @@ import com.playtogether_android.data.repositoryimpl.message.RoomIdRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.mypage.MyPageRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.onboarding.OnBoardingRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.onboarding.SubwayRepositoryImpl
+import com.playtogether_android.data.repositoryimpl.search.SearchRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.sign.SignRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderCreateRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderRepositoryImpl
@@ -30,6 +32,7 @@ import com.playtogether_android.domain.repository.message.RoomIdRepository
 import com.playtogether_android.domain.repository.mypage.MyPageRepository
 import com.playtogether_android.domain.repository.onboarding.OnBoardingRepository
 import com.playtogether_android.domain.repository.onboarding.SubwayRepository
+import com.playtogether_android.domain.repository.search.SearchRepository
 import com.playtogether_android.domain.repository.sign.SignRepository
 import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
@@ -89,6 +92,12 @@ object RepositoryModule {
     @Singleton
     fun provideRoomIdRepository(service : RoomIdService):RoomIdRepository{
         return RoomIdRepositoryImpl(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchRepository(service : SearchService): SearchRepository {
+        return SearchRepositoryImpl(service)
     }
 
     @Provides
