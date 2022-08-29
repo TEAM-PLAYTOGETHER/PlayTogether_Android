@@ -16,6 +16,6 @@ class PostMultipartThunderCreateUseCase @Inject constructor(private val reposito
         body: HashMap<String, RequestBody>,
         image: MultipartBody.Part?
     ) {
-        repository.postMultipartThunderCreate(crewId, body, image)
+//        repository.postMultipartThunderCreate(crewId, body, image)
     }
 }

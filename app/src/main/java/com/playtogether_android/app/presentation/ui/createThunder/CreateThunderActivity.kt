@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -29,6 +30,8 @@ import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailAct
 import com.playtogether_android.app.util.MultiPartResolver
 import com.playtogether_android.app.util.SpacesItemDecorationPhoto
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.app.util.viewPagerAnimation
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -39,9 +42,12 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okio.BufferedSink
 import timber.log.Timber
 import java.io.File
 import java.util.*
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class CreateThunderActivity :
@@ -154,25 +160,18 @@ class CreateThunderActivity :
             else
                 peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
             val description = binding.etCreatethunderExplanation.text.toString()
-//            val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-//            builder
-//                .addFormDataPart("title", title)
-//                .addFormDataPart("category", category)
-//                .addFormDataPart("date", date)
-//                .addFormDataPart("people_cnt", peopleCnt.toString())
-//                .addFormDataPart("description", description)
-//                .addFormDataPart("time", time)
-//                .addFormDataPart("place", place)
 
-            val files = transferImage(galleryItemList)
-            val formList = mutableListOf<MultipartBody.Part>()
-            for (file in files) {
-                val requestBody = file.asRequestBody("text/plain".toMediaTypeOrNull())
-                val body = MultipartBody.Part.createFormData("file", file.name, requestBody)
-                formList.add(body)
-            }
+            multipart(date, time, title, place, peopleCnt, description)
 
-            Timber.e("rere multipart : $formList")
+//
+//            val files = transferImage(galleryItemList)
+//            val formList = mutableListOf<MultipartBody.Part>()
+//            for (file in files) {
+//                val requestBody = file.asRequestBody("text/plain".toMediaTypeOrNull())
+//                val body = MultipartBody.Part.createFormData("file", file.name, requestBody)
+//                formList.add(body)
+//            }
+//            Timber.e("rere multipart : $formList")
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
@@ -185,6 +184,41 @@ class CreateThunderActivity :
                 Timber.d("createThunder : 번개 생성 안됨")
             }
         }
+    }
+
+    private fun multipart(
+        date: String,
+        time: String,
+        title: String,
+        place: String,
+        peopleCnt: Int,
+        description: String
+    ) {
+        val dateBody = date.toRequestBody("text/plain".toMediaTypeOrNull())
+        val timeBody = time.toRequestBody("text/plain".toMediaTypeOrNull())
+        val titleBody = title.toRequestBody("text/plain".toMediaTypeOrNull())
+        val placeBody = place.toRequestBody("text/plain".toMediaTypeOrNull())
+        val peopleCntBody = peopleCnt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val descriptionBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        val requestBodyMap = HashMap<String, RequestBody>()
+        requestBodyMap["date"] = dateBody
+        requestBodyMap["time"] = timeBody
+        requestBodyMap["title"] = titleBody
+        requestBodyMap["place"] = placeBody
+        requestBodyMap["peopleCnt"] = peopleCntBody
+        requestBodyMap["descriptionBody"] = descriptionBody
+
+        val multipartBodyList = mutableListOf<MultipartBody.Part>()
+        for (item in galleryItemList) {
+            multipartBodyList.add(multiPartResolver.createImgMultiPart(item))
+        }
+
+        createThunderViewModel.postCreateMultipartData(
+            PlayTogetherRepository.crewId,
+            multipartBodyList,
+            requestBodyMap
+        )
     }
 
     private fun absolutePath(uri: Uri): String {
@@ -453,9 +487,5 @@ class CreateThunderActivity :
             timePickerDialog.getButton(TimePickerDialog.BUTTON_POSITIVE).setTextColor(textColor)
             timePickerDialog.getButton(TimePickerDialog.BUTTON_NEGATIVE).setTextColor(textColor)
         }
-    }
-
-    companion object {
-        const val MAX_PICTURE_COUNT = 5
     }
 }

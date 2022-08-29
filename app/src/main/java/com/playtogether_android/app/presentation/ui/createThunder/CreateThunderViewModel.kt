@@ -11,6 +11,7 @@ import com.playtogether_android.domain.usecase.thunder.PostThunderCreateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,4 +46,19 @@ class CreateThunderViewModel @Inject constructor(
         }
     }
 
+    fun postCreateMultipartData(
+        crewId: Int,
+        images: List<MultipartBody.Part>,
+        body: HashMap<String, RequestBody>
+    ) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                repository.postMultipartThunderCreate(crewId, images, body)
+            }.onSuccess {
+                Timber.d("생성된 번개 아이디 : ${it.lightId}")
+            }.onFailure {
+                Timber.e("post create multipart data : ${it.message}")
+            }
+        }
+    }
 }
