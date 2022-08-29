@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
     val getThunderJoinEndOrganizerUseCase: GetThunderJoinEndOrganizerUseCase,
     val getHotListUseCase: GetHotListUseCase,
     val getNewListUseCase: GetNewListUseCase,
-    val getCrewListNameUseCase: GetCrewListNameUseCase,
+    val getCrewListUseCase: GetCrewListUseCase,
 ) : ViewModel() {
     private val _refreshView = MutableLiveData<Boolean>()
     val refreshView: LiveData<Boolean> = _refreshView
@@ -55,15 +55,15 @@ class HomeViewModel @Inject constructor(
     private val _newList = MutableLiveData<List<CategoryData>>()
     val newList: LiveData<List<CategoryData>> = _newList
 
-    private val _crewListName = MutableLiveData<List<String>>()
-    val crewListName: LiveData<List<String>> = _crewListName
+    private val _crewList = MutableLiveData<List<CrewListData.Data.CrewList>>()
+    val crewList: LiveData<List<CrewListData.Data.CrewList>> = _crewList
 
-    fun getCrewListName() {
+    fun getCrewList() {
         viewModelScope.launch {
             kotlin.runCatching {
-                getCrewListNameUseCase()
+                getCrewListUseCase().data.crewList
             }.onSuccess {
-                _crewListName.value = it
+                _crewList.value = it
             }.onFailure {
                 Timber.e("getCrewListName : ${it.message}")
             }
@@ -125,10 +125,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getHotThunderList() {
+    fun getHotThunderList(crewId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                getHotListUseCase()
+                getHotListUseCase(crewId)
             }.onSuccess {
                 _hotList.value = it
             }.onFailure {
@@ -137,10 +137,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getNewThunderList() {
+    fun getNewThunderList(crewId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                getNewListUseCase()
+                getNewListUseCase(crewId)
             }.onSuccess {
                 _newList.value = it
             }.onFailure {
@@ -148,5 +148,4 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
 }

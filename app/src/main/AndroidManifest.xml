@@ -24,6 +24,15 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.login.view.LoginInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.userInfo.OtherInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.search.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.login.view.LoginTermsActivity"
             android:exported="true" />
         <activity
@@ -31,13 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.mypage.MyPageSettingActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -71,7 +74,7 @@
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewEndOnBoardingActivity"
             android:exported="true" />
@@ -126,7 +129,13 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.ui.login.LoginActivity"
             android:exported="true" />

@@ -7,17 +7,18 @@ import com.playtogether_android.data.model.response.light.ResponseHomeLightning
 class LightDataSourceImpl(private val lightService: LightService) : LightDataSource {
 
     override suspend fun getLightListCategory(
+        crewId: Int,
         category: String,
         sort: String
     ): ResponseLightListCategory {
-        return lightService.getLightListCategory(category, sort)
+        return lightService.getLightListCategory(crewId, category, sort)
     }
 
-    override suspend fun getNewLightning(): ResponseHomeLightning {
-        return lightService.getNewLightning()
+    override suspend fun getNewLightning(crewId: Int): ResponseHomeLightning {
+        return lightService.getNewLightning(crewId)
     }
 
-    override suspend fun getHotLightning(): ResponseHomeLightning {
-        return lightService.getHotLightning()
+    override suspend fun getHotLightning(crewId: Int): ResponseHomeLightning {
+        return lightService.getHotLightning(crewId)
     }
 }

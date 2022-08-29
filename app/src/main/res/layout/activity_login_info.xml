@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.login.view.LoginInfoActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_logininfo_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_black"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_loginterm_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="14dp"
+                android:src="@drawable/ic_icn_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_logininfo_access"
+            app:layout_constraintTop_toBottomOf="@id/cl_logininfo_header">
+
+
+            <TextView
+                android:id="@+id/tv_logininfo_title"
+                style="@style/logininfo_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/logininfo_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_logininfo_about"
+                style="@style/logininfo_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/logininfo_about"
+                app:layout_constraintStart_toStartOf="@id/tv_logininfo_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_logininfo_title" />
+
+            <TextView
+                android:id="@+id/tv_logininfo_gender_text"
+                style="@style/logininfo_unselect_category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/logininfo_gender"
+                app:layout_constraintStart_toStartOf="@id/tv_logininfo_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_logininfo_about" />
+
+            <LinearLayout
+                android:id="@+id/ll_logininfo_btn_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_logininfo_gender_text">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_logininfo_man"
+                    style="@style/logininfo_btn_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_black_white_radius_10"
+                    android:paddingVertical="14dp"
+                    android:text="@string/text_man"
+                    android:textColor="@drawable/selector_gray01_main_green"
+                    tools:textColor="@color/main_green" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_logininfo_woman"
+                    style="@style/logininfo_btn_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_black_white_radius_10"
+                    android:paddingVertical="14dp"
+                    android:text="@string/text_woman"
+                    android:textColor="@drawable/selector_gray01_main_green"
+                    tools:textColor="@color/gray_gray01" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_logininfo_year"
+                style="@style/logininfo_unselect_category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/logininfo_year"
+                app:layout_constraintStart_toStartOf="@id/tv_logininfo_gender_text"
+                app:layout_constraintTop_toBottomOf="@id/ll_logininfo_btn_container" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_logininfo_date_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/rectangle_border_gray03_radius_10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_logininfo_year">
+
+                <TextView
+                    android:id="@+id/tv_logininfo_date_text"
+                    style="@style/logininfo_unselect_gender_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="18dp"
+                    android:text="@string/logininfo_year_hint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_login_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="14dp"
+                    android:src="@drawable/ic_calendar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_logininfo_access"
+            style="@style/logininfo_btn_unselect_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/selector_rectangle_fill_gray03_to_black"
+            android:clickable="false"
+            android:minHeight="0dp"
+            android:paddingVertical="18dp"
+            android:text="@string/loginterms_access"
+            android:textColor="@drawable/selector_text_gray01_to_main_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

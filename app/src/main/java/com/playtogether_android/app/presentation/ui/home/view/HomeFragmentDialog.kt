@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -10,10 +11,13 @@ import com.playtogether_android.app.databinding.FragmentHomeDialogBinding
 import com.playtogether_android.app.presentation.base.BaseBottomDialogFragment
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeDialogAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
+import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-import timber.log.Timber
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class HomeFragmentDialog :
     BaseBottomDialogFragment<FragmentHomeDialogBinding>(R.layout.fragment_home_dialog) {
     private val homeViewModel: HomeViewModel by activityViewModels()
@@ -21,23 +25,33 @@ class HomeFragmentDialog :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
         initView()
     }
 
     override fun initView() {
-        initData()
         initDialogSetting()
         clickListener()
         initAdapter()
     }
 
-    private fun initData() {
-        binding.lifecycleOwner = this
+    fun setChangeCrew(crewId: Int, name: String) {
+        with(PlayTogetherRepository) {
+            PlayTogetherRepository.crewId = crewId
+            crewName = name
+        }
+        homeViewModel.getNewThunderList(crewId)
+        homeViewModel.getHotThunderList(crewId)
+        dismiss()
     }
 
     private fun clickListener() {
         binding.ivHomedialogAddCrew.setOnClickListener {
             // TODO: 동아리 추가하기 화면 이동 intent이후 dismiss
+            Intent(requireActivity(), SelectOnboardingActivity::class.java).apply {
+                startActivity(this)
+            }
+            dismiss()
         }
     }
 
@@ -53,8 +67,8 @@ class HomeFragmentDialog :
     }
 
     private fun initAdapter() {
-        dialogAdapter = HomeDialogAdapter()
-        homeViewModel.crewListName.observe(viewLifecycleOwner) {
+        dialogAdapter = HomeDialogAdapter(this)
+        homeViewModel.crewList.observe(viewLifecycleOwner) {
             dialogAdapter.submitList(it)
         }
         binding.rvHomedialogContainer.adapter = dialogAdapter
