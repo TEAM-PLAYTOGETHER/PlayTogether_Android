@@ -16,6 +16,6 @@ interface ThunderCreateDataSource {
     suspend fun postMultipartThunderCreate(
         crewId: Int,
         image: List<MultipartBody.Part?>,
-        requestThunderCreate: RequestThunderCreate
+        body: HashMap<String,RequestBody>
     ): ResponseThunderCreate
 }

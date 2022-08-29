@@ -15,6 +15,6 @@ interface ThunderCreateRepository {
     suspend fun postMultipartThunderCreate(
         crewId: Int,
         image: List<MultipartBody.Part?>,
-        postThunderCreateData: PostThunderCreateData
+        body: HashMap<String, RequestBody>
     ): GetThunderCreateData
 }

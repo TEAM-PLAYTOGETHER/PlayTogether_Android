@@ -24,8 +24,16 @@ class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
     override suspend fun postMultipartThunderCreate(
         crewId: Int,
         image: List<MultipartBody.Part?>,
-        requestThunderCreate: RequestThunderCreate
+        body: HashMap<String, RequestBody>
     ): ResponseThunderCreate {
-        return service.postMultipartThunderCreate(crewId, image, requestThunderCreate)
+        return service.postMultipartThunderCreate(crewId, image, body)
     }
+//
+//    override suspend fun postMultipartThunderCreate(
+//        crewId: Int,
+//        image: List<MultipartBody.Part?>,
+//        requestThunderCreate: RequestThunderCreate
+//    ): ResponseThunderCreate {
+//        return service.postMultipartThunderCreate(crewId, image, requestThunderCreate)
+//    }
 }
