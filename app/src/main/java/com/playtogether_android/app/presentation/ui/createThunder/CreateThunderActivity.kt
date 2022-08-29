@@ -192,7 +192,7 @@ class CreateThunderActivity :
         title: String,
         place: String,
         peopleCnt: Int,
-        description: String
+        description: String,
     ) {
         val dateBody = date.toRequestBody("text/plain".toMediaTypeOrNull())
         val timeBody = time.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -200,14 +200,15 @@ class CreateThunderActivity :
         val placeBody = place.toRequestBody("text/plain".toMediaTypeOrNull())
         val peopleCntBody = peopleCnt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val descriptionBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
-
+        val categoryBody = category.toRequestBody("text/plain".toMediaTypeOrNull())
         val requestBodyMap = HashMap<String, RequestBody>()
         requestBodyMap["date"] = dateBody
         requestBodyMap["time"] = timeBody
         requestBodyMap["title"] = titleBody
         requestBodyMap["place"] = placeBody
         requestBodyMap["peopleCnt"] = peopleCntBody
-        requestBodyMap["descriptionBody"] = descriptionBody
+        requestBodyMap["description"] = descriptionBody
+        requestBodyMap["category"] = categoryBody
 
         val multipartBodyList = mutableListOf<MultipartBody.Part>()
         for (item in galleryItemList) {
