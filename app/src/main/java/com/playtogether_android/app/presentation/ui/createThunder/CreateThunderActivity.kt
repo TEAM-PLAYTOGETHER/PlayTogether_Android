@@ -27,10 +27,7 @@ import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
-import com.playtogether_android.app.util.MultiPartResolver
-import com.playtogether_android.app.util.SpacesItemDecorationPhoto
-import com.playtogether_android.app.util.shortToast
-import com.playtogether_android.app.util.viewPagerAnimation
+import com.playtogether_android.app.util.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +58,7 @@ class CreateThunderActivity :
     private lateinit var intentLauncher: ActivityResultLauncher<Intent>
     private lateinit var photoListAdapter: CreateThunderPhotoListAdapter
     private val multiPartResolver = MultiPartResolver(this)
+
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
@@ -148,6 +146,7 @@ class CreateThunderActivity :
     }
 
     private fun clickCompleteTest() {
+        val dialog = LoadingDialog(this)
         binding.tvCreatethunderFinish.setOnClickListener {
             val date = binding.tvCreatethunderDate.text.toString().replace(".", "-")
             val time = binding.tvCreatethunderTime.text.toString()
@@ -162,20 +161,12 @@ class CreateThunderActivity :
             val description = binding.etCreatethunderExplanation.text.toString()
 
             multipart(date, time, title, place, peopleCnt, description)
-
-//
-//            val files = transferImage(galleryItemList)
-//            val formList = mutableListOf<MultipartBody.Part>()
-//            for (file in files) {
-//                val requestBody = file.asRequestBody("text/plain".toMediaTypeOrNull())
-//                val body = MultipartBody.Part.createFormData("file", file.name, requestBody)
-//                formList.add(body)
-//            }
-//            Timber.e("rere multipart : $formList")
+            dialog.show()
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
             if (it.success) {
+                dialog.dismiss()
                 val intent = Intent(this, OpenThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", it.lightId)
                 startActivity(intent)
