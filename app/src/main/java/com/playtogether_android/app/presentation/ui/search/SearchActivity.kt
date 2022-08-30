@@ -40,6 +40,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if(!binding.rvSearch.canScrollVertically(1)){
+                        if(searchViewModel.isLastPage) return
                         searchViewModel.getSearchList(searchingWord)
                     }
                 }

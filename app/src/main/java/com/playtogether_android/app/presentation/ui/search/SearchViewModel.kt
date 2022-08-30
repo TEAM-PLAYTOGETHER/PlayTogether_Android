@@ -9,36 +9,41 @@ import com.playtogether_android.domain.model.search.SearchData
 import com.playtogether_android.domain.usecase.search.GetSearchResultUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     val getSearchResultUseCase: GetSearchResultUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _searchList = MutableLiveData<List<SearchData.LightData>>()
-    val searchList : LiveData<List<SearchData.LightData>> = _searchList
+    val searchList: LiveData<List<SearchData.LightData>> = _searchList
     val _category = MutableLiveData<String?>()
+    var isLastPage: Boolean = false
 
-    var limit = -1
-    var offset = -1
+    var pageSize = 10
+    var currentPage = 0
     var totalCount = -1
     var totalPage = -1
 
-    fun getSearchList(searchingWord : String){
+    fun getSearchList(searchingWord: String) {
         viewModelScope.launch {
-            kotlin.runCatching { getSearchResultUseCase(searchingWord, _category.value) }
+            kotlin.runCatching {
+                getSearchResultUseCase(searchingWord, _category.value, currentPage, pageSize)
+            }
                 .onSuccess {
                     _searchList.value = it.lightData
-                    limit = it.limit
-                    offset = it.offset
+                    currentPage = it.offset + 1
                     totalCount = it.totalCount
                     totalPage = it.totalPage
+                    if (totalCount < pageSize) isLastPage = true
+                    if (currentPage == totalPage) isLastPage = true
                 }
-                .onFailure { error -> Log.d("searchServer", "$error") }
+                .onFailure { error -> Timber.d("searchServer error : $error") }
         }
     }
 
-    companion object{
+    companion object {
         val EAT = "먹을래"
         val DO = "할래"
         val GO = "갈래"
