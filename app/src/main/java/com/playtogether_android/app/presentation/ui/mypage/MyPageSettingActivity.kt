@@ -64,22 +64,22 @@ class MyPageSettingActivity :
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
                 intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
-                intent.putExtra(Settings.EXTRA_APP_PACKAGE, this?.packageName)
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE, this.packageName)
             }
 
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> {
+            true -> {
                 intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
-                intent.putExtra("app_package", this?.packageName)
-                intent.putExtra("app_uid", this?.applicationInfo?.uid)
+                intent.putExtra("app_package", this.packageName)
+                intent.putExtra("app_uid", this.applicationInfo?.uid)
                 NotificationManagerCompat.from(this).areNotificationsEnabled()
             }
 
             else -> {
                 intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                 intent.addCategory(Intent.CATEGORY_DEFAULT)
-                intent.data = Uri.parse("package:" + this?.packageName)
+                intent.data = Uri.parse("package:" + this.packageName)
             }
         }
-        this?.startActivity(intent)
+        this.startActivity(intent)
     }
 }
