@@ -1,7 +1,6 @@
 package com.playtogether_android.app.presentation.ui.mypage
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -67,19 +66,14 @@ class MyPageSettingActivity :
                 intent.putExtra(Settings.EXTRA_APP_PACKAGE, this.packageName)
             }
 
-            true -> {
+            else -> {
                 intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
                 intent.putExtra("app_package", this.packageName)
                 intent.putExtra("app_uid", this.applicationInfo?.uid)
                 NotificationManagerCompat.from(this).areNotificationsEnabled()
             }
-
-            else -> {
-                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                intent.addCategory(Intent.CATEGORY_DEFAULT)
-                intent.data = Uri.parse("package:" + this.packageName)
-            }
         }
         this.startActivity(intent)
     }
+
 }
