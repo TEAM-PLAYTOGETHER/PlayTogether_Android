@@ -50,29 +50,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/tv_setting_alarm"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_setting_info"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
-            android:paddingTop="18dp"
-            android:paddingBottom="15dp"
-            android:text="@string/mypage_alarm_setting"
-            android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:text="@string/mypage_setting_account_info"
+            android:textColor="@color/gray_gray02"
+            android:textSize="12sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_mypage_top" />
-
-        <View
-            android:id="@+id/view_setting_alarm"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/gray_ebebeb"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_setting_alarm" />
 
 
         <TextView
@@ -80,160 +68,179 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
+            android:paddingStart="24dp"
             android:paddingTop="16dp"
-            android:paddingBottom="15dp"
+            android:layout_marginTop="7dp"
+            android:paddingBottom="16dp"
             android:text="@string/mypage_manage_accont"
             android:textColor="@color/gray_black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_setting_alarm" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_info" />
 
         <View
             android:id="@+id/view_setting_account"
             android:layout_width="0dp"
-            android:layout_height="5dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
             android:background="@color/gray_ebebeb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_accont" />
 
         <TextView
-            android:id="@+id/tv_setting_guide"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_setting_app_setting"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="15dp"
-            android:text="@string/mypage_setting_guide"
-            android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:text="@string/mypage_setting_app_setting"
+            android:textColor="@color/gray_gray02"
+            android:textSize="12sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_setting_account" />
 
+        <TextView
+            android:id="@+id/tv_setting_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingStart="24dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="11dp"
+            android:text="@string/mypage_alarm_setting"
+            android:textColor="@color/gray_black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_app_setting" />
+
         <View
-            android:id="@+id/view_setting_guide"
+            android:id="@+id/view_setting_alarm"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
             android:background="@color/gray_ebebeb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_setting_guide" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_alarm" />
+
+        <TextView
+            android:id="@+id/tv_setting_app_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/mypage_setting_app_info"
+            android:textColor="@color/gray_gray02"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_setting_alarm" />
+
+
+        <TextView
+            android:id="@+id/tv_setting_guide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="15dp"
+            android:text="@string/mypage_setting_guide"
+            android:layout_marginTop="11dp"
+            android:textColor="@color/gray_black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_app_info" />
 
         <TextView
             android:id="@+id/tv_setting_policy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
+            android:paddingStart="24dp"
             android:paddingTop="16dp"
             android:paddingBottom="15dp"
             android:text="@string/mypage_setting_policy"
             android:textColor="@color/gray_black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_setting_guide" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_guide" />
 
-        <View
-            android:id="@+id/view_setting_policy"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/gray_ebebeb"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_setting_policy" />
-
-        <TextView
-            android:id="@+id/tv_setting_warn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="15dp"
-            android:text="@string/mypage_setting_warn"
-            android:textColor="@color/gray_black"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_setting_policy" />
-
-        <View
-            android:id="@+id/view_setting_warn"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/gray_ebebeb"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_setting_warn" />
 
         <TextView
             android:id="@+id/tv_setting_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
+            android:paddingStart="24dp"
             android:paddingTop="16dp"
             android:paddingBottom="15dp"
             android:text="@string/mypage_setting_version"
             android:textColor="@color/gray_black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_setting_warn" />
-
-        <View
-            android:id="@+id/view_setting_version"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/gray_ebebeb"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_setting_version" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_policy" />
 
         <TextView
             android:id="@+id/tv_setting_developer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
+            android:paddingStart="24dp"
             android:paddingTop="16dp"
             android:paddingBottom="15dp"
             android:text="@string/mypage_setting_developer"
             android:textColor="@color/gray_black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_setting_version" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_version" />
 
         <View
             android:id="@+id/view_setting_developer"
             android:layout_width="0dp"
-            android:layout_height="5dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
             android:background="@color/gray_ebebeb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_developer" />
 
         <TextView
+            android:id="@+id/tv_setting_etc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/mypage_setting_etc"
+            android:textColor="@color/gray_gray02"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_setting_developer" />
+
+        <TextView
             android:id="@+id/tv_setting_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:paddingStart="35dp"
+            android:paddingStart="24dp"
             android:paddingTop="16dp"
             android:paddingBottom="15dp"
             android:text="@string/mypage_setting_logout"
+            android:layout_marginTop="11dp"
             android:textColor="@color/gray_black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_setting_developer" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_etc" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
