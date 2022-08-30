@@ -19,7 +19,6 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.thunder.list.view.ThunderListActivity">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_thunderlist_tool_container"
             android:layout_width="match_parent"
@@ -135,38 +134,10 @@
                 android:textSize="12sp" />
         </com.google.android.material.tabs.TabLayout>
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/ll_thunder_align_container"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="24dp"-->
-        <!--            android:layout_marginEnd="24dp"-->
-        <!--            android:gravity="center"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/tv_thunderlist_category_title"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/cl_thunderlist_tool_container">-->
-
-        <!--            <ImageView-->
-        <!--                android:id="@+id/iv_thunderlist_align"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:src="@drawable/ic_icn_align" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/tv_thunderlist_sort_type"-->
-        <!--                style="@style/thunder_align"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:text="@string/thunder_list_align" />-->
-
-        <!--        </LinearLayout>-->
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_thunderlist_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
