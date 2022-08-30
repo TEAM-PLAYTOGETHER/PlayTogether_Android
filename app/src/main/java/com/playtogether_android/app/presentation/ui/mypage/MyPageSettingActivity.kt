@@ -1,15 +1,18 @@
 package com.playtogether_android.app.presentation.ui.mypage
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import androidx.core.app.NotificationManagerCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMyPageSettingBinding
-import com.playtogether_android.app.databinding.ActivityWebViewBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.WebViewActivity
 
-class MyPageSettingActivity : BaseActivity<ActivityMyPageSettingBinding>(R.layout.activity_my_page_setting) {
+class MyPageSettingActivity :
+    BaseActivity<ActivityMyPageSettingBinding>(R.layout.activity_my_page_setting) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initMovePage()
@@ -43,14 +46,40 @@ class MyPageSettingActivity : BaseActivity<ActivityMyPageSettingBinding>(R.layou
             initIntent("https://cheddar-liquid-051.notion.site/9b109514a74349f4988c9b7f72fe4e47")
         }
 
-        //신고하기
-        binding.tvSettingWarn.setOnClickListener {
-            initIntent("https://forms.gle/7deZ5JgtVqrbTifG8")
-        }
-
         //계정 관리
         binding.tvSettingAccont.setOnClickListener {
             startActivity(Intent(this, ManageAccountActivity::class.java))
         }
+
+        //알림 설정
+        binding.tvSettingAlarm.setOnClickListener {
+            checkAlarm()
+        }
+    }
+
+
+    //버전에 따라 설정창 이동
+    private fun checkAlarm() {
+        val intent = Intent()
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+                intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE, this?.packageName)
+            }
+
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> {
+                intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                intent.putExtra("app_package", this?.packageName)
+                intent.putExtra("app_uid", this?.applicationInfo?.uid)
+                NotificationManagerCompat.from(this).areNotificationsEnabled()
+            }
+
+            else -> {
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.data = Uri.parse("package:" + this?.packageName)
+            }
+        }
+        this?.startActivity(intent)
     }
 }
