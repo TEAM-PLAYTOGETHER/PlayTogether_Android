@@ -24,6 +24,12 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.mypage.MyPageQuitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.mypage.ManageAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.login.view.LoginInfoActivity"
             android:exported="true" />
         <activity
@@ -40,7 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.mypage.MyPageSettingActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -70,7 +76,8 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"
@@ -113,16 +120,10 @@
             android:name=".presentation.ui.home.ThunderAppliedActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.sign.SignUpFinishActivity"
-            android:exported="true" />
-        <activity
-            android:name=".presentation.ui.sign.SignUpMainActivity"
+            android:name=".presentation.ui.onboarding.SignUpFinishActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.thunder.ApplyThunderDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".presentation.ui.sign.SignUpInfoActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.home.ThunderDetailActivity"

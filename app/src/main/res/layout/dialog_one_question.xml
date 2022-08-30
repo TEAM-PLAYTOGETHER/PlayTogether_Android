@@ -41,15 +41,14 @@
 
         <TextView
             android:id="@+id/tv_dialog_answer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="14dp"
             android:layout_marginVertical="6dp"
             android:fontFamily="@font/pretendard_bold"
-            android:paddingStart="30dp"
             android:paddingTop="10dp"
-            android:paddingEnd="28dp"
             android:paddingBottom="12dp"
+            android:textAlignment="center"
             android:text="@string/text_ok"
             android:textColor="@color/gray_black"
             android:textSize="14sp"

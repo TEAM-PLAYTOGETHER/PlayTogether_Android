@@ -6,17 +6,16 @@ import android.text.Editable
 import android.text.InputFilter.AllCaps
 import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityJoinOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
-import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class JoinOnBoardingActivity :
@@ -26,7 +25,6 @@ class JoinOnBoardingActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initBackBtn()
         initEditText()
         editTextWatcher()
@@ -44,9 +42,7 @@ class JoinOnBoardingActivity :
 
     //edittext 입력중일 때 텍스트 백그라운드 selected
     private fun initEditText() {
-        binding.etJoinOnboarding.setOnClickListener {
-            binding.etJoinOnboarding.isSelected = true
-        }
+        binding.etJoinOnboarding.setOnClickListener { binding.etJoinOnboarding.isSelected = true }
         binding.etJoinOnboarding.filters = arrayOf(AllCaps(), LengthFilter(6))
     }
 
@@ -54,14 +50,8 @@ class JoinOnBoardingActivity :
     //6자리 입력 해야 입장버튼 활성화
     private fun editTextWatcher() = with(binding) {
         etJoinOnboarding.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
                 val input = binding.etJoinOnboarding.text.toString()
                 if (input.length == 5) {
@@ -70,33 +60,9 @@ class JoinOnBoardingActivity :
                 } else {
                     binding.tvJoinOnboardingNext.visibility = View.INVISIBLE
                     binding.tvJoinOnboardingEnter.visibility = View.VISIBLE
-
-
                 }
-
             }
-
         })
-    }
-
-    //동아리 가입
-    private fun observeRegisterCrew() {
-        onBoardingViewModel.registerCrew.observe(this) {
-            if (it.success) {
-                Log.d("성공", "동아리가입")
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Log.d("실패", "동아리가입")
-//                val title = "존재하지 않는 코드입니다"
-//                val dialog = CustomDialog(this, title)
-//                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }
     }
 
     private fun initRegisterCrew() {
@@ -107,7 +73,22 @@ class JoinOnBoardingActivity :
                     onBoardingViewModel.crewCode.crewCode
                 )
             )
-            observeRegisterCrew()
+        }
+        onBoardingViewModel.registerCrew.observe(this) {
+            if (!it.success) {
+                Timber.d("실패 :동아리가입")
+                val title = "존재하지 않는 코드입니다"
+                val dialog = CustomDialog(this, title)
+                dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+            } else {
+                Timber.d("성공: 동아리가입")
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("crewName", it.crewName)
+                Timber.e("2222: ${it.crewName}")
+                intent.putExtra("isOpener", false)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

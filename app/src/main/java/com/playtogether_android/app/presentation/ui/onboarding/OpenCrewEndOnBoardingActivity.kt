@@ -5,12 +5,12 @@ import android.os.Bundle
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewEndOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.main.MainActivity
 
 class OpenCrewEndOnBoardingActivity :
     BaseActivity<ActivityOpenCrewEndOnBoardingBinding>(R.layout.activity_open_crew_end_on_boarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initSetting()
     }
 
@@ -18,7 +18,7 @@ class OpenCrewEndOnBoardingActivity :
         val crewName = intent.getStringExtra("crewName")
         val crewIntroduce = intent.getStringExtra("crewIntro")
         val crewCode = intent.getStringExtra("crewCode")
-        val userName = intent.getStringExtra("userName")
+        val userName = intent.getStringExtra("nickname")
 
         binding.tvOpenEndOnboardingName.setText(userName)
         binding.tvOpenEndOnboardingCrew.setText(crewName)
@@ -27,7 +27,7 @@ class OpenCrewEndOnBoardingActivity :
         binding.tvOpenEndOnboardingCodeAnswer.setText(crewCode)
 
         binding.tvOpenOnboardingNext.setOnClickListener {
-            val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("crewName", crewName)
             startActivity(intent)
             finish()
