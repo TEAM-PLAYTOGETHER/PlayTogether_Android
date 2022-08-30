@@ -4,20 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySignInBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
-import com.playtogether_android.app.presentation.ui.onboarding.OnBoardingIntroduceActivity
-import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.domain.model.sign.SignInItem
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
@@ -35,7 +33,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     //회원가입 클릭 리스너
     private fun initSignUpBtn() {
         binding.textSignInSignup.setOnClickListener {
-            startActivity(Intent(this, SignUpMainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
+            Timber.e("로직 수정")
             finish()
         }
     }
@@ -121,7 +120,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun showApplyDialog() {
         val title = "아이디 혹은 비밀번호를\n확인해주세요"
         val dialog = CustomDialog(this, title)
-        dialog.showOneChoiceDialog(R.layout.dialog_one_question)
+        //dialog.showOneChoiceDialog(R.layout.dialog_one_question)
     }
 
 

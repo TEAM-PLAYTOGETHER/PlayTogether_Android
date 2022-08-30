@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -19,19 +20,31 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
-import com.playtogether_android.app.util.SpacesItemDecorationPhoto
-import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.app.util.*
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okio.BufferedSink
 import timber.log.Timber
 import java.io.File
 import java.util.*
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class CreateThunderActivity :
@@ -44,6 +57,8 @@ class CreateThunderActivity :
     private val galleryItemList = mutableListOf<Uri>()
     private lateinit var intentLauncher: ActivityResultLauncher<Intent>
     private lateinit var photoListAdapter: CreateThunderPhotoListAdapter
+    private val multiPartResolver = MultiPartResolver(this)
+
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
@@ -131,34 +146,27 @@ class CreateThunderActivity :
     }
 
     private fun clickCompleteTest() {
+        val dialog = LoadingDialog(this)
         binding.tvCreatethunderFinish.setOnClickListener {
             val date = binding.tvCreatethunderDate.text.toString().replace(".", "-")
             val time = binding.tvCreatethunderTime.text.toString()
             val title = binding.etCreatethunderName.text.toString()
             val place = binding.etCreatethunderPlace.text.toString()
             var peopleCnt = 0
-            val image = transferImage(photoListAdapter.mutablePhotoList)
+
             if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
                 peopleCnt = -1
             else
                 peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
             val description = binding.etCreatethunderExplanation.text.toString()
-            createThunderViewModel.postMultipartThunderCreate(
-                PostThunderCreateData(
-                    title,
-                    category,
-                    date,
-                    time,
-                    place,
-                    peopleCnt,
-                    description,
-                    image
-                )
-            )
+
+            multipart(date, time, title, place, peopleCnt, description)
+            dialog.show()
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
             if (it.success) {
+                dialog.dismiss()
                 val intent = Intent(this, OpenThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", it.lightId)
                 startActivity(intent)
@@ -167,6 +175,42 @@ class CreateThunderActivity :
                 Timber.d("createThunder : 번개 생성 안됨")
             }
         }
+    }
+
+    private fun multipart(
+        date: String,
+        time: String,
+        title: String,
+        place: String,
+        peopleCnt: Int,
+        description: String,
+    ) {
+        val dateBody = date.toRequestBody("text/plain".toMediaTypeOrNull())
+        val timeBody = time.toRequestBody("text/plain".toMediaTypeOrNull())
+        val titleBody = title.toRequestBody("text/plain".toMediaTypeOrNull())
+        val placeBody = place.toRequestBody("text/plain".toMediaTypeOrNull())
+        val peopleCntBody = peopleCnt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val descriptionBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
+        val categoryBody = category.toRequestBody("text/plain".toMediaTypeOrNull())
+        val requestBodyMap = HashMap<String, RequestBody>()
+        requestBodyMap["date"] = dateBody
+        requestBodyMap["time"] = timeBody
+        requestBodyMap["title"] = titleBody
+        requestBodyMap["place"] = placeBody
+        requestBodyMap["peopleCnt"] = peopleCntBody
+        requestBodyMap["description"] = descriptionBody
+        requestBodyMap["category"] = categoryBody
+
+        val multipartBodyList = mutableListOf<MultipartBody.Part>()
+        for (item in galleryItemList) {
+            multipartBodyList.add(multiPartResolver.createImgMultiPart(item))
+        }
+
+        createThunderViewModel.postCreateMultipartData(
+            PlayTogetherRepository.crewId,
+            multipartBodyList,
+            requestBodyMap
+        )
     }
 
     private fun absolutePath(uri: Uri): String {
@@ -205,18 +249,19 @@ class CreateThunderActivity :
         Intent(Intent.ACTION_PICK).apply {
             type = MediaStore.Images.Media.CONTENT_TYPE
             data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
             setResult(RESULT_OK)
             intentLauncher.launch(this)
         }
     }
 
-    private fun transferImage(list: List<Uri>): List<String> {
-        val mut = mutableListOf<String>()
+    private fun transferImage(list: List<Uri>): List<File> {
+        val mut = mutableListOf<File>()
         list.forEach {
             val path = absolutePath(it)
+            val file = File(path)
             Timber.e("rere path : $path")
-            mut.add(path)
+            mut.add(file)
         }
         return mut
     }
@@ -234,18 +279,18 @@ class CreateThunderActivity :
             else
                 peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
             val description = binding.etCreatethunderExplanation.text.toString()
-            createThunderViewModel.postThunderCreate(
-                PostThunderCreateData(
-                    title,
-                    category,
-                    date,
-                    time,
-                    place,
-                    peopleCnt,
-                    description,
-                    image
-                )
-            )
+//            createThunderViewModel.postThunderCreate(
+//                PostThunderCreateData(
+//                    title,
+//                    category,
+//                    date,
+//                    time,
+//                    place,
+//                    peopleCnt,
+//                    description,
+//                    image
+//                )
+//            )
         }
 
         createThunderViewModel.getThunderCreateData.observe(this) {
@@ -434,9 +479,5 @@ class CreateThunderActivity :
             timePickerDialog.getButton(TimePickerDialog.BUTTON_POSITIVE).setTextColor(textColor)
             timePickerDialog.getButton(TimePickerDialog.BUTTON_NEGATIVE).setTextColor(textColor)
         }
-    }
-
-    companion object {
-        const val MAX_PICTURE_COUNT = 5
     }
 }

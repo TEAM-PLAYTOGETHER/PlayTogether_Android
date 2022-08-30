@@ -35,6 +35,7 @@ class OpenCrewOnBoardingActivity :
         activeBtn()
     }
 
+
     //뒤로가기 버튼 리스너
     private fun backBtnListener() {
         binding.ivOpenOnboardingBack.setOnClickListener {
@@ -43,25 +44,21 @@ class OpenCrewOnBoardingActivity :
         }
     }
 
+
     //et 비었는지 체크
     private fun nullCheck() {
-        binding.etOpenOnboardingName.setOnClickListener {
-            initTextFieldCheck()
-        }
-
-        binding.etOpenOnboardingIntro.setOnClickListener {
-            initTextFieldCheck()
-        }
+        binding.etOpenOnboardingName.setOnClickListener { initTextFieldCheck() }
+        binding.etOpenOnboardingIntro.setOnClickListener { initTextFieldCheck() }
     }
+
 
     private fun activeBtn() {
         if (binding.tvOpenOnboardingApprove.visibility == View.VISIBLE && binding.etOpenOnboardingIntro.text.toString() != "") {
             binding.tvOpenOnboardingNext.isSelected = true
             openCrewNetwork()
-        } else {
-            binding.tvOpenOnboardingNext.isSelected = false
-        }
+        } else { binding.tvOpenOnboardingNext.isSelected = false }
     }
+
 
     //backgroundresource 변경
     private fun initTextFieldCheck() {
@@ -76,12 +73,11 @@ class OpenCrewOnBoardingActivity :
         } else {
             binding.etOpenOnboardingIntro.setBackgroundResource(R.drawable.selector_rectangle_border_gray03_to_black02)
         }
-
     }
+
 
     //이름 textWatcher
     private fun nameTextWatcher() = with(binding) {
-
         etOpenOnboardingName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -98,13 +94,10 @@ class OpenCrewOnBoardingActivity :
                 } else {
                     binding.tvOpenOnboardingCheck.isSelected = true
                     binding.tvOpenOnboardingWarn.setTextColor(Color.parseColor("#C5C5C5"))
-
                 }
-
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                //block()
                 val name = p0.toString()
                 binding.tvOpenOnboardingCheck.setOnClickListener {
                     if (name.length < 15) {
@@ -114,18 +107,12 @@ class OpenCrewOnBoardingActivity :
                     activeBtn()
                 }
 
-
                 val crewName = onBoardingViewModel.crewName.value
-
-                if (crewName != etOpenOnboardingName.text.toString()) {
-                    tvOpenOnboardingApprove.visibility = View.INVISIBLE
-                }
+                if (crewName != etOpenOnboardingName.text.toString()) { tvOpenOnboardingApprove.visibility = View.INVISIBLE }
 
                 etOpenOnboardingName.isSelected = etOpenOnboardingName.text.toString() != ""
                 initTextFieldCheck()
-
                 activeBtn()
-
             }
         })
     }
@@ -144,9 +131,7 @@ class OpenCrewOnBoardingActivity :
             override fun afterTextChanged(p0: Editable?) {
                 etOpenOnboardingIntro.isSelected = etOpenOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
-
                 activeBtn()
-
             }
         })
     }
@@ -170,21 +155,24 @@ class OpenCrewOnBoardingActivity :
         }
     }
 
+
     //동아리 개설 observe
     private fun observeOpenCrew() {
         onBoardingViewModel.makeCrew.observe(this) {
             if (it.success) {
                 Timber.d("${it.code}")
-                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-                intent.putExtra("crewName", it.name)
-                intent.putExtra("crewCode", it.code)
-                intent.putExtra("crewId", it.id)
-                intent.putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java).apply{
+                    putExtra("crewName", it.name)
+                    putExtra("crewCode", it.code)
+                    putExtra("crewId", it.id)
+                    putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
+                    putExtra("isOpener", true)
+                }
+                Timber.e("${it.name} ${it.code} ${it.id} ${binding.etOpenOnboardingIntro.text.toString()}")
                 startActivity(intent)
                 finish()
             } else {
                 Toast.makeText(this, "동아리 개설이 실패되었습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
-
             }
         }
     }

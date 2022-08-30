@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_mypage_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_mypage_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_black"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_setting_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_quit_real"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/string_real"
+            android:textColor="@color/gray_black"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_mypage_top" />
+
+        <TextView
+            android:id="@+id/tv_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/string_quit"
+            android:textColor="@color/red_FF0000"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_quit_real"
+            app:layout_constraintStart_toEndOf="@+id/tv_quit_real"
+            app:layout_constraintTop_toTopOf="@+id/tv_quit_real" />
+
+        <TextView
+            android:id="@+id/tv_quit_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/mypage_question_quit"
+            android:textColor="@color/gray_black"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_quit"
+            app:layout_constraintStart_toEndOf="@+id/tv_quit"
+            app:layout_constraintTop_toTopOf="@+id/tv_quit" />
+
+        <TextView
+            android:id="@+id/tv_quit_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/mypage_quit_info"
+            android:textColor="@color/gray_black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_quit_real"
+            app:layout_constraintTop_toBottomOf="@+id/tv_quit_real" />
+
+
+        <TextView
+            android:id="@+id/tv_mypage_quit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_border_red_radius_10dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/string_do_quit"
+            android:textColor="@color/red_FF0000"
+            android:textSize="16sp"
+            android:layout_marginBottom="36dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:textAlignment="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

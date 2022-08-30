@@ -412,7 +412,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
-                            android:text="3"
+                            android:text="1"
                             android:textColor="@color/gray_gray01"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_createthunder_slash"

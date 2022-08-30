@@ -1,6 +1,5 @@
 package com.playtogether_android.app.presentation.ui.onboarding.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.playtogether_android.app.util.ResultWrapper
 import com.playtogether_android.app.util.safeApiCall
@@ -9,7 +8,6 @@ import com.playtogether_android.domain.usecase.onboarding.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -109,16 +107,16 @@ class OnBoardingViewModel @Inject constructor(
     //동아리 참여
     fun postRegisterCrew(registerCrewItem: RegisterCrewItem) {
         viewModelScope.launch {
-            kotlin.runCatching { postRegisterCrewUseCase(registerCrewItem) }
-                .onSuccess {
-                    _registerCrew.value = it
-                    Log.d("RegisterCrew", "서버 통신 성공")
+            when(val registerCrew =
+                safeApiCall(Dispatchers.IO) {postRegisterCrewUseCase(registerCrewItem)}) {
+                is ResultWrapper.Success -> _registerCrew.value =
+                    RegisterCrewData(true, registerCrew.data.crewName)
+                is ResultWrapper.GenericError -> {
+                    _registerCrew.value =
+                        RegisterCrewData(false, registerCrew.message.toString() )
                 }
-                .onFailure {
-                    _registerCrew.value = RegisterCrewData(false, "")
-                    it.printStackTrace()
-                    Log.d("RegisterCrew", "서버 통신 실패")
-                }
+            }
+            Timber.d("registerCrew : ${_registerCrew.value.toString()}")
         }
     }
 
@@ -170,21 +168,6 @@ class OnBoardingViewModel @Inject constructor(
 
     //닉네임 중복 체크
     fun getNickNameDuplication(crewId: Int, nickname: String) {
-//        viewModelScope.launch {
-//            kotlin.runCatching { getNicknameDuplicationUseCase(crewId, nickname) }
-//                .onSuccess {
-//                    _nickNameDuplication.value = it
-//                    Timber.d("닉네임 중복 체크 : 성공")
-//
-//                }
-//                .onFailure {
-//                    it.printStackTrace()
-//                    Timber.d("닉네임 중복 체크 : 실패")
-//                }
-
-//        }
-
-
         viewModelScope.launch {
             when(val nicknameDuplication =
                 safeApiCall(Dispatchers.IO) {getNicknameDuplicationUseCase(crewId, nickname) }) {
