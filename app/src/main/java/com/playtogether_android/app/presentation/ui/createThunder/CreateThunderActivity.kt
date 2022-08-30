@@ -249,7 +249,7 @@ class CreateThunderActivity :
         Intent(Intent.ACTION_PICK).apply {
             type = MediaStore.Images.Media.CONTENT_TYPE
             data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
             setResult(RESULT_OK)
             intentLauncher.launch(this)
         }
