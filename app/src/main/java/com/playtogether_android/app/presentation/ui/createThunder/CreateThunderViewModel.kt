@@ -2,23 +2,23 @@ package com.playtogether_android.app.presentation.ui.createThunder
 
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
-import com.playtogether_android.domain.usecase.thunder.PostMultipartThunderCreateUseCase
+import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 import com.playtogether_android.domain.usecase.thunder.PostThunderCreateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateThunderViewModel @Inject constructor(
     val postThunderCreateUseCase: PostThunderCreateUseCase,
-    val postMultipartThunderCreateUseCase: PostMultipartThunderCreateUseCase
+    val repository: ThunderCreateRepository
 ) : ViewModel() {
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()
     val getThunderCreateData: LiveData<GetThunderCreateData> get() = _getThunderCreateData
@@ -46,14 +46,19 @@ class CreateThunderViewModel @Inject constructor(
         }
     }
 
-    fun postMultipartThunderCreate(postThunderCreateData: PostThunderCreateData) {
+    fun postCreateMultipartData(
+        crewId: Int,
+        images: List<MultipartBody.Part>,
+        body: HashMap<String, RequestBody>
+    ) {
         viewModelScope.launch {
             kotlin.runCatching {
-                postMultipartThunderCreateUseCase(crewId, postThunderCreateData)
+                repository.postMultipartThunderCreate(crewId, images, body)
             }.onSuccess {
                 _getThunderCreateData.value = it
+                Timber.d("생성된 번개 아이디 : ${it.lightId}")
             }.onFailure {
-                Timber.e("writingServer ${it.message}")
+                Timber.e("post create multipart data : ${it.message}")
             }
         }
     }

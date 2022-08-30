@@ -85,6 +85,9 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    //bad request log detail show
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
     //sercurity
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha03")
 

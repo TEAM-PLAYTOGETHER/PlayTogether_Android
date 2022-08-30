@@ -4,6 +4,9 @@ import android.util.Log
 import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.Body
 
 class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
     ThunderCreateDataSource {
@@ -20,8 +23,17 @@ class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
 
     override suspend fun postMultipartThunderCreate(
         crewId: Int,
-        requestThunderCreate: RequestThunderCreate
+        image: List<MultipartBody.Part?>,
+        body: HashMap<String, RequestBody>
     ): ResponseThunderCreate {
-        return service.postMultipartThunderCreate(crewId, requestThunderCreate)
+        return service.postMultipartThunderCreate(crewId, image, body)
     }
+//
+//    override suspend fun postMultipartThunderCreate(
+//        crewId: Int,
+//        image: List<MultipartBody.Part?>,
+//        requestThunderCreate: RequestThunderCreate
+//    ): ResponseThunderCreate {
+//        return service.postMultipartThunderCreate(crewId, image, requestThunderCreate)
+//    }
 }
