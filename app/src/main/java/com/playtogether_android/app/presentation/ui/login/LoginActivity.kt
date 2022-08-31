@@ -1,9 +1,7 @@
 package com.playtogether_android.app.presentation.ui.login
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -13,18 +11,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -45,7 +40,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     startActivity(Intent(this, MainActivity::class.java))
                     try {
                         account = task.getResult(ApiException::class.java)
-
                     } catch (e: ApiException) {
                         shortToast("로그인 실패")
                     }
@@ -79,18 +73,35 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
+    private fun nextActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
     private fun setKakaoBtnListener() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 shortToast("로그인 실패")
                 getErrorLog(error)
             } else if (token != null) {
-                shortToast("성공")
-                Timber.e("token access ${token.accessToken}")
-                Timber.e("token refresh ${token.refreshToken}")
                 UserApiClient.instance.me { _, error ->
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    PlayTogetherRepository.kakaoAccessToken = token.accessToken
+                    with(signViewModel) {
+                        val isSignup = kakaoLogin()
+                        isLogin.observe(this@LoginActivity) {
+                            if (it) {
+                                if (isSignup) {
+                                    val intent =
+                                        Intent(this@LoginActivity, MainActivity::class.java)
+                                    nextActivity(intent)
+                                }else{
+
+                                }
+
+                            } else {
+                                shortToast("로그인 실패")
+                            }
+                        }
+                    }
                 }
             } else {
                 shortToast("else")
@@ -108,7 +119,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
-    fun getErrorLog(error: Throwable) {
+    private fun getErrorLog(error: Throwable) {
         when {
             error.toString() == AuthErrorCause.AccessDenied.toString() -> {
                 Timber.e("접근이 거부 됨(동의 취소)")
@@ -140,37 +151,3 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 }
-
-
-//private fun setTestKakao() {
-//    val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-//        if (error != null) {
-//            shortToast("카카오계정으로 로그인 실패")
-//        } else if (token != null) {
-//            shortToast("성공")
-//
-//        }
-//    }
-
-//// 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
-//    if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-//        UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
-//            if (error != null) {
-//                shortToast("카카오톡 로그인 실패")
-//
-//                // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
-//                // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
-//                if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-//                    return@loginWithKakaoTalk
-//                }
-//
-//                // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-//                UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
-//            } else if (token != null) {
-//                shortToast("카카오톡 로그인 성공")
-//            }
-//        }
-//    } else {
-//        UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
-//    }
-//}
