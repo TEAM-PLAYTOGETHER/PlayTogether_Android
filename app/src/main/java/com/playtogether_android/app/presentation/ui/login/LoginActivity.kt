@@ -5,14 +5,19 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Scope
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -22,7 +27,8 @@ import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.userAgent
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
@@ -38,16 +44,32 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-                    var account: GoogleSignInAccount? = null
-                    startActivity(Intent(this, MainActivity::class.java))
-                    try {
-                        account = task.getResult(ApiException::class.java)
-                    } catch (e: ApiException) {
-                        shortToast("로그인 실패")
-                    }
+                    handleSignInResult(task)
+                }else{
+                    Timber.e("result : $it")
+                    Timber.e("result code: ${it.resultCode}")
                 }
             }
         initView()
+    }
+
+    private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
+        try {
+            val account = task.getResult(ApiException::class.java)
+
+            val accessToken = account.idToken
+            val refreshToken = account.serverAuthCode
+            Timber.e("google access : $accessToken")
+            Timber.e("google refresh : $refreshToken")
+            PlayTogetherRepository.googleAccessToken = accessToken!!
+            if (!refreshToken.isNullOrBlank()) {
+                PlayTogetherRepository.googleUserRefreshToken = refreshToken
+            }
+            startActivity(Intent(this, MainActivity::class.java))
+        } catch (e: ApiException) {
+            Timber.e("$e")
+            shortToast("로그인 실패")
+        }
     }
 
     private fun initView() {
@@ -66,12 +88,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun btnGoogleListener() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-        client = GoogleSignIn.getClient(this, gso)
-
         binding.ivLoginGoogle.setOnClickListener {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                /*.requestServerAuthCode(serverClientId)
+                .requestIdToken(getString(R.string.server_client_id)*/
+                .requestEmail()
+                .build()
+
+            client = GoogleSignIn.getClient(this, gso)
             startForActivity.launch(client.signInIntent)
         }
     }
