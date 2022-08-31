@@ -16,6 +16,7 @@ import com.kakao.sdk.user.UserApiClient
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
@@ -93,10 +94,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                                     val intent =
                                         Intent(this@LoginActivity, MainActivity::class.java)
                                     nextActivity(intent)
-                                }else{
-
+                                } else {
+                                    val intent =
+                                        Intent(this@LoginActivity, LoginTermsActivity::class.java)
+                                    nextActivity(intent)
                                 }
-
                             } else {
                                 shortToast("로그인 실패")
                             }
