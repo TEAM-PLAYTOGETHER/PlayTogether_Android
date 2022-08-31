@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.playtogether_android.data.model.request.sign.RequestSignup
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.sign.*
 import com.playtogether_android.domain.repository.sign.SignRepository
@@ -41,6 +42,19 @@ class SignViewModel @Inject constructor(
 
     private val _isLogin = MutableLiveData<Boolean>()
     val isLogin: LiveData<Boolean> = _isLogin
+
+    fun signup(body: UserInfo) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                repository.putSignup(PlayTogetherRepository.userToken, body)
+            }.onSuccess {
+                _isLogin.value = true
+            }.onFailure {
+                Timber.e("signup error : $it")
+                _isLogin.value = false
+            }
+        }
+    }
 
     fun kakaoLogin(): Boolean {
         var isSignup = false
