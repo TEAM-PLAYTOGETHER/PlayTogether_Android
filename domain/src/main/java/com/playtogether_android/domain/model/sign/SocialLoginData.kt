@@ -1,7 +1,8 @@
 package com.playtogether_android.domain.model.sign
 
 data class SocialLoginData(
+    val userName: String,
     val accessToken: String,
     val refreshToken: String,
-    val userName: String
+    val isSignup: Boolean
 )
