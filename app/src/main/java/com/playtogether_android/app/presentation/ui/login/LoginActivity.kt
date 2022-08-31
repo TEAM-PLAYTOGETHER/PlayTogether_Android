@@ -86,6 +86,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             } else if (token != null) {
                 UserApiClient.instance.me { _, error ->
                     PlayTogetherRepository.kakaoAccessToken = token.accessToken
+                    Timber.e("kakao token access : ${token.accessToken}")
+                    Timber.e("kakao token refresh : ${token.refreshToken}")
                     with(signViewModel) {
                         val isSignup = kakaoLogin()
                         isLogin.observe(this@LoginActivity) {

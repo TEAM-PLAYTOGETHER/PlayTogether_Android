@@ -43,6 +43,26 @@ class SignViewModel @Inject constructor(
     private val _isLogin = MutableLiveData<Boolean>()
     val isLogin: LiveData<Boolean> = _isLogin
 
+    private val _statusCode = MutableLiveData<Int>()
+    val statusCode: LiveData<Int> = _statusCode
+
+    fun tokenChecker(accessToken: String, refreshToken: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                repository.getTokenIssuance(accessToken, refreshToken)
+            }.onSuccess {
+                _statusCode.value = it.status
+            }.onFailure {
+                Timber.e("token issuance : ${it.message}")
+                when (it) {
+                    is retrofit2.HttpException -> {
+                        _statusCode.value = it.code()
+                    }
+                }
+            }
+        }
+    }
+
     fun signup(body: UserInfo) {
         viewModelScope.launch {
             kotlin.runCatching {

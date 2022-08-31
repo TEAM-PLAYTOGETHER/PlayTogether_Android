@@ -44,6 +44,7 @@ object SignMapper {
 
     fun mapperToIssuanceItem(data: ResTokenIssuance): IssuanceItem {
         return IssuanceItem(
+            status = data.status,
             accessToken = data.data.accessToken,
             refreshToken = data.data.refreshToken
         )
