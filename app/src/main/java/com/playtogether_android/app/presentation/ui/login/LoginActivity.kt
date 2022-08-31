@@ -22,6 +22,7 @@ import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.userAgent
 import timber.log.Timber
 
 
@@ -69,6 +70,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             .requestEmail()
             .build()
         client = GoogleSignIn.getClient(this, gso)
+
         binding.ivLoginGoogle.setOnClickListener {
             startForActivity.launch(client.signInIntent)
         }

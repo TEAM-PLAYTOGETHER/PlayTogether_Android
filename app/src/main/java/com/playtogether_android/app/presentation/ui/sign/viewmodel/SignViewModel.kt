@@ -90,6 +90,8 @@ class SignViewModel @Inject constructor(
                     kakaoUserRefreshToken = it.refreshToken
                     kakaoUserlogOut = false
                 }
+                Timber.e("kakao login access : ${it.accessToken}")
+                Timber.e("kakao login refresh : ${it.refreshToken}")
                 isSignup = it.isSignup
                 _isLogin.value = true
             }.onFailure {
