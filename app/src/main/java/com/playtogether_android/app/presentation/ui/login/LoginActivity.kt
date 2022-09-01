@@ -26,7 +26,6 @@ import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginR
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
-import com.playtogether_android.data.api.google_sign.GoogleRepository
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope

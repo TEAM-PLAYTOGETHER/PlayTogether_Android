@@ -1,7 +1,6 @@
 package com.playtogether_android.app.presentation.ui.login.viewmodel
 
 import android.util.Log
-import com.playtogether_android.data.api.google_sign.GoogleRepository
 import com.playtogether_android.data.api.google_sign.GoogleService
 import com.playtogether_android.data.model.request.google.LoginGoogleRequestModel
 import com.playtogether_android.data.model.request.google.LoginGoogleResponseModel
@@ -9,6 +8,7 @@ import com.playtogether_android.data.singleton.PlayTogetherRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class GoogleLoginRepository(
     private val clientId: String,
@@ -35,7 +35,7 @@ class GoogleLoginRepository(
             }
 
             override fun onFailure(call: Call<LoginGoogleResponseModel>, t: Throwable) {
-                Log.e(GoogleRepository.TAG, "getOnFailure: ", t.fillInStackTrace())
+                Timber.e("getOnFailure: ", t.fillInStackTrace())
             }
         })
     }
