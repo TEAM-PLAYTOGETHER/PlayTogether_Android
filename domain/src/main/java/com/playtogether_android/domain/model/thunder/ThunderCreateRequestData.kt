@@ -1,11 +1,11 @@
-package com.playtogether_android.data.model.request.thunder
+package com.playtogether_android.domain.model.thunder
 
 import com.google.gson.annotations.SerializedName
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-data class RequestThunderCreate(
+data class ThunderCreateRequestData(
     val title: String,
     val category: String,
     val date: String,
@@ -24,10 +24,7 @@ data class RequestThunderCreate(
             "peopleCnt" to peopleCnt.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
             "description" to description.toRequestBody("text/plain".toMediaTypeOrNull()),
             "time" to time.toRequestBody("text/plain".toMediaTypeOrNull()),
-            "place" to place.toRequestBody("text/plain".toMediaTypeOrNull()),
+            "place" to place.toRequestBody("text/plain".toMediaTypeOrNull())
         )
     }
 }
-
-
-

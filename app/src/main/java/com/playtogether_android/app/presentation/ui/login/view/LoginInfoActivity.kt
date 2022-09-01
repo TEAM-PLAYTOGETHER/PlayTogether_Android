@@ -1,17 +1,25 @@
 package com.playtogether_android.app.presentation.ui.login.view
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginInfoBinding
 import com.playtogether_android.app.databinding.DialogOnlyYearBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
+import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.domain.model.sign.UserInfo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activity_login_info) {
+    private val signViewModel: SignViewModel by viewModels()
+    private var birth: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.btnLogininfoMan.isSelected = true
@@ -24,7 +32,25 @@ class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activi
         binding.clLogininfoDateContainer.setOnClickListener {
             initOnlyYearDatePickerDialog()
         }
+        btnAccessButtonClickListener()
         backButtonListener()
+    }
+
+    private fun btnAccessButtonClickListener() {
+        binding.btnLogininfoAccess.setOnClickListener {
+            val data = UserInfo(
+                binding.tvLogininfoGenderText.text.toString(), birth
+            )
+            signViewModel.signup(data)
+            signViewModel.isLogin.observe(this) {
+                if (it) {
+                    val intent = Intent(this, SelectOnboardingActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    shortToast("회원가입 실패!")
+                }
+            }
+        }
     }
 
     private fun setGenderClickListener(list: List<Button>) {
@@ -60,7 +86,8 @@ class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activi
                     this.setTextAppearance(R.style.logininfo_year_text)
                 }
                 clLogininfoDateContainer.setBackgroundResource(R.drawable.rectangle_border_gray01_radius_10)
-                tvLogininfoDateText.text = dialogBinding.npDialogPicker.value.toString()
+                birth = dialogBinding.npDialogPicker.value
+                tvLogininfoDateText.text = birth.toString()
                 ivLoginDate.setImageResource(R.drawable.ic_icn_calendar)
             }
             btnAccessButton()

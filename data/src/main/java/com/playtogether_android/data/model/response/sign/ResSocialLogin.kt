@@ -12,6 +12,7 @@ data class ResSocialLogin(
     data class Data(
         val accessToken: String,
         val refreshToken: String,
-        val userName: String
+        val userName: String,
+        val isSignup: Boolean
     )
 }

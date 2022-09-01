@@ -8,8 +8,9 @@ import retrofit2.http.Query
 
 interface LightService {
 
-    @GET("light")
+    @GET("light/{crewId}")
     suspend fun getLightListCategory(
+        @Path("crewId") crewId: Int,
         @Query("category") category: String,
         @Query("sort") sort: String
     ): ResponseLightListCategory

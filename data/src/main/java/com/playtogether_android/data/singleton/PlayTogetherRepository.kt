@@ -13,6 +13,13 @@ object PlayTogetherRepository {
     private const val KAKAO_URT_KEY = "KAKAO_URT_KEY"  //유저 리프레시토큰 키
     private const val KAKAO_ACCESS = "KAKAO_ACCESS" //
 
+    //구글
+    private const val GOOGLE_USER_FIRST_NAME = "KAKAO_USER_FIRST_NAME" //유저네임
+    private const val GOOGLE_USER_LOG_OUT = "KAKAO_USER_LOG_OUT" //로그아웃 유무
+    private const val GOOGLE_UT_KEY = "KAKAO_UT_KEY"  //유저토큰 키
+    private const val GOOGLE_URT_KEY = "KAKAO_URT_KEY"  //유저 리프레시토큰 키
+    private const val GOOGLE_ACCESS = "KAKAO_ACCESS" //
+
     //유저 동아리
     private const val CREW_ID = "CREW_ID"
     private const val CREW_NAME = "CREW_NAME"
@@ -56,10 +63,12 @@ object PlayTogetherRepository {
         editor.apply()
     }
 
+    //동아리 이름
     var crewName: String
         get() = authPreferences.getString(CREW_NAME, "") ?: ""
         set(value) = authPreferences.edit { it.putString(CREW_NAME, value) }
 
+    //동아리 id
     var crewId: Int
         get() = authPreferences.getInt(CREW_ID, -1) ?: -1
         set(value) = authPreferences.edit { it.putInt(CREW_ID, value) }
@@ -78,6 +87,31 @@ object PlayTogetherRepository {
     var userUuid: String
         get() = authPreferences.getString(USER_UUID_KEY, "") ?: ""
         set(value) = authPreferences.edit { it.putString(USER_UUID_KEY, value) }
+
+    //구글 유저 토큰
+    var googleUserToken: String
+        get() = authPreferences.getString(GOOGLE_UT_KEY, "") ?: ""
+        set(value) = authPreferences.edit { it.putString(GOOGLE_UT_KEY, value) }
+
+    //구글 유저 리프레시 토큰
+    var googleUserRefreshToken: String
+        get() = authPreferences.getString(GOOGLE_URT_KEY, "") ?: ""
+        set(value) = authPreferences.edit { it.putString(GOOGLE_URT_KEY, value) }
+
+    //구글 소셜 로그인시 토큰
+    var googleAccessToken: String
+        get() = authPreferences.getString(GOOGLE_ACCESS, "") ?: ""
+        set(value) = authPreferences.edit { it.putString(GOOGLE_ACCESS, value) }
+
+    //구글 유저 이름
+    var googleUserfirstName: String
+        get() = authPreferences.getString(GOOGLE_USER_FIRST_NAME, "") ?: ""
+        set(value) = authPreferences.edit { it.putString(GOOGLE_USER_FIRST_NAME, value) }
+
+    //구글 유저 로그아웃 유무
+    var googleUserlogOut: Boolean
+        get() = preferences.getBoolean(GOOGLE_USER_LOG_OUT, false)
+        set(value) = preferences.edit { it.putBoolean(GOOGLE_USER_LOG_OUT, value) }
 
     //카카오 유저 토큰
     var kakaoUserToken: String
