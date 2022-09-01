@@ -41,7 +41,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var client: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
+    }
 
+    private fun initView() {
+        googleLoginCallback()
+        onClickListener()
+    }
+
+    private fun googleLoginCallback() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -61,7 +69,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     Timber.e("result code: ${it.resultCode}")
                 }
             }
-        initView()
     }
 
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
@@ -72,16 +79,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
             GoogleLoginRepository(clientId, clientSecret)
                 .getAccessToken(account.serverAuthCode!!)
-
-            startActivity(Intent(this, MainActivity::class.java))
+            signViewModel.googleLogin()
+            signupChecker()
+            Timber.e("login : 구글 로그인 성공")
         } catch (e: ApiException) {
             Timber.e("signInResult:failed code=" + e.statusCode)
             shortToast("로그인 실패")
         }
-    }
-
-    private fun initView() {
-        onClickListener()
     }
 
     private fun onClickListener() {
@@ -112,6 +116,24 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         startActivity(intent)
     }
 
+    private fun signupChecker() {
+        signViewModel.isLogin.observe(this@LoginActivity) {
+            if (it) {
+                if (signViewModel.signup) {
+                    val intent =
+                        Intent(this@LoginActivity, MainActivity::class.java)
+                    nextActivity(intent)
+                } else {
+                    val intent =
+                        Intent(this@LoginActivity, LoginTermsActivity::class.java)
+                    nextActivity(intent)
+                }
+            } else {
+                shortToast("로그인 실패")
+            }
+        }
+    }
+
     private fun setKakaoBtnListener() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
@@ -122,24 +144,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     PlayTogetherRepository.kakaoAccessToken = token.accessToken
                     Timber.e("kakao token access : ${token.accessToken}")
                     Timber.e("kakao token refresh : ${token.refreshToken}")
-                    with(signViewModel) {
-                        kakaoLogin()
-                        isLogin.observe(this@LoginActivity) {
-                            if (it) {
-                                if (signViewModel.signup) {
-                                    val intent =
-                                        Intent(this@LoginActivity, MainActivity::class.java)
-                                    nextActivity(intent)
-                                } else {
-                                    val intent =
-                                        Intent(this@LoginActivity, LoginTermsActivity::class.java)
-                                    nextActivity(intent)
-                                }
-                            } else {
-                                shortToast("로그인 실패")
-                            }
-                        }
-                    }
+                    signViewModel.kakaoLogin()
+                    signupChecker()
                 }
             } else {
                 shortToast("else")

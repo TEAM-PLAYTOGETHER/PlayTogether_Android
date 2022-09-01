@@ -79,9 +79,26 @@ class SignViewModel @Inject constructor(
         }
     }
 
-    fun googleLogin(): Boolean {
-        var isSignup = false
-        return false
+    fun googleLogin() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                repository.postGoogleLogin()
+            }.onSuccess {
+                with(PlayTogetherRepository) {
+                    googleUserToken = ""
+                    googleUserToken = it.accessToken
+                    googleUserRefreshToken = it.refreshToken
+                    userToken = googleUserToken
+                    googleUserlogOut = false
+                }
+                _signup = it.isSignup
+                _isLogin.value = true
+
+            }.onFailure {
+                Timber.e("google login error :${it.message}")
+                _isLogin.value = false
+            }
+        }
     }
 
     fun kakaoLogin() {
