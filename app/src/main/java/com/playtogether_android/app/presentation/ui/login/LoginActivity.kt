@@ -22,9 +22,11 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
+import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.data.api.google_sign.GoogleRepository
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -65,17 +67,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-            val accessToken = account.idToken
-            val refreshToken = account.serverAuthCode
-            Timber.e("google access : $accessToken")
-            Timber.e("google refresh : $refreshToken")
-//            PlayTogetherRepository.googleAccessToken = accessToken!!
-            if (!refreshToken.isNullOrBlank()) {
-                PlayTogetherRepository.googleUserRefreshToken = refreshToken
-            }
+            val clientId = BuildConfig.GOOGLE_CLIENT_ID
+            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
+
+            GoogleLoginRepository(clientId, clientSecret)
+                .getAccessToken(account.serverAuthCode!!)
+
             startActivity(Intent(this, MainActivity::class.java))
         } catch (e: ApiException) {
-            Timber.e("signInResult:failed code=" + e.statusCode);
+            Timber.e("signInResult:failed code=" + e.statusCode)
             shortToast("로그인 실패")
         }
     }
@@ -123,10 +123,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     Timber.e("kakao token access : ${token.accessToken}")
                     Timber.e("kakao token refresh : ${token.refreshToken}")
                     with(signViewModel) {
-                        val isSignup = kakaoLogin()
+                        kakaoLogin()
                         isLogin.observe(this@LoginActivity) {
                             if (it) {
-                                if (isSignup) {
+                                if (signViewModel.signup) {
                                     val intent =
                                         Intent(this@LoginActivity, MainActivity::class.java)
                                     nextActivity(intent)
