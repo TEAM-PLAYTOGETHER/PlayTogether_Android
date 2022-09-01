@@ -35,17 +35,26 @@ import timber.log.Timber
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
     private val signViewModel: SignViewModel by viewModels()
-    private lateinit var client: GoogleSignInClient
     private lateinit var startForActivity: ActivityResultLauncher<Intent>
-
+    private lateinit var client: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestServerAuthCode(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        client = GoogleSignIn.getClient(this, gso)
+
         startForActivity =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
                     handleSignInResult(task)
-                }else{
+                } else {
                     Timber.e("result : $it")
                     Timber.e("result code: ${it.resultCode}")
                 }
@@ -56,18 +65,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-
             val accessToken = account.idToken
             val refreshToken = account.serverAuthCode
             Timber.e("google access : $accessToken")
             Timber.e("google refresh : $refreshToken")
-            PlayTogetherRepository.googleAccessToken = accessToken!!
+//            PlayTogetherRepository.googleAccessToken = accessToken!!
             if (!refreshToken.isNullOrBlank()) {
                 PlayTogetherRepository.googleUserRefreshToken = refreshToken
             }
             startActivity(Intent(this, MainActivity::class.java))
         } catch (e: ApiException) {
-            Timber.e("$e")
+            Timber.e("signInResult:failed code=" + e.statusCode);
             shortToast("로그인 실패")
         }
     }
@@ -87,16 +95,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+//        updateUI(account)
+    }
+
     private fun btnGoogleListener() {
         binding.ivLoginGoogle.setOnClickListener {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                /*.requestServerAuthCode(serverClientId)
-                .requestIdToken(getString(R.string.server_client_id)*/
-                .requestEmail()
-                .build()
-
-            client = GoogleSignIn.getClient(this, gso)
-            startForActivity.launch(client.signInIntent)
+            val intent = client.signInIntent
+            startForActivity.launch(intent)
         }
     }
 
