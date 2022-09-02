@@ -26,7 +26,7 @@ android {
         buildConfigField("String", "SUBWAY_URL", getSubwayUrl("SUBWAY_URL"))
         buildConfigField("String", "KAKAOKEY", getApiKey("kakao_key"))
         buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))
-        buildConfigField("String","GOOGLEKEY",getApiKey("google_key"))
+        buildConfigField("String","GOOGLE_CLIENT_SECRET",getApiKey("google_client_secret"))
     }
 
     buildTypes {

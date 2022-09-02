@@ -46,6 +46,9 @@ class SignViewModel @Inject constructor(
     private val _statusCode = MutableLiveData<Int>()
     val statusCode: LiveData<Int> = _statusCode
 
+    private var _signup = false
+    val signup get() = _signup
+
     fun tokenChecker(accessToken: String, refreshToken: String) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -76,30 +79,52 @@ class SignViewModel @Inject constructor(
         }
     }
 
-    fun kakaoLogin(): Boolean {
-        var isSignup = false
+    fun googleLogin() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                repository.postGoogleLogin()
+            }.onSuccess {
+                with(PlayTogetherRepository) {
+                    googleUserToken = ""
+                    googleUserToken = it.accessToken
+                    googleUserRefreshToken = it.refreshToken
+                    userToken = googleUserToken
+                    googleUserlogOut = false
+                }
+                _signup = it.isSignup
+                _isLogin.value = true
+
+            }.onFailure {
+                Timber.e("google login error :${it.message}")
+                _isLogin.value = false
+            }
+        }
+    }
+
+    fun kakaoLogin() {
         viewModelScope.launch {
             kotlin.runCatching {
                 repository.postKakaoLogin()
             }.onSuccess {
                 with(PlayTogetherRepository) {
-                    kakaoAccessToken = "" // todo 인터셉트 변경 위함
+                    //todo 인터셉트
+                    kakaoUserToken = ""
                     kakaoUserToken = it.accessToken
-                    kakaoAccessToken = it.accessToken
                     userToken = kakaoUserToken
                     kakaoUserRefreshToken = it.refreshToken
                     kakaoUserlogOut = false
                 }
                 Timber.e("kakao login access : ${it.accessToken}")
                 Timber.e("kakao login refresh : ${it.refreshToken}")
-                isSignup = it.isSignup
+
+                _signup = it.isSignup
                 _isLogin.value = true
+
             }.onFailure {
                 Timber.e("kakao login error :${it.message}")
                 _isLogin.value = false
             }
         }
-        return isSignup
     }
 
     fun postSignIn(item: SignInItem) {
