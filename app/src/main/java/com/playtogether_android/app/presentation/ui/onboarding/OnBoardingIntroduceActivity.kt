@@ -325,8 +325,6 @@ class OnBoardingIntroduceActivity :
 
         val crewId = intent.getIntExtra("crewId", 1)
 
-        Timber.e("제발 : $crewId")
-        //TODO 여기 crewId도 잘 들어오고 다 잘 들어가는데 뭔지 모르겠어여
         onBoardingViewModel.getNickNameDuplication(crewId, nickname)
         onBoardingViewModel.nicknameDuplicationCheck.observe(this) {
             if (!it.success) {

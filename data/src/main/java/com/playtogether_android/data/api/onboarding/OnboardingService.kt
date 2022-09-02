@@ -26,9 +26,8 @@ interface OnboardingService {
     @GET("crew/list")
     suspend fun getCrewList() : ResponseGetList
 
-    //TODO 여기 부분인데 뭔지 모르겠어요
     //유저 닉네임 중복확인
-    @GET("user/crew/{crewId}")
+    @GET("user/crew/{crewId}/nickname")
     suspend fun getNickNameDuplication(
         @Path("crewId") crewId : Int,
         @Query("nickname") nickname : String
