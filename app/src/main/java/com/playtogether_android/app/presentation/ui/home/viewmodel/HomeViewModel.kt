@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.home.JoinThunderData
 import com.playtogether_android.domain.model.home.ThunderJoinEndData
 import com.playtogether_android.domain.model.home.ThunderJoinEndMember
@@ -57,6 +58,14 @@ class HomeViewModel @Inject constructor(
 
     private val _crewList = MutableLiveData<List<CrewListData.Data.CrewList>>()
     val crewList: LiveData<List<CrewListData.Data.CrewList>> = _crewList
+
+    private val _crewName = MutableLiveData<String>()
+    val crewName: LiveData<String> = _crewName
+
+    fun setCrewName(name: String) {
+        PlayTogetherRepository.crewName = name
+        _crewName.value = name
+    }
 
     fun getCrewList() {
         viewModelScope.launch {
