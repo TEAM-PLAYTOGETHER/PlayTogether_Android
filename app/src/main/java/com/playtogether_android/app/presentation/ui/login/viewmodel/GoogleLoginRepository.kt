@@ -1,7 +1,6 @@
 package com.playtogether_android.app.presentation.ui.login.viewmodel
 
 import android.util.Log
-import com.playtogether_android.data.api.google_sign.GoogleRepository
 import com.playtogether_android.data.api.google_sign.GoogleService
 import com.playtogether_android.data.model.request.google.LoginGoogleRequestModel
 import com.playtogether_android.data.model.request.google.LoginGoogleResponseModel
@@ -35,7 +34,7 @@ class GoogleLoginRepository(
             }
 
             override fun onFailure(call: Call<LoginGoogleResponseModel>, t: Throwable) {
-                Log.e(GoogleRepository.TAG, "getOnFailure: ", t.fillInStackTrace())
+
             }
         })
     }

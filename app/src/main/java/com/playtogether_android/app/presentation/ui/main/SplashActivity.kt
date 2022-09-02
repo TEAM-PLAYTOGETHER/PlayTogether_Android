@@ -8,7 +8,9 @@ import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySplashBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.login.LoginActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.sign.SignInActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -19,6 +21,8 @@ import kotlin.math.sign
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     private val signViewModel: SignViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -100,11 +104,22 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         signViewModel.statusCode.observe(this@SplashActivity) { status ->
             when (status) {
                 ACCESS_NOW, REFRESH_SUCCESS -> {
-                    moveMain()
+                    if (PlayTogetherRepository.crewId == -1)
+                        moveSelectCrew()
+                    else
+                        moveMain()
                 }
                 else -> moveLoginActivity()
             }
         }
+    }
+
+    private fun moveSelectCrew() {
+        val intent = Intent(baseContext, SelectOnboardingActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startNextActivityWithHandling(intent)
     }
 
     companion object {

@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -24,13 +23,11 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
 import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
-import com.playtogether_android.data.api.google_sign.GoogleRepository
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
@@ -119,9 +116,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun signupChecker() {
         signViewModel.isLogin.observe(this@LoginActivity) {
             if (it) {
-                if (signViewModel.signup) {
+                if (signViewModel.signup && PlayTogetherRepository.crewId != -1) {
                     val intent =
                         Intent(this@LoginActivity, MainActivity::class.java)
+                    nextActivity(intent)
+                } else if (signViewModel.signup && PlayTogetherRepository.crewId == -1) {
+                    val intent = Intent(this@LoginActivity, SelectOnboardingActivity::class.java)
                     nextActivity(intent)
                 } else {
                     val intent =
