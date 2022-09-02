@@ -12,8 +12,10 @@ import com.playtogether_android.app.presentation.ui.message.MessageFragment
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
 import com.playtogether_android.app.presentation.ui.userInfo.MyInfoFragment
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -28,6 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //        val token = FirebaseMessaging.getInstance().token
         getFCMToken()
 //        Timber.e("firebase token :$token")
+        Timber.d("JWT 토큰 : ${PlayTogetherRepository.userToken}")
     }
 
 
