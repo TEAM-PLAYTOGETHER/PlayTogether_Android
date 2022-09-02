@@ -1,15 +1,14 @@
 package com.playtogether_android.app.presentation.ui.sign.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.playtogether_android.data.model.request.sign.RequestSignup
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-import com.playtogether_android.domain.model.sign.*
+import com.playtogether_android.domain.model.sign.SignInData
+import com.playtogether_android.domain.model.sign.SignInItem
+import com.playtogether_android.domain.model.sign.UserInfo
 import com.playtogether_android.domain.repository.sign.SignRepository
-import com.playtogether_android.domain.usecase.sign.PostSignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -20,6 +19,8 @@ class SignViewModel @Inject constructor(
 //    val postSignInUseCase: PostSignInUseCase,
     val repository: SignRepository
 ) : ViewModel() {
+
+    var signData: MutableLiveData<String> = MutableLiveData()
 
     //로그인 시 필요한 값
     var id = MutableLiveData<String>()
@@ -93,6 +94,7 @@ class SignViewModel @Inject constructor(
                 Timber.e("kakao login access : ${it.accessToken}")
                 Timber.e("kakao login refresh : ${it.refreshToken}")
                 isSignup = it.isSignup
+                signData.value = it.accessToken //signData Set accessToken
                 _isLogin.value = true
             }.onFailure {
                 Timber.e("kakao login error :${it.message}")

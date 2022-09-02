@@ -100,7 +100,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     //로그인
     private fun observeSignIn() {
         signViewModel.signIn.observe(this) {
-            PlayTogetherSharedPreference.setJwtToken(
+            PlayTogetherSharedPreference.setAccessToken(
                 this,
                 it.jwtToken
             )

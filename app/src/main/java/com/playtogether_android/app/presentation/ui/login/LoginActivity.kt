@@ -16,6 +16,7 @@ import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.R
@@ -24,6 +25,7 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +41,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var startForActivity: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var keyHash = Utility.getKeyHash(this)
+        Timber.e("kkkkkkkkkk: $keyHash")
         super.onCreate(savedInstanceState)
         startForActivity =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -118,6 +122,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                         val isSignup = kakaoLogin()
                         isLogin.observe(this@LoginActivity) {
                             if (it) {
+                                Timber.d("testset : ${signViewModel.signData.value}")
+                                PlayTogetherSharedPreference.setAccessToken(this@LoginActivity, signViewModel.signData.value ?: "")
+                                PlayTogetherSharedPreference.setRefreshToken(this@LoginActivity, signViewModel.signData.value ?: "")
                                 if (isSignup) {
                                     val intent =
                                         Intent(this@LoginActivity, MainActivity::class.java)
