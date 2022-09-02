@@ -8,7 +8,6 @@ import com.playtogether_android.data.singleton.PlayTogetherRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import timber.log.Timber
 
 class GoogleLoginRepository(
     private val clientId: String,
@@ -35,7 +34,7 @@ class GoogleLoginRepository(
             }
 
             override fun onFailure(call: Call<LoginGoogleResponseModel>, t: Throwable) {
-                Timber.e("getOnFailure: ", t.fillInStackTrace())
+
             }
         })
     }
