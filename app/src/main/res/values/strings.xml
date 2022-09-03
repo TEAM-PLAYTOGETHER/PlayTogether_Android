@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">PlayTogether_android</string>
-
-    <string name="default_web_client_id">이거 머야?</string>
     <!--바텀네비-->
     <string name="navigation_mypage">마이페이지</string>
     <string name="navigation_message">쪽지</string>
