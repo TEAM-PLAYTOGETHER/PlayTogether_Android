@@ -62,7 +62,7 @@ class HomeViewModel @Inject constructor(
     private val _crewName = MutableLiveData<String>()
     val crewName: LiveData<String> = _crewName
 
-    fun setCrewName(name: String) {
+    fun setCrewName(name: String = PlayTogetherRepository.crewName) {
         PlayTogetherRepository.crewName = name
         _crewName.value = name
     }

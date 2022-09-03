@@ -111,6 +111,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.getHotThunderList(crewId)
         homeViewModel.getNewThunderList(crewId)
         homeViewModel.getCrewList()
+        homeViewModel.setCrewName()
     }
 
     private fun refreshView() {
