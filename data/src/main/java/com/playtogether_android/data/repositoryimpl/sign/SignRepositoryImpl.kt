@@ -33,6 +33,6 @@ class SignRepositoryImpl(private val signDataSource: SignDataSource) : SignRepos
     }
 
     override suspend fun putSignup(authorization: String, body: UserInfo) {
-
+        signDataSource.putSignup(authorization, SignMapper.mapperToUserInfo(body))
     }
 }

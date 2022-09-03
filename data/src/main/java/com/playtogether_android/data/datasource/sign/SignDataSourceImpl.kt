@@ -30,6 +30,6 @@ class SignDataSourceImpl(private val service: SignService) : SignDataSource {
     }
 
     override suspend fun putSignup(authorization: String, body: RequestSignup) {
-        //response 안써도 되나?
+        service.putSignup(authorization, body)
     }
 }
