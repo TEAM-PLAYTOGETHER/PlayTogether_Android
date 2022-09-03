@@ -36,10 +36,8 @@ class HomeFragmentDialog :
     }
 
     fun setChangeCrew(crewId: Int, name: String) {
-        with(PlayTogetherRepository) {
-            PlayTogetherRepository.crewId = crewId
-            crewName = name
-        }
+        PlayTogetherRepository.crewId = crewId
+        homeViewModel.setCrewName(name)
         homeViewModel.getNewThunderList(crewId)
         homeViewModel.getHotThunderList(crewId)
         dismiss()
