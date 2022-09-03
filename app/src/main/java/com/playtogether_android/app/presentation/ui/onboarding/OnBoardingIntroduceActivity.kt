@@ -91,6 +91,7 @@ class OnBoardingIntroduceActivity :
 
         Timber.e("111111: $isOpener")
 
+
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
 
@@ -323,7 +324,8 @@ class OnBoardingIntroduceActivity :
         val nickname: String = binding.etIntroOnboardingName.text.toString()
 
         val crewId = intent.getIntExtra("crewId", 1)
-        onBoardingViewModel.getNickNameDuplication(crewId, "$nickname")
+
+        onBoardingViewModel.getNickNameDuplication(crewId, nickname)
         onBoardingViewModel.nicknameDuplicationCheck.observe(this) {
             if (!it.success) {
                 binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE

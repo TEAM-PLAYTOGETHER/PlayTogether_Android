@@ -1,6 +1,9 @@
 package com.playtogether_android.app.di
 
+import com.playtogether_android.app.BuildConfig.BASE_URL
 import com.playtogether_android.app.BuildConfig.SUBWAY_URL
+import com.playtogether_android.app.util.AuthInterceptor
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
@@ -17,6 +20,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -100,4 +106,29 @@ object ApiModule {
     fun provideSearchService(@RetrofitModule.GsonConverter retrofit: Retrofit): SearchService {
         return retrofit.create(SearchService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient() =
+        OkHttpClient.Builder()
+            .run {
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+                addInterceptor(provideInterceptor())
+                addInterceptor(AuthInterceptor())
+                build()
+            }
+
+    @Singleton
+    @Provides
+    fun provideInterceptor() =
+        Interceptor { chain ->
+            with(chain) {
+                val newRequest = request().newBuilder()
+                    .addHeader("Authorization",
+                        PlayTogetherSharedPreference.getAccessToken(PlayTogetherApplication.context()))
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                proceed(newRequest)
+            }
+        }
 }
