@@ -15,8 +15,8 @@ import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
-import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -25,6 +25,7 @@ import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginR
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +38,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var startForActivity: ActivityResultLauncher<Intent>
     private lateinit var client: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
+        var keyHash = Utility.getKeyHash(this)
+        Timber.e("kkkkkkkkkk: $keyHash")
         super.onCreate(savedInstanceState)
         initView()
     }
@@ -71,11 +74,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-            val clientId = BuildConfig.GOOGLE_CLIENT_ID
-            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
-
-            GoogleLoginRepository(clientId, clientSecret)
-                .getAccessToken(account.serverAuthCode!!)
+//            val clientId = BuildConfig.GOOGLE_CLIENT_ID
+//            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
+//
+//            GoogleLoginRepository(clientId, clientSecret)
+//                .getAccessToken(account.serverAuthCode!!)
             signViewModel.googleLogin()
             signupChecker()
             Timber.e("login : 구글 로그인 성공")
@@ -144,8 +147,32 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     PlayTogetherRepository.kakaoAccessToken = token.accessToken
                     Timber.e("kakao token access : ${token.accessToken}")
                     Timber.e("kakao token refresh : ${token.refreshToken}")
+
+                    with(signViewModel) {
+                        val isSignup = kakaoLogin()
+                        isLogin.observe(this@LoginActivity) {
+                            if (it) {
+                                Timber.d("testset : ${signViewModel.signData.value}")
+                                PlayTogetherSharedPreference.setAccessToken(this@LoginActivity, signViewModel.signData.value ?: "")
+                                PlayTogetherSharedPreference.setRefreshToken(this@LoginActivity, signViewModel.signData.value ?: "")
+//                                if (isSignup) {
+//                                    val intent =
+//                                        Intent(this@LoginActivity, MainActivity::class.java)
+//                                    nextActivity(intent)
+//                                } else {
+//                                    val intent =
+//                                        Intent(this@LoginActivity, LoginTermsActivity::class.java)
+//                                    nextActivity(intent)
+//                                }
+                            } else {
+                                shortToast("로그인 실패")
+                            }
+                        }
+                    }
+
                     signViewModel.kakaoLogin()
                     signupChecker()
+
                 }
             } else {
                 shortToast("else")
