@@ -37,17 +37,20 @@ class ThunderViewModel @Inject constructor(
 
 
     //번개탭-신청한 번개 리스트
-    fun getApplyList() = viewModelScope.launch {
-        kotlin.runCatching { getApplyListUseCase() }
-            .onSuccess {
-                _thunderApplyList.value = it
-                Timber.d("thunder apply : $it")
-            }
-            .onFailure {
-                it.printStackTrace()
-                Log.d("getApplyList-fail", "fail")
-            }
+    fun getApplyList() {
+        viewModelScope.launch {
+            kotlin.runCatching { getApplyListUseCase() }
+                .onSuccess {
+                    _thunderApplyList.value = it
+                    Timber.d("thunder apply size : ${it.size}")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("getApplyList-fail", "fail")
+                }
+        }
     }
+
 
     fun getOpenList() {
         viewModelScope.launch {

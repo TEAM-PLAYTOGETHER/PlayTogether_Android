@@ -27,7 +27,8 @@ class TabOpenFragment : BaseFragment<FragmentTabOpenBinding>(R.layout.fragment_t
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.lifecycleOwner = this
+        binding.viewModel = thunderViewModel
         initThunderListAdapter()
 //        getOpenList()
 //        observeOpenList()
