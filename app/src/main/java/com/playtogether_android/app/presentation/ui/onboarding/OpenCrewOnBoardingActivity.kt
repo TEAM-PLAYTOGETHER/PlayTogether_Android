@@ -100,7 +100,7 @@ class OpenCrewOnBoardingActivity :
             override fun afterTextChanged(p0: Editable?) {
                 val name = p0.toString()
                 binding.tvOpenOnboardingCheck.setOnClickListener {
-                    if (name.length < 15) {
+                    if (name.length < 16) {
                         onBoardingViewModel.crewName.value = p0.toString()
                         binding.tvOpenOnboardingApprove.visibility = View.VISIBLE
                     }
