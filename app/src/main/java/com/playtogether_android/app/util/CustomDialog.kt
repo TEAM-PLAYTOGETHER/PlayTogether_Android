@@ -2,17 +2,13 @@ package com.playtogether_android.app.util
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.annotation.LayoutRes
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.playtogether_android.app.R
-import com.playtogether_android.app.presentation.ui.sign.SignInActivity
+import com.playtogether_android.app.presentation.ui.login.LoginActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplyThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
 
 class CustomDialog(private val context: Context, val title: String) {
     private val dialog = Dialog(context)
@@ -113,7 +109,7 @@ class CustomDialog(private val context: Context, val title: String) {
         dialog.findViewById<TextView>(R.id.tv_dialog_check).setOnClickListener {
 //            onClickedListener.onClicked(1)
             dialog.dismiss()
-            (context as SignInActivity).finish()
+            (context as LoginActivity).finish()
         }
     }
 
