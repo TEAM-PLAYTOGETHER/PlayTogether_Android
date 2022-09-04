@@ -4,17 +4,28 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMyPageQuitBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.ThunderAppliedActivity
+import com.playtogether_android.app.presentation.ui.login.LoginActivity
+import com.playtogether_android.app.presentation.ui.mypage.viewModel.MyPageViewModel
 import com.playtogether_android.app.util.CustomDialog
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class MyPageQuitActivity : BaseActivity<ActivityMyPageQuitBinding>(R.layout.activity_my_page_quit) {
+
+    private val myPageViewModel: MyPageViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         backBtnListener()
         quitBtnListener()
+        quitNetwork()
     }
 
     private fun backBtnListener() {
@@ -31,12 +42,29 @@ class MyPageQuitActivity : BaseActivity<ActivityMyPageQuitBinding>(R.layout.acti
             dialog.showChoiceDialog(R.layout.dialog_yes_no)
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
-                    TODO("Not yet implemented")
+                    if (num == 1) {
+                        myPageViewModel.deleteUser()
+
+
+                    } else {
+                        Timber.e("탈퇴 실패")
+                    }
                 }
 
             })
         }
+    }
 
+    private fun quitNetwork() {
+        myPageViewModel.deleteUser.observe(this) {
+            if(it.success) {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+                Toast.makeText(this, "탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 
 }
