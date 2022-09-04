@@ -11,57 +11,64 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentTabLikeBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.presentation.ui.thunder.adapter.ThunderTabListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
+import com.playtogether_android.app.util.SpaceItemDecoration
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TabLikeFragment : BaseFragment<FragmentTabLikeBinding>(R.layout.fragment_tab_like) {
 
-    private lateinit var thunderListAdapter: ThunderListAdapter
+    private lateinit var thunderListAdapter: ThunderTabListAdapter
 
-    private val thunderViewModel: ThunderViewModel by viewModels()
+    private val thunderViewModel: ThunderViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initThunderListAdapter()
-        getLikeList()
-        observeLikeList()
+//        getLikeList()
+//        observeLikeList()
     }
 
     private fun initThunderListAdapter() {
-        thunderListAdapter = ThunderListAdapter()
+        thunderListAdapter = ThunderTabListAdapter()
+        thunderViewModel.thunderLikeList.observe(viewLifecycleOwner) {
+            thunderListAdapter.submitList(it)
+        }
+
         with(binding.rvLikeThunderList) {
             layoutManager = LinearLayoutManager(requireActivity())
+            addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
             adapter = thunderListAdapter
         }
         //리스트 클릭시 오픈 상세뷰로 이동
-        thunderListAdapter.itemClick = object : ThunderListAdapter.ItemClick {
-            override fun onClick(view: View, position: Int, thunderId: Int) {
-                val intent = Intent(context, ThunderDetailActivity::class.java)
-                intent.putExtra("thunderId", thunderId)
-                startActivity(intent)
-            }
-        }
+//        thunderListAdapter.itemClick = object : ThunderListAdapter.ItemClick {
+//            override fun onClick(view: View, position: Int, thunderId: Int) {
+//                val intent = Intent(context, ThunderDetailActivity::class.java)
+//                intent.putExtra("thunderId", thunderId)
+//                startActivity(intent)
+//            }
+//        }
     }
 
-    private fun getLikeList() {
+    /*private fun getLikeList() {
         thunderViewModel.getLikeList()
-    }
+    }*/
 
-    private fun observeLikeList() {
-        thunderViewModel.thundertabListData.observe(viewLifecycleOwner) {
-            val thunderTabListData = mutableListOf<ThunderTabListData.Data>()
-            thunderTabListData.addAll(it.data)
-            thunderListAdapter.thunderList = thunderTabListData
-
-            Log.d("connect-test", it.toString())
-
-            // 찜한 리스트 정렬(임시)
-            thunderTabListData.sortBy { it.date }
-        }
-    }
+//    private fun observeLikeList() {
+//        thunderViewModel.thundertabListData.observe(viewLifecycleOwner) {
+//            val thunderTabListData = mutableListOf<ThunderTabListData.Data>()
+//            thunderTabListData.addAll(it.data)
+//            thunderListAdapter.thunderList = thunderTabListData
+//
+//            Log.d("connect-test", it.toString())
+//
+//            // 찜한 리스트 정렬(임시)
+//            thunderTabListData.sortBy { it.date }
+//        }
+//    }
 
 
 }

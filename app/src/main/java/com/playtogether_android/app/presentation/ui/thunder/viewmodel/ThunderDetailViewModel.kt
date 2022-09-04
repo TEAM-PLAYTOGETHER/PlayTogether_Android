@@ -89,7 +89,7 @@ class ThunderDetailViewModel @Inject constructor(
                 thunderDetailOrganizerUseCase(thunderId)
             }.onSuccess {
                 _organizerInfo.value = it
-                Log.d("thunderDetailOriganizer-Success", "${it.userLoginId}")
+//                Log.d("thunderDetailOriganizer-Success", "${it.userLoginId}")
             }.onFailure {
                 it.printStackTrace()
                 Log.e("thunderDetailOrganizer", "failure : ${it.message}")

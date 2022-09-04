@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
@@ -8,9 +9,11 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.view.HomeFragment
+import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.MessageFragment
 import com.playtogether_android.app.presentation.ui.mypage.MyPageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.presentation.ui.userInfo.MyInfoFragment
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
@@ -19,6 +22,9 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+    private val homeViewModel: HomeViewModel by viewModels()
+    private val thunderViewModel: ThunderViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,6 +70,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
 
                 R.id.navigation_thunder -> {
+                    with(thunderViewModel) {
+                        getApplyList()
+                        getOpenList()
+                        getLikeList()
+                    }
                     if (prevSelectedItem == 1) {
                         changeFragment(R.id.fragment_container_main, ThunderFragment(), "Thunder")
                     } else {
