@@ -23,7 +23,9 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
 import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
+import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
+import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.app.util.shortToast
@@ -35,6 +37,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
     private val signViewModel: SignViewModel by viewModels()
+    private val onBoardingViewModel : OnBoardingViewModel by viewModels()
     private lateinit var startForActivity: ActivityResultLauncher<Intent>
     private lateinit var client: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,12 +122,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun signupChecker() {
         signViewModel.isLogin.observe(this@LoginActivity) {
             if (it) {
+                //TODO: 잘 모르겠는데 막판에 고치기
+                Timber.e("???????? : ${onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty()}")
                 if (signViewModel.signup && PlayTogetherRepository.crewId != -1) {
                     val intent =
                         Intent(this@LoginActivity, MainActivity::class.java)
                     nextActivity(intent)
-                } else if (signViewModel.signup && PlayTogetherRepository.crewId == -1) {
+                } else if (signViewModel.signup && PlayTogetherRepository.crewId == -1 && (onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty() == true)) {
                     val intent = Intent(this@LoginActivity, SelectOnboardingActivity::class.java)
+                    nextActivity(intent)
+                } else if (signViewModel.signup && PlayTogetherRepository.crewId == -1 && (onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty() == false)) {
+                    val intent = Intent(this@LoginActivity, OnboardingReDownLoadActivity::class.java)
                     nextActivity(intent)
                 } else {
                     val intent =

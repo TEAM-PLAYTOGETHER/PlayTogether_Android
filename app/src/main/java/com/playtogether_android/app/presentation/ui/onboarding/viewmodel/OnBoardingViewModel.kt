@@ -141,6 +141,7 @@ class OnBoardingViewModel @Inject constructor(
             kotlin.runCatching { getCrewListUseCase() }
                 .onSuccess {
                     _getCrewList.value = it
+                    Timber.e("TEST : ${it.data.crewList.size}")
                     Timber.d("동아리 리스트 조회 : 서버 통신 성공")
                 }
                 .onFailure {
