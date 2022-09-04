@@ -169,6 +169,7 @@ class OpenCrewOnBoardingActivity :
                     putExtra("isOpener", true)
                 }
                 Timber.e("${it.name} ${it.code} ${it.id} ${binding.etOpenOnboardingIntro.text.toString()}")
+
                 startActivity(intent)
                 finish()
             } else {

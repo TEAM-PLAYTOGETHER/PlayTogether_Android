@@ -88,20 +88,18 @@
         <activity
             android:name=".presentation.ui.onboarding.OpenCrewOnBoardingActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.mypage.OthersMyPageActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.main.SplashActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.ui.thunder.OpenThunderDetailActivity"
@@ -129,9 +127,6 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.home.ThunderDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".presentation.ui.sign.SignInActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.createThunder.CreateThunderActivity"
