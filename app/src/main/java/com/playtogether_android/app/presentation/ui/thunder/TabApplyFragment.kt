@@ -31,8 +31,6 @@ class TabApplyFragment : BaseFragment<FragmentTabApplyBinding>(R.layout.fragment
     private fun initThunderListAdapter() {
         thunderListAdapter = ThunderTabListAdapter()
         thunderViewModel.thunderApplyList.observe(viewLifecycleOwner) {
-            Timber.e("list size : ${thunderListAdapter.currentList.size}")
-
             thunderListAdapter.submitList(it)
         }
         with(binding.rvApplyThunderList) {

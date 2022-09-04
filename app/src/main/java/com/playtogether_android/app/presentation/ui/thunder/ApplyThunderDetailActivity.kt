@@ -93,12 +93,10 @@ class ApplyThunderDetailActivity :
             var organizerId: Int? = null
 
             thunderDetailViewModel.organizerInfo.observe(this) {
-                userLoginId = it.userLoginId
                 organizerId = it.organizerId
                 organizerName = it.name
             }
             val intent = Intent(this, OthersMyPageActivity::class.java)
-            intent.putExtra("userLoginId", userLoginId)
             intent.putExtra("organizerId", organizerId)
             intent.putExtra("organizerName", organizerName)
 
