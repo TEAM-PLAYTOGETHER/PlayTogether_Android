@@ -13,6 +13,8 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.app.util.PlayTogetherSharedPreference
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.onboarding.MakeCrewItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -161,6 +163,8 @@ class OpenCrewOnBoardingActivity :
         onBoardingViewModel.makeCrew.observe(this) {
             if (it.success) {
                 Timber.d("${it.code}")
+                PlayTogetherRepository.crewId = it.id
+                Timber.e("Test Repository : ${PlayTogetherRepository.crewId}")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java).apply{
                     putExtra("crewName", it.name)
                     putExtra("crewCode", it.code)

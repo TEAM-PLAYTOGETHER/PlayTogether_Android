@@ -110,10 +110,10 @@ class OnBoardingViewModel @Inject constructor(
             when(val registerCrew =
                 safeApiCall(Dispatchers.IO) {postRegisterCrewUseCase(registerCrewItem)}) {
                 is ResultWrapper.Success -> _registerCrew.value =
-                    RegisterCrewData(true, registerCrew.data.crewName)
+                    RegisterCrewData(true, registerCrew.data.message,registerCrew.data.crewId, registerCrew.data.crewName)
                 is ResultWrapper.GenericError -> {
                     _registerCrew.value =
-                        RegisterCrewData(false, registerCrew.message.toString() )
+                        RegisterCrewData(false, registerCrew.message.toString(),0, registerCrew.message.toString() )
                 }
             }
             Timber.d("registerCrew : ${_registerCrew.value.toString()}")
