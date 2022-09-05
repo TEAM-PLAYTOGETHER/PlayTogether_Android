@@ -4,7 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
 
+        <variable
+            name="viewModel"
+            type="com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +25,11 @@
             android:layout_marginTop="28dp"
             android:fillViewport="true">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_open_thunder_list"
                 android:layout_width="match_parent"
@@ -33,6 +42,20 @@
                 android:nestedScrollingEnabled="false"
                 android:overScrollMode="never" />
 
+            <TextView
+                android:id="@+id/tv_thundergo_empty_text"
+                style="@style/home_empty_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/home_empty_text"
+                android:visibility="@{viewModel.thunderOpenList.size()==0 ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 

@@ -1,12 +1,12 @@
 package com.playtogether_android.app.util
 
 import com.playtogether_android.app.di.PlayTogetherApplication
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber
 
-class AuthInterceptor() : Interceptor {
-
+class AuthInterceptor : Interceptor {
 
     companion object {
         const val TAG = "okhttp"
@@ -33,14 +33,16 @@ class AuthInterceptor() : Interceptor {
     private fun doRequest(chain: Interceptor.Chain): Response {
         val request = chain.request()
         Timber.d("request : $request")
-        val cookieSid = PlayTogetherSharedPreference.getAccessToken(PlayTogetherApplication.context())
-        if (cookieSid != null) {
+        val token = PlayTogetherRepository.userToken
+//        val cookieSid = PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context())
+        if (token.isNotEmpty()) {
             return chain.proceed(
                 request
                     .newBuilder()
                     .addHeader(
                         "Authorization",
-                        PlayTogetherSharedPreference.getAccessToken(PlayTogetherApplication.context())
+                        token
+//                        PlayTogetherSharedPreference.getJwtToken(PlayTogetherApplication.context())
                     )
                     .addHeader("Content-Type", "application/json")
                     .build()

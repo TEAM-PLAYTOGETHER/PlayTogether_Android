@@ -4,6 +4,7 @@ import com.playtogether_android.data.model.response.thunder.ResThunderDeleteData
 import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
 import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
 import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
+import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.model.thunder.*
 
 object ThunderMapper {
@@ -11,18 +12,34 @@ object ThunderMapper {
     //번개탭-신청한 번개 리스트
     fun mapperToThunderTabListData(resThunderTabListData: ResThunderTabListData): ThunderTabListData {
         return ThunderTabListData(
-            data = resThunderTabListData.data.map {
-                ThunderTabListData.Data(
-                    it.lightId,
-                    it.title,
+            data = resThunderTabListData.data.lightData.map {
+                CategoryData(
                     it.category,
                     it.date,
-                    it.time,
+                    it.lightId,
+                    it.lightMemberCnt,
                     it.peopleCnt,
                     it.place,
-                    it.lightMemberCnt
+                    it.time,
+                    it.title,
+                    it.scpCnt,
+                    it.isOpened,
                 )
             }
+//            data = resThunderTabListData.data.lightData {
+//                ThunderTabListData.Data(
+//                    it.lightId,
+//                    it.title,
+//                    it.category,
+//                    it.scpCnt,
+//                    it.date,
+//                    it.time,
+//                    it.peopleCnt,
+//                    it.place,
+//                    it.lightMemberCnt,
+//                    it.isOpened
+//                )
+//            }
         )
     }
 
@@ -38,7 +55,14 @@ object ThunderMapper {
     fun mapperToThunderDetailMember(it: List<ResThunderDetailData.Data>): List<Member> {
         val list = mutableListOf<Member>()
         it.map {
-            list.addAll(it.members.map { Member(it.age, it.gender, it.mbti, it.name, it.userId) })
+            list.addAll(it.members.map {
+                Member(
+                    it.age,
+                    it.gender,
+                    it.name,
+                    it.userId
+                )
+            })
         }
         return list
     }
@@ -46,7 +70,12 @@ object ThunderMapper {
     fun mapperToThunderDetailOrganizer(it: List<ResThunderDetailData.Data>): List<Organizer> {
         val list = mutableListOf<Organizer>()
         it.map {
-            list.addAll(it.organizer.map { Organizer(it.name, it.organizerId, it.userLoginId) })
+            list.addAll(it.organizer.map {
+                Organizer(
+                    it.name,
+                    it.organizerId
+                )
+            })
         }
         return list
     }
@@ -58,10 +87,12 @@ object ThunderMapper {
                 it.date,
                 it.description,
                 it.image,
+                it.isOpened,
                 it.lightId,
                 it.lightMemberCnt,
                 it.peopleCnt,
                 it.place,
+                it.scpCnt,
                 it.time,
                 it.title
             )

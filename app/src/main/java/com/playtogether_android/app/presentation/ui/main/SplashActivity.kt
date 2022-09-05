@@ -76,14 +76,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             }
             //todo 카카오 자동 로그인
             else if (kakaoUserToken == userToken) {
-                signViewModel.tokenChecker(kakaoUserToken, kakaoUserRefreshToken)
-                Timber.e("repository access : $kakaoUserToken")
+                signViewModel.tokenChecker(kakaoUserRefreshToken)
+                Timber.e("repository access : $userToken")
+                Timber.e("repository refresh : $kakaoUserRefreshToken")
                 accessTokenChecker()
                 Timber.e("splash auto kakao login : 카카오 자동 로그인")
             }
             //todo 구글 자동 로그인
             else if (googleAccessToken == userToken) {
-                signViewModel.tokenChecker(googleAccessToken, googleUserRefreshToken)
+                Timber.e("repository access : $userToken")
+                Timber.e("repository refresh : $googleUserRefreshToken")
+                signViewModel.tokenChecker(googleUserRefreshToken)
                 accessTokenChecker()
                 Timber.e("splash auto google login : 구글 자동 로그인")
             }

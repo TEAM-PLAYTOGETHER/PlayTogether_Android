@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.ListAdapterComparator
+import com.playtogether_android.app.util.applyOpenChecker
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
+import timber.log.Timber
 
-class ThunderCategoryListItemAdapter :
+class ThunderCategoryListItemAdapter(val thunderViewModel: ThunderViewModel) :
     ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -35,12 +38,12 @@ class ThunderCategoryListItemAdapter :
                             data.peopleCnt.toString()
                         )
                     )
-                itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
-                    intent.putExtra("thunderId", data.lightId)
-                    Log.d("TestThunderId", "" + data.lightId)
-                    itemView.context.startActivity(intent)
-                }
+//                itemView.setOnClickListener {
+//                    val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
+//                    intent.putExtra("thunderId", data.lightId)
+//                    intent.putExtra("category", "default")
+//                    itemView.context.startActivity(intent)
+//                }
             }
         }
     }
@@ -67,7 +70,14 @@ class ThunderCategoryListItemAdapter :
         holder: ThunderCategoryListItemAdapter.ViewHolder,
         position: Int
     ) {
-        holder.onBind(getItem(position))
+        val item = getItem(position)
+        holder.onBind(item)
+        val isApply = thunderViewModel.thunderApplyIdList.contains(item.lightId)
+        val isOpen = thunderViewModel.thunderOpenIdList.contains(item.lightId)
+        val context = holder.itemView.context
+        holder.itemView.setOnClickListener {
+            context.applyOpenChecker(context, item.lightId, isApply, isOpen)
+        }
     }
 
     companion object {

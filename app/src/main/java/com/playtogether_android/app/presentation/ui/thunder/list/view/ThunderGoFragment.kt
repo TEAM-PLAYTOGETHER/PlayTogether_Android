@@ -1,25 +1,20 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentThunderGoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.SpaceItemDecoration
-import timber.log.Timber
 
-class ThunderGoFragment : BaseFragment<FragmentThunderGoBinding>(R.layout.fragment_thunder_go) {
+class ThunderGoFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<FragmentThunderGoBinding>(R.layout.fragment_thunder_go) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
+//    private val thunderViewModel: ThunderViewModel by activityViewModels()
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,11 +24,12 @@ class ThunderGoFragment : BaseFragment<FragmentThunderGoBinding>(R.layout.fragme
     private fun initView() {
         binding.listViewModel = thunderListViewModel
         binding.lifecycleOwner = this
+
         initAdapter()
     }
 
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter()
+        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel)
         with(thunderListViewModel) {
             categoryGoList.observe(viewLifecycleOwner) {
                 listAdapter.submitList(it)

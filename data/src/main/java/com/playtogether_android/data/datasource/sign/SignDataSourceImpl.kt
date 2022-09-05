@@ -23,13 +23,12 @@ class SignDataSourceImpl(private val service: SignService) : SignDataSource {
     }
 
     override suspend fun getTokenIssuance(
-        accessToken: String,
         refreshToken: String
     ): ResTokenIssuance {
-        return service.getTokenIssuance(accessToken, refreshToken)
+        return service.getTokenIssuance(refreshToken)
     }
 
-    override suspend fun putSignup(authorization: String, body: RequestSignup) {
-        //response 안써도 되나?
+    override suspend fun putSignup(body: RequestSignup) {
+        service.putSignup(body)
     }
 }

@@ -1,6 +1,7 @@
 package com.playtogether_android.app.util
 
 import android.content.Context
+import android.content.Intent
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,8 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 fun Context.getPageTransformer(): ViewPager2.PageTransformer {
@@ -66,4 +69,16 @@ fun Context.stringListBuilder(context: Context, stringList: List<String?>): Stri
         }
     }
     return sb.toString()
+}
+
+
+fun Context.applyOpenChecker(context: Context, thunderId: Int, isApply: Boolean, isOpen: Boolean) {
+    val intent = Intent(context, ThunderDetailActivity::class.java)
+    Timber.e("apply item : $isApply")
+    Timber.e("open item : $isOpen")
+    if (isOpen) intent.putExtra("category", "open")
+    else if (isApply) intent.putExtra("category", "apply")
+    else intent.putExtra("category", "default")
+    intent.putExtra("thunderId", thunderId)
+    startActivity(intent)
 }

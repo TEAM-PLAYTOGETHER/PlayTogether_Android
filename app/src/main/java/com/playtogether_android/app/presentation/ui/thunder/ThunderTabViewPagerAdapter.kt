@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class ThunderTabViewPagerAdapter(private val fragment: FragmentActivity) :
-    FragmentStateAdapter(fragment) {
+class ThunderTabViewPagerAdapter(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity) {
     val fragments = mutableListOf<Fragment>()
 
     override fun getItemCount(): Int = fragments.size

@@ -13,10 +13,12 @@ class GetThunderDetailUseCase @Inject constructor(private val repo: ThunderRepos
                 it.date,
                 it.description,
                 it.image,
+                it.isOpened,
                 it.lightId,
                 it.lightMemberCnt,
                 it.peopleCnt,
                 it.place,
+                it.scpCnt,
                 it.time,
                 it.title,
             )
