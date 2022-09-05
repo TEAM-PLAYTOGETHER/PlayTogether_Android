@@ -66,6 +66,7 @@ class LoginTermsActivity : BaseActivity<ActivityLoginTermsBinding>(R.layout.acti
             //todo 약관은 저장해야 하나? 서버에 보내야 하나? 이부분은 어떻게 할지 같이 고민
             Intent(this, LoginInfoActivity::class.java).apply {
                 startActivity(this)
+                finish()
             }
         }
     }

@@ -6,7 +6,9 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySelectOnboardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.view.HomeFragment
 import com.playtogether_android.app.presentation.ui.login.LoginActivity
+import com.playtogether_android.app.presentation.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,9 +24,16 @@ class SelectOnboardingActivity :
 
     //뒤로가기 버튼 클릭 리스너
     private fun initBackBtn() {
+        val case = intent.getIntExtra("case",1)
         binding.ivSecondOnboardingBack.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            if(case == 1) {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+
         }
     }
 

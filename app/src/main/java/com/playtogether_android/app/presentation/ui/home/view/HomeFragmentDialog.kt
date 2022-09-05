@@ -47,6 +47,7 @@ class HomeFragmentDialog :
         binding.ivHomedialogAddCrew.setOnClickListener {
             // TODO: 동아리 추가하기 화면 이동 intent이후 dismiss
             Intent(requireActivity(), SelectOnboardingActivity::class.java).apply {
+                putExtra("case", 2)
                 startActivity(this)
             }
             dismiss()
