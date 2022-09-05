@@ -1,15 +1,12 @@
 package com.playtogether_android.app.util
 
-import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.domain.model.light.CategoryData
-import timber.log.Timber
 
 object BindingAdapter {
     @JvmStatic
@@ -57,21 +54,5 @@ object BindingAdapter {
         }
     }
 
-    @BindingAdapter("bindData")
-    @JvmStatic
-    fun bindRecyclerView(
-        recyclerView: RecyclerView,
-        list: List<CategoryData>
-    ) {
-        //최초 연결
-        if (recyclerView.adapter == null) {
-            val adapter = ThunderCategoryListItemAdapter()
-            recyclerView.adapter = adapter
-        }
-
-        val mAdapter = recyclerView.adapter as ThunderCategoryListItemAdapter
-
-        mAdapter.submitList(list.toMutableList())
-    }
 }
 
