@@ -17,15 +17,16 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_GO
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.LIKECNT
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderListActivity :
     BaseActivity<ActivityThunderListBinding>(R.layout.activity_thunder_list) {
     private lateinit var thunderCategoryListAdapter: ThunderCategoryListAdapter
+    private val thunderViewModel: ThunderViewModel by viewModels()
     private val thunderListViewModel: ThunderListViewModel by viewModels()
-    private val fragmentList =
-        listOf(ThunderEatFragment(), ThunderGoFragment(), ThunderDoFragment())
     val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -140,6 +141,8 @@ class ThunderListActivity :
     }
 
     private fun initFragment() {
+        val fragmentList =
+            listOf(ThunderEatFragment(thunderViewModel), ThunderGoFragment(thunderViewModel), ThunderDoFragment(thunderViewModel))
         thunderCategoryListAdapter = ThunderCategoryListAdapter(this)
         thunderCategoryListAdapter.fragmentList.addAll(fragmentList)
         binding.vpThunderlistContainer.adapter = thunderCategoryListAdapter
@@ -152,6 +155,9 @@ class ThunderListActivity :
             getLightCategoryList(CATEGORY_GO, sortType)
             getLightCategoryList(CATEGORY_DO, sortType)
         }
+        thunderViewModel.getApplyList()
+        thunderViewModel.getOpenList()
+        Timber.e("${thunderViewModel.thunderApplyIdList}")
     }
 
     private fun setBackButtonListener() {

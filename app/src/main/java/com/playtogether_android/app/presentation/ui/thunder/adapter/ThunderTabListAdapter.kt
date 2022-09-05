@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.thunder.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,13 @@ import com.playtogether_android.domain.model.thunder.ThunderTabListData
 
 class ThunderTabListAdapter :
     ListAdapter<CategoryData, ThunderTabListAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
+
+    interface ItemClick {
+        fun onClick(view: View, position: Int, thunderId: Int)
+    }
+
+    var itemClick: ItemClick? = null
+
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: CategoryData) {
@@ -28,6 +36,12 @@ class ThunderTabListAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.onBind(item)
+
+        if (itemClick != null) {
+            holder.itemView.setOnClickListener {
+                itemClick?.onClick(it,position,item.lightId)
+            }
+        }
     }
 
 }
