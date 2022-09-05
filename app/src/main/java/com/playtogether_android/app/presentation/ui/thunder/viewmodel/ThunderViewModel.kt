@@ -29,8 +29,14 @@ class ThunderViewModel @Inject constructor(
     private val _thunderApplyList = MutableLiveData<List<CategoryData>>()
     val thunderApplyList: LiveData<List<CategoryData>> = _thunderApplyList
 
+    private var _thunderApplyIdList = listOf<Int>()
+    val thunderApplyIdList get() = _thunderApplyIdList
+
     private val _thunderOpenList = MutableLiveData<List<CategoryData>>()
     val thunderOpenList: LiveData<List<CategoryData>> = _thunderOpenList
+
+    private var _thunderOpenIdList = listOf<Int>()
+    val thunderOpenIdList get() = _thunderOpenIdList
 
     private val _thunderLikeList = MutableLiveData<List<CategoryData>>()
     val thunderLikeList: LiveData<List<CategoryData>> = _thunderLikeList
@@ -42,6 +48,8 @@ class ThunderViewModel @Inject constructor(
             kotlin.runCatching { getApplyListUseCase() }
                 .onSuccess {
                     _thunderApplyList.value = it
+                    _thunderApplyIdList = it.map { it.lightId }
+                    Timber.e("thunder apply : $_thunderApplyIdList")
                     Timber.d("thunder apply size : ${it.size}")
                 }
                 .onFailure {
@@ -50,15 +58,14 @@ class ThunderViewModel @Inject constructor(
                 }
         }
     }
-
-
     fun getOpenList() {
         viewModelScope.launch {
             kotlin.runCatching {
                 getOpenListUseCase()
             }.onSuccess {
                 _thunderOpenList.value = it
-                Timber.d("thunder open : $it")
+                _thunderOpenIdList = it.map { it.lightId }
+                Timber.e("thunder open : $_thunderOpenIdList")
             }.onFailure {
 
             }
