@@ -68,7 +68,6 @@ fun getApiKey(propertyKey: String): String {
     return gradleLocalProperties(rootDir).getProperty(propertyKey)
 }
 
-
 fun getSubwayUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }

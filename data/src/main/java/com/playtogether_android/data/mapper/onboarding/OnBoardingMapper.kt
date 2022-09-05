@@ -12,7 +12,9 @@ object OnBoardingMapper {
     fun mapperToRegisterCrewData(responseRegisterCrew: ResponseRegisterCrew) : RegisterCrewData {
         return RegisterCrewData(
             success = responseRegisterCrew.success,
-            crewName = responseRegisterCrew.data.crewName
+            message = responseRegisterCrew.message,
+            crewName = responseRegisterCrew.data.crewName,
+            crewId = responseRegisterCrew.data.crewId
         )
     }
 
