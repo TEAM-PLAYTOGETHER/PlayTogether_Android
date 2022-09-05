@@ -50,10 +50,10 @@ class SignViewModel @Inject constructor(
     private var _signup = false
     val signup get() = _signup
 
-    fun tokenChecker(accessToken: String, refreshToken: String) {
+    fun tokenChecker(refreshToken: String) {
         viewModelScope.launch {
             kotlin.runCatching {
-                repository.getTokenIssuance(accessToken, refreshToken)
+                repository.getTokenIssuance(refreshToken)
             }.onSuccess {
                 _statusCode.value = it.status
             }.onFailure {
@@ -70,7 +70,7 @@ class SignViewModel @Inject constructor(
     fun signup(body: UserInfo) {
         viewModelScope.launch {
             kotlin.runCatching {
-                repository.putSignup(PlayTogetherRepository.userToken, body)
+                repository.putSignup(body)
             }.onSuccess {
                 _isLogin.value = true
             }.onFailure {

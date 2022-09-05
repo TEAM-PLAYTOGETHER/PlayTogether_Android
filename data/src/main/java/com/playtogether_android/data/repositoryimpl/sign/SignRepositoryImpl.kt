@@ -23,16 +23,15 @@ class SignRepositoryImpl(private val signDataSource: SignDataSource) : SignRepos
         return SignMapper.mapperToSocialData(signDataSource.postGoogleLogin())
     }
 
-    override suspend fun getTokenIssuance(accessToken: String, refreshToken: String): IssuanceItem {
+    override suspend fun getTokenIssuance(refreshToken: String): IssuanceItem {
         return SignMapper.mapperToIssuanceItem(
             signDataSource.getTokenIssuance(
-                accessToken,
                 refreshToken
             )
         )
     }
 
-    override suspend fun putSignup(authorization: String, body: UserInfo) {
-        signDataSource.putSignup(authorization, SignMapper.mapperToUserInfo(body))
+    override suspend fun putSignup(body: UserInfo) {
+        signDataSource.putSignup(SignMapper.mapperToUserInfo(body))
     }
 }

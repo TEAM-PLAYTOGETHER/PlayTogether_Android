@@ -16,8 +16,8 @@ interface SignDataSource {
 
     suspend fun postGoogleLogin(): ResSocialLogin
 
-    suspend fun getTokenIssuance(accessToken: String, refreshToken: String): ResTokenIssuance
+    suspend fun getTokenIssuance(refreshToken: String): ResTokenIssuance
     
-    suspend fun putSignup(authorization: String, body: RequestSignup)
+    suspend fun putSignup(body: RequestSignup)
 
 }
