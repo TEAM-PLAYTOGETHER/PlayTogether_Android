@@ -14,8 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.adapter.ThunderTabListAdapter
 import com.playtogether_android.app.util.SpaceItemDecoration
+import com.playtogether_android.app.util.applyOpenChecker
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -44,6 +46,15 @@ class TabOpenFragment : BaseFragment<FragmentTabOpenBinding>(R.layout.fragment_t
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = thunderListAdapter
             addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
+        }
+
+        thunderListAdapter.itemClick = object : ThunderTabListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int, thunderId: Int) {
+                val isApply = thunderViewModel.thunderApplyIdList.contains(thunderId)
+                val isOpen = thunderViewModel.thunderOpenIdList.contains(thunderId)
+                val context = requireActivity()
+                context.applyOpenChecker(context, thunderId, isApply, isOpen)
+            }
         }
         //리스트 클릭시 오픈 상세뷰로 이동
 //        thunderListAdapter.itemClick = object : ThunderListAdapter.ItemClick {

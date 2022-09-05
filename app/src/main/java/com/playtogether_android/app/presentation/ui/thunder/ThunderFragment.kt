@@ -42,12 +42,4 @@ class ThunderFragment : BaseFragment<FragmentThunderBinding>(R.layout.fragment_t
         }.attach()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        initAdapter()
-        initTabLayout()
-    }
-
-
 }

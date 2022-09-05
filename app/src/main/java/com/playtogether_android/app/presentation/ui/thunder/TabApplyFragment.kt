@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -7,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentTabApplyBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.adapter.ThunderTabListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.SpaceItemDecoration
+import com.playtogether_android.app.util.applyOpenChecker
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -27,7 +30,6 @@ class TabApplyFragment : BaseFragment<FragmentTabApplyBinding>(R.layout.fragment
         initThunderListAdapter()
     }
 
-
     private fun initThunderListAdapter() {
         thunderListAdapter = ThunderTabListAdapter()
         thunderViewModel.thunderApplyList.observe(viewLifecycleOwner) {
@@ -37,6 +39,15 @@ class TabApplyFragment : BaseFragment<FragmentTabApplyBinding>(R.layout.fragment
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = thunderListAdapter
             addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
+        }
+
+        thunderListAdapter.itemClick = object : ThunderTabListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int, thunderId: Int) {
+                val isApply = thunderViewModel.thunderApplyIdList.contains(thunderId)
+                val isOpen = thunderViewModel.thunderOpenIdList.contains(thunderId)
+                val context = requireActivity()
+                context.applyOpenChecker(context, thunderId, isApply, isOpen)
+            }
         }
 
         //리스트 클릭시 오픈 상세뷰로 이동
