@@ -12,6 +12,7 @@ import com.playtogether_android.domain.usecase.message.GetRoomIdUseCase
 import com.playtogether_android.domain.usecase.thunder.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -89,7 +90,8 @@ class ThunderDetailViewModel @Inject constructor(
                 thunderDetailOrganizerUseCase(thunderId)
             }.onSuccess {
                 _organizerInfo.value = it
-                Log.d("thunderDetailOriganizer-Success", "${it.userLoginId}")
+                Timber.e("organizer : $it")
+//                Log.d("thunderDetailOriganizer-Success", "${it.userLoginId}")
             }.onFailure {
                 it.printStackTrace()
                 Log.e("thunderDetailOrganizer", "failure : ${it.message}")

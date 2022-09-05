@@ -6,7 +6,9 @@ data class ThunderDetailData(
     val category: String,
     val date: String,
     val description: String,
-    val image: String?,
+    val image: String,
+    @SerializedName("is_opened")
+    val isOpened: Boolean,
     @SerializedName("light_id")
     val lightId: Int,
     @SerializedName("LightMemberCnt")
@@ -14,6 +16,8 @@ data class ThunderDetailData(
     @SerializedName("people_cnt")
     val peopleCnt: Int,
     val place: String,
+    @SerializedName("scp_cnt")
+    val scpCnt: Int,
     val time: String,
     val title: String
 )

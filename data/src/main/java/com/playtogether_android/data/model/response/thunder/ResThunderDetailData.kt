@@ -13,7 +13,9 @@ data class ResThunderDetailData(
         val category: String,
         val date: String,
         val description: String,
-        val image: String?,
+        val image: String,
+        @SerializedName("is_opened")
+        val isOpened: Boolean,
         @SerializedName("light_id")
         val lightId: Int,
         @SerializedName("LightMemberCnt")
@@ -23,24 +25,23 @@ data class ResThunderDetailData(
         @SerializedName("people_cnt")
         val peopleCnt: Int,
         val place: String,
+        @SerializedName("scp_cnt")
+        val scpCnt: Int,
         val time: String,
         val title: String
-    )
+    ) {
+        data class Member(
+            val age: Int,
+            val gender: String,
+            val name: String,
+            @SerializedName("user_id")
+            val userId: Int
+        )
 
-    data class Organizer(
-        val name: String,
-        @SerializedName("organizer_id")
-        val organizerId: Int,
-        val userLoginId: String
-    )
-
-    data class Member(
-        val age: Int,
-        val gender: String,
-        val mbti: String,
-        val name: String,
-        @SerializedName("user_id")
-        val userId: Int
-    )
-
+        data class Organizer(
+            val name: String,
+            @SerializedName("organizer_id")
+            val organizerId: Int
+        )
+    }
 }

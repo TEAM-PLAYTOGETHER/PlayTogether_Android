@@ -9,8 +9,8 @@ interface SignRepository { //로그인
 
     suspend fun postGoogleLogin(): SocialLoginData
 
-    suspend fun getTokenIssuance(accessToken: String, refreshToken: String): IssuanceItem
+    suspend fun getTokenIssuance(refreshToken: String): IssuanceItem
 
-    suspend fun putSignup(authorization: String, body: UserInfo)
+    suspend fun putSignup(body: UserInfo)
 
 }

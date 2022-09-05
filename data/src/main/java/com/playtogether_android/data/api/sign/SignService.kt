@@ -33,14 +33,12 @@ interface SignService {
     // signup
     @PUT("user/signup")
     suspend fun putSignup(
-        @Header("Authorization") authorization: String,
         @Body requestSignup: RequestSignup
     )
 
     // token re-issuance
     @GET("auth/refresh")
     suspend fun getTokenIssuance(
-        @Header("Authorization") authorization: String,
         @Header("refresh") refresh: String
     ): ResTokenIssuance
 }

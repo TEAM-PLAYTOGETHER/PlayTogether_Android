@@ -2,6 +2,7 @@ package com.playtogether_android.app.presentation.ui.home.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,13 +14,19 @@ import com.playtogether_android.domain.model.light.CategoryData
 
 class HomeNewAdapter :
     ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
+
+    interface ItemClick {
+        fun onClick(view: View, position: Int, thunderId: Int)
+    }
+
+    var itemClick: ItemClick? = null
+
     inner class ViewHolder(private val binding: ItemHomeNewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: CategoryData) {
             with(binding) {
+                categoryData = item
                 val context = itemView.context
-
-                tvHomenewTitle.text = item.title
                 tvHomenewDate.text =
                     context.stringListBuilder(context, listOf(item.date, item.place, item.time))
                 tvHomenewPeopleCnt.text = context.stringListBuilder(
@@ -38,13 +45,12 @@ class HomeNewAdapter :
 
     override fun onBindViewHolder(holder: HomeNewAdapter.ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.itemView.setOnClickListener {
-            Intent(it.context, ThunderDetailActivity::class.java).apply {
-                putExtra("thunderId", item.lightId)
-                it.context.startActivity(this)
+        holder.onBind(item)
+        if (itemClick != null) {
+            holder.itemView.setOnClickListener {
+                itemClick?.onClick(it, position, item.lightId)
             }
         }
-        holder.onBind(item)
     }
 
 }
