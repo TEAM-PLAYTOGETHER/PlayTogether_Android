@@ -67,7 +67,6 @@ class LoginTermsActivity : BaseActivity<ActivityLoginTermsBinding>(R.layout.acti
             Intent(this, LoginInfoActivity::class.java).apply {
                 startActivity(this)
             }
-
         }
     }
 

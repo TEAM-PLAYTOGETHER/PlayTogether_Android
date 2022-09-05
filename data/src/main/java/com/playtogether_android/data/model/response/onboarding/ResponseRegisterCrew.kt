@@ -7,6 +7,7 @@ data class ResponseRegisterCrew(
     val success: Boolean
 ) {
     data class Data(
+        val crewId : Int,
         val crewName: String
     )
 }

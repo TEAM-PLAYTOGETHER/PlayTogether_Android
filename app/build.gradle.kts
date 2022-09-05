@@ -25,6 +25,10 @@ android {
         buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
         buildConfigField("String", "SUBWAY_URL", getSubwayUrl("SUBWAY_URL"))
         buildConfigField("String", "KAKAOKEY", getApiKey("kakao_key"))
+        //buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))
+        //buildConfigField("String","GOOGLEKEY",getApiKey("google_key"))
+        buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))
+        buildConfigField("String","GOOGLE_CLIENT_SECRET",getApiKey("google_client_secret"))
 
     }
 
@@ -86,7 +90,7 @@ dependencies {
     implementation(project(":data"))
 
     //bad request log detail show
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     //sercurity
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha03")
@@ -213,15 +217,15 @@ dependencies {
     //kapt(KaptDependencies.glide)
 
     //Socket.io
-    implementation ("io.socket:socket.io-client:2.0.0"){
+    implementation("io.socket:socket.io-client:2.0.0") {
         exclude("org.json", "json")
     }
 
     //okhttp websocket
-    implementation ("com.squareup.okhttp3:okhttp:3.12.12")
+    implementation("com.squareup.okhttp3:okhttp:3.12.12")
 
     //gson
-    implementation ("com.google.code.gson:gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.9.0")
 
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 }

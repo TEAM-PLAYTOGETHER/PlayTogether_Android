@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PlayTogether_android</string>
-
     <!--바텀네비-->
     <string name="navigation_mypage">마이페이지</string>
     <string name="navigation_message">쪽지</string>
@@ -238,6 +237,10 @@
     <string name="mypage_setting_version">버전 정보</string>
     <string name="mypage_setting_developer">개발자 정보</string>
     <string name="mypage_setting_logout">로그아웃</string>
+    <string name="mypage_setting_account_info">계정 정보</string>
+    <string name="mypage_setting_app_setting">앱 설정</string>
+    <string name="mypage_setting_app_info">앱 정보</string>
+    <string name="mypage_setting_etc">기타</string>
 
     <!--    login terms activity-->
     <string name="loginterms_title">PLAY TOGETHER\n약관 동의</string>

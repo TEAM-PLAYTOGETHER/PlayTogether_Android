@@ -1,23 +1,19 @@
 package com.playtogether_android.app.presentation.ui.onboarding
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnboardingReDownLoadBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.login.LoginActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.adapter.OnboardingReDownAdapter
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
-import com.playtogether_android.app.presentation.ui.sign.SignInActivity
+//import com.playtogether_android.app.presentation.ui.sign.SignInActivity
 import com.playtogether_android.domain.model.onboarding.CrewListData
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import timber.log.Timber
 
 
@@ -74,7 +70,7 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
     //뒤로가기버튼 클릭 리스너
     private fun backBtnListener() {
         binding.ivIntroOnboardingBack.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }

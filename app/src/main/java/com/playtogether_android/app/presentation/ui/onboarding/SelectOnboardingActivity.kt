@@ -6,9 +6,8 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySelectOnboardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.sign.SignInActivity
+import com.playtogether_android.app.presentation.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class SelectOnboardingActivity :
@@ -24,7 +23,7 @@ class SelectOnboardingActivity :
     //뒤로가기 버튼 클릭 리스너
     private fun initBackBtn() {
         binding.ivSecondOnboardingBack.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
