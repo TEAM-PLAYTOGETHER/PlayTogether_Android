@@ -34,6 +34,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //        val token = FirebaseMessaging.getInstance().token
         getFCMToken()
 //        Timber.e("firebase token :$token")
+        initData()
+    }
+
+    private fun initData() {
+        with(thunderViewModel) {
+            getApplyList()
+            getOpenList()
+            getLikeList()
+        }
     }
 
 
