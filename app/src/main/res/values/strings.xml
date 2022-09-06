@@ -278,5 +278,8 @@
     <string name="myInfo_notice">공지사항</string>
     <string name="myInfo_event">이벤트</string>
     <string name="myInfo_question">문의하기</string>
+    <string name="my">MY</string>
+    <string name="center">고객센터</string>
+
 
 </resources>
