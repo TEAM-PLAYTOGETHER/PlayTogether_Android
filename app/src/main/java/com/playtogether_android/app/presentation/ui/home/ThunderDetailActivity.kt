@@ -46,6 +46,13 @@ class ThunderDetailActivity :
         checkCategory()
         clickScrap()
         clickOption(thunderId)
+        clickReport()
+    }
+
+    private fun clickReport() {
+        binding.tvThunderdetailReport.setOnClickListener {
+            shortToast("신고뷰로 이동 예정")
+        }
     }
 
     private fun clickOption(thunderId: Int) {
