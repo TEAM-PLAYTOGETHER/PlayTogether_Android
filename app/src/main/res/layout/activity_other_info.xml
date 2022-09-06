@@ -41,6 +41,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"/>
 
+            <ImageView
+                android:id="@+id/btn_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_icn_option"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_otherInfo_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_otherInfo_title"
+                android:layout_marginEnd="20dp"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -104,7 +114,7 @@
                     android:id="@+id/tv_user_birth_and_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="1998년생 / M"
+                    tools:text="1998년생 ・ M"
                     android:fontFamily="@font/pretendard_medium"
                     android:textSize="12sp"
                     android:textColor="@color/gray_white"
