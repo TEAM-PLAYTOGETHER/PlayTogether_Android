@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_myCrewManage_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/gray_black">
+
+            <TextView
+                android:id="@+id/tv_myCrewManage_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_crew_manage"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/gray_white"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingVertical="15dp"/>
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_icn_back"
+                app:layout_constraintTop_toTopOf="@id/tv_myCrewManage_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_myCrewManage_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_myCrewManage_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cl_myCrewManage_top">
+
+            <TextView
+                android:id="@+id/tv_user_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_setting"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="12sp"
+                android:textColor="@color/gray_gray02"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"/>
+
+            <TextView
+                android:id="@+id/tv_manage_blocked_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/manage_blocked_user"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="14sp"
+                android:textColor="@color/gray_black"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_setting"
+                app:layout_constraintStart_toStartOf="@id/tv_user_setting"
+                android:layout_marginTop="23dp" />
+
+            <TextView
+                android:id="@+id/tv_line_user_setting"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/boundary"
+                app:layout_constraintTop_toBottomOf="@id/tv_manage_blocked_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="23dp"/>
+
+            <TextView
+                android:id="@+id/tv_etc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/etc"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="12sp"
+                android:textColor="@color/gray_gray02"
+                app:layout_constraintTop_toBottomOf="@id/tv_line_user_setting"
+                app:layout_constraintStart_toStartOf="@id/tv_user_setting"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/tv_delete_crew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_crew"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="14sp"
+                android:textColor="@color/gray_black"
+                app:layout_constraintTop_toBottomOf="@id/tv_etc"
+                app:layout_constraintStart_toStartOf="@id/tv_user_setting"
+                android:layout_marginTop="27dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
