@@ -1,24 +1,26 @@
 package com.playtogether_android.app.presentation.ui.home
 
+import PhotoDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
-import com.playtogether_android.app.presentation.ui.thunder.adapter.ThunderTabListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.app.util.showCustomPopUp
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderDetailActivity :
@@ -32,6 +34,7 @@ class ThunderDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val thunderId = intent.getIntExtra("thunderId", -1)
         initData()
         clickProfile()
         clickSendMessage()
@@ -41,6 +44,56 @@ class ThunderDetailActivity :
         observeOrganizer()
         observeRoomId()
         checkCategory()
+        clickScrap()
+        clickOption(thunderId)
+        clickReport()
+    }
+
+    private fun clickReport() {
+        binding.tvThunderdetailReport.setOnClickListener {
+            shortToast("신고뷰로 이동 예정")
+        }
+    }
+
+    private fun clickOption(thunderId: Int) {
+        with(binding.ivDetailOption) {
+            setOnClickListener {
+                Timber.e("option click")
+                val popup = showCustomPopUp(it, R.array.option_popup, baseContext)
+                popup.setOnItemClickListener { _, view, _, _ ->
+                    if ((view as TextView).text == CHANGE) {
+                        //todo 번개 생성뷰로 이동해야합니다 분기처리가 필요할듯
+                        shortToast("구현중입니다 :)")
+                        popup.dismiss()
+                    } else {
+                        thunderDetailViewModel.thunderDelete(thunderId)
+                        shortToast("삭제가 완료 되었습니다.")
+                        popup.dismiss()
+                        finish()
+                    }
+                }
+                popup.show()
+            }
+        }
+    }
+
+    private fun clickImage(image: String) {
+        binding.ivDetailImage.setOnClickListener {
+            val dialog = PhotoDialog(image)
+            dialog.show(supportFragmentManager, "init photo fragment")
+        }
+    }
+
+    private fun clickScrap() {
+        val thunderId = intent.getIntExtra("thunderId", -1)
+        binding.ivThunderdetailLike.setOnClickListener { view ->
+            with(thunderDetailViewModel) {
+                postScrap(thunderId)
+                isLike.observe(this@ThunderDetailActivity) {
+                    view.isSelected = it
+                }
+            }
+        }
     }
 
     private fun initAdapter() {
@@ -138,7 +191,7 @@ class ThunderDetailActivity :
 
     private fun initData() {
         binding.lifecycleOwner = this
-
+        binding.viewModel = thunderDetailViewModel
         val thunderId = intent.getIntExtra("thunderId", -1)
 
         with(thunderDetailViewModel) {
@@ -152,6 +205,7 @@ class ThunderDetailActivity :
             if (image.isEmpty()) {
                 binding.ivDetailImage.visibility = View.GONE
             } else {
+                clickImage(it.image)
                 Glide
                     .with(this)
                     .load(it.image)
@@ -162,6 +216,7 @@ class ThunderDetailActivity :
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
+        thunderDetailViewModel.getScrapValue(thunderId)
     }
 
     private fun observeOrganizer() {
@@ -218,5 +273,7 @@ class ThunderDetailActivity :
         const val OPEN = "open"
         const val LIKE = "like"
         const val DEFAULT = "default"
+        const val CHANGE = "수정"
+        const val DELETE = "삭제"
     }
 }

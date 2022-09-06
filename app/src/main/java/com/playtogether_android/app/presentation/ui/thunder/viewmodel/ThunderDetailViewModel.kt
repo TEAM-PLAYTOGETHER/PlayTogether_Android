@@ -22,7 +22,9 @@ class ThunderDetailViewModel @Inject constructor(
     private val thunderDetailMemberUseCase: GetThunderDetailMemberUseCase,
     private val thunderDetailOrganizerUseCase: GetThunderDetailOrganizerUseCase,
     private val thunderDeleteUseCase: PostThunderDeleteUseCase,
-    private val getRoomIdUseCase: GetRoomIdUseCase
+    private val getRoomIdUseCase: GetRoomIdUseCase,
+    private val postThunderScrapUseCase: PostThunderScrapUseCase,
+    private val getThunderScrapUseCase: GetThunderScrapUseCase
 ) : ViewModel() {
 
     private val _isConfirm = MutableLiveData<Boolean>()
@@ -42,6 +44,36 @@ class ThunderDetailViewModel @Inject constructor(
     //번개 삭제
     private val _isDelete = MutableLiveData<Boolean>()
     val isDelete: LiveData<Boolean> = _isDelete
+
+    private val _isLike = MutableLiveData<Boolean>()
+    val isLike: LiveData<Boolean> = _isLike
+
+    fun postScrap(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postThunderScrapUseCase(thunderId)
+            }.onSuccess {
+                _isLike.value = isLike.value?.not()
+            }.onFailure {
+                Timber.d("post scrap error : $it")
+            }
+        }
+    }
+
+    fun getScrapValue(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getThunderScrapUseCase(thunderId)
+            }.onSuccess {
+                Timber.e("get scrap value success : $it")
+                _isLike.value = it
+            }.onFailure {
+                _isLike.value = false
+                Timber.e("get scrap value error : $it")
+            }
+        }
+    }
+
 
     fun getRoomId(organizerId: Int) {
         viewModelScope.launch {
