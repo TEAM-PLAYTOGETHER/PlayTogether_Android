@@ -19,6 +19,7 @@ import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDet
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderDetailActivity :
@@ -41,6 +42,19 @@ class ThunderDetailActivity :
         observeOrganizer()
         observeRoomId()
         checkCategory()
+        clickScrap()
+    }
+
+    private fun clickScrap() {
+        val thunderId = intent.getIntExtra("thunderId", -1)
+        binding.ivThunderdetailLike.setOnClickListener { view ->
+            with(thunderDetailViewModel) {
+                postScrap(thunderId)
+                isLike.observe(this@ThunderDetailActivity) {
+                    view.isSelected = it
+                }
+            }
+        }
     }
 
     private fun initAdapter() {
@@ -138,7 +152,7 @@ class ThunderDetailActivity :
 
     private fun initData() {
         binding.lifecycleOwner = this
-
+        binding.viewModel = thunderDetailViewModel
         val thunderId = intent.getIntExtra("thunderId", -1)
 
         with(thunderDetailViewModel) {
@@ -162,6 +176,7 @@ class ThunderDetailActivity :
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
+        thunderDetailViewModel.getScrapValue(thunderId)
     }
 
     private fun observeOrganizer() {
