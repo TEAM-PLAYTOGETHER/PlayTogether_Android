@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
@@ -35,6 +34,7 @@ class ThunderDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val thunderId = intent.getIntExtra("thunderId", -1)
         initData()
         clickProfile()
         clickSendMessage()
@@ -45,20 +45,22 @@ class ThunderDetailActivity :
         observeRoomId()
         checkCategory()
         clickScrap()
-        clickOption()
+        clickOption(thunderId)
     }
 
-    private fun clickOption() {
+    private fun clickOption(thunderId: Int) {
         with(binding.ivDetailOption) {
             setOnClickListener {
                 Timber.e("option click")
                 val popup = showCustomPopUp(it, R.array.option_popup, baseContext)
                 popup.setOnItemClickListener { _, view, _, _ ->
                     if ((view as TextView).text == CHANGE) {
+                        //todo 어디로 가야하는거지??
                         Timber.e("if")
                         popup.dismiss()
                     } else {
-                        Timber.e("else")
+                        thunderDetailViewModel.thunderDelete(thunderId)
+                        shortToast("삭제가 완료 되었습니다.")
                         popup.dismiss()
                         finish()
                     }
