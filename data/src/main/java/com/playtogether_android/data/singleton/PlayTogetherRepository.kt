@@ -14,11 +14,11 @@ object PlayTogetherRepository {
     private const val KAKAO_ACCESS = "KAKAO_ACCESS" //
 
     //구글
-    private const val GOOGLE_USER_FIRST_NAME = "KAKAO_USER_FIRST_NAME" //유저네임
-    private const val GOOGLE_USER_LOG_OUT = "KAKAO_USER_LOG_OUT" //로그아웃 유무
-    private const val GOOGLE_UT_KEY = "KAKAO_UT_KEY"  //유저토큰 키
-    private const val GOOGLE_URT_KEY = "KAKAO_URT_KEY"  //유저 리프레시토큰 키
-    private const val GOOGLE_ACCESS = "KAKAO_ACCESS" //
+    private const val GOOGLE_USER_FIRST_NAME = "GOOGLE_USER_FIRST_NAME" //유저네임
+    private const val GOOGLE_USER_LOG_OUT = "GOOGLE_USER_LOG_OUT" //로그아웃 유무
+    private const val GOOGLE_UT_KEY = "GOOGLE_UT_KEY"  //유저토큰 키
+    private const val GOOGLE_URT_KEY = "GOOGLE_URT_KEY"  //유저 리프레시토큰 키
+    private const val GOOGLE_ACCESS = "GOOGLE_ACCESS" //
 
     //유저 동아리
     private const val CREW_ID = "CREW_ID"
@@ -140,7 +140,7 @@ object PlayTogetherRepository {
 
     //파이어베이스 토큰
     var fireBaseToken: String
-        get() = authPreferences.getString(FB_KEY, "FireCardNa") ?: ""
+        get() = authPreferences.getString(FB_KEY, "firebase") ?: ""
         set(value) = authPreferences.edit {
             it.putString(FB_KEY, value)
         }

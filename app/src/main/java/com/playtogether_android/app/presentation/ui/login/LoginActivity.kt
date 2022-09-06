@@ -37,7 +37,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
     private val signViewModel: SignViewModel by viewModels()
-    private val onBoardingViewModel : OnBoardingViewModel by viewModels()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
     private lateinit var startForActivity: ActivityResultLauncher<Intent>
     private lateinit var client: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,11 +119,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         startActivity(intent)
     }
 
+//    private fun moveSelectCrew() {
+//        val intent = Intent(baseContext, OnboardingReDownLoadActivity::class.java).apply {
+//            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//        }
+//        startNextActivityWithHandling(intent)
+//    }
+
     private fun signupChecker() {
+
         signViewModel.isLogin.observe(this@LoginActivity) {
             if (it) {
                 //TODO: 잘 모르겠는데 막판에 고치기
                 Timber.e("???????? : ${onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty()}")
+                Timber.e("???????? : ${onBoardingViewModel.getCrewList.value?.data?.crewList}")
                 if (signViewModel.signup && PlayTogetherRepository.crewId != -1) {
                     val intent =
                         Intent(this@LoginActivity, MainActivity::class.java)
@@ -132,7 +142,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     val intent = Intent(this@LoginActivity, SelectOnboardingActivity::class.java)
                     nextActivity(intent)
                 } else if (signViewModel.signup && PlayTogetherRepository.crewId == -1 && (onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty() == false)) {
-                    val intent = Intent(this@LoginActivity, OnboardingReDownLoadActivity::class.java)
+                    val intent =
+                        Intent(this@LoginActivity, OnboardingReDownLoadActivity::class.java)
                     nextActivity(intent)
                 } else {
                     val intent =
@@ -161,8 +172,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                         isLogin.observe(this@LoginActivity) {
                             if (it) {
                                 Timber.d("testset : ${signViewModel.signData.value}")
-                                PlayTogetherSharedPreference.setAccessToken(this@LoginActivity, signViewModel.signData.value ?: "")
-                                PlayTogetherSharedPreference.setRefreshToken(this@LoginActivity, signViewModel.signData.value ?: "")
+                                PlayTogetherSharedPreference.setAccessToken(
+                                    this@LoginActivity,
+                                    signViewModel.signData.value ?: ""
+                                )
+                                PlayTogetherSharedPreference.setRefreshToken(
+                                    this@LoginActivity,
+                                    signViewModel.signData.value ?: ""
+                                )
 //                                if (isSignup) {
 //                                    val intent =
 //                                        Intent(this@LoginActivity, MainActivity::class.java)

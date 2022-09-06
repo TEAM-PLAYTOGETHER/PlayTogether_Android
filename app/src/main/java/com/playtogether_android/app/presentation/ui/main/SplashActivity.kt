@@ -113,8 +113,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 ACCESS_NOW, REFRESH_SUCCESS -> {
                     if (PlayTogetherRepository.crewId == -1)
                         moveJoinOrCreateCrew()
-                    else if (joinCrewListChecker > 0)
-                        moveSelectCrew()
                     else
                         moveMain()
                 }
@@ -125,14 +123,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     private fun moveJoinOrCreateCrew() {
         val intent = Intent(baseContext, SelectOnboardingActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        startNextActivityWithHandling(intent)
-    }
-
-    private fun moveSelectCrew() {
-        val intent = Intent(baseContext, OnboardingReDownLoadActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
