@@ -58,4 +58,8 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
     override suspend fun postScrap(thunderId: Int) {
         thunderDataSource.postScrap(thunderId)
     }
+
+    override suspend fun postReport(thunderId: Int) {
+        thunderDataSource.postReport(thunderId)
+    }
 }

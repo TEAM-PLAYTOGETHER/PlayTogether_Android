@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
@@ -17,7 +19,9 @@ import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.app.util.showCustomPopUp
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderDetailActivity :
@@ -41,6 +45,27 @@ class ThunderDetailActivity :
         observeRoomId()
         checkCategory()
         clickScrap()
+        clickOption()
+    }
+
+    private fun clickOption() {
+        with(binding.ivDetailOption) {
+            setOnClickListener {
+                Timber.e("option click")
+                val popup = showCustomPopUp(it, R.array.option_popup, baseContext)
+                popup.setOnItemClickListener { _, view, _, _ ->
+                    if ((view as TextView).text == CHANGE) {
+                        Timber.e("if")
+                        popup.dismiss()
+                    } else {
+                        Timber.e("else")
+                        popup.dismiss()
+                        finish()
+                    }
+                }
+                popup.show()
+            }
+        }
     }
 
     private fun clickImage(image: String) {
@@ -239,5 +264,7 @@ class ThunderDetailActivity :
         const val OPEN = "open"
         const val LIKE = "like"
         const val DEFAULT = "default"
+        const val CHANGE = "수정"
+        const val DELETE = "삭제"
     }
 }

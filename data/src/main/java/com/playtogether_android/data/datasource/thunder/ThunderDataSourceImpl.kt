@@ -41,4 +41,8 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
         service.postScrap(thunderId)
     }
 
+    override suspend fun postReport(thunderId: Int) {
+        service.postReport(thunderId)
+    }
+
 }

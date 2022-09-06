@@ -26,4 +26,7 @@ interface ThunderDataSource {
 
     //번개 찜/취소
     suspend fun postScrap(thunderId: Int)
+
+    //번개 신고
+    suspend fun postReport(thunderId: Int)
 }
