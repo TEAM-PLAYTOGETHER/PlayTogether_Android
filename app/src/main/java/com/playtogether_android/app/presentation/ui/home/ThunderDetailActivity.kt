@@ -55,8 +55,8 @@ class ThunderDetailActivity :
                 val popup = showCustomPopUp(it, R.array.option_popup, baseContext)
                 popup.setOnItemClickListener { _, view, _, _ ->
                     if ((view as TextView).text == CHANGE) {
-                        //todo 어디로 가야하는거지??
-                        Timber.e("if")
+                        //todo 번개 생성뷰로 이동해야합니다 분기처리가 필요할듯
+                        shortToast("구현중입니다 :)")
                         popup.dismiss()
                     } else {
                         thunderDetailViewModel.thunderDelete(thunderId)
