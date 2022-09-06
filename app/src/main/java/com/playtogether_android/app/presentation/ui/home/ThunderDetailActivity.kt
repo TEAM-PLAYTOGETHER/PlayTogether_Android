@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.home
 
+import PhotoDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,17 +10,14 @@ import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
-import com.playtogether_android.app.presentation.ui.thunder.adapter.ThunderTabListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderDetailActivity :
@@ -43,6 +41,13 @@ class ThunderDetailActivity :
         observeRoomId()
         checkCategory()
         clickScrap()
+    }
+
+    private fun clickImage(image: String) {
+        binding.ivDetailImage.setOnClickListener {
+            val dialog = PhotoDialog(image)
+            dialog.show(supportFragmentManager, "init photo fragment")
+        }
     }
 
     private fun clickScrap() {
@@ -166,6 +171,7 @@ class ThunderDetailActivity :
             if (image.isEmpty()) {
                 binding.ivDetailImage.visibility = View.GONE
             } else {
+                clickImage(it.image)
                 Glide
                     .with(this)
                     .load(it.image)
