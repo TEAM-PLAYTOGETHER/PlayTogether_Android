@@ -1,9 +1,6 @@
 package com.playtogether_android.data.datasource.thunder
 
-import com.playtogether_android.data.model.response.thunder.ResThunderDeleteData
-import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
-import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
-import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
+import com.playtogether_android.data.model.response.thunder.*
 
 interface ThunderDataSource {
 
@@ -23,4 +20,10 @@ interface ThunderDataSource {
 
     //번개 삭제
     suspend fun postThunderDelete(thunderId: Int): ResThunderDeleteData
+
+    //번개 찜 여부 조히
+    suspend fun getThunderScrap(thunderId: Int): ResThunderScrapData
+
+    //번개 찜/취소
+    suspend fun postScrap(thunderId: Int)
 }

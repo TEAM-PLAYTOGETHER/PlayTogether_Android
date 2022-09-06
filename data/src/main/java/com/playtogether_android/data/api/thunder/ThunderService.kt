@@ -1,9 +1,6 @@
 package com.playtogether_android.data.api.thunder
 
-import com.playtogether_android.data.model.response.thunder.ResThunderDeleteData
-import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
-import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
-import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
+import com.playtogether_android.data.model.response.thunder.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -44,4 +41,15 @@ interface ThunderService {
         @Path("thunderId") thunderId: Int
     ): ResThunderDeleteData
 
+    //번개 찜 확인
+    @GET("scrap/exist/{lightId}")
+    suspend fun getThunderScrap(
+        @Path("lightId") lightId: Int
+    ): ResThunderScrapData
+
+    //번개 찜/취소
+    @POST("scrap/{lightId}")
+    suspend fun postScrap(
+        @Path("lightId") lightId: Int
+    )
 }

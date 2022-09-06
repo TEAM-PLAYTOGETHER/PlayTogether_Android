@@ -50,4 +50,12 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
             )
         )
     }
+
+    override suspend fun getThunderScrap(thunderId: Int): Boolean {
+        return thunderDataSource.getThunderScrap(thunderId).data
+    }
+
+    override suspend fun postScrap(thunderId: Int) {
+        thunderDataSource.postScrap(thunderId)
+    }
 }
