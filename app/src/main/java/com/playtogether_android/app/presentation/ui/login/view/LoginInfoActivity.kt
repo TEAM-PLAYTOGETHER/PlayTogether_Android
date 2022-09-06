@@ -45,6 +45,7 @@ class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activi
             signViewModel.isLogin.observe(this) {
                 if (it) {
                     val intent = Intent(this, SelectOnboardingActivity::class.java)
+                    intent.putExtra("case", 1)
                     startActivity(intent)
                 } else {
                     shortToast("회원가입 실패!")

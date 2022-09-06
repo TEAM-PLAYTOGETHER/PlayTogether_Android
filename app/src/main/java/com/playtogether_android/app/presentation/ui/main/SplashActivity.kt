@@ -10,6 +10,7 @@ import com.playtogether_android.app.databinding.ActivitySplashBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.login.LoginActivity
+import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -74,6 +75,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 Timber.e("splash auto login : 회원 가입 안함")
                 moveLoginActivity()
             }
+            //todo 카카오 or 구글 로그 아웃한 경우
+            else if (kakaoUserlogOut || googleUserlogOut) {
+                moveLoginActivity()
+            }
             //todo 카카오 자동 로그인
             else if (kakaoUserToken == userToken) {
                 signViewModel.tokenChecker(kakaoUserRefreshToken)
@@ -90,10 +95,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 accessTokenChecker()
                 Timber.e("splash auto google login : 구글 자동 로그인")
             }
-            //todo 카카오 or 구글 로그 아웃한 경우
-            else if (kakaoUserlogOut || googleUserlogOut) {
-                moveLoginActivity()
-            }
             // todo 아몰랑 예외
             else {
                 moveLoginActivity()
@@ -102,10 +103,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun accessTokenChecker() {
+        var joinCrewListChecker = 0
+        homeViewModel.crewList.observe(this) {
+            joinCrewListChecker = it.size
+        }
+
         signViewModel.statusCode.observe(this@SplashActivity) { status ->
             when (status) {
                 ACCESS_NOW, REFRESH_SUCCESS -> {
                     if (PlayTogetherRepository.crewId == -1)
+                        moveJoinOrCreateCrew()
+                    else if (joinCrewListChecker > 0)
                         moveSelectCrew()
                     else
                         moveMain()
@@ -115,8 +123,16 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         }
     }
 
-    private fun moveSelectCrew() {
+    private fun moveJoinOrCreateCrew() {
         val intent = Intent(baseContext, SelectOnboardingActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startNextActivityWithHandling(intent)
+    }
+
+    private fun moveSelectCrew() {
+        val intent = Intent(baseContext, OnboardingReDownLoadActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
