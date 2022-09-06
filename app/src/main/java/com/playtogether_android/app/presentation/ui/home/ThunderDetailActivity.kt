@@ -19,6 +19,7 @@ import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDet
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.app.util.showCustomPopUp
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -142,6 +143,7 @@ class ThunderDetailActivity :
                 itemVisibility(likeCategory)
             }
             OPEN -> {
+                binding.ivThunderdetailIcon.isClickable = false
                 itemVisibility(openCategory)
             }
             else -> {
@@ -260,6 +262,7 @@ class ThunderDetailActivity :
                 organizerId = it.organizerId
                 organizerName = it.name
             }
+
             val intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             intent.putExtra("organizerName", organizerName)
