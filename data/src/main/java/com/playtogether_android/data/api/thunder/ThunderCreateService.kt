@@ -21,4 +21,12 @@ interface ThunderCreateService {
         @Part image: List<MultipartBody.Part?>,
         @PartMap body: HashMap<String, RequestBody>
     ): ResponseThunderCreate
+
+    @Multipart
+    @POST("light/add/{crewId}")
+    suspend fun postMultipartThunderCreateSingle(
+        @Path("crewId") crewId: Int,
+        @Part image: MultipartBody.Part?,
+        @PartMap body: HashMap<String, RequestBody>
+    ): ResponseThunderCreate
 }

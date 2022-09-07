@@ -33,6 +33,16 @@ class ThunderCreateRepositoryImpl(private val thunderCreateDataSource: ThunderCr
         )
     }
 
+    override suspend fun postMultipartThunderCreateSingle(
+        crewId: Int,
+        image: MultipartBody.Part?,
+        body: HashMap<String, RequestBody>
+    ): GetThunderCreateData {
+        return ThunderCreateMapper.mapperToGetCreateThunder(
+            thunderCreateDataSource.postMultipartThunderSingle(crewId,image,body)
+        )
+    }
+
 //    override suspend fun postMultipartThunderCreate(
 //        crewId: Int,
 //        image: List<MultipartBody.Part?>,

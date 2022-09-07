@@ -28,6 +28,14 @@ class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
     ): ResponseThunderCreate {
         return service.postMultipartThunderCreate(crewId, image, body)
     }
+
+    override suspend fun postMultipartThunderSingle(
+        crewId: Int,
+        image: MultipartBody.Part?,
+        body: HashMap<String, RequestBody>
+    ): ResponseThunderCreate {
+        return service.postMultipartThunderCreateSingle(crewId, image, body)
+    }
 //
 //    override suspend fun postMultipartThunderCreate(
 //        crewId: Int,

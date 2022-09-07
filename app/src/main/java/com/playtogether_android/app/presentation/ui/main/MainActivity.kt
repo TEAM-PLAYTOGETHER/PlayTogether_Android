@@ -40,11 +40,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initData() {
-        with(thunderViewModel) {
-            getApplyList()
-            getOpenList()
-            getLikeList()
-        }
         Timber.d("JWT 토큰 : ${PlayTogetherRepository.userToken}")
     }
 

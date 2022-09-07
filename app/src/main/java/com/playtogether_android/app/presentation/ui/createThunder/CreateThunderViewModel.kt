@@ -7,6 +7,7 @@ import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
+import com.playtogether_android.domain.usecase.thunder.PostMultipartThunderCreateUseCase
 import com.playtogether_android.domain.usecase.thunder.PostThunderCreateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateThunderViewModel @Inject constructor(
     val postThunderCreateUseCase: PostThunderCreateUseCase,
+    val postMultipartThunderCreateUseCase: PostMultipartThunderCreateUseCase,
     val repository: ThunderCreateRepository
 ) : ViewModel() {
     private val _getThunderCreateData = MutableLiveData<GetThunderCreateData>()
@@ -43,6 +45,23 @@ class CreateThunderViewModel @Inject constructor(
                     it.printStackTrace()
                     Log.d("writingServer", "${it.message}")
                 }
+        }
+    }
+
+    fun postMultipartDataSingle(
+        crewId: Int,
+        images: MultipartBody.Part,
+        body: HashMap<String, RequestBody>
+    ) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postMultipartThunderCreateUseCase(crewId, images, body)
+            }.onSuccess {
+                _getThunderCreateData.value = it
+                Timber.d("생성된 번개 아이디 : ${it.lightId}")
+            }.onFailure {
+                Timber.e("post create multipart data : ${it.message}")
+            }
         }
     }
 

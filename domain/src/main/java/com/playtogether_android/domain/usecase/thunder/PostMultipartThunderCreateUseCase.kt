@@ -13,9 +13,9 @@ import javax.inject.Inject
 class PostMultipartThunderCreateUseCase @Inject constructor(private val repository: ThunderCreateRepository) {
     suspend operator fun invoke(
         crewId: Int,
+        image: MultipartBody.Part?,
         body: HashMap<String, RequestBody>,
-        image: MultipartBody.Part?
-    ) {
-//        repository.postMultipartThunderCreate(crewId, body, image)
+    ): GetThunderCreateData {
+        return repository.postMultipartThunderCreateSingle(crewId, image, body)
     }
 }
