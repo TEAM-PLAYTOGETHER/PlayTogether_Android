@@ -124,7 +124,6 @@ class SignViewModel @Inject constructor(
 
                 signData.value = it.accessToken //signData Set accessToken
                 _signup = it.isSignup
-
                 _isLogin.value = true
 
             }.onFailure {
