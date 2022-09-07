@@ -140,6 +140,10 @@ class SearchSubwayActivity :
                                 binding.chipSubwayOnboarding.removeView(this)
                                 activeBtn()
                             }
+
+
+
+
                         })
                     } else {
                         shortToast("최대 2개까지 추가할 수 있어요!")
