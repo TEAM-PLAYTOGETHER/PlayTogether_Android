@@ -19,7 +19,6 @@ import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDet
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.app.util.showCustomPopUp
-import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -48,7 +47,39 @@ class ThunderDetailActivity :
         clickScrap()
         clickOption(thunderId)
         clickReport()
+        clickThunderCancel(thunderId)
     }
+
+    private fun clickThunderCancel(thunderId: Int) {
+        binding.tvDetailCancelText.setOnClickListener {
+            showCancelDialog(thunderId)
+        }
+    }
+
+    private fun showCancelDialog(thunderId: Int) {
+        val title = "신청을 취소할까요?"
+        val dialog = CustomDialog(this, title)
+        dialog.showChoiceDialog(R.layout.dialog_yes_no)
+        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+            override fun onClicked(num: Int) {
+                if (num == 1) {
+                    thunderDetailViewModel.joinAndCancel(thunderId)
+                    thunderDetailViewModel.isConfirm.observe(this@ThunderDetailActivity) { success ->
+                        if (success) {
+                            showConfirmDialog()
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    private fun showConfirmDialog() {
+        val title = "신청 취소되었습니다."
+        val dialog = CustomDialog(this@ThunderDetailActivity, title)
+        dialog.showConfirmDialog(R.layout.dialog_check)
+    }
+
 
     private fun clickReport() {
         binding.tvThunderdetailReport.setOnClickListener {
