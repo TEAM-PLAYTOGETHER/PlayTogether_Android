@@ -166,7 +166,6 @@ class ThunderListActivity :
         }
         thunderViewModel.getApplyList()
         thunderViewModel.getOpenList()
-        Timber.e("${thunderViewModel.thunderApplyIdList}")
     }
 
     private fun setBackButtonListener() {
