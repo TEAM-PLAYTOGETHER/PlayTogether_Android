@@ -2,15 +2,20 @@ package com.playtogether_android.app.util
 
 import android.content.Context
 import android.content.Intent
-import android.widget.ImageView
-import android.widget.Toast
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
+import com.playtogether_android.app.di.PlayTogetherApplication
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import timber.log.Timber
 import kotlin.math.roundToInt
 
@@ -81,4 +86,46 @@ fun Context.applyOpenChecker(context: Context, thunderId: Int, isApply: Boolean,
     else intent.putExtra("category", "default")
     intent.putExtra("thunderId", thunderId)
     startActivity(intent)
+}
+
+fun Context.showCustomPopUp(
+    view: View,
+    arrayInt: Int,
+    baseContext: Context
+): ListPopupWindow {
+
+    val items = this.resources.getStringArray(arrayInt)
+    val popupAdapter =
+        object : ArrayAdapter<String>(baseContext, R.layout.item_detail, items) {
+            override fun getView(
+                position: Int,
+                convertView: View?,
+                parent: ViewGroup
+            ): View {
+                val view = super.getView(position, convertView, parent)
+                val color = if (position == 0) {
+                    R.color.gray_black
+                } else {
+                    R.color.gray_black
+                }
+                (view as TextView).setTextColor(ContextCompat.getColor(context, color))
+                return view
+            }
+        }
+
+    val popup = ListPopupWindow(this).apply {
+        anchorView = view
+        setAdapter(popupAdapter)
+        setDropDownGravity(Gravity.NO_GRAVITY)
+        width = measureContentWidth(baseContext, popupAdapter)
+        height = ListPopupWindow.WRAP_CONTENT
+        isModal = true
+        val screenWidth = PlayTogetherApplication.pixelRatio.screenWidth / 5
+        val screenWidthStr = "-$screenWidth"
+        horizontalOffset = screenWidthStr.toInt()
+        verticalOffset = -20
+
+        setBackgroundDrawable(ContextCompat.getDrawable(baseContext, R.drawable.img_popup))
+    }
+    return popup
 }

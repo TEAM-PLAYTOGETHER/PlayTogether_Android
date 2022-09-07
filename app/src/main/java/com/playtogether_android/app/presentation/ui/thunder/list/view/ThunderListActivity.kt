@@ -38,6 +38,11 @@ class ThunderListActivity :
         initData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initData()
+    }
+
     private fun setClickListener() {
         floatButtonClickListener()
         searchButtonClickListener()
@@ -142,7 +147,11 @@ class ThunderListActivity :
 
     private fun initFragment() {
         val fragmentList =
-            listOf(ThunderEatFragment(thunderViewModel), ThunderGoFragment(thunderViewModel), ThunderDoFragment(thunderViewModel))
+            listOf(
+                ThunderEatFragment(thunderViewModel),
+                ThunderGoFragment(thunderViewModel),
+                ThunderDoFragment(thunderViewModel)
+            )
         thunderCategoryListAdapter = ThunderCategoryListAdapter(this)
         thunderCategoryListAdapter.fragmentList.addAll(fragmentList)
         binding.vpThunderlistContainer.adapter = thunderCategoryListAdapter
