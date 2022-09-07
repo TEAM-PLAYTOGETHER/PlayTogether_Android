@@ -34,8 +34,8 @@ class ThunderListActivity :
         binding.listViewModel = thunderListViewModel
         binding.thunderListActivity = this
         binding.lifecycleOwner = this
-        initView()
         initData()
+        initView()
     }
 
     override fun onResume() {

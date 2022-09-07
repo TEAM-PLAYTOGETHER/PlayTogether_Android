@@ -62,6 +62,9 @@ class HomeViewModel @Inject constructor(
     private val _crewName = MutableLiveData<String>()
     val crewName: LiveData<String> = _crewName
 
+    private var _isCrewListEmpty = true
+    val isCrewListEmpty get() = _isCrewListEmpty
+
     fun setCrewName(name: String = PlayTogetherRepository.crewName) {
         PlayTogetherRepository.crewName = name
         _crewName.value = name
@@ -73,6 +76,7 @@ class HomeViewModel @Inject constructor(
                 getCrewListUseCase().data.crewList
             }.onSuccess {
                 _crewList.value = it
+                _isCrewListEmpty = it.isEmpty()
             }.onFailure {
                 Timber.e("getCrewListName : ${it.message}")
             }
