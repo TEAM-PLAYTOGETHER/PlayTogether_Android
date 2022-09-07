@@ -1,6 +1,7 @@
 package com.playtogether_android.data.datasource.thunder
 
 import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
+import com.playtogether_android.data.model.response.thunder.ResThunderCreateSingle
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
 import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import okhttp3.MultipartBody
@@ -23,5 +24,5 @@ interface ThunderCreateDataSource {
         crewId: Int,
         image: MultipartBody.Part?,
         body: HashMap<String,RequestBody>
-    ): ResponseThunderCreate
+    ): ResThunderCreateSingle
 }

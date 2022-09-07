@@ -38,8 +38,8 @@ class ThunderCreateRepositoryImpl(private val thunderCreateDataSource: ThunderCr
         image: MultipartBody.Part?,
         body: HashMap<String, RequestBody>
     ): GetThunderCreateData {
-        return ThunderCreateMapper.mapperToGetCreateThunder(
-            thunderCreateDataSource.postMultipartThunderSingle(crewId,image,body)
+        return ThunderCreateMapper.mapperToMultipartPostSingle(
+            thunderCreateDataSource.postMultipartThunderSingle(crewId, image, body)
         )
     }
 
