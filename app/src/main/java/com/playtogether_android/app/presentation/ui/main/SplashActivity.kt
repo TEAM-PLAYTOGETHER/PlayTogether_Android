@@ -99,22 +99,30 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun accessTokenChecker() {
-        var joinCrewListChecker = 0
-        homeViewModel.crewList.observe(this) {
-            joinCrewListChecker = it.size
-        }
+        homeViewModel.getCrewList()
+        val isEmpty = homeViewModel.isCrewListEmpty
 
+        Timber.e("isEmpty : $isEmpty")
         signViewModel.statusCode.observe(this@SplashActivity) { status ->
             Timber.e("status : $status")
             when (status) {
                 ACCESS_NOW, REFRESH_SUCCESS -> {
-                    if (PlayTogetherRepository.crewId == -1)
+                    if (isEmpty && PlayTogetherRepository.crewId == -1)
+                        moveSelectCrew()
+                    else if (PlayTogetherRepository.crewId == -1 && isEmpty)
                         moveJoinOrCreateCrew()
                     else
                         moveMain()
                 }
                 else -> moveLoginActivity()
             }
+        }
+    }
+
+    private fun moveSelectCrew() {
+        Intent(this, OnboardingReDownLoadActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startNextActivityWithHandling(this)
         }
     }
 

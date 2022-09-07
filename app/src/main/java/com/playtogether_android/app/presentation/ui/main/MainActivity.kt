@@ -64,6 +64,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         return token
     }
 
+    private fun initThunderChecker() {
+        with(thunderViewModel) {
+            getApplyList()
+            getOpenList()
+            getLikeList()
+        }
+    }
+
     //바텀네비
     private fun initBottomNav() {
         binding.btNvMain.itemIconTintList = null
@@ -73,21 +81,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     prevSelectedItem = 1
                     supportFragmentManager.popBackStack()
                     changeFragmentNoBackStack(R.id.fragment_container_main, HomeFragment())
+                    initThunderChecker()
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.navigation_thunder -> {
-                    with(thunderViewModel) {
-                        getApplyList()
-                        getOpenList()
-                        getLikeList()
-                    }
                     if (prevSelectedItem == 1) {
                         changeFragment(R.id.fragment_container_main, ThunderFragment(), "Thunder")
                     } else {
                         changeFragmentNoBackStack(R.id.fragment_container_main, ThunderFragment())
                     }
-
+                    initThunderChecker()
                     prevSelectedItem = 2
                     return@setOnItemSelectedListener true
                 }
