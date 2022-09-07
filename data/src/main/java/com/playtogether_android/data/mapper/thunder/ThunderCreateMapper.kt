@@ -2,6 +2,7 @@ package com.playtogether_android.data.mapper.thunder
 
 import android.util.Log
 import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
+import com.playtogether_android.data.model.response.thunder.ResThunderCreateSingle
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
 import com.playtogether_android.domain.model.thunder.GetThunderCreateData
 import com.playtogether_android.domain.model.thunder.PostMultipartThunderCreateData
@@ -61,5 +62,25 @@ object ThunderCreateMapper {
             "${r.title} ${r.category} ${r.date} ${r.time} ${r.place} ${r.peopleCnt} ${r.description}"
         )
         return r
+    }
+
+
+    fun mapperToMultipartPostSingle(responseThunderCreate: ResThunderCreateSingle): GetThunderCreateData {
+        var _lightId = 0
+        var _crewId = 0
+        responseThunderCreate.data.map {
+            _lightId = it.id
+            _crewId = it.crewId
+        }
+
+        val g = GetThunderCreateData(
+            message = responseThunderCreate.message,
+            status = responseThunderCreate.status,
+            success = responseThunderCreate.success,
+            lightId = _lightId,
+            crewId = _crewId
+        )
+        Log.d("createServerMapper", "${g.message}, ${g.status}, ${g.success}")
+        return g
     }
 }
