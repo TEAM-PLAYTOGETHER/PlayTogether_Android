@@ -16,6 +16,7 @@ import com.playtogether_android.data.api.search.SearchService
 import com.playtogether_android.data.api.sign.SignService
 import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.api.thunder.ThunderService
+import com.playtogether_android.data.api.userInfo.UserInfoService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -105,6 +107,12 @@ object ApiModule {
     @Singleton
     fun provideSearchService(@RetrofitModule.GsonConverter retrofit: Retrofit): SearchService {
         return retrofit.create(SearchService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserInfoService(@RetrofitModule.GsonConverter retrofit: Retrofit): UserInfoService {
+        return retrofit.create(UserInfoService::class.java)
     }
 
     @Singleton

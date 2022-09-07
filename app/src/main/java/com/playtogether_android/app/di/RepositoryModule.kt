@@ -12,6 +12,7 @@ import com.playtogether_android.data.datasource.onboarding.SubwayDataSource
 import com.playtogether_android.data.datasource.sign.SignDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
+import com.playtogether_android.data.datasource.userInfo.UserInfoDataSource
 import com.playtogether_android.data.repositoryimpl.home.HomeRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.light.LightRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.message.ChatRepositoryImpl
@@ -24,6 +25,7 @@ import com.playtogether_android.data.repositoryimpl.search.SearchRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.sign.SignRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderCreateRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderRepositoryImpl
+import com.playtogether_android.data.repositoryimpl.userInfo.UserInfoRepositoryImpl
 import com.playtogether_android.domain.repository.home.HomeRepository
 import com.playtogether_android.domain.repository.light.LightRepository
 import com.playtogether_android.domain.repository.message.ChatRepository
@@ -36,6 +38,7 @@ import com.playtogether_android.domain.repository.search.SearchRepository
 import com.playtogether_android.domain.repository.sign.SignRepository
 import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
+import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -116,5 +119,11 @@ object RepositoryModule {
     @Singleton
     fun provideThunderCreateRepository(dataSource: ThunderCreateDataSource): ThunderCreateRepository {
         return ThunderCreateRepositoryImpl(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserInfoRepository(dataSource: UserInfoDataSource): UserInfoRepository {
+        return UserInfoRepositoryImpl(dataSource)
     }
 }
