@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
+import com.playtogether_android.domain.usecase.thunder.GetApplyListUseCase
+import com.playtogether_android.domain.usecase.thunder.GetLikeListUseCase
+import com.playtogether_android.domain.usecase.thunder.GetOpenListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,6 +19,9 @@ import javax.inject.Inject
 @HiltViewModel
 class ThunderListViewModel @Inject constructor(
     val getThunderCategoryUseCase: GetThunderCategoryUseCase,
+    val getApplyListUseCase: GetApplyListUseCase,
+    val getOpenListUseCase: GetOpenListUseCase,
+    val getLikeListUseCase: GetLikeListUseCase
 ) : ViewModel() {
 
     private val _categoryItemList = MutableLiveData<List<CategoryData>>()
@@ -37,11 +44,71 @@ class ThunderListViewModel @Inject constructor(
 
     val pageOrder = MutableLiveData<Int>()
 
+    private val _thunderApplyList = MutableLiveData<List<CategoryData>>()
+    val thunderApplyList: LiveData<List<CategoryData>> = _thunderApplyList
+
+    private var _thunderApplyIdList = listOf<Int>()
+    val thunderApplyIdList get() = _thunderApplyIdList
+
+    private val _thunderOpenList = MutableLiveData<List<CategoryData>>()
+    val thunderOpenList: LiveData<List<CategoryData>> = _thunderOpenList
+
+    private var _thunderOpenIdList = listOf<Int>()
+    val thunderOpenIdList get() = _thunderOpenIdList
+
+    private val _thunderLikeList = MutableLiveData<List<CategoryData>>()
+    val thunderLikeList: LiveData<List<CategoryData>> = _thunderLikeList
+
     private var _tapPosition = 0
     val tabPosition get() = _tapPosition
 
     fun setTabPosition(position: Int) {
         _tapPosition = position
+    }
+
+    fun getApplyList() {
+        viewModelScope.launch {
+            kotlin.runCatching { getApplyListUseCase() }
+                .onSuccess { list ->
+                    _thunderApplyIdList = emptyList()
+                    _thunderApplyList.value = list
+                    _thunderApplyIdList = list.map { it.lightId }
+                    Timber.e("thunder apply : $_thunderApplyIdList")
+                    Timber.d("thunder apply size : ${list.size}")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("getApplyList-fail", "fail")
+                }
+        }
+    }
+
+    fun getOpenList() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getOpenListUseCase()
+            }.onSuccess { list ->
+                _thunderOpenIdList = emptyList()
+                _thunderOpenList.value = list
+                _thunderOpenIdList = list.map { it.lightId }
+                Timber.e("thunder open : $_thunderOpenIdList")
+            }.onFailure {
+
+            }
+        }
+    }
+
+    fun getLikeList() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getLikeListUseCase()
+            }.onSuccess {
+                _thunderLikeList.value = it
+                Timber.d("thunder like : $it")
+            }.onFailure {
+
+            }
+        }
     }
 
     fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
