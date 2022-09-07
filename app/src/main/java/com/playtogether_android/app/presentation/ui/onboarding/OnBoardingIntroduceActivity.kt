@@ -44,7 +44,6 @@ class OnBoardingIntroduceActivity :
     override fun onResume() {
         super.onResume()
         initSetting()
-        nextBtnActive()
     }
 
     private fun nextBtnClickListener() {
@@ -121,7 +120,12 @@ class OnBoardingIntroduceActivity :
     }
 
     private fun nextBtnActive() {
-        binding.tvIntroOnboardingNext.isSelected = binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
+        if(binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != "") {
+            binding.tvIntroOnboardingNext.isSelected = true
+        } else {
+            binding.tvIntroOnboardingNext.isSelected = false
+        }
+
     }
 
 
@@ -148,17 +152,12 @@ class OnBoardingIntroduceActivity :
         binding.etIntroOnboardingName.setText(nickname)
         binding.etIntroOnboardingIntro.setText(description)
 
-        Timber.e("TEST")
         if (description != null && nicknameCheck == true) {
-            Timber.e("TEST ㅠㅠ~")
             binding.tvIntroOnboardingNext.isSelected = true
-            binding.tvIntroOnboardingNext.setBackgroundResource(R.drawable.rectangle_fill_green_border_black_radius_10)
-            binding.tvIntroOnboardingNext.setTextColor(Color.parseColor("#191919"))
             binding.tvIntroOnboardingNext.setOnClickListener {
                 nextBtnNetwork()
             }
         } else {
-            Timber.e("TEST2")
             binding.tvIntroOnboardingNext.isSelected = false
         }
     }
@@ -212,6 +211,7 @@ class OnBoardingIntroduceActivity :
                     binding.tvSignupmainIdDuplication.isClickable = true
                     binding.tvIntroOnboardingCondition.setTextColor(Color.parseColor("#C5C5C5"))
                 }
+                nextBtnActive()
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -229,10 +229,8 @@ class OnBoardingIntroduceActivity :
                 initTextFieldCheck()
                 duplicationClickEvent()
                 binding.tvIntroOnboardingNext.isSelected = false
-
+                nextBtnActive()
             }
-
-
         })
         nextBtnActive()
         binding.tvIntroOnboardingNext.isSelected = false
@@ -246,6 +244,7 @@ class OnBoardingIntroduceActivity :
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
+                nextBtnActive()
             }
         })
         nextBtnActive()
