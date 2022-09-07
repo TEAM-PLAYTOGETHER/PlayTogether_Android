@@ -128,7 +128,6 @@ class ThunderDetailActivity :
         }
     }
 
-
     private fun clickReport() {
         binding.tvThunderdetailReport.setOnClickListener {
             shortToast("신고뷰로 이동 예정")
@@ -146,10 +145,16 @@ class ThunderDetailActivity :
                         shortToast("구현중입니다 :)")
                         popup.dismiss()
                     } else {
-                        thunderDetailViewModel.thunderDelete(thunderId)
-                        shortToast("삭제가 완료 되었습니다.")
-                        popup.dismiss()
-                        finish()
+                        with(thunderDetailViewModel) {
+                            thunderDelete(thunderId)
+                            isDelete.observe(this@ThunderDetailActivity) {
+                                if (it) {
+                                    popup.dismiss()
+                                    finish()
+                                    shortToast("삭제가 완료 되었습니다.")
+                                }
+                            }
+                        }
                     }
                 }
                 popup.show()
