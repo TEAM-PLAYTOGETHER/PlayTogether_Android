@@ -7,17 +7,13 @@ import androidx.security.crypto.MasterKey
 
 object PlayTogetherRepository {
     //카카오
-    private const val KAKAO_USER_FIRST_NAME = "KAKAO_USER_FIRST_NAME" //유저네임
     private const val KAKAO_USER_LOG_OUT = "KAKAO_USER_LOG_OUT" //로그아웃 유무
     private const val KAKAO_UT_KEY = "KAKAO_UT_KEY"  //유저토큰 키
-    private const val KAKAO_URT_KEY = "KAKAO_URT_KEY"  //유저 리프레시토큰 키
     private const val KAKAO_ACCESS = "KAKAO_ACCESS" //
 
     //구글
-    private const val GOOGLE_USER_FIRST_NAME = "KAKAO_USER_FIRST_NAME" //유저네임
     private const val GOOGLE_USER_LOG_OUT = "KAKAO_USER_LOG_OUT" //로그아웃 유무
     private const val GOOGLE_UT_KEY = "KAKAO_UT_KEY"  //유저토큰 키
-    private const val GOOGLE_URT_KEY = "KAKAO_URT_KEY"  //유저 리프레시토큰 키
     private const val GOOGLE_ACCESS = "KAKAO_ACCESS" //
 
     //유저 동아리
@@ -30,7 +26,7 @@ object PlayTogetherRepository {
 
     //현재 유저 상태
     private const val UT_KEY = "UT_KEY"  //유저토큰 키
-    private const val USER_SOCIAL_KEY = "USER_SOCIAL_KEY" //소셜 키
+    private const val UT_REFRESH_KEY = "UT_REFRESH_KEY" // 유저 리프레시 키
     private const val USER_UUID_KEY = "USER_UUID_KEY" //유저아이디 키
 
     //푸시알림
@@ -78,10 +74,10 @@ object PlayTogetherRepository {
         get() = authPreferences.getString(UT_KEY, "") ?: ""
         set(value) = authPreferences.edit { it.putString(UT_KEY, value) }
 
-    //현재 유저 소셜
-    var userSocial: String
-        get() = authPreferences.getString(USER_SOCIAL_KEY, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(USER_SOCIAL_KEY, value) }
+    //현재 유저 리프레시 토큰
+    var userRefreshToken: String
+        get() = authPreferences.getString(UT_REFRESH_KEY, "") ?: ""
+        set(value) = authPreferences.edit { it.putString(UT_REFRESH_KEY, value) }
 
     //현재 유저 아이디
     var userUuid: String
@@ -93,20 +89,10 @@ object PlayTogetherRepository {
         get() = authPreferences.getString(GOOGLE_UT_KEY, "") ?: ""
         set(value) = authPreferences.edit { it.putString(GOOGLE_UT_KEY, value) }
 
-    //구글 유저 리프레시 토큰
-    var googleUserRefreshToken: String
-        get() = authPreferences.getString(GOOGLE_URT_KEY, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(GOOGLE_URT_KEY, value) }
-
     //구글 소셜 로그인시 토큰
     var googleAccessToken: String
         get() = authPreferences.getString(GOOGLE_ACCESS, "") ?: ""
         set(value) = authPreferences.edit { it.putString(GOOGLE_ACCESS, value) }
-
-    //구글 유저 이름
-    var googleUserfirstName: String
-        get() = authPreferences.getString(GOOGLE_USER_FIRST_NAME, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(GOOGLE_USER_FIRST_NAME, value) }
 
     //구글 유저 로그아웃 유무
     var googleUserlogOut: Boolean
@@ -118,20 +104,10 @@ object PlayTogetherRepository {
         get() = authPreferences.getString(KAKAO_UT_KEY, "") ?: ""
         set(value) = authPreferences.edit { it.putString(KAKAO_UT_KEY, value) }
 
-    //카카오 유저 리프레시 토큰
-    var kakaoUserRefreshToken: String
-        get() = authPreferences.getString(KAKAO_URT_KEY, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(KAKAO_URT_KEY, value) }
-
     //카카오 소셜 로그인시 토큰
     var kakaoAccessToken: String
         get() = authPreferences.getString(KAKAO_ACCESS, "") ?: ""
         set(value) = authPreferences.edit { it.putString(KAKAO_ACCESS, value) }
-
-    //카카오 유저 이름
-    var kakaoUserfirstName: String
-        get() = authPreferences.getString(KAKAO_USER_FIRST_NAME, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(KAKAO_USER_FIRST_NAME, value) }
 
     //카카오 유저 로그아웃 유무
     var kakaoUserlogOut: Boolean
