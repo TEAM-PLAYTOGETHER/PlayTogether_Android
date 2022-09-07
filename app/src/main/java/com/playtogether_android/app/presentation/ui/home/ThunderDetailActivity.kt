@@ -114,20 +114,19 @@ class ThunderDetailActivity :
         val title = "신청 취소되었습니다."
         val db = DialogCheckBinding.inflate(layoutInflater)
         dialog.setContentView(db.root)
-
+        dialog.show()
         db.tvDialogTitle.text = title
         dialog.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
-        dialog.show()
         db.tvDialogCheck.setOnClickListener {
             dialog.dismiss()
             finish()
         }
     }
-
 
     private fun clickReport() {
         binding.tvThunderdetailReport.setOnClickListener {
@@ -146,10 +145,16 @@ class ThunderDetailActivity :
                         shortToast("구현중입니다 :)")
                         popup.dismiss()
                     } else {
-                        thunderDetailViewModel.thunderDelete(thunderId)
-                        shortToast("삭제가 완료 되었습니다.")
-                        popup.dismiss()
-                        finish()
+                        with(thunderDetailViewModel) {
+                            thunderDelete(thunderId)
+                            isDelete.observe(this@ThunderDetailActivity) {
+                                if (it) {
+                                    popup.dismiss()
+                                    finish()
+                                    shortToast("삭제가 완료 되었습니다.")
+                                }
+                            }
+                        }
                     }
                 }
                 popup.show()

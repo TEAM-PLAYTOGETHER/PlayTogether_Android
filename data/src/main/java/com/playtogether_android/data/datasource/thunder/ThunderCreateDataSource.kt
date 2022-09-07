@@ -18,4 +18,10 @@ interface ThunderCreateDataSource {
         image: List<MultipartBody.Part?>,
         body: HashMap<String,RequestBody>
     ): ResponseThunderCreate
+
+    suspend fun postMultipartThunderSingle(
+        crewId: Int,
+        image: MultipartBody.Part?,
+        body: HashMap<String,RequestBody>
+    ): ResponseThunderCreate
 }
