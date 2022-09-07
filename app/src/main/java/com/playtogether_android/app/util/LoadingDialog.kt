@@ -12,7 +12,7 @@ class LoadingDialog(context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_loading_view)
-        setCancelable(false)
+        setCancelable(true)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 }
