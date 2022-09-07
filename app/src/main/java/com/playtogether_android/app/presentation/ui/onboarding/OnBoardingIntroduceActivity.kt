@@ -37,11 +37,14 @@ class OnBoardingIntroduceActivity :
         subwayBtnListener()
         setChipBtn()
         nullCheck()
+        initSetting()
+        nextBtnActive()
     }
 
     override fun onResume() {
         super.onResume()
         initSetting()
+        nextBtnActive()
     }
 
     private fun nextBtnClickListener() {
@@ -95,7 +98,7 @@ class OnBoardingIntroduceActivity :
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
 
-        if(isOpener) {
+        if (isOpener) {
             val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
                 putExtra("nickname", name)
                 putExtra("crewName", crewName)
@@ -117,10 +120,8 @@ class OnBoardingIntroduceActivity :
 
     }
 
-
     private fun nextBtnActive() {
-        binding.tvIntroOnboardingNext.isSelected =
-            binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
+        binding.tvIntroOnboardingNext.isSelected = binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
     }
 
 
@@ -139,16 +140,26 @@ class OnBoardingIntroduceActivity :
         val description = intent.getStringExtra("description")
         val nicknameCheck = intent.getBooleanExtra("nicknameCheck", false)
 
-        binding.tvIntroOnboardingCrewName.setText(crewName)
-        binding.etIntroOnboardingName.setText(nickname)
-        binding.etIntroOnboardingIntro.setText(description)
-
         if (nicknameCheck) {
             nicknameDuplicationCheck()
         }
 
-        if (description != "" && nicknameCheck) {
+        binding.tvIntroOnboardingCrewName.setText(crewName)
+        binding.etIntroOnboardingName.setText(nickname)
+        binding.etIntroOnboardingIntro.setText(description)
+
+        Timber.e("TEST")
+        if (description != null && nicknameCheck == true) {
+            Timber.e("TEST ㅠㅠ~")
             binding.tvIntroOnboardingNext.isSelected = true
+            binding.tvIntroOnboardingNext.setBackgroundResource(R.drawable.rectangle_fill_green_border_black_radius_10)
+            binding.tvIntroOnboardingNext.setTextColor(Color.parseColor("#191919"))
+            binding.tvIntroOnboardingNext.setOnClickListener {
+                nextBtnNetwork()
+            }
+        } else {
+            Timber.e("TEST2")
+            binding.tvIntroOnboardingNext.isSelected = false
         }
     }
 
@@ -217,22 +228,27 @@ class OnBoardingIntroduceActivity :
                 etIntroOnboardingName.isSelected = etIntroOnboardingName.text.toString() != ""
                 initTextFieldCheck()
                 duplicationClickEvent()
-                nextBtnActive()
+                binding.tvIntroOnboardingNext.isSelected = false
+
             }
+
+
         })
+        nextBtnActive()
+        binding.tvIntroOnboardingNext.isSelected = false
     }
 
     //간단소개 textWatcher
     private fun introTextWatcher() = with(binding) {
         etIntroOnboardingIntro.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {nextBtnActive()}
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
-                nextBtnActive()
             }
         })
+        nextBtnActive()
     }
 
     private fun subwayBtnListener() {
@@ -330,11 +346,12 @@ class OnBoardingIntroduceActivity :
             if (!it.success) {
                 binding.tvIntroOnboardingApprove.visibility = View.INVISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.VISIBLE
+                nextBtnActive()
             } else {
                 binding.tvIntroOnboardingApprove.visibility = View.VISIBLE
                 binding.tvIntroOnboardingWarn.visibility = View.INVISIBLE
+                nextBtnActive()
             }
         }
-        nextBtnActive()
     }
 }
