@@ -5,11 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
+import com.playtogether_android.app.databinding.DialogCheckBinding
+import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
@@ -17,6 +20,7 @@ import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.app.util.showCustomPopUp
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,32 +56,76 @@ class ThunderDetailActivity :
 
     private fun clickThunderCancel(thunderId: Int) {
         binding.tvDetailCancelText.setOnClickListener {
-            showCancelDialog(thunderId)
+            showCancelDialog2(thunderId)
         }
     }
 
-    private fun showCancelDialog(thunderId: Int) {
+    private fun showCancelDialog2(thunderId: Int) {
         val title = "신청을 취소할까요?"
-        val dialog = CustomDialog(this, title)
-        dialog.showChoiceDialog(R.layout.dialog_yes_no)
-        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
-            override fun onClicked(num: Int) {
-                if (num == 1) {
-                    thunderDetailViewModel.joinAndCancel(thunderId)
-                    thunderDetailViewModel.isConfirm.observe(this@ThunderDetailActivity) { success ->
-                        if (success) {
-                            showConfirmDialog()
+        val dialog = CustomDialogSon(this)
+        val db = DialogYesNoBinding.inflate(layoutInflater)
+        dialog.setContentView(db.root)
+
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        dialog.show()
+
+        with(db) {
+            tvDialogTitle.text = title
+            tvDialogNo.setOnClickListener {
+                dialog.dismiss()
+            }
+            tvDialogYes.setOnClickListener {
+                with(thunderDetailViewModel) {
+                    joinAndCancel(thunderId)
+                    isConfirm.observe(this@ThunderDetailActivity) {
+                        if (it) {
+                            showConfirmDialog(dialog)
                         }
                     }
                 }
+                dialog.dismiss()
             }
-        })
+        }
     }
 
-    private fun showConfirmDialog() {
+//    private fun showCancelDialog(thunderId: Int) {
+//        val title = "신청을 취소할까요?"
+//        val dialog = CustomDialog(this, title)
+//        dialog.showChoiceDialog(R.layout.dialog_yes_no)
+//        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+//            override fun onClicked(num: Int) {
+//                if (num == 1) {
+//                    thunderDetailViewModel.joinAndCancel(thunderId)
+//                    thunderDetailViewModel.isConfirm.observe(this@ThunderDetailActivity) { success ->
+//                        if (success) {
+//                            showConfirmDialog()
+//                        }
+//                    }
+//                }
+//            }
+//        })
+//    }
+
+    private fun showConfirmDialog(dialog: CustomDialogSon) {
         val title = "신청 취소되었습니다."
-        val dialog = CustomDialog(this@ThunderDetailActivity, title)
-        dialog.showConfirmDialog(R.layout.dialog_check)
+        val db = DialogCheckBinding.inflate(layoutInflater)
+        dialog.setContentView(db.root)
+
+        db.tvDialogTitle.text = title
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        dialog.show()
+        db.tvDialogCheck.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
     }
 
 
