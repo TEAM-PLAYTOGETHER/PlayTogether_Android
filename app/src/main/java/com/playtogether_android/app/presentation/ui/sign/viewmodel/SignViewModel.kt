@@ -56,6 +56,10 @@ class SignViewModel @Inject constructor(
                 repository.getTokenIssuance(refreshToken)
             }.onSuccess {
                 _statusCode.value = it.status
+                with(PlayTogetherRepository) {
+                    userToken = it.accessToken
+                    userRefreshToken = it.refreshToken
+                }
             }.onFailure {
                 Timber.e("token issuance : ${it.message}")
                 when (it) {
@@ -88,7 +92,7 @@ class SignViewModel @Inject constructor(
                 with(PlayTogetherRepository) {
                     googleUserToken = ""
                     googleUserToken = it.accessToken
-                    googleUserRefreshToken = it.refreshToken
+                    userRefreshToken = it.refreshToken
                     userToken = googleUserToken
                     googleUserlogOut = false
                 }
@@ -112,7 +116,7 @@ class SignViewModel @Inject constructor(
                     kakaoUserToken = ""
                     kakaoUserToken = it.accessToken
                     userToken = kakaoUserToken
-                    kakaoUserRefreshToken = it.refreshToken
+                    userRefreshToken = it.refreshToken
                     kakaoUserlogOut = false
                 }
                 Timber.e("kakao login access : ${it.accessToken}")

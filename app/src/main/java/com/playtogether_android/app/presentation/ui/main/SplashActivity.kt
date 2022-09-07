@@ -81,17 +81,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             }
             //todo 카카오 자동 로그인
             else if (kakaoUserToken == userToken) {
-                signViewModel.tokenChecker(kakaoUserRefreshToken)
-                Timber.e("repository access : $userToken")
-                Timber.e("repository refresh : $kakaoUserRefreshToken")
+                signViewModel.tokenChecker(userRefreshToken)
                 accessTokenChecker()
                 Timber.e("splash auto kakao login : 카카오 자동 로그인")
             }
             //todo 구글 자동 로그인
             else if (googleAccessToken == userToken) {
-                Timber.e("repository access : $userToken")
-                Timber.e("repository refresh : $googleUserRefreshToken")
-                signViewModel.tokenChecker(googleUserRefreshToken)
+                signViewModel.tokenChecker(userRefreshToken)
                 accessTokenChecker()
                 Timber.e("splash auto google login : 구글 자동 로그인")
             }
@@ -109,12 +105,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         }
 
         signViewModel.statusCode.observe(this@SplashActivity) { status ->
+            Timber.e("status : $status")
             when (status) {
                 ACCESS_NOW, REFRESH_SUCCESS -> {
                     if (PlayTogetherRepository.crewId == -1)
                         moveJoinOrCreateCrew()
-                    else if (joinCrewListChecker > 0)
-                        moveSelectCrew()
                     else
                         moveMain()
                 }
@@ -125,14 +120,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     private fun moveJoinOrCreateCrew() {
         val intent = Intent(baseContext, SelectOnboardingActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        startNextActivityWithHandling(intent)
-    }
-
-    private fun moveSelectCrew() {
-        val intent = Intent(baseContext, OnboardingReDownLoadActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
