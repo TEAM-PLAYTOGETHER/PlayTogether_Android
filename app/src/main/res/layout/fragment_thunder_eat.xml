@@ -20,6 +20,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_thundereat_container"
             android:layout_width="match_parent"
+            android:paddingHorizontal="20dp"
+            android:clipToPadding="true"
             android:layout_height="match_parent" />
 
         <TextView
