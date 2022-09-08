@@ -44,7 +44,6 @@ class ThunderListActivity :
     }
 
     private fun setClickListener() {
-        floatButtonClickListener()
         searchButtonClickListener()
         setBackButtonListener()
         setPreButtonClick()
@@ -60,10 +59,6 @@ class ThunderListActivity :
     }
 
     private fun initView() {
-        binding.fabThunderlist.layoutParams.apply {
-            width = resources.getDimension(R.dimen.fab_size).toInt()
-            height = resources.getDimension(R.dimen.fab_size).toInt()
-        }
         initFragment()
         initTabLayout()
         setClickListener()
@@ -166,19 +161,11 @@ class ThunderListActivity :
         }
         thunderViewModel.getApplyList()
         thunderViewModel.getOpenList()
-        Timber.e("${thunderViewModel.thunderApplyIdList}")
     }
 
     private fun setBackButtonListener() {
         binding.ivThunderlistBack.setOnClickListener {
             finish()
-        }
-    }
-
-    private fun floatButtonClickListener() {
-        binding.fabThunderlist.setOnClickListener {
-            val intent = Intent(this, CreateThunderActivity::class.java)
-            intentActivity(intent)
         }
     }
 

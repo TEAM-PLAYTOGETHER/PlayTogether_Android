@@ -143,18 +143,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_thunderlist_category_title" />
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fab_thunderlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_floating"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_height="64dp"
-            tools:layout_width="64dp" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
