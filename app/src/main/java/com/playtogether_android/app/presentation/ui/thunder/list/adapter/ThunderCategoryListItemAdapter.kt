@@ -4,6 +4,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
@@ -16,7 +17,10 @@ import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 import timber.log.Timber
 
-class ThunderCategoryListItemAdapter(val thunderViewModel: ThunderViewModel) :
+class ThunderCategoryListItemAdapter(
+    val thunderViewModel: ThunderViewModel,
+    viewLifecycleOwner: LifecycleOwner
+) :
     ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -72,11 +76,12 @@ class ThunderCategoryListItemAdapter(val thunderViewModel: ThunderViewModel) :
     ) {
         val item = getItem(position)
         holder.onBind(item)
-        val isApply = thunderViewModel.thunderApplyIdList.contains(item.lightId)
-        val isOpen = thunderViewModel.thunderOpenIdList.contains(item.lightId)
-        val context = holder.itemView.context
-        holder.itemView.setOnClickListener {
-            context.applyOpenChecker(context, item.lightId, isApply, isOpen)
+        holder.itemView.apply {
+            setOnClickListener {
+                val isApply = thunderViewModel.thunderApplyIdList.contains(item.lightId)
+                val isOpen = thunderViewModel.thunderOpenIdList.contains(item.lightId)
+                context.applyOpenChecker(context, item.lightId, isApply, isOpen)
+            }
         }
     }
 

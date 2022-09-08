@@ -43,6 +43,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         Timber.d("JWT 토큰 : ${PlayTogetherRepository.userToken}")
     }
 
+    override fun onResume() {
+        super.onResume()
+        initThunderChecker()
+    }
+
 
     private var prevSelectedItem: Int = 1
 
@@ -81,7 +86,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     prevSelectedItem = 1
                     supportFragmentManager.popBackStack()
                     changeFragmentNoBackStack(R.id.fragment_container_main, HomeFragment())
-                    initThunderChecker()
                     return@setOnItemSelectedListener true
                 }
 

@@ -29,7 +29,7 @@ class ThunderGoFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<F
     }
 
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel)
+        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel, viewLifecycleOwner)
         with(thunderListViewModel) {
             categoryGoList.observe(viewLifecycleOwner) {
                 listAdapter.submitList(it)

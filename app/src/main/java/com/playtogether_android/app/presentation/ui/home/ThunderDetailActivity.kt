@@ -40,18 +40,26 @@ class ThunderDetailActivity :
         super.onCreate(savedInstanceState)
         val thunderId = intent.getIntExtra("thunderId", -1)
         initData()
-        clickProfile()
-        clickSendMessage()
-        clickApply()
-        clickBackArrow()
+        initView()
+        clickItems(thunderId)
+    }
+
+    private fun initView() {
         initAdapter()
         observeOrganizer()
         observeRoomId()
         checkCategory()
+    }
+
+    private fun clickItems(thunderId: Int) {
         clickScrap()
         clickOption(thunderId)
         clickReport()
         clickThunderCancel(thunderId)
+        clickProfile()
+        clickSendMessage()
+        clickApply()
+        clickBackArrow()
     }
 
     private fun clickThunderCancel(thunderId: Int) {

@@ -29,7 +29,7 @@ class ThunderDoFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<F
     }
 
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel)
+        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel, viewLifecycleOwner)
         with(thunderListViewModel) {
             categoryDoList.observe(viewLifecycleOwner) {
                 listAdapter.submitList(it)

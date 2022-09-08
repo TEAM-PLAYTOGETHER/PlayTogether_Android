@@ -31,7 +31,7 @@ class ThunderEatFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<
 
     //먹/갈/할 같이 사용할 메서드
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel)
+        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel,viewLifecycleOwner)
 
         with(thunderListViewModel) {
             categoryEatList.observe(viewLifecycleOwner) { it ->
