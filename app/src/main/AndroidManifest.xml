@@ -76,8 +76,8 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"

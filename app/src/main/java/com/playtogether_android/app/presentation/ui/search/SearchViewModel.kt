@@ -20,27 +20,36 @@ class SearchViewModel @Inject constructor(
     val category = MutableLiveData<String?>(null)
     var isLastPage: Boolean = false
 
-    var pageSize = 2
-    var currentPage = 1
+    var pageSize = 10
+    var currentPage = 0
 
-    fun getSearchList(searchingWord: String, order : String) {
+    fun getSearchList(searchingWord: String, order: String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 var categoryTemp: String? = null
                 if (category.value != null) categoryTemp = category.value.toString()
-                Timber.d("Log for searching : $searchingWord, $categoryTemp, $currentPage, $pageSize")
+                if (order == FIRST) currentPage = 0
+                currentPage++
                 getSearchResultUseCase(searchingWord, categoryTemp, currentPage, pageSize)
             }
                 .onSuccess {
-                    if (it.lightData.isEmpty()) {
-                        isLastPage = true
-                        return@launch
+                    when (order) {
+                        FIRST -> {
+                            _searchList.value = it.lightData
+                            if (it.lightData.isEmpty()) {
+                                isLastPage = true
+                                return@launch
+                            }
+                        }
+                        MORE -> {
+                            if (it.lightData.isEmpty()) {
+                                isLastPage = true
+                                return@launch
+                            }
+                            _searchList.value =
+                                _searchList.value?.toMutableList()?.apply { addAll(it.lightData) }
+                        }
                     }
-                    when(order){
-                        FIRST -> _searchList.value = it.lightData
-                        MORE -> _searchList.value = _searchList.value?.toMutableList()?.apply { addAll(it.lightData) }
-                    }
-                    currentPage++
                     Timber.d("searchServer success")
                 }
                 .onFailure { error -> Timber.d("searchServer error : $error") }

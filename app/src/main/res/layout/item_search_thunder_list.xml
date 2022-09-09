@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{model.date}"
+            android:text="@{@string/search_date_place_time(model.date ?? @string/search_undecided, model.place ?? @string/search_undecided, model.time ?? @string/search_undecided)}"
             app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
             app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_title"
             tools:text="@string/thunder_item_day" />
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{@string/search_memberCnt + String.valueOf(model.lightMemberCnt)+'/'+String.valueOf(model.peopleCnt)}"
+            android:text="@{@string/search_memberCnt(model.scpCnt, model.peopleCnt!=0 ? String.valueOf(model.peopleCnt) : @string/search_undecided_memberCnt)}"
             app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
             app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_date"
             tools:text="@string/thunder_item_people" />
