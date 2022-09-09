@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.search
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySearchBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.search.SearchViewModel.Companion.DO
 import com.playtogether_android.app.presentation.ui.search.SearchViewModel.Companion.EAT
 import com.playtogether_android.app.presentation.ui.search.SearchViewModel.Companion.FIRST
@@ -20,9 +22,9 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_search) {
-    private val adapter: SearchListAdapter by lazy { SearchListAdapter() }
+    private val adapter: SearchListAdapter by lazy { SearchListAdapter { clickThunderItem(it) } }
     private val searchViewModel: SearchViewModel by viewModels()
-    private lateinit var searchingWord : String
+    private lateinit var searchingWord: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +39,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
     private fun initAdapter() {
         detectWhenScrollEnd()
-        binding.rvSearch.addItemDecoration(object : RecyclerView.ItemDecoration(){
+        binding.rvSearch.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
@@ -51,13 +53,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
         binding.rvSearch.adapter = adapter
     }
 
-    private fun detectWhenScrollEnd(){
+    private fun detectWhenScrollEnd() {
         binding.rvSearch.addOnScrollListener(
-            object : RecyclerView.OnScrollListener(){
+            object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    if(!binding.rvSearch.canScrollVertically(1)){
-                        if(searchViewModel.isLastPage) return
+                    if (!binding.rvSearch.canScrollVertically(1)) {
+                        if (searchViewModel.isLastPage) return
                         searchViewModel.getSearchList(searchingWord, MORE)
                         Timber.d("Log for recyclerview bottom end")
                     }
@@ -97,7 +99,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     }
 
     private fun clickSort(category: String?): Boolean {
-        when(category){
+        when (category) {
             searchViewModel.category.value -> {
                 searchViewModel.category.value = null
                 return false
@@ -108,9 +110,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
             }
             else -> {
                 searchViewModel.category.value = category
-                binding.tvSearchEat.isSelected=false
-                binding.tvSearchDo.isSelected=false
-                binding.tvSearchGo.isSelected=false
+                binding.tvSearchEat.isSelected = false
+                binding.tvSearchDo.isSelected = false
+                binding.tvSearchGo.isSelected = false
                 return true
             }
         }
@@ -119,7 +121,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     private fun observeFiltering() {
         searchViewModel.category.observe(this) {
             searchViewModel.getSearchList(binding.etSearch.text.toString(), FIRST)
-            searchViewModel.isLastPage=false
+            searchViewModel.isLastPage = false
         }
     }
 
@@ -139,11 +141,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     }
 
     private fun searching() {
-        Timber.d("Log for search")
         searchingWord = binding.etSearch.text.toString()
         if (!checkSearchingWordIsValid(searchingWord)) return
         searchViewModel.getSearchList(searchingWord, FIRST)
-        searchViewModel.isLastPage=false
+        searchViewModel.isLastPage = false
     }
 
     private fun checkSearchingWordIsValid(searchingWord: String): Boolean {
@@ -154,7 +155,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
         return true
     }
 
-    private fun clickBackArrow(){
-        binding.ivSearchBack.setOnClickListener{ finish() }
+    private fun clickBackArrow() {
+        binding.ivSearchBack.setOnClickListener { finish() }
+    }
+
+    private fun clickThunderItem(thunderId: Int) {
+        val intent = Intent(this, ThunderDetailActivity::class.java)
+        intent.putExtra("thunderId", thunderId)
+        startActivity(intent)
     }
 }
