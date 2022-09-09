@@ -166,7 +166,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_search_line"
             tools:itemCount="3"
-            tools:listitem="@layout/item_thunder_list" />
+            tools:listitem="@layout/item_search_thunder_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
