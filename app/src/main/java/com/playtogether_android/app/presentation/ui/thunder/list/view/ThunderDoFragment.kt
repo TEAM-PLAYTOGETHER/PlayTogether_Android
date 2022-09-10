@@ -9,13 +9,17 @@ import com.playtogether_android.app.databinding.FragmentThunderDoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.SpaceItemDecoration
 
 
-class ThunderDoFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<FragmentThunderDoBinding>(R.layout.fragment_thunder_do) {
+class ThunderDoFragment(val thunderViewModel: ThunderViewModel) :
+    BaseFragment<FragmentThunderDoBinding>(R.layout.fragment_thunder_do) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
-//    private val thunderViewModel: ThunderViewModel by activityViewModels()
+
+    //    private val thunderViewModel: ThunderViewModel by activityViewModels()
+    private val thunderDetailView: ThunderDetailViewModel by activityViewModels()
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +33,7 @@ class ThunderDoFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<F
     }
 
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel, viewLifecycleOwner)
+        listAdapter = ThunderCategoryListItemAdapter(thunderDetailView, viewLifecycleOwner)
         with(thunderListViewModel) {
             categoryDoList.observe(viewLifecycleOwner) {
                 listAdapter.submitList(it)

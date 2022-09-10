@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.ListAdapterComparator
 import com.playtogether_android.app.util.applyOpenChecker
@@ -18,8 +19,8 @@ import com.playtogether_android.domain.model.light.CategoryData
 import timber.log.Timber
 
 class ThunderCategoryListItemAdapter(
-    val thunderViewModel: ThunderViewModel,
-    viewLifecycleOwner: LifecycleOwner
+    val detailViewModel: ThunderDetailViewModel,
+    val viewLifecycleOwner: LifecycleOwner
 ) :
     ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
@@ -42,12 +43,6 @@ class ThunderCategoryListItemAdapter(
                             data.peopleCnt.toString()
                         )
                     )
-//                itemView.setOnClickListener {
-//                    val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
-//                    intent.putExtra("thunderId", data.lightId)
-//                    intent.putExtra("category", "default")
-//                    itemView.context.startActivity(intent)
-//                }
             }
         }
     }
@@ -78,9 +73,17 @@ class ThunderCategoryListItemAdapter(
         holder.onBind(item)
         holder.itemView.apply {
             setOnClickListener {
-                val isApply = thunderViewModel.thunderApplyIdList.contains(item.lightId)
-                val isOpen = thunderViewModel.thunderOpenIdList.contains(item.lightId)
-                context.applyOpenChecker(context, item.lightId, isApply, isOpen)
+                with(detailViewModel) {
+                    getThunderInfo(item.lightId)
+                    isThunderType.observe(viewLifecycleOwner) {
+                        context.applyOpenChecker(
+                            context,
+                            item.lightId,
+                            it.isEntered,
+                            it.isOrganizer
+                        )
+                    }
+                }
             }
         }
     }

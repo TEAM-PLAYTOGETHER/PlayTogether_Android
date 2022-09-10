@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @HiltViewModel
 class ThunderDetailViewModel @Inject constructor(
@@ -47,15 +48,22 @@ class ThunderDetailViewModel @Inject constructor(
     private val _isLike = MutableLiveData<Boolean>()
     val isLike: LiveData<Boolean> = _isLike
 
-    private val _thunderInfo = MutableLiveData<GetThunderExistCheck>()
-    val thunderInfo: LiveData<GetThunderExistCheck> = _thunderInfo
+    private var _isEntered = false
+    val isEntered get() = _isEntered
+
+    private var _isOrganizer = false
+    val isOrganizer get() = _isOrganizer
+
+    private val _isThunderType = MutableLiveData<GetThunderExistCheck>()
+    val isThunderType: LiveData<GetThunderExistCheck> = _isThunderType
+
 
     fun getThunderInfo(thunderId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
                 getThunderExistCheckerUseCase(thunderId)
             }.onSuccess {
-                _thunderInfo.value = GetThunderExistCheck(it.isEntered, it.isOrganizer)
+                _isThunderType.value = it
                 Timber.e("thunder detail info success")
             }.onFailure {
                 Timber.e("thunder detail info error : $it")

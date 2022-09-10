@@ -9,13 +9,17 @@ import com.playtogether_android.app.databinding.FragmentThunderGoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.SpaceItemDecoration
 
-class ThunderGoFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<FragmentThunderGoBinding>(R.layout.fragment_thunder_go) {
+class ThunderGoFragment(val thunderViewModel: ThunderViewModel) :
+    BaseFragment<FragmentThunderGoBinding>(R.layout.fragment_thunder_go) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
-//    private val thunderViewModel: ThunderViewModel by activityViewModels()
+
+    //    private val thunderViewModel: ThunderViewModel by activityViewModels()
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
+    private val thunderDetailView: ThunderDetailViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -29,7 +33,7 @@ class ThunderGoFragment(val thunderViewModel: ThunderViewModel) : BaseFragment<F
     }
 
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter(thunderViewModel, viewLifecycleOwner)
+        listAdapter = ThunderCategoryListItemAdapter(thunderDetailView, viewLifecycleOwner)
         with(thunderListViewModel) {
             categoryGoList.observe(viewLifecycleOwner) {
                 listAdapter.submitList(it)
