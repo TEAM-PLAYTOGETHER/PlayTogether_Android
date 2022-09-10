@@ -28,6 +28,7 @@ object PlayTogetherRepository {
     private const val UT_KEY = "UT_KEY"  //유저토큰 키
     private const val UT_REFRESH_KEY = "UT_REFRESH_KEY" // 유저 리프레시 키
     private const val USER_UUID_KEY = "USER_UUID_KEY" //유저아이디 키
+    private const val USER_LOGIN_STATUS = "USER_LOGIN_STATUS"
 
     //푸시알림
     private const val PUSH_ALARM_KEY = "PUSH_ALARM_KEY" //푸시알림 온오프
@@ -83,6 +84,10 @@ object PlayTogetherRepository {
     var userUuid: String
         get() = authPreferences.getString(USER_UUID_KEY, "") ?: ""
         set(value) = authPreferences.edit { it.putString(USER_UUID_KEY, value) }
+
+    var userLogin: Boolean
+        get() = authPreferences.getBoolean(USER_LOGIN_STATUS, false)
+        set(value) = authPreferences.edit { it.putBoolean(USER_LOGIN_STATUS, value) }
 
     //구글 유저 토큰
     var googleUserToken: String

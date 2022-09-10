@@ -76,7 +76,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 moveLoginActivity()
             }
             //todo 카카오 or 구글 로그 아웃한 경우
-            else if (kakaoUserlogOut || googleUserlogOut) {
+            else if (!userLogin) {
                 moveLoginActivity()
             }
             //todo 카카오 자동 로그인
