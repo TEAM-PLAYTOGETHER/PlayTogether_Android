@@ -75,12 +75,14 @@ class ThunderCategoryListItemAdapter(
             setOnClickListener {
                 with(detailViewModel) {
                     getThunderInfo(item.lightId)
-                    isThunderType.observe(viewLifecycleOwner) {
+                    val type = isThunderType.value
+                    Timber.e("type : $type")
+                    if (type != null) {
                         context.applyOpenChecker(
                             context,
                             item.lightId,
-                            it.isEntered,
-                            it.isOrganizer
+                            type.isEntered,
+                            type.isOrganizer
                         )
                     }
                 }
