@@ -65,6 +65,9 @@ class ThunderDetailViewModel @Inject constructor(
             }.onSuccess {
                 _isThunderType.value = it
                 Timber.e("thunder detail info success")
+                Timber.e("thunder detail apply ${it.isEntered}")
+                Timber.e("thunder detail organ ${it.isOrganizer}")
+
             }.onFailure {
                 Timber.e("thunder detail info error : $it")
             }

@@ -16,6 +16,7 @@ import com.playtogether_android.app.util.ListAdapterComparator
 import com.playtogether_android.app.util.applyOpenChecker
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
+import com.playtogether_android.domain.model.thunder.GetThunderExistCheck
 import timber.log.Timber
 
 class ThunderCategoryListItemAdapter(
@@ -71,21 +72,11 @@ class ThunderCategoryListItemAdapter(
     ) {
         val item = getItem(position)
         holder.onBind(item)
-        holder.itemView.apply {
-            setOnClickListener {
-                with(detailViewModel) {
-                    getThunderInfo(item.lightId)
-                    val type = isThunderType.value
-                    Timber.e("type : $type")
-                    if (type != null) {
-                        context.applyOpenChecker(
-                            context,
-                            item.lightId,
-                            type.isEntered,
-                            type.isOrganizer
-                        )
-                    }
-                }
+        val itemView = holder.itemView
+        itemView.setOnClickListener {
+            Intent(itemView.context, ThunderDetailActivity::class.java).apply {
+                putExtra("thunderId", item.lightId)
+                itemView.context.startActivity(this)
             }
         }
     }
