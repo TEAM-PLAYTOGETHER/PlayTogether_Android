@@ -39,19 +39,27 @@ class ThunderDetailActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val thunderId = intent.getIntExtra("thunderId", -1)
-        initData()
-        clickProfile()
-        clickSendMessage()
-        clickApply()
-        clickBackArrow()
+        initData(thunderId)
+        initView()
+        clickItems(thunderId)
+    }
+
+    private fun initView() {
         initAdapter()
         observeOrganizer()
         observeRoomId()
         checkCategory()
+    }
+
+    private fun clickItems(thunderId: Int) {
         clickScrap()
         clickOption(thunderId)
         clickReport()
         clickThunderCancel(thunderId)
+        clickProfile()
+        clickSendMessage()
+        clickApply()
+        clickBackArrow()
     }
 
     private fun clickThunderCancel(thunderId: Int) {
@@ -206,12 +214,6 @@ class ThunderDetailActivity :
             binding.clDetailBoundary,
             binding.clThunderApplicantContent
         )
-        val likeCategory = mutableListOf(
-            binding.ivThunderdetailLike,
-            binding.clThunderdetailMessage,
-            binding.clThunderdetailApplyBtn,
-            binding.tvThunderdetailReport
-        )
         val defaultCategory = mutableListOf(
             binding.clThunderdetailMessage,
             binding.ivThunderdetailLike,
@@ -219,18 +221,13 @@ class ThunderDetailActivity :
             binding.clThunderdetailApplyBtn
         )
 
-        when (intent.getStringExtra("category")) {
-            APPLY -> {
-                itemVisibility(applyCategory)
-            }
-            LIKE -> {
-                itemVisibility(likeCategory)
-            }
-            OPEN -> {
+        thunderDetailViewModel.isThunderType.observe(this) {
+            if (it.isOrganizer) {
                 binding.ivThunderdetailIcon.isClickable = false
                 itemVisibility(openCategory)
-            }
-            else -> {
+            } else if (it.isEntered) {
+                itemVisibility(applyCategory)
+            } else {
                 itemVisibility(defaultCategory)
             }
         }
@@ -275,15 +272,15 @@ class ThunderDetailActivity :
         })
     }
 
-    private fun initData() {
+    private fun initData(thunderId: Int) {
         binding.lifecycleOwner = this
         binding.viewModel = thunderDetailViewModel
-        val thunderId = intent.getIntExtra("thunderId", -1)
 
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)
             thunderDetailOrganizer(thunderId)
+            getThunderInfo(thunderId)
         }
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it

@@ -26,6 +26,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -167,7 +168,7 @@ class CreateThunderActivity :
         createThunderViewModel.getThunderCreateData.observe(this) {
             if (it.success) {
                 dialog.dismiss()
-                val intent = Intent(this, OpenThunderDetailActivity::class.java)
+                val intent = Intent(this, ThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", it.lightId)
                 startActivity(intent)
                 finish()

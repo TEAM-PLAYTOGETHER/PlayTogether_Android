@@ -94,7 +94,7 @@ class SignViewModel @Inject constructor(
                     googleUserToken = it.accessToken
                     userRefreshToken = it.refreshToken
                     userToken = googleUserToken
-                    googleUserlogOut = false
+                    userLogin = true
                 }
                 _signup = it.isSignup
                 _isLogin.value = true
@@ -117,7 +117,7 @@ class SignViewModel @Inject constructor(
                     kakaoUserToken = it.accessToken
                     userToken = kakaoUserToken
                     userRefreshToken = it.refreshToken
-                    kakaoUserlogOut = false
+                    userLogin = true
                 }
                 Timber.e("kakao login access : ${it.accessToken}")
                 Timber.e("kakao login refresh : ${it.refreshToken}")

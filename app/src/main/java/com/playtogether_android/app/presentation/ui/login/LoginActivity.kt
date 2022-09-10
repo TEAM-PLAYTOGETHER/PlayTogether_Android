@@ -22,13 +22,11 @@ import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
-import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
-import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,17 +44,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         var keyHash = Utility.getKeyHash(this)
         Timber.e("kkkkkkkkkk: $keyHash")
         super.onCreate(savedInstanceState)
-        initData()
         initView()
     }
 
     private fun initView() {
         googleLoginCallback()
         onClickListener()
-    }
-
-    private fun initData() {
-        homeViewModel.getCrewList()
     }
 
     private fun googleLoginCallback() {
@@ -134,9 +127,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun signupChecker() {
-        val isListEmpty = homeViewModel.isCrewListEmpty
+        homeViewModel.getCrewList()
+        homeViewModel.crewList.observe(this) {
+            observeCrewList(it.size)
+        }
+    }
+
+    private fun observeCrewList(size: Int) {
         val crewId = PlayTogetherRepository.crewId
-        Timber.e("list empty : $isListEmpty")
         if (signViewModel.signup) {
             //TODO: 회원가입했고 현재 등록된 crewId가 있음
             if (crewId != -1) {
@@ -144,13 +142,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 nextActivity(intent)
             }
             // TODO: 회원이지만 재설치를 해서 preference가 비어있음 -> 가입한 동아리 선택뷰로 이동
-            else if (crewId == -1 && !isListEmpty) {
+            else if (crewId == -1 && size > 0) {
                 val intent =
                     Intent(this@LoginActivity, OnboardingReDownLoadActivity::class.java)
                 nextActivity(intent)
             }
             // TODO: 회원이지만 가입한 동아리가 없는 경우
-            else if (crewId == -1 && isListEmpty) {
+            else if (crewId == -1 && size == 0) {
                 val intent = Intent(this@LoginActivity, SelectOnboardingActivity::class.java)
                 nextActivity(intent)
             }
