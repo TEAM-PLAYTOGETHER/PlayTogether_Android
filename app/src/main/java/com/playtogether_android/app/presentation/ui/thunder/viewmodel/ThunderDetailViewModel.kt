@@ -1,10 +1,8 @@
 package com.playtogether_android.app.presentation.ui.thunder.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.playtogether_android.domain.model.thunder.GetThunderExistCheck
 import com.playtogether_android.domain.model.thunder.Member
 import com.playtogether_android.domain.model.thunder.Organizer
 import com.playtogether_android.domain.model.thunder.ThunderDetailData
@@ -24,7 +22,8 @@ class ThunderDetailViewModel @Inject constructor(
     private val thunderDeleteUseCase: PostThunderDeleteUseCase,
     private val getRoomIdUseCase: GetRoomIdUseCase,
     private val postThunderScrapUseCase: PostThunderScrapUseCase,
-    private val getThunderScrapUseCase: GetThunderScrapUseCase
+    private val getThunderScrapUseCase: GetThunderScrapUseCase,
+    private val getThunderExistCheckerUseCase: GetThunderExistCheckerUseCase
 ) : ViewModel() {
 
     private val _isConfirm = MutableLiveData<Boolean>()
@@ -47,6 +46,22 @@ class ThunderDetailViewModel @Inject constructor(
 
     private val _isLike = MutableLiveData<Boolean>()
     val isLike: LiveData<Boolean> = _isLike
+
+    private val _thunderInfo = MutableLiveData<GetThunderExistCheck>()
+    val thunderInfo: LiveData<GetThunderExistCheck> = _thunderInfo
+
+    fun getThunderInfo(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getThunderExistCheckerUseCase(thunderId)
+            }.onSuccess {
+                _thunderInfo.value = GetThunderExistCheck(it.isEntered, it.isOrganizer)
+                Timber.e("thunder detail info success")
+            }.onFailure {
+                Timber.e("thunder detail info error : $it")
+            }
+        }
+    }
 
     fun postScrap(thunderId: Int) {
         viewModelScope.launch {
