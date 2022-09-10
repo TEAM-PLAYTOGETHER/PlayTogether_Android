@@ -223,9 +223,9 @@ class ThunderDetailActivity :
 
         thunderDetailViewModel.isThunderType.observe(this) {
             if (it.isOrganizer) {
+                binding.ivThunderdetailIcon.isClickable = false
                 itemVisibility(openCategory)
             } else if (it.isEntered) {
-                binding.ivThunderdetailIcon.isClickable = false
                 itemVisibility(applyCategory)
             } else {
                 itemVisibility(defaultCategory)
