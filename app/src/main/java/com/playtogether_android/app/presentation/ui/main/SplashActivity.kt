@@ -76,20 +76,22 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 moveLoginActivity()
             }
             //todo 카카오 or 구글 로그 아웃한 경우
-            else if (kakaoUserlogOut || googleUserlogOut) {
+            else if (!userLogin) {
                 moveLoginActivity()
             }
             //todo 카카오 자동 로그인
             else if (kakaoUserToken == userToken) {
                 signViewModel.tokenChecker(userRefreshToken)
                 accessTokenChecker()
-                Timber.e("splash auto kakao login : 카카오 자동 로그인")
+                Timber.e("auto kakao login : 카카오 자동 로그인")
+                Timber.e("auto login : $userToken")
             }
             //todo 구글 자동 로그인
             else if (googleAccessToken == userToken) {
                 signViewModel.tokenChecker(userRefreshToken)
                 accessTokenChecker()
-                Timber.e("splash auto google login : 구글 자동 로그인")
+                Timber.e("auto google login : 구글 자동 로그인")
+                Timber.e("auto login : $userToken")
             }
             // todo 아몰랑 예외
             else {
@@ -99,22 +101,30 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun accessTokenChecker() {
-        var joinCrewListChecker = 0
-        homeViewModel.crewList.observe(this) {
-            joinCrewListChecker = it.size
-        }
+        homeViewModel.getCrewList()
+        val isEmpty = homeViewModel.isCrewListEmpty
 
+        Timber.e("isEmpty : $isEmpty")
         signViewModel.statusCode.observe(this@SplashActivity) { status ->
             Timber.e("status : $status")
             when (status) {
                 ACCESS_NOW, REFRESH_SUCCESS -> {
-                    if (PlayTogetherRepository.crewId == -1)
+                    if (isEmpty && PlayTogetherRepository.crewId == -1)
+                        moveSelectCrew()
+                    else if (PlayTogetherRepository.crewId == -1 && isEmpty)
                         moveJoinOrCreateCrew()
                     else
                         moveMain()
                 }
                 else -> moveLoginActivity()
             }
+        }
+    }
+
+    private fun moveSelectCrew() {
+        Intent(this, OnboardingReDownLoadActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startNextActivityWithHandling(this)
         }
     }
 

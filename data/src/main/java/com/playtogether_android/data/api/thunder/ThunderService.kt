@@ -62,7 +62,12 @@ interface ThunderService {
     @PUT("light/enter/{lightId}")
     suspend fun putThunder(
         @Path("lightId") lightId: Int,
-        @Part image : MultipartBody.Part?,
-        @PartMap body : HashMap<String,RequestBody>
-    ) : ResThunderChangeData
+        @Part image: MultipartBody.Part?,
+        @PartMap body: HashMap<String, RequestBody>
+    ): ResThunderChangeData
+
+    @GET("light/exist/{lightId}")
+    suspend fun getThunderExistChecker(
+        @Path("lightId") lightId: Int,
+    ):ResThunderExistCheckData
 }

@@ -33,4 +33,7 @@ interface ThunderRepository {
 
     //번개 신고
     suspend fun postReport(thunderId: Int)
+
+    //번개 신청 및 오픈 여부 확인
+    suspend fun getThunderExistCheck(thunderId: Int): GetThunderExistCheck
 }
