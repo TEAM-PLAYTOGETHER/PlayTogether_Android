@@ -8,7 +8,6 @@
         <variable
             name="createThunderViewModel"
             type="com.playtogether_android.app.presentation.ui.createThunder.CreateThunderViewModel" />
-        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -209,8 +208,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_when_date"
-                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_when_date"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_when_date">
 
                         <TextView
                             android:id="@+id/tv_createthunder_date_undecided"
@@ -234,7 +233,7 @@
                             android:layout_marginTop="9dp"
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="9dp"
-                            android:src="@{View.selected ? @drawable/ic_icn_check_active : @drawable/ic_icn_check_inactive}"
+                            android:src="@drawable/ic_icn_check_inactive"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_date_undecided"
                             app:layout_constraintStart_toStartOf="parent"
@@ -279,8 +278,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_when_time"
-                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_when_time"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_when_time">
 
                         <TextView
                             android:id="@+id/tv_createthunder_time_undecided"
@@ -304,11 +303,11 @@
                             android:layout_marginTop="9dp"
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="9dp"
+                            android:src="@drawable/ic_icn_check_inactive"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_time_undecided"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_icn_check_inactive" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -349,8 +348,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_where"
-                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_where"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_where">
 
                         <TextView
                             android:id="@+id/tv_createthunder_place_undecided"
@@ -374,11 +373,11 @@
                             android:layout_marginTop="9dp"
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="9dp"
+                            android:src="@drawable/ic_icn_check_inactive"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_place_undecided"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_icn_check_inactive" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -419,9 +418,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_howmany"
                         app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_howmany"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_howmany">
 
                         <TextView
                             android:id="@+id/tv_createthunder_infinite"
@@ -445,11 +444,11 @@
                             android:layout_marginTop="9dp"
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="9dp"
+                            android:src="@drawable/ic_icn_check_inactive"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_infinite"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_icn_check_inactive" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
