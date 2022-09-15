@@ -119,23 +119,28 @@ class SearchSubwayActivity :
                         subwayLine = subwayLine.replace("용인경전철", "에버라인")
                     }
 
-
                     //칩버튼 커스텀
                     if (binding.chipSubwayOnboarding.childCount < 2) {
                         binding.chipSubwayOnboarding.addView(Chip(this@SearchSubwayActivity).apply {
-                            val string = "$subwayName $subwayLine"
+                        val string = "$subwayName $subwayLine"
 
-                            text = string
-                            setTextColor(getColorStateList(R.color.main_green))
-                            isCloseIconVisible = true
-                            setCloseIconResource(R.drawable.icn_exit)
-                            setCloseIconTintResource(R.color.gray_999999)
-                            chipBackgroundColor = getColorStateList(R.color.black)
-                            setOnCloseIconClickListener {
-                                binding.chipSubwayOnboarding.removeView(this)
-                                activeBtn()
+                        text = string
+                        setTextColor(getColorStateList(R.color.main_green))
+                        isCloseIconVisible = true
+                        setCloseIconResource(R.drawable.icn_exit)
+                        setCloseIconTintResource(R.color.gray_999999)
+                        chipBackgroundColor = getColorStateList(R.color.black)
+                        setOnCloseIconClickListener {
+                            binding.chipSubwayOnboarding.removeView(this)
+                            activeBtn()
+                        }
+                    })
+                        if (binding.chipSubwayOnboarding.childCount > 1) {
+                            if ((binding.chipSubwayOnboarding.getChildAt(0) as Chip).text.toString() == (binding.chipSubwayOnboarding.getChildAt(1) as Chip).text.toString()) {
+                                shortToast("이미 추가한 지하철역입니다")
+                               binding.chipSubwayOnboarding.removeView((binding.chipSubwayOnboarding.getChildAt(1) as Chip))
                             }
-                        })
+                        }
                     } else {
                         shortToast("최대 2개까지 추가할 수 있어요!")
                     }
@@ -143,7 +148,6 @@ class SearchSubwayActivity :
                 }
             })
     }
-
 
     private fun addListener() {
         for (i: Int in 1..binding.chipSubwayOnboarding.childCount) {

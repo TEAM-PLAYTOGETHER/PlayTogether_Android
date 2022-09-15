@@ -64,7 +64,7 @@ class ThunderAppliedActivity :
             finish()
         }
         binding.tvThunderdetailDescription.setOnClickListener {
-            val intent = Intent(this, ApplyThunderDetailActivity::class.java)
+            val intent = Intent(this, ThunderDetailActivity::class.java)
             intent.putExtra("thunderId", getThunderId())
             startActivity(intent)
         }

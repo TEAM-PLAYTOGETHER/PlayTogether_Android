@@ -15,7 +15,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -26,6 +28,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -139,6 +142,9 @@ class CreateThunderActivity :
     private fun setClickListener() {
         imageSelected()
         clickInfinite()
+        clickUndecidedDate()
+        clickUndecidedTime()
+        clickUndecidedPlace()
 //        clickComplete()
         clickCompleteTest()
         imageSelected()
@@ -167,7 +173,7 @@ class CreateThunderActivity :
         createThunderViewModel.getThunderCreateData.observe(this) {
             if (it.success) {
                 dialog.dismiss()
-                val intent = Intent(this, OpenThunderDetailActivity::class.java)
+                val intent = Intent(this, ThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", it.lightId)
                 startActivity(intent)
                 finish()
@@ -290,6 +296,41 @@ class CreateThunderActivity :
                 )
                 infiniteChecked = false
             }
+        }
+    }
+
+    private fun clickUndecided(textView : TextView, imageView : ImageView, str : Int){
+        if(!imageView.isSelected){
+            imageView.setImageResource(R.drawable.ic_icn_check_active)
+            textView.setText(str)
+            inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+            textView.isFocusable=false
+        }
+        else{
+            imageView.setImageResource(R.drawable.ic_icn_check_inactive)
+            textView.text=null
+            textView.isFocusableInTouchMode=true
+            textView.requestFocus()
+            inputMethodManager.showSoftInput(
+                textView,
+                InputMethodManager.SHOW_IMPLICIT
+            )
+        }
+    }
+
+    private fun clickUndecidedDate(){
+        binding.ivCreatethunderDateCheck.setOnClickListener{
+            clickUndecided(binding.tvCreatethunderDate, binding.ivCreatethunderDateCheck, R.string.createthunder_date_undecided)
+        }
+    }
+    private fun clickUndecidedTime(){
+        binding.ivCreatethunderTimeCheck.setOnClickListener{
+            clickUndecided(binding.tvCreatethunderTime, binding.ivCreatethunderTimeCheck, R.string.createthunder_time_undecided)
+        }
+    }
+    private fun clickUndecidedPlace(){
+        binding.ivCreatethunderPlaceCheck.setOnClickListener{
+            clickUndecided(binding.etCreatethunderPlace, binding.ivCreatethunderPlaceCheck, R.string.createthunder_place_undecided)
         }
     }
 

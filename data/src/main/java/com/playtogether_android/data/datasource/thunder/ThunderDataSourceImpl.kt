@@ -45,4 +45,8 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
         service.postReport(thunderId)
     }
 
+    override suspend fun getThunderExistChecker(thunderId: Int): ResThunderExistCheckData {
+        return service.getThunderExistChecker(thunderId)
+    }
+
 }

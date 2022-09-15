@@ -8,7 +8,9 @@ import androidx.core.app.NotificationManagerCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMyPageSettingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.login.LoginActivity
 import com.playtogether_android.app.presentation.ui.main.WebViewActivity
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 
 class MyPageSettingActivity :
     BaseActivity<ActivityMyPageSettingBinding>(R.layout.activity_my_page_setting) {
@@ -53,6 +55,16 @@ class MyPageSettingActivity :
         //알림 설정
         binding.tvSettingAlarm.setOnClickListener {
             checkAlarm()
+        }
+
+        //로그아웃
+        binding.tvSettingLogout.setOnClickListener {
+            PlayTogetherRepository.userLogin = false
+            Intent(this, LoginActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(this)
+            }
         }
     }
 
