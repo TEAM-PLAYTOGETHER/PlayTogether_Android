@@ -79,10 +79,11 @@
                 android:id="@+id/iv_send_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/gray_gray03"
+                android:background="@{viewmodel.inputMessage.empty ? @color/gray_gray03 : @color/main_green}"
+                android:clickable="@{viewmodel.inputMessage.empty ? false : true}"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="10dp"
-                android:src="@drawable/ic_icn_message"
+                android:src="@{viewmodel.inputMessage.empty ? @drawable/ic_icn_message : @drawable/ic_icn_message_black}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
