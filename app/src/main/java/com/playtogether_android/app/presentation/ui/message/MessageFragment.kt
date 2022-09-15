@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMessageBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.message.data.response.NewMessageReceived
 import com.playtogether_android.app.presentation.ui.message.viewmodel.MessageViewModel
 import com.playtogether_android.domain.model.message.MessageData
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +29,35 @@ class MessageFragment :
         initAdapter()
         initList()
         refreshView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMessageRoomList()
+        messageViewModel.initSocket(requireContext())
+        messageViewModel.resConnect()
+        messageViewModel.resNewMessageToUser { getSocketChat(it) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        messageViewModel.disconnect()
+    }
+
+    private fun getSocketChat(data: NewMessageReceived.Data.Message) {
+        activity!!.runOnUiThread{
+            val date = changeDateFormat(data.createdAt)
+            data.createdAt=date
+            messageViewModel.updateRoomList(data)
+        }
+    }
+
+    private fun changeDateFormat(text: String): String {
+        var date = text.slice(IntRange(0, 9))
+        date = date.replace("-", ".")
+        val time = text.slice(IntRange(11, 15))
+        val dateTime = date + "  " + time
+        return dateTime
     }
 
     private fun getMessageRoomList() {
