@@ -202,6 +202,44 @@
                         app:layout_constraintStart_toStartOf="@+id/tv_createthunder_when_date"
                         app:layout_constraintTop_toBottomOf="@+id/tv_createthunder_when_date" />
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_date_constraint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_when_date"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_when_date">
+
+                        <TextView
+                            android:id="@+id/tv_createthunder_date_undecided"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:text="@string/createthunder_date_undecided"
+                            android:textColor="@color/gray_gray01"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_createthunder_date_check"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_createthunder_date_check" />
+
+                        <ImageView
+                            android:id="@+id/iv_createthunder_date_check"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="9dp"
+                            android:src="@drawable/ic_icn_check_inactive"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_date_undecided"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <TextView
                         android:id="@+id/tv_createthunder_when_time"
                         android:layout_width="wrap_content"
@@ -234,6 +272,44 @@
                         app:layout_constraintStart_toStartOf="@+id/tv_createthunder_when_time"
                         app:layout_constraintTop_toBottomOf="@+id/tv_createthunder_when_time" />
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_time_constraint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_when_time"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_when_time">
+
+                        <TextView
+                            android:id="@+id/tv_createthunder_time_undecided"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:text="@string/createthunder_time_undecided"
+                            android:textColor="@color/gray_gray01"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_createthunder_time_check"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_createthunder_time_check" />
+
+                        <ImageView
+                            android:id="@+id/iv_createthunder_time_check"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="9dp"
+                            android:src="@drawable/ic_icn_check_inactive"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_time_undecided"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <TextView
                         android:id="@+id/tv_createthunder_where"
                         android:layout_width="wrap_content"
@@ -265,6 +341,44 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/tv_createthunder_where"
                         app:layout_constraintTop_toBottomOf="@+id/tv_createthunder_where" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_place_constraint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_where"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_where">
+
+                        <TextView
+                            android:id="@+id/tv_createthunder_place_undecided"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:text="@string/createthunder_place_undecided"
+                            android:textColor="@color/gray_gray01"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_createthunder_place_check"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_createthunder_place_check" />
+
+                        <ImageView
+                            android:id="@+id/iv_createthunder_place_check"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="9dp"
+                            android:src="@drawable/ic_icn_check_inactive"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_place_undecided"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/tv_createthunder_howmany"
@@ -304,9 +418,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="4dp"
-                        app:layout_constraintBottom_toTopOf="@+id/et_createthunder_people_number"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        app:layout_constraintBottom_toBottomOf="@id/tv_createthunder_howmany"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_createthunder_howmany">
 
                         <TextView
                             android:id="@+id/tv_createthunder_infinite"
@@ -330,11 +444,11 @@
                             android:layout_marginTop="9dp"
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="9dp"
+                            android:src="@drawable/ic_icn_check_inactive"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/tv_createthunder_infinite"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_icn_check_inactive" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
