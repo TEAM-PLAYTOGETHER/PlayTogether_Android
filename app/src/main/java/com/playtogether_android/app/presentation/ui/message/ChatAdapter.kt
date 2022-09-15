@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemMyChatBinding
 import com.playtogether_android.app.databinding.ItemOtherChatBinding
 import com.playtogether_android.domain.model.message.ChatData
 
-class ChatAdapter : RecyclerView.Adapter<ChatViewHolder<*>>() {
-
-    val chatList = mutableListOf<ChatData>()
+class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
 
     class MyChatViewHolder(private val binding: ItemMyChatBinding) :
         ChatViewHolder<ChatData>(binding.root) {
@@ -41,7 +38,7 @@ class ChatAdapter : RecyclerView.Adapter<ChatViewHolder<*>>() {
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder<*>, position: Int) {
-        val item = chatList[position]
+        val item = getItem(position)
         when (holder) {
             is MyChatViewHolder -> holder.bind(item)
             is OtherChatViewHolder -> holder.bind(item)
@@ -49,15 +46,24 @@ class ChatAdapter : RecyclerView.Adapter<ChatViewHolder<*>>() {
         }
     }
 
-    override fun getItemCount() = chatList.size
+    class ChatComparator() : DiffUtil.ItemCallback<ChatData>() {
+        override fun areItemsTheSame(oldItem: ChatData, newItem: ChatData): Boolean {
+            return oldItem === newItem
+        }
 
-    override fun getItemViewType(position: Int): Int {
-        return chatList[position].getViewType()
+        override fun areContentsTheSame(oldItem: ChatData, newItem: ChatData): Boolean {
+            return oldItem.messageId == newItem.messageId
+        }
     }
 
-    fun addChat(chat: ChatData) {
+
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position).getViewType()
+    }
+
+    /*fun addChat(chat: ChatData) {
         Log.d("asdf", "addChat 진입 ${chat.content}")
         chatList.add(chat)
         notifyItemInserted(chatList.size)
-    }
+    }*/
 }
