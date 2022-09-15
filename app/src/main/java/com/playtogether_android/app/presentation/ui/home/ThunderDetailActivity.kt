@@ -1,24 +1,30 @@
 package com.playtogether_android.app.presentation.ui.home
 
+import PhotoDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import android.widget.TextView
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderDetailBinding
+import com.playtogether_android.app.databinding.DialogCheckBinding
+import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
-import com.playtogether_android.app.presentation.ui.thunder.adapter.ThunderTabListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.app.util.showCustomPopUp
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderDetailActivity :
@@ -32,15 +38,155 @@ class ThunderDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initData()
-        clickProfile()
-        clickSendMessage()
-        clickApply()
-        clickBackArrow()
+        val thunderId = intent.getIntExtra("thunderId", -1)
+        initData(thunderId)
+        initView()
+        clickItems(thunderId)
+    }
+
+    private fun initView() {
         initAdapter()
         observeOrganizer()
         observeRoomId()
         checkCategory()
+    }
+
+    private fun clickItems(thunderId: Int) {
+        clickScrap()
+        clickOption(thunderId)
+        clickReport()
+        clickThunderCancel(thunderId)
+        clickProfile()
+        clickSendMessage()
+        clickApply()
+        clickBackArrow()
+    }
+
+    private fun clickThunderCancel(thunderId: Int) {
+        binding.tvDetailCancelText.setOnClickListener {
+            showCancelDialog2(thunderId)
+        }
+    }
+
+    private fun showCancelDialog2(thunderId: Int) {
+        val title = "신청을 취소할까요?"
+        val dialog = CustomDialogSon(this)
+        val db = DialogYesNoBinding.inflate(layoutInflater)
+        dialog.setContentView(db.root)
+
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        dialog.show()
+
+        with(db) {
+            tvDialogTitle.text = title
+            tvDialogNo.setOnClickListener {
+                dialog.dismiss()
+            }
+            tvDialogYes.setOnClickListener {
+                with(thunderDetailViewModel) {
+                    joinAndCancel(thunderId)
+                    isConfirm.observe(this@ThunderDetailActivity) {
+                        if (it) {
+                            showConfirmDialog(dialog)
+                        }
+                    }
+                }
+                dialog.dismiss()
+            }
+        }
+    }
+
+//    private fun showCancelDialog(thunderId: Int) {
+//        val title = "신청을 취소할까요?"
+//        val dialog = CustomDialog(this, title)
+//        dialog.showChoiceDialog(R.layout.dialog_yes_no)
+//        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+//            override fun onClicked(num: Int) {
+//                if (num == 1) {
+//                    thunderDetailViewModel.joinAndCancel(thunderId)
+//                    thunderDetailViewModel.isConfirm.observe(this@ThunderDetailActivity) { success ->
+//                        if (success) {
+//                            showConfirmDialog()
+//                        }
+//                    }
+//                }
+//            }
+//        })
+//    }
+
+    private fun showConfirmDialog(dialog: CustomDialogSon) {
+        val title = "신청 취소되었습니다."
+        val db = DialogCheckBinding.inflate(layoutInflater)
+        dialog.setContentView(db.root)
+        dialog.show()
+        db.tvDialogTitle.text = title
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        db.tvDialogCheck.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+    }
+
+    private fun clickReport() {
+        binding.tvThunderdetailReport.setOnClickListener {
+            shortToast("신고뷰로 이동 예정")
+        }
+    }
+
+    private fun clickOption(thunderId: Int) {
+        with(binding.ivDetailOption) {
+            setOnClickListener {
+                Timber.e("option click")
+                val popup = showCustomPopUp(it, R.array.option_popup, baseContext)
+                popup.setOnItemClickListener { _, view, _, _ ->
+                    if ((view as TextView).text == CHANGE) {
+                        //todo 번개 생성뷰로 이동해야합니다 분기처리가 필요할듯
+                        shortToast("구현중입니다 :)")
+                        popup.dismiss()
+                    } else {
+                        with(thunderDetailViewModel) {
+                            thunderDelete(thunderId)
+                            isDelete.observe(this@ThunderDetailActivity) {
+                                if (it) {
+                                    popup.dismiss()
+                                    finish()
+                                    shortToast("삭제가 완료 되었습니다.")
+                                }
+                            }
+                        }
+                    }
+                }
+                popup.show()
+            }
+        }
+    }
+
+    private fun clickImage(image: String) {
+        binding.ivDetailImage.setOnClickListener {
+            val dialog = PhotoDialog(image)
+            dialog.show(supportFragmentManager, "init photo fragment")
+        }
+    }
+
+    private fun clickScrap() {
+        val thunderId = intent.getIntExtra("thunderId", -1)
+        binding.ivThunderdetailLike.setOnClickListener { view ->
+            with(thunderDetailViewModel) {
+                postScrap(thunderId)
+                isLike.observe(this@ThunderDetailActivity) {
+                    view.isSelected = it
+                }
+            }
+        }
     }
 
     private fun initAdapter() {
@@ -68,12 +214,6 @@ class ThunderDetailActivity :
             binding.clDetailBoundary,
             binding.clThunderApplicantContent
         )
-        val likeCategory = mutableListOf(
-            binding.ivThunderdetailLike,
-            binding.clThunderdetailMessage,
-            binding.clThunderdetailApplyBtn,
-            binding.tvThunderdetailReport
-        )
         val defaultCategory = mutableListOf(
             binding.clThunderdetailMessage,
             binding.ivThunderdetailLike,
@@ -81,17 +221,13 @@ class ThunderDetailActivity :
             binding.clThunderdetailApplyBtn
         )
 
-        when (intent.getStringExtra("category")) {
-            APPLY -> {
-                itemVisibility(applyCategory)
-            }
-            LIKE -> {
-                itemVisibility(likeCategory)
-            }
-            OPEN -> {
+        thunderDetailViewModel.isThunderType.observe(this) {
+            if (it.isOrganizer) {
+                binding.ivThunderdetailIcon.isClickable = false
                 itemVisibility(openCategory)
-            }
-            else -> {
+            } else if (it.isEntered) {
+                itemVisibility(applyCategory)
+            } else {
                 itemVisibility(defaultCategory)
             }
         }
@@ -136,15 +272,15 @@ class ThunderDetailActivity :
         })
     }
 
-    private fun initData() {
+    private fun initData(thunderId: Int) {
         binding.lifecycleOwner = this
-
-        val thunderId = intent.getIntExtra("thunderId", -1)
+        binding.viewModel = thunderDetailViewModel
 
         with(thunderDetailViewModel) {
             thunderDetail(thunderId)
             thunderDetailMember(thunderId)
             thunderDetailOrganizer(thunderId)
+            getThunderInfo(thunderId)
         }
         thunderDetailViewModel.detailItemList.observe(this) {
             binding.detailData = it
@@ -152,6 +288,7 @@ class ThunderDetailActivity :
             if (image.isEmpty()) {
                 binding.ivDetailImage.visibility = View.GONE
             } else {
+                clickImage(it.image)
                 Glide
                     .with(this)
                     .load(it.image)
@@ -162,6 +299,7 @@ class ThunderDetailActivity :
         thunderDetailViewModel.organizerInfo.observe(this) {
             binding.organizer = it
         }
+        thunderDetailViewModel.getScrapValue(thunderId)
     }
 
     private fun observeOrganizer() {
@@ -205,6 +343,7 @@ class ThunderDetailActivity :
                 organizerId = it.organizerId
                 organizerName = it.name
             }
+
             val intent = Intent(this, OthersMyPageActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             intent.putExtra("organizerName", organizerName)
@@ -218,5 +357,7 @@ class ThunderDetailActivity :
         const val OPEN = "open"
         const val LIKE = "like"
         const val DEFAULT = "default"
+        const val CHANGE = "수정"
+        const val DELETE = "삭제"
     }
 }

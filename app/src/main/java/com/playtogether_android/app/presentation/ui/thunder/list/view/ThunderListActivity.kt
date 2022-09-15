@@ -34,12 +34,16 @@ class ThunderListActivity :
         binding.listViewModel = thunderListViewModel
         binding.thunderListActivity = this
         binding.lifecycleOwner = this
+        initData()
         initView()
+    }
+
+    override fun onResume() {
+        super.onResume()
         initData()
     }
 
     private fun setClickListener() {
-        floatButtonClickListener()
         searchButtonClickListener()
         setBackButtonListener()
         setPreButtonClick()
@@ -55,10 +59,6 @@ class ThunderListActivity :
     }
 
     private fun initView() {
-        binding.fabThunderlist.layoutParams.apply {
-            width = resources.getDimension(R.dimen.fab_size).toInt()
-            height = resources.getDimension(R.dimen.fab_size).toInt()
-        }
         initFragment()
         initTabLayout()
         setClickListener()
@@ -142,7 +142,11 @@ class ThunderListActivity :
 
     private fun initFragment() {
         val fragmentList =
-            listOf(ThunderEatFragment(thunderViewModel), ThunderGoFragment(thunderViewModel), ThunderDoFragment(thunderViewModel))
+            listOf(
+                ThunderEatFragment(thunderViewModel),
+                ThunderGoFragment(thunderViewModel),
+                ThunderDoFragment(thunderViewModel)
+            )
         thunderCategoryListAdapter = ThunderCategoryListAdapter(this)
         thunderCategoryListAdapter.fragmentList.addAll(fragmentList)
         binding.vpThunderlistContainer.adapter = thunderCategoryListAdapter
@@ -157,19 +161,11 @@ class ThunderListActivity :
         }
         thunderViewModel.getApplyList()
         thunderViewModel.getOpenList()
-        Timber.e("${thunderViewModel.thunderApplyIdList}")
     }
 
     private fun setBackButtonListener() {
         binding.ivThunderlistBack.setOnClickListener {
             finish()
-        }
-    }
-
-    private fun floatButtonClickListener() {
-        binding.fabThunderlist.setOnClickListener {
-            val intent = Intent(this, CreateThunderActivity::class.java)
-            intentActivity(intent)
         }
     }
 

@@ -273,7 +273,10 @@
     <string name="search_eat">먹을래</string>
     <string name="search_do">할래</string>
     <string name="search_go">갈래</string>
-    <string name="search_memberCnt">인원&#160;</string>
+    <string name="search_memberCnt">인원&#160;&#160;%1$d / %2$s</string>
+    <string name="search_undecided">미정</string>
+    <string name="search_undecided_memberCnt">인원제한없음</string>
+    <string name="search_date_place_time">%1$s&#160;&#160;|&#160;&#160;%2$s&#160;&#160;|&#160;&#160;%3$s</string>
 
     <!--    userIfo-->
     <string name="myInfo_title">마이페이지</string>

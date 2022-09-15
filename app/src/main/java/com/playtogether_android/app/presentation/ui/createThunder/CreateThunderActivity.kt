@@ -28,6 +28,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -172,11 +173,13 @@ class CreateThunderActivity :
         createThunderViewModel.getThunderCreateData.observe(this) {
             if (it.success) {
                 dialog.dismiss()
-                val intent = Intent(this, OpenThunderDetailActivity::class.java)
+                val intent = Intent(this, ThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", it.lightId)
                 startActivity(intent)
                 finish()
             } else {
+                dialog.dismiss()
+                shortToast("번개 생성 안됨")
                 Timber.d("createThunder : 번개 생성 안됨")
             }
         }
@@ -206,14 +209,16 @@ class CreateThunderActivity :
         requestBodyMap["description"] = descriptionBody
         requestBodyMap["category"] = categoryBody
 
-        val multipartBodyList = mutableListOf<MultipartBody.Part>()
-        for (item in galleryItemList) {
-            multipartBodyList.add(multiPartResolver.createImgMultiPart(item))
-        }
+        val item = galleryItemList[0]
+        val multipartBodySingle = multiPartResolver.createImgMultiPart(item)
 
-        createThunderViewModel.postCreateMultipartData(
+//        for (item in galleryItemList) {
+//            multipartBodyList.add(multiPartResolver.createImgMultiPart(item))
+//        }
+
+        createThunderViewModel.postMultipartDataSingle(
             PlayTogetherRepository.crewId,
-            multipartBodyList,
+            multipartBodySingle,
             requestBodyMap
         )
     }
@@ -269,45 +274,6 @@ class CreateThunderActivity :
             mut.add(file)
         }
         return mut
-    }
-
-    private fun clickComplete() {
-        binding.tvCreatethunderFinish.setOnClickListener {
-            val date = binding.tvCreatethunderDate.text.toString().replace(".", "-")
-            val time = binding.tvCreatethunderTime.text.toString()
-            val title = binding.etCreatethunderName.text.toString()
-            val place = binding.etCreatethunderPlace.text.toString()
-            var peopleCnt = 0
-            val image = transferImage(photoListAdapter.mutablePhotoList)
-            if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
-                peopleCnt = -1
-            else
-                peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
-            val description = binding.etCreatethunderExplanation.text.toString()
-//            createThunderViewModel.postThunderCreate(
-//                PostThunderCreateData(
-//                    title,
-//                    category,
-//                    date,
-//                    time,
-//                    place,
-//                    peopleCnt,
-//                    description,
-//                    image
-//                )
-//            )
-        }
-
-        createThunderViewModel.getThunderCreateData.observe(this) {
-            if (it.success) {
-                val intent = Intent(this, OpenThunderDetailActivity::class.java)
-                intent.putExtra("thunderId", it.lightId)
-                startActivity(intent)
-                finish()
-            } else {
-                Log.d("createThunder", "번개 생성 안됨")
-            }
-        }
     }
 
     private fun clickInfinite() {

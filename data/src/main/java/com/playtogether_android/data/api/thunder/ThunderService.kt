@@ -1,13 +1,10 @@
 package com.playtogether_android.data.api.thunder
 
-import com.playtogether_android.data.model.response.thunder.ResThunderDeleteData
-import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
-import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
-import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
+import com.playtogether_android.data.model.response.thunder.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface ThunderService {
     //번개탭-신청한 번개 리스트
@@ -44,4 +41,33 @@ interface ThunderService {
         @Path("thunderId") thunderId: Int
     ): ResThunderDeleteData
 
+    //번개 찜 확인
+    @GET("scrap/exist/{lightId}")
+    suspend fun getThunderScrap(
+        @Path("lightId") lightId: Int
+    ): ResThunderScrapData
+
+    //번개 찜/취소
+    @POST("scrap/{lightId}")
+    suspend fun postScrap(
+        @Path("lightId") lightId: Int
+    )
+
+    @POST("light/report/{lightId}")
+    suspend fun postReport(
+        @Path("lightId") lightId: Int
+    )
+
+    @Multipart
+    @PUT("light/enter/{lightId}")
+    suspend fun putThunder(
+        @Path("lightId") lightId: Int,
+        @Part image: MultipartBody.Part?,
+        @PartMap body: HashMap<String, RequestBody>
+    ): ResThunderChangeData
+
+    @GET("light/exist/{lightId}")
+    suspend fun getThunderExistChecker(
+        @Path("lightId") lightId: Int,
+    ):ResThunderExistCheckData
 }

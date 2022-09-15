@@ -37,8 +37,20 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
         PlayTogetherRepository.init(this)
         initKakaoLogin()
         getDeviceToken()
+        initPixelUtil()
+//        with(PlayTogetherRepository) {
+//            userToken = ""
+//            kakaoAccessToken=""
+//            googleAccessToken=""
+//            crewId = -1
+//            userRefreshToken=""
+//            googleUserlogOut=true
+//            kakaoUserlogOut=true
+//        }
     }
-
+    private fun initPixelUtil() {
+        pixelRatio = PixelRatio(this)
+    }
     private fun getDeviceToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {

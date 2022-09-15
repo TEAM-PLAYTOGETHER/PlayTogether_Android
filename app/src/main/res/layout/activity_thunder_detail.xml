@@ -12,6 +12,10 @@
         <variable
             name="detailData"
             type="com.playtogether_android.domain.model.thunder.ThunderDetailData" />
+
+        <variable
+            name="viewModel"
+            type="com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,11 +33,11 @@
                 android:id="@+id/cl_thunderdetail_apply_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/rectangle_fill_green_border_black_radius_10"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -135,41 +139,41 @@
 
             <ImageView
                 android:id="@+id/iv_thunderdetail_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginVertical="14dp"
                 android:layout_marginEnd="20dp"
+                android:background="@{viewModel.isLike ? @drawable/ic_icn_like_filled : @drawable/ic_icn_like_default}"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:visibility="gone"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_icn_like_default" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/iv_detail_option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="2dp"
+                android:padding="10dp"
                 android:src="@drawable/ic_icn_option"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginEnd="10dp"
-                android:padding="10dp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_detail_cancel_text"
                 android:layout_width="wrap_content"
-                android:paddingVertical="16dp"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:visibility="gone"
                 android:fontFamily="@font/pretendard_medium"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="16dp"
                 android:text="@string/cancel_application"
                 android:textColor="@color/main_green"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -244,8 +248,8 @@
                     android:id="@+id/cl_thunderdetail_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_marginEnd="10dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/cl_thunderdetail_profile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/cl_thunderdetail_profile">
@@ -288,8 +292,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="10dp"
-                    android:paddingBottom="20dp"
                     android:background="@drawable/rectangle_fill_gray_black_radius_10"
+                    android:paddingBottom="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -459,41 +463,41 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/tv_thunderdetail_report"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="22dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/pretendard_regular"
-                        android:includeFontPadding="false"
-                        android:paddingHorizontal="14dp"
-                        android:paddingVertical="10dp"
-                        android:text="@string/text_posting_report"
-                        android:textColor="@color/gray_gray01"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cl_thunderdetail_content" />
+                <TextView
+                    android:id="@+id/tv_thunderdetail_report"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="22dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:includeFontPadding="false"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp"
+                    android:text="@string/text_posting_report"
+                    android:textColor="@color/gray_gray01"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_thunderdetail_content" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_detail_boundary"
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
-                    android:visibility="gone"
+                    android:layout_marginTop="40dp"
                     android:background="#f0f0f0"
-                    app:layout_constraintTop_toBottomOf="@id/cl_thunderdetail_content"
-                    android:layout_marginTop="40dp"/>
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/cl_thunderdetail_content" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_detail_organizer_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/cl_detail_boundary"
-                    app:layout_constraintStart_toStartOf="parent">
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_detail_boundary">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_thunder_applicant_title"
@@ -519,9 +523,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
+                            android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
-                            android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                             app:layout_constraintStart_toEndOf="@id/tv_thunder_applicant_title"
                             app:layout_constraintTop_toTopOf="@id/tv_thunder_applicant_title"
                             tools:text="2" />
@@ -542,9 +546,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
+                            android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16sp"
-                            android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
                             app:layout_constraintTop_toTopOf="@id/tv_applicant_slash"
                             tools:text="6" />
@@ -564,30 +568,29 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_thunder_applicant_content"
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="90dp"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@id/cl_thunder_applicant_title">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_thunder_applicant_list"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             android:layout_marginHorizontal="20dp"
+                            android:nestedScrollingEnabled="false"
+                            android:overScrollMode="never"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:itemCount="3"
-                            tools:listitem="@layout/item_thunder_applicant_list"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"/>
+                            tools:listitem="@layout/item_thunder_applicant_list" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ interface SubwayInfoService {
         @Path("type") type : String = "json",
         @Path("service") service : String = "SearchSTNBySubwayLineInfo",
         @Path("start_index") start_index : Int = 1,
-        @Path("end_index") end_inedx : Int = 749,
+        @Path("end_index") end_inedx : Int = 1000,
     ) : ResponseSubwayList
 
 }

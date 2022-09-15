@@ -1,10 +1,7 @@
 package com.playtogether_android.data.datasource.thunder
 
 import com.playtogether_android.data.api.thunder.ThunderService
-import com.playtogether_android.data.model.response.thunder.ResThunderDeleteData
-import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
-import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
-import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
+import com.playtogether_android.data.model.response.thunder.*
 
 class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSource {
 
@@ -34,6 +31,22 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
 
     override suspend fun postThunderDelete(thunderId: Int): ResThunderDeleteData {
         return service.postThunderDelete(thunderId)
+    }
+
+    override suspend fun getThunderScrap(thunderId: Int): ResThunderScrapData {
+        return service.getThunderScrap(thunderId)
+    }
+
+    override suspend fun postScrap(thunderId: Int) {
+        service.postScrap(thunderId)
+    }
+
+    override suspend fun postReport(thunderId: Int) {
+        service.postReport(thunderId)
+    }
+
+    override suspend fun getThunderExistChecker(thunderId: Int): ResThunderExistCheckData {
+        return service.getThunderExistChecker(thunderId)
     }
 
 }

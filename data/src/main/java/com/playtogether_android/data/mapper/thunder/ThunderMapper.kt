@@ -1,9 +1,6 @@
 package com.playtogether_android.data.mapper.thunder
 
-import com.playtogether_android.data.model.response.thunder.ResThunderDeleteData
-import com.playtogether_android.data.model.response.thunder.ResThunderDetailData
-import com.playtogether_android.data.model.response.thunder.ResThunderTabListData
-import com.playtogether_android.data.model.response.thunder.ResponseThunderJoinCancel
+import com.playtogether_android.data.model.response.thunder.*
 import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.model.thunder.*
 
@@ -105,6 +102,14 @@ object ThunderMapper {
             status = it.status,
             success = it.success,
             message = it.message
+        )
+    }
+
+    //번개 참여,오픈 여부
+    fun mapperToThunderExistCheck(data: ResThunderExistCheckData.Data): GetThunderExistCheck {
+        return GetThunderExistCheck(
+            data.isEntered,
+            data.isOrganizer
         )
     }
 

@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{categoryData.date}"
+            android:text="@{@string/search_date_place_time(categoryData.date ?? @string/search_undecided, categoryData.place ?? @string/search_undecided, categoryData.time ?? @string/search_undecided)}"
             app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
             app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_title"
             tools:text="@string/thunder_item_day" />

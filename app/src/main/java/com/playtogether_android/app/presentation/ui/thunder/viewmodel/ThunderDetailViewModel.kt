@@ -1,10 +1,8 @@
 package com.playtogether_android.app.presentation.ui.thunder.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.playtogether_android.domain.model.thunder.GetThunderExistCheck
 import com.playtogether_android.domain.model.thunder.Member
 import com.playtogether_android.domain.model.thunder.Organizer
 import com.playtogether_android.domain.model.thunder.ThunderDetailData
@@ -14,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @HiltViewModel
 class ThunderDetailViewModel @Inject constructor(
@@ -22,7 +21,10 @@ class ThunderDetailViewModel @Inject constructor(
     private val thunderDetailMemberUseCase: GetThunderDetailMemberUseCase,
     private val thunderDetailOrganizerUseCase: GetThunderDetailOrganizerUseCase,
     private val thunderDeleteUseCase: PostThunderDeleteUseCase,
-    private val getRoomIdUseCase: GetRoomIdUseCase
+    private val getRoomIdUseCase: GetRoomIdUseCase,
+    private val postThunderScrapUseCase: PostThunderScrapUseCase,
+    private val getThunderScrapUseCase: GetThunderScrapUseCase,
+    private val getThunderExistCheckerUseCase: GetThunderExistCheckerUseCase
 ) : ViewModel() {
 
     private val _isConfirm = MutableLiveData<Boolean>()
@@ -42,6 +44,62 @@ class ThunderDetailViewModel @Inject constructor(
     //번개 삭제
     private val _isDelete = MutableLiveData<Boolean>()
     val isDelete: LiveData<Boolean> = _isDelete
+
+    private val _isLike = MutableLiveData<Boolean>()
+    val isLike: LiveData<Boolean> = _isLike
+
+    private var _isEntered = false
+    val isEntered get() = _isEntered
+
+    private var _isOrganizer = false
+    val isOrganizer get() = _isOrganizer
+
+    private val _isThunderType = MutableLiveData<GetThunderExistCheck>()
+    val isThunderType: LiveData<GetThunderExistCheck> = _isThunderType
+
+
+    fun getThunderInfo(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getThunderExistCheckerUseCase(thunderId)
+            }.onSuccess {
+                _isThunderType.value = it
+                Timber.e("thunder detail info success")
+                Timber.e("thunder detail apply ${it.isEntered}")
+                Timber.e("thunder detail organ ${it.isOrganizer}")
+
+            }.onFailure {
+                Timber.e("thunder detail info error : $it")
+            }
+        }
+    }
+
+    fun postScrap(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postThunderScrapUseCase(thunderId)
+            }.onSuccess {
+                _isLike.value = isLike.value?.not()
+            }.onFailure {
+                Timber.d("post scrap error : $it")
+            }
+        }
+    }
+
+    fun getScrapValue(thunderId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getThunderScrapUseCase(thunderId)
+            }.onSuccess {
+                Timber.e("get scrap value success : $it")
+                _isLike.value = it
+            }.onFailure {
+                _isLike.value = false
+                Timber.e("get scrap value error : $it")
+            }
+        }
+    }
+
 
     fun getRoomId(organizerId: Int) {
         viewModelScope.launch {

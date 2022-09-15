@@ -50,4 +50,24 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
             )
         )
     }
+
+    override suspend fun getThunderScrap(thunderId: Int): Boolean {
+        return thunderDataSource.getThunderScrap(thunderId).data
+    }
+
+    override suspend fun postScrap(thunderId: Int) {
+        thunderDataSource.postScrap(thunderId)
+    }
+
+    override suspend fun postReport(thunderId: Int) {
+        thunderDataSource.postReport(thunderId)
+    }
+
+    override suspend fun getThunderExistCheck(thunderId: Int): GetThunderExistCheck {
+        return ThunderMapper.mapperToThunderExistCheck(
+            thunderDataSource.getThunderExistChecker(
+                thunderId
+            ).data
+        )
+    }
 }
