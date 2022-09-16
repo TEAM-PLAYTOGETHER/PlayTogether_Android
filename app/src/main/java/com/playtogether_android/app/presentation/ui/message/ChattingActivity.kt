@@ -1,7 +1,6 @@
 package com.playtogether_android.app.presentation.ui.message
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
@@ -10,8 +9,6 @@ import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewMo
 import com.playtogether_android.app.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
@@ -30,6 +27,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         updateLastChatUi()
         clickSendMessage()
         clickBackArrow()
+        editTextObserver()
     }
 
     override fun onResume() {
@@ -71,11 +69,10 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         }
     }
 
-    private fun changeNowDateFormat(): String {
-        val dateFormat = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault())
-        val date = dateFormat.format(Date())
-        Log.d("asdf", "date : $date")
-        return date
+    private fun editTextObserver() {
+        binding.etMessage.viewTreeObserver.addOnGlobalLayoutListener {
+            scrollToBottom()
+        }
     }
 
     private fun clickSendMessage() {
@@ -97,48 +94,23 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
     private fun updateChatUi() {
         chatViewModel.chatData.observe(this) {
-            chatAdapter.submitList(it){
+            chatAdapter.submitList(it) {
                 scrollToBottom()
-                //removeTimeAll()
             }
         }
     }
 
-    private fun updateLastChatUi(){
-        chatViewModel.isLastChatChanged.observe(this){
-            chatAdapter.notifyItemChanged(chatAdapter.itemCount-1)
+    private fun updateLastChatUi() {
+        chatViewModel.isLastChatChanged.observe(this) {
+            chatAdapter.notifyItemChanged(chatAdapter.itemCount - 1)
         }
-        chatViewModel.isLastChatChanged.value=false
+        chatViewModel.isLastChatChanged.value = false
     }
 
     private fun scrollToBottom() {
         val size = chatAdapter.currentList.size - 1
         binding.rvInChattingChatting.scrollToPosition(size)
-        //Timber.e("socket scrollToBottom : ${chatAdapter.currentList[size]}")
     }
-
-   /* private fun removeTimeAll() {
-        var nowSize = chatAdapter.currentList.size - 1
-        var tempSize = nowSize - 1
-
-        if (tempSize < 0)
-            return
-
-        while (true) {
-            if (chatAdapter.currentList[tempSize].timeVisible == false) {
-                break
-            }
-            if (chatAdapter.currentList[tempSize].messageType == chatAdapter.currentList[nowSize].messageType) {
-                if (chatAdapter.currentList[nowSize].time == chatAdapter.currentList[tempSize].time) {
-                    chatAdapter.currentList[tempSize].timeVisible = false
-                }
-            }
-            nowSize = tempSize
-            tempSize--
-            if (tempSize < 0) break
-        }
-        //chatAdapter.notifyDataSetChanged()
-    }*/
 
     private fun initAdapter() {
         chatAdapter = ChatAdapter()
