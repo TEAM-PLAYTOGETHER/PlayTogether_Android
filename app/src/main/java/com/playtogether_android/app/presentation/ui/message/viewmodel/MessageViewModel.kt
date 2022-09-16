@@ -1,6 +1,8 @@
 package com.playtogether_android.app.presentation.ui.message.viewmodel
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -46,13 +48,10 @@ class MessageViewModel @Inject constructor(
     private fun onConnect() {
         val token = PlayTogetherRepository.userToken
         val tokenLst = listOf(token)
-        //val httpClient = OkHttpClient.Builder().addNetworkInterceptor(AuthInterceptor()).build()
         val header: MutableMap<String, List<String>> = HashMap()
         header["Authorization"] = tokenLst
         val options = IO.Options()
         options.extraHeaders = header
-        /*options.webSocketFactory = httpClient
-        options.callFactory = httpClient*/
         socket = IO.socket("http://13.125.232.150:3000", options)
         Timber.e("Socket connection success : ${socket.id()}")
     }
@@ -65,15 +64,23 @@ class MessageViewModel @Inject constructor(
         socket.on("resConnection", connection)
     }
 
-    fun resNewMessageToUser(lamda: (NewMessageReceived.Data.Message) -> Unit) {
+    fun resNewMessageToUser() {
         val messageListener = Emitter.Listener {
-            Timber.e("Socket receive chat : ${gson.fromJson(it[0].toString(), NewMessageReceived::class.java)}")
             val receivedChat: NewMessageReceived.Data.Message =
-                gson.fromJson(it[0].toString(), NewMessageReceived::class.java).data.message
-            lamda(receivedChat)
-            Timber.e("Socket ResNewMessageToUser : $receivedChat")
+                gson.fromJson(it[0].toString(), NewMessageReceived::class.java).data.message.apply {
+                    createdAt = changeDateFormat(createdAt)
+                }
+            updateRoomList(receivedChat)
         }
         socket.on("newMessageToUser", messageListener)
+    }
+
+    private fun changeDateFormat(text: String): String {
+        var date = text.slice(IntRange(0, 9))
+        date = date.replace("-", ".")
+        val time = text.slice(IntRange(11, 15))
+        val dateTime = date + "  " + time
+        return dateTime
     }
 
     fun disconnect() {
@@ -88,13 +95,9 @@ class MessageViewModel @Inject constructor(
                     if (it.isNotEmpty()) {
                         Log.d("messageServer", "성공!!")
                         val tempList: List<MessageData> = it
-                        for (i in it.indices) {
-                            var date = it[i].createdAt.slice(IntRange(0, 9))
-                            date = date.replace("-", ".")
-                            val time = it[i].createdAt.slice(IntRange(11, 15))
-                            val dateTime = date + "  " + time
-                            tempList[i].createdAt = dateTime
-                        }
+                        for (i in it.indices)
+                            tempList[i].createdAt = changeDateFormat(it[i].createdAt)
+
                         _messageData.value = tempList
                     } else
                         Log.d("messageServer", "가져온게 없어서 null $it")
@@ -117,11 +120,13 @@ class MessageViewModel @Inject constructor(
             )
         }
 
-        for (i in _messageData.value!!.indices) {
-            if (temp.audienceId == _messageData.value!![i].audienceId) {
-                _messageData.value?.toMutableList()?.apply{ removeAt(i) }
+        Handler(Looper.getMainLooper()).post {
+            for (item in _messageData.value ?: return@post) {
+                if (temp.audienceId == item.audienceId) {
+                    _messageData.value = _messageData.value?.toMutableList()?.apply { remove(item) }
+                }
             }
+            _messageData.value = _messageData.value?.toMutableList()?.apply { add(0, temp) }
         }
-        _messageData.value?.toMutableList()?.apply{ add(0, temp) }
     }
 }
