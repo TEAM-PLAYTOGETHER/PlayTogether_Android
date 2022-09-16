@@ -27,7 +27,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         setName()
         initAdapter()
         updateChatUi()
-
+        updateLastChatUi()
         clickSendMessage()
         clickBackArrow()
     }
@@ -97,18 +97,27 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
     private fun updateChatUi() {
         chatViewModel.chatData.observe(this) {
-            chatAdapter.submitList(it)
-            scrollToBottom()
-            removeTimeAll()
+            chatAdapter.submitList(it){
+                scrollToBottom()
+                //removeTimeAll()
+            }
         }
+    }
+
+    private fun updateLastChatUi(){
+        chatViewModel.isLastChatChanged.observe(this){
+            chatAdapter.notifyItemChanged(chatAdapter.itemCount-1)
+        }
+        chatViewModel.isLastChatChanged.value=false
     }
 
     private fun scrollToBottom() {
         val size = chatAdapter.currentList.size - 1
         binding.rvInChattingChatting.scrollToPosition(size)
+        //Timber.e("socket scrollToBottom : ${chatAdapter.currentList[size]}")
     }
 
-    private fun removeTimeAll() {
+   /* private fun removeTimeAll() {
         var nowSize = chatAdapter.currentList.size - 1
         var tempSize = nowSize - 1
 
@@ -128,8 +137,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
             tempSize--
             if (tempSize < 0) break
         }
-        chatAdapter.notifyDataSetChanged()
-    }
+        //chatAdapter.notifyDataSetChanged()
+    }*/
 
     private fun initAdapter() {
         chatAdapter = ChatAdapter()

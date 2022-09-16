@@ -1,6 +1,8 @@
 package com.playtogether_android.app.presentation.ui.message.viewmodel
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -33,13 +35,45 @@ class ChatViewModel @Inject constructor(
     private lateinit var socket: Socket
     private val gson by lazy { Gson() }
 
-    val inputMessage = MutableLiveData<String>()
+    var isLastChatChanged = MutableLiveData<Boolean>(false)
+
+    val inputMessage = MutableLiveData<String>("")
 
     private fun refineChatListDate(list: List<ChatData>): List<ChatData> {
         val tempList: List<ChatData> = list
         for (i in list.indices)
             tempList[i].time = changeRemoteDateFormat(list[i].time)
         return tempList
+    }
+
+    private fun removeTimeAll(list: List<ChatData>): List<ChatData> {
+        var nowSize = list.size - 1
+        var tempSize = nowSize - 1
+
+        if (tempSize < 0) return list
+
+        while (true) {
+            if (list[tempSize].timeVisible == false)
+                break
+            if (list[tempSize].messageType == list[nowSize].messageType) {
+                if (list[tempSize].time == list[nowSize].time) {
+                    list[tempSize].timeVisible = false
+                }
+            }
+            nowSize = tempSize
+            tempSize--
+            if (tempSize < 0) break
+        }
+        return list
+    }
+
+    private fun removeTimePart(addChat: ChatData) {
+        if (_chatData.value?.isEmpty() != false) return
+        if (_chatData.value?.last()?.messageType != addChat.messageType) return
+        if (_chatData.value?.last()?.time == addChat.time) {
+            _chatData.value = _chatData.value?.toMutableList()?.apply { last().timeVisible = false }
+            isLastChatChanged.value = true
+        }
     }
 
     private fun changeRemoteDateFormat(exFormatDate: String): String {
@@ -54,7 +88,7 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching { getChatUseCase(roomId) }
                 .onSuccess {
-                    _chatData.value = refineChatListDate(it)
+                    _chatData.value = removeTimeAll(refineChatListDate(it))
                 }
                 .onFailure { error ->
                     Log.d("messageServer", "채팅 읽어오기 실패")
@@ -101,7 +135,6 @@ class ChatViewModel @Inject constructor(
 
     fun resEnterRoom(lamda: () -> Unit) {
         val enterListener = Emitter.Listener {
-            Timber.e("Socket enter on : ${it[0].toString()}")
             val success: Boolean = gson.fromJson(it[0].toString(), ResEnterRoom::class.java).success
             if (!success) lamda()
             Timber.e("Socket ResEnterRoom : $success")
@@ -126,9 +159,10 @@ class ChatViewModel @Inject constructor(
             time = changeRemoteDateFormat(createdAt),
             messageType = amI
         )
-        Timber.e("Socket resSendMessage in addChat / newchat : ${newChat}")
-        _chatData.value?.toMutableList()?.add(newChat)
-        Timber.e("Socket resSendMessage in addChat / list : ${_chatData.value?.last()}")
+        Handler(Looper.getMainLooper()).post {
+            removeTimePart(newChat)
+            _chatData.value = _chatData.value?.toMutableList()?.apply { add(newChat) }
+        }
     }
 
     fun reqSendMessage(text: String, recvId: Int) {
@@ -136,22 +170,16 @@ class ChatViewModel @Inject constructor(
         Timber.e("Socket ReqSendMessage content : $message")
         val jsonData = gson.toJson(message)
         socket.emit("reqSendMessage", jsonData)
-        Timber.e("Socket ReqSendMessage")
     }
 
     fun resSendMessage(lamda: () -> Unit) {
         val sendListener = Emitter.Listener {
             val sendData = gson.fromJson(it[0].toString(), ResSendMessage::class.java)
             val sendChat = sendData.data.message
-            Timber.e("Socket send on : ${it[0].toString()}")
-            if (sendData.success){
-                Timber.e("Socket resSendMessage before addChat")
+            if (sendData.success) {
                 addChat(sendChat.messageId, sendChat.content, sendChat.createdAt, true)
-                Timber.e("Socket resSendMessage after addChat / list : ${_chatData.value?.last()}")
-            }
-            else
+            } else
                 lamda()
-            Timber.e("Socket ResSendMessage : ${sendData}")
         }
         socket.on("resSendMessage", sendListener)
     }
