@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
             type="com.playtogether_android.domain.model.message.ChatData" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,18 +20,19 @@
             android:id="@+id/tv_otherchar_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_radius_10"
-            android:backgroundTint="@color/gray_black"
-            android:text="@{data.content}"
-            android:maxEms="15"
-            android:inputType="textMultiLine"
-            android:fontFamily="@font/pretendard_medium"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="8dp"
-            android:textColor="@color/white"
-            android:textSize="14sp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
+            android:background="@drawable/rectangle_radius_10"
+            android:backgroundTint="@color/gray_black"
+            android:fontFamily="@font/pretendard_medium"
+            android:inputType="textMultiLine"
+            android:maxEms="15"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@{data.content}"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_otherchat_profile"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="네 가능합니다." />
@@ -38,42 +41,30 @@
             android:id="@+id/tv_otherchat_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:visibility="@{data.timeVisible?View.VISIBLE:View.GONE}"
-            android:text="@{data.time}"
-            android:includeFontPadding="false"
-            android:textSize="10sp"
-            android:textColor="@color/gray_gray02"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:text="@{data.time}"
+            android:textColor="@color/gray_gray02"
+            android:textSize="10sp"
+            android:visibility="@{data.timeVisible?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_otherchar_content"
             app:layout_constraintTop_toBottomOf="@id/tv_otherchar_content"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="2022.04.13. 14:00" />
 
         <ImageView
             android:id="@+id/iv_otherchat_profile"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_otherchar_content"
             app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/tv_otherchar_content"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.0666"
             app:srcCompat="@drawable/ic_img_profile" />
-
-        <!--<TextView
-            android:id="@+id/tv_otherchat_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="14:00"
-            android:fontFamily="@font/pretendard_regular"
-            android:includeFontPadding="false"
-            android:textSize="10sp"
-            android:textColor="@color/gray_gray02"
-            android:layout_marginStart="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_otherchat_date" />-->
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

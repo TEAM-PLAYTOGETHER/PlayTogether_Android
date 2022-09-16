@@ -7,13 +7,14 @@ object MessageMapper {
     fun mapperToDomainMessage(data: ResponseMessageData.Data): List<MessageData> {
         return data.messages.map {
             MessageData(
-                it.audience,
-                it.audienceId,
-                it.content,
-                it.createdAt,
-                it.read,
-                it.roomId,
-                it.send
+                audience = it.audience,
+                audienceId = it.audienceId,
+                audienceProfile = it.audienceProfile,
+                content = it.content,
+                createdAt = it.createdAt,
+                read = it.read,
+                roomId = it.roomId,
+                send = it.send
             )
         }
     }

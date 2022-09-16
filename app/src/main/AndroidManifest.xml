@@ -106,6 +106,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.message.ChattingActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.JoinOnBoardingActivity"

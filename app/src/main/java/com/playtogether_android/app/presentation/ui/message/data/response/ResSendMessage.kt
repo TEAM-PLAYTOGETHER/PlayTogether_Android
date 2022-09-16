@@ -1,22 +1,19 @@
-package com.playtogether_android.data.model.response.message
+package com.playtogether_android.app.presentation.ui.message.data.response
 
-data class ResponseMessageData(
+data class ResSendMessage(
     val data: Data,
     val message: String,
     val status: Int,
     val success: Boolean
 ) {
     data class Data(
-        val messages: List<Message>
+        val message: Message
     ) {
         data class Message(
-            val audience: String,
-            val audienceId: Int,
-            val audienceProfile : String?,
             val content: String,
             val createdAt: String,
+            val messageId: Int,
             val read: Boolean,
-            val roomId: Int,
             val send: Boolean
         )
     }
