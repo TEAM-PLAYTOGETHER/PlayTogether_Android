@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.userInfo
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,11 +9,16 @@ import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.view.WindowManager
 import androidx.core.text.set
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityDeleteMyCrewBinding
+import com.playtogether_android.app.databinding.DialogCheckBinding
+import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.main.SplashActivity
 import com.playtogether_android.app.util.CustomDialog
+import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.data.singleton.PlayTogetherRepository.crewId
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +29,7 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
 
         fontColorHighlight()
         btnBackEvent()
+        btnDeleteEvent()
     }
 
     private fun fontColorHighlight() {
@@ -46,34 +53,53 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
     // 탈퇴하기 버튼 클릭 이벤트
     private fun btnDeleteEvent() {
         binding.btnDeleteCrew.setOnClickListener {
-//            showConfirmDialog()
+            showDeleteDialog()
         }
     }
 
-    // 탈퇴 되묻는 다이어로그
-//    private fun showConfirmDialog() {
-//        val title = "정말 동아리를\n탈퇴하시겠어요?"
-//        val dialog = CustomDialog(this, title)
-//        dialog.showChoiceDialog(R.layout.dialog_yes_no)
-//        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
-//            override fun onClicked(num: Int) {
-//                if (num == 1) {
-//                    userInfoViewModel.delCrew(crewId)
-//                    userInfolViewModel.isConfirm.observe(this@DeleteMyCrewActivity) { success ->
-//                        if (success) {
-//                            showFinishDialog()
-//                        }
-//                    }
-//                }
-//            }
-//        })
-//    }
+    private fun showDeleteDialog() {
+        val title = "정말 동아리를\n탈퇴하시겠어요?"
+        val dialog = CustomDialogSon(this)
+        val view = DialogYesNoBinding.inflate(layoutInflater)
+        dialog.setContentView(view.root)
 
-    // 탈퇴 완료 다이어로그
-    private fun showFinishDialog() {
-        val title = "탈퇴 완료되었습니다."
-        val dialog = CustomDialog(this@DeleteMyCrewActivity, title)
-        dialog.showConfirmDialog(R.layout.dialog_check)
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        dialog.show()
+
+        with(view) {
+            tvDialogTitle.text = title
+            tvDialogNo.setOnClickListener {
+                dialog.dismiss()
+            }
+            tvDialogYes.setOnClickListener {
+                showConfirmDialog(dialog)
+            }
+        }
     }
+
+    private fun showConfirmDialog(dialog: CustomDialogSon) {
+        val title =  "탈퇴 되었습니다."
+        val view = DialogCheckBinding.inflate(layoutInflater)
+        dialog.setContentView(view.root)
+        dialog.show()
+        view.tvDialogTitle.text = title
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        view.tvDialogCheck.setOnClickListener {
+            dialog.dismiss()
+            finish()
+            startActivity(Intent(this, SplashActivity::class.java))
+        }
+    }
+
+
 
 }
