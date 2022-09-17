@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.userInfo
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMyInfoBinding
@@ -21,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @AndroidEntryPoint
 class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_info) {
 
-    private val userInfoViewModel: UserInfoViewModel by viewModels()
+    private val userInfoViewModel: UserInfoViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +57,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             if (gender == "남") genderFormat = "M"
             else genderFormat = "W"
 
-            binding.birthAndGender = "$birth+년생 ・ +$genderFormat"
+            binding.birthAndGender = "${birth}년생 ・ $genderFormat"
             binding.myInfo = it
 
         }
