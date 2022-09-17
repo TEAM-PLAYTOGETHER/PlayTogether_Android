@@ -7,37 +7,26 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-import com.playtogether_android.domain.model.thunder.PostThunderCreateData
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -46,6 +35,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okio.BufferedSink
 import timber.log.Timber
 import java.io.File
+import java.lang.IndexOutOfBoundsException
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -166,6 +156,8 @@ class CreateThunderActivity :
                 peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
             val description = binding.etCreatethunderExplanation.text.toString()
 
+            val itemList =
+                textTransfer(listOf(date, time, title, place, peopleCnt.toString(), description))
             multipart(date, time, title, place, peopleCnt, description)
             dialog.show()
         }
@@ -185,6 +177,17 @@ class CreateThunderActivity :
         }
     }
 
+    private fun textTransfer(itemList: List<String>): List<String?> {
+        val transferList = mutableListOf<String?>()
+        for (item in itemList) {
+            if (item.contains("미정")) {
+                transferList.add(null)
+            } else
+                transferList.add(item)
+        }
+        return transferList
+    }
+
     private fun multipart(
         date: String,
         time: String,
@@ -200,7 +203,7 @@ class CreateThunderActivity :
         val peopleCntBody = peopleCnt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val descriptionBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
         val categoryBody = category.toRequestBody("text/plain".toMediaTypeOrNull())
-        val requestBodyMap = HashMap<String, RequestBody>()
+        val requestBodyMap = HashMap<String, RequestBody?>()
         requestBodyMap["date"] = dateBody
         requestBodyMap["time"] = timeBody
         requestBodyMap["title"] = titleBody
@@ -209,18 +212,22 @@ class CreateThunderActivity :
         requestBodyMap["description"] = descriptionBody
         requestBodyMap["category"] = categoryBody
 
-        val item = galleryItemList[0]
-        val multipartBodySingle = multiPartResolver.createImgMultiPart(item)
+        if (galleryItemList.isNotEmpty()) {
+            val item = galleryItemList[0]
+            val multipartBodySingle = multiPartResolver.createImgMultiPart(item)
+            createThunderViewModel.postMultipartDataSingle(
+                PlayTogetherRepository.crewId,
+                multipartBodySingle,
+                requestBodyMap
+            )
+        } else {
+            createThunderViewModel.postMultipartDataSingle(
+                PlayTogetherRepository.crewId,
+                null,
+                requestBodyMap
+            )
+        }
 
-//        for (item in galleryItemList) {
-//            multipartBodyList.add(multiPartResolver.createImgMultiPart(item))
-//        }
-
-        createThunderViewModel.postMultipartDataSingle(
-            PlayTogetherRepository.crewId,
-            multipartBodySingle,
-            requestBodyMap
-        )
     }
 
     private fun absolutePath(uri: Uri): String {
@@ -299,17 +306,16 @@ class CreateThunderActivity :
         }
     }
 
-    private fun clickUndecided(textView : TextView, imageView : ImageView, str : Int){
-        if(!imageView.isSelected){
+    private fun clickUndecided(textView: TextView, imageView: ImageView, str: Int) {
+        if (!imageView.isSelected) {
             imageView.setImageResource(R.drawable.ic_icn_check_active)
             textView.setText(str)
             inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-            textView.isFocusable=false
-        }
-        else{
+            textView.isFocusable = false
+        } else {
             imageView.setImageResource(R.drawable.ic_icn_check_inactive)
-            textView.text=null
-            textView.isFocusableInTouchMode=true
+            textView.text = null
+            textView.isFocusableInTouchMode = true
             textView.requestFocus()
             inputMethodManager.showSoftInput(
                 textView,
@@ -318,19 +324,33 @@ class CreateThunderActivity :
         }
     }
 
-    private fun clickUndecidedDate(){
-        binding.ivCreatethunderDateCheck.setOnClickListener{
-            clickUndecided(binding.tvCreatethunderDate, binding.ivCreatethunderDateCheck, R.string.createthunder_date_undecided)
+    private fun clickUndecidedDate() {
+        binding.ivCreatethunderDateCheck.setOnClickListener {
+            clickUndecided(
+                binding.tvCreatethunderDate,
+                binding.ivCreatethunderDateCheck,
+                R.string.createthunder_date_undecided
+            )
         }
     }
-    private fun clickUndecidedTime(){
-        binding.ivCreatethunderTimeCheck.setOnClickListener{
-            clickUndecided(binding.tvCreatethunderTime, binding.ivCreatethunderTimeCheck, R.string.createthunder_time_undecided)
+
+    private fun clickUndecidedTime() {
+        binding.ivCreatethunderTimeCheck.setOnClickListener {
+            clickUndecided(
+                binding.tvCreatethunderTime,
+                binding.ivCreatethunderTimeCheck,
+                R.string.createthunder_time_undecided
+            )
         }
     }
-    private fun clickUndecidedPlace(){
-        binding.ivCreatethunderPlaceCheck.setOnClickListener{
-            clickUndecided(binding.etCreatethunderPlace, binding.ivCreatethunderPlaceCheck, R.string.createthunder_place_undecided)
+
+    private fun clickUndecidedPlace() {
+        binding.ivCreatethunderPlaceCheck.setOnClickListener {
+            clickUndecided(
+                binding.etCreatethunderPlace,
+                binding.ivCreatethunderPlaceCheck,
+                R.string.createthunder_place_undecided
+            )
         }
     }
 
