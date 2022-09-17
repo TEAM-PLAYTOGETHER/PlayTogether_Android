@@ -9,7 +9,6 @@ object UserInfoMapper {
     fun mapperToMyInfoData(resMyInfoData: ResMyInfoData.Data): MyInfoData {
         return MyInfoData(
             id = resMyInfoData.profile.id,
-            crewName = resMyInfoData.crewName,
             isDeleted = resMyInfoData.profile.isDeleted,
             nickname = resMyInfoData.profile.nickname,
             description = resMyInfoData.profile.description,

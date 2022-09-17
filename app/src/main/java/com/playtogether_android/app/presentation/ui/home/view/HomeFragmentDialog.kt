@@ -11,8 +11,8 @@ import com.playtogether_android.app.databinding.FragmentHomeDialogBinding
 import com.playtogether_android.app.presentation.base.BaseBottomDialogFragment
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeDialogAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
-import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
+import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
@@ -21,6 +21,7 @@ import kotlin.math.roundToInt
 class HomeFragmentDialog :
     BaseBottomDialogFragment<FragmentHomeDialogBinding>(R.layout.fragment_home_dialog) {
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private val userInfoViewModel: UserInfoViewModel by activityViewModels()
     private lateinit var dialogAdapter: HomeDialogAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,6 +41,7 @@ class HomeFragmentDialog :
         homeViewModel.setCrewName(name)
         homeViewModel.getNewThunderList(crewId)
         homeViewModel.getHotThunderList(crewId)
+        userInfoViewModel.getMyInfo()
         dismiss()
     }
 

@@ -3,26 +3,30 @@ package com.playtogether_android.app.presentation.ui.userInfo
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import android.widget.Toast
+import androidx.fragment.app.*
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMyInfoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.home.view.HomeFragmentDialog
+import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.WebViewActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageSettingActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnBoardingIntroduceActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.DateTimeUtil
+import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.notifyAll
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @AndroidEntryPoint
 class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_info) {
 
     private val userInfoViewModel: UserInfoViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,6 +62,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
             binding.birthAndGender = "${birth}년생 ・ $genderFormat"
             binding.myInfo = it
+            binding.homeViewModel = homeViewModel
 
         }
     }
@@ -69,6 +74,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             bottomSheetDialog.show(requireActivity().supportFragmentManager, "init bottom_sheet")
         }
     }
+
+
 
     //프로필 수정하기 온보딩 뷰 이동
     private fun moveEditProfile() {

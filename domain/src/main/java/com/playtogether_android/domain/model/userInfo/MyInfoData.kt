@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class MyInfoData(
     @SerializedName("id")
     val id: String,
-    val crewName: String,
     @SerializedName("isDeleted")
     val isDeleted: Boolean,
     @SerializedName("nickname")
