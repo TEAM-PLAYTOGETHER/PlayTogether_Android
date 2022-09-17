@@ -35,6 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initData()
         initView()
         refreshView()
+        Timber.d("jwt 토큰 : ${PlayTogetherRepository.userToken}")
     }
 
     private fun initView() {

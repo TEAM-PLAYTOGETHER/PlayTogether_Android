@@ -62,4 +62,12 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
     override suspend fun postReport(thunderId: Int) {
         thunderDataSource.postReport(thunderId)
     }
+
+    override suspend fun getThunderExistCheck(thunderId: Int): GetThunderExistCheck {
+        return ThunderMapper.mapperToThunderExistCheck(
+            thunderDataSource.getThunderExistChecker(
+                thunderId
+            ).data
+        )
+    }
 }

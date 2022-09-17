@@ -20,7 +20,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_thundergo_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:paddingHorizontal="20dp" />
 
         <TextView
             android:id="@+id/tv_thundergo_empty_text"

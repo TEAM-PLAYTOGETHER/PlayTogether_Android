@@ -3,6 +3,7 @@ package com.playtogether_android.data.datasource.thunder
 import android.util.Log
 import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.model.request.thunder.RequestThunderCreate
+import com.playtogether_android.data.model.response.thunder.ResThunderCreateSingle
 import com.playtogether_android.data.model.response.thunder.ResponseThunderCreate
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -27,6 +28,14 @@ class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
         body: HashMap<String, RequestBody>
     ): ResponseThunderCreate {
         return service.postMultipartThunderCreate(crewId, image, body)
+    }
+
+    override suspend fun postMultipartThunderSingle(
+        crewId: Int,
+        image: MultipartBody.Part?,
+        body: HashMap<String, RequestBody>
+    ): ResThunderCreateSingle {
+        return service.postMultipartThunderCreateSingle(crewId, image, body)
     }
 //
 //    override suspend fun postMultipartThunderCreate(

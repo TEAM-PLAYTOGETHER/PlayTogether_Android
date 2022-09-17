@@ -57,11 +57,14 @@
 
             <EditText
                 android:id="@+id/et_search"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:background="@null"
                 android:fontFamily="@font/pretendard_regular"
+                android:textCursorDrawable="@color/gray_black"
+                android:gravity="start"
                 android:hint="@string/search_hint"
                 android:imeOptions="actionDone"
                 android:inputType="textPersonName"
@@ -69,6 +72,7 @@
                 android:textColorHint="@color/gray_gray01"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_search"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_search"
                 app:layout_constraintTop_toTopOf="@id/iv_search" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -166,7 +170,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_search_line"
             tools:itemCount="3"
-            tools:listitem="@layout/item_thunder_list" />
+            tools:listitem="@layout/item_search_thunder_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

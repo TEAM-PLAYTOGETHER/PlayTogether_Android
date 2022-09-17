@@ -38,6 +38,15 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
         initKakaoLogin()
         getDeviceToken()
         initPixelUtil()
+//        with(PlayTogetherRepository) {
+//            userToken = ""
+//            kakaoAccessToken=""
+//            googleAccessToken=""
+//            crewId = -1
+//            userRefreshToken=""
+//            googleUserlogOut=true
+//            kakaoUserlogOut=true
+//        }
         PlayTogetherRepository.crewId = 12
     }
     private fun initPixelUtil() {

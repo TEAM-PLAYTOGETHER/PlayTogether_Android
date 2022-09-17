@@ -4,19 +4,25 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.ListAdapterComparator
 import com.playtogether_android.app.util.applyOpenChecker
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
+import com.playtogether_android.domain.model.thunder.GetThunderExistCheck
 import timber.log.Timber
 
-class ThunderCategoryListItemAdapter(val thunderViewModel: ThunderViewModel) :
+class ThunderCategoryListItemAdapter(
+    val detailViewModel: ThunderDetailViewModel,
+    val viewLifecycleOwner: LifecycleOwner
+) :
     ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -38,12 +44,6 @@ class ThunderCategoryListItemAdapter(val thunderViewModel: ThunderViewModel) :
                             data.peopleCnt.toString()
                         )
                     )
-//                itemView.setOnClickListener {
-//                    val intent = Intent(itemView.context, ThunderDetailActivity::class.java)
-//                    intent.putExtra("thunderId", data.lightId)
-//                    intent.putExtra("category", "default")
-//                    itemView.context.startActivity(intent)
-//                }
             }
         }
     }
@@ -72,11 +72,12 @@ class ThunderCategoryListItemAdapter(val thunderViewModel: ThunderViewModel) :
     ) {
         val item = getItem(position)
         holder.onBind(item)
-        val isApply = thunderViewModel.thunderApplyIdList.contains(item.lightId)
-        val isOpen = thunderViewModel.thunderOpenIdList.contains(item.lightId)
-        val context = holder.itemView.context
-        holder.itemView.setOnClickListener {
-            context.applyOpenChecker(context, item.lightId, isApply, isOpen)
+        val itemView = holder.itemView
+        itemView.setOnClickListener {
+            Intent(itemView.context, ThunderDetailActivity::class.java).apply {
+                putExtra("thunderId", item.lightId)
+                itemView.context.startActivity(this)
+            }
         }
     }
 

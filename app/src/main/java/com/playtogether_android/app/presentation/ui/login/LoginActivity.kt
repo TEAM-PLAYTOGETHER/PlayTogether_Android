@@ -20,14 +20,13 @@ import com.kakao.sdk.user.UserApiClient
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
-import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
-import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +36,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
     private val signViewModel: SignViewModel by viewModels()
-    private val onBoardingViewModel : OnBoardingViewModel by viewModels()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var startForActivity: ActivityResultLauncher<Intent>
     private lateinit var client: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,9 +82,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 //
 //            GoogleLoginRepository(clientId, clientSecret)
 //                .getAccessToken(account.serverAuthCode!!)
-            signViewModel.googleLogin()
-            signupChecker()
-            Timber.e("login : 구글 로그인 성공")
+            with(signViewModel) {
+                googleLogin()
+                isLogin.observe(this@LoginActivity) { success ->
+                    if (success) {
+                        Timber.e("login : 구글 로그인 성공")
+                        signupChecker()
+                    }
+                }
+            }
+
         } catch (e: ApiException) {
             Timber.e("signInResult:failed code=" + e.statusCode)
             shortToast("로그인 실패")
@@ -120,28 +127,36 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun signupChecker() {
-        signViewModel.isLogin.observe(this@LoginActivity) {
-            if (it) {
-                //TODO: 잘 모르겠는데 막판에 고치기
-                Timber.e("???????? : ${onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty()}")
-                if (signViewModel.signup && PlayTogetherRepository.crewId != -1) {
-                    val intent =
-                        Intent(this@LoginActivity, MainActivity::class.java)
-                    nextActivity(intent)
-                } else if (signViewModel.signup && PlayTogetherRepository.crewId == -1 && (onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty() == true)) {
-                    val intent = Intent(this@LoginActivity, SelectOnboardingActivity::class.java)
-                    nextActivity(intent)
-                } else if (signViewModel.signup && PlayTogetherRepository.crewId == -1 && (onBoardingViewModel.getCrewList.value?.data?.crewList?.isNotEmpty() == false)) {
-                    val intent = Intent(this@LoginActivity, OnboardingReDownLoadActivity::class.java)
-                    nextActivity(intent)
-                } else {
-                    val intent =
-                        Intent(this@LoginActivity, LoginTermsActivity::class.java)
-                    nextActivity(intent)
-                }
-            } else {
-                shortToast("로그인 실패")
+        homeViewModel.getCrewList()
+        homeViewModel.crewList.observe(this) {
+            observeCrewList(it.size)
+        }
+    }
+
+    private fun observeCrewList(size: Int) {
+        val crewId = PlayTogetherRepository.crewId
+        if (signViewModel.signup) {
+            //TODO: 회원가입했고 현재 등록된 crewId가 있음
+            if (crewId != -1) {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                nextActivity(intent)
             }
+            // TODO: 회원이지만 재설치를 해서 preference가 비어있음 -> 가입한 동아리 선택뷰로 이동
+            else if (crewId == -1 && size > 0) {
+                val intent =
+                    Intent(this@LoginActivity, OnboardingReDownLoadActivity::class.java)
+                nextActivity(intent)
+            }
+            // TODO: 회원이지만 가입한 동아리가 없는 경우
+            else if (crewId == -1 && size == 0) {
+                val intent = Intent(this@LoginActivity, SelectOnboardingActivity::class.java)
+                nextActivity(intent)
+            }
+        } else {
+            //todo 회원가입안함 -> 약관 뷰 이동
+            val intent =
+                Intent(this@LoginActivity, LoginTermsActivity::class.java)
+            nextActivity(intent)
         }
     }
 
@@ -153,34 +168,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             } else if (token != null) {
                 UserApiClient.instance.me { _, error ->
                     PlayTogetherRepository.kakaoAccessToken = token.accessToken
-                    Timber.e("kakao token access : ${token.accessToken}")
-                    Timber.e("kakao token refresh : ${token.refreshToken}")
-
+                    Timber.e("kakao access token : ${token.accessToken}")
                     with(signViewModel) {
-                        val isSignup = kakaoLogin()
-                        isLogin.observe(this@LoginActivity) {
-                            if (it) {
-                                Timber.d("testset : ${signViewModel.signData.value}")
-                                PlayTogetherSharedPreference.setAccessToken(this@LoginActivity, signViewModel.signData.value ?: "")
-                                PlayTogetherSharedPreference.setRefreshToken(this@LoginActivity, signViewModel.signData.value ?: "")
-//                                if (isSignup) {
-//                                    val intent =
-//                                        Intent(this@LoginActivity, MainActivity::class.java)
-//                                    nextActivity(intent)
-//                                } else {
-//                                    val intent =
-//                                        Intent(this@LoginActivity, LoginTermsActivity::class.java)
-//                                    nextActivity(intent)
-//                                }
-                            } else {
-                                shortToast("로그인 실패")
+                        kakaoLogin()
+                        isLogin.observe(this@LoginActivity) { success ->
+                            if (success) {
+                                signupChecker()
                             }
                         }
                     }
-
-                    signViewModel.kakaoLogin()
-                    signupChecker()
-
                 }
             } else {
                 shortToast("else")

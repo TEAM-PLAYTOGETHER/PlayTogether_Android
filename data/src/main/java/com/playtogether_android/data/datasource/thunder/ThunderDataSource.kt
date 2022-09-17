@@ -29,4 +29,7 @@ interface ThunderDataSource {
 
     //번개 신고
     suspend fun postReport(thunderId: Int)
+
+    //번개 참여/오픈 여부 확인
+    suspend fun getThunderExistChecker(thunderId: Int): ResThunderExistCheckData
 }

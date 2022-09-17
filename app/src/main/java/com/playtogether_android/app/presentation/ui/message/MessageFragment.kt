@@ -30,6 +30,19 @@ class MessageFragment :
         refreshView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getMessageRoomList()
+        messageViewModel.initSocket(requireContext())
+        messageViewModel.resConnect()
+        messageViewModel.resNewMessageToUser()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        messageViewModel.disconnect()
+    }
+
     private fun getMessageRoomList() {
         messageViewModel.getMessageList()
     }

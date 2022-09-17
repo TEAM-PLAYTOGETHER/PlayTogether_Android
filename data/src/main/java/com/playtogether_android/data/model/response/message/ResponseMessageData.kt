@@ -12,6 +12,7 @@ data class ResponseMessageData(
         data class Message(
             val audience: String,
             val audienceId: Int,
+            val audienceProfile : String?,
             val content: String,
             val createdAt: String,
             val read: Boolean,

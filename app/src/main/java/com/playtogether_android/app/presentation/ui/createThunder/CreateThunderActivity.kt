@@ -15,7 +15,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -26,6 +28,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityCreateThunderBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.createThunder.adapter.CreateThunderPhotoListAdapter
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 import com.playtogether_android.app.util.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -139,6 +142,9 @@ class CreateThunderActivity :
     private fun setClickListener() {
         imageSelected()
         clickInfinite()
+        clickUndecidedDate()
+        clickUndecidedTime()
+        clickUndecidedPlace()
 //        clickComplete()
         clickCompleteTest()
         imageSelected()
@@ -167,11 +173,13 @@ class CreateThunderActivity :
         createThunderViewModel.getThunderCreateData.observe(this) {
             if (it.success) {
                 dialog.dismiss()
-                val intent = Intent(this, OpenThunderDetailActivity::class.java)
+                val intent = Intent(this, ThunderDetailActivity::class.java)
                 intent.putExtra("thunderId", it.lightId)
                 startActivity(intent)
                 finish()
             } else {
+                dialog.dismiss()
+                shortToast("번개 생성 안됨")
                 Timber.d("createThunder : 번개 생성 안됨")
             }
         }
@@ -201,14 +209,16 @@ class CreateThunderActivity :
         requestBodyMap["description"] = descriptionBody
         requestBodyMap["category"] = categoryBody
 
-        val multipartBodyList = mutableListOf<MultipartBody.Part>()
-        for (item in galleryItemList) {
-            multipartBodyList.add(multiPartResolver.createImgMultiPart(item))
-        }
+        val item = galleryItemList[0]
+        val multipartBodySingle = multiPartResolver.createImgMultiPart(item)
 
-        createThunderViewModel.postCreateMultipartData(
+//        for (item in galleryItemList) {
+//            multipartBodyList.add(multiPartResolver.createImgMultiPart(item))
+//        }
+
+        createThunderViewModel.postMultipartDataSingle(
             PlayTogetherRepository.crewId,
-            multipartBodyList,
+            multipartBodySingle,
             requestBodyMap
         )
     }
@@ -266,45 +276,6 @@ class CreateThunderActivity :
         return mut
     }
 
-    private fun clickComplete() {
-        binding.tvCreatethunderFinish.setOnClickListener {
-            val date = binding.tvCreatethunderDate.text.toString().replace(".", "-")
-            val time = binding.tvCreatethunderTime.text.toString()
-            val title = binding.etCreatethunderName.text.toString()
-            val place = binding.etCreatethunderPlace.text.toString()
-            var peopleCnt = 0
-            val image = transferImage(photoListAdapter.mutablePhotoList)
-            if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
-                peopleCnt = -1
-            else
-                peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
-            val description = binding.etCreatethunderExplanation.text.toString()
-//            createThunderViewModel.postThunderCreate(
-//                PostThunderCreateData(
-//                    title,
-//                    category,
-//                    date,
-//                    time,
-//                    place,
-//                    peopleCnt,
-//                    description,
-//                    image
-//                )
-//            )
-        }
-
-        createThunderViewModel.getThunderCreateData.observe(this) {
-            if (it.success) {
-                val intent = Intent(this, OpenThunderDetailActivity::class.java)
-                intent.putExtra("thunderId", it.lightId)
-                startActivity(intent)
-                finish()
-            } else {
-                Log.d("createThunder", "번개 생성 안됨")
-            }
-        }
-    }
-
     private fun clickInfinite() {
         binding.ivCreatethunderCheck.setOnClickListener {
             if (!infiniteChecked) {
@@ -325,6 +296,41 @@ class CreateThunderActivity :
                 )
                 infiniteChecked = false
             }
+        }
+    }
+
+    private fun clickUndecided(textView : TextView, imageView : ImageView, str : Int){
+        if(!imageView.isSelected){
+            imageView.setImageResource(R.drawable.ic_icn_check_active)
+            textView.setText(str)
+            inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+            textView.isFocusable=false
+        }
+        else{
+            imageView.setImageResource(R.drawable.ic_icn_check_inactive)
+            textView.text=null
+            textView.isFocusableInTouchMode=true
+            textView.requestFocus()
+            inputMethodManager.showSoftInput(
+                textView,
+                InputMethodManager.SHOW_IMPLICIT
+            )
+        }
+    }
+
+    private fun clickUndecidedDate(){
+        binding.ivCreatethunderDateCheck.setOnClickListener{
+            clickUndecided(binding.tvCreatethunderDate, binding.ivCreatethunderDateCheck, R.string.createthunder_date_undecided)
+        }
+    }
+    private fun clickUndecidedTime(){
+        binding.ivCreatethunderTimeCheck.setOnClickListener{
+            clickUndecided(binding.tvCreatethunderTime, binding.ivCreatethunderTimeCheck, R.string.createthunder_time_undecided)
+        }
+    }
+    private fun clickUndecidedPlace(){
+        binding.ivCreatethunderPlaceCheck.setOnClickListener{
+            clickUndecided(binding.etCreatethunderPlace, binding.ivCreatethunderPlaceCheck, R.string.createthunder_place_undecided)
         }
     }
 

@@ -16,6 +16,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.SubwayListData
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -100,47 +101,46 @@ class SearchSubwayActivity :
                     val subwayName = subwayAdapter.dataList[position].STATION_NM
                     var subwayLine = subwayAdapter.dataList[position].LINE_NUM
 
-                    if(subwayLine.contains("0")) {
-                        subwayLine = subwayLine.replace("0","")
+                    if (subwayLine.contains("0")) {
+                        subwayLine = subwayLine.replace("0", "")
+                    } else if (subwayLine == "경의선") {
+                        subwayLine = subwayLine.replace("경의선", "경의중앙선")
+                    } else if (subwayLine == "인천선") {
+                        subwayLine = subwayLine.replace("인천선", "인천1호선")
+                    } else if (subwayLine == "우이신설경전철") {
+                        subwayLine = subwayLine.replace("우이신설경전철", "우이신설선")
+                    } else if (subwayLine == "북한산우이") {
+                        subwayLine = subwayLine.replace("북한산우이", "우이신설선")
+                    } else if (subwayLine == "김포공항") {
+                        subwayLine = subwayLine.replace("김포공항", "김포골드라인")
+                    } else if (subwayLine == "김포도시철도") {
+                        subwayLine = subwayLine.replace("김포도시철도", "김포골드라인")
+                    } else if (subwayLine == "용인경전철") {
+                        subwayLine = subwayLine.replace("용인경전철", "에버라인")
                     }
-                    else if(subwayLine == "경의선") {
-                        subwayLine = subwayLine.replace("경의선","경의중앙선")
-                    }
-                    else if(subwayLine == "인천선") {
-                        subwayLine = subwayLine.replace("인천선","인천1호선")
-                    }
-                    else if(subwayLine == "우이신설경전철") {
-                        subwayLine = subwayLine.replace("우이신설경전철","우이신설선")
-                    }
-                    else if(subwayLine == "북한산우이") {
-                        subwayLine = subwayLine.replace("북한산우이","우이신설선")
-                    }
-                    else if(subwayLine == "김포공항") {
-                        subwayLine = subwayLine.replace("김포공항","김포골드라인")
-                    }
-                    else if(subwayLine=="김포도시철도"){
-                        subwayLine = subwayLine.replace("김포도시철도","김포골드라인")
-                    }
-                    else if(subwayLine=="용인경전철"){
-                        subwayLine = subwayLine.replace("용인경전철","에버라인")
-                    }
-
 
                     //칩버튼 커스텀
                     if (binding.chipSubwayOnboarding.childCount < 2) {
                         binding.chipSubwayOnboarding.addView(Chip(this@SearchSubwayActivity).apply {
-                            val string = "$subwayName $subwayLine"
-                            text = string
-                            setTextColor(getColorStateList(R.color.main_green))
-                            isCloseIconVisible = true
-                            setCloseIconResource(R.drawable.icn_exit)
-                            setCloseIconTintResource(R.color.gray_999999)
-                            chipBackgroundColor = getColorStateList(R.color.black)
-                            setOnCloseIconClickListener {
-                                binding.chipSubwayOnboarding.removeView(this)
-                                activeBtn()
+                        val string = "$subwayName $subwayLine"
+
+                        text = string
+                        setTextColor(getColorStateList(R.color.main_green))
+                        isCloseIconVisible = true
+                        setCloseIconResource(R.drawable.icn_exit)
+                        setCloseIconTintResource(R.color.gray_999999)
+                        chipBackgroundColor = getColorStateList(R.color.black)
+                        setOnCloseIconClickListener {
+                            binding.chipSubwayOnboarding.removeView(this)
+                            activeBtn()
+                        }
+                    })
+                        if (binding.chipSubwayOnboarding.childCount > 1) {
+                            if ((binding.chipSubwayOnboarding.getChildAt(0) as Chip).text.toString() == (binding.chipSubwayOnboarding.getChildAt(1) as Chip).text.toString()) {
+                                shortToast("이미 추가한 지하철역입니다")
+                               binding.chipSubwayOnboarding.removeView((binding.chipSubwayOnboarding.getChildAt(1) as Chip))
                             }
-                        })
+                        }
                     } else {
                         shortToast("최대 2개까지 추가할 수 있어요!")
                     }
@@ -148,7 +148,6 @@ class SearchSubwayActivity :
                 }
             })
     }
-
 
     private fun addListener() {
         for (i: Int in 1..binding.chipSubwayOnboarding.childCount) {
@@ -192,7 +191,7 @@ class SearchSubwayActivity :
         binding.ivSubwayOnboardingBack.setOnClickListener {
             val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
             if (list != null) {
-                if(list.size != 0 ) {
+                if (list.size != 0) {
                     intent.putExtra("ChipList", list)
                 }
                 intent.putExtra("nickname", nickname)

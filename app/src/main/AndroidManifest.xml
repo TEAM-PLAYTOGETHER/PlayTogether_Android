@@ -85,8 +85,8 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"
@@ -115,6 +115,7 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.message.ChattingActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.onboarding.JoinOnBoardingActivity"
