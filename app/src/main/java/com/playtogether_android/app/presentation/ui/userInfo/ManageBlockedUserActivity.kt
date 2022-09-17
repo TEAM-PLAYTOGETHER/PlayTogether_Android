@@ -12,5 +12,17 @@ class ManageBlockedUserActivity : BaseActivity<ActivityManageBlockedUserBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        clickEvent()
+    }
+
+    private fun clickEvent() {
+        btnBackEvent()
+    }
+
+    // 뒤로가기 버튼
+    private fun btnBackEvent() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }

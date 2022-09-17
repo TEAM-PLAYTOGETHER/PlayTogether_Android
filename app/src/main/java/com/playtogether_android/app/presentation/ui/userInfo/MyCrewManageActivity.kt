@@ -14,6 +14,10 @@ class MyCrewManageActivity : BaseActivity<ActivityMyCrewManageBinding> (R.layout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        clickEvent()
+    }
+
+    private fun clickEvent() {
         moveMyCrewDelete()
         moveBlockedUserManage()
         btnBackEvent()
@@ -21,12 +25,16 @@ class MyCrewManageActivity : BaseActivity<ActivityMyCrewManageBinding> (R.layout
 
     // 차단사용자 관리하기 뷰 이동
     private fun moveBlockedUserManage() {
-        startActivity(Intent(this, ManageBlockedUserActivity::class.java))
+        binding.tvManageBlockedUser.setOnClickListener {
+            startActivity(Intent(this, ManageBlockedUserActivity::class.java))
+        }
     }
 
     // 동아리 탈퇴하기 뷰 이동
     private fun moveMyCrewDelete() {
-        startActivity(Intent(this, DeleteMyCrewActivity::class.java))
+        binding.tvDeleteCrew.setOnClickListener {
+            startActivity(Intent(this, DeleteMyCrewActivity::class.java))
+        }
     }
 
     // 뒤로가기 버튼
@@ -35,8 +43,6 @@ class MyCrewManageActivity : BaseActivity<ActivityMyCrewManageBinding> (R.layout
             finish()
         }
     }
-
-
 
 
 }

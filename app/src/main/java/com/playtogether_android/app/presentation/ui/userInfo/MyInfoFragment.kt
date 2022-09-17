@@ -34,6 +34,10 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         getMyInfo()
         observeMyInfo()
         initBottomDialog()
+        clickEvent()
+    }
+
+    private fun clickEvent() {
         moveSettingView()
         moveEditProfile()
         moveManageCrew()
