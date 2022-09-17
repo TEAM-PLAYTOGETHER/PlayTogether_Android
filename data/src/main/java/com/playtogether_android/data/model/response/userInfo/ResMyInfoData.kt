@@ -19,15 +19,15 @@ data class ResMyInfoData(
         @SerializedName("isDeleted")
         val isDeleted: Boolean,
         @SerializedName("nickname")
-        val nickname: String ? = null,
+        val nickname: String?,
         @SerializedName("description")
-        val description: String ? = null,
+        val description: String?,
         @SerializedName("firstStation")
-        val firstStation: String ? = null,
+        val firstStation: String?,
         @SerializedName("secondStation")
-        val secondStation: String ? = null,
+        val secondStation: String?,
         @SerializedName("profileImage")
-        val profileImage: String ? = null,
+        val profileImage: String?,
         @SerializedName("gender")
         val gender: String,
         @SerializedName("birth")

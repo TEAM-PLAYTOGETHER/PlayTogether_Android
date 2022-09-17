@@ -38,6 +38,7 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
         initKakaoLogin()
         getDeviceToken()
         initPixelUtil()
+        PlayTogetherRepository.crewId = 12
     }
     private fun initPixelUtil() {
         pixelRatio = PixelRatio(this)
