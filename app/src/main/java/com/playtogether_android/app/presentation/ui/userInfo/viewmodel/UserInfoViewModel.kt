@@ -9,6 +9,7 @@ import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,15 +18,15 @@ class UserInfoViewModel @Inject constructor (private val userInfoRepository: Use
     private val _myInfoData = MutableLiveData<MyInfoData>()
     val myInfoData: LiveData<MyInfoData> = _myInfoData
 
-    fun getMyInfo(crewId: Int) = viewModelScope.launch {
-        kotlin.runCatching { userInfoRepository.getMyInfo(crewId) }
+    fun getMyInfo() = viewModelScope.launch {
+        kotlin.runCatching { userInfoRepository.getMyInfo() }
             .onSuccess {
                 _myInfoData.postValue(it)
-                Log.d("getMyInfo-server 성공", it.toString())
+                Timber.d("getMyInfo-server 성공", it.toString())
             }
             .onFailure {
                 it.printStackTrace()
-                Log.d("getMyInfo-server 실패", it.toString())
+                Timber.e("getMyInfo-server 실패 : $it")
             }
     }
 }

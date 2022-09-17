@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.userInfo
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMyInfoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
@@ -18,9 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @AndroidEntryPoint
-class MyInfoFragment : BaseFragment<FragmentMyInfoBinding> (R.layout.fragment_my_info) {
+class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_info) {
 
-    private val userInfoViewModel: UserInfoViewModel by viewModel()
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +44,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding> (R.layout.fragment_my
     }
 
     private fun getMyInfo() {
-        val crewId = PlayTogetherRepository.crewId
-        userInfoViewModel.getMyInfo(crewId)
+//        val crewId = PlayTogetherRepository.crewId
+        userInfoViewModel.getMyInfo()
     }
 
     private fun observeMyInfo() {
