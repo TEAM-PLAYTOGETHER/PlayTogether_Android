@@ -31,7 +31,7 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
         binding.tvDeleteCrewTitle.text = strTitle
 
         val strContent = SpannableStringBuilder(binding.tvDeleteCrewContent.text)
-        strContent.setSpan(ForegroundColorSpan(getColor(R.color.red_FF0000)), 98, 114, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        strContent.setSpan(ForegroundColorSpan(getColor(R.color.red_FF0000)), 98, 115, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvDeleteCrewContent.text = strContent
 
     }
