@@ -6,10 +6,8 @@ import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
 
 class UserInfoRepositoryImpl(private val userInfoDataSource: UserInfoDataSource) : UserInfoRepository {
-//    override suspend fun getMyInfo(crewId: Int): MyInfoData {
-//        return UserInfoMapper.mapperToMyInfoData(userInfoDataSource.getMyInfo(crewId))
-//    }
 
+    // 유저 본인 멀티프로필 상세 조회
     override suspend fun getMyInfo(): MyInfoData {
         return UserInfoMapper.mapperToMyInfoData(userInfoDataSource.getMyInfo().data)
     }

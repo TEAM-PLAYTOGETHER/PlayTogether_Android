@@ -8,16 +8,16 @@ object UserInfoMapper {
     // 유저 본인 멀티프로필 상세 조회
     fun mapperToMyInfoData(resMyInfoData: ResMyInfoData.Data): MyInfoData {
         return MyInfoData(
-            resMyInfoData.profile.id,
-            resMyInfoData.crewName,
-            resMyInfoData.profile.isDeleted,
-            resMyInfoData.profile.nickname,
-            resMyInfoData.profile.description,
-            resMyInfoData.profile.firstStation,
-            resMyInfoData.profile.secondStation,
-            resMyInfoData.profile.profileImage,
-            resMyInfoData.profile.gender,
-            resMyInfoData.profile.birth
+            id = resMyInfoData.profile.id,
+            crewName = resMyInfoData.crewName,
+            isDeleted = resMyInfoData.profile.isDeleted,
+            nickname = resMyInfoData.profile.nickname,
+            description = resMyInfoData.profile.description,
+            firstStation = resMyInfoData.profile.firstStation,
+            secondStation = resMyInfoData.profile.secondStation,
+            profileImage = resMyInfoData.profile.profileImage,
+            gender = resMyInfoData.profile.gender,
+            birth = resMyInfoData.profile.birth
         )
     }
 }

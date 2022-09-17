@@ -45,7 +45,6 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     }
 
     private fun getMyInfo() {
-//        val crewId = PlayTogetherRepository.crewId
         userInfoViewModel.getMyInfo()
     }
 
