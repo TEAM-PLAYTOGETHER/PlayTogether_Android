@@ -3,15 +3,18 @@ package com.playtogether_android.app.presentation.ui.userInfo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOtherInfoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.main.WebViewActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.DateTimeUtil
+import com.playtogether_android.app.util.showCustomPopUp
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -29,7 +32,7 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
         clickEvent()
         getOtherInfo(crewId, memberId)
         initData()
-        Timber.d("initOtherInfo : $crewId")
+        Timber.d("initOtherInfo : $crewId, $memberId")
     }
 
     private fun clickEvent() {
@@ -52,11 +55,28 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
         }
     }
 
-    // 옵션 버튼
+    private fun initIntent(url: String) {
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("url", url)
+        startActivity(intent)
+    }
+
+    // 차단/신고 옵션 버튼
     //todo 옵션 차단/신고 기능
     private fun btnOption() {
         binding.btnOption.setOnClickListener {
+            val popup = showCustomPopUp(it, R.array.option_mypage, baseContext)
+            popup.setOnItemClickListener { _, view, _, _ ->
+                if ((view as TextView).text == "차단") {
+                    //todo 차단 API 연결
+                    popup.dismiss()
+                } else {
+                    initIntent("https://cheddar-liquid-051.notion.site/14fc6c632471488486e7e76bc161069e")
+                    popup.dismiss()
 
+                }
+            }
+            popup.show()
         }
     }
 
