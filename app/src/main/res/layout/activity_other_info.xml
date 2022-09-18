@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="otherInfo"
+            type="com.playtogether_android.domain.model.userInfo.OtherInfoData" />
+
+        <variable
+            name="birthAndGender"
+            type="String" />
 
     </data>
 
@@ -71,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="SOPT"
+                android:text="@{otherInfo.crewName}"
                 android:fontFamily="@font/pretendard_bold"
                 android:textSize="14sp"
                 android:textColor="@color/black"
@@ -95,6 +103,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:src="@drawable/img_go"
+                    android:src="@drawable/img_go"
                     android:layout_marginTop="24dp"
                     android:layout_marginStart="16dp"/>
 
@@ -103,6 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="문수제비"
+                    android:text="@{otherInfo.nickname}"
                     android:fontFamily="@font/pretendard_bold"
                     android:textSize="18sp"
                     android:textColor="@color/main_green"
@@ -115,6 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="1998년생 ・ M"
+                    android:text="@{birthAndGender}"
                     android:fontFamily="@font/pretendard_medium"
                     android:textSize="12sp"
                     android:textColor="@color/gray_white"
@@ -137,6 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="강남역"
+                        android:text="@{otherInfo.firstStation}"
                         android:fontFamily="@font/pretendard_medium"
                         android:textSize="12sp"
                         android:textColor="@color/gray_white"
@@ -153,6 +165,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         tools:text="뒷부분말줄임테스트뒷부분말줄임이되었으면줗겠다"
+                        android:text="@{otherInfo.secondStation}"
                         android:fontFamily="@font/pretendard_medium"
                         android:textSize="12sp"
                         android:textColor="@color/gray_white"
@@ -184,6 +197,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     tools:text="한줄 소개임ㅋㅋㅋㅋ나 언제자냐 얼른 자야해 하하하하하하하하하하핳 잇츠미 잇츠미 룰루랄라 글자수테스트를 해보쟈아아아ㅏ아아아앙아아 "
+                    android:text="@{otherInfo.description}"
                     android:fontFamily="@font/pretendard_medium"
                     android:textSize="12sp"
                     android:textColor="@color/gray_gray02"
