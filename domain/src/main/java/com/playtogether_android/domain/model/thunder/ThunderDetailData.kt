@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ThunderDetailData(
     val category: String,
-    val date: String,
+    val date: String?,
     val description: String,
     val image: String,
     @SerializedName("is_opened")
@@ -15,10 +15,10 @@ data class ThunderDetailData(
     val lightMemberCnt: Int,
     @SerializedName("people_cnt")
     val peopleCnt: Int,
-    val place: String,
+    val place: String?,
     @SerializedName("scp_cnt")
     val scpCnt: Int,
-    val time: String,
+    val time: String?,
     val title: String
 )
 
