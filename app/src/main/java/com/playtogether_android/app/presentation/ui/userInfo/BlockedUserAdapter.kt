@@ -38,6 +38,11 @@ class BlockedUserAdapter : RecyclerView.Adapter<BlockedUserAdapter.BlockedUserVi
         : RecyclerView.ViewHolder(binding.root) {
             fun onBind(data: BlockUserList.Block) {
                 binding.blockUserList = data
+
+                //todo 차단해제 API 연결
+//                binding.btnUnblock.setOnClickListener {
+//
+//                }
             }
         }
 }
