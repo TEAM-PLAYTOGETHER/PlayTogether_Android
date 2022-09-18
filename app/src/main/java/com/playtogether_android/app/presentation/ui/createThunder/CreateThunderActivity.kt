@@ -135,13 +135,12 @@ class CreateThunderActivity :
         clickUndecidedDate()
         clickUndecidedTime()
         clickUndecidedPlace()
-//        clickComplete()
-        clickCompleteTest()
+        clickComplete()
         imageSelected()
         uploadPhotoClickListener()
     }
 
-    private fun clickCompleteTest() {
+    private fun clickComplete() {
         val dialog = LoadingDialog(this)
         binding.tvCreatethunderFinish.setOnClickListener {
             val date = binding.tvCreatethunderDate.text.toString().replace(".", "-")
@@ -158,7 +157,8 @@ class CreateThunderActivity :
 
             val itemList =
                 textTransfer(listOf(date, time, title, place, peopleCnt.toString(), description))
-            multipart(date, time, title, place, peopleCnt, description)
+            Timber.e("itemList : $itemList")
+            multipart(itemList)
             dialog.show()
         }
 
@@ -185,31 +185,30 @@ class CreateThunderActivity :
             } else
                 transferList.add(item)
         }
+        Timber.e("list : $transferList")
         return transferList
     }
 
     private fun multipart(
-        date: String,
-        time: String,
-        title: String,
-        place: String,
-        peopleCnt: Int,
-        description: String,
+        itemList: List<String?>
     ) {
-        val dateBody = date.toRequestBody("text/plain".toMediaTypeOrNull())
-        val timeBody = time.toRequestBody("text/plain".toMediaTypeOrNull())
-        val titleBody = title.toRequestBody("text/plain".toMediaTypeOrNull())
-        val placeBody = place.toRequestBody("text/plain".toMediaTypeOrNull())
-        val peopleCntBody = peopleCnt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val descriptionBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
+        val partMapTagList = listOf("date", "time", "title", "place", "peopleCnt", "description")
+//        val dateBody = itemList[0]?.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val timeBody = itemList[1]?.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val titleBody = itemList[2]?.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val placeBody = itemList[3]?.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val peopleCntBody = itemList[4].toString().toRequestBody("text/plain".toMediaTypeOrNull())
+//        val descriptionBody = itemList[5]?.toRequestBody("text/plain".toMediaTypeOrNull())
         val categoryBody = category.toRequestBody("text/plain".toMediaTypeOrNull())
+
         val requestBodyMap = HashMap<String, RequestBody?>()
-        requestBodyMap["date"] = dateBody
-        requestBodyMap["time"] = timeBody
-        requestBodyMap["title"] = titleBody
-        requestBodyMap["place"] = placeBody
-        requestBodyMap["peopleCnt"] = peopleCntBody
-        requestBodyMap["description"] = descriptionBody
+        for (cnt in 0..5) {
+            val item = itemList[cnt]
+            if (!item.isNullOrEmpty()) {
+                requestBodyMap[partMapTagList[cnt]] =
+                    item.toRequestBody("text/plain".toMediaTypeOrNull())
+            }
+        }
         requestBodyMap["category"] = categoryBody
 
         if (galleryItemList.isNotEmpty()) {
