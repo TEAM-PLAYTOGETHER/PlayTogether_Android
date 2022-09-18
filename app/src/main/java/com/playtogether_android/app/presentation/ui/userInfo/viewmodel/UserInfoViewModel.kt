@@ -27,6 +27,10 @@ class UserInfoViewModel @Inject constructor (private val userInfoRepository: Use
     private val _isBlock = MutableLiveData<Boolean>()
     val isBlock: LiveData<Boolean> = _isBlock
 
+    // 동아리 탈퇴
+    private val _isDelete = MutableLiveData<Boolean>()
+    val isDelete: LiveData<Boolean> = _isDelete
+
 
     // 유저 본인 멀티프로필 상세 조회
     fun getMyInfo() = viewModelScope.launch {
@@ -64,6 +68,19 @@ class UserInfoViewModel @Inject constructor (private val userInfoRepository: Use
             .onFailure {
                 _isBlock.value = false
                 Timber.e("postBlockUser-server 실패 : $it")
+            }
+    }
+
+    // 동아리 탈퇴
+    fun delCrew() = viewModelScope.launch {
+        kotlin.runCatching { userInfoRepository.delCrew() }
+            .onSuccess {
+                _isDelete.value = true
+                Timber.d("delCrew-server 성공 : $it")
+            }
+            .onFailure {
+                _isDelete.value = false
+                Timber.e("delCrew-server 실패 : $it")
             }
     }
 }

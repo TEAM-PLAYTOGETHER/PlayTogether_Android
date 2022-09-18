@@ -10,6 +10,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.core.text.set
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityDeleteMyCrewBinding
@@ -17,6 +18,7 @@ import com.playtogether_android.app.databinding.DialogCheckBinding
 import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.SplashActivity
+import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.data.singleton.PlayTogetherRepository.crewId
@@ -24,6 +26,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.activity_delete_my_crew) {
+
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -76,7 +81,16 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
                 dialog.dismiss()
             }
             tvDialogYes.setOnClickListener {
-                showConfirmDialog(dialog)
+                //todo 동아리 탈퇴 API 연결
+                with(userInfoViewModel) {
+                    delCrew()
+                    isDelete.observe(this@DeleteMyCrewActivity) {
+                        if (it) {
+                            showConfirmDialog(dialog)
+                        }
+                    }
+                }
+                dialog.dismiss()
             }
         }
     }
@@ -96,6 +110,7 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
         view.tvDialogCheck.setOnClickListener {
             dialog.dismiss()
             finish()
+            //todo 탈퇴완료하고 어디로 넘어갈까????
             startActivity(Intent(this, SplashActivity::class.java))
         }
     }
