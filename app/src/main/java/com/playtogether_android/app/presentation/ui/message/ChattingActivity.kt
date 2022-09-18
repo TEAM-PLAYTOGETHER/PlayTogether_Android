@@ -29,7 +29,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         updateLastChatUi()
         clickSendMessage()
         clickBackArrow()
-        editTextObserver()
+        //editTextObserver()
     }
 
     override fun onResume() {
@@ -70,7 +70,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         }
     }
 
-    private fun editTextObserver() {
+    /*private fun editTextObserver() {
         binding.etMessage.viewTreeObserver.addOnGlobalLayoutListener {
             scrollToBottom()
             Timber.e("editText layoutListener : 여기 실행 되나1")
@@ -81,9 +81,9 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
                 }
             }
         }
-    }
+    }*/
 
-    private fun sdkfjasdlfa(){
+    /*private fun sdkfjasdlfa(){
         binding.etMessage.viewTreeObserver.addOnGlobalFocusChangeListener(
             object : ViewTreeObserver.OnGlobalFocusChangeListener{
                 override fun onGlobalFocusChanged(p0: View?, p1: View?) {
@@ -92,7 +92,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
             }
         )
-    }
+    }*/
 
     private fun clickSendMessage() {
         val recvId = intent.getIntExtra("audienceId", -1)
