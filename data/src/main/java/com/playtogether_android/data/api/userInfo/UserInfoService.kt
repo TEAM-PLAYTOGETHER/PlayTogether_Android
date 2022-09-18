@@ -2,6 +2,7 @@ package com.playtogether_android.data.api.userInfo
 
 import com.playtogether_android.data.model.response.userInfo.ResBlockUserData
 import com.playtogether_android.data.model.ResGenericData
+import com.playtogether_android.data.model.response.userInfo.ResBlockUserList
 import com.playtogether_android.data.model.response.userInfo.ResMyInfoData
 import com.playtogether_android.data.model.response.userInfo.ResOtherInfoData
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -35,6 +36,10 @@ interface UserInfoService {
     suspend fun delCrew(
         @Path("crewId") crewId: Int = PlayTogetherRepository.crewId
     ): ResGenericData
+
+    // 유저 차단 리스트 조회
+    @GET("user/block/list")
+    suspend fun getBlockUserList(): ResBlockUserList
 
 
 }

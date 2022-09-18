@@ -1,9 +1,11 @@
 package com.playtogether_android.data.mapper.userInfo
 
 import com.playtogether_android.data.model.response.userInfo.ResBlockUserData
+import com.playtogether_android.data.model.response.userInfo.ResBlockUserList
 import com.playtogether_android.data.model.response.userInfo.ResMyInfoData
 import com.playtogether_android.data.model.response.userInfo.ResOtherInfoData
 import com.playtogether_android.domain.model.userInfo.BlockUserData
+import com.playtogether_android.domain.model.userInfo.BlockUserList
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
 
@@ -49,6 +51,15 @@ object UserInfoMapper {
             blockUserId = resBlockUserData.blockUserId,
             createdAt = resBlockUserData.createdAt,
             updatedAt = resBlockUserData.updatedAt
+        )
+    }
+
+    // 유저 차단 리스트 조회
+    fun mapperToBlockUserList(resBlockUserList: ResBlockUserList): BlockUserList {
+        return BlockUserList(
+            data = resBlockUserList.data.map {
+                BlockUserList.Block(it.id, it.userId, it.blockUserId, it.createdAt, it.updatedAt)
+            }
         )
     }
 }
