@@ -1,5 +1,6 @@
 package com.playtogether_android.domain.repository.userInfo
 
+import com.playtogether_android.domain.model.userInfo.BlockUserData
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
 
@@ -10,4 +11,7 @@ interface UserInfoRepository {
 
     // 유저 멀티프로필 상세 조회
     suspend fun getOtherInfo(crewId: Int,memberId: Int): OtherInfoData
+
+    // 유저 차단
+    suspend fun postBlockUser(memberId: Int): BlockUserData
 }

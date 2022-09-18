@@ -1,9 +1,11 @@
 package com.playtogether_android.data.api.userInfo
 
+import com.playtogether_android.data.model.response.userInfo.ResBlockUserData
 import com.playtogether_android.data.model.response.userInfo.ResMyInfoData
 import com.playtogether_android.data.model.response.userInfo.ResOtherInfoData
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface UserInfoService {
@@ -19,6 +21,12 @@ interface UserInfoService {
         @Path("crewId") crewId: Int = PlayTogetherRepository.crewId,
         @Path("memberId") memberId: Int
     ): ResOtherInfoData
+
+    // 유저 차단
+    @POST("user/block/{memberId}")
+    suspend fun postBlockUser(
+        @Path("memberId") memberId: Int
+    ): ResBlockUserData
 
 
 }

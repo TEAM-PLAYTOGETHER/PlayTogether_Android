@@ -1,7 +1,9 @@
 package com.playtogether_android.data.mapper.userInfo
 
+import com.playtogether_android.data.model.response.userInfo.ResBlockUserData
 import com.playtogether_android.data.model.response.userInfo.ResMyInfoData
 import com.playtogether_android.data.model.response.userInfo.ResOtherInfoData
+import com.playtogether_android.domain.model.userInfo.BlockUserData
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
 
@@ -36,6 +38,17 @@ object UserInfoMapper {
             gender = resOtherInfoData.profile.gender,
             birth = resOtherInfoData.profile.birth,
             crewName = resOtherInfoData.crewName
+        )
+    }
+
+    // 유저 차단
+    fun mapperToBlockUserData(resBlockUserData: ResBlockUserData.Data): BlockUserData {
+        return BlockUserData(
+            id = resBlockUserData.id,
+            userId = resBlockUserData.userId,
+            blockUserId = resBlockUserData.blockUserId,
+            createdAt = resBlockUserData.createdAt,
+            updatedAt = resBlockUserData.updatedAt
         )
     }
 }
