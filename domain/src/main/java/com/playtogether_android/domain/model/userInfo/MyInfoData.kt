@@ -20,5 +20,6 @@ data class MyInfoData(
     @SerializedName("gender")
     val gender: String,
     @SerializedName("birth")
-    val birth: String
+    val birth: String,
+    val crewName: String
 )

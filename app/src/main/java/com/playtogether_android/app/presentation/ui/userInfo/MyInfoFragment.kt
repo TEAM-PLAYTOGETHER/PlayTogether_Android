@@ -84,9 +84,16 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     //프로필 수정하기 온보딩 뷰 이동
     private fun moveEditProfile() {
         binding.tvProfileEdit.setOnClickListener {
-            val intent = Intent(requireActivity(), OnBoardingIntroduceActivity::class.java)
-            //todo 온보딩뷰 이동 시 넘겨줄 값 추가
-            startActivity(intent)
+            userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
+                val intent = Intent(requireActivity(), OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("crewName", it.crewName)
+                intent.putExtra("nickname",it.nickname )
+                intent.putExtra("description",it.description)
+                intent.putExtra("firstStation", it.firstStation)
+                intent.putExtra("secondStation", it.secondStation)
+                //todo 온보딩뷰 이동 시 넘겨줄 값 추가
+                startActivity(intent)
+            }
         }
     }
 

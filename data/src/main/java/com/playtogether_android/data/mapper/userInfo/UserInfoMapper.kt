@@ -16,7 +16,8 @@ object UserInfoMapper {
             secondStation = resMyInfoData.profile.secondStation,
             profileImage = resMyInfoData.profile.profileImage,
             gender = resMyInfoData.profile.gender,
-            birth = resMyInfoData.profile.birth
+            birth = resMyInfoData.profile.birth,
+            crewName = resMyInfoData.crewName
         )
     }
 }
