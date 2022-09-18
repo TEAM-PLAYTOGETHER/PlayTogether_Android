@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="blockUserList"
+            type="com.playtogether_android.domain.model.userInfo.BlockUserList.Block" />
 
     </data>
 
@@ -25,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="문수제비"
+            android:text="@{blockUserList.createdAt}"
             android:fontFamily="@font/pretendard_bold"
             android:textSize="14sp"
             android:textColor="@color/gray_black"
