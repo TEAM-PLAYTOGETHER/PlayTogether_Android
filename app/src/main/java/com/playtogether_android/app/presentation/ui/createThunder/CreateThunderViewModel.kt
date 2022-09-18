@@ -50,8 +50,25 @@ class CreateThunderViewModel @Inject constructor(
 
     fun postMultipartDataSingle(
         crewId: Int,
-        images: MultipartBody.Part,
-        body: HashMap<String, RequestBody>
+        images: MultipartBody.Part?,
+        body: HashMap<String, RequestBody?>
+    ) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postMultipartThunderCreateUseCase(crewId, images, body)
+            }.onSuccess {
+                _getThunderCreateData.value = it
+                Timber.d("생성된 번개 아이디 : ${it.lightId}")
+            }.onFailure {
+                Timber.e("post create multipart data : ${it.message}")
+            }
+        }
+    }
+
+    fun postMultipartDataNoImages(
+        crewId: Int,
+        images: MultipartBody.Part?,
+        body: HashMap<String, RequestBody?>
     ) {
         viewModelScope.launch {
             kotlin.runCatching {

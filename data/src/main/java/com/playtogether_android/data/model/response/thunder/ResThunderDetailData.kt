@@ -11,7 +11,7 @@ data class ResThunderDetailData(
 ) {
     data class Data(
         val category: String,
-        val date: String,
+        val date: String?,
         val description: String,
         val image: String,
         @SerializedName("is_opened")
@@ -24,10 +24,10 @@ data class ResThunderDetailData(
         val organizer: List<Organizer>,
         @SerializedName("people_cnt")
         val peopleCnt: Int,
-        val place: String,
+        val place: String?,
         @SerializedName("scp_cnt")
         val scpCnt: Int,
-        val time: String,
+        val time: String?,
         val title: String
     ) {
         data class Member(
