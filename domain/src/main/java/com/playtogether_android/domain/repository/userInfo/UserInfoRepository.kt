@@ -1,5 +1,6 @@
 package com.playtogether_android.domain.repository.userInfo
 
+import com.playtogether_android.domain.model.GenericData
 import com.playtogether_android.domain.model.userInfo.BlockUserData
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
@@ -14,4 +15,7 @@ interface UserInfoRepository {
 
     // 유저 차단
     suspend fun postBlockUser(memberId: Int): BlockUserData
+
+    // 동아리 탈퇴
+    suspend fun delCrew(): GenericData
 }

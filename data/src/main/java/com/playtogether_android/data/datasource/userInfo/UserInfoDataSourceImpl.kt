@@ -1,6 +1,7 @@
 package com.playtogether_android.data.datasource.userInfo
 
 import com.playtogether_android.data.api.userInfo.UserInfoService
+import com.playtogether_android.data.model.ResGenericData
 import com.playtogether_android.data.model.response.userInfo.ResBlockUserData
 import com.playtogether_android.data.model.response.userInfo.ResMyInfoData
 import com.playtogether_android.data.model.response.userInfo.ResOtherInfoData
@@ -19,5 +20,10 @@ class UserInfoDataSourceImpl(private val service: UserInfoService) : UserInfoDat
     // 유저 차단
     override suspend fun postBlockUser(memberId: Int): ResBlockUserData {
         return service.postBlockUser(memberId)
+    }
+
+    // 동아리 탈퇴
+    override suspend fun delCrew(): ResGenericData {
+        return service.delCrew()
     }
 }

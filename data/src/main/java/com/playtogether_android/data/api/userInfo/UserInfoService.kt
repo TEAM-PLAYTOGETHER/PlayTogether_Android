@@ -1,9 +1,11 @@
 package com.playtogether_android.data.api.userInfo
 
 import com.playtogether_android.data.model.response.userInfo.ResBlockUserData
+import com.playtogether_android.data.model.ResGenericData
 import com.playtogether_android.data.model.response.userInfo.ResMyInfoData
 import com.playtogether_android.data.model.response.userInfo.ResOtherInfoData
 import com.playtogether_android.data.singleton.PlayTogetherRepository
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -27,6 +29,12 @@ interface UserInfoService {
     suspend fun postBlockUser(
         @Path("memberId") memberId: Int
     ): ResBlockUserData
+
+    // 동아리 탈퇴
+    @DELETE("crew/{crewId}")
+    suspend fun delCrew(
+        @Path("crewId") crewId: Int = PlayTogetherRepository.crewId
+    ): ResGenericData
 
 
 }

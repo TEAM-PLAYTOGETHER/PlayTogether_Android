@@ -2,6 +2,7 @@ package com.playtogether_android.data.repositoryimpl.userInfo
 
 import com.playtogether_android.data.datasource.userInfo.UserInfoDataSource
 import com.playtogether_android.data.mapper.userInfo.UserInfoMapper
+import com.playtogether_android.domain.model.GenericData
 import com.playtogether_android.domain.model.userInfo.BlockUserData
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
@@ -22,5 +23,16 @@ class UserInfoRepositoryImpl(private val userInfoDataSource: UserInfoDataSource)
     // 유저 차단
     override suspend fun postBlockUser(memberId: Int): BlockUserData {
         return UserInfoMapper.mapperToBlockUserData(userInfoDataSource.postBlockUser(memberId).data)
+    }
+
+    // 동아리 탈퇴
+    override suspend fun delCrew(): GenericData {
+        return with(userInfoDataSource.delCrew()) {
+            GenericData(
+                this.status,
+                this.success,
+                this.message
+            )
+        }
     }
 }
