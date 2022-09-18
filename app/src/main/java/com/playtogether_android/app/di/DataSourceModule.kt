@@ -10,6 +10,7 @@ import com.playtogether_android.data.api.onboarding.SubwayInfoService
 import com.playtogether_android.data.api.sign.SignService
 import com.playtogether_android.data.api.thunder.ThunderCreateService
 import com.playtogether_android.data.api.thunder.ThunderService
+import com.playtogether_android.data.api.userInfo.UserInfoService
 import com.playtogether_android.data.datasource.home.HomeDataSource
 import com.playtogether_android.data.datasource.home.HomeDataSourceImpl
 import com.playtogether_android.data.datasource.light.LightDataSource
@@ -27,6 +28,8 @@ import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSourceImpl
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderDataSourceImpl
+import com.playtogether_android.data.datasource.userInfo.UserInfoDataSource
+import com.playtogether_android.data.datasource.userInfo.UserInfoDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -96,5 +99,11 @@ object DataSourceModule {
     @Singleton
     fun provideHomeDataSource(service: HomeService): HomeDataSource {
         return HomeDataSourceImpl(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserInfoDataSource(service: UserInfoService): UserInfoDataSource {
+        return UserInfoDataSourceImpl(service)
     }
 }

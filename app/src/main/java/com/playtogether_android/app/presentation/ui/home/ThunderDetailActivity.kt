@@ -19,6 +19,7 @@ import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
+import com.playtogether_android.app.presentation.ui.userInfo.OtherInfoActivity
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.app.util.shortToast
@@ -344,9 +345,9 @@ class ThunderDetailActivity :
                 organizerName = it.name
             }
 
-            val intent = Intent(this, OthersMyPageActivity::class.java)
-            intent.putExtra("organizerId", organizerId)
-            intent.putExtra("organizerName", organizerName)
+            val intent = Intent(this, OtherInfoActivity::class.java)
+            intent.putExtra("memberId", organizerId)
+//            intent.putExtra("organizerName", organizerName)
 
             startActivity(intent)
         }

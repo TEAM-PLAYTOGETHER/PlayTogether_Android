@@ -1,14 +1,173 @@
 package com.playtogether_android.app.presentation.ui.userInfo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
+import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOtherInfoBinding
+import com.playtogether_android.app.databinding.DialogCheckBinding
+import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.main.MainActivity
+import com.playtogether_android.app.presentation.ui.main.WebViewActivity
+import com.playtogether_android.app.presentation.ui.message.ChattingActivity
+import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
+import com.playtogether_android.app.util.CustomDialogSon
+import com.playtogether_android.app.util.DateTimeUtil
+import com.playtogether_android.app.util.showCustomPopUp
+import com.playtogether_android.data.singleton.PlayTogetherRepository
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activity_other_info) {
+
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val memberId = intent.getIntExtra("memberId", -1)
+        val crewId = PlayTogetherRepository.crewId
+        clickEvent()
+        getOtherInfo(crewId, memberId)
+        initData()
+        btnOption(memberId)
+        Timber.d("initOtherInfo : $crewId, $memberId")
+    }
+
+    private fun clickEvent() {
+        moveChattingView()
+        btnBackEvent()
+    }
+
+    // 채팅뷰로 이동
+    private fun moveChattingView() {
+        binding.clOtherInfoBtnChatting.setOnClickListener {
+            startActivity(Intent(this, ChattingActivity::class.java))
+        }
+    }
+
+    // 뒤로가기 버튼
+    private fun btnBackEvent() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun initIntent(url: String) {
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("url", url)
+        startActivity(intent)
+    }
+
+    // 차단/신고 옵션 버튼
+    //todo 옵션 차단/신고 기능
+    private fun btnOption(memberId: Int) {
+        binding.btnOption.setOnClickListener {
+            val popup = showCustomPopUp(it, R.array.option_mypage, baseContext)
+            popup.setOnItemClickListener { _, view, _, _ ->
+                if ((view as TextView).text == "차단") {
+                    //todo 차단 다이어로그 띄우기 -> 그 안에 차단 API 연결
+//                    with(userInfoViewModel) {
+//                        postBlockUser(memberId)
+//                        isBlock.observe(this@OtherInfoActivity) {
+//                            if (it) {
+//                                popup.dismiss()
+//
+//                            }
+//                        }
+//                    }
+                    showBlockDialog(memberId)
+                    popup.dismiss()
+                } else {
+                    initIntent("https://cheddar-liquid-051.notion.site/14fc6c632471488486e7e76bc161069e")
+                    popup.dismiss()
+
+                }
+            }
+            popup.show()
+        }
+    }
+
+    // 차단 다이어로그
+    private fun showBlockDialog(memberId: Int) {
+        userInfoViewModel.otherInfoData.observe(this) {
+            val nickname = it.nickname
+
+            val title = "${nickname}님을 차단할까요?\n[내 동아리 관리하기]에서\n해제할 수 있습니!"
+            val dialog = CustomDialogSon(this)
+            val view = DialogYesNoBinding.inflate(layoutInflater)
+            dialog.setContentView(view.root)
+
+            dialog.window?.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+            dialog.show()
+
+            with(view) {
+                tvDialogTitle.text = title
+                tvDialogNo.setOnClickListener {
+                    dialog.dismiss()
+                }
+                tvDialogYes.setOnClickListener {
+                    //todo 유저차단 API 연결
+                    with(userInfoViewModel) {
+                        postBlockUser(memberId)
+                        isBlock.observe(this@OtherInfoActivity) {
+                            if (it) {
+                                showConfirmDialog(dialog)
+                            }
+                        }
+                    }
+                    dialog.dismiss()
+                }
+            }
+        }
+    }
+
+    private fun showConfirmDialog(dialog: CustomDialogSon) {
+        val title = "차단 완료되었습니다."
+        val view = DialogCheckBinding.inflate(layoutInflater)
+        dialog.setContentView(view.root)
+        dialog.show()
+        view.tvDialogTitle.text = title
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        dialog.window?.setBackgroundDrawableResource(R.drawable.inset_horizontal_58)
+        view.tvDialogCheck.setOnClickListener {
+            dialog.dismiss()
+            // 차단 완료 후 홈뷰로 이동
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
+
+    private fun getOtherInfo(crewId: Int, memberId: Int) {
+        userInfoViewModel.getOtherInfo(crewId, memberId)
+    }
+
+    private fun initData() {
+        userInfoViewModel.otherInfoData.observe(this) {
+            val birth = DateTimeUtil.convertBirthFormat(it.birth)
+            val gender = it.gender
+            val genderFormat: String
+            if (gender == "남") genderFormat = "M"
+            else genderFormat = "W"
+
+            binding.birthAndGender = "${birth}년생 ・ $genderFormat"
+            binding.otherInfo = it
+            binding.tvOtherInfoTitle.text = "${it.nickname}님의 프로필"
+            binding.tvOtherInfoChatting.text = "${it.nickname}님과 채팅하기"
+        }
     }
 }
