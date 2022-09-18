@@ -193,12 +193,6 @@ class CreateThunderActivity :
         itemList: List<String?>
     ) {
         val partMapTagList = listOf("date", "time", "title", "place", "peopleCnt", "description")
-//        val dateBody = itemList[0]?.toRequestBody("text/plain".toMediaTypeOrNull())
-//        val timeBody = itemList[1]?.toRequestBody("text/plain".toMediaTypeOrNull())
-//        val titleBody = itemList[2]?.toRequestBody("text/plain".toMediaTypeOrNull())
-//        val placeBody = itemList[3]?.toRequestBody("text/plain".toMediaTypeOrNull())
-//        val peopleCntBody = itemList[4].toString().toRequestBody("text/plain".toMediaTypeOrNull())
-//        val descriptionBody = itemList[5]?.toRequestBody("text/plain".toMediaTypeOrNull())
         val categoryBody = category.toRequestBody("text/plain".toMediaTypeOrNull())
 
         val requestBodyMap = HashMap<String, RequestBody?>()
