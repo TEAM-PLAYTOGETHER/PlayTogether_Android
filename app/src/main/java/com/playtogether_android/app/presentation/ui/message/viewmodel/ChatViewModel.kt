@@ -193,6 +193,7 @@ class ChatViewModel @Inject constructor(
         val exitListener = Emitter.Listener {
             val success = gson.fromJson(it[0].toString(), ResExitRoom::class.java).success
             if (!success) lamda()
+            else disconnect()
             Timber.e("Socket ResExitRoom : $success")
         }
         socket.on("resExitRoom", exitListener)
