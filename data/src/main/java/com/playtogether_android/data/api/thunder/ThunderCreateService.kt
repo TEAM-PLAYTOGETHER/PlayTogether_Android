@@ -28,6 +28,6 @@ interface ThunderCreateService {
     suspend fun postMultipartThunderCreateSingle(
         @Path("crewId") crewId: Int,
         @Part image: MultipartBody.Part?,
-        @PartMap body: HashMap<String, RequestBody>
+        @PartMap body: HashMap<String, RequestBody?>
     ): ResThunderCreateSingle
 }

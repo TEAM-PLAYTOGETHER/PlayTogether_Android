@@ -14,7 +14,7 @@ class PostMultipartThunderCreateUseCase @Inject constructor(private val reposito
     suspend operator fun invoke(
         crewId: Int,
         image: MultipartBody.Part?,
-        body: HashMap<String, RequestBody>,
+        body: HashMap<String, RequestBody?>,
     ): GetThunderCreateData {
         return repository.postMultipartThunderCreateSingle(crewId, image, body)
     }

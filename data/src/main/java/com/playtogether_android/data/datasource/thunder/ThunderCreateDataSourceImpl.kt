@@ -33,7 +33,7 @@ class ThunderCreateDataSourceImpl(private val service: ThunderCreateService) :
     override suspend fun postMultipartThunderSingle(
         crewId: Int,
         image: MultipartBody.Part?,
-        body: HashMap<String, RequestBody>
+        body: HashMap<String, RequestBody?>
     ): ResThunderCreateSingle {
         return service.postMultipartThunderCreateSingle(crewId, image, body)
     }
