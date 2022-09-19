@@ -68,6 +68,14 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             binding.myInfo = it
             binding.homeViewModel = homeViewModel
 
+            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
+            if(it.firstStation == null) {
+                binding.firstStation = "지하철역 미지정"
+                binding.isEmpty = true
+            } else
+                binding.firstStation = it.firstStation
+                binding.secondStation = it.secondStation
+
         }
     }
 
