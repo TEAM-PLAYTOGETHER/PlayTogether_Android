@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderListBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
+import com.playtogether_android.app.presentation.ui.search.SearchActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_DO
@@ -19,7 +19,6 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.LIKECNT
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderListActivity :
@@ -52,9 +51,16 @@ class ThunderListActivity :
 
     private fun searchButtonClickListener() {
         binding.ivThunderlistSearch.setOnClickListener {
-            //todo coming soon
-//        val intent = Intent(this,SearchActivity::class.java)
-//        intentActivity(intent)
+            val intent = Intent(this, SearchActivity::class.java)
+            val category: String?
+            when (thunderListViewModel.pageOrder.value) {
+                0 -> category = "먹을래"
+                1 -> category = "갈래"
+                2 -> category = "할래"
+                else -> category = null
+            }
+            intent.putExtra("category", category)
+            intentActivity(intent)
         }
     }
 

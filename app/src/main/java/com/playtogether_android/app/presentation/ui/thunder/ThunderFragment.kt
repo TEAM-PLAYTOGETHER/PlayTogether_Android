@@ -1,5 +1,6 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -7,6 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentThunderBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.search.SearchActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,10 +22,18 @@ class ThunderFragment : BaseFragment<FragmentThunderBinding>(R.layout.fragment_t
         initAdapter()
         initTabLayout()
 //        initData()
+        clickSearch()
     }
 
     private fun initData() {
 
+    }
+
+    private fun clickSearch(){
+        binding.ivThundertapSearch.setOnClickListener{
+            val intent = Intent(requireContext(), SearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initAdapter() {
