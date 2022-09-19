@@ -21,6 +21,7 @@ import com.playtogether_android.domain.model.userInfo.MyInfoData
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.internal.notifyAll
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_info) {
@@ -109,9 +110,14 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     //내 동아리 관리하기 이동뷰 이동
     private fun moveManageCrew() {
         binding.tvCrewManage.setOnClickListener {
-            val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
+            userInfoViewModel.myInfoData.observe(viewLifecycleOwner){
+                val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
+                intent.putExtra("crewName", it.crewName)
+                Timber.d("crewName보내는 쪽: ${it.crewName}")
+                startActivity(intent)
+            }
             //todo 동아리 탈퇴를 위해 crewId 넘겨줘야 함?
-            startActivity(intent)
+
         }
     }
 
