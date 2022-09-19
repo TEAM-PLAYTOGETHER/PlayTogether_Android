@@ -10,6 +10,8 @@ import com.playtogether_android.app.databinding.ActivityMyPageSettingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.login.LoginActivity
 import com.playtogether_android.app.presentation.ui.main.WebViewActivity
+import com.playtogether_android.app.presentation.ui.onboarding.OnBoardingIntroduceActivity
+import com.playtogether_android.app.presentation.ui.userInfo.MyInfoFragment
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 
 class MyPageSettingActivity :
@@ -27,6 +29,9 @@ class MyPageSettingActivity :
 
 
     private fun initMovePage() {
+        binding.ivSettingBack.setOnClickListener {
+            finish()
+        }
         //버전정보
         binding.tvSettingVersion.setOnClickListener {
             initIntent("https://cheddar-liquid-051.notion.site/14fc6c632471488486e7e76bc161069e")
