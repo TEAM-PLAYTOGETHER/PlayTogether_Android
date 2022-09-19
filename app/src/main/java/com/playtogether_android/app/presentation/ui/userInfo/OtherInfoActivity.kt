@@ -111,7 +111,7 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
         userInfoViewModel.otherInfoData.observe(this) {
             val nickname = it.nickname
 
-            val title = "${nickname}님을 차단할까요?\n[내 동아리 관리하기]에서\n해제할 수 있습니!"
+            val title = "${nickname}님을 차단할까요?\n[내 동아리 관리하기]에서\n해제할 수 있습니다!"
             val dialog = CustomDialogSon(this)
             val view = DialogYesNoBinding.inflate(layoutInflater)
             dialog.setContentView(view.root)
