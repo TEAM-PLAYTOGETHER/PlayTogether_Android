@@ -23,7 +23,7 @@ class SearchViewModel @Inject constructor(
     var pageSize = 10
     var currentPage = 0
 
-    fun getSearchList(searchingWord: String, order: String) {
+    fun getSearchList(searchingWord: String, order: String, lamda: () -> Unit) {
         viewModelScope.launch {
             kotlin.runCatching {
                 var categoryTemp: String? = null
@@ -37,6 +37,7 @@ class SearchViewModel @Inject constructor(
                         FIRST -> {
                             _searchList.value = it.lightData
                             if (it.lightData.isEmpty()) {
+                                lamda()
                                 isLastPage = true
                                 return@launch
                             }
