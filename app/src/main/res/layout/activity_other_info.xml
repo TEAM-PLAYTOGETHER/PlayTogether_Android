@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="otherInfo"
             type="com.playtogether_android.domain.model.userInfo.OtherInfoData" />
@@ -11,6 +13,18 @@
         <variable
             name="birthAndGender"
             type="String" />
+
+        <variable
+            name="firstStation"
+            type="String" />
+
+        <variable
+            name="secondStation"
+            type="String" />
+
+        <variable
+            name="isEmpty"
+            type="Boolean" />
 
     </data>
 
@@ -148,7 +162,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="강남역"
-                        android:text="@{otherInfo.firstStation}"
+                        android:text="@{firstStation}"
                         android:fontFamily="@font/pretendard_medium"
                         android:textSize="12sp"
                         android:textColor="@color/gray_white"
@@ -165,7 +179,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         tools:text="뒷부분말줄임테스트뒷부분말줄임이되었으면줗겠다"
-                        android:text="@{otherInfo.secondStation}"
+                        android:text="@{secondStation}"
                         android:fontFamily="@font/pretendard_medium"
                         android:textSize="12sp"
                         android:textColor="@color/gray_white"
@@ -177,7 +191,8 @@
                         android:layout_marginStart="4dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:maxLines="1"
-                        android:ellipsize="end" />
+                        android:ellipsize="end"
+                        android:visibility="@{isEmpty ? View.GONE : View.VISIBLE}"/>/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

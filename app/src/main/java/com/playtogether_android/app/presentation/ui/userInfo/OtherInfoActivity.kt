@@ -180,6 +180,14 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
             binding.otherInfo = it
             binding.tvOtherInfoTitle.text = "${it.nickname}님의 프로필"
             binding.tvOtherInfoChatting.text = "${it.nickname}님과 채팅하기"
+
+            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
+            if(it.firstStation == null) {
+                binding.firstStation = "지하철역 미지정"
+                binding.isEmpty = true
+            } else
+                binding.firstStation = it.firstStation
+            binding.secondStation = it.secondStation
         }
     }
 
