@@ -41,4 +41,15 @@ class UserInfoRepositoryImpl(private val userInfoDataSource: UserInfoDataSource)
     override suspend fun getBlockUserList(): BlockUserList {
         return UserInfoMapper.mapperToBlockUserList(userInfoDataSource.getBlockUserList())
     }
+
+    // 유저 차단 해제
+    override suspend fun delUnblockUser(memberId: Int): GenericData {
+        return with(userInfoDataSource.delUnblockUser(memberId)) {
+            GenericData(
+                this.status,
+                this.success,
+                this.message
+            )
+        }
+    }
 }
