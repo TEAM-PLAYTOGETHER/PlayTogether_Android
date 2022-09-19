@@ -25,9 +25,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     private val adapter: SearchListAdapter by lazy { SearchListAdapter { clickThunderItem(it) } }
     private val searchViewModel: SearchViewModel by viewModels()
     private lateinit var searchingWord: String
+    private var becauseOfIntent = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkIntent()
         initAdapter()
         initSearchList()
         clickSearchingImage()
@@ -53,6 +55,30 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
         binding.rvSearch.adapter = adapter
     }
 
+    private fun checkIntent() {
+        val category: String? = intent.getStringExtra("category")
+        when (category) {
+            EAT -> {
+                searchViewModel.category.value = category
+                binding.tvSearchEat.isSelected = true
+            }
+            DO -> {
+                searchViewModel.category.value = category
+                binding.tvSearchDo.isSelected = true
+            }
+            GO -> {
+                searchViewModel.category.value = category
+                binding.tvSearchGo.isSelected = true
+            }
+            else -> searchViewModel.category.value = null
+        }
+        becauseOfIntent = true
+    }
+
+    private fun showToastNoResult() {
+        shortToast("검색 결과가 없습니다.")
+    }
+
     private fun detectWhenScrollEnd() {
         binding.rvSearch.addOnScrollListener(
             object : RecyclerView.OnScrollListener() {
@@ -60,7 +86,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
                     super.onScrollStateChanged(recyclerView, newState)
                     if (!binding.rvSearch.canScrollVertically(1)) {
                         if (searchViewModel.isLastPage) return
-                        searchViewModel.getSearchList(searchingWord, MORE)
+                        searchViewModel.getSearchList(searchingWord, MORE, { showToastNoResult() })
                         Timber.d("Log for recyclerview bottom end")
                     }
                 }
@@ -120,8 +146,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
     private fun observeFiltering() {
         searchViewModel.category.observe(this) {
-            searchViewModel.getSearchList(binding.etSearch.text.toString(), FIRST)
-            searchViewModel.isLastPage = false
+            val searchingWord = binding.etSearch.text.toString()
+            if (becauseOfIntent) {
+                becauseOfIntent = false
+            } else if (checkSearchingWordIsValid(searchingWord)) {
+                searchViewModel.getSearchList(searchingWord, FIRST, { showToastNoResult() })
+                searchViewModel.isLastPage = false
+            }
         }
     }
 
@@ -143,7 +174,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     private fun searching() {
         searchingWord = binding.etSearch.text.toString()
         if (!checkSearchingWordIsValid(searchingWord)) return
-        searchViewModel.getSearchList(searchingWord, FIRST)
+        searchViewModel.getSearchList(searchingWord, FIRST, { showToastNoResult() })
         searchViewModel.isLastPage = false
     }
 
