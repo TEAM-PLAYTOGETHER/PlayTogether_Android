@@ -35,6 +35,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         observeMyInfo()
         initBottomDialog()
         clickEvent()
+        roundingImage()
     }
 
     private fun clickEvent() {
@@ -143,6 +144,12 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             //todo 이동할 곳과 넘겨줄 값 추가
             //todo crewId값 넘겨줘야 함?
         }
+    }
+
+    private fun roundingImage() {
+        //  프로필 이미지 코너 라운딩 (radius: 10dp)
+        binding.ivProfileImg.background = getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+        binding.ivProfileImg.setClipToOutline(true)
     }
 
 

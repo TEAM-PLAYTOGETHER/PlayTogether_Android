@@ -37,6 +37,7 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
         initData()
         btnOption(memberId)
         Timber.d("initOtherInfo : $crewId, $memberId")
+        roundingImage()
     }
 
     private fun clickEvent() {
@@ -180,5 +181,11 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
             binding.tvOtherInfoTitle.text = "${it.nickname}님의 프로필"
             binding.tvOtherInfoChatting.text = "${it.nickname}님과 채팅하기"
         }
+    }
+
+    private fun roundingImage() {
+        //  프로필 이미지 코너 라운딩 (radius: 10dp)
+        binding.ivProfileImg.background = getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+        binding.ivProfileImg.setClipToOutline(true)
     }
 }
