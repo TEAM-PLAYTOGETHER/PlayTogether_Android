@@ -1,22 +1,24 @@
 package com.playtogether_android.app.presentation.ui.userInfo.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.playtogether_android.domain.model.userInfo.BlockUserData
 import com.playtogether_android.domain.model.userInfo.BlockUserList
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
 import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
+import com.playtogether_android.domain.usecase.message.GetRoomIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class UserInfoViewModel @Inject constructor (private val userInfoRepository: UserInfoRepository): ViewModel() {
+class UserInfoViewModel @Inject constructor(
+    private val userInfoRepository: UserInfoRepository,
+    private val roomIdUseCase: GetRoomIdUseCase
+) : ViewModel() {
 
     private val _myInfoData = MutableLiveData<MyInfoData>()
     val myInfoData: LiveData<MyInfoData> = _myInfoData
@@ -36,6 +38,7 @@ class UserInfoViewModel @Inject constructor (private val userInfoRepository: Use
     private val _blockUserList = MutableLiveData<BlockUserList>()
     val blockUserList: LiveData<BlockUserList> = _blockUserList
 
+    var roomId: Int? = null
 
     // 유저 본인 멀티프로필 상세 조회
     fun getMyInfo() = viewModelScope.launch {
@@ -102,4 +105,13 @@ class UserInfoViewModel @Inject constructor (private val userInfoRepository: Use
             }
     }
 
+
+    // 유저와의 채팅방 roomId 조회
+    fun getChattingRoomId(recvId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching { roomIdUseCase(recvId) }
+                .onSuccess { roomId = it.roomId }
+                .onFailure { error -> Timber.e("상대 유저 마이페이지에서 상대 유저와의 roomId 조회 실패") }
+        }
+    }
 }

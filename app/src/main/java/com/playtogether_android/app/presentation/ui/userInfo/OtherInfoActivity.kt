@@ -1,13 +1,10 @@
 package com.playtogether_android.app.presentation.ui.userInfo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOtherInfoBinding
 import com.playtogether_android.app.databinding.DialogCheckBinding
@@ -19,6 +16,7 @@ import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.app.util.DateTimeUtil
+import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.app.util.showCustomPopUp
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +47,20 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
     // 채팅뷰로 이동
     private fun moveChattingView() {
         binding.clOtherInfoBtnChatting.setOnClickListener {
-            startActivity(Intent(this, ChattingActivity::class.java))
+            val recvId: Int? = userInfoViewModel.otherInfoData.value?.id?.toInt()
+            val roomId: Int? = userInfoViewModel.roomId
+            val name: String? = userInfoViewModel.otherInfoData.value?.nickname
+
+            if ((recvId == null) or (roomId == null) or (name == null)) {
+                shortToast("오류가 발생했습니다. 다시 시도해주세요")
+                return@setOnClickListener
+            }
+
+            val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra("audienceId", recvId)
+            intent.putExtra("roomId", roomId)
+            intent.putExtra("name", name)
+            startActivity(intent)
         }
     }
 
@@ -163,7 +174,7 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
             val genderFormat: String
             if (gender == "남") genderFormat = "M"
             else genderFormat = "W"
-
+            userInfoViewModel.getChattingRoomId(it.id.toInt())
             binding.birthAndGender = "${birth}년생 ・ $genderFormat"
             binding.otherInfo = it
             binding.tvOtherInfoTitle.text = "${it.nickname}님의 프로필"
