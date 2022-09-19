@@ -1,6 +1,8 @@
 package com.playtogether_android.app.presentation.ui.message
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
@@ -27,7 +29,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         updateLastChatUi()
         clickSendMessage()
         clickBackArrow()
-        editTextObserver()
+        //editTextObserver()
     }
 
     override fun onResume() {
@@ -43,7 +45,6 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     override fun onPause() {
         super.onPause()
         chatViewModel.reqExitRoom()
-        chatViewModel.disconnect()
     }
 
     private fun connectSocketServer(roomId: Int, recvId: Int) {
@@ -69,11 +70,29 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         }
     }
 
-    private fun editTextObserver() {
+    /*private fun editTextObserver() {
         binding.etMessage.viewTreeObserver.addOnGlobalLayoutListener {
             scrollToBottom()
+            Timber.e("editText layoutListener : 여기 실행 되나1")
+            object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    Timber.e("editText layoutListener : 여기 실행 되나2")
+                    binding.etMessage.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            }
         }
-    }
+    }*/
+
+    /*private fun sdkfjasdlfa(){
+        binding.etMessage.viewTreeObserver.addOnGlobalFocusChangeListener(
+            object : ViewTreeObserver.OnGlobalFocusChangeListener{
+                override fun onGlobalFocusChanged(p0: View?, p1: View?) {
+                    Timber.e("asdf : ${p0}")
+                }
+
+            }
+        )
+    }*/
 
     private fun clickSendMessage() {
         val recvId = intent.getIntExtra("audienceId", -1)
