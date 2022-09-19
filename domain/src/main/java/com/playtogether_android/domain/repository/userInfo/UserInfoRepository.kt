@@ -22,4 +22,7 @@ interface UserInfoRepository {
 
     // 유저 차단 리스트 조회
     suspend fun getBlockUserList(): BlockUserList
+
+    // 유저 차단 해제
+    suspend fun delUnblockUser(memberId: Int): GenericData
 }

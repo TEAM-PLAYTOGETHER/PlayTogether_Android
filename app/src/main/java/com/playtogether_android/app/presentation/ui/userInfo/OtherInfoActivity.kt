@@ -37,6 +37,7 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
         initData()
         btnOption(memberId)
         Timber.d("initOtherInfo : $crewId, $memberId")
+        roundingImage()
     }
 
     private fun clickEvent() {
@@ -111,7 +112,7 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
         userInfoViewModel.otherInfoData.observe(this) {
             val nickname = it.nickname
 
-            val title = "${nickname}님을 차단할까요?\n[내 동아리 관리하기]에서\n해제할 수 있습니!"
+            val title = "${nickname}님을 차단할까요?\n[내 동아리 관리하기]에서\n해제할 수 있습니다!"
             val dialog = CustomDialogSon(this)
             val view = DialogYesNoBinding.inflate(layoutInflater)
             dialog.setContentView(view.root)
@@ -179,6 +180,20 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
             binding.otherInfo = it
             binding.tvOtherInfoTitle.text = "${it.nickname}님의 프로필"
             binding.tvOtherInfoChatting.text = "${it.nickname}님과 채팅하기"
+
+            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
+            if(it.firstStation == null) {
+                binding.firstStation = "지하철역 미지정"
+                binding.isEmpty = true
+            } else
+                binding.firstStation = it.firstStation
+            binding.secondStation = it.secondStation
         }
+    }
+
+    private fun roundingImage() {
+        //  프로필 이미지 코너 라운딩 (radius: 10dp)
+        binding.ivProfileImg.background = getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+        binding.ivProfileImg.setClipToOutline(true)
     }
 }

@@ -292,7 +292,7 @@
     <string name="manage_blocked_user">차단사용자 관리하기</string>
     <string name="etc">기타</string>
     <string name="delete_crew">동아리 탈퇴하기</string>
-    <string name="delete_crew_title">SOPT\n동아리를 탈퇴하시겠어요?</string>
+    <string name="delete_crew_title">동아리를 탈퇴하시겠어요?</string>
     <string name="delete_crew_content">탈퇴 후, 재가입을 원하시는 경우\n다시 초대코드를 입력하셔야 합니다.\n\n현재 설정되어 있는 동아리가 아닌 다른 동아리를\n탈퇴하고 싶으시다면, 먼저 마이페이지 또는\n메인 화면에서 탈퇴를 원하시는 동아리를 선택해주세요!</string>
     <string name="blocked_user_message">차단한 유저와는 서로의 게시물, 댓글, 마이페이지를\n확인할 수 없으며, 채팅 또한 보낼 수 없습니다.</string>
     <string name="unblock">차단 해제</string>

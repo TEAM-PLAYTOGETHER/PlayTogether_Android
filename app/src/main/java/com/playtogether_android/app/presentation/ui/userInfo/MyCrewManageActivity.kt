@@ -33,7 +33,10 @@ class MyCrewManageActivity : BaseActivity<ActivityMyCrewManageBinding> (R.layout
     // 동아리 탈퇴하기 뷰 이동
     private fun moveMyCrewDelete() {
         binding.tvDeleteCrew.setOnClickListener {
-            startActivity(Intent(this, DeleteMyCrewActivity::class.java))
+            val crewName = intent.getStringExtra("crewName")
+            val intent = Intent(this, DeleteMyCrewActivity::class.java)
+            intent.putExtra("crewName", crewName)
+            startActivity(intent)
         }
     }
 
@@ -43,6 +46,7 @@ class MyCrewManageActivity : BaseActivity<ActivityMyCrewManageBinding> (R.layout
             finish()
         }
     }
+
 
 
 }

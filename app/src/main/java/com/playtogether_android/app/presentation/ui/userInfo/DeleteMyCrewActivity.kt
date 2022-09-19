@@ -23,6 +23,7 @@ import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.data.singleton.PlayTogetherRepository.crewId
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.activity_delete_my_crew) {
@@ -35,11 +36,15 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
         fontColorHighlight()
         btnBackEvent()
         btnDeleteEvent()
+
+        val crewName = intent.getStringExtra("crewName")
+        binding.tvCrewName.text = crewName
+        Timber.d("crewName받는쪽 : $crewName")
     }
 
     private fun fontColorHighlight() {
         val strTitle = SpannableStringBuilder(binding.tvDeleteCrewTitle.text)
-        strTitle.setSpan(ForegroundColorSpan(getColor(R.color.red_FF0000)), 10, 12, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        strTitle.setSpan(ForegroundColorSpan(getColor(R.color.red_FF0000)), 5, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvDeleteCrewTitle.text = strTitle
 
         val strContent = SpannableStringBuilder(binding.tvDeleteCrewContent.text)

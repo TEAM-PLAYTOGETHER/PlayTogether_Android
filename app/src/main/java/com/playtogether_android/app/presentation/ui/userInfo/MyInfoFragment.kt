@@ -21,6 +21,7 @@ import com.playtogether_android.domain.model.userInfo.MyInfoData
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.internal.notifyAll
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_info) {
@@ -35,6 +36,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         observeMyInfo()
         initBottomDialog()
         clickEvent()
+        roundingImage()
     }
 
     private fun clickEvent() {
@@ -68,6 +70,14 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             binding.myInfo = it
             binding.homeViewModel = homeViewModel
 
+            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
+            if(it.firstStation == null) {
+                binding.firstStation = "지하철역 미지정"
+                binding.isEmpty = true
+            } else
+                binding.firstStation = it.firstStation
+                binding.secondStation = it.secondStation
+
         }
     }
 
@@ -100,9 +110,14 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     //내 동아리 관리하기 이동뷰 이동
     private fun moveManageCrew() {
         binding.tvCrewManage.setOnClickListener {
-            val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
+            userInfoViewModel.myInfoData.observe(viewLifecycleOwner){
+                val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
+                intent.putExtra("crewName", it.crewName)
+                Timber.d("crewName보내는 쪽: ${it.crewName}")
+                startActivity(intent)
+            }
             //todo 동아리 탈퇴를 위해 crewId 넘겨줘야 함?
-            startActivity(intent)
+
         }
     }
 
@@ -135,6 +150,12 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             //todo 이동할 곳과 넘겨줄 값 추가
             //todo crewId값 넘겨줘야 함?
         }
+    }
+
+    private fun roundingImage() {
+        //  프로필 이미지 코너 라운딩 (radius: 10dp)
+        binding.ivProfileImg.background = getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+        binding.ivProfileImg.setClipToOutline(true)
     }
 
 

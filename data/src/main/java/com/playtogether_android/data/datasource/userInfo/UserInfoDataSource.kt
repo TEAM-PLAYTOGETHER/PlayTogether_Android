@@ -1,10 +1,7 @@
 package com.playtogether_android.data.datasource.userInfo
 
-import com.playtogether_android.data.model.response.userInfo.ResBlockUserData
 import com.playtogether_android.data.model.ResGenericData
-import com.playtogether_android.data.model.response.userInfo.ResBlockUserList
-import com.playtogether_android.data.model.response.userInfo.ResMyInfoData
-import com.playtogether_android.data.model.response.userInfo.ResOtherInfoData
+import com.playtogether_android.data.model.response.userInfo.*
 
 interface UserInfoDataSource {
     // 유저 본인 멀티프로필 상세 조회
@@ -21,4 +18,7 @@ interface UserInfoDataSource {
 
     // 유저 차단 리스트 조회
     suspend fun getBlockUserList(): ResBlockUserList
+
+    // 유저 차단 해제
+    suspend fun delUnblockUser(memberId: Int): ResUnblockUserData
 }
