@@ -14,15 +14,11 @@ data class ResBlockUserList(
     val data: List<Block>
 ) {
     data class Block(
-        @SerializedName("id")
-        val id: Int,
         @SerializedName("userId")
         val userId: Int,
         @SerializedName("blockUserId")
         val blockUserId: Int,
-        @SerializedName("createdAt")
-        val createdAt: String,
-        @SerializedName("updatedAt")
-        val updatedAt: String
+        @SerializedName("name")
+        val name: String
     )
 }

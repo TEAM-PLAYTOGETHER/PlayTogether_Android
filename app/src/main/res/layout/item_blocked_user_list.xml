@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="문수제비"
-            android:text="@{blockUserList.createdAt}"
+            android:text="@{blockUserList.name}"
             android:fontFamily="@font/pretendard_bold"
             android:textSize="14sp"
             android:textColor="@color/gray_black"

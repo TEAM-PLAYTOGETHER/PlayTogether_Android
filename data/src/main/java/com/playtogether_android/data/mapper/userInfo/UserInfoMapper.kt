@@ -58,7 +58,7 @@ object UserInfoMapper {
     fun mapperToBlockUserList(resBlockUserList: ResBlockUserList): BlockUserList {
         return BlockUserList(
             data = resBlockUserList.data.map {
-                BlockUserList.Block(it.id, it.userId, it.blockUserId, it.createdAt, it.updatedAt)
+                BlockUserList.Block(it.userId, it.blockUserId, it.name)
             }
         )
     }
