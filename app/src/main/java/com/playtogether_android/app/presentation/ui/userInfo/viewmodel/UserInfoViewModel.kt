@@ -38,7 +38,12 @@ class UserInfoViewModel @Inject constructor(
     private val _blockUserList = MutableLiveData<BlockUserList>()
     val blockUserList: LiveData<BlockUserList> = _blockUserList
 
+    // 유저와의 채팅방 roomId 조회
     var roomId: Int? = null
+
+    // 유저 차단 해제
+    private val _isUnblock = MutableLiveData<Boolean>()
+    val isUnblock: LiveData<Boolean> = _isUnblock
 
     // 유저 본인 멀티프로필 상세 조회
     fun getMyInfo() = viewModelScope.launch {
@@ -113,5 +118,18 @@ class UserInfoViewModel @Inject constructor(
                 .onSuccess { roomId = it.roomId }
                 .onFailure { error -> Timber.e("상대 유저 마이페이지에서 상대 유저와의 roomId 조회 실패") }
         }
+    }
+
+    // 유저 차단 해제
+    fun delUnblockUser(memberId: Int) = viewModelScope.launch {
+        kotlin.runCatching { userInfoRepository.delUnblockUser(memberId) }
+            .onSuccess {
+                _isUnblock.value = true
+                Timber.d("delUnblockUser-server 성공 : $it")
+            }
+            .onFailure {
+                _isUnblock.value = false
+                Timber.e("delUnblockUser-server 실패 : $it")
+            }
     }
 }
