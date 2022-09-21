@@ -2,14 +2,14 @@ package com.playtogether_android.app.presentation.ui.message
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemMyChatBinding
 import com.playtogether_android.app.databinding.ItemOtherChatBinding
 import com.playtogether_android.domain.model.message.ChatData
 import timber.log.Timber
 
-class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
+class ChatAdapter : RecyclerView.Adapter<ChatViewHolder<*>>() {
+    val chatList = mutableListOf<ChatData>()
 
     class MyChatViewHolder(private val binding: ItemMyChatBinding) :
         ChatViewHolder<ChatData>(binding.root) {
@@ -38,7 +38,7 @@ class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder<*>, position: Int) {
-        val item = getItem(position)
+        val item = chatList[position]
         when (holder) {
             is MyChatViewHolder -> holder.bind(item)
             is OtherChatViewHolder -> holder.bind(item)
@@ -46,24 +46,9 @@ class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
         }
     }
 
-    class ChatComparator() : DiffUtil.ItemCallback<ChatData>() {
-        override fun areItemsTheSame(oldItem: ChatData, newItem: ChatData): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: ChatData, newItem: ChatData): Boolean {
-            return oldItem.messageId == newItem.messageId
-        }
-    }
-
-
     override fun getItemViewType(position: Int): Int {
-        return getItem(position).getViewType()
+        return chatList[position].getViewType()
     }
 
-    /*fun addChat(chat: ChatData) {
-        Log.d("asdf", "addChat 진입 ${chat.content}")
-        chatList.add(chat)
-        notifyItemInserted(chatList.size)
-    }*/
+    override fun getItemCount() = chatList.size
 }

@@ -1,6 +1,7 @@
 package com.playtogether_android.app.presentation.ui.message.viewmodel
 
 import android.content.Context
+import android.util.Log
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
@@ -141,27 +142,31 @@ class ChatViewModel @Inject constructor(
         socket.on("resEnterRoom", enterListener)
     }
 
-    fun resNewMessageToRoom() {
+    fun resNewMessageToRoom(addChatLamda: (ChatData) -> Unit) {
         val messageListener = Emitter.Listener {
             val receivedChat: NewMessageReceived.Data.Message =
                 gson.fromJson(it[0].toString(), NewMessageReceived::class.java).data.message
             Timber.e("Socket receive chat : $receivedChat")
-            addChat(null, receivedChat.content, receivedChat.createdAt, amI = false)
+            val tempChat =
+                reformatChatData(null, receivedChat.content, receivedChat.createdAt, amI = false)
+            addChatLamda(tempChat)
         }
         socket.on("newMessageToRoom", messageListener)
     }
 
-    private fun addChat(messageId: Int?, content: String, createdAt: String, amI: Boolean) {
+    private fun reformatChatData(
+        messageId: Int?,
+        content: String,
+        createdAt: String,
+        amI: Boolean
+    ): ChatData {
         val newChat = ChatData(
             messageId = messageId ?: ((chatData.value?.last()?.messageId ?: 0) + 1),
             content = content,
             time = changeRemoteDateFormat(createdAt),
             messageType = amI
         )
-        Handler(Looper.getMainLooper()).post {
-            removeTimePart(newChat)
-            _chatData.value = _chatData.value?.toMutableList()?.apply { add(newChat) }
-        }
+        return newChat
     }
 
     fun reqSendMessage(text: String, recvId: Int) {
@@ -171,14 +176,16 @@ class ChatViewModel @Inject constructor(
         socket.emit("reqSendMessage", jsonData)
     }
 
-    fun resSendMessage(lamda: () -> Unit) {
+    fun resSendMessage(errorLamda: () -> Unit, addChatLamda: (ChatData) -> Unit) {
         val sendListener = Emitter.Listener {
             val sendData = gson.fromJson(it[0].toString(), ResSendMessage::class.java)
             val sendChat = sendData.data.message
             if (sendData.success) {
-                addChat(sendChat.messageId, sendChat.content, sendChat.createdAt, true)
+                val tempChat =
+                    reformatChatData(sendChat.messageId, sendChat.content, sendChat.createdAt, true)
+                addChatLamda(tempChat)
             } else
-                lamda()
+                errorLamda()
         }
         socket.on("resSendMessage", sendListener)
     }

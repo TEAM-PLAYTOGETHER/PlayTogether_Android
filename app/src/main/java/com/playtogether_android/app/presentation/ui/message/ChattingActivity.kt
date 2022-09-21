@@ -1,14 +1,14 @@
 package com.playtogether_android.app.presentation.ui.message
 
 import android.os.Bundle
-import android.view.View
-import android.view.ViewTreeObserver
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.domain.model.message.ChatData
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -29,7 +29,6 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         updateLastChatUi()
         clickSendMessage()
         clickBackArrow()
-        //editTextObserver()
     }
 
     override fun onResume() {
@@ -52,8 +51,11 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         chatViewModel.resConnect { socketErrorControl("resConnection") }
         chatViewModel.reqEnterRoom(roomId, recvId)
         chatViewModel.resEnterRoom { socketErrorControl("resEnterRoom") }
-        chatViewModel.resNewMessageToRoom()
-        chatViewModel.resSendMessage { runOnUiThread { shortToast("보내기에 실패하였습니다") } }
+        chatViewModel.resNewMessageToRoom { addChatToRecyclerView(it) }
+        chatViewModel.resSendMessage(
+            { runOnUiThread { shortToast("보내기에 실패하였습니다") } },
+            { addChatToRecyclerView(it) }
+        )
         chatViewModel.resExitRoom {
             runOnUiThread {
                 finish()
@@ -70,29 +72,23 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         }
     }
 
-    /*private fun editTextObserver() {
-        binding.etMessage.viewTreeObserver.addOnGlobalLayoutListener {
+    private fun addChatToRecyclerView(chatData: ChatData) {
+        runOnUiThread {
+            removeTimePart(chatData)
+            chatAdapter.chatList.add(chatData)
+            chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)
             scrollToBottom()
-            Timber.e("editText layoutListener : 여기 실행 되나1")
-            object : ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    Timber.e("editText layoutListener : 여기 실행 되나2")
-                    binding.etMessage.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                }
-            }
         }
-    }*/
+    }
 
-    /*private fun sdkfjasdlfa(){
-        binding.etMessage.viewTreeObserver.addOnGlobalFocusChangeListener(
-            object : ViewTreeObserver.OnGlobalFocusChangeListener{
-                override fun onGlobalFocusChanged(p0: View?, p1: View?) {
-                    Timber.e("asdf : ${p0}")
-                }
-
-            }
-        )
-    }*/
+    private fun removeTimePart(addChat: ChatData) {
+        if (chatAdapter.chatList.isEmpty()) return
+        if (chatAdapter.chatList.last().messageType != addChat.messageType) return
+        if (chatAdapter.chatList.last().time == addChat.time) {
+            chatAdapter.chatList.last().timeVisible = false
+            chatViewModel.isLastChatChanged.value = true
+        }
+    }
 
     private fun clickSendMessage() {
         val recvId = intent.getIntExtra("audienceId", -1)
@@ -113,9 +109,9 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
     private fun updateChatUi() {
         chatViewModel.chatData.observe(this) {
-            chatAdapter.submitList(it) {
-                scrollToBottom()
-            }
+            chatAdapter.chatList.addAll(it)
+            chatAdapter.notifyDataSetChanged()
+            scrollToBottom()
         }
     }
 
@@ -127,14 +123,16 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun scrollToBottom() {
-        val size = chatAdapter.currentList.size - 1
+        val size = chatAdapter.itemCount - 1
         binding.rvInChattingChatting.scrollToPosition(size)
     }
 
     private fun initAdapter() {
         chatAdapter = ChatAdapter()
+        val llm = LinearLayoutManager(this)
+        llm.stackFromEnd = true
+        binding.rvInChattingChatting.layoutManager = llm
         binding.rvInChattingChatting.adapter = chatAdapter
         binding.rvInChattingChatting.addItemDecoration(VerticalItemDecoration())
-        scrollToBottom()
     }
 }
