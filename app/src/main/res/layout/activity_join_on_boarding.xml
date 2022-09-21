@@ -52,10 +52,11 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="@drawable/rectangle_fill_gray3_radius_0"
+            app:layout_constraintBottom_toBottomOf="@+id/view_join_onboarding_progressbar_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="2"
             app:layout_constraintStart_toEndOf="@+id/view_join_onboarding_progressbar_green"
-            app:layout_constraintTop_toBottomOf="@+id/view_join_onboarding_progressbar_green" />
+            app:layout_constraintTop_toTopOf="@+id/view_join_onboarding_progressbar_green" />
 
 
         <TextView
