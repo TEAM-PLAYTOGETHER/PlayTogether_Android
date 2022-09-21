@@ -26,10 +26,9 @@
             android:fontFamily="@font/pretendard_medium"
             android:includeFontPadding="false"
             android:inputType="textMultiLine"
-            android:maxEms="14"
+            android:maxWidth="228dp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
-            android:scrollbarSize="14sp"
             android:text="@{data.content}"
             android:textColor="@color/gray_black"
             android:textSize="14dp"
@@ -38,7 +37,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv_mychat_time"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="안녕하세요" />
+            tools:text="안녕하세요    안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요" />
 
         <TextView
             android:id="@+id/tv_mychat_time"

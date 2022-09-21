@@ -5,6 +5,11 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.playtogether_android.app.presentation.ui.search.SearchViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -157,6 +162,20 @@
             android:background="@color/gray_gray03"
             app:layout_constraintTop_toBottomOf="@id/tv_search_eat" />
 
+        <TextView
+            android:id="@+id/tv_emptyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/search_empty_view"
+            android:textColor="@color/gray_gray02"
+            android:textSize="14dp"
+            android:visibility="@{viewModel.resultEmpty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_search_line" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search"
             android:layout_width="match_parent"
@@ -165,10 +184,11 @@
             android:layout_marginTop="20dp"
             android:clipToPadding="false"
             android:paddingBottom="20dp"
+            android:visibility="@{viewModel.resultEmpty ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_search_line"
-            tools:itemCount="3"
+            tools:itemCount="0"
             tools:listitem="@layout/item_search_thunder_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
