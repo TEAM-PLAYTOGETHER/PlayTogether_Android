@@ -26,7 +26,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:includeFontPadding="false"
             android:inputType="textMultiLine"
-            android:maxWidth="230dp"
+            android:maxWidth="228dp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
             android:text="@{data.content}"

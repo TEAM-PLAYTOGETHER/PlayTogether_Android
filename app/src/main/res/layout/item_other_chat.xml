@@ -26,7 +26,7 @@
             android:backgroundTint="@color/gray_black"
             android:fontFamily="@font/pretendard_medium"
             android:inputType="textMultiLine"
-            android:maxWidth="200dp"
+            android:maxWidth="192dp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
             android:text="@{data.content}"
