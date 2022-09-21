@@ -26,7 +26,7 @@
             android:backgroundTint="@color/gray_black"
             android:fontFamily="@font/pretendard_medium"
             android:inputType="textMultiLine"
-            android:maxEms="12"
+            android:maxWidth="200dp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
             android:text="@{data.content}"
@@ -37,7 +37,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/iv_otherchat_profile"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="네 가능합니다." />
+            app:layout_constraintVertical_bias="1.0"
+            tools:text="가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하" />
 
         <TextView
             android:id="@+id/tv_otherchat_date"
