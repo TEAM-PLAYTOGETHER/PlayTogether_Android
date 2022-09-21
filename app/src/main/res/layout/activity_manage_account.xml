@@ -31,7 +31,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/mypage_manage_accont"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
             android:paddingBottom="15dp"
             android:text="@string/mypage_service_quit"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_mypage_top" />
 
