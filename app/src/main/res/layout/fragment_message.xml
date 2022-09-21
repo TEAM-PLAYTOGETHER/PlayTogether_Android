@@ -30,7 +30,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/messageBox"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
