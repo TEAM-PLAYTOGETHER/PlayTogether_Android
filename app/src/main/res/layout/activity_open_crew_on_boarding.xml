@@ -69,7 +69,7 @@
             android:lineSpacingExtra="4dp"
             android:text="@string/onboarding_open_intro"
             android:textColor="@color/gray_black"
-            android:textSize="22sp"
+            android:textSize="22dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_open_onboarding_progressbar_green" />
 
@@ -81,7 +81,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="@string/onboarding_crew_name"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="@+id/tv_open_onboarding_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_open_onboarding_title" />
 
@@ -101,7 +101,7 @@
             android:paddingBottom="20dp"
             android:singleLine="true"
             android:textColorHint="@color/gray_gray01"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_open_onboarding_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_open_onboarding_name" />
@@ -113,7 +113,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/onboarding_crew_condition"
             android:textColor="@color/gray_gray02"
-            android:textSize="12sp"
+            android:textSize="12dp"
             android:layout_marginStart="6dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/tv_open_onboarding_name"
@@ -144,7 +144,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/onboarding_crew_approve"
             android:textColor="@color/green_3be200"
-            android:textSize="12sp"
+            android:textSize="12dp"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@+id/et_open_onboarding_name"
             app:layout_constraintTop_toBottomOf="@+id/et_open_onboarding_name" />
@@ -158,7 +158,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="@string/onboarding_crew_intro"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="@+id/tv_open_onboarding_approve"
             app:layout_constraintTop_toBottomOf="@+id/tv_open_onboarding_approve" />
 
@@ -179,7 +179,7 @@
             android:paddingBottom="20dp"
             android:singleLine="true"
             android:textColorHint="@color/gray_gray01"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_open_onboarding_intro"
             app:layout_constraintTop_toBottomOf="@+id/tv_open_onboarding_intro" />
@@ -196,7 +196,7 @@
             android:text="@string/text_next"
             android:textAlignment="center"
             android:textColor="@drawable/selector_text_gray01_to_black01"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:visibility="visible"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"

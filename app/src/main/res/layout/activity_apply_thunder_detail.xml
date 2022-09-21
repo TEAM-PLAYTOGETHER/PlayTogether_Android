@@ -50,7 +50,7 @@
                 android:fontFamily="@font/pretendard_medium"
                 android:text="@string/cancel_application"
                 android:textColor="@color/main_green"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -105,7 +105,7 @@
                         android:paddingVertical="16dp"
                         android:text="@{organizer.name}"
                         android:textColor="@color/gray_black"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/iv_opener_profile"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_opener_profile"
@@ -136,7 +136,7 @@
                         android:paddingVertical="6dp"
                         android:text="@string/navigation_message"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +178,7 @@
                         android:fontFamily="@font/pretendard_bold"
                         android:text="@{detailData.title}"
                         android:textColor="@color/main_green"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -192,7 +192,7 @@
                         android:fontFamily="@font/pretendard_regular"
                         android:text="@string/text_date"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@id/tv_applythunderdetail_title"
                         app:layout_constraintTop_toBottomOf="@id/tv_applythunderdetail_title" />
 
@@ -204,7 +204,7 @@
                         android:fontFamily="@font/pretendard_medium"
                         android:text="@{detailData.date}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_date"
                         app:layout_constraintStart_toEndOf="@id/tv_applythunderdetail_date"
                         app:layout_constraintTop_toTopOf="@id/tv_applythunderdetail_date"
@@ -218,7 +218,7 @@
                         android:fontFamily="@font/pretendard_regular"
                         android:text="@string/text_time"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@id/tv_applythunderdetail_date"
                         app:layout_constraintTop_toBottomOf="@id/tv_applythunderdetail_date" />
 
@@ -230,7 +230,7 @@
                         android:fontFamily="@font/pretendard_medium"
                         android:text="@{detailData.time}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_time"
                         app:layout_constraintStart_toEndOf="@id/tv_applythunderdetail_time"
                         app:layout_constraintTop_toTopOf="@id/tv_applythunderdetail_time"
@@ -244,7 +244,7 @@
                         android:fontFamily="@font/pretendard_regular"
                         android:text="@string/text_place"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@id/tv_applythunderdetail_time"
                         app:layout_constraintTop_toBottomOf="@id/tv_applythunderdetail_time" />
 
@@ -256,7 +256,7 @@
                         android:fontFamily="@font/pretendard_medium"
                         android:text="@{detailData.place}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_place"
                         app:layout_constraintStart_toEndOf="@id/tv_applythunderdetail_place"
                         app:layout_constraintTop_toTopOf="@id/tv_applythunderdetail_place"
@@ -270,7 +270,7 @@
                         android:fontFamily="@font/pretendard_regular"
                         android:text="@string/text_category"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@id/tv_applythunderdetail_place"
                         app:layout_constraintTop_toBottomOf="@id/tv_applythunderdetail_place" />
 
@@ -282,7 +282,7 @@
                         android:fontFamily="@font/pretendard_medium"
                         android:text="@{detailData.category}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_applythunderdetail_category"
                         app:layout_constraintStart_toEndOf="@id/tv_applythunderdetail_category"
                         app:layout_constraintTop_toTopOf="@id/tv_applythunderdetail_category"
@@ -305,7 +305,7 @@
                         android:fontFamily="@font/pretendard_regular"
                         android:text="@{detailData.description}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_applythunderdetail_dotted_line"
@@ -333,7 +333,7 @@
                         android:paddingVertical="10dp"
                         android:text="@string/text_posting_report"
                         android:textColor="@color/gray_gray01"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -377,7 +377,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="번개 신청자 ("
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -388,7 +388,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_thunder_applicant_title"
                             app:layout_constraintTop_toTopOf="@id/tv_thunder_applicant_title"
                             tools:text="2" />
@@ -400,7 +400,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="@string/text_slash"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_current_applicant"
                             app:layout_constraintTop_toTopOf="@id/tv_current_applicant" />
 
@@ -411,7 +411,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
                             app:layout_constraintTop_toTopOf="@id/tv_applicant_slash"
                             tools:text="6" />
@@ -423,7 +423,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text=")"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_max_applicant"
                             app:layout_constraintTop_toTopOf="@id/tv_max_applicant" />
 

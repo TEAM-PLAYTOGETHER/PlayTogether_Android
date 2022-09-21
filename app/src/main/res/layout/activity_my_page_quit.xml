@@ -43,7 +43,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/string_real"
             android:textColor="@color/gray_black"
-            android:textSize="22sp"
+            android:textSize="22dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_mypage_top" />
 
@@ -55,7 +55,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="@string/string_quit"
             android:textColor="@color/red_FF0000"
-            android:textSize="22sp"
+            android:textSize="22dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_quit_real"
             app:layout_constraintStart_toEndOf="@+id/tv_quit_real"
             app:layout_constraintTop_toTopOf="@+id/tv_quit_real" />
@@ -67,7 +67,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/mypage_question_quit"
             android:textColor="@color/gray_black"
-            android:textSize="22sp"
+            android:textSize="22dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_quit"
             app:layout_constraintStart_toEndOf="@+id/tv_quit"
             app:layout_constraintTop_toTopOf="@+id/tv_quit" />
@@ -80,7 +80,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/mypage_quit_info"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="@+id/tv_quit_real"
             app:layout_constraintTop_toBottomOf="@+id/tv_quit_real" />
 
@@ -93,7 +93,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="@string/string_do_quit"
             android:textColor="@color/red_FF0000"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:layout_marginBottom="36dp"
             android:paddingTop="18dp"
             android:paddingBottom="18dp"

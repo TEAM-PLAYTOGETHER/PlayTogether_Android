@@ -31,7 +31,7 @@
             android:lineSpacingExtra="4dp"
             android:text="@string/signup_finish_main"
             android:textColor="@color/gray_black"
-            android:textSize="22sp"
+            android:textSize="22dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_signup_finish_top" />
 
@@ -43,7 +43,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:lineSpacingExtra="4dp"
             android:textColor="@color/gray_black"
-            android:textSize="22sp"
+            android:textSize="22dp"
             android:text=""
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_finish_title"
@@ -56,7 +56,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:text="@string/signup_finish_welcome"
             android:textColor="@color/gray_black"
-            android:textSize="22sp"
+            android:textSize="22dp"
             app:layout_constraintStart_toEndOf="@+id/tv_signup_finish_nickname"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_finish_title" />
 
@@ -69,7 +69,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:text="@string/signup_finish_start"
             android:textColor="@color/gray_black"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textAlignment="center"
             android:paddingTop="18dp"
             android:paddingBottom="18dp"

@@ -5,21 +5,21 @@
     <style name="home_image_text">
         <item name="android:textColor">@color/gray_black</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="home_title_text">
         <item name="android:textColor">@color/main_green</item>
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="home_more_text">
         <item name="android:textColor">#666666</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -27,7 +27,7 @@
     <style name="home_category">
         <item name="android:textColor">@color/gray_black</item>
         <item name="fontFamily">@font/pretendard_extrabold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20dp</item>
         <item name="lineHeight">24dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -35,7 +35,7 @@
     <style name="home_empty_text">
         <item name="android:textColor">@color/gray_gray02</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">20dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -45,28 +45,28 @@
     <style name="thunder_tool_title">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="thunder_title">
         <item name="android:textColor">@color/gray_black</item>
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="thunder_align">
         <item name="android:textColor">@color/gray_gray01</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="thunder_item_title">
         <item name="fontFamily">@font/pretendard_semibold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="lineHeight">19dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -74,14 +74,14 @@
     <style name="thunder_item_date">
         <item name="android:textColor">@color/gray_gray03</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="thunder_item_people">
         <item name="android:textColor">@color/gray_gray02</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">12dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -99,25 +99,25 @@
     <style name="home_dialog_bold_title">
         <item name="android:textColor">@color/black</item>
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">18dp</item>
     </style>
 
     <style name="home_dialog_normal_title">
         <item name="android:textColor">@color/gray_gray02</item>
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
     </style>
 
     <style name="home_dialog_button_text">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
     <style name="home_dialog_medium">
         <item name="android:textColor">@color/gray_black</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -126,32 +126,32 @@
     <style name="home_item_title">
         <item name="android:textColor">@color/main_green</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20dp</item>
     </style>
 
     <style name="home_item_btn_text">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
     <style name="home_item_about">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
     </style>
 
     <style name="home_item_tag">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">12dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="home_select_item_crew">
         <item name="android:textColor">@color/gray_black02</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="lineHeight">19dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -159,7 +159,7 @@
     <style name="home_unselect_item_crew">
         <item name="android:textColor">@color/gray_gray02</item>
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -167,21 +167,21 @@
     <style name="sort_title">
         <item name="android:textColor">@color/gray_black</item>
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="sort_select_item">
         <item name="android:textColor">@color/gray_black02</item>
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="sort_unselect_item">
         <item name="android:textColor">@color/gray_gray02</item>
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -192,21 +192,21 @@
 
     <!--    loginActivity-->
     <style name="login_title">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">24dp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/gray_black</item>
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
     <style name="login_prob">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/gray_gray01</item>
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
     <style name="login_ask">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/gray_gray01</item>
         <item name="fontFamily">@font/pretendard_medium</item>
@@ -215,14 +215,14 @@
     <!--    tablayout style-->
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">12dp</item>
         <item name="lineHeight">14dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="tab_item_unselected">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">12dp</item>
         <item name="android:textColor">@color/gray_gray02</item>
         <item name="lineHeight">14dp</item>
     </style>
@@ -230,28 +230,28 @@
     <!--    login terms activity-->
     <style name="loginterms_title">
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">22dp</item>
         <item name="android:textColor">@color/gray_black</item>
         <item name="lineHeight">30dp</item>
     </style>
 
     <style name="loginterms_about">
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray_black02</item>
         <item name="lineHeight">16dp</item>
     </style>
 
     <style name="loginterms_all">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/gray_black</item>
         <item name="lineHeight">19dp</item>
     </style>
 
     <style name="loginterms_terms">
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/gray_black02</item>
         <item name="lineHeight">19dp</item>
         <item name="android:includeFontPadding">false</item>
@@ -260,7 +260,7 @@
     <!--    login info activity-->
     <style name="logininfo_title">
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">22dp</item>
         <item name="android:textColor">@color/gray_black</item>
         <item name="lineHeight">30dp</item>
         <item name="android:includeFontPadding">false</item>
@@ -268,7 +268,7 @@
 
     <style name="logininfo_about">
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray_black02</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
@@ -276,7 +276,7 @@
 
     <style name="logininfo_unselect_gender_text">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray_gray01</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
@@ -284,7 +284,7 @@
 
     <style name="logininfo_select_gender_text">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/main_green</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
@@ -292,7 +292,7 @@
 
     <style name="logininfo_unselect_category_title">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray_black</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
@@ -300,7 +300,7 @@
 
     <style name="logininfo_year_text">
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray_black</item>
         <item name="lineHeight">16dp</item>
         <item name="android:includeFontPadding">false</item>
@@ -308,34 +308,34 @@
 
     <style name="logininfo_btn_unselect_text">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">15dp</item>
         <item name="lineHeight">18dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="logininfo_btn_select_text">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="lineHeight">19dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <!--    number picker style-->
     <style name="DefaultNumberPickerTheme">
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">22dp</item>
         <item name="android:editTextColor">@color/gray_black</item>
     </style>
 
     <style name="date_dialog_access">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">24dp</item>
         <item name="android:textColor">@color/gray_black</item>
     </style>
 
     <style name="date_dialog_cancel">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">24dp</item>
         <item name="android:textColor">@color/gray_gray01</item>
     </style>

@@ -1,16 +1,12 @@
 package com.playtogether_android.app.presentation.ui.mypage
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMyPageQuitBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.home.ThunderAppliedActivity
-import com.playtogether_android.app.presentation.ui.login.LoginActivity
 import com.playtogether_android.app.presentation.ui.main.SplashActivity
 import com.playtogether_android.app.presentation.ui.mypage.viewModel.MyPageViewModel
 import com.playtogether_android.app.util.CustomDialog

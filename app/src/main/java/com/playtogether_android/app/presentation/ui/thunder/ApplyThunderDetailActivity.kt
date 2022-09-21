@@ -7,8 +7,8 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityApplyThunderDetailBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
-import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
+import com.playtogether_android.app.presentation.ui.userInfo.OtherInfoActivity
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.imageNullCheck
 import com.playtogether_android.app.util.shortToast
@@ -96,7 +96,7 @@ class ApplyThunderDetailActivity :
                 organizerId = it.organizerId
                 organizerName = it.name
             }
-            val intent = Intent(this, OthersMyPageActivity::class.java)
+            val intent = Intent(this, OtherInfoActivity::class.java)
             intent.putExtra("organizerId", organizerId)
             intent.putExtra("organizerName", organizerName)
 
