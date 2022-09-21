@@ -129,9 +129,6 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
     private fun initAdapter() {
         chatAdapter = ChatAdapter()
-        val llm = LinearLayoutManager(this)
-        llm.stackFromEnd = true
-        binding.rvInChattingChatting.layoutManager = llm
         binding.rvInChattingChatting.adapter = chatAdapter
         binding.rvInChattingChatting.addItemDecoration(VerticalItemDecoration())
     }
