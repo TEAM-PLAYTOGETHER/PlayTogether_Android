@@ -3,7 +3,6 @@ package com.playtogether_android.app.presentation.ui.message.viewmodel
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -91,7 +90,7 @@ class ChatViewModel @Inject constructor(
                     _chatData.value = removeTimeAll(refineChatListDate(it))
                 }
                 .onFailure { error ->
-                    Log.d("messageServer", "채팅 읽어오기 실패")
+                    Timber.d("messageServer: 채팅 읽어오기 실패")
                 }
         }
     }

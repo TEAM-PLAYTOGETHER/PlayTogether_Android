@@ -1,6 +1,5 @@
 package com.playtogether_android.app.presentation.ui.message
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.playtogether_android.app.databinding.ItemMyChatBinding
 import com.playtogether_android.app.databinding.ItemOtherChatBinding
 import com.playtogether_android.domain.model.message.ChatData
+import timber.log.Timber
 
 class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
 
@@ -29,7 +29,7 @@ class ChatAdapter : ListAdapter<ChatData, ChatViewHolder<*>>(ChatComparator()) {
         val layoutInflater = LayoutInflater.from(parent.context)
         val bindingMyChat = ItemMyChatBinding.inflate(layoutInflater, parent, false)
         val bindingOtherChat = ItemOtherChatBinding.inflate(layoutInflater, parent, false)
-        Log.d("checkViewType", "${viewType}")
+        Timber.d("checkViewType : ${viewType}")
         return when (viewType) {
             ChatData.TYPE_MY_MESSAGE -> MyChatViewHolder(bindingMyChat)
             ChatData.TYPE_FRIEND_MESSAGE -> OtherChatViewHolder(bindingOtherChat)
