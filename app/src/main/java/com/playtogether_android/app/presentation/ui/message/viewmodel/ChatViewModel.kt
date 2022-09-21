@@ -2,6 +2,8 @@ package com.playtogether_android.app.presentation.ui.message.viewmodel
 
 import android.content.Context
 import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -65,6 +67,15 @@ class ChatViewModel @Inject constructor(
         return list
     }
 
+    private fun removeTimePart(addChat: ChatData) {
+        if (_chatData.value?.isEmpty() != false) return
+        if (_chatData.value?.last()?.messageType != addChat.messageType) return
+        if (_chatData.value?.last()?.time == addChat.time) {
+            _chatData.value = _chatData.value?.toMutableList()?.apply { last().timeVisible = false }
+            isLastChatChanged.value = true
+        }
+    }
+
     private fun changeRemoteDateFormat(exFormatDate: String): String {
         var date = exFormatDate.slice(IntRange(0, 9))
         date = date.replace("-", ".")
@@ -80,7 +91,7 @@ class ChatViewModel @Inject constructor(
                     _chatData.value = removeTimeAll(refineChatListDate(it))
                 }
                 .onFailure { error ->
-                    Log.d("messageServer", "채팅 읽어오기 실패")
+                    Timber.d("messageServer: 채팅 읽어오기 실패")
                 }
         }
     }

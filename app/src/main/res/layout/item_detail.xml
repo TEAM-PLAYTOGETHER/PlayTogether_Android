@@ -15,6 +15,6 @@
         android:fontFamily="@font/pretendard_semibold"
         android:text="보관"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="14dp" />
 </layout>
 

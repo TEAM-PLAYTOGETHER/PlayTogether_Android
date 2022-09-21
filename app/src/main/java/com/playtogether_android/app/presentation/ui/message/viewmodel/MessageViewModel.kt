@@ -3,7 +3,6 @@ package com.playtogether_android.app.presentation.ui.message.viewmodel
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -93,16 +92,16 @@ class MessageViewModel @Inject constructor(
             kotlin.runCatching { getMessageUseCase() }
                 .onSuccess {
                     if (it.isNotEmpty()) {
-                        Log.d("messageServer", "성공!!")
+                        Timber.d("messageServer: 성공!!")
                         val tempList: List<MessageData> = it
                         for (i in it.indices)
                             tempList[i].createdAt = changeDateFormat(it[i].createdAt)
 
                         _messageData.value = tempList
                     } else
-                        Log.d("messageServer", "가져온게 없어서 null $it")
+                        Timber.d("messageServer : 가져온게 없어서 null $it")
                 }
-                .onFailure { error -> Log.d("messageServer", "$error") }
+                .onFailure { error -> Timber.d("messageServer: $error") }
         }
     }
 

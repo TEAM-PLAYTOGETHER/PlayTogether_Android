@@ -43,7 +43,7 @@
                 android:paddingVertical="16dp"
                 android:text="@{member.name}"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toEndOf="@id/iv_applicant_profile"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="김세후니" />
@@ -77,7 +77,7 @@
                 android:paddingVertical="16dp"
                 android:text="@{member.mbti}"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toStartOf="@id/iv_go_applicant_details"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="ENFJ" />
@@ -90,7 +90,7 @@
                 android:paddingVertical="16dp"
                 android:text=" / "
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toStartOf="@id/tv_applicant_mbti"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,7 +102,7 @@
                 android:paddingVertical="16dp"
                 android:text="@{String.valueOf(member.age)}"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toStartOf="@id/tv_applicant_slash"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="25" />

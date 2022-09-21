@@ -49,7 +49,7 @@
             android:includeFontPadding="false"
             android:text="@{data.time}"
             android:textColor="@color/gray_gray02"
-            android:textSize="10sp"
+            android:textSize="10dp"
             android:visibility="@{data.timeVisible?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_otherchar_content"
             app:layout_constraintEnd_toEndOf="parent"

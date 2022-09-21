@@ -52,10 +52,11 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="@drawable/rectangle_fill_gray3_radius_0"
+            app:layout_constraintBottom_toBottomOf="@+id/view_join_onboarding_progressbar_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="2"
             app:layout_constraintStart_toEndOf="@+id/view_join_onboarding_progressbar_green"
-            app:layout_constraintTop_toBottomOf="@+id/view_join_onboarding_progressbar_green" />
+            app:layout_constraintTop_toTopOf="@+id/view_join_onboarding_progressbar_green" />
 
 
         <TextView
@@ -68,7 +69,7 @@
             android:lineSpacingExtra="4dp"
             android:text="@string/onboarding_join_input_code"
             android:textColor="@color/gray_black"
-            android:textSize="22sp"
+            android:textSize="22dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_join_onboarding_progressbar_green" />
 
@@ -82,7 +83,7 @@
             android:text="@string/onboarding_join_input_six"
             android:layout_marginTop="8dp"
             android:textColor="@color/gray_black02"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="@+id/tv_join_onboarding_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_join_onboarding_name" />
 
@@ -119,7 +120,7 @@
             android:text="@string/text_next"
             android:textAlignment="center"
             android:textColor="@color/gray_gray01"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -139,7 +140,7 @@
             android:textAlignment="center"
             android:visibility="invisible"
             android:textColor="@color/gray_black"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

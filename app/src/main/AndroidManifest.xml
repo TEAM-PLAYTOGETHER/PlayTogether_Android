@@ -99,9 +99,6 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".presentation.ui.mypage.OthersMyPageActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.main.SplashActivity"
             android:exported="true">
             <intent-filter>

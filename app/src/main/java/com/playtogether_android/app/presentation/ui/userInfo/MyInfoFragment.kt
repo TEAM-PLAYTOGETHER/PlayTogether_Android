@@ -132,15 +132,15 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     private fun moveWebPage() {
         //공지사항
         binding.tvNotice.setOnClickListener {
-            initIntent("https://cheddar-liquid-051.notion.site/14fc6c632471488486e7e76bc161069e")
+            initIntent("https://cheddar-liquid-051.notion.site/9386d123057d48ceb8a8f71ebb800888")
         }
         //이벤트
         binding.tvEvent.setOnClickListener {
-            initIntent("https://cheddar-liquid-051.notion.site/14fc6c632471488486e7e76bc161069e")
+            initIntent("https://cheddar-liquid-051.notion.site/ceff1d48f36847a19b50b5dc663f30b0")
         }
         //문의하기
         binding.tvQuestion.setOnClickListener {
-            initIntent("https://cheddar-liquid-051.notion.site/14fc6c632471488486e7e76bc161069e")
+            initIntent("http://pf.kakao.com/_RDWlxj")
         }
     }
 

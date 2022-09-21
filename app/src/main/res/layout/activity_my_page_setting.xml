@@ -31,7 +31,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/mypage_setting"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:text="@string/mypage_setting_account_info"
             android:textColor="@color/gray_gray02"
-            android:textSize="12sp"
+            android:textSize="12dp"
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
             android:paddingBottom="16dp"
             android:text="@string/mypage_manage_accont"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_info" />
 
@@ -97,7 +97,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:text="@string/mypage_setting_app_setting"
             android:textColor="@color/gray_gray02"
-            android:textSize="12sp"
+            android:textSize="12dp"
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +114,7 @@
             android:layout_marginTop="11dp"
             android:text="@string/mypage_alarm_setting"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_app_setting" />
 
@@ -139,7 +139,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:text="@string/mypage_setting_app_info"
             android:textColor="@color/gray_gray02"
-            android:textSize="12sp"
+            android:textSize="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view_setting_alarm" />
 
@@ -155,7 +155,7 @@
             android:text="@string/mypage_setting_guide"
             android:layout_marginTop="11dp"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_app_info" />
 
@@ -169,7 +169,7 @@
             android:paddingBottom="15dp"
             android:text="@string/mypage_setting_policy"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_guide" />
 
@@ -184,7 +184,7 @@
             android:paddingBottom="15dp"
             android:text="@string/mypage_setting_version"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_policy" />
 
@@ -198,7 +198,7 @@
             android:paddingBottom="15dp"
             android:text="@string/mypage_setting_developer"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_version" />
 
@@ -223,7 +223,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:text="@string/mypage_setting_etc"
             android:textColor="@color/gray_gray02"
-            android:textSize="12sp"
+            android:textSize="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view_setting_developer" />
 
@@ -238,7 +238,7 @@
             android:text="@string/mypage_setting_logout"
             android:layout_marginTop="11dp"
             android:textColor="@color/gray_black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_etc" />
 
