@@ -1,6 +1,5 @@
 package com.playtogether_android.app.presentation.ui.home.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,10 @@ import com.playtogether_android.domain.model.home.ThunderJoinEndMember
 import com.playtogether_android.domain.model.home.ThunderJoinEndOrganizer
 import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.model.onboarding.CrewListData
-import com.playtogether_android.domain.usecase.home.*
+import com.playtogether_android.domain.usecase.home.GetThunderJoinEndMemberUseCase
+import com.playtogether_android.domain.usecase.home.GetThunderJoinEndOrganizerUseCase
+import com.playtogether_android.domain.usecase.home.GetThunderJoinEndUseCase
+import com.playtogether_android.domain.usecase.home.PostJoinThunderUseCase
 import com.playtogether_android.domain.usecase.light.GetHotListUseCase
 import com.playtogether_android.domain.usecase.light.GetNewListUseCase
 import com.playtogether_android.domain.usecase.onboarding.GetCrewListUseCase
@@ -88,11 +90,11 @@ class HomeViewModel @Inject constructor(
             kotlin.runCatching { postJoinThunderUseCase(lightId) }
                 .onSuccess {
                     _joinThunder.value = it
-                    Log.d("joinThunder", "서버 통신 성공")
+                    Timber.d("joinThunder: 서버 통신 성공")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("joinThunder", "서버 통신 실패")
+                    Timber.d("joinThunder: 서버 통신 실패")
                 }
         }
     }
@@ -102,11 +104,11 @@ class HomeViewModel @Inject constructor(
             kotlin.runCatching { getThunderJoinEndUseCase(lightId) }
                 .onSuccess {
                     _endThunder.value = it
-                    Log.d("번개 참여 완료", "서버 통신 성공")
+                    Timber.d("번개 참여 완료: 서버 통신 성공")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("번개 참여 실패", "서버 통신 성공")
+                    Timber.d("번개 참여 실패: 서버 통신 성공")
                 }
         }
     }
@@ -118,7 +120,7 @@ class HomeViewModel @Inject constructor(
             }.onSuccess {
                 _organizerInfo.value = it
             }.onFailure {
-                Log.e("thunderDetailOrganizer", "failure")
+                Timber.e("thunderDetailOrganizer: failure")
 
             }
         }
@@ -130,9 +132,9 @@ class HomeViewModel @Inject constructor(
                 getThunderJoinEndMemberUseCase(lightId)
             }.onSuccess {
                 _memberList.value = it
-                Log.d("thunderDetailMember", "success : $it")
+                Timber.d("thunderDetailMember: success : $it")
             }.onFailure {
-                Log.e("thunderDetailMember", "failure")
+                Timber.e("thunderDetailMember: failure")
 
             }
         }

@@ -26,7 +26,7 @@ object ThunderCreateMapper {
             lightId = _lightId,
             crewId = _crewId
         )
-        Log.d("createServerMapper", "${g.message}, ${g.status}, ${g.success}")
+       // Log.d("createServerMapper", "${g.message}, ${g.status}, ${g.success}")
         return g
     }
 
@@ -40,10 +40,10 @@ object ThunderCreateMapper {
             peopleCnt = postThunderCreateData.peopleCnt,
             description = postThunderCreateData.description,
         )
-        Log.d(
-            "createServerMapper",
-            "${r.title} ${r.category} ${r.date} ${r.time} ${r.place} ${r.peopleCnt} ${r.description}"
-        )
+//        Log.d(
+//            "createServerMapper",
+//            "${r.title} ${r.category} ${r.date} ${r.time} ${r.place} ${r.peopleCnt} ${r.description}"
+//        )
         return r
     }
 
@@ -57,10 +57,10 @@ object ThunderCreateMapper {
             peopleCnt = postThunderCreateData.peopleCnt,
             description = postThunderCreateData.description,
         )
-        Log.d(
-            "createServerMapper",
-            "${r.title} ${r.category} ${r.date} ${r.time} ${r.place} ${r.peopleCnt} ${r.description}"
-        )
+//        Log.d(
+//            "createServerMapper",
+//            "${r.title} ${r.category} ${r.date} ${r.time} ${r.place} ${r.peopleCnt} ${r.description}"
+//        )
         return r
     }
 
@@ -80,7 +80,7 @@ object ThunderCreateMapper {
             lightId = _lightId,
             crewId = _crewId
         )
-        Log.d("createServerMapper", "${g.message}, ${g.status}, ${g.success}")
+//        Log.d("createServerMapper", "${g.message}, ${g.status}, ${g.success}")
         return g
     }
 }

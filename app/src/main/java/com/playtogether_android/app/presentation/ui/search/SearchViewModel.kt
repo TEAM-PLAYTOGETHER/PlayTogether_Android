@@ -18,6 +18,7 @@ class SearchViewModel @Inject constructor(
     private val _searchList = MutableLiveData<List<SearchData.LightData>>()
     val searchList: LiveData<List<SearchData.LightData>> = _searchList
     val category = MutableLiveData<String?>(null)
+    val resultEmpty = MutableLiveData<Boolean>(true)
     var isLastPage: Boolean = false
 
     var pageSize = 10
@@ -37,10 +38,11 @@ class SearchViewModel @Inject constructor(
                         FIRST -> {
                             _searchList.value = it.lightData
                             if (it.lightData.isEmpty()) {
+                                resultEmpty.value = true
                                 lamda()
                                 isLastPage = true
                                 return@launch
-                            }
+                            } else resultEmpty.value = false
                         }
                         MORE -> {
                             if (it.lightData.isEmpty()) {

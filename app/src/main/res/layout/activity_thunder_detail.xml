@@ -51,7 +51,7 @@
                     android:fontFamily="@font/pretendard_bold"
                     android:text="신청하기 ("
                     android:textColor="@color/gray_black"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_current"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -65,7 +65,7 @@
                     android:fontFamily="@font/pretendard_bold"
                     android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                     android:textColor="@color/gray_black"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_apply"
                     app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_slash"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -80,7 +80,7 @@
                     android:fontFamily="@font/pretendard_bold"
                     android:text="/"
                     android:textColor="@color/gray_black"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_current"
                     app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_max"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -94,7 +94,7 @@
                     android:fontFamily="@font/pretendard_bold"
                     android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                     android:textColor="@color/gray_black"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_thunderdetail_apply"
                     app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_par_end"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -109,7 +109,7 @@
                     android:fontFamily="@font/pretendard_bold"
                     android:text=")"
                     android:textColor="@color/gray_black"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_max"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -172,7 +172,7 @@
                 android:paddingVertical="16dp"
                 android:text="@string/cancel_application"
                 android:textColor="@color/main_green"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -236,7 +236,7 @@
                         android:includeFontPadding="false"
                         android:text="@{organizer.name}"
                         android:textColor="@color/gray_black"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/iv_thunderdetail_icon"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_thunderdetail_icon"
@@ -267,7 +267,7 @@
                         android:paddingVertical="6dp"
                         android:text="@string/navigation_message"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -296,7 +296,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_border_line"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:paddingBottom="30dp">
 
                     <TextView
                         android:id="@+id/tv_thunderdetail_title"
@@ -308,7 +309,7 @@
                         android:includeFontPadding="false"
                         android:text="@{detailData.title}"
                         android:textColor="@color/main_green"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -323,7 +324,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/text_date"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_title"
                         app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_title" />
 
@@ -336,7 +337,7 @@
                         android:includeFontPadding="false"
                         android:text="@{detailData.date}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_date"
                         app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_date"
                         app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_date"
@@ -351,7 +352,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/text_time"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_date"
                         app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_date" />
 
@@ -364,7 +365,7 @@
                         android:includeFontPadding="false"
                         android:text="@{detailData.time}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_time"
                         app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_time"
                         app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_time"
@@ -379,7 +380,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/text_place"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_time"
                         app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_time" />
 
@@ -392,7 +393,7 @@
                         android:includeFontPadding="false"
                         android:text="@{detailData.place}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_place"
                         app:layout_constraintStart_toEndOf="@id/tv_thunderdetail_place"
                         app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_place"
@@ -407,7 +408,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/text_category"
                         android:textColor="@color/main_green"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@+id/tv_thunderdetail_place"
                         app:layout_constraintTop_toBottomOf="@+id/tv_thunderdetail_place" />
 
@@ -444,7 +445,7 @@
                         android:includeFontPadding="false"
                         android:text="@{detailData.description}"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_dotted_line"
@@ -513,7 +514,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="번개 신청자 ("
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -524,7 +525,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="@{String.valueOf(detailData.lightMemberCnt)}"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_thunder_applicant_title"
                             app:layout_constraintTop_toTopOf="@id/tv_thunder_applicant_title"
                             tools:text="2" />
@@ -536,7 +537,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="@string/text_slash"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_current_applicant"
                             app:layout_constraintTop_toTopOf="@id/tv_current_applicant" />
 
@@ -547,7 +548,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"
                             app:layout_constraintTop_toTopOf="@id/tv_applicant_slash"
                             tools:text="6" />
@@ -559,7 +560,7 @@
                             android:fontFamily="@font/pretendard_bold"
                             android:text=")"
                             android:textColor="@color/gray_black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_max_applicant"
                             app:layout_constraintTop_toTopOf="@id/tv_max_applicant" />
 

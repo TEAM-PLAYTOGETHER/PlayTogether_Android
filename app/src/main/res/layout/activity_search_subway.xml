@@ -69,7 +69,7 @@
         android:lineSpacingExtra="4dp"
         android:text="@string/onboarding_subway_title"
         android:textColor="@color/gray_black"
-        android:textSize="22sp"
+        android:textSize="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_subway_onboarding_progressbar_green" />
 
@@ -81,7 +81,7 @@
         android:fontFamily="@font/pretendard_bold"
         android:text="@string/onboarding_subway"
         android:textColor="@color/gray_black"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@+id/tv_subway_onboarding_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_subway_onboarding_title" />
 
@@ -93,7 +93,7 @@
         android:fontFamily="@font/pretendard_regular"
         android:text="@string/onboarding_intro_subway_two"
         android:textColor="@color/gray_gray01"
-        android:textSize="10sp"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_subway_onboarding_name"
         app:layout_constraintStart_toEndOf="@+id/tv_subway_onboarding_name"
         app:layout_constraintTop_toTopOf="@+id/tv_subway_onboarding_name" />
@@ -115,7 +115,7 @@
         android:paddingBottom="20dp"
         android:singleLine="true"
         android:textColorHint="@color/gray_gray01"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_subway_onboarding_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_subway_onboarding_name" />
@@ -159,7 +159,7 @@
         android:text="@string/onboarding_add"
         android:textAlignment="center"
         android:textColor="@drawable/selector_text_gray01_to_black01"
-        android:textSize="15sp"
+        android:textSize="15dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

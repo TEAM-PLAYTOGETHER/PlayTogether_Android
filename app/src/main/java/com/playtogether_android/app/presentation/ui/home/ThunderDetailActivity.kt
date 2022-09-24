@@ -3,7 +3,6 @@ package com.playtogether_android.app.presentation.ui.home
 import PhotoDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
@@ -16,7 +15,6 @@ import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
-import com.playtogether_android.app.presentation.ui.mypage.OthersMyPageActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.userInfo.OtherInfoActivity
@@ -265,7 +263,7 @@ class ThunderDetailActivity :
                             startActivity(intent)
                             this@ThunderDetailActivity.finish()
                         } else {
-                            Log.d("번개참여", "실패")
+                            Timber.d("번개참여: 실패")
                         }
                     }
                 }

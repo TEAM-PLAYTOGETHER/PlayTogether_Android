@@ -1,6 +1,5 @@
 package com.playtogether_android.app.presentation.ui.thunder.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -54,7 +53,7 @@ class ThunderViewModel @Inject constructor(
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("getApplyList-fail", "fail")
+                    Timber.d("getApplyList-fail: fail")
                 }
         }
     }
