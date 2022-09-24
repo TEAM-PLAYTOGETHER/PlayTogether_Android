@@ -293,11 +293,10 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/rectangle_fill_gray_black_radius_10"
-                    android:paddingBottom="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_border_line">
+                    app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_border_line"
+                    android:layout_marginTop="30dp">
 
                     <TextView
                         android:id="@+id/tv_thunderdetail_title"
