@@ -24,6 +24,9 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.userInfo.ManageBlockedUserActivity"
             android:exported="false" />
         <activity
@@ -86,7 +89,7 @@
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"
@@ -112,8 +115,8 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.message.ChattingActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.ui.onboarding.JoinOnBoardingActivity"
             android:exported="true" />
