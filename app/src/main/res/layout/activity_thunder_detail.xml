@@ -41,7 +41,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/tv_thunderdetail_apply"
@@ -92,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
-                    android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
+                    android:text="@{detailData.peopleCnt==0 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                     android:textColor="@color/gray_black"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_thunderdetail_apply"
@@ -546,7 +547,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
+                            android:text="@{detailData.peopleCnt==0 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"

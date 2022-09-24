@@ -217,7 +217,8 @@ class ThunderDetailActivity :
             binding.clThunderdetailMessage,
             binding.ivThunderdetailLike,
             binding.tvThunderdetailReport,
-            binding.clThunderdetailApplyBtn
+            binding.clThunderdetailApplyBtn,
+            binding.clThunderApplicantContent
         )
 
         thunderDetailViewModel.isThunderType.observe(this) {
