@@ -18,10 +18,12 @@ import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.userInfo.OtherInfoActivity
+import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.app.util.showCustomPopUp
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -29,6 +31,7 @@ import timber.log.Timber
 class ThunderDetailActivity :
     BaseActivity<ActivityThunderDetailBinding>(R.layout.activity_thunder_detail) {
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
     private lateinit var applicantListAdapter: ApplicantListAdapter
     private val homeViewModel: HomeViewModel by viewModels()
     private var organizerId: Int = -1
@@ -197,6 +200,13 @@ class ThunderDetailActivity :
             applicantListAdapter.notifyDataSetChanged()
         }
 
+        applicantListAdapter.itemClick = object : ApplicantListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int, userId: Int) {
+                userInfoViewModel.getOtherInfo(PlayTogetherRepository.crewId, userId)
+                val intent = Intent(this@ThunderDetailActivity, OtherInfoActivity::class.java)
+
+            }
+        }
     }
 
     private fun checkCategory() {
