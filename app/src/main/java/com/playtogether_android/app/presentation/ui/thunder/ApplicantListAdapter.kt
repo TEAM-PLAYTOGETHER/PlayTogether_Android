@@ -1,9 +1,11 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemThunderApplicantListBinding
+import com.playtogether_android.app.presentation.ui.userInfo.OtherInfoActivity
 import com.playtogether_android.domain.model.home.ThunderJoinEndMember
 import com.playtogether_android.domain.model.thunder.Member
 
@@ -26,7 +28,16 @@ class ApplicantListAdapter : RecyclerView.Adapter<ApplicantListAdapter.Applicant
     }
 
     override fun onBindViewHolder(holder: ApplicantListViewHolder, position: Int) {
-        holder.onBind(applicantList[position])
+        val item = applicantList[position]
+        holder.onBind(item)
+        holder.itemView.apply {
+            //todo 근데 본인일때는 어케 알고 처리를 하지?
+            setOnClickListener { view ->
+                val intent = Intent(this.context, OtherInfoActivity::class.java)
+                intent.putExtra("memberId", item.userId)
+                this.context.startActivity(intent)
+            }
+        }
     }
 
     override fun getItemCount(): Int = applicantList.size
