@@ -296,7 +296,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_border_line"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:paddingBottom="30dp">
 
                     <TextView
                         android:id="@+id/tv_thunderdetail_title"
