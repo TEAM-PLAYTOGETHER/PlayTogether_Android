@@ -196,6 +196,7 @@ class ThunderDetailActivity :
             applicantListAdapter.applicantList.addAll(it)
             applicantListAdapter.notifyDataSetChanged()
         }
+
     }
 
     private fun checkCategory() {
@@ -205,20 +206,19 @@ class ThunderDetailActivity :
             binding.clDetailBoundary,
             binding.clDetailOrganizerContainer,
             binding.tvThunderdetailReport,
-            binding.clThunderApplicantContent
+            binding.clThunderApplicantContent,
         )
         val openCategory = mutableListOf(
             binding.ivDetailOption,
             binding.clDetailOrganizerContainer,
             binding.clDetailBoundary,
-            binding.clThunderApplicantContent
+            binding.clThunderApplicantContent,
         )
         val defaultCategory = mutableListOf(
             binding.clThunderdetailMessage,
             binding.ivThunderdetailLike,
             binding.tvThunderdetailReport,
             binding.clThunderdetailApplyBtn,
-            binding.clThunderApplicantContent
         )
 
         thunderDetailViewModel.isThunderType.observe(this) {
