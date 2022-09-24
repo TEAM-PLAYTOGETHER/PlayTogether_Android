@@ -17,11 +17,13 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
+import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
@@ -77,11 +79,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-//            val clientId = BuildConfig.GOOGLE_CLIENT_ID
-//            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
-//
-//            GoogleLoginRepository(clientId, clientSecret)
-//                .getAccessToken(account.serverAuthCode!!)
+            val clientId = BuildConfig.GOOGLE_CLIENT_ID
+            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
+            GoogleLoginRepository(clientId, clientSecret)
+                .getAccessToken(account.serverAuthCode!!)
+
             with(signViewModel) {
                 googleLogin()
                 Timber.e("google-login : ${PlayTogetherRepository.googleUserToken}")
