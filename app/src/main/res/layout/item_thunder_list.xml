@@ -82,7 +82,8 @@
             android:layout_height="wrap_content"
             android:background="@{categoryData.open ? @drawable/ic_icn_like_filled : @drawable/ic_icn_like_unfilled}"
             app:layout_constraintBottom_toBottomOf="@id/tv_thunder_item_limit_count"
-            app:layout_constraintStart_toStartOf="@id/ll_thunder_item_tag_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="46dp"
             app:layout_constraintTop_toTopOf="@id/tv_thunder_item_limit_count"
             tools:background="@drawable/ic_icn_like_filled" />
 
@@ -94,9 +95,10 @@
             android:layout_marginStart="2dp"
             android:text="@{String.valueOf(categoryData.likeCount)}"
             app:layout_constraintBottom_toBottomOf="@id/iv_thunder_item_fill_like"
-            app:layout_constraintStart_toEndOf="@id/iv_thunder_item_fill_like"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_thunder_item_fill_like"
-            tools:text="123" />
+            tools:text="3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
