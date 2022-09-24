@@ -57,7 +57,6 @@
     <string name="createthunder_date_undecided">날짜 미정</string>
 
 
-
     <!--signIn-->
     <string name="text_signin">로그인</string>
     <string name="signin_main_message">함께 놀아요! \nPLAY TOGETHER</string>
@@ -111,6 +110,9 @@
     <string name="tab_open">오픈한</string>
     <string name="tab_like">찜한</string>
     <string name="thunder_members">인원</string>
+    <string name="apply_empty">아직 신청한 번개가 없어요!\n관심 있는 번개를 신청해 보세요</string>
+    <string name="open_empty">아직 오픈한 번개가 없어요!\n새로운 번개를 오픈해 보세요</string>
+    <string name="like_empty">아직 찜한 번개가 없어요!\n관심 있는 번개를 찜 해보세요</string>
 
     <!-- onBoarding -->
     <string name="onboarding_user">님의</string>
