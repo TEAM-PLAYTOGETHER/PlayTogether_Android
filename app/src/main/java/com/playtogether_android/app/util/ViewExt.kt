@@ -65,9 +65,9 @@ fun Context.stringListBuilder(context: Context, stringList: List<String?>): Stri
     val sb = StringBuilder()
 
     for (it in stringList) {
-        if (it.isNullOrBlank()) {
+        if (it.isNullOrEmpty()) {
             sb.append("미정")
-        } else if (it == "-1") {
+        } else if (it == "0") {
             sb.append(context.getString(R.string.createthunder_infinite))
         } else {
             sb.append(it)

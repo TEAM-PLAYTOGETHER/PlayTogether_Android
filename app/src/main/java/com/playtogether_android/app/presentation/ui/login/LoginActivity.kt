@@ -17,11 +17,13 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
+import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
@@ -77,13 +79,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-//            val clientId = BuildConfig.GOOGLE_CLIENT_ID
-//            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
-//
-//            GoogleLoginRepository(clientId, clientSecret)
-//                .getAccessToken(account.serverAuthCode!!)
+            val clientId = BuildConfig.GOOGLE_CLIENT_ID
+            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
+            GoogleLoginRepository(clientId, clientSecret)
+                .getAccessToken(account.serverAuthCode!!)
+
             with(signViewModel) {
                 googleLogin()
+                Timber.e("google-login : ${PlayTogetherRepository.googleUserToken}")
                 isLogin.observe(this@LoginActivity) { success ->
                     if (success) {
                         Timber.e("login : 구글 로그인 성공")
@@ -136,15 +139,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun observeCrewList(size: Int) {
         val crewId = PlayTogetherRepository.crewId
         if (signViewModel.signup) {
-            //TODO: 회원가입했고 현재 등록된 crewId가 있음
-            if (crewId != -1) {
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                nextActivity(intent)
-            }
-            // TODO: 회원이지만 재설치를 해서 preference가 비어있음 -> 가입한 동아리 선택뷰로 이동
-            else if (crewId == -1 && size > 0) {
+            // TODO: 회원이지만 재설치를 해서 preference가 비어있음 또는 로그아웃한 경우-> 가입한 동아리 선택뷰로 이동
+            if (crewId == -1 && size > 0) {
                 val intent =
                     Intent(this@LoginActivity, OnboardingReDownLoadActivity::class.java)
+                nextActivity(intent)
+            }
+            //TODO: 회원가입했고 현재 등록된 crewId가 있음
+            else if (crewId != -1) {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 nextActivity(intent)
             }
             // TODO: 회원이지만 가입한 동아리가 없는 경우

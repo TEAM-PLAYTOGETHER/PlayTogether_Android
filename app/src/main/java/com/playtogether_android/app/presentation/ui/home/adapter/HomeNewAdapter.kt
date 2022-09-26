@@ -11,6 +11,7 @@ import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.util.ListAdapterComparator
 import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
+import timber.log.Timber
 
 class HomeNewAdapter :
     ListAdapter<CategoryData, HomeNewAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
@@ -28,11 +29,17 @@ class HomeNewAdapter :
                 categoryData = item
                 val context = itemView.context
                 tvHomenewDate.text =
-                    context.stringListBuilder(context, listOf(item.date, item.place, item.time))
+                    context.stringListBuilder(
+                        context,
+                        listOf(item.date, " ", item.place, " ", item.time)
+                    )
                 tvHomenewPeopleCnt.text = context.stringListBuilder(
                     context,
                     listOf(item.lightMemberCnt.toString(), "/", item.peopleCnt.toString())
                 )
+                Timber.e("item date : ${item.date}")
+                Timber.e("item place : ${item.place}")
+                Timber.e("item time : ${item.time}")
             }
         }
     }
