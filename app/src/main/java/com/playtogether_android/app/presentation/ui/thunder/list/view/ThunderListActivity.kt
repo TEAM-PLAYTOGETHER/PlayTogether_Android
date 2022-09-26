@@ -16,9 +16,10 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_GO
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
-import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.LIKECNT
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCPCNT
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderListActivity :
@@ -85,7 +86,7 @@ class ThunderListActivity :
                             initData(DEFAULT_SORT)
                         }
                         1 -> {
-                            initData(LIKECNT)
+                            initData(SCPCNT)
                         }
                     }
                     thunderListViewModel.setTabPosition(tab?.position!!)
@@ -160,13 +161,12 @@ class ThunderListActivity :
 
     @SuppressLint("SetTextI18n")
     private fun initData(sortType: String = DEFAULT_SORT) {
+        Timber.e("init data : $sortType")
         with(thunderListViewModel) {
             getLightCategoryList(CATEGORY_EAT, sortType)
             getLightCategoryList(CATEGORY_GO, sortType)
             getLightCategoryList(CATEGORY_DO, sortType)
         }
-        thunderViewModel.getApplyList()
-        thunderViewModel.getOpenList()
     }
 
     private fun setBackButtonListener() {
