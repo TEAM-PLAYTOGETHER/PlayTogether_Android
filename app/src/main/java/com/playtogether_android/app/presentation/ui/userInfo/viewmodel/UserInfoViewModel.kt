@@ -63,7 +63,7 @@ class UserInfoViewModel @Inject constructor(
         kotlin.runCatching { userInfoRepository.getOtherInfo(crewId, memberId) }
             .onSuccess {
                 _otherInfoData.postValue(it)
-                Timber.d("getOtherInfo-server 성공 : $it")
+                Timber.e("getOtherInfo-server 성공 : $it")
             }
             .onFailure {
                 it.printStackTrace()

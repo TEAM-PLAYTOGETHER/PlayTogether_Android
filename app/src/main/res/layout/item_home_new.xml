@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="categoryData"
             type="com.playtogether_android.domain.model.light.CategoryData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_hot_item_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rectangle_fill_gray_black_radius_10"
@@ -18,9 +20,11 @@
         <TextView
             android:id="@+id/tv_homenew_title"
             style="@style/home_item_title"
-            android:text="@{categoryData.title}"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@{categoryData.title}"
+            app:layout_constraintEnd_toStartOf="@id/ll_itemhome"
+            android:layout_marginEnd="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/home_item_title" />
@@ -29,39 +33,41 @@
             android:id="@+id/ll_itemhome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/ic_rectangle_category_button"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="@id/tv_homenew_title">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tv_itemhome_category"
                 style="@style/home_item_btn_text"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@{categoryData.category}" />
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_homenew_people_cnt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_homenew_title"
-            android:layout_marginTop="30dp"
+            style="@style/home_item_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/home_item_tool_people_cnt"
-            style="@style/home_item_about" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_itemhome" />
 
         <TextView
-            android:layout_width="wrap_content"
-            style="@style/home_item_about"
-            android:text="@string/home_item_tool_date"
-            android:layout_height="wrap_content"
             android:id="@+id/tv_homenew_date"
+            style="@style/home_item_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_item_tool_date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_homenew_people_cnt"/>
+            app:layout_constraintTop_toTopOf="@id/tv_homenew_people_cnt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

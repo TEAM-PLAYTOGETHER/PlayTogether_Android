@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
-                    android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
+                    android:text="@{detailData.peopleCnt==0 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                     android:textColor="@color/gray_black"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_thunderdetail_apply"
@@ -495,7 +495,7 @@
                     android:id="@+id/cl_detail_organizer_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cl_detail_boundary">
 
@@ -546,7 +546,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="@{detailData.peopleCnt==-1 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
+                            android:text="@{detailData.peopleCnt==0 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"

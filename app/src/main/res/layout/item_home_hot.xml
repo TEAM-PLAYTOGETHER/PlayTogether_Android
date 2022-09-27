@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="categoryData"
             type="com.playtogether_android.domain.model.light.CategoryData" />
@@ -19,9 +20,11 @@
         <TextView
             android:id="@+id/tv_homenew_title"
             style="@style/home_item_title"
-            android:text="@{categoryData.title}"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:text="@{categoryData.title}"
+            app:layout_constraintEnd_toStartOf="@id/ll_itemhome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/home_item_title" />
@@ -34,7 +37,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_homenew_title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_itemhome_category"
@@ -51,10 +54,11 @@
             style="@style/home_item_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/home_item_tool_people_cnt"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_homenew_title" />
+            app:layout_constraintTop_toBottomOf="@id/ll_itemhome" />
 
         <TextView
             android:id="@+id/tv_homenew_date"

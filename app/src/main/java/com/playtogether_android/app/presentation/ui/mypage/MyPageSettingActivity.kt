@@ -64,7 +64,13 @@ class MyPageSettingActivity :
 
         //로그아웃
         binding.tvSettingLogout.setOnClickListener {
-            PlayTogetherRepository.userLogin = false
+            with(PlayTogetherRepository) {
+                //todo 로그아웃한 경우 남아있는 Preferenece를 제거해야 소셜로그인 번갈아가면서 사용할 때 좋을거같아서 수정합니다.
+                crewId = -1
+                crewName = ""
+                userLogin = false
+            }
+
             Intent(this, LoginActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

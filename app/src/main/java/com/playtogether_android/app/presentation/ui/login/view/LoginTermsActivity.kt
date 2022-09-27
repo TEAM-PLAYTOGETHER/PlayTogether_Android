@@ -54,7 +54,10 @@ class LoginTermsActivity : BaseActivity<ActivityLoginTermsBinding>(R.layout.acti
         for (item in textList) {
             item.setOnClickListener {
                 Intent(this, WebViewActivity::class.java).apply {
-                    putExtra("url", "www.naver.com")
+                    putExtra(
+                        "url",
+                        "https://cheddar-liquid-051.notion.site/fc9dae6b1917453bbb1a39c4be4e4297"
+                    )
                     startActivity(this)
                 }
             }

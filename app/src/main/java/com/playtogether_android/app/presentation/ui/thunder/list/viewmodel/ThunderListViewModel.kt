@@ -135,7 +135,7 @@ class ThunderListViewModel @Inject constructor(
 
     companion object {
         const val DEFAULT_SORT = "createdAt"
-        const val LIKECNT = "peopleCnt"
+        const val SCPCNT = "scpCnt"
         const val CATEGORY_EAT = "먹을래"
         const val CATEGORY_GO = "갈래"
         const val CATEGORY_DO = "할래"

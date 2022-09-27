@@ -564,6 +564,7 @@
                         android:gravity="top"
                         android:hint="@string/createthunder_explaination"
                         android:includeFontPadding="false"
+                        android:maxLength="200"
                         android:minLines="11"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="20dp"
