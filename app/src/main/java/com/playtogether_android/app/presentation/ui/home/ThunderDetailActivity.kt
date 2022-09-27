@@ -296,7 +296,7 @@ class ThunderDetailActivity :
             binding.detailData = it
             val image = it.image
             if (image.isEmpty()) {
-                binding.ivDetailImage.visibility = View.GONE
+                binding.cvDetailImageContainer.visibility = View.GONE
             } else {
                 clickImage(it.image)
                 Glide
