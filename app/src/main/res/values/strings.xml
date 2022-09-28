@@ -301,5 +301,8 @@
     <string name="unblock">차단 해제</string>
     <string name="text_edit">수정하기</string>
 
+    <!--    report-->
+    <string name="report_title">게시글 신고</string>
+    <string name="report_description">게시글을 신고하는 이유에 대해 알려주세요.</string>
 
 </resources>
