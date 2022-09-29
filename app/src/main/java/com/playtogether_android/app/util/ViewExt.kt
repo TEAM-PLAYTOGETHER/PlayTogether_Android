@@ -125,7 +125,7 @@ fun Context.showCustomPopUp(
         horizontalOffset = screenWidthStr.toInt()
         verticalOffset = -20
 
-        setBackgroundDrawable(ContextCompat.getDrawable(baseContext, R.drawable.img_popup))
+        setBackgroundDrawable(ContextCompat.getDrawable(baseContext, R.drawable.ic_group_popup))
     }
     return popup
 }
