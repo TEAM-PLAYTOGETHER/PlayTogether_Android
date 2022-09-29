@@ -138,6 +138,13 @@ class CreateThunderActivity :
         clickComplete()
         imageSelected()
         uploadPhotoClickListener()
+        preButtonClick()
+    }
+
+    private fun preButtonClick() {
+        binding.ivCreatethunderBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun clickComplete() {
