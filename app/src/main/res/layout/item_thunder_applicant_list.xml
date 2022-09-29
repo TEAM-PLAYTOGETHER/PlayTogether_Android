@@ -68,43 +68,43 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_applicant_mbti"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/pretendard_regular"
-                android:paddingVertical="16dp"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintEnd_toStartOf="@id/iv_go_applicant_details"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="ENFJ" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_applicant_mbti"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:fontFamily="@font/pretendard_regular"-->
+<!--                android:paddingVertical="16dp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14dp"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/iv_go_applicant_details"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:text="ENFJ" />-->
 
-            <TextView
-                android:id="@+id/tv_applicant_slash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:paddingVertical="16dp"
-                android:text=" / "
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_applicant_mbti"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_applicant_slash"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/pretendard_regular"-->
+<!--                android:paddingVertical="16dp"-->
+<!--                android:text=" / "-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14dp"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/tv_applicant_mbti"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <TextView
-                android:id="@+id/tv_applicant_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:paddingVertical="16dp"
-                android:text="@{String.valueOf(member.age)}"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_applicant_slash"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="25" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_applicant_age"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/pretendard_regular"-->
+<!--                android:paddingVertical="16dp"-->
+<!--                android:text="@{String.valueOf(member.age)}"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14dp"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/tv_applicant_slash"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:text="25" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
