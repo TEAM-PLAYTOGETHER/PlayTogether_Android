@@ -86,7 +86,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
             with(signViewModel) {
                 googleLogin()
-                Timber.e("google-login : ${PlayTogetherRepository.googleUserToken}")
+                Timber.e("google-login : ${PlayTogetherRepository.googleAccessToken}")
+//                Timber.e("google-login : ${PlayTogetherRepository.googleUserToken}")
                 isLogin.observe(this@LoginActivity) { success ->
                     if (success) {
                         Timber.e("login : 구글 로그인 성공")

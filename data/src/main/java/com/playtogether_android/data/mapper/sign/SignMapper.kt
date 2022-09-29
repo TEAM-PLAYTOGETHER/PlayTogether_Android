@@ -54,7 +54,7 @@ object SignMapper {
     fun mapperToUserInfo(data: UserInfo): RequestSignup {
         return RequestSignup(
             data.gender,
-            data.birth
+            data.birth.toString()
         )
     }
 }
