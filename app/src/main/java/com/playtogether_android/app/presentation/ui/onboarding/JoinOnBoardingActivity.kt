@@ -84,10 +84,11 @@ class JoinOnBoardingActivity :
                 dialog.showOneChoiceDialog(R.layout.dialog_one_question)
             } else {
                 PlayTogetherRepository.crewId = it.crewId
+                PlayTogetherRepository.crewName = it.crewName
                 Timber.d("성공: 동아리가입")
                 Timber.e("PlayTogether CrewId : ${PlayTogetherRepository.crewId}")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-                intent.putExtra("crewName", it.crewName)
+//                intent.putExtra("crewName", it.crewName)
                 Timber.e("2222: ${it.crewName}")
                 intent.putExtra("isOpener", false)
                 startActivity(intent)

@@ -6,6 +6,7 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewEndOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 
 class OpenCrewEndOnBoardingActivity :
     BaseActivity<ActivityOpenCrewEndOnBoardingBinding>(R.layout.activity_open_crew_end_on_boarding) {
@@ -28,7 +29,8 @@ class OpenCrewEndOnBoardingActivity :
 
         binding.tvOpenOnboardingNext.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("crewName", crewName)
+            PlayTogetherRepository.crewName = crewName!!
+//            intent.putExtra("crewName", crewName)
             startActivity(intent)
             finish()
         }
