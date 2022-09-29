@@ -38,11 +38,6 @@ class ThunderListActivity :
         initView()
     }
 
-    override fun onResume() {
-        super.onResume()
-        initData()
-    }
-
     private fun setClickListener() {
         searchButtonClickListener()
         setBackButtonListener()
@@ -90,11 +85,6 @@ class ThunderListActivity :
                         }
                     }
                     thunderListViewModel.setTabPosition(tab?.position!!)
-//                finish()
-//                overridePendingTransition(0, 0)
-//                val intent = intent
-//                startActivity(intent)
-//                overridePendingTransition(0, 0)
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {

@@ -47,6 +47,7 @@ class ThunderEatFragment(val thunderViewModel: ThunderViewModel) :
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
             adapter = listAdapter
+            itemAnimator = null
         }
     }
 }

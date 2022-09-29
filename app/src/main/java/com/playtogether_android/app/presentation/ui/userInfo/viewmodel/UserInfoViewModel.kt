@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.userInfo.BlockUserList
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
@@ -50,6 +51,7 @@ class UserInfoViewModel @Inject constructor(
         kotlin.runCatching { userInfoRepository.getMyInfo() }
             .onSuccess {
                 _myInfoData.postValue(it)
+                PlayTogetherRepository.userUuid = it.id.toInt()
                 Timber.d("getMyInfo-server 성공", it.toString())
             }
             .onFailure {
