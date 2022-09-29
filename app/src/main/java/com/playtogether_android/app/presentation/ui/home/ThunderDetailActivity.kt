@@ -203,8 +203,11 @@ class ThunderDetailActivity :
         applicantListAdapter.itemClick = object : ApplicantListAdapter.ItemClick {
             override fun onClick(view: View, position: Int, userId: Int) {
                 userInfoViewModel.getOtherInfo(PlayTogetherRepository.crewId, userId)
-                val intent = Intent(this@ThunderDetailActivity, OtherInfoActivity::class.java)
-
+                if (PlayTogetherRepository.userUuid != userId) {
+                    val intent = Intent(this@ThunderDetailActivity, OtherInfoActivity::class.java)
+                    intent.putExtra("memberId", userId)
+                    startActivity(intent)
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package com.playtogether_android.app.presentation.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
@@ -14,6 +15,7 @@ import com.playtogether_android.app.presentation.ui.message.MessageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.presentation.ui.userInfo.MyInfoFragment
+import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -24,6 +26,7 @@ import timber.log.Timber
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val homeViewModel: HomeViewModel by viewModels()
     private val thunderViewModel: ThunderViewModel by viewModels()
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initData() {
+        userInfoViewModel.getMyInfo()
         Timber.d("JWT 토큰 : ${PlayTogetherRepository.userToken}")
     }
 
