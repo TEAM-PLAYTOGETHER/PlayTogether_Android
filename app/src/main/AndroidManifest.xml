@@ -116,6 +116,7 @@
         <activity
             android:name=".presentation.ui.message.ChattingActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:parentActivityName=".presentation.ui.main.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
