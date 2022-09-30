@@ -115,12 +115,12 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.message.ChattingActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="false"
-            android:parentActivityName=".presentation.ui.main.MainActivity">
+            android:parentActivityName=".presentation.ui.main.MainActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="CHATTING_ACTIVITY"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="CHATTING_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
