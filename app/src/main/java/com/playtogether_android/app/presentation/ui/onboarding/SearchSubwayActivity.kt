@@ -13,6 +13,7 @@ import com.playtogether_android.app.databinding.ActivitySearchSubwayBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.adapter.SubwayAdapter
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
+import com.playtogether_android.app.presentation.ui.userInfo.EditProfileActivity
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.SubwayListData
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,13 @@ class SearchSubwayActivity :
         addBtnClickListener()
         initSetting()
         activeBtn()
+    }
+
+    private fun isEditBtn() {
+        val isEdit = intent.getBooleanExtra("isEdit", false)
+        if(isEdit == true) {
+
+        }
     }
 
 
@@ -189,23 +197,46 @@ class SearchSubwayActivity :
             }
         }
         binding.ivSubwayOnboardingBack.setOnClickListener {
-            val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-            if (list != null) {
-                if (list.size != 0) {
-                    intent.putExtra("ChipList", list)
+            val isEdit = intent.getBooleanExtra("isEdit", false)
+            if(isEdit == true) {
+                val intent = Intent(this, EditProfileActivity::class.java)
+                if (list != null) {
+                    if (list.size != 0) {
+                        intent.putExtra("ChipList", list)
+                    }
+                    intent.putExtra("nickname", nickname)
+                    intent.putExtra("description", description)
+                    intent.putExtra("nicknameCheck", nicknameCheck)
+                    intent.putExtra("isEdit", true)
+                    intent.putExtra("crewId", crewId)
+                    intent.putExtra("isOpener", isOpener)
+                    intent.putExtra("crewCode", crewCode)
+                    intent.putExtra("crewName", crewName)
+                    intent.putExtra("crewIntro", crewIntroduce)
                 }
-                intent.putExtra("nickname", nickname)
-                intent.putExtra("description", description)
-                intent.putExtra("nicknameCheck", nicknameCheck)
+                startActivity(intent)
+                finish()
+            } else {
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                if (list != null) {
+                    if (list.size != 0) {
+                        intent.putExtra("ChipList", list)
+                    }
+                    intent.putExtra("nickname", nickname)
+                    intent.putExtra("description", description)
+                    intent.putExtra("nicknameCheck", nicknameCheck)
 
-                intent.putExtra("crewId", crewId)
-                intent.putExtra("isOpener", isOpener)
-                intent.putExtra("crewCode", crewCode)
-                intent.putExtra("crewName", crewName)
-                intent.putExtra("crewIntro", crewIntroduce)
+                    intent.putExtra("crewId", crewId)
+                    intent.putExtra("isOpener", isOpener)
+                    intent.putExtra("crewCode", crewCode)
+                    intent.putExtra("crewName", crewName)
+                    intent.putExtra("crewIntro", crewIntroduce)
+                }
+                startActivity(intent)
+                finish()
             }
-            startActivity(intent)
-            finish()
+
+
         }
     }
 
@@ -221,20 +252,35 @@ class SearchSubwayActivity :
             val crewIntroduce = intent.getStringExtra("crewIntro")
             val crewId = intent.getIntExtra("crewId", 1)
             val isOpener = intent.getBooleanExtra("isOpener", true)
+            val isEdit = intent.getBooleanExtra("isEdit", false)
 
-            val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-            intent.putExtra("ChipList", chipList)
-            intent.putExtra("nickname", nickname)
-            intent.putExtra("description", description)
-            intent.putExtra("nicknameCheck", nicknameCheck)
-            intent.putExtra("crewId", crewId)
-            intent.putExtra("crewCode", crewCode)
-            intent.putExtra("crewName", crewName)
-            intent.putExtra("crewIntro", crewIntroduce)
-            intent.putExtra("isOpener", isOpener)
-
-            startActivity(intent)
-            finish()
+            if(isEdit == true) {
+                val intent = Intent(this, EditProfileActivity::class.java)
+                intent.putExtra("ChipList", chipList)
+                intent.putExtra("nickname", nickname)
+                intent.putExtra("description", description)
+                intent.putExtra("nicknameCheck", nicknameCheck)
+                intent.putExtra("crewId", crewId)
+                intent.putExtra("crewCode", crewCode)
+                intent.putExtra("crewName", crewName)
+                intent.putExtra("crewIntro", crewIntroduce)
+                intent.putExtra("isOpener", isOpener)
+                startActivity(intent)
+                finish()
+            }else {
+                val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
+                intent.putExtra("ChipList", chipList)
+                intent.putExtra("nickname", nickname)
+                intent.putExtra("description", description)
+                intent.putExtra("nicknameCheck", nicknameCheck)
+                intent.putExtra("crewId", crewId)
+                intent.putExtra("crewCode", crewCode)
+                intent.putExtra("crewName", crewName)
+                intent.putExtra("crewIntro", crewIntroduce)
+                intent.putExtra("isOpener", isOpener)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 

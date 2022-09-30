@@ -28,6 +28,7 @@ class EditProfileActivity :
     private val chipList = java.util.ArrayList<String>()
     private var firstSubway: String? = null
     private var secondSubway: String? = null
+    private val isEdit = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -242,8 +243,8 @@ class EditProfileActivity :
             val crewCode = intent.getStringExtra("crewCode")
             val crewIntroduce = intent.getStringExtra("crewIntro")
             val crewId = intent.getIntExtra("crewId", 1)
-            val isOpener = intent.getBooleanExtra("isOpener", true)
-            Timber.e("222222222: $isOpener")
+//            val isOpener = intent.getBooleanExtra("isOpener", true)
+//            Timber.e("222222222: $isOpener")
             if (binding.tvOpenOnboardingAdd.isSelected) {
                 shortToast("최대 2개까지 추가할 수 있어요!")
             } else {
@@ -263,7 +264,8 @@ class EditProfileActivity :
                     putExtra("crewCode", crewCode)
                     putExtra("crewId", crewId)
                     putExtra("crewIntro", crewIntroduce)
-                    putExtra("isOpener", isOpener)
+                    putExtra("isEdit", isEdit)
+                   // putExtra("isOpener", isOpener)
 
                     putExtra("ChipList", chipList)
                     putExtra("description", description)
