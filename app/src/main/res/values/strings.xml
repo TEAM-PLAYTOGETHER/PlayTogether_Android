@@ -300,5 +300,6 @@
     <string name="blocked_user_message">차단한 유저와는 서로의 게시물, 댓글, 마이페이지를\n확인할 수 없으며, 채팅 또한 보낼 수 없습니다.</string>
     <string name="unblock">차단 해제</string>
 
-
+    <string name="channel_name">PLTO Channel</string>
+    <string name="channel_description">PlayTogther Notification Channel</string>
 </resources>
