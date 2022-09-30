@@ -3,8 +3,7 @@ package com.playtogether_android.app.presentation.ui.userInfo
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.*
+import androidx.fragment.app.activityViewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMyInfoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
@@ -12,16 +11,9 @@ import com.playtogether_android.app.presentation.ui.home.view.HomeFragmentDialog
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.WebViewActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageSettingActivity
-import com.playtogether_android.app.presentation.ui.onboarding.EditProfileActivity
-import com.playtogether_android.app.presentation.ui.onboarding.OnBoardingIntroduceActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.DateTimeUtil
-import com.playtogether_android.app.util.shortToast
-import com.playtogether_android.data.singleton.PlayTogetherRepository
-import com.playtogether_android.domain.model.userInfo.MyInfoData
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.notifyAll
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -55,6 +47,11 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        //여기에 프로필 서버통신하는 코드 넣기
+    }
+
     private fun getMyInfo() {
         userInfoViewModel.getMyInfo()
     }
@@ -72,12 +69,12 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             binding.homeViewModel = homeViewModel
 
             // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
-            if(it.firstStation == null) {
+            if (it.firstStation == null) {
                 binding.firstStation = "지하철역 미지정"
                 binding.isEmpty = true
             } else
                 binding.firstStation = it.firstStation
-                binding.secondStation = it.secondStation
+            binding.secondStation = it.secondStation
 
         }
     }
@@ -91,15 +88,28 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     }
 
 
-
     //프로필 수정하기 온보딩 뷰 이동
     private fun moveEditProfile() {
         binding.tvProfileEdit.setOnClickListener {
             userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
                 val intent = Intent(requireActivity(), EditProfileActivity::class.java)
+                val list = arrayListOf<String>()
+                Timber.e("121111 : ${it.firstStation}")
+                Timber.e("121111 : ${it.secondStation}")
+                if (it.firstStation != null) {
+                    list.add(it.firstStation.toString())
+                }
+                if (it.secondStation != null) {
+                    list.add(it.secondStation.toString())
+                }
+                if (list != null) {
+                    if (list.size != 0) {
+                        intent.putExtra("ChipList", list)
+                    }
+                }
                 intent.putExtra("crewName", it.crewName)
-                intent.putExtra("nickname",it.nickname )
-                intent.putExtra("description",it.description)
+                intent.putExtra("nickname", it.nickname)
+                intent.putExtra("description", it.description)
                 intent.putExtra("firstStation", it.firstStation)
                 intent.putExtra("secondStation", it.secondStation)
                 //todo 온보딩뷰 이동 시 넘겨줄 값 추가
@@ -111,7 +121,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     //내 동아리 관리하기 이동뷰 이동
     private fun moveManageCrew() {
         binding.tvCrewManage.setOnClickListener {
-            userInfoViewModel.myInfoData.observe(viewLifecycleOwner){
+            userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
                 val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
                 intent.putExtra("crewName", it.crewName)
                 Timber.d("crewName보내는 쪽: ${it.crewName}")
@@ -155,7 +165,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
     private fun roundingImage() {
         //  프로필 이미지 코너 라운딩 (radius: 10dp)
-        binding.ivProfileImg.background = getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+        binding.ivProfileImg.background =
+            getResources().getDrawable(R.drawable.rectangle_radius_10, null)
         binding.ivProfileImg.setClipToOutline(true)
     }
 
