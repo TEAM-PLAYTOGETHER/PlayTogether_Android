@@ -3,6 +3,7 @@ package com.playtogether_android.app.util
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -55,19 +56,26 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
     private fun sendNotification(message: RemoteMessage) {
         val roomId = message.data.get("roomId").toString().toInt()
         val audienceId = message.data.get("sendId").toString().toInt()
-        //val name = message.notification!!.title.toString()
         val name = message.data.get("title").toString()
         val body = message.data.get("body").toString()
 
         val intent = Intent(this, ChattingActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtra("name", name)
         intent.putExtra("roomId", roomId)
         intent.putExtra("audienceId", audienceId)
+        intent.setAction("" + Math.random())
 
-        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
-        } else {
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val rand = (Math.random().toFloat() * 10000).toInt()
+
+        val pendingIntent = TaskStackBuilder.create(this).run {
+            addNextIntentWithParentStack(intent)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                getPendingIntent(0, PendingIntent.FLAG_MUTABLE)
+            } else {
+                getPendingIntent(0, PendingIntent.FLAG_CANCEL_CURRENT)
+            }
         }
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID).apply {
@@ -78,6 +86,6 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
             setContentIntent(pendingIntent)
         }
 
-        NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, builder.build())
+        NotificationManagerCompat.from(this).notify(rand, builder.build())
     }
 }
