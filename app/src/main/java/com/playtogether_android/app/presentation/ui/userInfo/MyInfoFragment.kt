@@ -72,10 +72,10 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             if (it.firstStation == null) {
                 binding.firstStation = "지하철역 미지정"
                 binding.isEmpty = true
-            } else
+            } else {
                 binding.firstStation = it.firstStation
-            binding.secondStation = it.secondStation
-
+                binding.secondStation = it.secondStation
+            }
         }
     }
 
@@ -94,8 +94,14 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
                 val intent = Intent(requireActivity(), EditProfileActivity::class.java)
                 val list = arrayListOf<String>()
-                list.add(it.firstStation.toString())
-                list.add(it.secondStation.toString())
+                Timber.e("121111 : ${it.firstStation}")
+                Timber.e("121111 : ${it.secondStation}")
+                if(it.firstStation != null) {
+                    list.add(it.firstStation.toString())
+                }
+                if(it.secondStation != null) {
+                    list.add(it.secondStation.toString())
+                }
                 if (list != null) {
                     if (list.size != 0) {
                         intent.putExtra("ChipList", list)

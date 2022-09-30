@@ -284,6 +284,7 @@ class EditProfileActivity :
     //칩버튼 관리
     private fun setChipBtn() {
         val list = intent.getStringArrayListExtra("ChipList")
+        Timber.e("TEST123: $list")
         if (list?.size != null) {
             binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
             for (i in 0 until list.size) {
@@ -321,6 +322,7 @@ class EditProfileActivity :
         }
     }
 
+    //닉네임 중복 확인
     private fun nicknameDuplicationCheck() {
         val nickname: String = binding.etIntroOnboardingName.text.toString()
 
