@@ -46,6 +46,7 @@ class EditProfileActivity :
 
     override fun onResume() {
         super.onResume()
+        nicknameDuplicationCheck()
         initSetting()
     }
 
