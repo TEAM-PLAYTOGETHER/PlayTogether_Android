@@ -61,7 +61,13 @@ class EditProfileActivity :
         val nickName = binding.etIntroOnboardingName.text.toString()
         val description = binding.etIntroOnboardingIntro.text.toString()
 
-        val list = intent.getStringArrayListExtra("ChipList")
+        for (i: Int in 1..binding.chipMypage.childCount) {
+            val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
+            chipList.add(chip.text.toString())
+        }
+
+        val list = chipList
+       //val list = intent.getStringArrayListExtra("ChipList")
         if (list?.size != null) {
             for (i in 0 until list.size) {
                 val chip = Chip(binding.chipMypage.context).apply {
@@ -93,49 +99,13 @@ class EditProfileActivity :
         Timber.e("Test4 : $secondSubway")
 
 
-
-        val crewName = intent.getStringExtra("crewName")
-        val crewCode = intent.getStringExtra("crewCode")
-        val crewIntroduce = intent.getStringExtra("crewIntro")
-        val crewId = intent.getIntExtra("crewId", 1)
-        val isOpener = intent.getBooleanExtra("isOpener", true)
-
-        Timber.e("111111: $isOpener")
-
-
-        val name = binding.etIntroOnboardingName.text.toString()
-        binding.tvIntroOnboardingCrewName.text = crewName
-
-        /*
-        if (isOpener) {
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
-                putExtra("nickname", name)
-                putExtra("crewName", crewName)
-                putExtra("crewCode", crewCode)
-                putExtra("crewId", crewId)
-                putExtra("crewIntro", crewIntroduce)
-                putExtra("isOpener", isOpener)
-            }
-            startActivity(intent)
-            finish()
-        } else {
-            val intent = Intent(this, SignUpFinishActivity::class.java).apply {
-                putExtra("nickname", name)
-            }
-
-
-            startActivity(intent)
-
-         */
-            finish()
-        //}
-
+        finish()
 
 
     }
 
     private fun nextBtnActive() {
-        if(binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != "") {
+        if (binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != "") {
             binding.tvIntroOnboardingNext.isSelected = true
         } else {
             binding.tvIntroOnboardingNext.isSelected = false
@@ -170,7 +140,7 @@ class EditProfileActivity :
         if (description != null && nicknameCheck == true) {
             binding.tvIntroOnboardingNext.isSelected = true
             binding.tvIntroOnboardingNext.setOnClickListener {
-                nextBtnNetwork()
+                //nextBtnNetwork()
             }
         } else {
             binding.tvIntroOnboardingNext.isSelected = false
@@ -253,7 +223,10 @@ class EditProfileActivity :
     private fun introTextWatcher() = with(binding) {
         etIntroOnboardingIntro.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {nextBtnActive()}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                nextBtnActive()
+            }
+
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
