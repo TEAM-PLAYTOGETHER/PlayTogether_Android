@@ -2,7 +2,6 @@ package com.playtogether_android.app.presentation.ui.message
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -103,7 +102,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun setName() {
-        val name = intent.getStringExtra("name") ?: error("ChatActivity로 name을 넘겨주지 않음")
+        val name = intent.getStringExtra("name")
         binding.tvInChattingName.text = name
     }
 
