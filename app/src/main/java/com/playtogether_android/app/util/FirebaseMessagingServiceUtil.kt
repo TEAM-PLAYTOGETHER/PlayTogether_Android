@@ -3,7 +3,6 @@ package com.playtogether_android.app.util
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.TaskStackBuilder
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -36,14 +35,6 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
             makeChannel()
             sendNotification(remoteMessage)
         }
-
-        /*if (remoteMessage.notification == null) {
-            Timber.e("plto fcm : remote message notification is empty")
-        } else {
-            Timber.e("plto fcm : remote message notification is not empty")
-            makeChannel()
-            sendNotification(remoteMessage)
-        }*/
     }
 
     fun makeChannel() {
@@ -75,7 +66,7 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
 
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
-        }else {
+        } else {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
