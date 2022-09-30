@@ -12,6 +12,7 @@ import com.playtogether_android.app.presentation.ui.home.view.HomeFragmentDialog
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.WebViewActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageSettingActivity
+import com.playtogether_android.app.presentation.ui.onboarding.EditProfileActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnBoardingIntroduceActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.DateTimeUtil
@@ -95,7 +96,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     private fun moveEditProfile() {
         binding.tvProfileEdit.setOnClickListener {
             userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
-                val intent = Intent(requireActivity(), OnBoardingIntroduceActivity::class.java)
+                val intent = Intent(requireActivity(), EditProfileActivity::class.java)
                 intent.putExtra("crewName", it.crewName)
                 intent.putExtra("nickname",it.nickname )
                 intent.putExtra("description",it.description)
