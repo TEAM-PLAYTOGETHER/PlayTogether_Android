@@ -3,8 +3,7 @@ package com.playtogether_android.app.presentation.ui.userInfo
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.*
+import androidx.fragment.app.activityViewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMyInfoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
@@ -12,16 +11,9 @@ import com.playtogether_android.app.presentation.ui.home.view.HomeFragmentDialog
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.main.WebViewActivity
 import com.playtogether_android.app.presentation.ui.mypage.MyPageSettingActivity
-import com.playtogether_android.app.presentation.ui.onboarding.EditProfileActivity
-import com.playtogether_android.app.presentation.ui.onboarding.OnBoardingIntroduceActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.DateTimeUtil
-import com.playtogether_android.app.util.shortToast
-import com.playtogether_android.data.singleton.PlayTogetherRepository
-import com.playtogether_android.domain.model.userInfo.MyInfoData
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.notifyAll
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 @AndroidEntryPoint

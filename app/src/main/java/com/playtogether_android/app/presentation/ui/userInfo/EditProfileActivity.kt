@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.onboarding
+package com.playtogether_android.app.presentation.ui.userInfo
 
 import android.content.Intent
 import android.graphics.Color
@@ -12,6 +12,9 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityEditProfileBinding
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.OpenCrewEndOnBoardingActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SearchSubwayActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SignUpFinishActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.AddProfileItem
