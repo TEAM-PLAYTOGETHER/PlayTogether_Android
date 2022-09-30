@@ -64,12 +64,12 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             binding.homeViewModel = homeViewModel
 
             // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
-            if(it.firstStation == null) {
+            if (it.firstStation == null) {
                 binding.firstStation = "지하철역 미지정"
                 binding.isEmpty = true
             } else
                 binding.firstStation = it.firstStation
-                binding.secondStation = it.secondStation
+            binding.secondStation = it.secondStation
 
         }
     }
@@ -83,15 +83,22 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     }
 
 
-
     //프로필 수정하기 온보딩 뷰 이동
     private fun moveEditProfile() {
         binding.tvProfileEdit.setOnClickListener {
             userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
                 val intent = Intent(requireActivity(), EditProfileActivity::class.java)
+                val list = arrayListOf<String>()
+                list.add(it.firstStation.toString())
+                list.add(it.secondStation.toString())
+                if (list != null) {
+                    if (list.size != 0) {
+                        intent.putExtra("ChipList", list)
+                    }
+                }
                 intent.putExtra("crewName", it.crewName)
-                intent.putExtra("nickname",it.nickname )
-                intent.putExtra("description",it.description)
+                intent.putExtra("nickname", it.nickname)
+                intent.putExtra("description", it.description)
                 intent.putExtra("firstStation", it.firstStation)
                 intent.putExtra("secondStation", it.secondStation)
                 //todo 온보딩뷰 이동 시 넘겨줄 값 추가
@@ -103,7 +110,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     //내 동아리 관리하기 이동뷰 이동
     private fun moveManageCrew() {
         binding.tvCrewManage.setOnClickListener {
-            userInfoViewModel.myInfoData.observe(viewLifecycleOwner){
+            userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
                 val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
                 intent.putExtra("crewName", it.crewName)
                 Timber.d("crewName보내는 쪽: ${it.crewName}")
@@ -147,7 +154,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
     private fun roundingImage() {
         //  프로필 이미지 코너 라운딩 (radius: 10dp)
-        binding.ivProfileImg.background = getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+        binding.ivProfileImg.background =
+            getResources().getDrawable(R.drawable.rectangle_radius_10, null)
         binding.ivProfileImg.setClipToOutline(true)
     }
 
