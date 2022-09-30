@@ -10,13 +10,11 @@ import androidx.activity.viewModels
 import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityEditProfileBinding
-import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.onboarding.OpenCrewEndOnBoardingActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SearchSubwayActivity
-import com.playtogether_android.app.presentation.ui.onboarding.SignUpFinishActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.onboarding.AddProfileItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -85,8 +83,15 @@ class EditProfileActivity :
                 firstSubway,
                 nickName,
                 secondSubway
-            ), intent.getIntExtra("crewId", 1)
+            ), PlayTogetherRepository.crewId
         )
+
+        Timber.e("TEST0 : ${PlayTogetherRepository.crewId}")
+        Timber.e("TEST1 : $description")
+        Timber.e("Test2 : $firstSubway")
+        Timber.e("Test3 : $nickName")
+        Timber.e("Test4 : $secondSubway")
+
 
 
         val crewName = intent.getStringExtra("crewName")
@@ -101,6 +106,7 @@ class EditProfileActivity :
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
 
+        /*
         if (isOpener) {
             val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
                 putExtra("nickname", name)
@@ -116,9 +122,14 @@ class EditProfileActivity :
             val intent = Intent(this, SignUpFinishActivity::class.java).apply {
                 putExtra("nickname", name)
             }
+
+
             startActivity(intent)
+
+         */
             finish()
-        }
+        //}
+
 
 
     }
