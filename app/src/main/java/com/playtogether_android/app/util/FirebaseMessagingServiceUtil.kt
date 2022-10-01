@@ -11,6 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.playtogether_android.app.R
+import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -59,18 +60,26 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
         val name = message.data.get("title").toString()
         val body = message.data.get("body").toString()
 
-        val intent = Intent(this, ChattingActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra("name", name)
-        intent.putExtra("roomId", roomId)
-        intent.putExtra("audienceId", audienceId)
-        intent.setAction("" + Math.random())
+        val stackBuilder = TaskStackBuilder.create(this)
+
+        val parentIntent = Intent(this, MainActivity::class.java).run {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            putExtra("fragment", "message")
+        }
+        stackBuilder.addNextIntent(parentIntent)
+
+        val intent = Intent(this, ChattingActivity::class.java).run {
+            putExtra("name", name)
+            putExtra("roomId", roomId)
+            putExtra("audienceId", audienceId)
+            setAction("" + Math.random())
+        }
+        stackBuilder.addNextIntent(intent)
 
         val rand = (Math.random().toFloat() * 10000).toInt()
 
-        val pendingIntent = TaskStackBuilder.create(this).run {
-            addNextIntentWithParentStack(intent)
+        val pendingIntent: PendingIntent = stackBuilder.run {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 getPendingIntent(0, PendingIntent.FLAG_MUTABLE)
             } else {
