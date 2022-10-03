@@ -71,6 +71,8 @@ class MyPageSettingActivity :
                 userLogin = false
                 googleUserToken = ""
                 kakaoUserToken = ""
+                kakaoAccessToken=""
+                googleAccessToken=""
                 userToken = ""
             }
 

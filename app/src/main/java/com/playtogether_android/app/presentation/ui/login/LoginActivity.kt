@@ -51,7 +51,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private fun initView() {
         googleLoginCallback()
-        onClickListener()
+        btnKakaoListener()
+        btnGoogleListener()
     }
 
     private fun googleLoginCallback() {
@@ -79,11 +80,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-            val clientId = BuildConfig.GOOGLE_CLIENT_ID
-            val clientSecret = BuildConfig.GOOGLE_CLIENT_SECRET
-            GoogleLoginRepository(clientId, clientSecret)
+            GoogleLoginRepository(
+                BuildConfig.GOOGLE_CLIENT_ID,
+                BuildConfig.GOOGLE_CLIENT_SECRET
+            )
                 .getAccessToken(account.serverAuthCode!!)
-
             with(signViewModel) {
                 googleLogin()
                 Timber.e("google-login : ${PlayTogetherRepository.googleAccessToken}")
@@ -103,8 +104,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun onClickListener() {
-        btnKakaoListener()
-        btnGoogleListener()
+
     }
 
     private fun btnKakaoListener() {
