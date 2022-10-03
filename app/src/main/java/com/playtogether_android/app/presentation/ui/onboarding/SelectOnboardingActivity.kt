@@ -6,7 +6,6 @@ import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySelectOnboardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.home.view.HomeFragment
 import com.playtogether_android.app.presentation.ui.login.LoginActivity
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint

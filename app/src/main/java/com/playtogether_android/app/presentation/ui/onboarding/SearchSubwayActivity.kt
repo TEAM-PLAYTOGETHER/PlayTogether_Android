@@ -17,7 +17,6 @@ import com.playtogether_android.app.presentation.ui.userInfo.EditProfileActivity
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.SubwayListData
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -36,14 +35,6 @@ class SearchSubwayActivity :
         initSetting()
         activeBtn()
     }
-
-    private fun isEditBtn() {
-        val isEdit = intent.getBooleanExtra("isEdit", false)
-        if(isEdit == true) {
-
-        }
-    }
-
 
     private fun initTextFieldCheck() {
         if (binding.etSubwayOnboardingName.text.toString() != "") {

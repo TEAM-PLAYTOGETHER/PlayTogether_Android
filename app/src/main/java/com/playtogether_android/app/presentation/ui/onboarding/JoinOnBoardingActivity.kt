@@ -77,7 +77,6 @@ class JoinOnBoardingActivity :
         }
         onBoardingViewModel.registerCrew.observe(this) {
             if (!it.success) {
-                Timber.e("Test: ${it.message}")
                 Timber.d("실패 :동아리가입")
                 val title = it.message
                 val dialog = CustomDialog(this, title)
@@ -86,13 +85,10 @@ class JoinOnBoardingActivity :
                 PlayTogetherRepository.crewId = it.crewId
                 PlayTogetherRepository.crewName = it.crewName
                 Timber.d("성공: 동아리가입")
-                Timber.e("PlayTogether CrewId : ${PlayTogetherRepository.crewId}")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
 //                intent.putExtra("crewName", it.crewName)
                 intent.putExtra("crewId", it.crewId)
                 intent.putExtra("crewName", it.crewName)
-                Timber.e("2222: ${it.crewName}")
-                Timber.e("TESTETSET: ${PlayTogetherRepository.crewId}")
                 intent.putExtra("isOpener", false)
                 startActivity(intent)
                 finish()
