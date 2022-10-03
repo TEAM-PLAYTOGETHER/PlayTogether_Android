@@ -57,7 +57,7 @@ class ThunderDetailActivity :
     private fun clickItems(thunderId: Int) {
         clickScrap()
         clickOption(thunderId)
-        clickReport()
+        clickReport(thunderId)
         clickThunderCancel(thunderId)
         clickProfile()
         clickSendMessage()
@@ -139,11 +139,11 @@ class ThunderDetailActivity :
         }
     }
 
-    private fun clickReport() {
+    private fun clickReport(thunderId: Int) {
         binding.tvThunderdetailReport.setOnClickListener {
             val intent = Intent(this, ReportPostActivity::class.java)
             //TODO:  해당 lightId 보내주기
-//            intent.putExtra("lightId", lightId)
+            intent.putExtra("thunderId", thunderId)
             startActivity(intent)
         }
     }
