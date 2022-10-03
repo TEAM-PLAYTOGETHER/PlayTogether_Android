@@ -207,8 +207,11 @@ class ThunderDetailActivity :
         applicantListAdapter.itemClick = object : ApplicantListAdapter.ItemClick {
             override fun onClick(view: View, position: Int, userId: Int) {
                 userInfoViewModel.getOtherInfo(PlayTogetherRepository.crewId, userId)
-                val intent = Intent(this@ThunderDetailActivity, OtherInfoActivity::class.java)
-
+                if (PlayTogetherRepository.userUuid != userId) {
+                    val intent = Intent(this@ThunderDetailActivity, OtherInfoActivity::class.java)
+                    intent.putExtra("memberId", userId)
+                    startActivity(intent)
+                }
             }
         }
     }
@@ -300,7 +303,7 @@ class ThunderDetailActivity :
             binding.detailData = it
             val image = it.image
             if (image.isEmpty()) {
-                binding.ivDetailImage.visibility = View.GONE
+                binding.cvDetailImageContainer.visibility = View.GONE
             } else {
                 clickImage(it.image)
                 Glide

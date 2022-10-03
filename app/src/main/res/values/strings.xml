@@ -260,6 +260,9 @@
     <string name="loginterms_terms3"><b><u>개인정보 수집 및 이용</u></b></string>
     <string name="loginterms_terms4"><b><u>마케팅 정보 수집 및 수신</u></b></string>
     <string name="loginterms_access">확인</string>
+    <string name="loginterms2">https://www.notion.so/96da09a5d6c04580a61251348f89e4e5</string>
+    <string name="loginterm3">https://www.notion.so/6523be1a894e46f0851fc9560f147f77</string>
+    <string name="loginterm4">https://www.notion.so/a0fbf347a10a4ab298214da5b9b6b2b9</string>
 
     <!--    login info activity-->
     <string name="logininfo_title">안전한 번개를 위해\n정보를 입력해주세요</string>
@@ -301,6 +304,8 @@
     <string name="unblock">차단 해제</string>
     <string name="text_edit">수정하기</string>
 
+    <string name="channel_name">PLTO Channel</string>
+    <string name="channel_description">PlayTogther Notification Channel</string>
     <!--    report-->
     <string name="report_title">게시글 신고</string>
     <string name="report_description">게시글을 신고하는 이유에 대해 알려주세요.</string>

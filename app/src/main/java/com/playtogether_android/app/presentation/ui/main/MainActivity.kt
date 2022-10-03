@@ -9,11 +9,11 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityMainBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.view.HomeFragment
-import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.MessageFragment
 import com.playtogether_android.app.presentation.ui.thunder.ThunderFragment
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.presentation.ui.userInfo.MyInfoFragment
+import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.changeFragment
 import com.playtogether_android.app.util.changeFragmentNoBackStack
 import com.playtogether_android.data.singleton.PlayTogetherRepository
@@ -22,14 +22,14 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private val homeViewModel: HomeViewModel by viewModels()
     private val thunderViewModel: ThunderViewModel by viewModels()
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        changeFragmentNoBackStack(R.id.fragment_container_main, HomeFragment())
         initBottomNav()
+        startFisrtFragment()
         FirebaseApp.initializeApp(this)
 //        val token = FirebaseMessaging.getInstance().token
         getFCMToken()
@@ -38,6 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initData() {
+        userInfoViewModel.getMyInfo()
         Timber.d("JWT 토큰 : ${PlayTogetherRepository.userToken}")
     }
 
@@ -49,6 +50,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private var prevSelectedItem: Int = 1
 
+    private fun startFisrtFragment() {
+        val startFragment = intent.getStringExtra("fragment")
+        when (startFragment) {
+            "message" -> binding.btNvMain.selectedItemId = R.id.navigation_message
+            else -> binding.btNvMain.selectedItemId = R.id.navigation_home
+        }
+    }
 
     private fun getFCMToken(): String? {
         var token: String? = null

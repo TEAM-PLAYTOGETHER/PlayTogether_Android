@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.onboarding
+package com.playtogether_android.app.presentation.ui.userInfo
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,10 +10,11 @@ import androidx.activity.viewModels
 import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityEditProfileBinding
-import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SearchSubwayActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.onboarding.AddProfileItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -27,6 +28,7 @@ class EditProfileActivity :
     private val chipList = java.util.ArrayList<String>()
     private var firstSubway: String? = null
     private var secondSubway: String? = null
+    private val isEdit = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,7 @@ class EditProfileActivity :
 
     override fun onResume() {
         super.onResume()
+        nicknameDuplicationCheck()
         initSetting()
     }
 
@@ -60,7 +63,13 @@ class EditProfileActivity :
         val nickName = binding.etIntroOnboardingName.text.toString()
         val description = binding.etIntroOnboardingIntro.text.toString()
 
-        val list = intent.getStringArrayListExtra("ChipList")
+        for (i: Int in 1..binding.chipMypage.childCount) {
+            val chip: Chip = binding.chipMypage.getChildAt(i - 1) as Chip
+            chipList.add(chip.text.toString())
+        }
+
+        val list = chipList
+       //val list = intent.getStringArrayListExtra("ChipList")
         if (list?.size != null) {
             for (i in 0 until list.size) {
                 val chip = Chip(binding.chipMypage.context).apply {
@@ -82,46 +91,23 @@ class EditProfileActivity :
                 firstSubway,
                 nickName,
                 secondSubway
-            ), intent.getIntExtra("crewId", 1)
+            ), PlayTogetherRepository.crewId
         )
 
-
-        val crewName = intent.getStringExtra("crewName")
-        val crewCode = intent.getStringExtra("crewCode")
-        val crewIntroduce = intent.getStringExtra("crewIntro")
-        val crewId = intent.getIntExtra("crewId", 1)
-        val isOpener = intent.getBooleanExtra("isOpener", true)
-
-        Timber.e("111111: $isOpener")
+        Timber.e("TEST0 : ${PlayTogetherRepository.crewId}")
+        Timber.e("TEST1 : $description")
+        Timber.e("Test2 : $firstSubway")
+        Timber.e("Test3 : $nickName")
+        Timber.e("Test4 : $secondSubway")
 
 
-        val name = binding.etIntroOnboardingName.text.toString()
-        binding.tvIntroOnboardingCrewName.text = crewName
-
-        if (isOpener) {
-            val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
-                putExtra("nickname", name)
-                putExtra("crewName", crewName)
-                putExtra("crewCode", crewCode)
-                putExtra("crewId", crewId)
-                putExtra("crewIntro", crewIntroduce)
-                putExtra("isOpener", isOpener)
-            }
-            startActivity(intent)
-            finish()
-        } else {
-            val intent = Intent(this, SignUpFinishActivity::class.java).apply {
-                putExtra("nickname", name)
-            }
-            startActivity(intent)
-            finish()
-        }
+        finish()
 
 
     }
 
     private fun nextBtnActive() {
-        if(binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != "") {
+        if (binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != "") {
             binding.tvIntroOnboardingNext.isSelected = true
         } else {
             binding.tvIntroOnboardingNext.isSelected = false
@@ -156,7 +142,7 @@ class EditProfileActivity :
         if (description != null && nicknameCheck == true) {
             binding.tvIntroOnboardingNext.isSelected = true
             binding.tvIntroOnboardingNext.setOnClickListener {
-                nextBtnNetwork()
+                //nextBtnNetwork()
             }
         } else {
             binding.tvIntroOnboardingNext.isSelected = false
@@ -239,7 +225,10 @@ class EditProfileActivity :
     private fun introTextWatcher() = with(binding) {
         etIntroOnboardingIntro.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {nextBtnActive()}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                nextBtnActive()
+            }
+
             override fun afterTextChanged(p0: Editable?) {
                 etIntroOnboardingIntro.isSelected = etIntroOnboardingIntro.text.toString() != ""
                 initTextFieldCheck()
@@ -255,8 +244,8 @@ class EditProfileActivity :
             val crewCode = intent.getStringExtra("crewCode")
             val crewIntroduce = intent.getStringExtra("crewIntro")
             val crewId = intent.getIntExtra("crewId", 1)
-            val isOpener = intent.getBooleanExtra("isOpener", true)
-            Timber.e("222222222: $isOpener")
+//            val isOpener = intent.getBooleanExtra("isOpener", true)
+//            Timber.e("222222222: $isOpener")
             if (binding.tvOpenOnboardingAdd.isSelected) {
                 shortToast("최대 2개까지 추가할 수 있어요!")
             } else {
@@ -276,7 +265,8 @@ class EditProfileActivity :
                     putExtra("crewCode", crewCode)
                     putExtra("crewId", crewId)
                     putExtra("crewIntro", crewIntroduce)
-                    putExtra("isOpener", isOpener)
+                    putExtra("isEdit", isEdit)
+                   // putExtra("isOpener", isOpener)
 
                     putExtra("ChipList", chipList)
                     putExtra("description", description)
@@ -297,6 +287,7 @@ class EditProfileActivity :
     //칩버튼 관리
     private fun setChipBtn() {
         val list = intent.getStringArrayListExtra("ChipList")
+        Timber.e("TEST123: $list")
         if (list?.size != null) {
             binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
             for (i in 0 until list.size) {
@@ -334,6 +325,7 @@ class EditProfileActivity :
         }
     }
 
+    //닉네임 중복 확인
     private fun nicknameDuplicationCheck() {
         val nickname: String = binding.etIntroOnboardingName.text.toString()
 

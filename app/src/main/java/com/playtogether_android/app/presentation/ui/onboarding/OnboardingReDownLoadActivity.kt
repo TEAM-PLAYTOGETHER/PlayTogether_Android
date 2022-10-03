@@ -12,18 +12,18 @@ import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.adapter.OnboardingReDownAdapter
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-//import com.playtogether_android.app.presentation.ui.sign.SignInActivity
 import com.playtogether_android.domain.model.onboarding.CrewListData
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 
 @AndroidEntryPoint
-class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBinding>(R.layout.activity_onboarding_re_down_load) {
+class OnboardingReDownLoadActivity :
+    BaseActivity<ActivityOnboardingReDownLoadBinding>(R.layout.activity_onboarding_re_down_load) {
 
 
     private lateinit var onboardingReDownAdapter: OnboardingReDownAdapter
-    private val onBoardingViewModel : OnBoardingViewModel by viewModels()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +47,13 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
         }
 
         onboardingReDownAdapter.setItemClickListener(
-            object : OnboardingReDownAdapter.ItemClickListener{
+            object : OnboardingReDownAdapter.ItemClickListener {
                 override fun onClick(view: View, position: Int) {
                     val crewId = onboardingReDownAdapter.dataList[position].id
+                    val crewName = onboardingReDownAdapter.dataList[position].name
                     Timber.d("CrewId : $crewId")
                     PlayTogetherRepository.crewId = crewId
+                    PlayTogetherRepository.crewName = crewName
                     binding.tvIntroOnboardingNext.isSelected = true
                 }
 
@@ -62,7 +64,7 @@ class OnboardingReDownLoadActivity : BaseActivity<ActivityOnboardingReDownLoadBi
     //입장하기버튼 클릭 리스너
     private fun enterBtnListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
-            if(binding.tvIntroOnboardingNext.isSelected) {
+            if (binding.tvIntroOnboardingNext.isSelected) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }

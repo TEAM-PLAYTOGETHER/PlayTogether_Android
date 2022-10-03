@@ -81,9 +81,9 @@ object PlayTogetherRepository {
         set(value) = authPreferences.edit { it.putString(UT_REFRESH_KEY, value) }
 
     //현재 유저 아이디
-    var userUuid: String
-        get() = authPreferences.getString(USER_UUID_KEY, "") ?: ""
-        set(value) = authPreferences.edit { it.putString(USER_UUID_KEY, value) }
+    var userUuid: Int
+        get() = authPreferences.getInt(USER_UUID_KEY, -1)
+        set(value) = authPreferences.edit { it.putInt(USER_UUID_KEY, value) }
 
     var userLogin: Boolean
         get() = authPreferences.getBoolean(USER_LOGIN_STATUS, false)
