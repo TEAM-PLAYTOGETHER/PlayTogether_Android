@@ -8,7 +8,6 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentHomeBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.createThunder.CreateThunderActivity
-import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeHotAdapter
 import com.playtogether_android.app.presentation.ui.home.adapter.HomeNewAdapter
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel

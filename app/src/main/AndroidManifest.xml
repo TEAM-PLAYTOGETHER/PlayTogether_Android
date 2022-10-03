@@ -9,6 +9,7 @@
         android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -23,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".presentation.ui.userInfo.EditProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.userInfo.ManageBlockedUserActivity"
             android:exported="false" />
@@ -73,10 +77,9 @@
 
         <service
             android:name=".util.FirebaseMessagingServiceUtil"
-            android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -86,7 +89,7 @@
         <activity
             android:name=".presentation.ui.onboarding.SearchSubwayActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingIntroduceActivity"
             android:exported="true"
@@ -112,8 +115,14 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.message.ChattingActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="CHATTING_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.ui.onboarding.JoinOnBoardingActivity"
             android:exported="true" />
