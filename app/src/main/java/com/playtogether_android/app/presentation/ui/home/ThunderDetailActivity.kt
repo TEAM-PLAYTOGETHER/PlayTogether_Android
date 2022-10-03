@@ -143,7 +143,7 @@ class ThunderDetailActivity :
         binding.tvThunderdetailReport.setOnClickListener {
             val intent = Intent(this, ReportPostActivity::class.java)
             //TODO:  해당 lightId 보내주기
-            intent.putExtra("lightId", thunderId)
+            intent.putExtra("thunderId", thunderId)
             startActivity(intent)
         }
     }
