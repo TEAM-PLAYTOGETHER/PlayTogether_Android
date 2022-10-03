@@ -1,5 +1,6 @@
 package com.playtogether_android.domain.repository.thunder
 
+import com.playtogether_android.domain.model.GenericData
 import com.playtogether_android.domain.model.thunder.*
 
 interface ThunderRepository {
@@ -31,8 +32,8 @@ interface ThunderRepository {
     //번개 찜 / 취소
     suspend fun postScrap(thunderId: Int)
 
-    //번개 신고
-    suspend fun postReport(thunderId: Int)
+    //번개 게시글 신고
+    suspend fun postReport(thunderId: Int, reportData: ReportData): GenericData
 
     //번개 신청 및 오픈 여부 확인
     suspend fun getThunderExistCheck(thunderId: Int): GetThunderExistCheck
