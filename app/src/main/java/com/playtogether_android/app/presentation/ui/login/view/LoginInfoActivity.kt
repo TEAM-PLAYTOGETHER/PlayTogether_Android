@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.appcompat.widget.AppCompatButton
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityLoginInfoBinding
 import com.playtogether_android.app.databinding.DialogOnlyYearBinding
@@ -15,6 +16,7 @@ import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.sign.UserInfo
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activity_login_info) {
@@ -32,15 +34,19 @@ class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activi
         binding.clLogininfoDateContainer.setOnClickListener {
             initOnlyYearDatePickerDialog()
         }
-        btnAccessButtonClickListener()
+        btnAccessButtonClickListener(list)
         backButtonListener()
     }
 
-    private fun btnAccessButtonClickListener() {
+    private fun btnAccessButtonClickListener(list: List<AppCompatButton>) {
         binding.btnLogininfoAccess.setOnClickListener {
+            val gender = list.filter {
+                it.isSelected
+            }
             val data = UserInfo(
-                binding.tvLogininfoGenderText.text.toString(), birth
+                gender[0].text.toString(), birth
             )
+
             signViewModel.signup(data)
             signViewModel.isLogin.observe(this) {
                 if (it) {

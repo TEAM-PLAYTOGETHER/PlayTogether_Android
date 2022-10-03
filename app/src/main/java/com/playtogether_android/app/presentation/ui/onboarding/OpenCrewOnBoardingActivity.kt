@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
@@ -13,12 +12,9 @@ import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOpenCrewOnBoardingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
-import com.playtogether_android.app.util.PlayTogetherSharedPreference
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.onboarding.MakeCrewItem
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-import java.util.regex.Pattern
 
 
 @AndroidEntryPoint
@@ -162,9 +158,7 @@ class OpenCrewOnBoardingActivity :
     private fun observeOpenCrew() {
         onBoardingViewModel.makeCrew.observe(this) {
             if (it.success) {
-                Timber.d("${it.code}")
                 PlayTogetherRepository.crewId = it.id
-                Timber.e("Test Repository : ${PlayTogetherRepository.crewId}")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java).apply{
                     putExtra("crewName", it.name)
                     putExtra("crewCode", it.code)
@@ -172,8 +166,6 @@ class OpenCrewOnBoardingActivity :
                     putExtra("crewIntro", binding.etOpenOnboardingIntro.text.toString())
                     putExtra("isOpener", true)
                 }
-                Timber.e("${it.name} ${it.code} ${it.id} ${binding.etOpenOnboardingIntro.text.toString()}")
-
                 startActivity(intent)
                 finish()
             } else {

@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.playtogether_android.app.BuildConfig
+import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.sign.SignInData
 import com.playtogether_android.domain.model.sign.SignInItem
@@ -77,6 +80,8 @@ class SignViewModel @Inject constructor(
                 repository.putSignup(body)
             }.onSuccess {
                 _isLogin.value = true
+                Timber.e("signup-birth : ${body.birth}")
+                Timber.e("signup-gender : ${body.gender}")
             }.onFailure {
                 Timber.e("signup error : $it")
                 _isLogin.value = false
@@ -93,7 +98,7 @@ class SignViewModel @Inject constructor(
                     googleUserToken = ""
                     googleUserToken = it.accessToken
                     userRefreshToken = it.refreshToken
-                    userToken = googleUserToken
+                    userToken = it.accessToken
                     userLogin = true
                 }
                 _signup = it.isSignup

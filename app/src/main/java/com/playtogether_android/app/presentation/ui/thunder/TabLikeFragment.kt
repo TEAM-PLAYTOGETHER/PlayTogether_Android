@@ -44,6 +44,7 @@ class TabLikeFragment : BaseFragment<FragmentTabLikeBinding>(R.layout.fragment_t
             layoutManager = LinearLayoutManager(requireActivity())
             addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
             adapter = thunderListAdapter
+            itemAnimator = null
         }
 
         thunderListAdapter.itemClick = object : ThunderTabListAdapter.ItemClick {

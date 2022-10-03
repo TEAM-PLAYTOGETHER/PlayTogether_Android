@@ -84,15 +84,17 @@ class OnBoardingIntroduceActivity :
             ), intent.getIntExtra("crewId", 1)
         )
 
+        Timber.e("${AddProfileItem(description,
+            firstSubway,
+            nickName,
+            secondSubway)}")
+
 
         val crewName = intent.getStringExtra("crewName")
         val crewCode = intent.getStringExtra("crewCode")
         val crewIntroduce = intent.getStringExtra("crewIntro")
         val crewId = intent.getIntExtra("crewId", 1)
         val isOpener = intent.getBooleanExtra("isOpener", true)
-
-        Timber.e("111111: $isOpener")
-
 
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
@@ -257,7 +259,6 @@ class OnBoardingIntroduceActivity :
             val crewIntroduce = intent.getStringExtra("crewIntro")
             val crewId = intent.getIntExtra("crewId", 1)
             val isOpener = intent.getBooleanExtra("isOpener", true)
-            Timber.e("222222222: $isOpener")
             if (binding.tvOpenOnboardingAdd.isSelected) {
                 shortToast("최대 2개까지 추가할 수 있어요!")
             } else {
