@@ -45,6 +45,7 @@ class TabOpenFragment : BaseFragment<FragmentTabOpenBinding>(R.layout.fragment_t
         with(binding.rvOpenThunderList) {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = thunderListAdapter
+            itemAnimator = null
             addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
         }
 

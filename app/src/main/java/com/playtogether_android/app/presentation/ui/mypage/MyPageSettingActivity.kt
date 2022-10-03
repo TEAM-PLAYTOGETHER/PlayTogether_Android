@@ -69,6 +69,11 @@ class MyPageSettingActivity :
                 crewId = -1
                 crewName = ""
                 userLogin = false
+                googleUserToken = ""
+                kakaoUserToken = ""
+                kakaoAccessToken=""
+                googleAccessToken=""
+                userToken = ""
             }
 
             Intent(this, LoginActivity::class.java).apply {

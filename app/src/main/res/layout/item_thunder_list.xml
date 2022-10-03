@@ -80,10 +80,10 @@
             android:id="@+id/iv_thunder_item_fill_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
             android:background="@{categoryData.open ? @drawable/ic_icn_like_filled : @drawable/ic_icn_like_unfilled}"
             app:layout_constraintBottom_toBottomOf="@id/tv_thunder_item_limit_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="46dp"
+            app:layout_constraintEnd_toStartOf="@id/tv_thunder_item_like_count"
             app:layout_constraintTop_toTopOf="@id/tv_thunder_item_limit_count"
             tools:background="@drawable/ic_icn_like_filled" />
 

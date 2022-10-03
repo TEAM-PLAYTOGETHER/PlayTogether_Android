@@ -51,6 +51,17 @@ class LoginTermsActivity : BaseActivity<ActivityLoginTermsBinding>(R.layout.acti
     }
 
     private fun termsTextClickListener(textList: List<TextView>) {
+        val webList = listOf(R.string.loginterms2, R.string.loginterm3, R.string.loginterm4)
+        for (index in textList.indices) {
+            textList[index].setOnClickListener {
+                Intent(this, WebViewActivity::class.java).apply {
+                    putExtra(
+                        "url", getString(webList[index])
+                    )
+                    startActivity(this)
+                }
+            }
+        }
         for (item in textList) {
             item.setOnClickListener {
                 Intent(this, WebViewActivity::class.java).apply {

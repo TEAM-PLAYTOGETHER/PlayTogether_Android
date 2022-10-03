@@ -21,7 +21,7 @@ import kotlin.math.roundToInt
 
 fun Context.getPageTransformer(): ViewPager2.PageTransformer {
     val compositePageTransformer = CompositePageTransformer()
-    compositePageTransformer.addTransformer(MarginPageTransformer((20 * resources.displayMetrics.density).roundToInt()))
+    compositePageTransformer.addTransformer(MarginPageTransformer((10 * resources.displayMetrics.density).roundToInt()))
 
     return compositePageTransformer
 }
@@ -38,7 +38,7 @@ fun Context.viewPagerAnimation(viewpager: ViewPager2) {
         offscreenPageLimit = 1
         setPageTransformer(compositePageTransformer)
         setPadding(
-            (20 * resources.displayMetrics.density).roundToInt(),
+            (20* resources.displayMetrics.density).roundToInt(),
             0,
             (55 * resources.displayMetrics.density).roundToInt(),
             0
@@ -125,7 +125,7 @@ fun Context.showCustomPopUp(
         horizontalOffset = screenWidthStr.toInt()
         verticalOffset = -20
 
-        setBackgroundDrawable(ContextCompat.getDrawable(baseContext, R.drawable.img_popup))
+        setBackgroundDrawable(ContextCompat.getDrawable(baseContext, R.drawable.ic_group_popup))
     }
     return popup
 }
