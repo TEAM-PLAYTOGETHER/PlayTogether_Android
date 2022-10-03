@@ -16,6 +16,7 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.message.ChattingActivity
 import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
+import com.playtogether_android.app.presentation.ui.thunder.ReportPostActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import com.playtogether_android.app.presentation.ui.userInfo.OtherInfoActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
@@ -140,7 +141,10 @@ class ThunderDetailActivity :
 
     private fun clickReport() {
         binding.tvThunderdetailReport.setOnClickListener {
-            shortToast("신고뷰로 이동 예정")
+            val intent = Intent(this, ReportPostActivity::class.java)
+            //TODO:  해당 lightId 보내주기
+//            intent.putExtra("lightId", lightId)
+            startActivity(intent)
         }
     }
 

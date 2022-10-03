@@ -1,5 +1,7 @@
 package com.playtogether_android.data.datasource.thunder
 
+import com.playtogether_android.data.model.ResGenericData
+import com.playtogether_android.data.model.request.thunder.ReqReportData
 import com.playtogether_android.data.model.response.thunder.*
 
 interface ThunderDataSource {
@@ -27,8 +29,8 @@ interface ThunderDataSource {
     //번개 찜/취소
     suspend fun postScrap(thunderId: Int)
 
-    //번개 신고
-    suspend fun postReport(thunderId: Int)
+    //번개 게시글 신고
+    suspend fun postReport(thunderId: Int, reqReportData: ReqReportData): ResGenericData
 
     //번개 참여/오픈 여부 확인
     suspend fun getThunderExistChecker(thunderId: Int): ResThunderExistCheckData

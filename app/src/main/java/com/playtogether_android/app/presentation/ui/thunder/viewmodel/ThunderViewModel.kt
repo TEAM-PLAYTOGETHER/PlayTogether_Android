@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.playtogether_android.domain.model.GenericData
 import com.playtogether_android.domain.model.light.CategoryData
+import com.playtogether_android.domain.model.thunder.ReportData
 import com.playtogether_android.domain.model.thunder.ThunderTabListData
+import com.playtogether_android.domain.repository.thunder.ThunderRepository
 import com.playtogether_android.domain.usecase.thunder.GetApplyListUseCase
 import com.playtogether_android.domain.usecase.thunder.GetLikeListUseCase
 import com.playtogether_android.domain.usecase.thunder.GetOpenListUseCase
@@ -18,7 +21,8 @@ import javax.inject.Inject
 class ThunderViewModel @Inject constructor(
     val getApplyListUseCase: GetApplyListUseCase,
     val getOpenListUseCase: GetOpenListUseCase,
-    val getLikeListUseCase: GetLikeListUseCase
+    val getLikeListUseCase: GetLikeListUseCase,
+    val thunderRepository: ThunderRepository
 ) : ViewModel() {
 
     private val _thunderTabListData = MutableLiveData<ThunderTabListData>()
@@ -39,6 +43,13 @@ class ThunderViewModel @Inject constructor(
 
     private val _thunderLikeList = MutableLiveData<List<CategoryData>>()
     val thunderLikeList: LiveData<List<CategoryData>> = _thunderLikeList
+
+    private val _reportPost = MutableLiveData<GenericData>()
+    val reportPost: LiveData<GenericData>
+        get() = _reportPost
+
+    // 번개 게시글 신고 reqest
+    var requestReport = ReportData("")
 
 
     //번개탭-신청한 번개 리스트
@@ -109,6 +120,22 @@ class ThunderViewModel @Inject constructor(
 //                Log.d("getOpenList-fail", "fail")
 //            }
 //    }
+
+    // 번개 게시글 신고
+    fun postReport(thunderId: Int, reportData: ReportData) {
+        viewModelScope.launch {
+            kotlin.runCatching { thunderRepository.postReport(thunderId, reportData) }
+                .onSuccess {
+                    _reportPost.value = it
+                    Timber.d("postReport-server 성공: $it")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("postReport-server 실패: $it")
+                }
+
+        }
+    }
 
 
 }

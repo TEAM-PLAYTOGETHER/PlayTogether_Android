@@ -1,6 +1,8 @@
 package com.playtogether_android.data.datasource.thunder
 
 import com.playtogether_android.data.api.thunder.ThunderService
+import com.playtogether_android.data.model.ResGenericData
+import com.playtogether_android.data.model.request.thunder.ReqReportData
 import com.playtogether_android.data.model.response.thunder.*
 
 class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSource {
@@ -41,12 +43,13 @@ class ThunderDataSourceImpl(private val service: ThunderService) : ThunderDataSo
         service.postScrap(thunderId)
     }
 
-    override suspend fun postReport(thunderId: Int) {
-        service.postReport(thunderId)
+    override suspend fun postReport(thunderId: Int, reqReportData: ReqReportData): ResGenericData {
+        return service.postReport(thunderId, reqReportData)
     }
 
     override suspend fun getThunderExistChecker(thunderId: Int): ResThunderExistCheckData {
         return service.getThunderExistChecker(thunderId)
     }
+
 
 }
