@@ -84,6 +84,11 @@ class OnBoardingIntroduceActivity :
             ), intent.getIntExtra("crewId", 1)
         )
 
+        Timber.e("${AddProfileItem(description,
+            firstSubway,
+            nickName,
+            secondSubway)}")
+
 
         val crewName = intent.getStringExtra("crewName")
         val crewCode = intent.getStringExtra("crewCode")
