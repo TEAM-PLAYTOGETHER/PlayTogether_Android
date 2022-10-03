@@ -1,6 +1,9 @@
 package com.playtogether_android.data.mapper.thunder
 
+import com.playtogether_android.data.model.ResGenericData
+import com.playtogether_android.data.model.request.thunder.ReqReportData
 import com.playtogether_android.data.model.response.thunder.*
+import com.playtogether_android.domain.model.GenericData
 import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.model.thunder.*
 
@@ -110,6 +113,23 @@ object ThunderMapper {
         return GetThunderExistCheck(
             data.isEntered,
             data.isOrganizer
+        )
+    }
+
+    // 번개 게시글 신고 : Request
+    fun mapperToReportItem(reportData: ReportData): ReqReportData {
+        return ReqReportData(
+            report = reportData.report
+        )
+    }
+
+    // 번개 게시글 신고 : Response
+    fun mapperToReportData(resGenericData: ResGenericData): GenericData {
+        return GenericData(
+            success = resGenericData.success,
+            status = resGenericData.status,
+            message = resGenericData.message
+
         )
     }
 
