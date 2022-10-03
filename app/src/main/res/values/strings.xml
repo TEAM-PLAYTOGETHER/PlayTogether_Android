@@ -281,7 +281,7 @@
     <string name="search_memberCnt">인원&#160;&#160;%1$d / %2$s</string>
     <string name="search_undecided">미정</string>
     <string name="search_undecided_memberCnt">인원제한없음</string>
-    <string name="search_date_place_time">%1$s&#160;&#160;|&#160;&#160;%2$s&#160;&#160;|&#160;&#160;%3$s</string>
+    <string name="search_date_place_time">%1$s&#160;&#160;•&#160;&#160;%2$s&#160;&#160;•&#160;&#160;%3$s</string>
     <string name="search_empty_view">검색 결과가 없어요!</string>
 
     <!--    userIfo-->
