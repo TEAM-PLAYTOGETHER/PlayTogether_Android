@@ -2,6 +2,7 @@ package com.playtogether_android.data.repositoryimpl.thunder
 
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
 import com.playtogether_android.data.mapper.thunder.ThunderMapper
+import com.playtogether_android.domain.model.GenericData
 import com.playtogether_android.domain.model.thunder.*
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
 
@@ -59,8 +60,11 @@ class ThunderRepositoryImpl(private val thunderDataSource: ThunderDataSource) : 
         thunderDataSource.postScrap(thunderId)
     }
 
-    override suspend fun postReport(thunderId: Int) {
-        thunderDataSource.postReport(thunderId)
+    override suspend fun postReport(thunderId: Int, reportData: ReportData): GenericData {
+        return ThunderMapper.mapperToReportData(
+            thunderDataSource.postReport(thunderId,
+            ThunderMapper.mapperToReportItem(reportData))
+        )
     }
 
     override suspend fun getThunderExistCheck(thunderId: Int): GetThunderExistCheck {

@@ -1,5 +1,7 @@
 package com.playtogether_android.data.api.thunder
 
+import com.playtogether_android.data.model.ResGenericData
+import com.playtogether_android.data.model.request.thunder.ReqReportData
 import com.playtogether_android.data.model.response.thunder.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import okhttp3.MultipartBody
@@ -53,10 +55,12 @@ interface ThunderService {
         @Path("lightId") lightId: Int
     )
 
+    // 번개 게시글 신고
     @POST("light/report/{lightId}")
     suspend fun postReport(
-        @Path("lightId") lightId: Int
-    )
+        @Path("lightId") lightId: Int,
+        @Body reqReportData: ReqReportData
+    ): ResGenericData
 
     @Multipart
     @PUT("light/enter/{lightId}")
@@ -70,4 +74,5 @@ interface ThunderService {
     suspend fun getThunderExistChecker(
         @Path("lightId") lightId: Int,
     ):ResThunderExistCheckData
+
 }

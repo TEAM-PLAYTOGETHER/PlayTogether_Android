@@ -26,7 +26,7 @@
 
     <style name="home_category">
         <item name="android:textColor">@color/gray_black</item>
-        <item name="fontFamily">@font/pretendard_extrabold</item>
+        <item name="fontFamily">@font/pretendard_black</item>
         <item name="android:textSize">20dp</item>
         <item name="lineHeight">24dp</item>
         <item name="android:includeFontPadding">false</item>

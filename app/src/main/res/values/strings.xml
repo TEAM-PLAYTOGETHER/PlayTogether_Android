@@ -260,6 +260,9 @@
     <string name="loginterms_terms3"><b><u>개인정보 수집 및 이용</u></b></string>
     <string name="loginterms_terms4"><b><u>마케팅 정보 수집 및 수신</u></b></string>
     <string name="loginterms_access">확인</string>
+    <string name="loginterms2">https://www.notion.so/96da09a5d6c04580a61251348f89e4e5</string>
+    <string name="loginterm3">https://www.notion.so/6523be1a894e46f0851fc9560f147f77</string>
+    <string name="loginterm4">https://www.notion.so/a0fbf347a10a4ab298214da5b9b6b2b9</string>
 
     <!--    login info activity-->
     <string name="logininfo_title">안전한 번개를 위해\n정보를 입력해주세요</string>
@@ -278,7 +281,7 @@
     <string name="search_memberCnt">인원&#160;&#160;%1$d / %2$s</string>
     <string name="search_undecided">미정</string>
     <string name="search_undecided_memberCnt">인원제한없음</string>
-    <string name="search_date_place_time">%1$s&#160;&#160;|&#160;&#160;%2$s&#160;&#160;|&#160;&#160;%3$s</string>
+    <string name="search_date_place_time">%1$s&#160;&#160;•&#160;&#160;%2$s&#160;&#160;•&#160;&#160;%3$s</string>
     <string name="search_empty_view">검색 결과가 없어요!</string>
 
     <!--    userIfo-->

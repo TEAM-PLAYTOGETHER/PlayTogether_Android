@@ -27,11 +27,12 @@ class HomeHotAdapter :
         fun onBind(item: CategoryData) {
             with(binding) {
                 val context = itemView.context
+                val dateChange = item.date?.replace("-",".")
                 categoryData = item
                 tvHomenewDate.text =
                     context.stringListBuilder(
                         context,
-                        listOf(item.date, " ", item.place, " ", item.time)
+                        listOf(dateChange, " ", item.place, " ", item.time)
                     )
                 tvHomenewPeopleCnt.text = context.stringListBuilder(
                     context,

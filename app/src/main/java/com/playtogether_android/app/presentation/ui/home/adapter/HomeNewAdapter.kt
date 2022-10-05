@@ -28,10 +28,11 @@ class HomeNewAdapter :
             with(binding) {
                 categoryData = item
                 val context = itemView.context
+                val dateChange = item.date?.replace("-",".")
                 tvHomenewDate.text =
                     context.stringListBuilder(
                         context,
-                        listOf(item.date, " ", item.place, " ", item.time)
+                        listOf(dateChange, " ", item.place, " ", item.time)
                     )
                 tvHomenewPeopleCnt.text = context.stringListBuilder(
                     context,
