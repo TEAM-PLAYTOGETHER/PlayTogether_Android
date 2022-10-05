@@ -94,7 +94,7 @@ class OnBoardingIntroduceActivity :
         val crewCode = intent.getStringExtra("crewCode")
         val crewIntroduce = intent.getStringExtra("crewIntro")
         val crewId = intent.getIntExtra("crewId", 1)
-        val isOpener = intent.getBooleanExtra("isOpener", true)
+        val isOpener = intent.getBooleanExtra("isOpener", false)
 
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
@@ -167,8 +167,14 @@ class OnBoardingIntroduceActivity :
     //뒤로가기 버튼 리스너
     private fun backBtnListener() {
         binding.ivIntroOnboardingBack.setOnClickListener {
-            val intent = Intent(this, SelectOnboardingActivity::class.java)
-            startActivity(intent)
+            val isOpener = intent.getBooleanExtra("isOpener", false)
+            if(isOpener == true) {
+                val intent = Intent(this, OpenCrewOnBoardingActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, SelectOnboardingActivity::class.java)
+                startActivity(intent)
+            }
             finish()
         }
     }
