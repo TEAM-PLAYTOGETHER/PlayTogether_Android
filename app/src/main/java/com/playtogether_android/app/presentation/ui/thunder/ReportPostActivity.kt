@@ -55,8 +55,10 @@ class ReportPostActivity : BaseActivity<ActivityReportPostBinding>(R.layout.acti
         thunderViewModel.reportPost.observe(this) {
             if (it.success) {
                 shortToast("신고 내용이 접수되었습니다.")
+                finish()
             } else {
                 shortToast("게시글 신고에 실패하였습니다.")
+                finish()
             }
         }
     }
