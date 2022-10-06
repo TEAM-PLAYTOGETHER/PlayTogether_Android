@@ -15,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_fill_black_radius_10"
-        android:orientation="vertical"
-        android:paddingBottom="16dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_thunder_item_title"
@@ -24,12 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="18dp"
             android:text="@{categoryData.title}"
             android:textColor="@{categoryData.open ? @color/main_green : @color/gray_gray04}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_thunder_item_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_goneMarginTop="16dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginTop="16dp"
             tools:text="@string/thunder_item_title"
             tools:textColor="@color/main_green" />
 
@@ -38,10 +38,12 @@
             style="@style/thunder_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:text="@{@string/search_date_place_time(categoryData.date ?? @string/search_undecided, categoryData.place ?? @string/search_undecided, categoryData.time ?? @string/search_undecided)}"
-            app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_title"
+            app:layout_constraintBottom_toTopOf="@+id/tv_thunder_item_limit_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_thunder_item_title"
             tools:text="@string/thunder_item_day" />
 
         <TextView
@@ -49,9 +51,12 @@
             style="@style/thunder_item_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@id/tv_thunder_item_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_date"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_thunder_item_date"
             tools:text="@string/thunder_item_people" />
 
         <LinearLayout
@@ -63,8 +68,9 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_thunder_item_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_thunder_item_title">
+            app:layout_constraintTop_toTopOf="@+id/tv_thunder_item_title">
 
             <TextView
                 android:id="@+id/tv_thunder_item_tag"
@@ -73,7 +79,6 @@
                 android:layout_height="wrap_content"
                 android:text="@{categoryData.category}"
                 tools:text="@string/home_item_do_text" />
-
         </LinearLayout>
 
         <ImageView
@@ -93,9 +98,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
+            android:layout_marginEnd="20dp"
             android:text="@{String.valueOf(categoryData.likeCount)}"
             app:layout_constraintBottom_toBottomOf="@id/iv_thunder_item_fill_like"
-            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_thunder_item_fill_like"
             tools:text="3" />

@@ -1,7 +1,7 @@
 object Apps {
-    const val compileSdk = 33
+    const val compileSdk = 32
     const val minSdk = 24
-    const val targetSdk = 33
+    const val targetSdk = 32
     var versionCode = 1
     var versionName = "1.0.0"
     const val pacakageName = "com.playtogether_android.app"

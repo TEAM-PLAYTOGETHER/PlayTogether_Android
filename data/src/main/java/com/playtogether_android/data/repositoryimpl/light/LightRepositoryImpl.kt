@@ -11,13 +11,17 @@ class LightRepositoryImpl(private val lightDataSource: LightDataSource) : LightR
     override suspend fun getLightListCategory(
         crewId: Int,
         category: String,
-        sort: String
+        sort: String,
+        currentPage: Int,
+        pageSize: Int
     ): List<CategoryData> {
         return LightMapper.mapperToCategoryData(
             lightDataSource.getLightListCategory(
                 crewId,
                 category,
-                sort
+                sort,
+                currentPage,
+                pageSize
             )
         )
     }
