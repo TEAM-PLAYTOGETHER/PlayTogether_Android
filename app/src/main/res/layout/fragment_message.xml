@@ -61,6 +61,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:text="@string/messageListEmpty"
             android:textColor="@color/gray_gray02"
+            android:visibility="@{viewModel.messageData.size()==0 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
