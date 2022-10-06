@@ -1,5 +1,6 @@
 package com.playtogether_android.app.di
 
+import com.playtogether_android.data.api.google_sign.GoogleService
 import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
@@ -24,6 +25,8 @@ import com.playtogether_android.data.datasource.onboarding.SubwayDataSource
 import com.playtogether_android.data.datasource.onboarding.SubwayDataSourceImpl
 import com.playtogether_android.data.datasource.sign.SignDataSource
 import com.playtogether_android.data.datasource.sign.SignDataSourceImpl
+import com.playtogether_android.data.datasource.sign.google.GoogleDataSource
+import com.playtogether_android.data.datasource.sign.google.GoogleDataSourceImpl
 import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSourceImpl
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
@@ -42,8 +45,14 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideSubwayDataSource(service: SubwayInfoService) : SubwayDataSource{
+    fun provideSubwayDataSource(service: SubwayInfoService): SubwayDataSource {
         return SubwayDataSourceImpl(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGoogleService(service: GoogleService): GoogleDataSource {
+        return GoogleDataSourceImpl(service)
     }
 
     @Provides

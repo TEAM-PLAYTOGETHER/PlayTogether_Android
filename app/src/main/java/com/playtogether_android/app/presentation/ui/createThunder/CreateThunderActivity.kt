@@ -154,16 +154,16 @@ class CreateThunderActivity :
             val time = binding.tvCreatethunderTime.text.toString()
             val title = binding.etCreatethunderName.text.toString()
             val place = binding.etCreatethunderPlace.text.toString()
-            var peopleCnt = 0
-
-            if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
-                peopleCnt = -1
-            else
-                peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
+            val peopleCnt = binding.etCreatethunderPeopleNumber.text.toString()
             val description = binding.etCreatethunderExplanation.text.toString()
 
+//            if (binding.etCreatethunderPeopleNumber.text.toString() == resources.getString(R.string.createthunder_infinite))
+//                peopleCnt = -1
+//            else
+//                peopleCnt = binding.etCreatethunderPeopleNumber.text.toString().toInt()
+
             val itemList =
-                textTransfer(listOf(date, time, title, place, peopleCnt.toString(), description))
+                textTransfer(listOf(date, time, title, place, peopleCnt, description))
             Timber.e("itemList : $itemList")
             multipart(itemList)
             dialog.show()
@@ -187,7 +187,7 @@ class CreateThunderActivity :
     private fun textTransfer(itemList: List<String>): List<String?> {
         val transferList = mutableListOf<String?>()
         for (item in itemList) {
-            if (item.contains("미정")) {
+            if (item.contains("미정") || item.contains(resources.getString(R.string.createthunder_infinite))) {
                 transferList.add(null)
             } else
                 transferList.add(item)
@@ -199,15 +199,18 @@ class CreateThunderActivity :
     private fun multipart(
         itemList: List<String?>
     ) {
-        val partMapTagList = listOf("date", "time", "title", "place", "peopleCnt", "description")
+        val partMapTagList = listOf("date", "time", "title", "place", "people_cnt", "description")
         val categoryBody = category.toRequestBody("text/plain".toMediaTypeOrNull())
 
         val requestBodyMap = HashMap<String, RequestBody?>()
         for (cnt in 0..5) {
             val item = itemList[cnt]
+
             if (!item.isNullOrEmpty()) {
                 requestBodyMap[partMapTagList[cnt]] =
                     item.toRequestBody("text/plain".toMediaTypeOrNull())
+                Timber.e("item key : ${partMapTagList[cnt]}")
+                Timber.e("item : $item")
             }
         }
         requestBodyMap["category"] = categoryBody

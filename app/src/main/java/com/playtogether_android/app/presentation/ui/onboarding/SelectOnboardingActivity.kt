@@ -25,11 +25,11 @@ class SelectOnboardingActivity :
     private fun initBackBtn() {
         val case = intent.getIntExtra("case",1)
         binding.ivSecondOnboardingBack.setOnClickListener {
-            if(case == 1) {
-                startActivity(Intent(this, LoginActivity::class.java))
+            if(case == 2) {
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
 

@@ -1,9 +1,10 @@
 package com.playtogether_android.app.di
 
-import com.playtogether_android.app.BuildConfig.BASE_URL
-import com.playtogether_android.app.BuildConfig.SUBWAY_URL
+import com.playtogether_android.app.BuildConfig
+import com.playtogether_android.app.BuildConfig.*
 import com.playtogether_android.app.util.AuthInterceptor
 import com.playtogether_android.app.util.PlayTogetherSharedPreference
+import com.playtogether_android.data.api.google_sign.GoogleService
 import com.playtogether_android.data.api.home.HomeService
 import com.playtogether_android.data.api.light.LightService
 import com.playtogether_android.data.api.message.ChatService
@@ -35,12 +36,22 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideSubwayService() : SubwayInfoService {
+    fun provideSubwayService(): SubwayInfoService {
         return Retrofit.Builder()
             .baseUrl(SUBWAY_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(SubwayInfoService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGoogleService(): GoogleService {
+        return Retrofit.Builder()
+            .baseUrl(GOOGLE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GoogleService::class.java)
     }
 
     @Provides
@@ -63,7 +74,7 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideRoomIdService(@RetrofitModule.GsonConverter retrofit: Retrofit) : RoomIdService{
+    fun provideRoomIdService(@RetrofitModule.GsonConverter retrofit: Retrofit): RoomIdService {
         return retrofit.create(RoomIdService::class.java)
     }
 
@@ -132,8 +143,10 @@ object ApiModule {
         Interceptor { chain ->
             with(chain) {
                 val newRequest = request().newBuilder()
-                    .addHeader("Authorization",
-                        PlayTogetherSharedPreference.getAccessToken(PlayTogetherApplication.context()))
+                    .addHeader(
+                        "Authorization",
+                        PlayTogetherSharedPreference.getAccessToken(PlayTogetherApplication.context())
+                    )
                     .addHeader("Content-Type", "application/json")
                     .build()
                 proceed(newRequest)
