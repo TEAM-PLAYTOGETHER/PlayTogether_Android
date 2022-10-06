@@ -58,6 +58,7 @@ class CreateThunderViewModel @Inject constructor(
             kotlin.runCatching {
                 postMultipartThunderCreateUseCase(crewId, images, body)
             }.onSuccess {
+                Timber.e("item viewmoel : ${body.values}")
                 _getThunderCreateData.value = it
                 Timber.d("생성된 번개 아이디 : ${it.lightId}")
             }.onFailure {

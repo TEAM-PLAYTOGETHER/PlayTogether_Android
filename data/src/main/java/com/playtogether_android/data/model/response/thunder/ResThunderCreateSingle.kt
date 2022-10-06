@@ -1,5 +1,7 @@
 package com.playtogether_android.data.model.response.thunder
 
+import com.google.gson.annotations.SerializedName
+
 data class ResThunderCreateSingle(
     val data: List<Data>,
     val message: String,
@@ -16,6 +18,7 @@ data class ResThunderCreateSingle(
         val image: String,
         val isDeleted: Boolean,
         val organizerId: Int,
+        @SerializedName("people_cnt")
         val peopleCnt: Int,
         val place: String,
         val time: String,

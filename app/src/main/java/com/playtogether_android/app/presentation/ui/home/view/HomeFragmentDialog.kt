@@ -15,6 +15,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingA
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -38,6 +39,10 @@ class HomeFragmentDialog :
 
     fun setChangeCrew(crewId: Int, name: String) {
         PlayTogetherRepository.crewId = crewId
+        PlayTogetherRepository.crewName = name
+        Timber.e("crewId change $crewId")
+        Timber.e("crewId change repo${PlayTogetherRepository.crewId}")
+
         homeViewModel.setCrewName(name)
         homeViewModel.getNewThunderList(crewId)
         homeViewModel.getHotThunderList(crewId)
