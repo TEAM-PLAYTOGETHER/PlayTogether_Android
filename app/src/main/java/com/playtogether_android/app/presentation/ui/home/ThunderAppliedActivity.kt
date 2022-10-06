@@ -2,6 +2,7 @@ package com.playtogether_android.app.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderAppliedBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -9,6 +10,9 @@ import com.playtogether_android.app.presentation.ui.thunder.ApplicantListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.ApplyThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderDetailViewModel
 import androidx.activity.viewModels
+import com.playtogether_android.app.presentation.ui.userInfo.OtherInfoActivity
+import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.StringBuilder
 
@@ -18,6 +22,7 @@ class ThunderAppliedActivity :
 
     private val thunderDetailViewModel: ThunderDetailViewModel by viewModels()
     private lateinit var adapter: ApplicantListAdapter
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
 
     // TODO: 이슈 번호 116
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,6 +83,17 @@ class ThunderAppliedActivity :
         thunderDetailViewModel.memberList.observe(this) {
             adapter.applicantList.addAll(it)
             adapter.notifyDataSetChanged()
+        }
+
+        adapter.itemClick = object : ApplicantListAdapter.ItemClick {
+            override fun onClick(view: View, position: Int, userId: Int) {
+                userInfoViewModel.getOtherInfo(PlayTogetherRepository.crewId, userId)
+                if (PlayTogetherRepository.userUuid != userId) {
+                    val intent = Intent(this@ThunderAppliedActivity, OtherInfoActivity::class.java)
+                    intent.putExtra("memberId", userId)
+                    startActivity(intent)
+                }
+            }
         }
     }
 }
