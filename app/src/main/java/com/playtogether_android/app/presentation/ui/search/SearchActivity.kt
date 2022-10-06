@@ -29,8 +29,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.viewModel=searchViewModel
-        binding.lifecycleOwner=this
+        binding.viewModel = searchViewModel
+        binding.lifecycleOwner = this
         checkIntent()
         initAdapter()
         initSearchList()

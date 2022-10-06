@@ -11,7 +11,6 @@ import com.playtogether_android.app.presentation.base.BaseFragment
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_DO
-import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.FIRST
 import com.playtogether_android.app.util.SpaceItemDecoration
 
 class ThunderDoFragment :
@@ -48,8 +47,8 @@ class ThunderDoFragment :
         }
     }
 
-    private fun observingList(){
-        thunderListViewModel.doingItemList.observe(viewLifecycleOwner){
+    private fun observingList() {
+        thunderListViewModel.doingItemList.observe(viewLifecycleOwner) {
             listAdapter.submitList(it)
         }
     }

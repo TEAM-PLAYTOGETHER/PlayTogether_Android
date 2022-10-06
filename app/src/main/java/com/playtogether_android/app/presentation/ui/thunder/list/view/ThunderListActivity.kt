@@ -86,7 +86,7 @@ class ThunderListActivity :
 
     private fun clickPrevButton() {
         binding.ivThunderlistPrevious.setOnClickListener {
-            val index = thunderListViewModel.pageOrder.value ?:0
+            val index = thunderListViewModel.pageOrder.value ?: 0
             if (index > 0) {
                 thunderListViewModel.pageOrder.value = index - 1
                 binding.vpThunderlistContainer.setCurrentItem(index - 1, true)
@@ -128,12 +128,13 @@ class ThunderListActivity :
                 1 -> thunderListViewModel.sort.value = SCPCNT
             }
         }
+
         override fun onTabUnselected(tab: TabLayout.Tab?) {}
         override fun onTabReselected(tab: TabLayout.Tab?) {}
     }
 
-    private fun initList(){
-        with(thunderListViewModel){
+    private fun initList() {
+        with(thunderListViewModel) {
             getLightCategoryList(FIRST, CATEGORY_EAT)
             getLightCategoryList(FIRST, CATEGORY_DO)
             getLightCategoryList(FIRST, CATEGORY_GO)

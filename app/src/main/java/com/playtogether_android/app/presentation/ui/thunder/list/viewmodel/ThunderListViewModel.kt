@@ -60,7 +60,7 @@ class ThunderListViewModel @Inject constructor(
         }
     }
 
-    fun getLightCategoryList(order: String, category : String) {
+    fun getLightCategoryList(order: String, category: String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 val crewId = PlayTogetherRepository.crewId
