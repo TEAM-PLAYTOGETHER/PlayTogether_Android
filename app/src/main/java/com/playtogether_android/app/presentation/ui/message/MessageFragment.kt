@@ -27,7 +27,6 @@ class MessageFragment :
         getMessageRoomList()
         initAdapter()
         initList()
-        refreshView()
     }
 
     override fun onResume() {
@@ -64,14 +63,5 @@ class MessageFragment :
         intent.putExtra("name", data.audience)
         intent.putExtra("audienceId", data.audienceId)
         resultLauncher.launch(intent)
-    }
-
-    private fun refreshView() {
-        with(binding) {
-            lsrlMessageContainer.setOnRefreshListener {
-                getMessageRoomList()
-                lsrlMessageContainer.isRefreshing = false
-            }
-        }
     }
 }

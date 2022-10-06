@@ -6,6 +6,11 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.playtogether_android.app.presentation.ui.message.viewmodel.MessageViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
 
@@ -37,40 +42,29 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
-            android:id="@+id/lsrl_message_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_messageRoom"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:indicator_overlay="false"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_message_top"
-            app:lottie_rawRes="@raw/plto_refresh"
-            app:trigger_offset_top="70dp"
-            tools:visibility="gone">
+            tools:listitem="@layout/item_message_room" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_message_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_messageRoom"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item_message_room" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/messageListEmpty"
+            android:textColor="@color/gray_gray02"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_message_top" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
