@@ -13,21 +13,26 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface GoogleService {
+//    @POST("oauth2/v4/token")
+//    fun getAccessToken(
+//        @Body request: LoginGoogleRequestModel
+//    ): Call<LoginGoogleResponseModel>
+
     @POST("oauth2/v4/token")
-    fun getAccessToken(
+    suspend fun getAccessToken(
         @Body request: LoginGoogleRequestModel
-    ): Call<LoginGoogleResponseModel>
-
-    companion object {
-        private val gson = GsonBuilder().setLenient().create()
-
-        fun loginRetrofit(baseUrl: String): GoogleService {
-            return Retrofit.Builder()
-                .baseUrl(baseUrl)
-//                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create(GoogleService::class.java)
-        }
-    }
+    ): LoginGoogleResponseModel
+//
+//    companion object {
+//        private val gson = GsonBuilder().setLenient().create()
+//
+//        fun loginRetrofit(baseUrl: String): GoogleService {
+//            return Retrofit.Builder()
+//                .baseUrl(baseUrl)
+////                .addConverterFactory(ScalarsConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .build()
+//                .create(GoogleService::class.java)
+//        }
+//    }
 }

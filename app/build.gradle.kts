@@ -25,6 +25,7 @@ android {
         buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
         buildConfigField("String", "SUBWAY_URL", getSubwayUrl("SUBWAY_URL"))
         buildConfigField("String", "KAKAOKEY", getApiKey("kakao_key"))
+        buildConfigField("String","GOOGLE_URL",getBaseUrl("GOOGLE_URL"))
         //buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))
         //buildConfigField("String","GOOGLEKEY",getApiKey("google_key"))
         buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))

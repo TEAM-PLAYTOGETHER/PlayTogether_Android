@@ -5,14 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.playtogether_android.app.BuildConfig
-import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.sign.SignInData
 import com.playtogether_android.domain.model.sign.SignInItem
 import com.playtogether_android.domain.model.sign.UserInfo
+import com.playtogether_android.domain.model.sign.google.ReqGoogleAccess
 import com.playtogether_android.domain.repository.sign.SignRepository
+import com.playtogether_android.domain.repository.sign.google.GoogleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SignViewModel @Inject constructor(
 //    val postSignInUseCase: PostSignInUseCase,
-    val repository: SignRepository
+    val repository: SignRepository,
+    val googleRepository: GoogleRepository,
 ) : ViewModel() {
 
     var signData: MutableLiveData<String> = MutableLiveData()
@@ -49,6 +54,9 @@ class SignViewModel @Inject constructor(
 
     private val _statusCode = MutableLiveData<Int>()
     val statusCode: LiveData<Int> = _statusCode
+
+    private val _isGetToken = MutableLiveData<Boolean>()
+    val isGetToken: LiveData<Boolean> = _isGetToken
 
     private var _signup = false
     val signup get() = _signup
@@ -89,25 +97,50 @@ class SignViewModel @Inject constructor(
         }
     }
 
-    fun googleLogin() {
+    fun googleGetAccessToken(task: Task<GoogleSignInAccount>) {
         viewModelScope.launch {
             kotlin.runCatching {
-                repository.postGoogleLogin()
-            }.onSuccess {
-                with(PlayTogetherRepository) {
-                    googleUserToken = ""
-                    googleUserToken = it.accessToken
-                    userRefreshToken = it.refreshToken
-                    userToken = it.accessToken
-                    userLogin = true
-                }
-                _signup = it.isSignup
-                _isLogin.value = true
 
-            }.onFailure {
-                Timber.e("google login error :${it.message}")
-                _isLogin.value = false
             }
+        }
+    }
+
+    private suspend fun getAccessToken(request: ReqGoogleAccess) {
+        kotlin.runCatching {
+            googleRepository.getAccessToken(request)
+        }.onSuccess {
+            PlayTogetherRepository.googleAccessToken = it.access_token
+            Timber.e("google 11111111111")
+        }.onFailure {
+            Timber.e("google login error : $it")
+        }
+    }
+
+    private suspend fun postGoogleLogin() {
+        kotlin.runCatching {
+            repository.postGoogleLogin()
+        }.onSuccess {
+            Timber.e("google 2222222222")
+            with(PlayTogetherRepository) {
+                googleUserToken = ""
+                googleUserToken = it.accessToken
+                userRefreshToken = it.refreshToken
+                userToken = it.accessToken
+                userLogin = true
+            }
+            _signup = it.isSignup
+            _isLogin.value = true
+
+        }.onFailure {
+            Timber.e("google login error :${it.message}")
+            _isLogin.value = false
+        }
+    }
+
+    fun googleLogin(request: ReqGoogleAccess) {
+        viewModelScope.launch {
+            getAccessToken(request)
+            postGoogleLogin()
         }
     }
 
