@@ -30,7 +30,7 @@ class ThunderListViewModel @Inject constructor(
     val sort = MutableLiveData<String>()
 
     var isLastPage = false
-    private var pageSize = 5
+    private var pageSize = 20
     private var currentPage = 0
 
     fun currentCategory(): String {
