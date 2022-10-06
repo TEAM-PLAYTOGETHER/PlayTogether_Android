@@ -17,13 +17,16 @@ import com.playtogether_android.app.util.SpaceItemDecoration
 class ThunderDoFragment(val thunderViewModel: ThunderViewModel) :
     BaseFragment<FragmentThunderDoBinding>(R.layout.fragment_thunder_do) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
-
-    //    private val thunderViewModel: ThunderViewModel by activityViewModels()
-    private val thunderDetailView: ThunderDetailViewModel by activityViewModels()
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        thunderListViewModel.getLightCategoryList(ThunderListViewModel.CATEGORY_DO)
     }
 
     private fun initView() {
@@ -33,7 +36,7 @@ class ThunderDoFragment(val thunderViewModel: ThunderViewModel) :
     }
 
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter(thunderDetailView, viewLifecycleOwner)
+        listAdapter = ThunderCategoryListItemAdapter()
         with(thunderListViewModel) {
             categoryDoList.observe(viewLifecycleOwner) {
                 listAdapter.submitList(it)
@@ -46,9 +49,5 @@ class ThunderDoFragment(val thunderViewModel: ThunderViewModel) :
             adapter = listAdapter
             itemAnimator = null
         }
-    }
-
-    private fun initData() {
-        thunderListViewModel.getLightCategoryList(ThunderListViewModel.CATEGORY_DO)
     }
 }
