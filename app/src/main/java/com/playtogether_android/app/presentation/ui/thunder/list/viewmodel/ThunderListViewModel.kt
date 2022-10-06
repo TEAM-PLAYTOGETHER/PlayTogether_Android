@@ -17,47 +17,80 @@ class ThunderListViewModel @Inject constructor(
     val getThunderCategoryUseCase: GetThunderCategoryUseCase,
 ) : ViewModel() {
 
-    private val categoryItemList = MutableLiveData<List<CategoryData>>()
+    private val _eatingItemList = MutableLiveData<List<CategoryData>>()
+    val eatingItemList: LiveData<List<CategoryData>> get() = _eatingItemList
 
-    private val _category = MutableLiveData<String>()
-    val category: LiveData<String> = _category
+    private val _doingItemList = MutableLiveData<List<CategoryData>>()
+    val doingItemList: LiveData<List<CategoryData>> get() = _doingItemList
 
-    private val _sortType = MutableLiveData<String>()
-    val sortType: LiveData<String> = _sortType
+    private val _goingItemList = MutableLiveData<List<CategoryData>>()
+    val goingItemList: LiveData<List<CategoryData>> get() = _goingItemList
 
-    private val _categoryEatList = MutableLiveData<List<CategoryData>>()
-    val categoryEatList: LiveData<List<CategoryData>> = _categoryEatList
+    var pageOrder = MutableLiveData<Int>()
+    val sort = MutableLiveData<String>()
 
-    private val _categoryGoList = MutableLiveData<List<CategoryData>>()
-    val categoryGoList: LiveData<List<CategoryData>> = _categoryGoList
+    var isLastPage = false
+    private var pageSize = 5
+    private var currentPage = 0
 
-    private val _categoryDoList = MutableLiveData<List<CategoryData>>()
-    val categoryDoList: LiveData<List<CategoryData>> = _categoryDoList
-
-    val pageOrder = MutableLiveData<Int>()
-
-    private var tapPosition = 0
-
-    fun setTabPosition(position: Int) {
-        tapPosition = position
+    fun currentCategory(): String {
+        return when (pageOrder.value) {
+            0 -> CATEGORY_EAT
+            1 -> CATEGORY_GO
+            else -> CATEGORY_DO
+        }
     }
 
-    fun getLightCategoryList(category: String, sort: String = DEFAULT_SORT) {
+    private fun initList(category: String, list: List<CategoryData>) {
+        when (category) {
+            CATEGORY_EAT -> _eatingItemList.value = list
+            CATEGORY_DO -> _doingItemList.value = list
+            CATEGORY_GO -> _goingItemList.value = list
+        }
+    }
+
+    private fun addList(category: String, list: List<CategoryData>) {
+        when (category) {
+            CATEGORY_EAT -> _eatingItemList.value =
+                _eatingItemList.value?.toMutableList()?.apply { addAll(list) }
+            CATEGORY_DO -> _doingItemList.value =
+                _doingItemList.value?.toMutableList()?.apply { addAll(list) }
+            CATEGORY_GO -> _goingItemList.value =
+                _goingItemList.value?.toMutableList()?.apply { addAll(list) }
+        }
+    }
+
+    fun getLightCategoryList(order: String, category : String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 val crewId = PlayTogetherRepository.crewId
-                getThunderCategoryUseCase(crewId, category, sort)
+                val sortString: String = sort.value ?: DEFAULT_SORT
+                if (order == FIRST) currentPage = 0
+                currentPage++
+                getThunderCategoryUseCase(crewId, category, sortString, currentPage, pageSize)
             }.onSuccess {
-                categoryItemList.value = it
-                when (category) {
-                    CATEGORY_EAT -> _categoryEatList.value = it
-                    CATEGORY_GO -> _categoryGoList.value = it
-                    CATEGORY_DO -> _categoryDoList.value = it
+                Timber.e("asdf category : ${currentCategory()}")
+                Timber.e("asdf sort : ${sort.value}")
+                Timber.e("asdf currentPage : $currentPage")
+                Timber.e("asdf order : $order")
+                when (order) {
+                    FIRST -> {
+                        if (it.isEmpty()) {
+                            isLastPage = true
+                            return@launch
+                        }
+                        initList(category, it)
+                    }
+                    MORE -> {
+                        if (it.isEmpty()) {
+                            Timber.e("asdf 근데 비어있다.")
+                            isLastPage = true
+                            return@launch
+                        }
+                        Timber.e("asdf MORE 안에 들어왔다.")
+                        addList(category, it)
+                    }
                 }
-                it.map {
-                    _category.value = it.category
-                }
-                _sortType.value = sort
             }.onFailure {
                 Timber.e("getLightList error : ${it.message}")
             }
@@ -70,5 +103,7 @@ class ThunderListViewModel @Inject constructor(
         const val CATEGORY_EAT = "먹을래"
         const val CATEGORY_GO = "갈래"
         const val CATEGORY_DO = "할래"
+        const val FIRST = "FIRST"
+        const val MORE = "MORE"
     }
 }
