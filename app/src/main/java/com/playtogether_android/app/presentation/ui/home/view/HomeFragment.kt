@@ -130,11 +130,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initData() {
-        val crewId = PlayTogetherRepository.crewId
-        homeViewModel.getHotThunderList(crewId)
-        homeViewModel.getNewThunderList(crewId)
+        homeViewModel.getHotThunderList()
+        homeViewModel.getNewThunderList()
         homeViewModel.getCrewList()
-        homeViewModel.setCrewName()
+        homeViewModel.setCrewChange()
     }
 
     private fun refreshView() {

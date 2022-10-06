@@ -38,14 +38,13 @@ class HomeFragmentDialog :
     }
 
     fun setChangeCrew(crewId: Int, name: String) {
-        PlayTogetherRepository.crewId = crewId
-        PlayTogetherRepository.crewName = name
+        /*PlayTogetherRepository.crewId = crewId
         Timber.e("crewId change $crewId")
-        Timber.e("crewId change repo${PlayTogetherRepository.crewId}")
+        Timber.e("crewId change repo${PlayTogetherRepository.crewId}")*/
 
-        homeViewModel.setCrewName(name)
-        homeViewModel.getNewThunderList(crewId)
-        homeViewModel.getHotThunderList(crewId)
+        homeViewModel.setCrewChange(name,crewId)
+        homeViewModel.getNewThunderList()
+        homeViewModel.getHotThunderList()
         userInfoViewModel.getMyInfo()
         dismiss()
     }

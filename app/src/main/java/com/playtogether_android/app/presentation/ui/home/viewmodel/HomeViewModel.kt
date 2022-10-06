@@ -67,8 +67,11 @@ class HomeViewModel @Inject constructor(
     private var _isCrewListEmpty = true
     val isCrewListEmpty get() = _isCrewListEmpty
 
-    fun setCrewName(name: String = PlayTogetherRepository.crewName) {
-        PlayTogetherRepository.crewName = name
+    fun setCrewChange(name: String = PlayTogetherRepository.crewName, id: Int = PlayTogetherRepository.crewId) {
+        with(PlayTogetherRepository) {
+            crewName = name
+            crewId = id
+        }
         _crewName.value = name
     }
 
@@ -140,10 +143,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getHotThunderList(crewId: Int) {
+    fun getHotThunderList() {
         viewModelScope.launch {
             kotlin.runCatching {
-                getHotListUseCase(crewId)
+                getHotListUseCase(PlayTogetherRepository.crewId)
             }.onSuccess {
                 _hotList.value = it
             }.onFailure {
@@ -152,10 +155,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getNewThunderList(crewId: Int) {
+    fun getNewThunderList() {
         viewModelScope.launch {
             kotlin.runCatching {
-                getNewListUseCase(crewId)
+                getNewListUseCase(PlayTogetherRepository.crewId)
             }.onSuccess {
                 _newList.value = it
             }.onFailure {
