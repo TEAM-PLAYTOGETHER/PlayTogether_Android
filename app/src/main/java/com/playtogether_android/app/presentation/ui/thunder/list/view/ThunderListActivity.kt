@@ -38,6 +38,11 @@ class ThunderListActivity :
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initData()
+    }
+
     private fun setClickListener() {
         searchButtonClickListener()
         setBackButtonListener()
