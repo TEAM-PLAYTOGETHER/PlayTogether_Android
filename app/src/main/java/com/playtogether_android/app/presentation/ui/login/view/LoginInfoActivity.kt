@@ -107,7 +107,7 @@ class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activi
         dialogBinding.npDialogPicker.apply {
             wrapSelectorWheel = false
             minValue = 1900
-            maxValue = 2022
+            maxValue = 2003
             value = 2000
         }
         dialog.show()
