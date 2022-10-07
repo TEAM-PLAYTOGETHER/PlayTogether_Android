@@ -308,6 +308,8 @@
     <string name="channel_description">PlayTogther Notification Channel</string>
     <!--    report-->
     <string name="report_title">게시글 신고</string>
+    <string name="report_ok">확인</string>
     <string name="report_description">게시글을 신고하는 이유에 대해 알려주세요.</string>
+    <string name="report_finish_title">신고 내용이\n접수되었습니다</string>
 
 </resources>
