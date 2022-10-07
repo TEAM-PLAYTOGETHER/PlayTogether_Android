@@ -17,6 +17,9 @@ import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.sign.UserInfo
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.logging.SimpleFormatter
 
 @AndroidEntryPoint
 class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activity_login_info) {
@@ -85,6 +88,8 @@ class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activi
         val params = dialog.window?.attributes
         params?.width = WindowManager.LayoutParams.MATCH_PARENT
         params?.height = WindowManager.LayoutParams.WRAP_CONTENT
+        val time = Date(System.currentTimeMillis())
+        val dateFormat = SimpleDateFormat("yyyy", Locale("ko", "KR"))
 
         dialogBinding.tvDialogAccess.setOnClickListener {
             with(binding) {
@@ -107,7 +112,7 @@ class LoginInfoActivity : BaseActivity<ActivityLoginInfoBinding>(R.layout.activi
         dialogBinding.npDialogPicker.apply {
             wrapSelectorWheel = false
             minValue = 1900
-            maxValue = 2003
+            maxValue = dateFormat.format(time).toString().toInt() - 19
             value = 2000
         }
         dialog.show()
