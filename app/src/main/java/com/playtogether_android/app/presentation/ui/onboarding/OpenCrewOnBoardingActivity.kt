@@ -5,7 +5,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.playtogether_android.app.R
@@ -31,6 +33,21 @@ class OpenCrewOnBoardingActivity :
         introTextWatcher()
         openCrewNetwork()
         activeBtn()
+        closeKeyboard()
+    }
+
+    //기기 내 엔터 누를 시 키보드 닫힘
+    private fun closeKeyboard() {
+        binding.etOpenOnboardingIntro.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                val imm: InputMethodManager =
+                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.etOpenOnboardingIntro.getWindowToken(), 0) //hide keyboard
+                return@OnKeyListener true
+            }
+            false
+        })
+
     }
 
 

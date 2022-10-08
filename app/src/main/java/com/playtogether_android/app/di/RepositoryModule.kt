@@ -10,6 +10,7 @@ import com.playtogether_android.data.datasource.mypage.MyPageDataSource
 import com.playtogether_android.data.datasource.onboarding.OnBoardingDataSource
 import com.playtogether_android.data.datasource.onboarding.SubwayDataSource
 import com.playtogether_android.data.datasource.sign.SignDataSource
+import com.playtogether_android.data.datasource.sign.google.GoogleDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderCreateDataSource
 import com.playtogether_android.data.datasource.thunder.ThunderDataSource
 import com.playtogether_android.data.datasource.userInfo.UserInfoDataSource
@@ -23,6 +24,7 @@ import com.playtogether_android.data.repositoryimpl.onboarding.OnBoardingReposit
 import com.playtogether_android.data.repositoryimpl.onboarding.SubwayRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.search.SearchRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.sign.SignRepositoryImpl
+import com.playtogether_android.data.repositoryimpl.sign.google.GoogleRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderCreateRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.thunder.ThunderRepositoryImpl
 import com.playtogether_android.data.repositoryimpl.userInfo.UserInfoRepositoryImpl
@@ -36,6 +38,7 @@ import com.playtogether_android.domain.repository.onboarding.OnBoardingRepositor
 import com.playtogether_android.domain.repository.onboarding.SubwayRepository
 import com.playtogether_android.domain.repository.search.SearchRepository
 import com.playtogether_android.domain.repository.sign.SignRepository
+import com.playtogether_android.domain.repository.sign.google.GoogleRepository
 import com.playtogether_android.domain.repository.thunder.ThunderCreateRepository
 import com.playtogether_android.domain.repository.thunder.ThunderRepository
 import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
@@ -71,6 +74,12 @@ object RepositoryModule {
     @Singleton
     fun provideSubwayRepository(dataSource: SubwayDataSource) : SubwayRepository {
         return SubwayRepositoryImpl(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGoogleRepository(dataSource: GoogleDataSource) : GoogleRepository {
+        return GoogleRepositoryImpl(dataSource)
     }
 
     @Provides

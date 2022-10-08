@@ -9,9 +9,11 @@ class LightDataSourceImpl(private val lightService: LightService) : LightDataSou
     override suspend fun getLightListCategory(
         crewId: Int,
         category: String,
-        sort: String
+        sort: String,
+        currentPage: Int,
+        pageSize: Int
     ): ResponseLightListCategory {
-        return lightService.getLightListCategory(crewId, category, sort)
+        return lightService.getLightListCategory(crewId, category, sort, currentPage, pageSize)
     }
 
     override suspend fun getNewLightning(crewId: Int): ResponseHomeLightning {

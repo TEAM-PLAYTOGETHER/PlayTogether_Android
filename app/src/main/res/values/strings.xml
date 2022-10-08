@@ -174,7 +174,7 @@
 
     <!-- message -->
     <string name="messageBox">채팅</string>
-
+    <string name="messageListEmpty">아직 진행중인 채팅이 없어요!</string>
 
     <!--    ThunderListActivity-->
 

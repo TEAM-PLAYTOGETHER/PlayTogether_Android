@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/home_empty_text"
-            android:visibility="@{listViewModel.categoryGoList.size()==0 ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{listViewModel.goingItemList.size()==0 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

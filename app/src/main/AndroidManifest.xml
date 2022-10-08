@@ -34,6 +34,7 @@
             android:noHistory="true"/>
         <activity
             android:name=".presentation.ui.userInfo.EditProfileActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.userInfo.ManageBlockedUserActivity"

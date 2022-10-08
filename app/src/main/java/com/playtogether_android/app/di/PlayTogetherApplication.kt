@@ -47,7 +47,6 @@ class PlayTogetherApplication : Application(), Application.ActivityLifecycleCall
 //            googleUserlogOut=true
 //            kakaoUserlogOut=true
 //        }
-        PlayTogetherRepository.crewId = 12
     }
     private fun initPixelUtil() {
         pixelRatio = PixelRatio(this)

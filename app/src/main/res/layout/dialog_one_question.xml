@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rectangle_fill_white_black_stroke"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,33 +13,25 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_regular"
         android:includeFontPadding="false"
-        android:textSize="16dp"
+        android:paddingVertical="59dp"
         android:textAlignment="center"
         android:textColor="@color/gray_black"
-        android:paddingVertical="59dp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="신청을 취소할까요?"/>
+        tools:text="신청을 취소할까요?" />
 
-    <TextView
-        android:id="@+id/tv_dialog_horizontal_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_title" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/main_green"
+        android:background="@drawable/rectangle_fill_green_down_radius_10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_dialog_horizontal_line">
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_title">
 
         <TextView
             android:id="@+id/tv_dialog_answer"
@@ -48,8 +42,8 @@
             android:fontFamily="@font/pretendard_bold"
             android:paddingTop="10dp"
             android:paddingBottom="12dp"
-            android:textAlignment="center"
             android:text="@string/text_ok"
+            android:textAlignment="center"
             android:textColor="@color/gray_black"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"

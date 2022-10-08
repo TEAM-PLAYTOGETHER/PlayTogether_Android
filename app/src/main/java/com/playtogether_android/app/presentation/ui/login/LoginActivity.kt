@@ -23,7 +23,6 @@ import com.playtogether_android.app.databinding.ActivityLoginBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.login.view.LoginTermsActivity
-import com.playtogether_android.app.presentation.ui.login.viewmodel.GoogleLoginRepository
 import com.playtogether_android.app.presentation.ui.main.MainActivity
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
@@ -31,6 +30,7 @@ import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoard
 import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.data.singleton.PlayTogetherRepository
+import com.playtogether_android.domain.model.sign.google.ReqGoogleAccess
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -69,6 +69,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+                    signViewModel.googleGetAccessToken(task)
                     handleSignInResult(task)
                 } else {
                     Timber.e("result : $it")
@@ -80,13 +81,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-            GoogleLoginRepository(
+            val request = ReqGoogleAccess(
+                "authorization_code",
                 BuildConfig.GOOGLE_CLIENT_ID,
-                BuildConfig.GOOGLE_CLIENT_SECRET
+                BuildConfig.GOOGLE_CLIENT_SECRET,
+                account.serverAuthCode!!
             )
-                .getAccessToken(account.serverAuthCode!!)
             with(signViewModel) {
-                googleLogin()
+                googleLogin(request)
                 Timber.e("google-login : ${PlayTogetherRepository.googleAccessToken}")
 //                Timber.e("google-login : ${PlayTogetherRepository.googleUserToken}")
                 isLogin.observe(this@LoginActivity) { success ->
@@ -111,12 +113,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         binding.ivLoginKakao.setOnClickListener {
             setKakaoBtnListener()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-//        updateUI(account)
     }
 
     private fun btnGoogleListener() {

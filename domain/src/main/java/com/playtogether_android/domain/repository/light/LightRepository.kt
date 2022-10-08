@@ -6,7 +6,9 @@ interface LightRepository {
     suspend fun getLightListCategory(
         crewId: Int,
         category: String,
-        sort: String
+        sort: String,
+        currentPage : Int,
+        pageSize : Int
     ): List<CategoryData>
 
     suspend fun getNewLightning(crewId: Int): List<CategoryData>

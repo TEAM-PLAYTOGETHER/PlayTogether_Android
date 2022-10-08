@@ -103,24 +103,6 @@ class ThunderDetailActivity :
         }
     }
 
-//    private fun showCancelDialog(thunderId: Int) {
-//        val title = "신청을 취소할까요?"
-//        val dialog = CustomDialog(this, title)
-//        dialog.showChoiceDialog(R.layout.dialog_yes_no)
-//        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
-//            override fun onClicked(num: Int) {
-//                if (num == 1) {
-//                    thunderDetailViewModel.joinAndCancel(thunderId)
-//                    thunderDetailViewModel.isConfirm.observe(this@ThunderDetailActivity) { success ->
-//                        if (success) {
-//                            showConfirmDialog()
-//                        }
-//                    }
-//                }
-//            }
-//        })
-//    }
-
     private fun showConfirmDialog(dialog: CustomDialogSon) {
         val title = "신청 취소되었습니다."
         val db = DialogCheckBinding.inflate(layoutInflater)
