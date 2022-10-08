@@ -1,7 +1,11 @@
 package com.playtogether_android.app.presentation.ui.thunder
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityReportPostBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
@@ -22,6 +26,7 @@ class ReportPostActivity : BaseActivity<ActivityReportPostBinding>(R.layout.acti
 
         clickEvent()
         postReport(thunderId)
+        checkReportContent()
     }
 
     private fun clickEvent() {
@@ -32,9 +37,12 @@ class ReportPostActivity : BaseActivity<ActivityReportPostBinding>(R.layout.acti
     private fun btnBackEvent() {
         binding.btnBack.setOnClickListener {
             finish()
-            //todo 신고완료 뷰 만들어서 이동 넣기
-//            moveReportFinishView()
         }
+    }
+
+    private fun moveReportFinishView() {
+        val intent = Intent(this, ReportPostFinishActivity::class.java)
+        startActivity(intent)
     }
 
     // 번개 게시글 신고 서버통신
@@ -54,12 +62,42 @@ class ReportPostActivity : BaseActivity<ActivityReportPostBinding>(R.layout.acti
     private fun observeReport() {
         thunderViewModel.reportPost.observe(this) {
             if (it.success) {
-                shortToast("신고 내용이 접수되었습니다.")
-                finish()
+                moveReportFinishView()
             } else {
                 shortToast("게시글 신고에 실패하였습니다.")
-                finish()
             }
         }
+    }
+
+    private fun btnActive() {
+        with(binding) {
+            if (etReportContent.text.toString().isEmpty()) {
+                tvReportFinish.isClickable = false
+                tvReportFinish.setTextColor(
+                    ContextCompat.getColor(
+                        this@ReportPostActivity,
+                        R.color.gray_gray01
+                    )
+                )
+            } else {
+                tvReportFinish.isClickable = true
+                tvReportFinish.setTextColor(
+                    ContextCompat.getColor(
+                        this@ReportPostActivity,
+                        R.color.main_green
+                    )
+                )
+            }
+        }
+    }
+
+    private fun checkReportContent() {
+        binding.etReportContent.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                btnActive()
+            }
+        })
     }
 }
