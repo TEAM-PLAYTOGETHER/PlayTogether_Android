@@ -25,8 +25,13 @@
         android:theme="@style/Theme.PlayTogether_android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.thunder.ReportPostFinishActivity"
+            android:exported="false"
+            android:noHistory="true"/>
+        <activity
             android:name=".presentation.ui.thunder.ReportPostActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".presentation.ui.userInfo.EditProfileActivity"
             android:windowSoftInputMode="adjustPan"
@@ -124,6 +129,7 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="CHATTING_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

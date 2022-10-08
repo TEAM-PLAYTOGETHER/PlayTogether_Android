@@ -260,6 +260,11 @@
             app:layout_constraintTop_toBottomOf="@id/cl_myInfo_content"
             android:layout_marginTop="24dp" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cl_boundary"
+            app:layout_constraintBottom_toBottomOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_myInfo_bottom"
             android:layout_width="match_parent"
@@ -365,6 +370,7 @@
                 android:layout_marginTop="31dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
 
 
