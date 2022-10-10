@@ -334,6 +334,7 @@
                         android:fontFamily="@font/pretendard_regular"
                         android:gravity="center"
                         android:hint="@string/text_place"
+                        android:maxLength="10"
                         android:includeFontPadding="false"
                         android:paddingVertical="20dp"
                         android:textColor="@color/gray_black"
