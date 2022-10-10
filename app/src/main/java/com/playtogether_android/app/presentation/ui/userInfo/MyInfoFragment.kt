@@ -74,7 +74,10 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             if (it.firstStation == null) {
                 binding.firstStation = "지하철역 미지정"
                 binding.isEmpty = true
-            } else
+            } else if (it.secondStation == null) {
+                binding.firstStation = it.firstStation
+                binding.isEmpty = true
+            }else
                 binding.firstStation = it.firstStation
             binding.secondStation = it.secondStation
 
