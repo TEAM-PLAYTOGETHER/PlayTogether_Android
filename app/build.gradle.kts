@@ -232,4 +232,6 @@ dependencies {
 
     //for push alarm
     implementation ("androidx.work:work-runtime-ktx:2.7.1")
+
+    implementation ("com.airbnb.android:lottie:5.2.0")
 }
