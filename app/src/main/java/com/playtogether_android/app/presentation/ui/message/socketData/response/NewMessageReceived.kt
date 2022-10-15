@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.message.data.response
+package com.playtogether_android.app.presentation.ui.message.socketData.response
 
 data class NewMessageReceived(
     val data: Data,
