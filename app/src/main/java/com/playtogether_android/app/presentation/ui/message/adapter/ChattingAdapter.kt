@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.message
+package com.playtogether_android.app.presentation.ui.message.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,11 +7,11 @@ import com.playtogether_android.app.databinding.ItemChatDateBinding
 import com.playtogether_android.app.databinding.ItemChatLoadingBinding
 import com.playtogether_android.app.databinding.ItemMyChatBinding
 import com.playtogether_android.app.databinding.ItemOtherChatBinding
-import com.playtogether_android.app.presentation.ui.message.ChatData2.Companion.MY_CHAT
-import com.playtogether_android.app.presentation.ui.message.ChatData2.Companion.OTHER_CHAT
-import com.playtogether_android.app.presentation.ui.message.ChattingData.Companion.CHAT
-import com.playtogether_android.app.presentation.ui.message.ChattingData.Companion.DATE
-import com.playtogether_android.app.presentation.ui.message.ChattingData.Companion.LOADING
+import com.playtogether_android.app.presentation.ui.message.adapter.ChatData2.Companion.MY_CHAT
+import com.playtogether_android.app.presentation.ui.message.adapter.ChatData2.Companion.OTHER_CHAT
+import com.playtogether_android.app.presentation.ui.message.adapter.ChattingData.Companion.CHAT
+import com.playtogether_android.app.presentation.ui.message.adapter.ChattingData.Companion.DATE
+import com.playtogether_android.app.presentation.ui.message.adapter.ChattingData.Companion.LOADING
 
 class ChattingAdapter : RecyclerView.Adapter<ChatViewHolder2>() {
     val chatList = mutableListOf<ChattingData>()

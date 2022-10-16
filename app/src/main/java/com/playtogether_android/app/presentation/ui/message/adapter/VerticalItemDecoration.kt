@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.message
+package com.playtogether_android.app.presentation.ui.message.adapter
 
 import android.graphics.Rect
 import android.view.View

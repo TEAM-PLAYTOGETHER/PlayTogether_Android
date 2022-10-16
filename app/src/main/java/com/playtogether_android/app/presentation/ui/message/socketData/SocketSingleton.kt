@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.message.data
+package com.playtogether_android.app.presentation.ui.message.socketData
 
 import android.content.Context
 import android.widget.Toast

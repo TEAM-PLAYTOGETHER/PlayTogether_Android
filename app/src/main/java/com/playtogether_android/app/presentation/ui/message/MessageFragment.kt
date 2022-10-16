@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMessageBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.message.adapter.MessageListAdapter
 import com.playtogether_android.app.presentation.ui.message.viewmodel.MessageViewModel
 import com.playtogether_android.domain.model.message.MessageData
 import dagger.hilt.android.AndroidEntryPoint
