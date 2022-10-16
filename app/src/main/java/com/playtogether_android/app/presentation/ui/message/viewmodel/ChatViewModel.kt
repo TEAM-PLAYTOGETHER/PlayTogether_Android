@@ -64,14 +64,14 @@ class ChatViewModel @Inject constructor(
         return list
     }
 
-    private fun removeTimePart(addChat: ChatData) {
+    /*private fun removeTimePart(addChat: ChatData) {
         if (_chatData.value?.isEmpty() != false) return
         if (_chatData.value?.last()?.messageType != addChat.messageType) return
         if (_chatData.value?.last()?.time == addChat.time) {
             _chatData.value = _chatData.value?.toMutableList()?.apply { last().timeVisible = false }
             isLastChatChanged.value = true
         }
-    }
+    }*/
 
     private fun changeRemoteDateFormat(exFormatDate: String): String {
         var date = exFormatDate.slice(IntRange(0, 9))
@@ -83,7 +83,7 @@ class ChatViewModel @Inject constructor(
 
     fun getChatList(roomId: Int) {
         viewModelScope.launch {
-            kotlin.runCatching { getChatUseCase(roomId) }
+            kotlin.runCatching { getChatUseCase(roomId, 1, 20) }
                 .onSuccess {
                     _chatData.value = removeTimeAll(refineChatListDate(it))
                 }
