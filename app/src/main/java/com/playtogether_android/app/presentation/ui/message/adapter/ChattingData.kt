@@ -17,7 +17,7 @@ data class ChatData2(
     var time: String,
     val messageType: Boolean,
     var timeVisible: Boolean = true,
-    var shownTime : String
+    var shownTime : String = ""
 ) : ChattingData() {
     private val chatViewType = if (messageType) MY_CHAT else OTHER_CHAT
     fun getChatViewType(): Int = chatViewType
