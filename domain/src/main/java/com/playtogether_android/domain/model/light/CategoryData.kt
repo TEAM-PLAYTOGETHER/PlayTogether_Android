@@ -15,7 +15,7 @@ data class CategoryData(
     val time: String?,
     val title: String,
     @SerializedName("scp_cnt")
-    val likeCount: Int,
+    var likeCount: Int,
     @SerializedName("is_opened")
     val isOpen: Boolean,
 )

@@ -9,8 +9,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.playtogether_android.app.presentation.ui.message.data.response.NewMessageReceived
-import com.playtogether_android.app.presentation.ui.message.data.response.ResConnection
+import com.playtogether_android.app.presentation.ui.message.socketData.response.NewMessageReceived
+import com.playtogether_android.app.presentation.ui.message.socketData.response.ResConnection
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.message.MessageData
 import com.playtogether_android.domain.usecase.message.GetMessageUseCase

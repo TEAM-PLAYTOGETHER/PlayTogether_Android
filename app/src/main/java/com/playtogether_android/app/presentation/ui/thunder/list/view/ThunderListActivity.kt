@@ -2,12 +2,15 @@ package com.playtogether_android.app.presentation.ui.thunder.list.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityThunderListBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.search.SearchActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
@@ -16,6 +19,8 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_GO
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.FIRST
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.LATER
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.PREV
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCPCNT
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -23,22 +28,23 @@ import timber.log.Timber
 @AndroidEntryPoint
 class ThunderListActivity :
     BaseActivity<ActivityThunderListBinding>(R.layout.activity_thunder_list) {
+    private lateinit var thunderDetailLauncher: ActivityResultLauncher<Intent>
     private lateinit var thunderCategoryListAdapter: ThunderCategoryListAdapter
     private val thunderListViewModel: ThunderListViewModel by viewModels()
     val categoryTitleList = listOf(CATEGORY_EAT, CATEGORY_GO, CATEGORY_DO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.e("asdf : ThunderListActivity 실행됨")
         binding.listViewModel = thunderListViewModel
         binding.thunderListActivity = this
         binding.lifecycleOwner = this
-        setCategory()
         initAdapter()
+        setCategory()
         updateCategory()
         initTabLayout()
         initList()
         observingSort()
+        initLauncher()
 
         clickBackButton()
         clickSearchButton()
@@ -105,7 +111,6 @@ class ThunderListActivity :
     }
 
     private fun setCategory() {
-        Timber.e("asdf : setCategory")
         val category = intent.getStringExtra("category") ?: CATEGORY_EAT
         val index = categoryTitleList.indexOf(category)
         thunderListViewModel.pageOrder.value = index
@@ -147,5 +152,21 @@ class ThunderListActivity :
             thunderListViewModel.getLightCategoryList(FIRST, thunderListViewModel.currentCategory())
             thunderListViewModel.isLastPage = false
         }
+    }
+
+    fun clickThunderListItem(thunderId: Int) {
+        thunderListViewModel.getScrapValue(thunderId, PREV)
+        thunderListViewModel.adapterThunderId = thunderId
+        val intent = Intent(this, ThunderDetailActivity::class.java)
+        intent.putExtra("thunderId", thunderId)
+        thunderDetailLauncher.launch(intent)
+    }
+
+    private fun initLauncher() {
+        thunderDetailLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                val thunderId = thunderListViewModel.adapterThunderId ?: -1
+                thunderListViewModel.getScrapValue(thunderId, LATER)
+            }
     }
 }

@@ -12,6 +12,8 @@ import com.playtogether_android.app.presentation.ui.thunder.list.adapter.Thunder
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.MORE
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_MINUS
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_PLUS
 import com.playtogether_android.app.util.SpaceItemDecoration
 import timber.log.Timber
 
@@ -26,11 +28,14 @@ class ThunderEatFragment :
         binding.lifecycleOwner = this
         initAdapter()
         observingList()
+        observingScrap()
     }
 
     //먹/갈/할 같이 사용할 메서드
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter()
+        listAdapter = ThunderCategoryListItemAdapter { thunderId, position ->
+            adapterLamda(thunderId, position)
+        }
         with(binding.rvThundereatContainer) {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
@@ -40,12 +45,16 @@ class ThunderEatFragment :
         }
     }
 
+    private fun adapterLamda(thunderId: Int, position: Int) {
+        (activity as ThunderListActivity).clickThunderListItem(thunderId)
+        thunderListViewModel.adapterPosition = position
+    }
+
     inner class MyScrollListener : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             if (!binding.rvThundereatContainer.canScrollVertically(1)) {
                 if (thunderListViewModel.isLastPage) return
-                Timber.e("asdf : 끝에 도달했다")
                 thunderListViewModel.getLightCategoryList(MORE, CATEGORY_EAT)
             }
         }
@@ -53,8 +62,23 @@ class ThunderEatFragment :
 
     private fun observingList() {
         thunderListViewModel.eatingItemList.observe(viewLifecycleOwner) {
-            Timber.e("life cycle : submitList")
-            listAdapter.submitList(it)
+            listAdapter.initList(it)
+        }
+    }
+
+    private fun changeScrapCount() {
+        with(thunderListViewModel) {
+            if ((prevScrapState ?: return) and !((laterScrapState.value) ?: return)) {
+                listAdapter.updateScrapCount(adapterPosition ?: return, SCRAP_MINUS)
+            } else if (!(prevScrapState ?: return) and (laterScrapState.value ?: return)) {
+                listAdapter.updateScrapCount(adapterPosition ?: return, SCRAP_PLUS)
+            }
+        }
+    }
+
+    private fun observingScrap() {
+        thunderListViewModel.laterScrapState.observe(viewLifecycleOwner) {
+            changeScrapCount()
         }
     }
 }
