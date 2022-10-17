@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemThunderListBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.util.ListAdapterComparator
-import com.playtogether_android.app.util.stringListBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 
 class ThunderCategoryListItemAdapter :
@@ -16,24 +15,7 @@ class ThunderCategoryListItemAdapter :
     inner class ViewHolder(private val binding: ItemThunderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: CategoryData) {
-            with(binding) {
-                categoryData = data
-                tvThunderItemDate.text =
-                    itemView.context.stringListBuilder(
-                        itemView.context,
-                        listOf(data.date, data.place, data.time)
-                    )
-                tvThunderItemLimitCount.text =
-                    itemView.context.stringListBuilder(
-                        itemView.context,
-                        listOf(
-                            PERSON,
-                            data.lightMemberCnt.toString(),
-                            " / ",
-                            data.peopleCnt.toString()
-                        )
-                    )
-            }
+            binding.categoryData = data
         }
     }
 
