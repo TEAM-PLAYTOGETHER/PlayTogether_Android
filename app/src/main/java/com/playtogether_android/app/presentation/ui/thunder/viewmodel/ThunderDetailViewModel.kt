@@ -1,7 +1,10 @@
 package com.playtogether_android.app.presentation.ui.thunder.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.playtogether_android.domain.model.thunder.GetThunderExistCheck
 import com.playtogether_android.domain.model.thunder.Member
 import com.playtogether_android.domain.model.thunder.Organizer
@@ -12,7 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 @HiltViewModel
 class ThunderDetailViewModel @Inject constructor(

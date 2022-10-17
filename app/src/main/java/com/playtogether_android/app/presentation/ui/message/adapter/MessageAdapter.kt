@@ -54,7 +54,7 @@ class MessageListAdapter(val itemClick: (MessageData) -> Unit) :
     class MessageListViewHolder(
         private val binding: ItemMessageRoomBinding,
         val itemClick: (MessageData) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ThunderCategoryListViewHolder(binding.root) {
         fun onBind(data: MessageData) {
             binding.data = data
             itemView.setOnClickListener {

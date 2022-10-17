@@ -51,7 +51,7 @@
 //    override fun getItemCount(): Int = _thunderList.size
 //
 //    class ThunderListViewHolder(val binding: ItemThunderListBinding) :
-//        RecyclerView.ViewHolder(binding.root) {
+//        RecyclerView.ThunderCategoryListViewHolder(binding.root) {
 //        fun onBind(data: ThunderTabListData.Data) {
 //            binding.tvThunderItemTitle.text = data.title
 //            binding.tvThunderItemDate.text = data.date + " " + data.place + " " + data.time

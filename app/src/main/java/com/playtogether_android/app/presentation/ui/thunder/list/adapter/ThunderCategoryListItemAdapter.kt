@@ -1,18 +1,24 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemThunderListBinding
-import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.app.util.ListAdapterComparator
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_DEFAULT
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_MINUS
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_PLUS
 import com.playtogether_android.domain.model.light.CategoryData
 
-class ThunderCategoryListItemAdapter :
-    ListAdapter<CategoryData, ThunderCategoryListItemAdapter.ViewHolder>(ListAdapterComparator<CategoryData>()) {
-    inner class ViewHolder(private val binding: ItemThunderListBinding) :
+class ThunderCategoryListItemAdapter(
+    private val itemClick: (Int, Int) -> Unit
+) :
+    RecyclerView.Adapter<ThunderCategoryListItemAdapter.ThunderCategoryListViewHolder>() {
+
+    private val thunderList = mutableListOf<CategoryData>()
+
+    class ThunderCategoryListViewHolder(
+        private val binding: ItemThunderListBinding
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: CategoryData) {
             binding.categoryData = data
@@ -22,28 +28,33 @@ class ThunderCategoryListItemAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ThunderCategoryListItemAdapter.ViewHolder {
+    ): ThunderCategoryListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemThunderListBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(binding)
+        return ThunderCategoryListViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: ThunderCategoryListItemAdapter.ViewHolder,
-        position: Int
-    ) {
-        val item = getItem(position)
+    override fun onBindViewHolder(holder: ThunderCategoryListViewHolder, position: Int) {
+        val item = thunderList[position]
         holder.onBind(item)
-        val itemView = holder.itemView
-        itemView.setOnClickListener {
-            Intent(itemView.context, ThunderDetailActivity::class.java).apply {
-                putExtra("thunderId", item.lightId)
-                itemView.context.startActivity(this)
-            }
+        holder.itemView.setOnClickListener {
+            itemClick(item.lightId, position)
         }
     }
 
-    companion object {
-        const val PERSON = "인원 "
+    override fun getItemCount(): Int = thunderList.size
+
+    fun initList(list: List<CategoryData>) {
+        thunderList.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun updateScrapCount(position: Int, op: String) {
+        when (op) {
+            SCRAP_PLUS -> thunderList[position].likeCount++
+            SCRAP_MINUS -> thunderList[position].likeCount--
+            SCRAP_DEFAULT -> return
+        }
+        notifyItemChanged(position)
     }
 }
