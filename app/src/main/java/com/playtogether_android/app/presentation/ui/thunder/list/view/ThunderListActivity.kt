@@ -33,8 +33,8 @@ class ThunderListActivity :
         binding.listViewModel = thunderListViewModel
         binding.thunderListActivity = this
         binding.lifecycleOwner = this
-        setCategory()
         initAdapter()
+        setCategory()
         updateCategory()
         initTabLayout()
         initList()
@@ -110,6 +110,7 @@ class ThunderListActivity :
         val index = categoryTitleList.indexOf(category)
         thunderListViewModel.pageOrder.value = index
         binding.vpThunderlistContainer.setCurrentItem(index, false)
+        Timber.e("asdf : category-$category, index-$index")
     }
 
     private fun initTabLayout() {
