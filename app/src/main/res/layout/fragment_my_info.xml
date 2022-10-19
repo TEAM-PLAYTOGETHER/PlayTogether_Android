@@ -25,6 +25,14 @@
 
         <variable
             name="secondStation"
+            type="String" />=
+
+        <variable
+            name="nickname"
+            type="String" />
+
+        <variable
+            name="description"
             type="String" />
 
         <variable
@@ -131,7 +139,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:src="@drawable/img_go"
-                    android:src="@drawable/img_go"
+                    android:src="@{myInfo.profileImage}"
                     android:layout_marginTop="24dp"
                     android:layout_marginStart="16dp"/>
 

@@ -69,6 +69,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             binding.birthAndGender = "${birth}년생 ・ $genderFormat"
             binding.myInfo = it
             binding.homeViewModel = homeViewModel
+            binding.nickname = it.nickname
+            binding.description = it.description
 
             // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
             if (it.firstStation == null) {
@@ -96,30 +98,28 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     //프로필 수정하기 온보딩 뷰 이동
     private fun moveEditProfile() {
         binding.tvProfileEdit.setOnClickListener {
-            userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
                 val intent = Intent(requireActivity(), EditProfileActivity::class.java)
                 val list = arrayListOf<String>()
-                Timber.e("121111 : ${it.firstStation}")
-                Timber.e("121111 : ${it.secondStation}")
-                if (it.firstStation != null) {
-                    list.add(it.firstStation.toString())
+                Timber.e("121111 : ${binding.firstStation}")
+                Timber.e("121111 : ${binding.secondStation}")
+                if (binding.firstStation != null) {
+                    list.add(binding.firstStation.toString())
                 }
-                if (it.secondStation != null) {
-                    list.add(it.secondStation.toString())
+                if (binding.secondStation != null) {
+                    list.add(binding.secondStation.toString())
                 }
                 if (list != null) {
                     if (list.size != 0) {
                         intent.putExtra("ChipList", list)
                     }
                 }
-                intent.putExtra("crewName", it.crewName)
-                intent.putExtra("nickname", it.nickname)
-                intent.putExtra("description", it.description)
-                intent.putExtra("firstStation", it.firstStation)
-                intent.putExtra("secondStation", it.secondStation)
+                intent.putExtra("crewName", homeViewModel.crewName.toString())
+                intent.putExtra("nickname", binding.nickname)
+                intent.putExtra("description", binding.description)
+                intent.putExtra("firstStation", binding.firstStation)
+                intent.putExtra("secondStation", binding.secondStation)
                 //todo 온보딩뷰 이동 시 넘겨줄 값 추가
                 startActivity(intent)
-            }
         }
     }
 
