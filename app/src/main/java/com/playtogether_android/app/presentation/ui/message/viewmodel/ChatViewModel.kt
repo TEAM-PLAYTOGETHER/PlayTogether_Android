@@ -1,18 +1,15 @@
 package com.playtogether_android.app.presentation.ui.message.viewmodel
 
 import android.content.Context
-import android.util.Log
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.playtogether_android.app.presentation.ui.message.data.request.ReqEnterRoom
-import com.playtogether_android.app.presentation.ui.message.data.request.ReqSendMessage
-import com.playtogether_android.app.presentation.ui.message.data.response.*
+import com.playtogether_android.app.presentation.ui.message.socketData.request.ReqEnterRoom
+import com.playtogether_android.app.presentation.ui.message.socketData.request.ReqSendMessage
+import com.playtogether_android.app.presentation.ui.message.socketData.response.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.message.ChatData
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
@@ -53,7 +50,7 @@ class ChatViewModel @Inject constructor(
         if (tempSize < 0) return list
 
         while (true) {
-            if (list[tempSize].timeVisible == false)
+            if (!list[tempSize].timeVisible)
                 break
             if (list[tempSize].messageType == list[nowSize].messageType) {
                 if (list[tempSize].time == list[nowSize].time) {
@@ -67,14 +64,14 @@ class ChatViewModel @Inject constructor(
         return list
     }
 
-    private fun removeTimePart(addChat: ChatData) {
+    /*private fun removeTimePart(addChat: ChatData) {
         if (_chatData.value?.isEmpty() != false) return
         if (_chatData.value?.last()?.messageType != addChat.messageType) return
         if (_chatData.value?.last()?.time == addChat.time) {
             _chatData.value = _chatData.value?.toMutableList()?.apply { last().timeVisible = false }
             isLastChatChanged.value = true
         }
-    }
+    }*/
 
     private fun changeRemoteDateFormat(exFormatDate: String): String {
         var date = exFormatDate.slice(IntRange(0, 9))
@@ -86,7 +83,7 @@ class ChatViewModel @Inject constructor(
 
     fun getChatList(roomId: Int) {
         viewModelScope.launch {
-            kotlin.runCatching { getChatUseCase(roomId) }
+            kotlin.runCatching { getChatUseCase(roomId, 1, 20) }
                 .onSuccess {
                     _chatData.value = removeTimeAll(refineChatListDate(it))
                 }

@@ -1,4 +1,5 @@
-package com.playtogether_android.app.presentation.ui.message.data
+/*
+package com.playtogether_android.app.presentation.ui.message.socketData
 
 import android.content.Context
 import android.widget.Toast
@@ -34,8 +35,10 @@ object SocketSingleton {
         header["Authorization"] = tokenLst
         val options = IO.Options()
         options.extraHeaders = header
-        /*options.webSocketFactory = httpClient
-        options.callFactory = httpClient*/
+        */
+/*options.webSocketFactory = httpClient
+        options.callFactory = httpClient*//*
+
         socket = IO.socket("http://13.125.232.150:3000", options)
         Timber.e("Socket connection success : ${socket.id()}")
     }
@@ -115,4 +118,4 @@ object SocketSingleton {
     fun disconnect(){
         socket.disconnect()
     }
-}
+}*/

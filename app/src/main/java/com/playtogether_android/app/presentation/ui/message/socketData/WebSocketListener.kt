@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.message
+package com.playtogether_android.app.presentation.ui.message.socketData
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
