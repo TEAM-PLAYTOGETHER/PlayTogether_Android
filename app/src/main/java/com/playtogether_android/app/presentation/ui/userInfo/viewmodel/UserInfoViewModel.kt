@@ -144,12 +144,11 @@ class UserInfoViewModel @Inject constructor(
 
     // 유저 멀티프로필 이미지 추가
     fun putProfileImage(
-        crewId: Int,
         image: MultipartBody.Part?
     ) {
         viewModelScope.launch {
             kotlin.runCatching {
-                userInfoRepository.putProfileImage(crewId, image)
+                userInfoRepository.putProfileImage(PlayTogetherRepository.crewId, image)
             }
                 .onSuccess {
                     _putProfileImageData.postValue(it)

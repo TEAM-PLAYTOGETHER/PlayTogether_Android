@@ -43,6 +43,7 @@ interface UserInfoService {
     ) : ResUnblockUserData
 
     // 유저 멀티프로필 이미지 추가
+    @Multipart
     @PUT("user/{crewId}/image")
     suspend fun putProfileImage (
         @Path("crewId") crewId: Int = PlayTogetherRepository.crewId,
