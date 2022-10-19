@@ -105,10 +105,10 @@ class ThunderListActivity :
     }
 
     private fun setCategory() {
-        Timber.e("asdf : setCategory")
         val category = intent.getStringExtra("category") ?: CATEGORY_EAT
         val index = categoryTitleList.indexOf(category)
         thunderListViewModel.pageOrder.value = index
+        Timber.e("category : $category , index : $index")
         binding.vpThunderlistContainer.setCurrentItem(index, false)
     }
 

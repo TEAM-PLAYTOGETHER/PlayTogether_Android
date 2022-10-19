@@ -34,6 +34,7 @@ class ThunderListViewModel @Inject constructor(
     private var currentPage = 0
 
     fun currentCategory(): String {
+        Timber.e("asdf pageOrder.value : ${pageOrder.value}")
         return when (pageOrder.value) {
             0 -> CATEGORY_EAT
             1 -> CATEGORY_GO
@@ -69,7 +70,7 @@ class ThunderListViewModel @Inject constructor(
                 currentPage++
                 getThunderCategoryUseCase(crewId, category, sortString, currentPage, pageSize)
             }.onSuccess {
-                Timber.e("asdf category : ${currentCategory()}")
+//                Timber.e("asdf category : ${currentCategory()}")
                 Timber.e("asdf sort : ${sort.value}")
                 Timber.e("asdf currentPage : $currentPage")
                 Timber.e("asdf order : $order")
