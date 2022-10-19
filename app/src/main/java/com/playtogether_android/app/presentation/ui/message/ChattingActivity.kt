@@ -5,6 +5,8 @@ import androidx.activity.viewModels
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.message.adapter.ChatAdapter
+import com.playtogether_android.app.presentation.ui.message.adapter.VerticalItemDecoration
 import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.message.ChatData

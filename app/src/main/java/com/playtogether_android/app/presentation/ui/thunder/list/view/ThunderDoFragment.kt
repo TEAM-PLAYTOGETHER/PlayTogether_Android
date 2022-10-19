@@ -24,10 +24,13 @@ class ThunderDoFragment :
         binding.lifecycleOwner = this
         initAdapter()
         observingList()
+        observingScrap()
     }
 
     private fun initAdapter() {
-        listAdapter = ThunderCategoryListItemAdapter()
+        listAdapter = ThunderCategoryListItemAdapter { thunderId, position ->
+            adapterLamda(thunderId, position)
+        }
         with(binding.rvThunderdoContainer) {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(SpaceItemDecoration(0, 10, 0, 0))
@@ -35,6 +38,11 @@ class ThunderDoFragment :
             itemAnimator = null
             addOnScrollListener(MyScrollListener())
         }
+    }
+
+    private fun adapterLamda(thunderId: Int, position: Int) {
+        (activity as ThunderListActivity).clickThunderListItem(thunderId)
+        thunderListViewModel.adapterPosition = position
     }
 
     inner class MyScrollListener : RecyclerView.OnScrollListener() {
@@ -49,7 +57,29 @@ class ThunderDoFragment :
 
     private fun observingList() {
         thunderListViewModel.doingItemList.observe(viewLifecycleOwner) {
-            listAdapter.submitList(it)
+            listAdapter.initList(it)
+        }
+    }
+
+    private fun changeScrapCount() {
+        with(thunderListViewModel) {
+            if ((prevScrapState ?: return) and !((laterScrapState.value) ?: return)) {
+                listAdapter.updateScrapCount(
+                    adapterPosition ?: return,
+                    ThunderListViewModel.SCRAP_MINUS
+                )
+            } else if (!(prevScrapState ?: return) and (laterScrapState.value ?: return)) {
+                listAdapter.updateScrapCount(
+                    adapterPosition ?: return,
+                    ThunderListViewModel.SCRAP_PLUS
+                )
+            }
+        }
+    }
+
+    private fun observingScrap() {
+        thunderListViewModel.laterScrapState.observe(viewLifecycleOwner) {
+            changeScrapCount()
         }
     }
 }

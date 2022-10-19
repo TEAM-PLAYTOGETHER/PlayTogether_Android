@@ -15,9 +15,9 @@ import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.di.PlayTogetherApplication
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
-import com.playtogether_android.data.singleton.PlayTogetherRepository
 import timber.log.Timber
 import kotlin.math.roundToInt
+
 
 fun Context.getPageTransformer(): ViewPager2.PageTransformer {
     val compositePageTransformer = CompositePageTransformer()
@@ -26,8 +26,13 @@ fun Context.getPageTransformer(): ViewPager2.PageTransformer {
     return compositePageTransformer
 }
 
+private var toast: Toast? = null
 fun Context.shortToast(text: String) {
-    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    if(toast == null)
+        toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
+    else
+        toast!!.setText(text)
+    toast?.show()
 }
 
 fun Context.viewPagerAnimation(viewpager: ViewPager2) {

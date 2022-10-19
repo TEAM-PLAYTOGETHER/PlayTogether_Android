@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.light.CategoryData
 import com.playtogether_android.domain.usecase.light.GetThunderCategoryUseCase
+import com.playtogether_android.domain.usecase.thunder.GetThunderScrapUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ThunderListViewModel @Inject constructor(
     val getThunderCategoryUseCase: GetThunderCategoryUseCase,
+    private val getThunderScrapUseCase: GetThunderScrapUseCase,
 ) : ViewModel() {
 
     private val _eatingItemList = MutableLiveData<List<CategoryData>>()
@@ -26,6 +28,11 @@ class ThunderListViewModel @Inject constructor(
     private val _goingItemList = MutableLiveData<List<CategoryData>>()
     val goingItemList: LiveData<List<CategoryData>> get() = _goingItemList
 
+    var prevScrapState: Boolean? = null
+    val laterScrapState = MutableLiveData<Boolean>()
+    var adapterPosition: Int? = null
+    var adapterThunderId: Int? = null
+
     var pageOrder = MutableLiveData<Int>()
     val sort = MutableLiveData<String>()
 
@@ -34,7 +41,6 @@ class ThunderListViewModel @Inject constructor(
     private var currentPage = 0
 
     fun currentCategory(): String {
-        Timber.e("asdf pageOrder.value : ${pageOrder.value}")
         return when (pageOrder.value) {
             0 -> CATEGORY_EAT
             1 -> CATEGORY_GO
@@ -61,6 +67,24 @@ class ThunderListViewModel @Inject constructor(
         }
     }
 
+    fun getScrapValue(thunderId: Int, timing: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getThunderScrapUseCase(thunderId)
+            }.onSuccess {
+                when (timing) {
+                    PREV -> prevScrapState = it
+                    LATER -> laterScrapState.value = it
+                }
+            }.onFailure {
+                when (timing) {
+                    PREV -> prevScrapState = false
+                    LATER -> laterScrapState.value = false
+                }
+            }
+        }
+    }
+
     fun getLightCategoryList(order: String, category: String) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -70,10 +94,6 @@ class ThunderListViewModel @Inject constructor(
                 currentPage++
                 getThunderCategoryUseCase(crewId, category, sortString, currentPage, pageSize)
             }.onSuccess {
-//                Timber.e("asdf category : ${currentCategory()}")
-                Timber.e("asdf sort : ${sort.value}")
-                Timber.e("asdf currentPage : $currentPage")
-                Timber.e("asdf order : $order")
                 when (order) {
                     FIRST -> {
                         if (it.isEmpty()) {
@@ -84,11 +104,9 @@ class ThunderListViewModel @Inject constructor(
                     }
                     MORE -> {
                         if (it.isEmpty()) {
-                            Timber.e("asdf 근데 비어있다.")
                             isLastPage = true
                             return@launch
                         }
-                        Timber.e("asdf MORE 안에 들어왔다.")
                         addList(category, it)
                     }
                 }
@@ -106,5 +124,11 @@ class ThunderListViewModel @Inject constructor(
         const val CATEGORY_DO = "할래"
         const val FIRST = "FIRST"
         const val MORE = "MORE"
+
+        const val PREV = "prev"
+        const val LATER = "later"
+        const val SCRAP_PLUS = "plus"
+        const val SCRAP_MINUS = "minus"
+        const val SCRAP_DEFAULT = "default"
     }
 }
