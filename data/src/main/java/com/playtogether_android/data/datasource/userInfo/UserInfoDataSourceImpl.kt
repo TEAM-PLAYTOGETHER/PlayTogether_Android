@@ -3,6 +3,7 @@ package com.playtogether_android.data.datasource.userInfo
 import com.playtogether_android.data.api.userInfo.UserInfoService
 import com.playtogether_android.data.model.ResGenericData
 import com.playtogether_android.data.model.response.userInfo.*
+import okhttp3.MultipartBody
 
 class UserInfoDataSourceImpl(private val service: UserInfoService) : UserInfoDataSource {
     // 유저 본인 멀티프로필 상세 조회
@@ -33,5 +34,13 @@ class UserInfoDataSourceImpl(private val service: UserInfoService) : UserInfoDat
     // 유저 차단 해제
     override suspend fun delUnblockUser(memberId: Int): ResUnblockUserData {
         return service.delUnblockUser(memberId)
+    }
+
+    // 유저 멀티프로필 이미지 추가
+    override suspend fun putProfileImage(
+        crewId: Int,
+        image: MultipartBody.Part?
+    ): ResGenericData {
+        return service.putProfileImage(crewId, image)
     }
 }

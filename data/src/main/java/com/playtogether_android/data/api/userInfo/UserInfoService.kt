@@ -3,10 +3,8 @@ package com.playtogether_android.data.api.userInfo
 import com.playtogether_android.data.model.ResGenericData
 import com.playtogether_android.data.model.response.userInfo.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface UserInfoService {
     // 유저 본인 멀티프로필 상세 조회
@@ -43,6 +41,13 @@ interface UserInfoService {
     suspend fun delUnblockUser(
        @Path("memberId") memberId: Int
     ) : ResUnblockUserData
+
+    // 유저 멀티프로필 이미지 추가
+    @PUT("user/{crewId}/image")
+    suspend fun putProfileImage (
+        @Path("crewId") crewId: Int = PlayTogetherRepository.crewId,
+        @Part image: MultipartBody.Part?
+    ): ResGenericData
 
 
 }
