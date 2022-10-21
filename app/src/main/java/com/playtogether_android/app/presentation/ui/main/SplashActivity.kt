@@ -26,6 +26,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         super.onCreate(savedInstanceState)
         initView()
 //        initSplash()
+        with(PlayTogetherRepository) {
+            Timber.e("init userToken : $userToken")
+            Timber.e("init refresh $userRefreshToken")
+            Timber.e("init kakao login : $kakaoAccessToken")
+            Timber.e("init google login : ${googleAccessToken}")
+            Timber.e("init ===========================")
+        }
     }
 
     private fun initView() {
@@ -68,7 +75,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         startNextActivityWithHandling(intent)
     }
 
-    private fun autoLoginCheck() {
+    private fun     autoLoginCheck() {
         with(PlayTogetherRepository) {
             // todo  회원가입 유도
             if (kakaoAccessToken.isEmpty() && googleAccessToken.isEmpty()) {
@@ -79,19 +86,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             else if (!userLogin) {
                 moveLoginActivity()
             }
-            //todo 카카오 자동 로그인
-            else if (kakaoUserToken == userToken) {
+            //todo 그냥 자동 로그인
+            else if (userToken.isNotEmpty()) {
+                Timber.e("auto login : 자동 로그인")
+                Timber.e("auto login : $userToken")
                 signViewModel.tokenChecker(userRefreshToken)
                 accessTokenChecker()
-                Timber.e("auto kakao login : 카카오 자동 로그인")
-                Timber.e("auto login : $userToken")
-            }
-            //todo 구글 자동 로그인
-            else if (googleUserToken == userToken) {
-                signViewModel.tokenChecker(userRefreshToken)
-                accessTokenChecker()
-                Timber.e("auto google login : 구글 자동 로그인")
-                Timber.e("auto login : $userToken")
             }
             // todo 아몰랑 예외
             else {
@@ -144,6 +144,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         private const val DURATION: Long = 2000
         const val REFRESH_SUCCESS = 200
         const val ACCESS_NOW = 400
+        const val KAKAO = "kakao"
+        const val GOOGLE = "google"
     }
 
 }

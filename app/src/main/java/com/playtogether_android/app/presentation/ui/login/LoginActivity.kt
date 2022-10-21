@@ -69,7 +69,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-                    signViewModel.googleGetAccessToken(task)
                     handleSignInResult(task)
                 } else {
                     Timber.e("result : $it")
@@ -89,8 +88,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             )
             with(signViewModel) {
                 googleLogin(request)
-                Timber.e("google-login : ${PlayTogetherRepository.googleAccessToken}")
-//                Timber.e("google-login : ${PlayTogetherRepository.googleUserToken}")
                 isLogin.observe(this@LoginActivity) { success ->
                     if (success) {
                         Timber.e("login : 구글 로그인 성공")
@@ -98,15 +95,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     }
                 }
             }
-
         } catch (e: ApiException) {
             Timber.e("signInResult:failed code=" + e.statusCode)
             shortToast("로그인 실패")
         }
-    }
-
-    private fun onClickListener() {
-
     }
 
     private fun btnKakaoListener() {

@@ -12,9 +12,9 @@ object PlayTogetherRepository {
     private const val KAKAO_ACCESS = "KAKAO_ACCESS" //
 
     //구글
-    private const val GOOGLE_USER_LOG_OUT = "KAKAO_USER_LOG_OUT" //로그아웃 유무
-    private const val GOOGLE_UT_KEY = "KAKAO_UT_KEY"  //유저토큰 키
-    private const val GOOGLE_ACCESS = "KAKAO_ACCESS" //
+    private const val GOOGLE_USER_LOG_OUT = "GOOGLE_USER_LOG_OUT" //로그아웃 유무
+    private const val GOOGLE_UT_KEY = "GOOGLE_UT_KEY"  //유저토큰 키
+    private const val GOOGLE_ACCESS = "GOOGLE_ACCESS" //
 
     //유저 동아리
     private const val CREW_ID = "CREW_ID"
