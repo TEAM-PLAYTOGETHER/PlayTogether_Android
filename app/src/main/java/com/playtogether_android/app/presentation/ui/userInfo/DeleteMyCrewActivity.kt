@@ -18,6 +18,7 @@ import com.playtogether_android.app.databinding.DialogCheckBinding
 import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.main.SplashActivity
+import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.CustomDialogSon
@@ -116,7 +117,7 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
             dialog.dismiss()
             finish()
             //todo 탈퇴완료하고 어디로 넘어갈까????
-            startActivity(Intent(this, SplashActivity::class.java))
+            startActivity(Intent(this, OnboardingReDownLoadActivity::class.java))
         }
     }
 
