@@ -4,10 +4,14 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.RoundedCorner
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import com.airbnb.lottie.model.content.RoundedCorners
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentMyInfoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
@@ -38,8 +42,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         observeMyInfo()
         initBottomDialog()
         clickEvent()
-//        roundingImage()
         imagePickerCallback()
+
     }
 
     private val requestPermissionLauncher =
@@ -71,8 +75,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     override fun onResume() {
         super.onResume()
         //여기에 프로필 서버통신하는 코드 넣기
-//        getMyInfo()
-//        observeMyInfo()
+        getMyInfo()
+        observeMyInfo()
     }
 
     private fun getMyInfo() {
@@ -103,6 +107,11 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             } else
                 binding.firstStation = it.firstStation
             binding.secondStation = it.secondStation
+
+            //프로필 이미지 띄우기
+            val imageUrl = it.profileImage
+            loadImage(imageUrl)
+
 
         }
     }
@@ -194,12 +203,21 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         }
     }
 
-//    private fun roundingImage() {
-//        //  프로필 이미지 코너 라운딩 (radius: 10dp)
-//        binding.ivProfileImg.background =
-//            getResources().getDrawable(R.drawable.rectangle_radius_10, null)
-//        binding.ivProfileImg.setClipToOutline(true)
-//    }
+    private fun loadImage(url: String?) {
+
+        Glide.with(this)
+            .load(url)
+//            .apply(RequestOptions.bitmapTransform(com.bumptech.glide.load.resource.bitmap.RoundedCorners(10)))
+            .placeholder(R.drawable.img_go)
+            .error(R.drawable.img_go)
+            .fallback(R.drawable.img_go)
+            .into(binding.ivProfileImg)
+
+//          프로필 이미지 코너 라운딩 (radius: 10dp)
+        binding.ivProfileImg.background =
+            getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+        binding.ivProfileImg.setClipToOutline(true)
+    }
 
     private fun imagePicker() {
         Intent(Intent.ACTION_PICK).apply {
