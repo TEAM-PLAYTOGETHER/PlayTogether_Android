@@ -208,9 +208,9 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         Glide.with(this)
             .load(url)
 //            .apply(RequestOptions.bitmapTransform(com.bumptech.glide.load.resource.bitmap.RoundedCorners(10)))
-            .placeholder(R.drawable.img_go)
-            .error(R.drawable.img_go)
-            .fallback(R.drawable.img_go)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .fallback(R.drawable.ic_profile)
             .into(binding.ivProfileImg)
 
 //          프로필 이미지 코너 라운딩 (radius: 10dp)
