@@ -50,8 +50,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     override fun onResume() {
         super.onResume()
         //여기에 프로필 서버통신하는 코드 넣기
-        getMyInfo()
-        observeMyInfo()
+//        getMyInfo()
+//        observeMyInfo()
     }
 
     private fun getMyInfo() {
