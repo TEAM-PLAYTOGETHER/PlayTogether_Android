@@ -4,6 +4,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.domain.model.light.CategoryData
@@ -52,6 +53,16 @@ object BindingAdapter {
         } else {
             imageView.setImageResource(R.drawable.ic_icn_message_black)
         }
+    }
+
+    @BindingAdapter("imageUrl")
+    @JvmStatic
+    fun loadImage(imageView: ImageView, url: String) {
+        Glide.with(imageView.context).load(url)
+            .placeholder(R.drawable.img_go)
+            .error(R.drawable.img_go)
+            .fallback(R.drawable.img_go)
+            .into(imageView)
     }
 
 }
