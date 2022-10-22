@@ -1,11 +1,12 @@
 package com.playtogether_android.app.presentation.ui.main
 
+import com.playtogether_android.app.R
+import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
-import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySplashBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
@@ -16,6 +17,7 @@ import com.playtogether_android.app.presentation.ui.sign.viewmodel.SignViewModel
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+
 
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -64,7 +66,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             .postDelayed({
                 startActivity(intent)
                 finish()
-            }, 1000)
+            }, 3500)
     }
 
     private fun moveMain() {
@@ -75,7 +77,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         startNextActivityWithHandling(intent)
     }
 
-    private fun     autoLoginCheck() {
+    private fun autoLoginCheck() {
         with(PlayTogetherRepository) {
             // todo  회원가입 유도
             if (kakaoAccessToken.isEmpty() && googleAccessToken.isEmpty()) {
@@ -141,7 +143,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     companion object {
-        private const val DURATION: Long = 2000
+        private const val DURATION: Long = 1400
         const val REFRESH_SUCCESS = 200
         const val ACCESS_NOW = 400
         const val KAKAO = "kakao"
