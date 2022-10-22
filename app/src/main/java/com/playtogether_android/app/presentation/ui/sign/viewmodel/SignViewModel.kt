@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.playtogether_android.app.BuildConfig
+import com.playtogether_android.app.presentation.ui.main.SplashActivity.Companion.KAKAO
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.sign.SignInData
 import com.playtogether_android.domain.model.sign.SignInItem
@@ -97,14 +98,6 @@ class SignViewModel @Inject constructor(
         }
     }
 
-    fun googleGetAccessToken(task: Task<GoogleSignInAccount>) {
-        viewModelScope.launch {
-            kotlin.runCatching {
-
-            }
-        }
-    }
-
     private suspend fun getAccessToken(request: ReqGoogleAccess) {
         kotlin.runCatching {
             googleRepository.getAccessToken(request)
@@ -120,14 +113,13 @@ class SignViewModel @Inject constructor(
         kotlin.runCatching {
             repository.postGoogleLogin()
         }.onSuccess {
-            Timber.e("google 2222222222")
             with(PlayTogetherRepository) {
-                googleUserToken = ""
-                googleUserToken = it.accessToken
+                kakaoAccessToken = ""
                 userRefreshToken = it.refreshToken
                 userToken = it.accessToken
                 userLogin = true
             }
+            Timber.e("login remove : ${PlayTogetherRepository.kakaoAccessToken}")
             _signup = it.isSignup
             _isLogin.value = true
 
@@ -150,15 +142,15 @@ class SignViewModel @Inject constructor(
                 repository.postKakaoLogin()
             }.onSuccess {
                 with(PlayTogetherRepository) {
-                    //todo 인터셉트
-                    kakaoUserToken = ""
+                    googleAccessToken = ""
                     kakaoUserToken = it.accessToken
-                    userToken = kakaoUserToken
+                    userToken = it.accessToken
                     userRefreshToken = it.refreshToken
                     userLogin = true
                 }
-                Timber.e("kakao login access : ${it.accessToken}")
-                Timber.e("kakao login refresh : ${it.refreshToken}")
+                Timber.e("login access kakao : ${it.accessToken}")
+                Timber.e("login refresh kakao : ${it.refreshToken}")
+                Timber.e("login remove : ${PlayTogetherRepository.googleAccessToken}")
 
                 signData.value = it.accessToken //signData Set accessToken
                 _signup = it.isSignup
@@ -170,10 +162,4 @@ class SignViewModel @Inject constructor(
             }
         }
     }
-
-    fun postSignIn(item: SignInItem) {
-
-    }
-
-
 }

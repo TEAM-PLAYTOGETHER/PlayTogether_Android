@@ -134,6 +134,7 @@ dependencies {
 // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
     implementation("com.github.nabil6391:LottieSwipeRefreshLayout:1.0.0")
+    implementation("com.airbnb.android:lottie:5.0.2")
 
 // Glide
     implementation(ThirdPartyDependencies.glide)
