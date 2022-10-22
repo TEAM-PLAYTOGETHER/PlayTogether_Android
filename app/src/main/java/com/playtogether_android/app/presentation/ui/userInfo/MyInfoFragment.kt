@@ -38,7 +38,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         observeMyInfo()
         initBottomDialog()
         clickEvent()
-        roundingImage()
+//        roundingImage()
         imagePickerCallback()
     }
 
@@ -134,7 +134,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
                     intent.putExtra("ChipList", list)
                 }
             }
-            intent.putExtra("crewName", homeViewModel.crewName.toString())
+            intent.putExtra("crewName", PlayTogetherRepository.crewName)
             intent.putExtra("nickname", binding.nickname)
             intent.putExtra("description", binding.description)
             intent.putExtra("firstStation", binding.firstStation)
@@ -194,12 +194,12 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         }
     }
 
-    private fun roundingImage() {
-        //  프로필 이미지 코너 라운딩 (radius: 10dp)
-        binding.ivProfileImg.background =
-            getResources().getDrawable(R.drawable.rectangle_radius_10, null)
-        binding.ivProfileImg.setClipToOutline(true)
-    }
+//    private fun roundingImage() {
+//        //  프로필 이미지 코너 라운딩 (radius: 10dp)
+//        binding.ivProfileImg.background =
+//            getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+//        binding.ivProfileImg.setClipToOutline(true)
+//    }
 
     private fun imagePicker() {
         Intent(Intent.ACTION_PICK).apply {
