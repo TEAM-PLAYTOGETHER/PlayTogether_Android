@@ -12,7 +12,8 @@ data class ResponseGetList(
         data class CrewList(
             val id: Int,
             val name: String,
-            val description: String?
+            val description: String?,
+            val isAdmin: Boolean
         )
     }
 }
