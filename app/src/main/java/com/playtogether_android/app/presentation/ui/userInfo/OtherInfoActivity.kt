@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.activity.viewModels
+import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOtherInfoBinding
 import com.playtogether_android.app.databinding.DialogCheckBinding
@@ -37,7 +38,6 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
         initData()
         btnOption(memberId)
         Timber.d("initOtherInfo : $crewId, $memberId")
-        roundingImage()
     }
 
     private fun clickEvent() {
@@ -175,6 +175,7 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
             val genderFormat: String
             if (gender == "남") genderFormat = "M"
             else genderFormat = "W"
+
             userInfoViewModel.getChattingRoomId(it.id.toInt())
             binding.birthAndGender = "${birth}년생 ・ $genderFormat"
             binding.otherInfo = it
@@ -182,18 +183,36 @@ class OtherInfoActivity : BaseActivity<ActivityOtherInfoBinding>(R.layout.activi
             binding.tvOtherInfoChatting.text = "${it.nickname}님과 채팅하기"
 
             // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
-            if(it.firstStation == null) {
+            if (it.firstStation == null) {
                 binding.firstStation = "지하철역 미지정"
+                binding.isEmpty = true
+            } else if (it.secondStation == null) {
+                binding.firstStation = it.firstStation
                 binding.isEmpty = true
             } else
                 binding.firstStation = it.firstStation
             binding.secondStation = it.secondStation
+
+            //프로필 이미지 띄우기
+            val imageUrl = it.profileImage
+            loadImage(imageUrl)
+
         }
     }
 
-    private fun roundingImage() {
-        //  프로필 이미지 코너 라운딩 (radius: 10dp)
-        binding.ivProfileImg.background = getResources().getDrawable(R.drawable.rectangle_radius_10, null)
+    private fun loadImage(url: String?) {
+
+        Glide.with(this)
+            .load(url)
+//            .apply(RequestOptions.bitmapTransform(com.bumptech.glide.load.resource.bitmap.RoundedCorners(10)))
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .fallback(R.drawable.ic_profile)
+            .into(binding.ivProfileImg)
+
+//          프로필 이미지 코너 라운딩 (radius: 10dp)
+        binding.ivProfileImg.background =
+            getResources().getDrawable(R.drawable.rectangle_radius_10, null)
         binding.ivProfileImg.setClipToOutline(true)
     }
 }
