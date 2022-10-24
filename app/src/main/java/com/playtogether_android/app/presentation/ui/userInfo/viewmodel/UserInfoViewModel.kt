@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.data.singleton.PlayTogetherRepository
+import com.playtogether_android.domain.model.GenericData
 import com.playtogether_android.domain.model.userInfo.BlockUserList
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
@@ -12,6 +13,7 @@ import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
 import com.playtogether_android.domain.usecase.message.GetRoomIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,6 +47,11 @@ class UserInfoViewModel @Inject constructor(
     // 유저 차단 해제
     private val _isUnblock = MutableLiveData<Boolean>()
     val isUnblock: LiveData<Boolean> = _isUnblock
+
+    // 유저 멀티프로필 이미지 추가
+    private val _putProfileImageData = MutableLiveData<GenericData>()
+    val putProfileImageData: LiveData<GenericData> = _putProfileImageData
+
 
     // 유저 본인 멀티프로필 상세 조회
     fun getMyInfo() = viewModelScope.launch {
@@ -134,4 +141,25 @@ class UserInfoViewModel @Inject constructor(
                 Timber.e("delUnblockUser-server 실패 : $it")
             }
     }
+
+    // 유저 멀티프로필 이미지 추가
+    fun putProfileImage(
+        image: MultipartBody.Part?
+    ) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                userInfoRepository.putProfileImage(PlayTogetherRepository.crewId, image)
+            }
+                .onSuccess {
+                    _putProfileImageData.postValue(it)
+                    Timber.e("putProfileImage-server 성공 : $it")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.e("putProfileImage-server 실패 : $it")
+                }
+        }
+    }
+
+
 }

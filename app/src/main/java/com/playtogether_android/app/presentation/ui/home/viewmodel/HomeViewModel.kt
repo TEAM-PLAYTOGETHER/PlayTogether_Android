@@ -82,6 +82,7 @@ class HomeViewModel @Inject constructor(
             }.onSuccess {
                 _crewList.value = it
                 _isCrewListEmpty = it.isEmpty()
+                Timber.d("getCrewList-success: ${it}")
             }.onFailure {
                 Timber.e("getCrewListName : ${it.message}")
             }

@@ -5,6 +5,7 @@ import com.playtogether_android.domain.model.userInfo.BlockUserData
 import com.playtogether_android.domain.model.userInfo.BlockUserList
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
+import okhttp3.MultipartBody
 
 interface UserInfoRepository {
 
@@ -25,4 +26,10 @@ interface UserInfoRepository {
 
     // 유저 차단 해제
     suspend fun delUnblockUser(memberId: Int): GenericData
+
+    // 유저 멀티프로필 이미지 추가
+    suspend fun putProfileImage(
+        crewId: Int,
+        image: MultipartBody.Part?
+    ): GenericData
 }

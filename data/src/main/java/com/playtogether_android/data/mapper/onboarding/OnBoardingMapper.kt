@@ -52,7 +52,8 @@ object OnBoardingMapper {
                     CrewListData.Data.CrewList(
                         id = it.id,
                         name = it.name,
-                        description = it.description ?: ""
+                        description = it.description ?: "",
+                        isAdmin = it.isAdmin
                     )
                 }
             ),

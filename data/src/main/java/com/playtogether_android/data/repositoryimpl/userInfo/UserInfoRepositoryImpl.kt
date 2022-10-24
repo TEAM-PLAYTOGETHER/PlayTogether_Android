@@ -8,6 +8,7 @@ import com.playtogether_android.domain.model.userInfo.BlockUserList
 import com.playtogether_android.domain.model.userInfo.MyInfoData
 import com.playtogether_android.domain.model.userInfo.OtherInfoData
 import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
+import okhttp3.MultipartBody
 
 class UserInfoRepositoryImpl(private val userInfoDataSource: UserInfoDataSource) : UserInfoRepository {
 
@@ -45,6 +46,20 @@ class UserInfoRepositoryImpl(private val userInfoDataSource: UserInfoDataSource)
     // 유저 차단 해제
     override suspend fun delUnblockUser(memberId: Int): GenericData {
         return with(userInfoDataSource.delUnblockUser(memberId)) {
+            GenericData(
+                this.status,
+                this.success,
+                this.message
+            )
+        }
+    }
+
+    // 유저 멀티프로필 이미지 추가
+    override suspend fun putProfileImage(
+        crewId: Int,
+        image: MultipartBody.Part?
+    ): GenericData {
+        return with(userInfoDataSource.putProfileImage(crewId, image)) {
             GenericData(
                 this.status,
                 this.success,
