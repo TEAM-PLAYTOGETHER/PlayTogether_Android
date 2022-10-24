@@ -14,6 +14,7 @@ import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
 import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
 import com.playtogether_android.app.util.CustomDialogSon
 import com.playtogether_android.app.util.shortToast
@@ -112,7 +113,8 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
             dialog.dismiss()
             finish()
             //todo 탈퇴완료하고 어디로 넘어갈까????
-            startActivity(Intent(this, OnboardingReDownLoadActivity::class.java))
+            intentEvent()
+
         }
     }
 
@@ -128,6 +130,7 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
             }
 
             Timber.d("crewIndex: ${crewIndex}")
+            Timber.d("isAdmin: ${it[crewIndex].isAdmin}")
 
             if (it[crewIndex].isAdmin) {
                 shortToast("개설자는 동아리 탈퇴가 불가능 합니다.\n플투팀에 문의해주세요.")
@@ -135,6 +138,18 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
                 delCrew()
             }
 
+        }
+    }
+
+    private fun intentEvent() {
+        homeViewModel.crewList.observe(this) {
+            var crewSize = it.size
+
+        Timber.d("crewSize: ${crewSize}")
+
+            if (crewSize < 2) {
+                startActivity(Intent(this, SelectOnboardingActivity::class.java))
+            } else startActivity(Intent(this, OnboardingReDownLoadActivity::class.java))
         }
     }
 
