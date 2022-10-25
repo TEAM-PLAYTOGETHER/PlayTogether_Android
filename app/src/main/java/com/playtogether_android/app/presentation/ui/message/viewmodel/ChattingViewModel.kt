@@ -61,7 +61,7 @@ class ChattingViewModel @Inject constructor(
                     _chattingList.value =
                         _chattingList.value?.toMutableList()?.apply { addAll(checkDateChanged(it)) }
                     isLoading.value = false
-                    lastId = it.last().messageId
+                    lastId = chattingList.value?.let { (chattingList.value!!.last() as ChatData).messageId }
                     if (it.size < pageSize) isLastPage = true
                 }
                 .onFailure { error -> Timber.d("messageServer: 다음 채팅 읽어오기 실패 / error:$error") }
