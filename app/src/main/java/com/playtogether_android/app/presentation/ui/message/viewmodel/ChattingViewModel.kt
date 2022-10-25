@@ -31,7 +31,7 @@ class ChattingViewModel @Inject constructor(
 
     var isFirstPage: Boolean = true
     val isLoading = MutableLiveData<Boolean>()
-    private val pageSize: Int = 20
+    private val pageSize: Int = 40
     private var lastId: Int? = null
     var isLastPage: Boolean = false
 
@@ -61,7 +61,7 @@ class ChattingViewModel @Inject constructor(
                     _chattingList.value =
                         _chattingList.value?.toMutableList()?.apply { addAll(checkDateChanged(it)) }
                     isLoading.value = false
-                    lastId = it.last().messageId
+                    lastId = chattingList.value?.let { (chattingList.value!!.last() as ChatData).messageId }
                     if (it.size < pageSize) isLastPage = true
                 }
                 .onFailure { error -> Timber.d("messageServer: 다음 채팅 읽어오기 실패 / error:$error") }
