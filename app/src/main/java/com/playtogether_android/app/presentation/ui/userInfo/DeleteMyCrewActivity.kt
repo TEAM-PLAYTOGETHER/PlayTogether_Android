@@ -1,27 +1,24 @@
 package com.playtogether_android.app.presentation.ui.userInfo
 
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
-import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.core.text.set
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityDeleteMyCrewBinding
 import com.playtogether_android.app.databinding.DialogCheckBinding
 import com.playtogether_android.app.databinding.DialogYesNoBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.main.SplashActivity
+import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
+import com.playtogether_android.app.presentation.ui.onboarding.OnboardingReDownLoadActivity
+import com.playtogether_android.app.presentation.ui.onboarding.SelectOnboardingActivity
 import com.playtogether_android.app.presentation.ui.userInfo.viewmodel.UserInfoViewModel
-import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.app.util.CustomDialogSon
-import com.playtogether_android.data.singleton.PlayTogetherRepository.crewId
+import com.playtogether_android.app.util.shortToast
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -29,6 +26,7 @@ import timber.log.Timber
 class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.activity_delete_my_crew) {
 
     private val userInfoViewModel: UserInfoViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +35,8 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
         btnBackEvent()
         btnDeleteEvent()
 
-        val crewName = intent.getStringExtra("crewName")
-        binding.tvCrewName.text = crewName
-        Timber.d("crewName받는쪽 : $crewName")
+        binding.tvCrewName.text = PlayTogetherRepository.crewName
+        Timber.d("crewName받는쪽 : ${PlayTogetherRepository.crewName}")
     }
 
     private fun fontColorHighlight() {
@@ -87,8 +84,8 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
             }
             tvDialogYes.setOnClickListener {
                 //todo 동아리 탈퇴 API 연결
+                deleteExecute()
                 with(userInfoViewModel) {
-                    delCrew()
                     isDelete.observe(this@DeleteMyCrewActivity) {
                         if (it) {
                             showConfirmDialog(dialog)
@@ -116,7 +113,43 @@ class DeleteMyCrewActivity : BaseActivity<ActivityDeleteMyCrewBinding>(R.layout.
             dialog.dismiss()
             finish()
             //todo 탈퇴완료하고 어디로 넘어갈까????
-            startActivity(Intent(this, SplashActivity::class.java))
+            intentEvent()
+
+        }
+    }
+
+    private fun deleteExecute() {
+        homeViewModel.getCrewList()
+        homeViewModel.crewList.observe(this) {
+            var crewIndex: Int = 0
+            var nowCrewId = PlayTogetherRepository.crewId
+            for (i in it.indices) {
+                if (it[i].id == nowCrewId) {
+                    crewIndex = i
+                }
+            }
+
+            Timber.d("crewIndex: ${crewIndex}")
+            Timber.d("isAdmin: ${it[crewIndex].isAdmin}")
+
+            if (it[crewIndex].isAdmin) {
+                shortToast("개설자는 동아리 탈퇴가 불가능 합니다.\n플투팀에 문의해주세요.")
+            } else with(userInfoViewModel) {
+                delCrew()
+            }
+
+        }
+    }
+
+    private fun intentEvent() {
+        homeViewModel.crewList.observe(this) {
+            var crewSize = it.size
+
+        Timber.d("crewSize: ${crewSize}")
+
+            if (crewSize < 2) {
+                startActivity(Intent(this, SelectOnboardingActivity::class.java))
+            } else startActivity(Intent(this, OnboardingReDownLoadActivity::class.java))
         }
     }
 

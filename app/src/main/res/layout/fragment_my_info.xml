@@ -28,6 +28,14 @@
             type="String" />
 
         <variable
+            name="nickname"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+
+        <variable
             name="isEmpty"
             type="Boolean" />
 
@@ -126,12 +134,12 @@
 
                 <ImageView
                     android:id="@+id/iv_profile_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:src="@drawable/img_go"
-                    android:src="@drawable/img_go"
                     android:layout_marginTop="24dp"
                     android:layout_marginStart="16dp"/>
 

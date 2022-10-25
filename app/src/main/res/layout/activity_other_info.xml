@@ -112,8 +112,9 @@
 
                 <ImageView
                     android:id="@+id/iv_profile_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:src="@drawable/img_go"

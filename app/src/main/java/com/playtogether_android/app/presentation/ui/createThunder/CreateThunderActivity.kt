@@ -28,14 +28,9 @@ import com.playtogether_android.app.util.*
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import okio.BufferedSink
 import timber.log.Timber
-import java.io.File
-import java.lang.IndexOutOfBoundsException
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -130,6 +125,7 @@ class CreateThunderActivity :
     }
 
     private fun setClickListener() {
+        val galleryUtil = GalleryUtil(this, requestPermissionLauncher)
         imageSelected()
         clickInfinite()
         clickUndecidedDate()
@@ -137,7 +133,7 @@ class CreateThunderActivity :
         clickUndecidedPlace()
         clickComplete()
         imageSelected()
-        uploadPhotoClickListener()
+        uploadPhotoClickListener(galleryUtil)
         preButtonClick()
     }
 
@@ -242,9 +238,12 @@ class CreateThunderActivity :
         return result!!
     }
 
-    private fun uploadPhotoClickListener() {
+    private fun uploadPhotoClickListener(galleryUtil: GalleryUtil) {
         binding.clCreatethunderPhoto.setOnClickListener {
-            aboutPermission()
+//            aboutPermission()
+            if (galleryUtil.aboutPermission()) {
+                uploadImageListener()
+            }
         }
     }
 
@@ -273,17 +272,6 @@ class CreateThunderActivity :
             setResult(RESULT_OK)
             intentLauncher.launch(this)
         }
-    }
-
-    private fun transferImage(list: List<Uri>): List<File> {
-        val mut = mutableListOf<File>()
-        list.forEach {
-            val path = absolutePath(it)
-            val file = File(path)
-            Timber.e("rere path : $path")
-            mut.add(file)
-        }
-        return mut
     }
 
     private fun clickInfinite() {

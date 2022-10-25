@@ -1,11 +1,12 @@
 package com.playtogether_android.app.presentation.ui.main
 
+import com.playtogether_android.app.R
+import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
-import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivitySplashBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel
@@ -17,6 +18,7 @@ import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     private val signViewModel: SignViewModel by viewModels()
@@ -26,6 +28,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         super.onCreate(savedInstanceState)
         initView()
 //        initSplash()
+        with(PlayTogetherRepository) {
+            Timber.e("init userToken : $userToken")
+            Timber.e("init refresh $userRefreshToken")
+            Timber.e("init kakao login : $kakaoAccessToken")
+            Timber.e("init google login : ${googleAccessToken}")
+            Timber.e("init ===========================")
+        }
     }
 
     private fun initView() {
@@ -57,7 +66,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             .postDelayed({
                 startActivity(intent)
                 finish()
-            }, 1000)
+            }, 3500)
     }
 
     private fun moveMain() {
@@ -79,22 +88,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             else if (!userLogin) {
                 moveLoginActivity()
             }
-            //todo 카카오 자동 로그인
-            else if (kakaoUserToken == userToken) {
+            //todo 그냥 자동 로그인
+            else if (userToken.isNotEmpty()) {
+                Timber.e("auto login : 자동 로그인")
+                Timber.e("auto login : $userToken")
                 signViewModel.tokenChecker(userRefreshToken)
                 accessTokenChecker()
-                Timber.e("auto kakao login : 카카오 자동 로그인")
-                Timber.e("auto login : $userToken")
-            }
-            //todo 구글 자동 로그인
-            else if (googleAccessToken == userToken) {
-                signViewModel.tokenChecker(userRefreshToken)
-                accessTokenChecker()
-                Timber.e("auto google login : 구글 자동 로그인")
-                Timber.e("auto login : $userToken")
             }
             // todo 아몰랑 예외
             else {
+                Timber.e("auto else ")
+                Timber.e("auto user : $userToken")
+                Timber.e("auto user : $kakaoUserToken")
+                Timber.e("auto user : $googleUserToken")
                 moveLoginActivity()
             }
         }
@@ -137,9 +143,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     companion object {
-        private const val DURATION: Long = 2000
+        private const val DURATION: Long = 1400
         const val REFRESH_SUCCESS = 200
         const val ACCESS_NOW = 400
+        const val KAKAO = "kakao"
+        const val GOOGLE = "google"
     }
 
 }
