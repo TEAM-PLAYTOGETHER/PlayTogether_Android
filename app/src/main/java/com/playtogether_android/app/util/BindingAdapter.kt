@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 
@@ -44,7 +43,6 @@ object BindingAdapter {
     }
 
 
-
     @BindingAdapter("app:imageSelecter")
     @JvmStatic
     fun bindImageSelecter(editText: EditText, imageView: ImageView) {
@@ -64,6 +62,7 @@ object BindingAdapter {
             this.layoutParams = layoutParams
         }
     }
+
     @BindingAdapter("imageUrl")
     @JvmStatic
     fun loadImage(imageView: ImageView, url: String) {
