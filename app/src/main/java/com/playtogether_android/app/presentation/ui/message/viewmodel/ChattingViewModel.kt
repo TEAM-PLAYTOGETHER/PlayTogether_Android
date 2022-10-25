@@ -31,7 +31,7 @@ class ChattingViewModel @Inject constructor(
 
     var isFirstPage: Boolean = true
     val isLoading = MutableLiveData<Boolean>()
-    private val pageSize: Int = 20
+    private val pageSize: Int = 40
     private var lastId: Int? = null
     var isLastPage: Boolean = false
 
