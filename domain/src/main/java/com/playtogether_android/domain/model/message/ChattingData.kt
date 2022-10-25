@@ -10,7 +10,7 @@ sealed class ChattingData() {
     }
 }
 
-data class ChatData2(
+data class ChatData(
     override val viewType: Int = CHAT,
     val messageId: Int?,
     val content: String,
