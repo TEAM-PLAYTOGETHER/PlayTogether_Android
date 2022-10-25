@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            app:margintop="@{data.profileVisible ? 16 : 4}"
             android:background="@drawable/rectangle_radius_10"
             android:backgroundTint="@color/gray_black"
             android:fontFamily="@font/pretendard_medium"
@@ -34,10 +34,8 @@
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_otherchat_date"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/iv_otherchat_profile"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
             tools:text="가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하" />
 
         <TextView
@@ -47,13 +45,12 @@
             android:layout_marginStart="6dp"
             android:fontFamily="@font/pretendard_regular"
             android:includeFontPadding="false"
-            android:text="@{data.time}"
+            android:text="@{data.shownTime}"
             android:textColor="@color/gray_gray02"
             android:textSize="10dp"
             android:visibility="@{data.timeVisible?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_otherchar_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv_otherchar_content"
             tools:text="2022.04.13. 14:00" />
 
@@ -61,6 +58,8 @@
             android:id="@+id/iv_otherchat_profile"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:scaleType="centerCrop"
+            android:visibility="@{data.profileVisible?View.VISIBLE:View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_otherchar_content"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/tv_otherchar_content"
