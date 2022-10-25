@@ -1,4 +1,4 @@
-package com.playtogether_android.app.presentation.ui.message.adapter
+package com.playtogether_android.domain.model.message
 
 sealed class ChattingData() {
     abstract val viewType: Int
@@ -10,13 +10,14 @@ sealed class ChattingData() {
     }
 }
 
-data class ChatData2(
+data class ChatData(
     override val viewType: Int = CHAT,
     val messageId: Int?,
     val content: String,
     var time: String,
     val messageType: Boolean,
     var timeVisible: Boolean = true,
+    var profileVisible : Boolean = true,
     var shownTime : String = ""
 ) : ChattingData() {
     private val chatViewType = if (messageType) MY_CHAT else OTHER_CHAT

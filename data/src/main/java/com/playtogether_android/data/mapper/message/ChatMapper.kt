@@ -4,8 +4,8 @@ import com.playtogether_android.data.model.response.message.ResponseChatData
 import com.playtogether_android.domain.model.message.ChatData
 
 object ChatMapper {
-    fun mapperToDomainChat(data:ResponseChatData) : List<ChatData>{
-        return data.data.messages.map{
+    fun mapperToDomainChat(data: ResponseChatData): List<ChatData> {
+        return data.data.messages.map {
             ChatData(
                 content = it.content,
                 time = it.createdAt,

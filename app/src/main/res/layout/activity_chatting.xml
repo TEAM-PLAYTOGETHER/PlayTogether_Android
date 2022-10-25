@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel" />
+            type="com.playtogether_android.app.presentation.ui.message.viewmodel.ChattingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,7 +64,7 @@
             android:paddingBottom="12dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:stackFromEnd="true"
+            app:reverseLayout="true"
             app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

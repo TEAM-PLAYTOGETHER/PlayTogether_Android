@@ -6,7 +6,9 @@ import com.playtogether_android.domain.model.message.ChatData
 import com.playtogether_android.domain.repository.message.ChatRepository
 
 class ChatRepositoryImpl(private val chatDataSource: ChatDataSource) : ChatRepository {
-    override suspend fun getChatData(roomId: Int, curPage: Int, pageSize: Int): List<ChatData> {
-        return ChatMapper.mapperToDomainChat(chatDataSource.getChatData(roomId, curPage, pageSize))
+    override suspend fun getChatData(roomId: Int, messageId: Int?, pageSize: Int): List<ChatData> {
+        return ChatMapper.mapperToDomainChat(
+            chatDataSource.getChatData(roomId, messageId, pageSize)
+        )
     }
 }
