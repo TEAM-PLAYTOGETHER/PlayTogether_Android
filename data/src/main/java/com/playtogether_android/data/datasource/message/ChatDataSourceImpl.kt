@@ -4,8 +4,8 @@ import com.playtogether_android.data.api.message.ChatService
 import com.playtogether_android.data.model.response.message.ResponseChatData
 
 class ChatDataSourceImpl(private val service: ChatService) : ChatDataSource {
-    override suspend fun getChatData(roomId: Int, curPage: Int, pageSize: Int): ResponseChatData {
-        return service.getChatData(roomId, curPage, pageSize)
+    override suspend fun getChatData(roomId: Int, messageId: Int?, pageSize: Int): ResponseChatData {
+        return service.getChatData(roomId, messageId, pageSize)
     }
 
 }
