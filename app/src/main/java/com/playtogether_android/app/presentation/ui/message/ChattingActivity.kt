@@ -73,6 +73,7 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
 
     private fun initAdapter() {
         binding.rvInChattingChatting.adapter = chattingAdapter
+        binding.rvInChattingChatting.itemAnimator = null
         detectScrollReachTop()
     }
 
