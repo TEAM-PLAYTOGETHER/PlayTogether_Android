@@ -142,7 +142,7 @@ class EditProfileActivity :
         if (description != null && nicknameCheck == true) {
             binding.tvIntroOnboardingNext.isSelected = true
             binding.tvIntroOnboardingNext.setOnClickListener {
-                //nextBtnNetwork()
+                nextBtnNetwork()
             }
         } else {
             binding.tvIntroOnboardingNext.isSelected = false
@@ -244,8 +244,7 @@ class EditProfileActivity :
             val crewCode = intent.getStringExtra("crewCode")
             val crewIntroduce = intent.getStringExtra("crewIntro")
             val crewId = intent.getIntExtra("crewId", 1)
-//            val isOpener = intent.getBooleanExtra("isOpener", true)
-//            Timber.e("222222222: $isOpener")
+
             if (binding.tvOpenOnboardingAdd.isSelected) {
                 shortToast("최대 2개까지 추가할 수 있어요!")
             } else {
@@ -266,7 +265,6 @@ class EditProfileActivity :
                     putExtra("crewId", crewId)
                     putExtra("crewIntro", crewIntroduce)
                     putExtra("isEdit", isEdit)
-                   // putExtra("isOpener", isOpener)
 
                     putExtra("ChipList", chipList)
                     putExtra("description", description)
@@ -287,7 +285,6 @@ class EditProfileActivity :
     //칩버튼 관리
     private fun setChipBtn() {
         val list = intent.getStringArrayListExtra("ChipList")
-        Timber.e("TEST123: $list")
         if (list?.size != null) {
             binding.clOpenOnboardingPltoSubway.visibility = View.INVISIBLE
             for (i in 0 until list.size) {
