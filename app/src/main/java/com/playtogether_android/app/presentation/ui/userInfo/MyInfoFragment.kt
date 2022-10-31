@@ -104,9 +104,10 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             } else if (it.secondStation == null) {
                 binding.firstStation = it.firstStation
                 binding.isEmpty = true
-            } else
+            } else {
                 binding.firstStation = it.firstStation
-            binding.secondStation = it.secondStation
+                binding.secondStation = it.secondStation
+            }
 
             //프로필 이미지 띄우기
             val imageUrl = it.profileImage
@@ -132,7 +133,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             val list = arrayListOf<String>()
             Timber.e("121111 : ${binding.firstStation}")
             Timber.e("121111 : ${binding.secondStation}")
-            if (binding.firstStation != null) {
+            if (binding.firstStation != null && binding.firstStation != "지하철역 미지정") {
                 list.add(binding.firstStation.toString())
             }
             if (binding.secondStation != null) {
@@ -148,6 +149,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             intent.putExtra("description", binding.description)
             intent.putExtra("firstStation", binding.firstStation)
             intent.putExtra("secondStation", binding.secondStation)
+
+
             //todo 온보딩뷰 이동 시 넘겨줄 값 추가
             startActivity(intent)
         }
@@ -156,8 +159,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     //내 동아리 관리하기 이동뷰 이동
     private fun moveManageCrew() {
         binding.tvCrewManage.setOnClickListener {
-                val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
-                startActivity(intent)
+            val intent = Intent(requireActivity(), MyCrewManageActivity::class.java)
+            startActivity(intent)
 
         }
     }
