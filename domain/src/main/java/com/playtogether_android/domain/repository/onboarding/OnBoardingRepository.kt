@@ -13,4 +13,6 @@ interface OnBoardingRepository {
     suspend fun getNickNameDuplication(crewId : Int, nickname : String) : NickNameDuplicationData
 
     suspend fun putAddProfile(addProfileItem: AddProfileItem, crewId: Int) : AddProfileData
+
+    suspend fun getCheckExist(crewCode : String) : CheckExistData
 }

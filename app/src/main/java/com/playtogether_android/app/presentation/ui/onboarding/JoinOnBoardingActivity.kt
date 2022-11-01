@@ -75,20 +75,20 @@ class JoinOnBoardingActivity :
                 )
             )
         }
-        onBoardingViewModel.registerCrew.observe(this) {
-            if (!it.success) {
+        onBoardingViewModel.checkExist.observe(this) {
+            if (!it.available) {
                 Timber.d("실패 :동아리가입")
                 val title = it.message
                 val dialog = CustomDialog(this, title)
                 dialog.showOneChoiceDialog(R.layout.dialog_one_question)
             } else {
-                PlayTogetherRepository.crewId = it.crewId
-                PlayTogetherRepository.crewName = it.crewName
+                PlayTogetherRepository.crewId = it.id
+                PlayTogetherRepository.crewName = it.name
                 Timber.d("성공: 동아리가입")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
 //                intent.putExtra("crewName", it.crewName)
-                intent.putExtra("crewId", it.crewId)
-                intent.putExtra("crewName", it.crewName)
+                intent.putExtra("crewId", it.id)
+                intent.putExtra("crewName", it.name)
                 intent.putExtra("isOpener", false)
                 startActivity(intent)
                 finish()
