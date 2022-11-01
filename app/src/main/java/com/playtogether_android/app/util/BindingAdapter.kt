@@ -1,13 +1,12 @@
 package com.playtogether_android.app.util
 
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
-import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
-import com.playtogether_android.domain.model.light.CategoryData
 
 object BindingAdapter {
     @JvmStatic
@@ -44,7 +43,6 @@ object BindingAdapter {
     }
 
 
-
     @BindingAdapter("app:imageSelecter")
     @JvmStatic
     fun bindImageSelecter(editText: EditText, imageView: ImageView) {
@@ -52,6 +50,16 @@ object BindingAdapter {
             imageView.setImageResource(R.drawable.ic_icn_message)
         } else {
             imageView.setImageResource(R.drawable.ic_icn_message_black)
+        }
+    }
+
+    @BindingAdapter("app:margintop")
+    @JvmStatic
+    fun View.layoutMarginTop(margin: Int) {
+        if (margin != 0) {
+            val layoutParams = this.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.topMargin = margin.dp
+            this.layoutParams = layoutParams
         }
     }
 
