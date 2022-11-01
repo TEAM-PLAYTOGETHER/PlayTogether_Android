@@ -217,17 +217,42 @@ class OnBoardingViewModel @Inject constructor(
     }
 
     //동아리 가입 가능 여부
-    fun getCheckExist(crewCode : String) {
+    fun getCheckExist(crewCode: String) {
         viewModelScope.launch {
-            kotlin.runCatching { getCheckExistUseCase(crewCode) }
-                .onSuccess {
-                    _checkExist.value = it
-                    Timber.d("동아리 가입 여부 서버통신 성공")
+            /*
+            when (val checkExist =
+                safeApiCall(Dispatchers.IO) { getCheckExistUseCase(crewCode) }) {
+                is ResultWrapper.Success -> {
+                    _checkExist.value =
+                        CheckExistData(
+                            true,
+                            checkExist.data.available,
+                            checkExist.data.id,
+                            checkExist.data.message,
+                            checkExist.data.name
+                        )
+                    Timber.e("모지2 : ${checkExist.data.message}")
                 }
-                .onFailure {
-                    it.printStackTrace()
-                    Timber.e("동아리 가입 여부 서버통신 실패")
+                is ResultWrapper.GenericError -> {
+                    Timber.e("모지 : ${checkExist.message}")
+                    _checkExist.value =
+                        CheckExistData(true, false, 0, checkExist.message.toString(), "")
                 }
+            }
+
+             */
+
+
+        kotlin.runCatching { getCheckExistUseCase(crewCode) }
+            .onSuccess {
+                _checkExist.value = it
+                Timber.d("동아리 가입 여부 서버통신 성공")
+            }
+            .onFailure {
+                it.printStackTrace()
+                Timber.e("동아리 가입 여부 서버통신 실패")
+            }
+
         }
     }
 

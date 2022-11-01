@@ -103,10 +103,11 @@ object OnBoardingMapper {
 
     fun mapperToCheckExist(responseCheckExist: ResponseCheckExist) : CheckExistData {
         return CheckExistData(
-            available = responseCheckExist.data.available,
-            id = responseCheckExist.data.id,
-            message = responseCheckExist.data.message,
-            name = responseCheckExist.data.name
+            success = responseCheckExist.success,
+            available = responseCheckExist.data?.available,
+            id = responseCheckExist.data?.id,
+            message = responseCheckExist.data?.message,
+            name = responseCheckExist.data?.name
         )
     }
 }
