@@ -14,7 +14,6 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.CustomDialog
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -69,31 +68,31 @@ class JoinOnBoardingActivity :
     private fun initRegisterCrew() {
         binding.tvJoinOnboardingEnter.setOnClickListener {
             onBoardingViewModel.crewCode.crewCode = binding.etJoinOnboarding.text.toString()
-            onBoardingViewModel.postRegisterCrew(
-                RegisterCrewItem(
-                    onBoardingViewModel.crewCode.crewCode
-                )
+            onBoardingViewModel.getCheckExist(
+                onBoardingViewModel.crewCode.crewCode
             )
         }
-        onBoardingViewModel.registerCrew.observe(this) {
-            if (!it.success) {
+
+        onBoardingViewModel.checkExist.observe(this) {
+            if (!it.available!!) {
                 Timber.d("실패 :동아리가입")
                 val title = it.message
-                val dialog = CustomDialog(this, title)
+                val dialog = CustomDialog(this, title ?: "")
                 dialog.showOneChoiceDialog(R.layout.dialog_one_question)
             } else {
-                PlayTogetherRepository.crewId = it.crewId
-                PlayTogetherRepository.crewName = it.crewName
+                PlayTogetherRepository.crewId = it.id ?: 0
+                PlayTogetherRepository.crewName = it.name ?: ""
                 Timber.d("성공: 동아리가입")
                 val intent = Intent(this, OnBoardingIntroduceActivity::class.java)
-//                intent.putExtra("crewName", it.crewName)
-                intent.putExtra("crewId", it.crewId)
-                intent.putExtra("crewName", it.crewName)
+                intent.putExtra("crewId", it.id)
+                intent.putExtra("crewName", it.name)
                 intent.putExtra("isOpener", false)
+                intent.putExtra("crewCode",binding.etJoinOnboarding.text.toString())
                 startActivity(intent)
                 finish()
             }
         }
+
     }
 }
 

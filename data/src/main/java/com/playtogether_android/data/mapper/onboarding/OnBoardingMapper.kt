@@ -100,4 +100,14 @@ object OnBoardingMapper {
             secondStation = addProfileItem?.secondStation
         )
     }
+
+    fun mapperToCheckExist(responseCheckExist: ResponseCheckExist) : CheckExistData {
+        return CheckExistData(
+            success = responseCheckExist.success,
+            available = responseCheckExist.data?.available,
+            id = responseCheckExist.data?.id,
+            message = responseCheckExist.data?.message,
+            name = responseCheckExist.data?.name
+        )
+    }
 }

@@ -5,18 +5,15 @@ import com.playtogether_android.data.model.request.onboarding.RequestAddProfile
 import com.playtogether_android.data.model.request.onboarding.RequestMakeCrew
 import com.playtogether_android.data.model.request.onboarding.RequestRegisterCrew
 import com.playtogether_android.data.model.response.onboarding.*
-import com.playtogether_android.data.singleton.PlayTogetherRepository
 import retrofit2.http.*
 
 interface OnboardingService {
-    @Headers("Content-Type:application/json")
     @POST("crew/register")
     suspend fun postRegisterCrew(
         @Body requestRegisterCrew: RequestRegisterCrew
     ): ResponseRegisterCrew
 
     //동아리 생성
-   // @Headers("Content-Type:application/json", "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MCIsImVtYWlsIjoibGhiODEwNkBuYXRlLmNvbSIsImlhdCI6MTY2MjA0NDU4OSwiZXhwIjoxNjYyMDQ4MTg5LCJpc3MiOiJwbGF5dG9nZXRoZXIifQ.YqE8_0nL7xThTajEercBl5HAWDP2nvoWhG4yXQ-BbQ0")
     @POST("crew")
     suspend fun postMakeCrew(
         @Body requestMakeCrew: RequestMakeCrew
@@ -34,12 +31,16 @@ interface OnboardingService {
     ) : ResponseGetNickNameDuplication
 
     //멀티 프로필 등록
-   // @Headers("Content-Type:application/json", "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0IiwidXNlckxvZ2luSWQiOiJicmlhbmRyIiwiaWF0IjoxNjU5MjM2Mjg3LCJleHAiOjE2NjE4MjgyODcsImlzcyI6InBsYXl0b2dldGhlciJ9.N_qdonODmdOPpTdre-zY1RmZXnTFHeN72OTc3zYUTcY")
     @PUT("user/{crewId}")
     suspend fun putAddProfile(
         @Body requestAddProfile: RequestAddProfile,
         @Path("crewId") crewId : Int
     ) : ResponseAddProfile
 
+    //동아리 가입가능 확인
+    @GET("crew/checkExist/{crewCode}")
+    suspend fun getCheckExist(
+        @Path("crewCode") crewCode : String
+    ) : ResponseCheckExist
 
 }

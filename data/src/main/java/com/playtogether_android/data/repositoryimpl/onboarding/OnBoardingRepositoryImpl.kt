@@ -52,4 +52,8 @@ class OnBoardingRepositoryImpl(
         )
     }
 
+    override suspend fun getCheckExist(crewCode: String): CheckExistData {
+        return OnBoardingMapper.mapperToCheckExist(onBoardingDataSource.getCheckExist(crewCode))
+    }
+
 }
