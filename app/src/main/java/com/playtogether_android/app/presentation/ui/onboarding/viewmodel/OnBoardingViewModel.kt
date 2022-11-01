@@ -23,9 +23,6 @@ class OnBoardingViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    //멀티 프로필 등록 put
-    var reqeustMutiProfile = AddProfileItem("", "", "", "")
-
     // 동아리명
     var crewName = MutableLiveData<String>()
 
@@ -37,11 +34,6 @@ class OnBoardingViewModel @Inject constructor(
 
 
     var nicknameDuplicationCheck: MutableLiveData<NickNameDuplicationData> = MutableLiveData()
-
-//    //동아리 닉네임 체크
-//    private val _nickNameDuplication = MutableLiveData<NickNameDuplicationData>()
-//    val nickNameDuplication: LiveData<NickNameDuplicationData>
-//        get() = _nickNameDuplication
 
     //동아리 리스트
     private val _getCrewList = MutableLiveData<CrewListData>()

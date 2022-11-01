@@ -13,7 +13,6 @@ import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBindi
 import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.shortToast
-import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.onboarding.AddProfileItem
 import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,12 +85,6 @@ class OnBoardingIntroduceActivity :
             ), intent.getIntExtra("crewId", 1)
         )
 
-        Timber.e("${AddProfileItem(description,
-            firstSubway,
-            nickName,
-            secondSubway)}")
-
-
         val crewName = intent.getStringExtra("crewName")
         val crewCode = intent.getStringExtra("crewCode")
         val crewIntroduce = intent.getStringExtra("crewIntro")
@@ -114,7 +107,6 @@ class OnBoardingIntroduceActivity :
             finish()
         } else {
             onBoardingViewModel.crewCode.crewCode = intent.getStringExtra("crewCode") ?: ""
-            Timber.e("뭐냐 : $crewCode")
             onBoardingViewModel.postRegisterCrew(
                 RegisterCrewItem(
                     onBoardingViewModel.crewCode.crewCode
