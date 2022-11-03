@@ -183,7 +183,7 @@ class CreateThunderActivity :
     private fun textTransfer(itemList: List<String>): List<String?> {
         val transferList = mutableListOf<String?>()
         for (item in itemList) {
-            if (item.contains("미정") || item.contains(resources.getString(R.string.createthunder_infinite))) {
+            if (item.contains("미정") || item.contains(resources.getString(R.string.no_constraint))) {
                 transferList.add(null)
             } else
                 transferList.add(item)
@@ -278,7 +278,7 @@ class CreateThunderActivity :
         binding.ivCreatethunderCheck.setOnClickListener {
             if (!infiniteChecked) {
                 binding.ivCreatethunderCheck.setImageResource(R.drawable.ic_icn_check_active)
-                val infiniteText = resources.getString(R.string.createthunder_infinite)
+                val infiniteText = resources.getString(R.string.no_constraint)
                 binding.etCreatethunderPeopleNumber.setText(infiniteText)
                 inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
                 binding.etCreatethunderPeopleNumber.isFocusable = false
