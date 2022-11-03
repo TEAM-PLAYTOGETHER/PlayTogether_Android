@@ -66,18 +66,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
-            android:id="@+id/lsrl_home_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:indicator_overlay="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_home_tools_container"
-            app:lottie_rawRes="@raw/plto_refresh"
-            app:trigger_offset_top="70dp"
-            tools:visibility="gone">
+<!--        <com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout-->
+<!--            android:id="@+id/lsrl_home_container"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:indicator_overlay="false"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cl_home_tools_container"-->
+<!--            app:lottie_rawRes="@raw/plto_refresh"-->
+<!--            app:trigger_offset_top="70dp"-->
+<!--            tools:visibility="gone">-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -211,7 +211,7 @@
                             android:layout_width="0dp"
                             android:layout_height="128dp"
                             android:layout_marginHorizontal="20dp"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="13dp"
                             android:background="@drawable/rectangle_border_gray02_radius_10"
                             android:gravity="center"
                             android:visibility="@{homeViewModel.hotList.size()==0 ? View.VISIBLE : View.INVISIBLE}"
@@ -255,7 +255,7 @@
                             android:layout_width="0dp"
                             android:layout_height="128dp"
                             android:layout_marginHorizontal="20dp"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="13dp"
                             android:layout_marginBottom="48dp"
                             android:background="@drawable/rectangle_border_gray02_radius_10"
                             android:gravity="center"
@@ -290,7 +290,7 @@
                     tools:layout_width="64dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>
+<!--        </com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
