@@ -45,8 +45,17 @@ class ThunderCategoryListItemAdapter(
     override fun getItemCount(): Int = thunderList.size
 
     fun initList(list: List<CategoryData>) {
+        thunderList.clear()
         thunderList.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun addList(list: List<CategoryData>) {
+        val startPosition = thunderList.size
+        val endPosition = list.size - 1
+        val addedList = list.subList(startPosition, endPosition)
+        thunderList.addAll(addedList)
+        notifyItemRangeInserted(startPosition, addedList.size)
     }
 
     fun updateScrapCount(position: Int, op: String) {
