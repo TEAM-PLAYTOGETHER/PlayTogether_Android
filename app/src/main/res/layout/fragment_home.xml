@@ -233,7 +233,7 @@
                             style="@style/home_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="54dp"
                             android:text="@string/home_new_title"
                             app:layout_constraintStart_toStartOf="@id/tv_home_hot_title"
                             app:layout_constraintTop_toBottomOf="@id/ll_home_hot_empty_container" />
