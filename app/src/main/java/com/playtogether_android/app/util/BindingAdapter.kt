@@ -67,9 +67,14 @@ object BindingAdapter {
 
 @BindingAdapter("profileUrl")
 fun loadImage(imageView: ImageView, url: String?) {
+    val imageUrl = if (url.isNullOrEmpty()) {
+        R.drawable.ic_profile
+    } else {
+        url
+    }
     Glide
         .with(imageView.context)
-        .load(url)
+        .load(imageUrl)
         .circleCrop()
         .into(imageView)
 }
