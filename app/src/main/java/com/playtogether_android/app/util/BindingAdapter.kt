@@ -63,15 +63,13 @@ object BindingAdapter {
         }
     }
 
-    @BindingAdapter("imageUrl")
-    @JvmStatic
-    fun loadImage(imageView: ImageView, url: String) {
-        Glide.with(imageView.context).load(url)
-            .placeholder(R.drawable.img_go)
-            .error(R.drawable.img_go)
-            .fallback(R.drawable.img_go)
-            .into(imageView)
-    }
-
 }
 
+@BindingAdapter("profileUrl")
+fun loadImage(imageView: ImageView, url: String?) {
+    Glide
+        .with(imageView.context)
+        .load(url)
+        .circleCrop()
+        .into(imageView)
+}
