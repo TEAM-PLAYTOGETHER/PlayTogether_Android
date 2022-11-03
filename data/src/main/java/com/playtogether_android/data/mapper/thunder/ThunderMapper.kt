@@ -60,7 +60,8 @@ object ThunderMapper {
                     it.age,
                     it.gender,
                     it.name,
-                    it.userId
+                    it.userId,
+                    it.image
                 )
             })
         }
@@ -73,7 +74,8 @@ object ThunderMapper {
             list.addAll(it.organizer.map {
                 Organizer(
                     it.name,
-                    it.organizerId
+                    it.organizerId,
+                    it.image
                 )
             })
         }
