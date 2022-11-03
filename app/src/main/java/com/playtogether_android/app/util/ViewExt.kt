@@ -73,7 +73,7 @@ fun Context.stringListBuilder(context: Context, stringList: List<String?>): Stri
         if (it.isNullOrEmpty()) {
             sb.append("미정")
         } else if (it == "0") {
-            sb.append(context.getString(R.string.createthunder_infinite))
+            sb.append(context.getString(R.string.no_constraint))
         } else {
             sb.append(it)
         }

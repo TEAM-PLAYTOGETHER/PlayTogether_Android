@@ -55,7 +55,7 @@ class ThunderAppliedActivity :
         val sb = StringBuilder()
         for (i in list) {
             if (i == "-1")
-                getString(R.string.createthunder_infinite)
+                getString(R.string.no_constraint)
             else
                 sb.append(i)
         }
