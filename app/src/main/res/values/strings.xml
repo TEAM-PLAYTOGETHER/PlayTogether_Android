@@ -181,6 +181,9 @@
     <string name="thunder_list_title">같이&#160;</string>
     <string name="thunder_list_question">"?"</string>
     <string name="thunder_list_align">최신순</string>
+    <string name="thunder_list_date_unknown">날짜 미정</string>
+    <string name="thunder_list_place_unknown">장소 미정</string>
+    <string name="thunder_list_time_unknown">시간 미정</string>
 
     <!--    ThunderListItem-->
     <string name="thunder_item_title">선착순 곱창 5명 구함</string>
