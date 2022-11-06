@@ -14,6 +14,7 @@ import com.playtogether_android.app.presentation.base.BaseActivity
 import com.playtogether_android.app.presentation.ui.onboarding.viewmodel.OnBoardingViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.onboarding.AddProfileItem
+import com.playtogether_android.domain.model.onboarding.RegisterCrewItem
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -84,12 +85,6 @@ class OnBoardingIntroduceActivity :
             ), intent.getIntExtra("crewId", 1)
         )
 
-        Timber.e("${AddProfileItem(description,
-            firstSubway,
-            nickName,
-            secondSubway)}")
-
-
         val crewName = intent.getStringExtra("crewName")
         val crewCode = intent.getStringExtra("crewCode")
         val crewIntroduce = intent.getStringExtra("crewIntro")
@@ -111,11 +106,27 @@ class OnBoardingIntroduceActivity :
             startActivity(intent)
             finish()
         } else {
-            val intent = Intent(this, SignUpFinishActivity::class.java).apply {
-                putExtra("nickname", name)
+            onBoardingViewModel.crewCode.crewCode = intent.getStringExtra("crewCode") ?: ""
+            onBoardingViewModel.postRegisterCrew(
+                RegisterCrewItem(
+                    onBoardingViewModel.crewCode.crewCode
+                )
+            )
+            onBoardingViewModel.registerCrew.observe(this) {
+                if (!it.success) {
+                    Timber.d("실패 :동아리가입")
+                }
+                else {
+                    Timber.d("성공: 동아리가입")
+                    val intent = Intent(this, SignUpFinishActivity::class.java).apply {
+                        putExtra("nickname", name)
+
+                    }
+                    startActivity(intent)
+                    finish()
+                }
             }
-            startActivity(intent)
-            finish()
+
         }
 
 

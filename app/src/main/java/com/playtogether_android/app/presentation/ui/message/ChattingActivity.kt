@@ -2,105 +2,64 @@ package com.playtogether_android.app.presentation.ui.message
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
-import com.playtogether_android.app.presentation.ui.message.adapter.ChatAdapter
-import com.playtogether_android.app.presentation.ui.message.adapter.VerticalItemDecoration
-import com.playtogether_android.app.presentation.ui.message.viewmodel.ChatViewModel
+import com.playtogether_android.app.presentation.ui.message.adapter.ChattingAdapter
+import com.playtogether_android.app.presentation.ui.message.viewmodel.ChattingViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.message.ChatData
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
-    private val chatViewModel: ChatViewModel by viewModels()
-    private lateinit var chatAdapter: ChatAdapter
+    private val chattingViewModel: ChattingViewModel by viewModels()
+    private val chattingAdapter: ChattingAdapter by lazy { ChattingAdapter() }
+    var roomId: Int = -1
+    var recvId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.viewmodel = chatViewModel
+        binding.viewmodel = chattingViewModel
         binding.lifecycleOwner = this
 
+        getIdFromIntent()
         setName()
         initAdapter()
-        updateChatUi()
-        updateLastChatUi()
-        clickSendMessage()
+
+        observeFirstPage()
+        observeLoading()
         clickBackArrow()
+        clickSendMessage()
     }
 
     override fun onResume() {
         super.onResume()
-        val roomId = intent.getIntExtra("roomId", -1)
-        val recvId = intent.getIntExtra("audienceId", -1)
-        if (roomId == -1) error("ChatActivity로 roomId를 넘겨주지 않음")
-        if (recvId == -1) error("ChatActivity로 recvId를 넘겨주지 않음")
-        chatViewModel.getChatList(roomId)
-        connectSocketServer(roomId, recvId)
+        chattingViewModel.getChatList(roomId)
+        chattingViewModel.connectSocket(this)
+        chattingViewModel.enterRoom(roomId, recvId) { handleSocketError() }
+        chattingViewModel.listenSocketConnection(
+            { handleSocketError() },
+            { runOnUiThread { finish() } })
+        chattingViewModel.listenSocketMessage(
+            { addChatToRecyclerView(it) },
+            { handleSocketError() }
+        )
     }
 
     override fun onPause() {
         super.onPause()
-        chatViewModel.reqExitRoom()
+        chattingViewModel.exitRoom()
+        chattingViewModel.isFirstPage = true
     }
 
-    private fun connectSocketServer(roomId: Int, recvId: Int) {
-        chatViewModel.initSocket(this)
-        chatViewModel.resConnect { socketErrorControl("resConnection") }
-        chatViewModel.reqEnterRoom(roomId, recvId)
-        chatViewModel.resEnterRoom { socketErrorControl("resEnterRoom") }
-        chatViewModel.resNewMessageToRoom { addChatToRecyclerView(it) }
-        chatViewModel.resSendMessage(
-            { runOnUiThread { shortToast("보내기에 실패하였습니다") } },
-            { addChatToRecyclerView(it) }
-        )
-        chatViewModel.resExitRoom {
-            runOnUiThread {
-                finish()
-                Timber.e("채팅방을 나갔음에도 소켓 연결이 끊어지지 않음")
-            }
+    private fun getIdFromIntent() {
+        intent.run {
+            roomId = getIntExtra("roomId", -1)
+            recvId = getIntExtra("audienceId", -1)
         }
-    }
-
-    private fun socketErrorControl(text: String) {
-        runOnUiThread {
-            shortToast("서버 통신이 원활하지 않습니다.")
-            finish()
-            Timber.e("채팅방 소켓 서버에 연결하지 못했습니다. ($text 오류")
-        }
-    }
-
-    private fun addChatToRecyclerView(chatData: ChatData) {
-        runOnUiThread {
-            removeTimePart(chatData)
-            chatAdapter.chatList.add(chatData)
-            chatAdapter.notifyItemInserted(chatAdapter.itemCount - 1)
-            scrollToBottom()
-        }
-    }
-
-    private fun removeTimePart(addChat: ChatData) {
-        if (chatAdapter.chatList.isEmpty()) return
-        if (chatAdapter.chatList.last().messageType != addChat.messageType) return
-        if (chatAdapter.chatList.last().time == addChat.time) {
-            chatAdapter.chatList.last().timeVisible = false
-            chatViewModel.isLastChatChanged.value = true
-        }
-    }
-
-    private fun clickSendMessage() {
-        val recvId = intent.getIntExtra("audienceId", -1)
-        binding.ivSendMessage.setOnClickListener {
-            chatViewModel.reqSendMessage(binding.etMessage.text.toString(), recvId)
-            binding.etMessage.text.clear()
-        }
-    }
-
-    private fun clickBackArrow() {
-        binding.ivInChattingBack.setOnClickListener { finish() }
     }
 
     private fun setName() {
@@ -108,29 +67,74 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         binding.tvInChattingName.text = name
     }
 
-    private fun updateChatUi() {
-        chatViewModel.chatData.observe(this) {
-            chatAdapter.chatList.addAll(it)
-            chatAdapter.notifyDataSetChanged()
+    private fun clickBackArrow() {
+        binding.ivInChattingBack.setOnClickListener { finish() }
+    }
+
+    private fun initAdapter() {
+        binding.rvInChattingChatting.adapter = chattingAdapter
+        binding.rvInChattingChatting.itemAnimator = null
+        detectScrollReachTop()
+    }
+
+    private fun detectScrollReachTop() {
+        binding.rvInChattingChatting.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy < 0) {
+                    if (!binding.rvInChattingChatting.canScrollVertically(-1)) {
+                        if (chattingViewModel.isLastPage) return
+                        chattingViewModel.isLoading.value = true
+                        chattingAdapter.initLoading()
+                        binding.rvInChattingChatting.scrollToPosition(chattingAdapter.itemCount - 1)
+                        chattingViewModel.getMoreChatList(roomId)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun observeFirstPage() {
+        chattingViewModel.chattingList.observe(this) {
+            if (chattingViewModel.isFirstPage) {
+                chattingAdapter.initList(it)
+            }
+        }
+    }
+
+    private fun observeLoading() {
+        chattingViewModel.isLoading.observe(this) {
+            if (chattingViewModel.isLoading.value == false) {
+                chattingAdapter.deleteLoading()
+                chattingViewModel.addedChattingList.value?.let { list ->
+                    chattingAdapter.addList(list, chattingViewModel.lastProfileVisible)
+                }
+            }
+        }
+    }
+
+    private fun clickSendMessage() {
+        binding.ivSendMessage.setOnClickListener {
+            chattingViewModel.sendMessage(binding.etMessage.text.toString(), recvId)
+            binding.etMessage.text.clear()
+        }
+    }
+
+    private fun handleSocketError() {
+        runOnUiThread {
+            shortToast("서버 통신이 원활하지 않습니다.")
+            finish()
+        }
+    }
+
+    private fun addChatToRecyclerView(chatData: ChatData) {
+        runOnUiThread {
+            chattingAdapter.addChat(chatData)
             scrollToBottom()
         }
     }
 
-    private fun updateLastChatUi() {
-        chatViewModel.isLastChatChanged.observe(this) {
-            chatAdapter.notifyItemChanged(chatAdapter.itemCount - 1)
-        }
-        chatViewModel.isLastChatChanged.value = false
-    }
-
     private fun scrollToBottom() {
-        val size = chatAdapter.itemCount - 1
-        binding.rvInChattingChatting.scrollToPosition(size)
-    }
-
-    private fun initAdapter() {
-        chatAdapter = ChatAdapter()
-        binding.rvInChattingChatting.adapter = chatAdapter
-        binding.rvInChattingChatting.addItemDecoration(VerticalItemDecoration())
+        binding.rvInChattingChatting.scrollToPosition(0)
     }
 }

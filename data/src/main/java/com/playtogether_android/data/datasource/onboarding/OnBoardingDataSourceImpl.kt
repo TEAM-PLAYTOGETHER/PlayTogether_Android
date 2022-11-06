@@ -34,4 +34,8 @@ class OnBoardingDataSourceImpl (private val service: OnboardingService): OnBoard
         return service.putAddProfile(requestAddProfile, crewId)
     }
 
+    override suspend fun getCheckExist(crewCode: String): ResponseCheckExist {
+        return service.getCheckExist(crewCode)
+    }
+
 }

@@ -9,7 +9,7 @@ interface ChatService {
     @GET("message/{roomId}")
     suspend fun getChatData(
         @Path("roomId") roomId: Int,
-        @Query("curPage") curPage : Int,
+        @Query("messageId") messageId : Int?,
         @Query("pageSize") pageSize : Int
     ): ResponseChatData
 }

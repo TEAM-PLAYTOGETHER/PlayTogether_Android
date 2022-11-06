@@ -6,6 +6,9 @@ import com.playtogether_android.app.databinding.ItemChatDateBinding
 import com.playtogether_android.app.databinding.ItemChatLoadingBinding
 import com.playtogether_android.app.databinding.ItemMyChatBinding
 import com.playtogether_android.app.databinding.ItemOtherChatBinding
+import com.playtogether_android.domain.model.message.ChatData
+import com.playtogether_android.domain.model.message.ChattingData
+import com.playtogether_android.domain.model.message.DateData
 
 abstract class ChatViewHolder2(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
     abstract fun bind(data: ChattingData)
@@ -13,26 +16,24 @@ abstract class ChatViewHolder2(binding: ViewDataBinding) : RecyclerView.ViewHold
 
 class MyChatViewHolder(private val binding: ItemMyChatBinding) : ChatViewHolder2(binding) {
     override fun bind(data: ChattingData) {
-        val mychatData = data as ChatData2
-        //binding.data = mychatData
+        val mychatData = data as ChatData
+        binding.data = mychatData
     }
 }
 
 class OtherChatViewHolder(private val binding: ItemOtherChatBinding) : ChatViewHolder2(binding) {
     override fun bind(data: ChattingData) {
-        val otherChatData = data as ChatData2
-        //binding.data = otherChatData
+        val otherChatData = data as ChatData
+        binding.data = otherChatData
     }
 }
 
 class DateViewHolder(private val binding: ItemChatDateBinding) : ChatViewHolder2(binding) {
     override fun bind(data: ChattingData) {
-        val dateData = data as DateData
+        binding.textView.text = (data as DateData).getDate()
     }
 }
 
 class LoadingViewHolder(private val binding: ItemChatLoadingBinding) : ChatViewHolder2(binding) {
-    override fun bind(data: ChattingData) {
-
-    }
+    override fun bind(data: ChattingData) {}
 }

@@ -30,5 +30,6 @@
 
     <color name="boundary">#EBEBEB</color>
 
+    <color name="gray_gray01_0.6">#99828282</color>
     <color name="mtrl_textinput_default_box_stroke_color">@color/gray_gray01</color>
 </resources>

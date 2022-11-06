@@ -18,12 +18,10 @@ class OnBoardingViewModel @Inject constructor(
     val getCrewListUseCase: GetCrewListUseCase,
     val getSubwayListUseCase: GetSubwayListUseCase,
     val getNicknameDuplicationUseCase: GetNicknameDuplicationUseCase,
-    val putAddProfileUseCase: PutAddProfileUseCase
+    val putAddProfileUseCase: PutAddProfileUseCase,
+    val getCheckExistUseCase: GetCheckExistUseCase
 
 ) : ViewModel() {
-
-    //멀티 프로필 등록 put
-    var reqeustMutiProfile = AddProfileItem("", "", "", "")
 
     // 동아리명
     var crewName = MutableLiveData<String>()
@@ -36,11 +34,6 @@ class OnBoardingViewModel @Inject constructor(
 
 
     var nicknameDuplicationCheck: MutableLiveData<NickNameDuplicationData> = MutableLiveData()
-
-//    //동아리 닉네임 체크
-//    private val _nickNameDuplication = MutableLiveData<NickNameDuplicationData>()
-//    val nickNameDuplication: LiveData<NickNameDuplicationData>
-//        get() = _nickNameDuplication
 
     //동아리 리스트
     private val _getCrewList = MutableLiveData<CrewListData>()
@@ -57,6 +50,12 @@ class OnBoardingViewModel @Inject constructor(
     private val _makeCrew = MutableLiveData<MakeCrewData>()
     val makeCrew: LiveData<MakeCrewData>
         get() = _makeCrew
+
+    //동아리 가입가능 확인
+    private val _checkExist = MutableLiveData<CheckExistData>()
+    val checkExist: LiveData<CheckExistData>
+        get() = _checkExist
+
 
     //멀티 프로필
     private val _addProfile = MutableLiveData<AddProfileData>()
@@ -107,13 +106,23 @@ class OnBoardingViewModel @Inject constructor(
     //동아리 참여
     fun postRegisterCrew(registerCrewItem: RegisterCrewItem) {
         viewModelScope.launch {
-            when(val registerCrew =
-                safeApiCall(Dispatchers.IO) {postRegisterCrewUseCase(registerCrewItem)}) {
+            when (val registerCrew =
+                safeApiCall(Dispatchers.IO) { postRegisterCrewUseCase(registerCrewItem) }) {
                 is ResultWrapper.Success -> _registerCrew.value =
-                    RegisterCrewData(true, registerCrew.data.message,registerCrew.data.crewId, registerCrew.data.crewName)
+                    RegisterCrewData(
+                        true,
+                        registerCrew.data.message,
+                        registerCrew.data.crewId,
+                        registerCrew.data.crewName
+                    )
                 is ResultWrapper.GenericError -> {
                     _registerCrew.value =
-                        RegisterCrewData(false, registerCrew.message.toString(),0, registerCrew.message.toString() )
+                        RegisterCrewData(
+                            false,
+                            registerCrew.message.toString(),
+                            0,
+                            registerCrew.message.toString()
+                        )
                 }
             }
             Timber.d("registerCrew : ${_registerCrew.value.toString()}")
@@ -170,8 +179,8 @@ class OnBoardingViewModel @Inject constructor(
     //닉네임 중복 체크
     fun getNickNameDuplication(crewId: Int, nickname: String) {
         viewModelScope.launch {
-            when(val nicknameDuplication =
-                safeApiCall(Dispatchers.IO) {getNicknameDuplicationUseCase(crewId, nickname) }) {
+            when (val nicknameDuplication =
+                safeApiCall(Dispatchers.IO) { getNicknameDuplicationUseCase(crewId, nickname) }) {
                 is ResultWrapper.Success -> nicknameDuplicationCheck.value =
                     NickNameDuplicationData(200, true)
                 is ResultWrapper.GenericError -> {
@@ -196,6 +205,22 @@ class OnBoardingViewModel @Inject constructor(
                     it.printStackTrace()
                     Timber.d("멀티 프로필 등록 : 실패")
                 }
+        }
+    }
+
+    //동아리 가입 가능 여부
+    fun getCheckExist(crewCode: String) {
+        viewModelScope.launch {
+        kotlin.runCatching { getCheckExistUseCase(crewCode) }
+            .onSuccess {
+                _checkExist.value = it
+                Timber.d("동아리 가입 여부 서버통신 성공")
+            }
+            .onFailure {
+                it.printStackTrace()
+                Timber.e("동아리 가입 여부 서버통신 실패")
+            }
+
         }
     }
 
