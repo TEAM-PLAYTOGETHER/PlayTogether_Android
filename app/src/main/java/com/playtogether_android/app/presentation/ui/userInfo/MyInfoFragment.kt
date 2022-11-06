@@ -215,6 +215,9 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         binding.ivProfileImg.background =
             getResources().getDrawable(R.drawable.rectangle_radius_10, null)
         binding.ivProfileImg.setClipToOutline(true)
+
+        // 사진수정 후 즉각반영
+        getMyInfo()
     }
 
     private fun imagePicker() {
