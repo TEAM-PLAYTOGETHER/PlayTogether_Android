@@ -156,11 +156,27 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="home_select_item_crewCode">
+        <item name="android:textColor">@color/gray_gray01</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">10dp</item>
+        <item name="lineHeight">12dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="home_unselect_item_crew">
         <item name="android:textColor">@color/gray_gray02</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">16dp</item>
+        <item name="lineHeight">19dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="home_unselect_item_crewCode">
+        <item name="android:textColor">@color/gray_gray02</item>
         <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textSize">14dp</item>
-        <item name="lineHeight">16dp</item>
+        <item name="android:textSize">10dp</item>
+        <item name="lineHeight">12dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 

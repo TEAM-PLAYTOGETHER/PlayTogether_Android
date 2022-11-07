@@ -26,6 +26,10 @@ class HomeDialogAdapter(
                 text = data.name
                 setTextAppearance(crewTextStyle(data.name))
             }
+            binding.tvItemhomeCrewCode.apply {
+                text = "코드 : ${data.crewCode}"
+                setTextAppearance(crewCodeTextStyle(data.crewCode))
+            }
             itemView.setOnClickListener {
                 //todo 이후 hot/new 리스트 갱신을 할 때 crweId를 받는다 preference에 가지고 있는 id가 아닌
 //                //todo 다른 id를 클릭한다면 homeViewModel(crewId)로 갱신해야 한다. -> dismiss()
@@ -53,5 +57,12 @@ class HomeDialogAdapter(
             R.style.home_select_item_crew
         else
             R.style.home_unselect_item_crew
+    }
+
+    private fun crewCodeTextStyle(crewName: String): Int {
+        return if (PlayTogetherRepository.crewName.equals(crewName))
+            R.style.home_select_item_crewCode
+        else
+            R.style.home_unselect_item_crewCode
     }
 }
