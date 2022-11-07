@@ -23,7 +23,6 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.PREV
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCPCNT
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ThunderListActivity :
@@ -78,6 +77,7 @@ class ThunderListActivity :
         thunderCategoryListAdapter = ThunderCategoryListAdapter(this)
         thunderCategoryListAdapter.fragmentList.addAll(fragmentList)
         binding.vpThunderlistContainer.adapter = thunderCategoryListAdapter
+        binding.vpThunderlistContainer.offscreenPageLimit = 2
     }
 
     private fun clickNextButton() {
@@ -114,7 +114,6 @@ class ThunderListActivity :
         val category = intent.getStringExtra("category") ?: CATEGORY_EAT
         val index = categoryTitleList.indexOf(category)
         thunderListViewModel.pageOrder.value = index
-        Timber.e("category : $category , index : $index")
         binding.vpThunderlistContainer.setCurrentItem(index, false)
     }
 
@@ -149,7 +148,6 @@ class ThunderListActivity :
 
     private fun observingSort() {
         thunderListViewModel.sort.observe(this) {
-            Timber.e("asdf : FIRST2 호출됨 ${it}")
             thunderListViewModel.getLightCategoryList(FIRST, thunderListViewModel.currentCategory())
             thunderListViewModel.isLastPage = false
         }
