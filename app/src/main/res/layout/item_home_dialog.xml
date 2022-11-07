@@ -9,16 +9,25 @@
         android:id="@+id/tv_itemhome_crew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="SOPT" />
 
+    <TextView
+        android:id="@+id/tv_itemhome_crewCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_itemhome_crew"
+        tools:text="코드 : QCKMNO" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:background="#EBEBEB"
-        app:layout_constraintTop_toBottomOf="@id/tv_itemhome_crew" />
+        app:layout_constraintTop_toBottomOf="@id/tv_itemhome_crewCode" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

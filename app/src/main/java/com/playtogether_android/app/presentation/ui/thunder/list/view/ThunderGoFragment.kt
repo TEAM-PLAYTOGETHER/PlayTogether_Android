@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentThunderGoBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.search.SearchViewModel.Companion.GO
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_GO
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.FIRST
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.MORE
 import com.playtogether_android.app.util.SpaceItemDecoration
 
@@ -18,6 +21,8 @@ class ThunderGoFragment :
     BaseFragment<FragmentThunderGoBinding>(R.layout.fragment_thunder_go) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
+    private var isFirstPage = true
+    private var sort = DEFAULT_SORT
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +31,17 @@ class ThunderGoFragment :
         initAdapter()
         observingList()
         observingScrap()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkSort()
+    }
+
+    private fun checkSort(){
+        if (sort != thunderListViewModel.sort.value) {
+            thunderListViewModel.getLightCategoryList(FIRST, GO)
+        }
     }
 
     private fun initAdapter() {
@@ -58,7 +74,11 @@ class ThunderGoFragment :
 
     private fun observingList() {
         thunderListViewModel.goingItemList.observe(viewLifecycleOwner) {
-            listAdapter.initList(it)
+            when (isFirstPage) {
+                true -> listAdapter.initList(it)
+                false -> listAdapter.addList(it)
+            }
+            sort = thunderListViewModel.sort.value ?: DEFAULT_SORT
         }
     }
 

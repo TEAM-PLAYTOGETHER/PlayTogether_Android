@@ -51,6 +51,7 @@ object OnBoardingMapper {
                 crewList = responseGetList.data.list.map {
                     CrewListData.Data.CrewList(
                         id = it.id,
+                        crewCode = it.crewCode,
                         name = it.name,
                         description = it.description ?: "",
                         isAdmin = it.isAdmin

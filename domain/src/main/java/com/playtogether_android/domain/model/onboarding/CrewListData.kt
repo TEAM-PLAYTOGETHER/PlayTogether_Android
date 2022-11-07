@@ -9,6 +9,7 @@ data class CrewListData(
     ) {
         data class CrewList(
             val id: Int,
+            val crewCode: String,
             val name: String,
             val description : String?,
             val isAdmin: Boolean
