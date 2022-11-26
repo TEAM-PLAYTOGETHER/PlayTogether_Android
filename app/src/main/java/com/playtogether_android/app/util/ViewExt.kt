@@ -66,7 +66,7 @@ fun Context.imageNullCheck(image: String?, imageView: ImageView) {
     }
 }
 
-fun Context.stringListBuilder(context: Context, stringList: List<String?>): String {
+fun Context.homeTabTextBuilder(context: Context, stringList: List<String?>): String {
     val sb = StringBuilder()
     Timber.e("미정 : $stringList")
     stringList.forEachIndexed { index, it ->
@@ -84,11 +84,18 @@ fun Context.stringListBuilder(context: Context, stringList: List<String?>): Stri
             }
         } else if (it == "0") {
             sb.append(context.getString(R.string.no_constraint))
+        } else if (index == 2 && it.length > 4) {
+            sb.append(it.take(4)).append("...")
         } else {
             sb.append(it)
         }
     }
     return sb.toString()
+}
+
+fun Context.thunderTabTextBuilder(context: Context, stringList: List<String?>): String {
+
+    return "aa"
 }
 
 

@@ -47,6 +47,18 @@
             tools:text="@string/thunder_item_day" />
 
         <TextView
+            android:id="@+id/tv_thunder_item_place"
+            style="@style/thunder_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxEms="4"
+            android:maxLines="1"
+            tools:text="아나 나나"
+           app:layout_constraintStart_toEndOf="@id/tv_thunder_item_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_date" />
+
+        <TextView
             android:id="@+id/tv_thunder_item_limit_count"
             style="@style/thunder_item_people"
             android:layout_width="wrap_content"

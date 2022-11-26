@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.databinding.ItemHomeNewBinding
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.util.ListAdapterComparator
-import com.playtogether_android.app.util.stringListBuilder
+import com.playtogether_android.app.util.homeTabTextBuilder
 import com.playtogether_android.domain.model.light.CategoryData
 import timber.log.Timber
 
@@ -30,11 +30,11 @@ class HomeNewAdapter :
                 val context = itemView.context
                 val dateChange = item.date?.replace("-",".")
                 tvHomenewDate.text =
-                    context.stringListBuilder(
+                    context.homeTabTextBuilder(
                         context,
                         listOf(dateChange, " ", item.place, " ", item.time)
                     )
-                tvHomenewPeopleCnt.text = context.stringListBuilder(
+                tvHomenewPeopleCnt.text = context.homeTabTextBuilder(
                     context,
                     listOf(item.lightMemberCnt.toString(), "/", item.peopleCnt.toString())
                 )
