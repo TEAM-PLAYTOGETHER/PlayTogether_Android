@@ -8,19 +8,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentThunderEatBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.search.SearchViewModel.Companion.EAT
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.FIRST
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.MORE
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_MINUS
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_PLUS
 import com.playtogether_android.app.util.SpaceItemDecoration
-import timber.log.Timber
 
 class ThunderEatFragment :
     BaseFragment<FragmentThunderEatBinding>(R.layout.fragment_thunder_eat) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
+    private var isFirstPage = true
+    private var sort = DEFAULT_SORT
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +33,17 @@ class ThunderEatFragment :
         initAdapter()
         observingList()
         observingScrap()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkSort()
+    }
+
+    private fun checkSort() {
+        if (sort != thunderListViewModel.sort.value) {
+            thunderListViewModel.getLightCategoryList(FIRST, EAT)
+        }
     }
 
     //먹/갈/할 같이 사용할 메서드
@@ -62,7 +77,11 @@ class ThunderEatFragment :
 
     private fun observingList() {
         thunderListViewModel.eatingItemList.observe(viewLifecycleOwner) {
-            listAdapter.initList(it)
+            when (isFirstPage) {
+                true -> listAdapter.initList(it)
+                false -> listAdapter.addList(it)
+            }
+            sort = thunderListViewModel.sort.value ?: DEFAULT_SORT
         }
     }
 
