@@ -28,7 +28,7 @@ fun Context.getPageTransformer(): ViewPager2.PageTransformer {
 
 private var toast: Toast? = null
 fun Context.shortToast(text: String) {
-    if(toast == null)
+    if (toast == null)
         toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
     else
         toast!!.setText(text)
@@ -43,7 +43,7 @@ fun Context.viewPagerAnimation(viewpager: ViewPager2) {
         offscreenPageLimit = 1
         setPageTransformer(compositePageTransformer)
         setPadding(
-            (20* resources.displayMetrics.density).roundToInt(),
+            (20 * resources.displayMetrics.density).roundToInt(),
             0,
             (55 * resources.displayMetrics.density).roundToInt(),
             0
@@ -66,14 +66,26 @@ fun Context.imageNullCheck(image: String?, imageView: ImageView) {
     }
 }
 
-fun Context.stringListBuilder(context: Context, stringList: List<String?>): String {
+fun Context.homeTabTextBuilder(context: Context, stringList: List<String?>): String {
     val sb = StringBuilder()
-
-    for (it in stringList) {
+    Timber.e("미정 : $stringList")
+    stringList.forEachIndexed { index, it ->
         if (it.isNullOrEmpty()) {
-            sb.append("미정")
+            when (index) {
+                0 -> {
+                    sb.append("날짜 미정")
+                }
+                2 -> {
+                    sb.append("장소 미정")
+                }
+                4 -> {
+                    sb.append("시간 미정")
+                }
+            }
         } else if (it == "0") {
-            sb.append(context.getString(R.string.createthunder_infinite))
+            sb.append(context.getString(R.string.no_constraint))
+        } else if (index == 2 && it.length > 4) {
+            sb.append(it.take(4)).append("...")
         } else {
             sb.append(it)
         }
@@ -81,8 +93,18 @@ fun Context.stringListBuilder(context: Context, stringList: List<String?>): Stri
     return sb.toString()
 }
 
+fun Context.thunderTabTextBuilder(context: Context, stringList: List<String?>): String {
 
-fun Context.applyOpenChecker(context: Context, thunderId: Int, isApply: Boolean, isOpen: Boolean) {
+    return "aa"
+}
+
+
+fun Context.applyOpenChecker(
+    context: Context,
+    thunderId: Int,
+    isApply: Boolean,
+    isOpen: Boolean
+) {
     val intent = Intent(context, ThunderDetailActivity::class.java)
     Timber.e("apply item : $isApply")
     Timber.e("open item : $isOpen")

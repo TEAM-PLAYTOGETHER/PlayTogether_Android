@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_bold"
-                    android:text="@{detailData.peopleCnt==0 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
+                    android:text="@{detailData.peopleCnt==0 ? @string/no_constraint : String.valueOf(detailData.peopleCnt)}"
                     android:textColor="@color/gray_black"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_thunderdetail_apply"
@@ -217,14 +217,16 @@
 
                     <ImageView
                         android:id="@+id/iv_thunderdetail_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginVertical="6dp"
                         android:layout_marginStart="10dp"
+                        android:scaleType="fitXY"
+                        app:profileUrl="@{organizer.image}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_img_profile" />
+                        tools:srcCompat="@drawable/ic_img_profile" />
 
                     <TextView
                         android:id="@+id/tv_thunderdetail_name"
@@ -455,10 +457,10 @@
                         android:id="@+id/cv_detail_image_container"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardBackgroundColor="@color/gray_black"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
+                        app:cardBackgroundColor="@color/gray_black"
+                        app:cardCornerRadius="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_thunderdetail_description">
@@ -500,10 +502,10 @@
                     android:textColor="@color/gray_gray01"
                     android:textSize="12sp"
                     android:visibility="gone"
-                    tools:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_thunderdetail_content" />
+                    app:layout_constraintTop_toBottomOf="@+id/cl_thunderdetail_content"
+                    tools:visibility="visible" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_detail_boundary"
@@ -569,7 +571,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="@{detailData.peopleCnt==0 ? @string/createthunder_infinite : String.valueOf(detailData.peopleCnt)}"
+                            android:text="@{detailData.peopleCnt==0 ? @string/no_constraint : String.valueOf(detailData.peopleCnt)}"
                             android:textColor="@color/gray_black"
                             android:textSize="16dp"
                             app:layout_constraintStart_toEndOf="@id/tv_applicant_slash"

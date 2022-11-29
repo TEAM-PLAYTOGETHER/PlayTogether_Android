@@ -23,13 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:text="@{categoryData.title}"
             android:textColor="@{categoryData.open ? @color/main_green : @color/gray_gray04}"
             app:layout_constraintBottom_toTopOf="@+id/tv_thunder_item_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginTop="16dp"
             tools:text="@string/thunder_item_title"
             tools:textColor="@color/main_green" />
 
@@ -40,11 +40,23 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:text="@{@string/search_date_place_time(categoryData.date ?? @string/search_undecided, categoryData.place ?? @string/search_undecided, categoryData.time ?? @string/search_undecided)}"
+            android:text="@{@string/search_date_place_time(categoryData.date ?? @string/thunder_list_date_unknown, categoryData.place ?? @string/thunder_list_place_unknown, categoryData.time ?? @string/thunder_list_time_unknown)}"
             app:layout_constraintBottom_toTopOf="@+id/tv_thunder_item_limit_count"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_thunder_item_title"
             tools:text="@string/thunder_item_day" />
+
+        <TextView
+            android:id="@+id/tv_thunder_item_place"
+            style="@style/thunder_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxEms="4"
+            android:maxLines="1"
+            tools:text="아나 나나"
+           app:layout_constraintStart_toEndOf="@id/tv_thunder_item_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_thunder_item_date" />
 
         <TextView
             android:id="@+id/tv_thunder_item_limit_count"

@@ -10,7 +10,7 @@ class GetThunderDetailOrganizerUseCase @Inject constructor(
     suspend operator fun invoke(thunderId: Int): Organizer {
         lateinit var data: Organizer
         repo.getThunderDetailOrganizer(thunderId)
-            .map { data = Organizer(it.name, it.organizerId) }
+            .map { data = Organizer(it.name, it.organizerId, it.image) }
         return data
     }
 }

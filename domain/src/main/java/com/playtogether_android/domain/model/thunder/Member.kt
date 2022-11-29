@@ -7,5 +7,6 @@ data class Member(
     val gender: String,
     val name: String,
     @SerializedName("user_id")
-    val userId: Int
+    val userId: Int,
+    val image: String
 )
