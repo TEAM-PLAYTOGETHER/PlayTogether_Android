@@ -1,16 +1,19 @@
 package com.playtogether_android.app.presentation.ui.message
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityChattingBinding
 import com.playtogether_android.app.presentation.base.BaseActivity
+import com.playtogether_android.app.presentation.ui.main.SplashActivity
 import com.playtogether_android.app.presentation.ui.message.adapter.ChattingAdapter
 import com.playtogether_android.app.presentation.ui.message.viewmodel.ChattingViewModel
 import com.playtogether_android.app.util.shortToast
 import com.playtogether_android.domain.model.message.ChatData
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity_chatting) {
@@ -25,6 +28,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         binding.viewmodel = chattingViewModel
         binding.lifecycleOwner = this
 
+        chattingViewModel.checkToken()
+        observeTokenAlive()
         getIdFromIntent()
         setName()
         initAdapter()
@@ -54,6 +59,17 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         super.onPause()
         chattingViewModel.exitRoom()
         chattingViewModel.isFirstPage = true
+    }
+
+    private fun observeTokenAlive() {
+        chattingViewModel.tokenAlive.observe(this) {
+            Timber.e("asdf : $it")
+            if (!it) {
+                val intent = Intent(this, SplashActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     private fun getIdFromIntent() {

@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playtogether_android.app.presentation.ui.message.socketData.ChattingSocket
 import com.playtogether_android.app.util.ChatDateStringReformat
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import com.playtogether_android.domain.model.message.ChatData
 import com.playtogether_android.domain.model.message.ChattingData
 import com.playtogether_android.domain.usecase.message.GetChatUseCase
+import com.playtogether_android.domain.usecase.sign.GetTokenIssuance
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChattingViewModel @Inject constructor(
-    val getChatUseCase: GetChatUseCase
+    val getChatUseCase: GetChatUseCase,
+    val getTokenIssuance: GetTokenIssuance
 ) : ViewModel() {
     private val _chattingList = MutableLiveData<List<ChattingData>>()
     val chattingList: LiveData<List<ChattingData>> get() = _chattingList
@@ -29,6 +32,8 @@ class ChattingViewModel @Inject constructor(
     private val socket = ChattingSocket()
     private val chattingFormatter = ChatDateStringReformat()
 
+    val tokenAlive = MutableLiveData<Boolean>()
+
     var isFirstPage: Boolean = true
     val isLoading = MutableLiveData<Boolean>()
     private val pageSize: Int = 40
@@ -36,6 +41,18 @@ class ChattingViewModel @Inject constructor(
     var isLastPage: Boolean = false
 
     val inputMessage = MutableLiveData<String>("")
+
+    fun checkToken() {
+        viewModelScope.launch {
+            kotlin.runCatching { getTokenIssuance(PlayTogetherRepository.userRefreshToken) }
+                .onSuccess {
+                    Timber.e("asdf in viewModel : $it")
+                    tokenAlive.value = true
+                    PlayTogetherRepository.userToken = it.accessToken
+                    PlayTogetherRepository.userRefreshToken = it.refreshToken
+                }
+        }
+    }
 
     fun getChatList(roomId: Int) {
         Timber.e("chatting in getChatList")
@@ -49,7 +66,10 @@ class ChattingViewModel @Inject constructor(
                     if (it.size < pageSize) isLastPage = true
                     isFirstPage = false
                 }
-                .onFailure { error -> Timber.d("chatting messageServer: 첫 채팅 읽어오기 실패 / error:$error") }
+                .onFailure { error ->
+                    Timber.d("chatting messageServer: 첫 채팅 읽어오기 실패 / error:$error")
+                    tokenAlive.value = false
+                }
         }
     }
 
