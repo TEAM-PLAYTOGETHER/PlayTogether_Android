@@ -33,6 +33,8 @@ class MessageViewModel @Inject constructor(
     private lateinit var socket: Socket
     private val gson by lazy { Gson() }
 
+    val isMessageEmpty = MutableLiveData<Boolean>()
+
     fun initSocket(context: Context) {
         try {
             onConnect()
@@ -78,8 +80,7 @@ class MessageViewModel @Inject constructor(
         var date = text.slice(IntRange(0, 9))
         date = date.replace("-", ".")
         val time = text.slice(IntRange(11, 15))
-        val dateTime = date + "  " + time
-        return dateTime
+        return "$date  $time"
     }
 
     fun disconnect() {
@@ -92,14 +93,16 @@ class MessageViewModel @Inject constructor(
             kotlin.runCatching { getMessageUseCase() }
                 .onSuccess {
                     if (it.isNotEmpty()) {
-                        Timber.d("messageServer: 성공!!")
+                        isMessageEmpty.value = false
                         val tempList: List<MessageData> = it
                         for (i in it.indices)
                             tempList[i].createdAt = changeDateFormat(it[i].createdAt)
 
                         _messageData.value = tempList
-                    } else
+                    } else {
                         Timber.d("messageServer : 가져온게 없어서 null $it")
+                        isMessageEmpty.value = true
+                    }
                 }
                 .onFailure { error -> Timber.d("messageServer: $error") }
         }
