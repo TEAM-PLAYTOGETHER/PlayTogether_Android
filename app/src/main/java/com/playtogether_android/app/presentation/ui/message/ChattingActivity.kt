@@ -42,7 +42,8 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
         chattingViewModel.enterRoom(roomId, recvId) { handleSocketError() }
         chattingViewModel.listenSocketConnection(
             { handleSocketError() },
-            { runOnUiThread { finish() } })
+            { runOnUiThread { finish() } }
+        )
         chattingViewModel.listenSocketMessage(
             { addChatToRecyclerView(it) },
             { handleSocketError() }

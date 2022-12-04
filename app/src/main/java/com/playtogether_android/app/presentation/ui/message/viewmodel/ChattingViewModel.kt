@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChattingViewModel @Inject constructor(
-    val getChatUseCase: GetChatUseCase,
+    val getChatUseCase: GetChatUseCase
 ) : ViewModel() {
     private val _chattingList = MutableLiveData<List<ChattingData>>()
     val chattingList: LiveData<List<ChattingData>> get() = _chattingList
@@ -61,7 +61,8 @@ class ChattingViewModel @Inject constructor(
                     _chattingList.value =
                         _chattingList.value?.toMutableList()?.apply { addAll(checkDateChanged(it)) }
                     isLoading.value = false
-                    lastId = chattingList.value?.let { (chattingList.value!!.last() as ChatData).messageId }
+                    lastId =
+                        chattingList.value?.let { (chattingList.value!!.last() as ChatData).messageId }
                     if (it.size < pageSize) isLastPage = true
                 }
                 .onFailure { error -> Timber.d("messageServer: 다음 채팅 읽어오기 실패 / error:$error") }
@@ -71,7 +72,8 @@ class ChattingViewModel @Inject constructor(
     private fun checkDateChanged(list: List<ChatData>): List<ChattingData> {
         val (list, prevProfileVisible) = chattingFormatter.processDate(
             list,
-            chattingList.value?.let { it.last() as ChatData })
+            chattingList.value?.let { it.last() as ChatData }
+        )
         lastProfileVisible = prevProfileVisible
         return list
     }

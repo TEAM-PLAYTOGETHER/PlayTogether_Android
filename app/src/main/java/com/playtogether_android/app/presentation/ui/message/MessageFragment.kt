@@ -49,7 +49,7 @@ class MessageFragment :
 
     private fun initAdapter() {
         adapter = MessageListAdapter { clickItem(it) }
-        binding.rvMessageRoom.itemAnimator=null
+        binding.rvMessageRoom.itemAnimator = null
         binding.rvMessageRoom.adapter = adapter
     }
 
