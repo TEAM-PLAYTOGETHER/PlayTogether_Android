@@ -61,13 +61,22 @@ class ThunderDetailActivity :
         clickThunderCancel(thunderId)
         clickProfile()
         clickSendMessage()
-        clickApply()
+//        clickApply()
         clickBackArrow()
     }
 
     private fun clickThunderCancel(thunderId: Int) {
-        binding.tvDetailCancelText.setOnClickListener {
-            showCancelDialog2(thunderId)
+        binding.clThunderdetailApplyBtn.setOnClickListener {
+            thunderDetailViewModel.isThunderType.observe(this) {
+                when (it.isEntered) {
+                    true -> {
+                        showCancelDialog2(thunderId)
+                    }
+                    false -> {
+                        showApplyDialog()
+                    }
+                }
+            }
         }
     }
 
@@ -200,12 +209,14 @@ class ThunderDetailActivity :
 
     private fun checkCategory() {
         val applyCategory = mutableListOf(
-            binding.tvDetailCancelText,
+            binding.ivThunderdetailLike,
             binding.clThunderdetailMessage,
             binding.clDetailBoundary,
             binding.clDetailOrganizerContainer,
+            binding.clThunderdetailApplyBtn,
             binding.tvThunderdetailReport,
             binding.clThunderApplicantContent,
+            binding.tvThunderdetailTextCancel
         )
         val openCategory = mutableListOf(
             binding.ivDetailOption,
@@ -218,6 +229,7 @@ class ThunderDetailActivity :
             binding.ivThunderdetailLike,
             binding.tvThunderdetailReport,
             binding.clThunderdetailApplyBtn,
+            binding.clThunderdetailApplyStateContainer
         )
 
         thunderDetailViewModel.isThunderType.observe(this) {
@@ -226,6 +238,7 @@ class ThunderDetailActivity :
                 itemVisibility(openCategory)
             } else if (it.isEntered) {
                 itemVisibility(applyCategory)
+
             } else {
                 itemVisibility(defaultCategory)
             }
