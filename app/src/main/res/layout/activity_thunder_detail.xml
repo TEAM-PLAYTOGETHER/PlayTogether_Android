@@ -44,77 +44,102 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_thunderdetail_apply"
+                    style="@style/detail_apply_cancel_text"
+                    android:id="@+id/tv_thunderdetail_text_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="18dp"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="신청하기 ("
-                    android:textColor="@color/gray_black"
-                    android:textSize="16dp"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_current"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_thunderdetail_current"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@{String.valueOf(detailData.lightMemberCnt)}"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_apply"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_slash"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_apply"
-                    app:layout_constraintTop_toTopOf="@+id/tv_thunderdetail_apply"
-                    tools:text="1" />
-
-                <TextView
-                    android:id="@+id/tv_thunderdetail_slash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="/"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_current"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_max"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_current"
-                    app:layout_constraintTop_toTopOf="@+id/tv_thunderdetail_current" />
-
-                <TextView
-                    android:id="@+id/tv_thunderdetail_max"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@{detailData.peopleCnt==0 ? @string/no_constraint : String.valueOf(detailData.peopleCnt)}"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_thunderdetail_apply"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_par_end"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_slash"
-                    app:layout_constraintTop_toTopOf="@+id/tv_thunderdetail_slash"
-                    tools:text="6" />
-
-                <TextView
-                    android:id="@+id/tv_thunderdetail_par_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text=")"
-                    android:textColor="@color/gray_black"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_max"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_max"
-                    app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_max" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/thunderdetail_apply_cancel" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_thunderdetail_apply_state_container"
+                    android:layout_width="0dp"
+                    android:visibility="invisible"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="18dp"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="신청하기 ("
+                        android:textColor="@color/gray_black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_current"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@{String.valueOf(detailData.lightMemberCnt)}"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_apply"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_slash"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_apply"
+                        app:layout_constraintTop_toTopOf="@+id/tv_thunderdetail_apply"
+                        tools:text="1" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_slash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="/"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_current"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_max"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_current"
+                        app:layout_constraintTop_toTopOf="@+id/tv_thunderdetail_current" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_max"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@{detailData.peopleCnt==0 ? @string/no_constraint : String.valueOf(detailData.peopleCnt)}"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_thunderdetail_apply"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_thunderdetail_par_end"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_slash"
+                        app:layout_constraintTop_toTopOf="@+id/tv_thunderdetail_slash"
+                        tools:text="6" />
+
+                    <TextView
+                        android:id="@+id/tv_thunderdetail_par_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text=")"
+                        android:textColor="@color/gray_black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_thunderdetail_max"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toEndOf="@+id/tv_thunderdetail_max"
+                        app:layout_constraintTop_toTopOf="@id/tv_thunderdetail_max" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -222,10 +247,10 @@
                         android:layout_marginVertical="6dp"
                         android:layout_marginStart="10dp"
                         android:scaleType="fitXY"
-                        app:profileUrl="@{organizer.image}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:profileUrl="@{organizer.image}"
                         tools:srcCompat="@drawable/ic_img_profile" />
 
                     <TextView
