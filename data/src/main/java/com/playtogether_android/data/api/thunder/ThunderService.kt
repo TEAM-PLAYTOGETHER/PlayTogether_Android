@@ -31,10 +31,15 @@ interface ThunderService {
     suspend fun postThunderJoinCancel(
         @Path("thunderId") thunderId: Int
     ): ResponseThunderJoinCancel
+//    @GET("light/detail/{thunderId}")
+//    suspend fun getThunderDetail(
+//        @Path("thunderId") thunderId: Int,
+//    ): ResThunderDetailData
 
-    @GET("light/detail/{thunderId}")
+    @GET("light/{crewid}/{lightid}/detail")
     suspend fun getThunderDetail(
-        @Path("thunderId") thunderId: Int,
+        @Path("lightid") thunderId: Int,
+        @Path("crewid") crewId: Int = PlayTogetherRepository.crewId,
     ): ResThunderDetailData
 
     //번개삭제
@@ -73,6 +78,6 @@ interface ThunderService {
     @GET("light/exist/{lightId}")
     suspend fun getThunderExistChecker(
         @Path("lightId") lightId: Int,
-    ):ResThunderExistCheckData
+    ): ResThunderExistCheckData
 
 }
