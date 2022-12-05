@@ -363,4 +363,13 @@
         <item name="boxCornerRadiusBottomStart">10dp</item>
         <item name="boxCornerRadiusBottomEnd">10dp</item>
     </style>
+
+    <!--    ThunderDetailActivity-->
+    <style name="detail_apply_cancel_text">
+        <item name="android:textColor">@color/gray_black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">19dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>
