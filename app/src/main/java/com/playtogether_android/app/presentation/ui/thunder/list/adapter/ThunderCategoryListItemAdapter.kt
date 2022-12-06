@@ -8,6 +8,7 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_MINUS
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_PLUS
 import com.playtogether_android.domain.model.light.CategoryData
+import timber.log.Timber
 
 class ThunderCategoryListItemAdapter(
     private val itemClick: (Int, Int) -> Unit
@@ -59,6 +60,7 @@ class ThunderCategoryListItemAdapter(
     }
 
     fun updateScrapCount(position: Int, op: String) {
+        Timber.e("asdf updateScrapCount : size=${thunderList.size}, position=$position")
         when (op) {
             SCRAP_PLUS -> thunderList[position].likeCount++
             SCRAP_MINUS -> thunderList[position].likeCount--
