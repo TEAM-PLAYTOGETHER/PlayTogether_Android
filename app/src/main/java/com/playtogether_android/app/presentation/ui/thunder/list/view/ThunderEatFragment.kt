@@ -1,15 +1,21 @@
 package com.playtogether_android.app.presentation.ui.thunder.list.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.FragmentThunderEatBinding
 import com.playtogether_android.app.presentation.base.BaseFragment
+import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.search.SearchViewModel.Companion.EAT
 import com.playtogether_android.app.presentation.ui.thunder.list.adapter.ThunderCategoryListItemAdapter
+import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderEatViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.CATEGORY_EAT
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.DEFAULT_SORT
@@ -18,11 +24,16 @@ import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.Thund
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_MINUS
 import com.playtogether_android.app.presentation.ui.thunder.list.viewmodel.ThunderListViewModel.Companion.SCRAP_PLUS
 import com.playtogether_android.app.util.SpaceItemDecoration
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class ThunderEatFragment :
     BaseFragment<FragmentThunderEatBinding>(R.layout.fragment_thunder_eat) {
     private lateinit var listAdapter: ThunderCategoryListItemAdapter
+    lateinit var thunderDetailLauncher: ActivityResultLauncher<Intent>
     private val thunderListViewModel: ThunderListViewModel by activityViewModels()
+    private val thunderEatViewModel: ThunderEatViewModel by viewModels()
     private var isFirstPage = true
     private var sort = DEFAULT_SORT
 
@@ -33,6 +44,7 @@ class ThunderEatFragment :
         initAdapter()
         observingList()
         observingScrap()
+        initLauncher()
     }
 
     override fun onResume() {
@@ -46,7 +58,7 @@ class ThunderEatFragment :
         }
     }
 
-    //먹/갈/할 같이 사용할 메서드
+    // 먹/갈/할 같이 사용할 메서드
     private fun initAdapter() {
         listAdapter = ThunderCategoryListItemAdapter { thunderId, position ->
             adapterLamda(thunderId, position)
@@ -61,8 +73,17 @@ class ThunderEatFragment :
     }
 
     private fun adapterLamda(thunderId: Int, position: Int) {
-        (activity as ThunderListActivity).clickThunderListItem(thunderId)
-        thunderListViewModel.adapterPosition = position
+        clickThunderListItem(thunderId)
+        thunderEatViewModel.adapterPosition = position
+        Timber.e("asdf adapterPosition : ${thunderEatViewModel.adapterPosition}")
+    }
+
+    private fun clickThunderListItem(thunderId: Int) {
+        thunderEatViewModel.getScrapValue(thunderId, ThunderListViewModel.PREV)
+        thunderEatViewModel.adapterThunderId = thunderId
+        val intent = Intent(requireContext(), ThunderDetailActivity::class.java)
+        intent.putExtra("thunderId", thunderId)
+        thunderDetailLauncher.launch(intent)
     }
 
     inner class MyScrollListener : RecyclerView.OnScrollListener() {
@@ -86,7 +107,7 @@ class ThunderEatFragment :
     }
 
     private fun changeScrapCount() {
-        with(thunderListViewModel) {
+        with(thunderEatViewModel) {
             if ((prevScrapState ?: return) and !((laterScrapState.value) ?: return)) {
                 listAdapter.updateScrapCount(adapterPosition ?: return, SCRAP_MINUS)
             } else if (!(prevScrapState ?: return) and (laterScrapState.value ?: return)) {
@@ -99,5 +120,13 @@ class ThunderEatFragment :
         thunderListViewModel.laterScrapState.observe(viewLifecycleOwner) {
             changeScrapCount()
         }
+    }
+
+    private fun initLauncher() {
+        thunderDetailLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                val thunderId = thunderEatViewModel.adapterThunderId ?: -1
+                thunderEatViewModel.getScrapValue(thunderId, ThunderListViewModel.LATER)
+            }
     }
 }
