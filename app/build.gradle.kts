@@ -43,11 +43,8 @@ android {
             )
         }
         getByName("release") {
+            manifestPlaceholders["appName"] = "@string/app_name"
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
     compileOptions {
