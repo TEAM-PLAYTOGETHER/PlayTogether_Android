@@ -233,14 +233,37 @@ class ThunderDetailActivity :
         )
 
         thunderDetailViewModel.isThunderType.observe(this) {
-            if (it.isOrganizer) {
+            if (it.isOrganizer) { // 개설자
                 binding.ivThunderdetailIcon.isClickable = false
                 itemVisibility(openCategory)
-            } else if (it.isEntered) {
+            } else if (it.isEntered) { // 참여자
                 itemVisibility(applyCategory)
-
-            } else {
+            } else { // default
+                fullThunderCheck()
                 itemVisibility(defaultCategory)
+            }
+            closeThunderCheck()
+        }
+    }
+
+    private fun fullThunderCheck() {
+        thunderDetailViewModel.detailItemList.observe(this) {
+            if (it.peopleCnt == it.lightMemberCnt)
+                binding.clThunderdetailApplyBtn.apply {
+                    isClickable = false
+                    background = getDrawable(R.drawable.rectangle_border_black_fill_gray_radius_10)
+                }
+        }
+    }
+
+    private fun closeThunderCheck() {
+        thunderDetailViewModel.detailItemList.observe(this) {
+            if (!it.isOpened) {
+                binding.clThunderdetailApplyBtn.apply {
+                    isClickable = false
+                    background = getDrawable(R.drawable.rectangle_border_black_fill_gray_radius_10)
+                }
+                binding.tvThunderdetailTextCancel.text = "모집 완료!"
             }
         }
     }
