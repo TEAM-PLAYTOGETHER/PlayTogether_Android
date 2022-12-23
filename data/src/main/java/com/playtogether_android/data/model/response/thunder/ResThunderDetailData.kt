@@ -37,7 +37,7 @@ data class ResThunderDetailData(
             @SerializedName("user_id")
             val userId: Int,
             @SerializedName("profile_image")
-            val image: String
+            val image: String?
         )
 
         data class Organizer(
@@ -45,7 +45,7 @@ data class ResThunderDetailData(
             @SerializedName("organizer_id")
             val organizerId: Int,
             @SerializedName("profile_image")
-            val image: String
+            val image: String?
         )
     }
 }

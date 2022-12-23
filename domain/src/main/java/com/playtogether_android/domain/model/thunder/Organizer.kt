@@ -7,5 +7,5 @@ data class Organizer(
     @SerializedName("organizer_id")
     val organizerId: Int,
     @SerializedName("profile_image")
-    val image: String
+    val image: String?
 )
