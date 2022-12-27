@@ -8,5 +8,5 @@ data class Member(
     val name: String,
     @SerializedName("user_id")
     val userId: Int,
-    val image: String
+    val image: String?
 )
