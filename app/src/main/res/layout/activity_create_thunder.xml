@@ -431,7 +431,7 @@
                             android:layout_marginEnd="10dp"
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
-                            android:text="@string/no_constraint"
+                            android:text="@string/createthunder_people_undecided"
                             android:textColor="@color/gray_gray01"
                             android:textSize="12dp"
                             app:layout_constraintBottom_toBottomOf="@+id/iv_createthunder_check"
