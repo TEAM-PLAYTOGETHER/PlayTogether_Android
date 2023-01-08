@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
 import com.playtogether_android.app.di.PlayTogetherApplication
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
+import com.playtogether_android.data.singleton.PlayTogetherRepository
 import timber.log.Timber
 import kotlin.math.roundToInt
 
@@ -155,4 +156,15 @@ fun Context.showCustomPopUp(
         setBackgroundDrawable(ContextCompat.getDrawable(baseContext, R.drawable.ic_group_popup))
     }
     return popup
+}
+
+fun removePreference() {
+    with(PlayTogetherRepository) {
+        userLogin = false
+        userToken = ""
+        kakaoAccessToken = ""
+        googleAccessToken = ""
+        crewId = -1
+        crewName = ""
+    }
 }

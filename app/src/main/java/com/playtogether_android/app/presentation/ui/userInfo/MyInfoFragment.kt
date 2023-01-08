@@ -38,12 +38,16 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getMyInfo()
+//        getMyInfo()
         observeMyInfo()
         initBottomDialog()
         clickEvent()
         imagePickerCallback()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        observeMyInfo()
     }
 
     private val requestPermissionLauncher =
@@ -72,15 +76,15 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        //여기에 프로필 서버통신하는 코드 넣기
-        getMyInfo()
-        observeMyInfo()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        //여기에 프로필 서버통신하는 코드 넣기
+//        getMyInfo()
+//        observeMyInfo()
+//    }
 
     private fun getMyInfo() {
-        userInfoViewModel.getMyInfo()
+//        userInfoViewModel.getMyInfo()
     }
 
     private fun observeMyInfo() {
@@ -217,7 +221,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         binding.ivProfileImg.setClipToOutline(true)
 
         // 사진수정 후 즉각반영
-        getMyInfo()
+//        getMyInfo()
     }
 
     private fun imagePicker() {
