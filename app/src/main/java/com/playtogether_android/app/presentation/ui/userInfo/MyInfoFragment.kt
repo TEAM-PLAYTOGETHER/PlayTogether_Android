@@ -239,15 +239,20 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                val item = it.data?.clipData
+//                val item = it.data?.clipData
+                val item = it.data?.data
+                Timber.e("profile item $item")
                 if (item != null) {
                     val multipartResolver = MultiPartResolver(requireActivity())
-                    val transferItem = multipartResolver.createImgMultiPart(item.getItemAt(0).uri)
+//                    val transferItem = multipartResolver.createImgMultiPart(item.getItemAt(0).uri)
+                    val transferItem = multipartResolver.createImgMultiPart(item)
                     userInfoViewModel.putProfileImage(transferItem)
+                    Timber.e("profile : 성공")
                 }
             } else {
                 Timber.e("profileImageError : 이상함")
             }
+
         }
     }
 
