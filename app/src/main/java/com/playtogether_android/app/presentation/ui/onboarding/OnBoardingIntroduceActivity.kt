@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
 import com.playtogether_android.app.R
 import com.playtogether_android.app.databinding.ActivityOnBoardingIntroduceBinding
@@ -47,10 +48,12 @@ class OnBoardingIntroduceActivity :
         initSetting()
     }
 
+
+
     private fun nextBtnClickListener() {
         binding.tvIntroOnboardingNext.setOnClickListener {
             if (binding.tvIntroOnboardingNext.isSelected) {
-                nextBtnNetwork()
+                isOpenerCheck()
             }
         }
     }
@@ -85,6 +88,23 @@ class OnBoardingIntroduceActivity :
             ), intent.getIntExtra("crewId", 1)
         )
 
+        onBoardingViewModel.addProfile.observe(this) {
+            if(it.success) {
+                val intent = Intent(this, SignUpFinishActivity::class.java).apply {
+                    putExtra("nickname", nickName)
+
+                }
+                startActivity(intent)
+                finish()
+            }
+        }
+
+
+    }
+
+
+    private fun isOpenerCheck() {
+
         val crewName = intent.getStringExtra("crewName")
         val crewCode = intent.getStringExtra("crewCode")
         val crewIntroduce = intent.getStringExtra("crewIntro")
@@ -93,7 +113,6 @@ class OnBoardingIntroduceActivity :
 
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
-
         if (isOpener) {
             val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
                 putExtra("nickname", name)
@@ -107,6 +126,8 @@ class OnBoardingIntroduceActivity :
             finish()
         } else {
             onBoardingViewModel.crewCode.crewCode = intent.getStringExtra("crewCode") ?: ""
+            Timber.e("뭘까 진짜 : ${onBoardingViewModel.crewCode.crewCode}")
+
             onBoardingViewModel.postRegisterCrew(
                 RegisterCrewItem(
                     onBoardingViewModel.crewCode.crewCode
@@ -115,29 +136,20 @@ class OnBoardingIntroduceActivity :
             onBoardingViewModel.registerCrew.observe(this) {
                 if (!it.success) {
                     Timber.d("실패 :동아리가입")
+                    nextBtnNetwork()
                 }
                 else {
                     Timber.d("성공: 동아리가입")
-                    val intent = Intent(this, SignUpFinishActivity::class.java).apply {
-                        putExtra("nickname", name)
+                    Timber.e("TEST : ${name}")
 
-                    }
-                    startActivity(intent)
-                    finish()
                 }
             }
 
         }
-
-
     }
 
     private fun nextBtnActive() {
-        if(binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != "") {
-            binding.tvIntroOnboardingNext.isSelected = true
-        } else {
-            binding.tvIntroOnboardingNext.isSelected = false
-        }
+        binding.tvIntroOnboardingNext.isSelected = binding.tvIntroOnboardingApprove.visibility == View.VISIBLE && binding.etIntroOnboardingIntro.text.toString() != ""
 
     }
 
@@ -167,9 +179,6 @@ class OnBoardingIntroduceActivity :
 
         if (description != null && nicknameCheck == true) {
             binding.tvIntroOnboardingNext.isSelected = true
-            binding.tvIntroOnboardingNext.setOnClickListener {
-                nextBtnNetwork()
-            }
         } else {
             binding.tvIntroOnboardingNext.isSelected = false
         }
