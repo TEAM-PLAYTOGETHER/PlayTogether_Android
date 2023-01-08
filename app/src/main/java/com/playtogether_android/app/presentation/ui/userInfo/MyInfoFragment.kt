@@ -37,9 +37,11 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        getMyInfo()
-        observeMyInfo()
+        //todo 그림 가져오기 getMyPicture
+        //todo 나머지 정보 가져오기 getMyInfo
+        //todo 그림 콜백 -> 변경되면 이미지 변경시키기
+        initData()
+        getMyInfo()
         initBottomDialog()
         clickEvent()
         imagePickerCallback()
@@ -47,7 +49,18 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
     override fun onResume() {
         super.onResume()
-        observeMyInfo()
+        userInfoViewModel.getMyInfo()
+    }
+
+    private fun initData() {
+        binding.homeViewModel = homeViewModel
+        userInfoViewModel.getMyInfo()
+        binding.myInfo = userInfoViewModel.myInfoData.value
+        subWayChecker()
+    }
+
+    private fun subWayChecker() {
+
     }
 
     private val requestPermissionLauncher =
@@ -76,50 +89,43 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        //여기에 프로필 서버통신하는 코드 넣기
-//        getMyInfo()
-//        observeMyInfo()
-//    }
-
     private fun getMyInfo() {
-//        userInfoViewModel.getMyInfo()
-    }
-
-    private fun observeMyInfo() {
-        userInfoViewModel.myInfoData.observe(viewLifecycleOwner) { it ->
-            val birth = DateTimeUtil.convertBirthFormat(it.birth)
-            val gender = it.gender
-            val genderFormat: String
-            if (gender == "남") genderFormat = "M"
-            else genderFormat = "W"
-
-            binding.birthAndGender = "${birth}년생 ・ $genderFormat"
+        userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
             binding.myInfo = it
-            binding.homeViewModel = homeViewModel
-            binding.nickname = it.nickname
-            binding.description = it.description
-
-            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
-            if (it.firstStation == null) {
-                binding.firstStation = "지하철역 미지정"
-                binding.isEmpty = true
-            } else if (it.secondStation == null) {
-                binding.firstStation = it.firstStation
-                binding.isEmpty = true
-            } else {
-                binding.firstStation = it.firstStation
-                binding.secondStation = it.secondStation
-            }
-
-            //프로필 이미지 띄우기
-            val imageUrl = it.profileImage
-            loadImage(imageUrl)
-
-
+            Timber.e("변경")
         }
     }
+
+//    private fun observeMyInfo() {
+//        userInfoViewModel.myInfoData.observe(viewLifecycleOwner) { it ->
+//            val birth = DateTimeUtil.convertBirthFormat(it.birth)
+//            val gender = it.gender
+//            val genderFormat: String = if (gender == "남") "M"
+//            else "W"
+//
+//            binding.birthAndGender = "${birth}년생 ・ $genderFormat"
+//            binding.myInfo = it
+//            binding.homeViewModel = homeViewModel
+//            binding.nickname = it.nickname
+//            binding.description = it.description
+//
+//            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
+//            if (it.firstStation == null) {
+//                binding.firstStation = "지하철역 미지정"
+//                binding.isEmpty = true
+//            } else if (it.secondStation == null) {
+//                binding.firstStation = it.firstStation
+//                binding.isEmpty = true
+//            } else {
+//                binding.firstStation = it.firstStation
+//                binding.secondStation = it.secondStation
+//            }
+//
+//            //프로필 이미지 띄우기
+//            val imageUrl = it.profileImage
+//            loadImage(imageUrl)
+//        }
+//    }
 
     //동아리 전환 바텀시트
     private fun initBottomDialog() {
@@ -246,7 +252,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
                     val multipartResolver = MultiPartResolver(requireActivity())
 //                    val transferItem = multipartResolver.createImgMultiPart(item.getItemAt(0).uri)
                     val transferItem = multipartResolver.createImgMultiPart(item)
-                    userInfoViewModel.putProfileImage(transferItem)
+                    userInfoViewModel.changeUserProfile(transferItem)
+//                    userInfoViewModel.putProfileImage(transferItem)
                     Timber.e("profile : 성공")
                 }
             } else {
