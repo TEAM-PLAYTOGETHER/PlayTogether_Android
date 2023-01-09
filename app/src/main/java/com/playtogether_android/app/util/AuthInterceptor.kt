@@ -1,10 +1,10 @@
 package com.playtogether_android.app.util
 
-import com.playtogether_android.app.di.PlayTogetherApplication
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber
+import java.net.HttpURLConnection
 
 class AuthInterceptor : Interceptor {
 
@@ -13,11 +13,12 @@ class AuthInterceptor : Interceptor {
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
+
         val request = chain.request().newBuilder()
-        val response = this.doRequest(chain)
+        val response = doRequest(chain)
+
         return response
         //return chain.proceed(request.build())
-        Timber.d("request : $request")
 
 
         //Timber.d("request header : ${request.headers}")
