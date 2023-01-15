@@ -32,7 +32,7 @@ class ChattingViewModel @Inject constructor(
     private val socket = ChattingSocket()
     private val chattingFormatter = ChatDateStringReformat()
 
-    val tokenAlive = MutableLiveData<Boolean>()
+    val tokenStatus = MutableLiveData<Int>()
 
     var isFirstPage: Boolean = true
     val isLoading = MutableLiveData<Boolean>()
@@ -47,9 +47,11 @@ class ChattingViewModel @Inject constructor(
             kotlin.runCatching { getTokenIssuance(PlayTogetherRepository.userRefreshToken) }
                 .onSuccess {
                     Timber.e("asdf in viewModel : $it")
-                    tokenAlive.value = true
+                    tokenStatus.value = it.status
                     PlayTogetherRepository.userToken = it.accessToken
                     PlayTogetherRepository.userRefreshToken = it.refreshToken
+                }.onFailure {
+                    tokenStatus.value = FAILURE
                 }
         }
     }
@@ -68,7 +70,7 @@ class ChattingViewModel @Inject constructor(
                 }
                 .onFailure { error ->
                     Timber.d("chatting messageServer: 첫 채팅 읽어오기 실패 / error:$error")
-                    tokenAlive.value = false
+                    tokenStatus.value = FAILURE
                 }
         }
     }
@@ -137,5 +139,11 @@ class ChattingViewModel @Inject constructor(
 
     fun exitRoom() {
         socket.reqExitRoom()
+    }
+
+    companion object {
+        const val TOKEN_ALIVE = 200
+        const val TOKEN_REFRESHED = 400
+        const val FAILURE = 500
     }
 }

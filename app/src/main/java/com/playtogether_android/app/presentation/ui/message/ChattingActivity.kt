@@ -62,9 +62,9 @@ class ChattingActivity : BaseActivity<ActivityChattingBinding>(R.layout.activity
     }
 
     private fun observeTokenAlive() {
-        chattingViewModel.tokenAlive.observe(this) {
+        chattingViewModel.tokenStatus.observe(this) {
             Timber.e("asdf : $it")
-            if (!it) {
+            if (it == FAILURE) {
                 val intent = Intent(this, SplashActivity::class.java)
                 startActivity(intent)
                 finish()
