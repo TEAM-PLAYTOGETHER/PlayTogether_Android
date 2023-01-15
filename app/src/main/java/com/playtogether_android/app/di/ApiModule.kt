@@ -1,5 +1,6 @@
 package com.playtogether_android.app.di
 
+import android.util.Log
 import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.BuildConfig.*
 import com.playtogether_android.app.util.AuthInterceptor
@@ -135,6 +136,7 @@ object ApiModule {
                 addInterceptor(provideInterceptor())
                 addInterceptor(AuthInterceptor())
                 build()
+                Log.e("TEST", "찍히나")
             }
 
     @Singleton
