@@ -19,26 +19,6 @@
             name="homeViewModel"
             type="com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel" />
 
-        <variable
-            name="firstStation"
-            type="String" />
-
-        <variable
-            name="secondStation"
-            type="String" />
-
-        <variable
-            name="nickname"
-            type="String" />
-
-        <variable
-            name="description"
-            type="String" />
-
-        <variable
-            name="isEmpty"
-            type="Boolean" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -198,7 +178,7 @@
                         android:maxLines="1"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="6dp"
-                        android:text="@{firstStation==null ? `지하철역 미지정` : firstStation}"
+                        android:text="@{myInfo.firstStation==null ? `지하철역 미지정` : myInfo.firstStation}"
                         android:textColor="@color/gray_white"
                         android:textSize="12dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -217,10 +197,10 @@
                         android:maxLines="1"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="6dp"
-                        android:text="@{secondStation.length() > 7 ? secondStation.substring(0,7) +`...` : secondStation }"
+                        android:text="@{myInfo.secondStation.length() > 7 ? myInfo.secondStation.substring(0,7) +`...` : myInfo.secondStation }"
                         android:textColor="@color/gray_white"
                         android:textSize="12dp"
-                        android:visibility="@{secondStation==null ? View.GONE : View.VISIBLE}"
+                        android:visibility="@{myInfo.secondStation==null ? View.GONE : View.VISIBLE}"
                         app:layout_constraintStart_toEndOf="@id/tv_subway_first"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="뒷부분말줄임테스트뒷부분말줄임이되었으면줗겠다aaa" />

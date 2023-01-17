@@ -37,7 +37,7 @@ object RetrofitModule {
         .readTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor())
         .addInterceptor(AuthInterceptor())
-        .authenticator(MyAuthenticator())
+//        .authenticator(MyAuthenticator())
         .build()
 
     @GsonConverter
