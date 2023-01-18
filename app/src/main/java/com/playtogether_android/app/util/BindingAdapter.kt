@@ -80,6 +80,23 @@ fun loadImage(imageView: ImageView, url: String?) {
         .into(imageView)
 }
 
+@BindingAdapter("mypageImage")
+fun loadMyPageImage(imageView: ImageView, url: String?) {
+    val imageUrl = if (url.isNullOrEmpty()) {
+        R.drawable.ic_profile
+    } else {
+        url
+    }
+    Glide
+        .with(imageView.context)
+        .load(imageUrl)
+        .into(imageView)
+    imageView.apply {
+        background = this.context.resources.getDrawable(R.drawable.rectangle_radius_10, null)
+        clipToOutline = true
+    }
+}
+
 @BindingAdapter("decidedSchedule")
 fun textNullChecker(textView: TextView, input: String?) {
 

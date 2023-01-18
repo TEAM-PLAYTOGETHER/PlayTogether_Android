@@ -3,11 +3,12 @@ package com.playtogether_android.app.di
 import com.google.gson.GsonBuilder
 import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.util.AuthInterceptor
+import com.playtogether_android.app.util.MyAuthenticator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +23,7 @@ import javax.inject.Singleton
 object RetrofitModule {
     private const val BASE_URL = BuildConfig.BASE_URL
     private const val SUBWAY_URL = BuildConfig.SUBWAY_URL
-    private val gson=GsonBuilder().setLenient().create()
+    private val gson = GsonBuilder().setLenient().create()
 
     private fun httpLoggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -36,6 +37,7 @@ object RetrofitModule {
         .readTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor())
         .addInterceptor(AuthInterceptor())
+//        .authenticator(MyAuthenticator())
         .build()
 
     @GsonConverter
