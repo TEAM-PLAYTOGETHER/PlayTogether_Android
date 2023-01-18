@@ -12,6 +12,8 @@ import com.playtogether_android.domain.model.userInfo.OtherInfoData
 import com.playtogether_android.domain.repository.userInfo.UserInfoRepository
 import com.playtogether_android.domain.usecase.message.GetRoomIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import timber.log.Timber
@@ -25,6 +27,9 @@ class UserInfoViewModel @Inject constructor(
 
     private val _myInfoData = MutableLiveData<MyInfoData>()
     val myInfoData: LiveData<MyInfoData> = _myInfoData
+
+    private val _myPicture = MutableLiveData<String?>()
+    val myPicture: LiveData<String?> = _myPicture
 
     private val _otherInfoData = MutableLiveData<OtherInfoData>()
     val otherInfoData: LiveData<OtherInfoData> = _otherInfoData
@@ -52,14 +57,30 @@ class UserInfoViewModel @Inject constructor(
     private val _putProfileImageData = MutableLiveData<GenericData>()
     val putProfileImageData: LiveData<GenericData> = _putProfileImageData
 
-
     // 유저 본인 멀티프로필 상세 조회
-    fun getMyInfo() = viewModelScope.launch {
+    fun getMyInfo() {
+        viewModelScope.launch {
+            kotlin.runCatching { userInfoRepository.getMyInfo() }
+                .onSuccess {
+                    _myInfoData.postValue(it)
+                    _myPicture.value = it.profileImage
+                    PlayTogetherRepository.userUuid = it.id.toInt()
+                    Timber.d("getMyInfo-server 성공", it.toString())
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.e("getMyInfo-server 실패 : $it")
+                }
+        }
+    }
+
+    private suspend fun getMyPageInfo() {
         kotlin.runCatching { userInfoRepository.getMyInfo() }
             .onSuccess {
                 _myInfoData.postValue(it)
+                _myPicture.value = it.profileImage
                 PlayTogetherRepository.userUuid = it.id.toInt()
-                Timber.d("getMyInfo-server 성공", it.toString())
+                Timber.e("getMyInfo-server 성공", it.toString())
             }
             .onFailure {
                 it.printStackTrace()
@@ -68,16 +89,18 @@ class UserInfoViewModel @Inject constructor(
     }
 
     // 유저 멀티프로필 상세 조회
-    fun getOtherInfo(crewId: Int, memberId: Int) = viewModelScope.launch {
-        kotlin.runCatching { userInfoRepository.getOtherInfo(crewId, memberId) }
-            .onSuccess {
-                _otherInfoData.postValue(it)
-                Timber.e("getOtherInfo-server 성공 : $it")
-            }
-            .onFailure {
-                it.printStackTrace()
-                Timber.e("getOtherInfo-server 실패 : $it")
-            }
+    fun getOtherInfo(crewId: Int, memberId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching { userInfoRepository.getOtherInfo(crewId, memberId) }
+                .onSuccess {
+                    _otherInfoData.postValue(it)
+                    Timber.e("getOtherInfo-server 성공 : $it")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.e("getOtherInfo-server 실패 : $it")
+                }
+        }
     }
 
     // 유저 차단
@@ -142,23 +165,29 @@ class UserInfoViewModel @Inject constructor(
             }
     }
 
-    // 유저 멀티프로필 이미지 추가
-    fun putProfileImage(
+    fun changeUserProfile(
         image: MultipartBody.Part?
     ) {
         viewModelScope.launch {
-            kotlin.runCatching {
-                userInfoRepository.putProfileImage(PlayTogetherRepository.crewId, image)
-            }
-                .onSuccess {
-                    _putProfileImageData.postValue(it)
-                    Timber.e("putProfileImage-server 성공 : $it")
-                }
-                .onFailure {
-                    it.printStackTrace()
-                    Timber.e("putProfileImage-server 실패 : $it")
-                }
+            putProfileImage(image)
+            getMyPageInfo()
         }
+    }
+
+    // 유저 멀티프로필 이미지 추가
+    private suspend fun putProfileImage(
+        image: MultipartBody.Part?
+    ) {
+        kotlin.runCatching {
+            userInfoRepository.putProfileImage(PlayTogetherRepository.crewId, image)
+        }.onSuccess {
+            _putProfileImageData.postValue(it)
+            Timber.e("putProfileImage-server 성공 : $it")
+        }.onFailure {
+            it.printStackTrace()
+            Timber.e("putProfileImage-server 실패 : $it")
+        }
+
     }
 
 

@@ -238,11 +238,11 @@ class ThunderDetailActivity :
                 itemVisibility(openCategory)
             } else if (it.isEntered) { // 참여자
                 itemVisibility(applyCategory)
-            } else { // default
                 closeThunderCheck()
+            } else { // default
+                fullThunderCheck()
                 itemVisibility(defaultCategory)
             }
-            fullThunderCheck()
         }
     }
 
@@ -260,6 +260,7 @@ class ThunderDetailActivity :
                     isClickable = false
                     background = getDrawable(R.drawable.rectangle_border_black_fill_gray_radius_10)
                 }
+                binding.tvThunderdetailTextCancel.text = "모집 완료!"
             }
         }
     }

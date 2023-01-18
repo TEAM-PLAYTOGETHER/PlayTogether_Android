@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.playtogether_android.app.R
@@ -77,4 +78,31 @@ fun loadImage(imageView: ImageView, url: String?) {
         .load(imageUrl)
         .circleCrop()
         .into(imageView)
+}
+
+@BindingAdapter("mypageImage")
+fun loadMyPageImage(imageView: ImageView, url: String?) {
+    val imageUrl = if (url.isNullOrEmpty()) {
+        R.drawable.ic_profile
+    } else {
+        url
+    }
+    Glide
+        .with(imageView.context)
+        .load(imageUrl)
+        .into(imageView)
+    imageView.apply {
+        background = this.context.resources.getDrawable(R.drawable.rectangle_radius_10, null)
+        clipToOutline = true
+    }
+}
+
+@BindingAdapter("decidedSchedule")
+fun textNullChecker(textView: TextView, input: String?) {
+
+    if (input.isNullOrEmpty()) {
+        textView.text = "미정"
+    } else {
+        textView.text = input
+    }
 }

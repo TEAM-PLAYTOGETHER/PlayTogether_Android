@@ -51,6 +51,7 @@
     <string name="createthunder_explain">번개 소개글을 작성해주세요.</string>
     <string name="createthunder_explaination">만나서 무엇을 할지, 위치 등을 구체적으로 적어주세요. 200자까지 쓸 수 있어요.</string>
     <string name="no_constraint">\u221E</string>
+    <string name="createthunder_people_undecided">인원제한없음</string>
     <string name="createthunder_infinite">\u221E</string>
     <string name="createthunder_place_undecided">장소 미정</string>
     <string name="createthunder_time_undecided">시간 미정</string>

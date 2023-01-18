@@ -37,12 +37,26 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initData()
         getMyInfo()
-        observeMyInfo()
         initBottomDialog()
         clickEvent()
         imagePickerCallback()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        userInfoViewModel.getMyInfo()
+    }
+
+    private fun initData() {
+        binding.homeViewModel = homeViewModel
+        userInfoViewModel.getMyInfo()
+        binding.myInfo = userInfoViewModel.myInfoData.value
+        subWayChecker()
+    }
+
+    private fun subWayChecker() {
 
     }
 
@@ -58,7 +72,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
     private fun clickEvent() {
         moveSettingView()
-        moveEditProfile()
+//        moveEditProfile()
         moveManageCrew()
         moveWebPage()
         moveEditProfileImage()
@@ -72,50 +86,43 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        //여기에 프로필 서버통신하는 코드 넣기
-        getMyInfo()
-        observeMyInfo()
-    }
-
     private fun getMyInfo() {
-        userInfoViewModel.getMyInfo()
-    }
-
-    private fun observeMyInfo() {
-        userInfoViewModel.myInfoData.observe(viewLifecycleOwner) { it ->
-            val birth = DateTimeUtil.convertBirthFormat(it.birth)
-            val gender = it.gender
-            val genderFormat: String
-            if (gender == "남") genderFormat = "M"
-            else genderFormat = "W"
-
-            binding.birthAndGender = "${birth}년생 ・ $genderFormat"
+        userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
             binding.myInfo = it
-            binding.homeViewModel = homeViewModel
-            binding.nickname = it.nickname
-            binding.description = it.description
-
-            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
-            if (it.firstStation == null) {
-                binding.firstStation = "지하철역 미지정"
-                binding.isEmpty = true
-            } else if (it.secondStation == null) {
-                binding.firstStation = it.firstStation
-                binding.isEmpty = true
-            } else {
-                binding.firstStation = it.firstStation
-                binding.secondStation = it.secondStation
-            }
-
-            //프로필 이미지 띄우기
-            val imageUrl = it.profileImage
-            loadImage(imageUrl)
-
-
+            Timber.e("변경")
         }
     }
+
+//    private fun observeMyInfo() {
+//        userInfoViewModel.myInfoData.observe(viewLifecycleOwner) { it ->
+//            val birth = DateTimeUtil.convertBirthFormat(it.birth)
+//            val gender = it.gender
+//            val genderFormat: String = if (gender == "남") "M"
+//            else "W"
+//
+//            binding.birthAndGender = "${birth}년생 ・ $genderFormat"
+//            binding.myInfo = it
+//            binding.homeViewModel = homeViewModel
+//            binding.nickname = it.nickname
+//            binding.description = it.description
+//
+//            // 지하철 미지정 시 '지하철역 미지정' 하나만 띄우기
+//            if (it.firstStation == null) {
+//                binding.firstStation = "지하철역 미지정"
+//                binding.isEmpty = true
+//            } else if (it.secondStation == null) {
+//                binding.firstStation = it.firstStation
+//                binding.isEmpty = true
+//            } else {
+//                binding.firstStation = it.firstStation
+//                binding.secondStation = it.secondStation
+//            }
+//
+//            //프로필 이미지 띄우기
+//            val imageUrl = it.profileImage
+//            loadImage(imageUrl)
+//        }
+//    }
 
     //동아리 전환 바텀시트
     private fun initBottomDialog() {
@@ -127,34 +134,34 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
 
     //프로필 수정하기 온보딩 뷰 이동
-    private fun moveEditProfile() {
-        binding.tvProfileEdit.setOnClickListener {
-            val intent = Intent(requireActivity(), EditProfileActivity::class.java)
-            val list = arrayListOf<String>()
-            Timber.e("121111 : ${binding.firstStation}")
-            Timber.e("121111 : ${binding.secondStation}")
-            if (binding.firstStation != null && binding.firstStation != "지하철역 미지정") {
-                list.add(binding.firstStation.toString())
-            }
-            if (binding.secondStation != null) {
-                list.add(binding.secondStation.toString())
-            }
-            if (list != null) {
-                if (list.size != 0) {
-                    intent.putExtra("ChipList", list)
-                }
-            }
-            intent.putExtra("crewName", PlayTogetherRepository.crewName)
-            intent.putExtra("nickname", binding.nickname)
-            intent.putExtra("description", binding.description)
-            intent.putExtra("firstStation", binding.firstStation)
-            intent.putExtra("secondStation", binding.secondStation)
-
-
-            //todo 온보딩뷰 이동 시 넘겨줄 값 추가
-            startActivity(intent)
-        }
-    }
+//    private fun moveEditProfile() {
+//        binding.tvProfileEdit.setOnClickListener {
+//            val intent = Intent(requireActivity(), EditProfileActivity::class.java)
+//            val list = arrayListOf<String>()
+//            Timber.e("121111 : ${binding.firstStation}")
+//            Timber.e("121111 : ${binding.secondStation}")
+//            if (binding.firstStation != null && binding.firstStation != "지하철역 미지정") {
+//                list.add(binding.firstStation.toString())
+//            }
+//            if (binding.secondStation != null) {
+//                list.add(binding.secondStation.toString())
+//            }
+//            if (list != null) {
+//                if (list.size != 0) {
+//                    intent.putExtra("ChipList", list)
+//                }
+//            }
+//            intent.putExtra("crewName", PlayTogetherRepository.crewName)
+//            intent.putExtra("nickname", binding.nickname)
+//            intent.putExtra("description", binding.description)
+//            intent.putExtra("firstStation", binding.firstStation)
+//            intent.putExtra("secondStation", binding.secondStation)
+//
+//
+//            //todo 온보딩뷰 이동 시 넘겨줄 값 추가
+//            startActivity(intent)
+//        }
+//    }
 
     //내 동아리 관리하기 이동뷰 이동
     private fun moveManageCrew() {
@@ -217,7 +224,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         binding.ivProfileImg.setClipToOutline(true)
 
         // 사진수정 후 즉각반영
-        getMyInfo()
+//        getMyInfo()
     }
 
     private fun imagePicker() {
@@ -235,15 +242,21 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                val item = it.data?.clipData
+//                val item = it.data?.clipData
+                val item = it.data?.data
+                Timber.e("profile item $item")
                 if (item != null) {
                     val multipartResolver = MultiPartResolver(requireActivity())
-                    val transferItem = multipartResolver.createImgMultiPart(item.getItemAt(0).uri)
-                    userInfoViewModel.putProfileImage(transferItem)
+//                    val transferItem = multipartResolver.createImgMultiPart(item.getItemAt(0).uri)
+                    val transferItem = multipartResolver.createImgMultiPart(item)
+                    userInfoViewModel.changeUserProfile(transferItem)
+//                    userInfoViewModel.putProfileImage(transferItem)
+                    Timber.e("profile : 성공")
                 }
             } else {
                 Timber.e("profileImageError : 이상함")
             }
+
         }
     }
 
