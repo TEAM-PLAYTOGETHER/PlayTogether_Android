@@ -3,6 +3,7 @@ package com.playtogether_android.app.util
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber
@@ -19,10 +20,10 @@ class AuthInterceptor : Interceptor {
         val response = doRequest(chain)
         if (response.code == 401) {
             Timber.e("need refresh")
-            test(response)
+            runBlocking {
+                test(response)
+            }
         }
-        Timber.e("need $response")
-
         return response
         //return chain.proceed(request.build())
 
