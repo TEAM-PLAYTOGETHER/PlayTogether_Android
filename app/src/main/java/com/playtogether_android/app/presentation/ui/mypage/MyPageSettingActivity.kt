@@ -44,7 +44,7 @@ class MyPageSettingActivity :
 
         //정책 및 약관
         binding.tvSettingPolicy.setOnClickListener {
-            initIntent("https://cheddar-liquid-051.notion.site/fc9dae6b1917453bbb1a39c4be4e4297")
+            initIntent("https://cheddar-liquid-051.notion.site/1fcdb884cf8a45a58359e23d64bce4fd")
         }
 
         //개발자 정보
