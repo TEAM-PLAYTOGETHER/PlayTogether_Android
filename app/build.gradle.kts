@@ -59,6 +59,7 @@ android {
         dataBinding = true
         viewBinding = true
     }
+    namespace = "com.playtogether_android.app"
 }
 
 

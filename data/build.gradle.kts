@@ -42,6 +42,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    namespace = "com.playtogether_android.data"
 }
 
 dependencies {
