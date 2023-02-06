@@ -72,7 +72,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
 
     private fun clickEvent() {
         moveSettingView()
-//        moveEditProfile()
+        moveEditProfile()
         moveManageCrew()
         moveWebPage()
         moveEditProfileImage()
@@ -133,35 +133,37 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     }
 
 
-    //프로필 수정하기 온보딩 뷰 이동
-//    private fun moveEditProfile() {
-//        binding.tvProfileEdit.setOnClickListener {
-//            val intent = Intent(requireActivity(), EditProfileActivity::class.java)
-//            val list = arrayListOf<String>()
+    //    프로필 수정하기 온보딩 뷰 이동
+    private fun moveEditProfile() {
+        binding.tvProfileEdit.setOnClickListener {
+            val intent = Intent(requireActivity(), EditProfileActivity::class.java)
+            val list = arrayListOf<String>()
 //            Timber.e("121111 : ${binding.firstStation}")
 //            Timber.e("121111 : ${binding.secondStation}")
-//            if (binding.firstStation != null && binding.firstStation != "지하철역 미지정") {
-//                list.add(binding.firstStation.toString())
-//            }
-//            if (binding.secondStation != null) {
-//                list.add(binding.secondStation.toString())
-//            }
-//            if (list != null) {
-//                if (list.size != 0) {
-//                    intent.putExtra("ChipList", list)
-//                }
-//            }
-//            intent.putExtra("crewName", PlayTogetherRepository.crewName)
-//            intent.putExtra("nickname", binding.nickname)
-//            intent.putExtra("description", binding.description)
-//            intent.putExtra("firstStation", binding.firstStation)
-//            intent.putExtra("secondStation", binding.secondStation)
-//
-//
-//            //todo 온보딩뷰 이동 시 넘겨줄 값 추가
-//            startActivity(intent)
-//        }
-//    }
+            val firstStation = binding.tvSubwayFirst.toString()
+            val secondStation = binding.tvSubwaySecond.toString()
+
+            if (firstStation.isNotBlank() && firstStation != "지하철역 미지정") {
+                list.add(firstStation)
+            }
+            if (secondStation.isNotBlank()) {
+                list.add(secondStation)
+            }
+            if (list.isNotEmpty()) {
+                intent.putExtra("ChipList", list)
+            }
+
+            intent.putExtra("crewName", PlayTogetherRepository.crewName)
+            intent.putExtra("nickname", binding.tvUserName.toString())
+            intent.putExtra("description", binding.tvUserIntroduction.toString())
+            intent.putExtra("firstStation", firstStation)
+            intent.putExtra("secondStation", secondStation)
+
+
+            //todo 온보딩뷰 이동 시 넘겨줄 값 추가
+            startActivity(intent)
+        }
+    }
 
     //내 동아리 관리하기 이동뷰 이동
     private fun moveManageCrew() {
