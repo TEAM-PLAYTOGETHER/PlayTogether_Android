@@ -12,7 +12,7 @@ plugins {
 
 android {
     compileSdk = Apps.compileSdk
-    buildToolsVersion = "30.0.3"
+    buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = Apps.pacakageName
@@ -89,16 +89,16 @@ dependencies {
     implementation(project(":data"))
 
     //bad request log detail show
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     //sercurity
-    implementation("androidx.security:security-crypto-ktx:1.1.0-alpha03")
+    implementation("androidx.security:security-crypto-ktx:1.1.0-alpha04")
 
     //kakao login
     implementation("com.kakao.sdk:v2-user:2.9.0")
 
     //google login
-    implementation("com.google.android.gms:play-services-auth:20.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.4.1")
 
     //moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
@@ -111,10 +111,10 @@ dependencies {
 
 
     //ViewModel
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
 
 
@@ -132,15 +132,15 @@ dependencies {
 // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
     implementation("com.github.nabil6391:LottieSwipeRefreshLayout:1.0.0")
-    implementation("com.airbnb.android:lottie:5.0.2")
+    implementation("com.airbnb.android:lottie:5.2.0")
 
 // Glide
     implementation(ThirdPartyDependencies.glide)
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("androidx.appcompat:appcompat:1.6.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.security:security-crypto:1.1.0-alpha03")
-    implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha04")
+//    implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
 
 // Navigation
     implementation(AndroidXDependencies.navigation)
@@ -166,8 +166,8 @@ dependencies {
     androidTestImplementation(TestDependencies.espresso)
 
 //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
 //CardView
     implementation(AndroidXDependencies.cardview)
@@ -177,12 +177,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
 //annotation
-    implementation("org.jetbrains:annotations:15.0")
-    implementation("androidx.annotation:annotation:1.3.0")
+    implementation("org.jetbrains:annotations:20.1.0")
+    implementation("androidx.annotation:annotation:1.5.0")
 
 //    hilt
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    implementation("com.google.dagger:hilt-android:2.42")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
 
 //koin
     implementation("io.insert-koin:koin-core:3.1.2")
@@ -192,7 +192,7 @@ dependencies {
 
 
     //bottomsheet
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.google.android.material:material:1.8.0")
 
     //google
     implementation(platform("com.google.firebase:firebase-bom:29.1.0"))     // Firebase BoM
@@ -201,7 +201,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
-    implementation("androidx.work:work-runtime:2.8.0-alpha01")
+    implementation("androidx.work:work-runtime-ktx:2.7.1")
 
 
     //dot indicator
@@ -222,7 +222,7 @@ dependencies {
     }
 
     //okhttp websocket
-    implementation("com.squareup.okhttp3:okhttp:3.12.12")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
 
     //gson
     implementation("com.google.code.gson:gson:2.9.0")
