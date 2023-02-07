@@ -1,38 +1,38 @@
 package com.playtogether_android.app.util
 
 import com.playtogether_android.app.BuildConfig
-import com.playtogether_android.data.model.response.sign.ResTokenIssuance
 import com.playtogether_android.data.singleton.PlayTogetherRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
 import timber.log.Timber
 
 class TokenManager {
     private lateinit var service: TokenRefreshService
 
-    init {
+    fun initService() {
         val retrofit = Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()).build()
         service = retrofit.create(TokenRefreshService::class.java)
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun getRefreshToken() = GlobalScope.launch {
-        kotlin.runCatching {
+    fun getRefreshToken(coroutineScope: CoroutineScope) = coroutineScope.launch {
+        val result = runCatching {
             service.getTokenIssuance(
                 PlayTogetherRepository.userToken, PlayTogetherRepository.userRefreshToken
             )
-        }.onSuccess {
-            PlayTogetherRepository.userToken = it.data.accessToken
-            PlayTogetherRepository.userRefreshToken = it.data.refreshToken
-            Timber.d("token manager success")
-        }.onFailure {
-            Timber.e("token access :${PlayTogetherRepository.userToken}")
-            Timber.e("token access :${PlayTogetherRepository.userRefreshToken}")
-            Timber.e("token manager error $it")
+        }
+        if (result.isSuccess) {
+            result.getOrNull()?.let {
+                PlayTogetherRepository.userToken = it.data.accessToken
+                PlayTogetherRepository.userRefreshToken = it.data.refreshToken
+                Timber.d("token manager success")
+            } ?: run {
+                Timber.e("token manager error: result is null")
+            }
+        } else {
+            Timber.e("token manager error: ${result.exceptionOrNull()}")
         }
     }
 }
