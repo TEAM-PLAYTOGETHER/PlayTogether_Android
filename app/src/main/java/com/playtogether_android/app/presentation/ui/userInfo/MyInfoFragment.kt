@@ -140,8 +140,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             val list = arrayListOf<String>()
 //            Timber.e("121111 : ${binding.firstStation}")
 //            Timber.e("121111 : ${binding.secondStation}")
-            val firstStation = binding.tvSubwayFirst.toString()
-            val secondStation = binding.tvSubwaySecond.toString()
+            val firstStation = binding.tvSubwayFirst.text.toString()
+            val secondStation = binding.tvSubwaySecond.text.toString()
 
             if (firstStation.isNotBlank() && firstStation != "지하철역 미지정") {
                 list.add(firstStation)
@@ -154,11 +154,10 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
             }
 
             intent.putExtra("crewName", PlayTogetherRepository.crewName)
-            intent.putExtra("nickname", binding.tvUserName.toString())
-            intent.putExtra("description", binding.tvUserIntroduction.toString())
+            intent.putExtra("nickname", binding.tvUserName.text.toString())
+            intent.putExtra("description", binding.tvUserIntroduction.text.toString())
             intent.putExtra("firstStation", firstStation)
             intent.putExtra("secondStation", secondStation)
-
 
             //todo 온보딩뷰 이동 시 넘겨줄 값 추가
             startActivity(intent)
