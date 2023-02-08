@@ -3,11 +3,13 @@ package com.playtogether_android.app.di
 import com.google.gson.GsonBuilder
 import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.util.AuthInterceptor
-import com.playtogether_android.app.util.MyAuthenticator
+import com.playtogether_android.app.util.RefreshTokenInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,7 +39,7 @@ object RetrofitModule {
         .readTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor())
         .addInterceptor(AuthInterceptor())
-//        .authenticator(MyAuthenticator())
+        .addInterceptor(RefreshTokenInterceptor(CoroutineScope(Dispatchers.Default)))
         .build()
 
     @GsonConverter
