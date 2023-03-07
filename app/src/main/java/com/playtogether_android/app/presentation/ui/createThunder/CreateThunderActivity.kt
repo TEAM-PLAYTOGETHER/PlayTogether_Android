@@ -52,8 +52,9 @@ class CreateThunderActivity :
             if (isGranted) {
                 Timber.d("권한 승인")
                 uploadImageListener()
-            } else
+            } else {
                 shortToast("권한요청이 거절되었습니다.")
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +69,7 @@ class CreateThunderActivity :
 
     private fun initAdapter() {
         photoListAdapter = CreateThunderPhotoListAdapter(createThunderViewModel)
-        //todo 스크롤이 원하는 방향으로 가지 않는다.
+        // todo 스크롤이 원하는 방향으로 가지 않는다.
 
         createThunderViewModel.photoList.observe(this) {
             photoListAdapter.mutablePhotoList = it
@@ -185,8 +186,9 @@ class CreateThunderActivity :
         for (item in itemList) {
             if (item.contains("미정") || item.contains(resources.getString(R.string.no_constraint))) {
                 transferList.add(null)
-            } else
+            } else {
                 transferList.add(item)
+            }
         }
         Timber.e("list : $transferList")
         return transferList
@@ -226,7 +228,6 @@ class CreateThunderActivity :
                 requestBodyMap
             )
         }
-
     }
 
     private fun absolutePath(uri: Uri): String {
@@ -299,19 +300,22 @@ class CreateThunderActivity :
 
     private fun clickUndecided(textView: TextView, imageView: ImageView, str: Int) {
         if (!imageView.isSelected) {
+            imageView.isSelected = !imageView.isSelected
             imageView.setImageResource(R.drawable.ic_icn_check_active)
             textView.setText(str)
             inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
             textView.isFocusable = false
         } else {
+            imageView.isSelected = !imageView.isSelected
             imageView.setImageResource(R.drawable.ic_icn_check_inactive)
             textView.text = null
             textView.isFocusableInTouchMode = true
+            /*
             textView.requestFocus()
             inputMethodManager.showSoftInput(
                 textView,
                 InputMethodManager.SHOW_IMPLICIT
-            )
+            )*/
         }
     }
 
@@ -322,6 +326,7 @@ class CreateThunderActivity :
                 binding.ivCreatethunderDateCheck,
                 R.string.createthunder_date_undecided
             )
+            btnActive()
         }
     }
 
@@ -332,6 +337,7 @@ class CreateThunderActivity :
                 binding.ivCreatethunderTimeCheck,
                 R.string.createthunder_time_undecided
             )
+            btnActive()
         }
     }
 
@@ -342,6 +348,7 @@ class CreateThunderActivity :
                 binding.ivCreatethunderPlaceCheck,
                 R.string.createthunder_place_undecided
             )
+            btnActive()
         }
     }
 
