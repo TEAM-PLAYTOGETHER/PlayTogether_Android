@@ -115,6 +115,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun nextActivity(intent: Intent) {
+        finishAffinity()
         startActivity(intent)
     }
 
