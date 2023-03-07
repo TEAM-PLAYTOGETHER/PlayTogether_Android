@@ -11,6 +11,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile = file(rootProject.extra["keyStore"] as String)
+            storePassword = rootProject.extra["password"] as String
+            keyAlias = rootProject.extra["name"] as String
+            keyPassword = rootProject.extra["password"] as String
+        }
+        create("unit1") {
+            storeFile = file(rootProject.extra["unitName"] as String)
+            storePassword = rootProject.extra["unitPassword"] as String
+            keyAlias = rootProject.extra["keyname"] as String
+            keyPassword = rootProject.extra["unitPassword"] as String
+        }
+    }
     compileSdk = Apps.compileSdk
     buildToolsVersion = "31.0.0"
 
@@ -43,8 +57,10 @@ android {
             )
         }
         getByName("release") {
+            manifestPlaceholders += mapOf()
             manifestPlaceholders["appName"] = "@string/app_name"
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("unit1")
         }
     }
     compileOptions {
