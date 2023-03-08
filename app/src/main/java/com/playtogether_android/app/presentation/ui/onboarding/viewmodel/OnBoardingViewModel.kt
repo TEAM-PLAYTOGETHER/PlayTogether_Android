@@ -124,6 +124,7 @@ class OnBoardingViewModel @Inject constructor(
                             registerCrew.message.toString()
                         )
                 }
+                else -> {}
             }
             Timber.d("registerCrew : ${_registerCrew.value.toString()}")
         }
@@ -187,6 +188,7 @@ class OnBoardingViewModel @Inject constructor(
                     nicknameDuplicationCheck.value =
                         NickNameDuplicationData(nicknameDuplication.code!!, false)
                 }
+                else -> {}
             }
             Timber.d("nicknameDuplication: ${nicknameDuplicationCheck.value.toString()}")
 

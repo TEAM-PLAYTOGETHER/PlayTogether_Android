@@ -15,7 +15,7 @@ class SelectOnboardingActivity :
     BaseActivity<ActivitySelectOnboardingBinding>(R.layout.activity_select_onboarding) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initBackBtn()
+        //initBackBtn()
         initOpenBtnClickListener()
         initJoinBtnClickListener()
         movePage()

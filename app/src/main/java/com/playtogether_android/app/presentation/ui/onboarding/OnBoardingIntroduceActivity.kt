@@ -103,6 +103,7 @@ class OnBoardingIntroduceActivity :
     }
 
 
+
     private fun isOpenerCheck() {
 
         val crewName = intent.getStringExtra("crewName")
@@ -111,9 +112,37 @@ class OnBoardingIntroduceActivity :
         val crewId = intent.getIntExtra("crewId", 1)
         val isOpener = intent.getBooleanExtra("isOpener", false)
 
+
         val name = binding.etIntroOnboardingName.text.toString()
         binding.tvIntroOnboardingCrewName.text = crewName
         if (isOpener) {
+            val nickName = binding.etIntroOnboardingName.text.toString()
+            val description = binding.etIntroOnboardingIntro.text.toString()
+            val list = intent.getStringArrayListExtra("ChipList")
+            if (list?.size != null) {
+                for (i in 0 until list.size) {
+                    val chip = Chip(binding.chipMypage.context).apply {
+                        text = list[i]
+                        Timber.e("TEST ${list[i]}")
+                        firstSubway = list[0]
+                        if (list.size < 2) {
+                            secondSubway = null
+                        } else {
+                            secondSubway = list[1]
+                        }
+                    }
+                }
+            }
+
+            onBoardingViewModel.putAddProfile(
+                AddProfileItem(
+                    description,
+                    firstSubway,
+                    nickName,
+                    secondSubway
+                ), intent.getIntExtra("crewId", 1)
+            )
+
             val intent = Intent(this, OpenCrewEndOnBoardingActivity::class.java).apply {
                 putExtra("nickname", name)
                 putExtra("crewName", crewName)

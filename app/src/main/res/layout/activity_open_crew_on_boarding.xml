@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_open_onboarding_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:background="@color/gray_black"
             app:layout_constraintTop_toTopOf="parent">
 
