@@ -15,6 +15,7 @@ import com.playtogether_android.app.presentation.ui.search.SearchActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.applyOpenChecker
+import com.playtogether_android.app.util.permission.NotificationPermission
 import com.playtogether_android.app.util.viewPagerAnimation
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initData()
         initView()
         refreshView()
+        requestPermission()
         Timber.d("jwt 토큰 : ${PlayTogetherRepository.userToken}")
     }
 
@@ -152,6 +154,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             val bottomSheetDialog = HomeFragmentDialog()
             bottomSheetDialog.show(requireActivity().supportFragmentManager, "init bottom_sheet")
         }
+    }
+
+    private fun requestPermission() {
+        NotificationPermission.requestNotificationPermission(requireContext())
     }
 
     companion object {
