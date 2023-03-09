@@ -8,14 +8,13 @@ import androidx.annotation.LayoutRes
 import com.playtogether_android.app.R
 import com.playtogether_android.app.presentation.ui.home.ThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.login.LoginActivity
-import com.playtogether_android.app.presentation.ui.thunder.ApplyThunderDetailActivity
 import com.playtogether_android.app.presentation.ui.thunder.OpenThunderDetailActivity
 
 class CustomDialog(private val context: Context, val title: String) {
     private val dialog = Dialog(context)
     private lateinit var onClickedListener: ButtonClickListener
 
-    interface ButtonClickListener {
+    fun interface ButtonClickListener {
         fun onClicked(num: Int)
     }
 
@@ -54,7 +53,6 @@ class CustomDialog(private val context: Context, val title: String) {
         dialog.setCancelable(false)
         dialog.findViewById<TextView>(R.id.tv_dialog_answer).setOnClickListener {
             dialog.dismiss()
-
         }
     }
 
@@ -73,11 +71,10 @@ class CustomDialog(private val context: Context, val title: String) {
 //            onClickedListener.onClicked(1)
             dialog.dismiss()
             (context as ThunderDetailActivity).finish()
-
         }
     }
 
-    //번개 삭제 다이어로그
+    // 번개 삭제 다이어로그
     fun showDeleteDialog(@LayoutRes layout: Int) {
         dialog.setContentView(layout)
         dialog.findViewById<TextView>(R.id.tv_dialog_title).text = title
@@ -95,8 +92,7 @@ class CustomDialog(private val context: Context, val title: String) {
         }
     }
 
-
-    //번개 삭제 다이어로그
+    // 번개 삭제 다이어로그
     fun showSignDialog(@LayoutRes layout: Int) {
         dialog.setContentView(layout)
         dialog.findViewById<TextView>(R.id.tv_dialog_title).text = title
@@ -113,6 +109,4 @@ class CustomDialog(private val context: Context, val title: String) {
             (context as LoginActivity).finish()
         }
     }
-
-
 }

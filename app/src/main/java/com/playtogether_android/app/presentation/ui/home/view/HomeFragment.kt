@@ -139,7 +139,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun refreshView() {
         with(binding) {
             lsrlHomeContainer.setOnRefreshListener {
-                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
+                // 해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
                 initData()
                 initAdapter()
                 lsrlHomeContainer.isRefreshing = false
@@ -159,5 +159,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         const val CATEGORY_GO = "갈래"
         const val CATEGORY_DO = "할래"
     }
-
 }
