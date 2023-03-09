@@ -23,6 +23,7 @@ android {
         manifestPlaceholders["kakaokey"] = getApiKey("kakao_key_manifest")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
+        buildConfigField("String", "SOCKET_URL", getSocketUrl("socket_url"))
         buildConfigField("String", "SUBWAY_URL", getSubwayUrl("SUBWAY_URL"))
         buildConfigField("String", "KAKAOKEY", getApiKey("kakao_key"))
         buildConfigField("String", "GOOGLE_URL", getBaseUrl("GOOGLE_URL"))
@@ -69,6 +70,10 @@ fun getSubwayUrl(value: String): String {
 }
 
 fun getBaseUrl(value: String): String {
+    return gradleLocalProperties(rootDir).getProperty(value)
+}
+
+fun getSocketUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }
 
