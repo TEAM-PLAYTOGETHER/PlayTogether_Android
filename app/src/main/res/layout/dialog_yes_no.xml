@@ -11,8 +11,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_regular"
         android:includeFontPadding="false"
-        android:textSize="16dp"
-        android:textColor="@color/gray_black"
         android:paddingVertical="59dp"
         android:textColor="@color/gray_black"
         android:textSize="16dp"
