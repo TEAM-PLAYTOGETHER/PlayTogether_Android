@@ -127,8 +127,8 @@ object PlayTogetherRepository {
         }
 
     //푸시알림 온,오프
-    var pushAlarmOn: Boolean
-        get() = preferences.getBoolean(PUSH_ALARM_KEY, true)
+    var doesNotificationChecked: Boolean
+        get() = preferences.getBoolean(PUSH_ALARM_KEY, false)
         set(value) = preferences.edit {
             it.putBoolean(PUSH_ALARM_KEY, value)
         }

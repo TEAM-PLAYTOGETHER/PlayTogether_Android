@@ -1,7 +1,7 @@
 object Apps {
-    const val compileSdk = 32
+    const val compileSdk = 33
     const val minSdk = 24
-    const val targetSdk = 32
+    const val targetSdk = 33
     var versionCode = 1
     var versionName = "1.0.0"
     const val pacakageName = "com.playtogether_android.app"
@@ -39,7 +39,6 @@ object Versions {
     const val jvm_version = "1.8"
 }
 
-
 object KotlinDependencies {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
 }
@@ -67,7 +66,6 @@ object AndroidXDependencies {
     const val cardview = "androidx.cardview:cardview:${Versions.cardview_version}"
     const val liveDataKtx =
         "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_ktx_version}"
-
 }
 
 object MaterialDesignDependencies {
@@ -86,7 +84,6 @@ object ThirdPartyDependencies {
     const val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor"
     const val lottieSwipeRefreshLayout = "com.github.nabil6391:LottieSwipeRefreshLayout:1.0.0"
 }
-
 
 object TestDependencies {
     const val jUnit = "junit:junit:${Versions.junit_version}"
