@@ -19,6 +19,14 @@
             name="homeViewModel"
             type="com.playtogether_android.app.presentation.ui.home.viewmodel.HomeViewModel" />
 
+        <variable
+            name="first"
+            type="String" />
+
+        <variable
+            name="second"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -172,18 +180,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rectangle_fill_gray_black02_radius_14"
-                        android:ellipsize="end"
                         android:fontFamily="@font/pretendard_medium"
-                        android:maxLength="9"
-                        android:maxLines="1"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="6dp"
-                        android:text="@{myInfo.firstStation==null ? `지하철역 미지정` : myInfo.firstStation}"
+                        android:text="@{myInfo.firstStation==null ? `지하철역 미지정` : first}"
                         android:textColor="@color/gray_white"
                         android:textSize="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="강남역" />
+                        tools:text="홍대입구역" />
 
                     <TextView
                         android:id="@+id/tv_subway_second"
@@ -193,17 +198,16 @@
                         android:background="@drawable/rectangle_fill_gray_black02_radius_14"
                         android:ellipsize="end"
                         android:fontFamily="@font/pretendard_medium"
-                        android:maxLength="10"
                         android:maxLines="1"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="6dp"
-                        android:text="@{myInfo.secondStation.length() > 7 ? myInfo.secondStation.substring(0,7) +`...` : myInfo.secondStation }"
+                        android:text="@{second }"
                         android:textColor="@color/gray_white"
                         android:textSize="12dp"
                         android:visibility="@{myInfo.secondStation==null ? View.GONE : View.VISIBLE}"
                         app:layout_constraintStart_toEndOf="@id/tv_subway_first"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="뒷부분말줄임테스트뒷부분말줄임이되었으면줗겠다aaa" />
+                        tools:text="삼성역" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
