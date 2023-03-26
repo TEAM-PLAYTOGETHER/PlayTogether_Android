@@ -25,6 +25,7 @@ class MessageFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = messageViewModel
         getMessageRoomList()
         initAdapter()
         initList()

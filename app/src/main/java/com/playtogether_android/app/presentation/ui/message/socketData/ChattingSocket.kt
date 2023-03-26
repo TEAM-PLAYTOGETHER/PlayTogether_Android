@@ -3,6 +3,7 @@ package com.playtogether_android.app.presentation.ui.message.socketData
 import android.content.Context
 import android.widget.Toast
 import com.google.gson.Gson
+import com.playtogether_android.app.BuildConfig
 import com.playtogether_android.app.presentation.ui.message.socketData.request.ReqEnterRoom
 import com.playtogether_android.app.presentation.ui.message.socketData.request.ReqSendMessage
 import com.playtogether_android.app.presentation.ui.message.socketData.response.*
@@ -35,7 +36,7 @@ class ChattingSocket {
         header["Authorization"] = tokenLst
         val options = IO.Options()
         options.extraHeaders = header
-        socket = IO.socket("http://13.125.232.150:3000", options)
+        socket = IO.socket(BuildConfig.SOCKET_URL, options)
         Timber.e("Socket connection success : ${socket.id()}")
     }
 
@@ -82,8 +83,9 @@ class ChattingSocket {
             if (sendData.success) {
                 val tempChat = reformatSocketChat(sendChat.content, sendChat.createdAt, true)
                 addChatLambda(tempChat)
-            } else
+            } else {
                 errorLambda()
+            }
         }
         socket.on("resSendMessage", sendListener)
     }

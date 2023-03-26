@@ -17,9 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 // 대충 fcm 토큰 받으려고 긁어옴
-const val CHANNEL_ID = "plto noti channel"
-const val NOTIFICATION_ID = 82
-
 @AndroidEntryPoint
 class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
 
@@ -34,7 +31,11 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
             Timber.e("plto fcm : remote message data is empty")
         } else {
             Timber.e("plto fcm : remote message data is not empty")
-            makeChannel()
+            if (NotificationManagerCompat.from(this)
+                .getNotificationChannel(Channel.CHATTING.name) == null
+            ) {
+                makeChannel()
+            }
             sendNotification(remoteMessage)
         }
     }
@@ -42,15 +43,18 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
     fun makeChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create the NotificationChannel
-            val name = getString(R.string.channel_name)
-            val descriptionText = getString(R.string.channel_description)
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
-            mChannel.description = descriptionText
+            val mChannel = NotificationChannel(
+                Channel.CHATTING.name,
+                Channel.CHATTING.channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = Channel.CHATTING.description
+            }
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(mChannel)
+            NotificationManagerCompat.from(this).createNotificationChannel(mChannel)
+            /*val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(mChannel)*/
         }
     }
 
@@ -87,7 +91,7 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
             }
         }
 
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID).apply {
+        val builder = NotificationCompat.Builder(this, Channel.CHATTING.name).apply {
             setAutoCancel(true)
             setContentTitle(name)
             setContentText(body)
@@ -97,4 +101,8 @@ class FirebaseMessagingServiceUtil : FirebaseMessagingService() {
 
         NotificationManagerCompat.from(this).notify(rand, builder.build())
     }
+}
+
+enum class Channel(val channelName: String, val description: String) {
+    CHATTING("채팅", "채팅을 받는 푸시알림 권한")
 }
