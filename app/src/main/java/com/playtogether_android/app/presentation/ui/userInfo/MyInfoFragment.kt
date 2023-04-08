@@ -90,6 +90,10 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
         userInfoViewModel.myInfoData.observe(viewLifecycleOwner) {
             binding.myInfo = it
             Timber.e("변경")
+
+            binding.first = it.firstStation!!.substring(0, it.firstStation!!.indexOf(" ")) + "역"
+            binding.second = it.secondStation!!.substring(0, it.secondStation!!.indexOf(" ")) + "역"
+
         }
     }
 
