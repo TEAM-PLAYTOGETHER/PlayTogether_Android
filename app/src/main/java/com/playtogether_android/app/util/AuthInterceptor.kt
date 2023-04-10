@@ -15,16 +15,10 @@ class AuthInterceptor : Interceptor {
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
-
         val request = chain.request().newBuilder()
-        val response = doRequest(chain)
-        if (response.code == 401) {
-            Timber.e("need refresh")
-            runBlocking {
-                test(response)
-            }
-        }
-        return response
+            .addHeader("Authorization", PlayTogetherRepository.userToken)
+            .build()
+        return chain.proceed(request)
         //return chain.proceed(request.build())
 
 
@@ -36,20 +30,6 @@ class AuthInterceptor : Interceptor {
 //        Log.d("response", "" + response)
 //        Log.d("response header", "" + response.headers)
 //        return response
-    }
-
-    private fun test1() {
-
-    }
-
-    private fun test(response: Response) {
-        val isRefresh = TokenManager().getRefreshToken().isCompleted
-        if (isRefresh) {
-            Timber.d("code 200 재발급")
-            response.request.newBuilder()
-                .header("Authorization", PlayTogetherRepository.userToken)
-                .build()
-        }
     }
 
     private fun doRequest(chain: Interceptor.Chain): Response {

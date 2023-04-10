@@ -29,6 +29,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -136,7 +137,7 @@ object ApiModule {
                 addInterceptor(provideInterceptor())
                 addInterceptor(AuthInterceptor())
                 build()
-                Log.e("TEST", "찍히나")
+//                Timber.e("TEST provideOkHttpClient")
             }
 
     @Singleton
