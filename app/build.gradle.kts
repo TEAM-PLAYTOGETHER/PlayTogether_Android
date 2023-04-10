@@ -11,22 +11,8 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        create("release") {
-            storeFile = file(rootProject.extra["keyStore"] as String)
-            storePassword = rootProject.extra["password"] as String
-            keyAlias = rootProject.extra["name"] as String
-            keyPassword = rootProject.extra["password"] as String
-        }
-        create("unit1") {
-            storeFile = file(rootProject.extra["unitName"] as String)
-            storePassword = rootProject.extra["unitPassword"] as String
-            keyAlias = rootProject.extra["keyname"] as String
-            keyPassword = rootProject.extra["unitPassword"] as String
-        }
-    }
     compileSdk = Apps.compileSdk
-    buildToolsVersion = "31.0.0"
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = Apps.pacakageName
@@ -37,14 +23,14 @@ android {
         manifestPlaceholders["kakaokey"] = getApiKey("kakao_key_manifest")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", getBaseUrl("base_url"))
+        buildConfigField("String", "SOCKET_URL", getSocketUrl("socket_url"))
         buildConfigField("String", "SUBWAY_URL", getSubwayUrl("SUBWAY_URL"))
         buildConfigField("String", "KAKAOKEY", getApiKey("kakao_key"))
-        buildConfigField("String","GOOGLE_URL",getBaseUrl("GOOGLE_URL"))
-        //buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))
-        //buildConfigField("String","GOOGLEKEY",getApiKey("google_key"))
+        buildConfigField("String", "GOOGLE_URL", getBaseUrl("GOOGLE_URL"))
+        // buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))
+        // buildConfigField("String","GOOGLEKEY",getApiKey("google_key"))
         buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("google_client_id"))
-        buildConfigField("String","GOOGLE_CLIENT_SECRET",getApiKey("google_client_secret"))
-
+        buildConfigField("String", "GOOGLE_CLIENT_SECRET", getApiKey("google_client_secret"))
     }
 
     buildTypes {
@@ -57,10 +43,8 @@ android {
             )
         }
         getByName("release") {
-            manifestPlaceholders += mapOf()
             manifestPlaceholders["appName"] = "@string/app_name"
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("unit1")
         }
     }
     compileOptions {
@@ -75,9 +59,7 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    namespace = "com.playtogether_android.app"
 }
-
 
 fun getApiKey(propertyKey: String): String {
     return gradleLocalProperties(rootDir).getProperty(propertyKey)
@@ -88,6 +70,10 @@ fun getSubwayUrl(value: String): String {
 }
 
 fun getBaseUrl(value: String): String {
+    return gradleLocalProperties(rootDir).getProperty(value)
+}
+
+fun getSocketUrl(value: String): String {
     return gradleLocalProperties(rootDir).getProperty(value)
 }
 
@@ -104,19 +90,19 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
-    //bad request log detail show
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    // bad request log detail show
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
-    //sercurity
-    implementation("androidx.security:security-crypto-ktx:1.1.0-alpha04")
+    // sercurity
+    implementation("androidx.security:security-crypto-ktx:1.1.0-alpha03")
 
-    //kakao login
+    // kakao login
     implementation("com.kakao.sdk:v2-user:2.9.0")
 
-    //google login
-    implementation("com.google.android.gms:play-services-auth:20.4.1")
+    // google login
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
 
-    //moshi
+    // moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
     implementation("com.squareup.moshi:moshi:1.12.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
@@ -125,19 +111,16 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.12.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
 
-
-    //ViewModel
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    // ViewModel
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
-
 
 // DataStore
     implementation(AndroidXDependencies.dataStore)
     implementation(AndroidXDependencies.dataStoreCore)
-
 
 // Android KTX
     implementation(AndroidXDependencies.fragmentKtx)
@@ -148,15 +131,15 @@ dependencies {
 // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
     implementation("com.github.nabil6391:LottieSwipeRefreshLayout:1.0.0")
-    implementation("com.airbnb.android:lottie:5.2.0")
+    implementation("com.airbnb.android:lottie:5.0.2")
 
 // Glide
     implementation(ThirdPartyDependencies.glide)
-    implementation("androidx.appcompat:appcompat:1.6.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.security:security-crypto:1.1.0-alpha04")
-//    implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha03")
+    implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
 
 // Navigation
     implementation(AndroidXDependencies.navigation)
@@ -181,72 +164,73 @@ dependencies {
     androidTestImplementation(TestDependencies.androidTest)
     androidTestImplementation(TestDependencies.espresso)
 
-//coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+// coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
 
-//CardView
+// CardView
     implementation(AndroidXDependencies.cardview)
 
-//recyclerview
+// recyclerview
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
-//annotation
-    implementation("org.jetbrains:annotations:20.1.0")
-    implementation("androidx.annotation:annotation:1.5.0")
+// annotation
+    implementation("org.jetbrains:annotations:15.0")
+    implementation("androidx.annotation:annotation:1.3.0")
 
 //    hilt
-    implementation("com.google.dagger:hilt-android:2.42")
-    kapt("com.google.dagger:hilt-android-compiler:2.42")
+    implementation("com.google.dagger:hilt-android:2.41")
+    kapt("com.google.dagger:hilt-android-compiler:2.41")
 
-//koin
+// koin
     implementation("io.insert-koin:koin-core:3.1.2")
     implementation("io.insert-koin:koin-android:3.1.2")
     implementation("io.insert-koin:koin-android-compat:3.1.2")
     testImplementation("io.insert-koin:koin-test:3.1.2")
 
+    // bottomsheet
+    implementation("com.google.android.material:material:1.4.0")
 
-    //bottomsheet
-    implementation("com.google.android.material:material:1.8.0")
-
-    //google
-    implementation(platform("com.google.firebase:firebase-bom:29.1.0"))     // Firebase BoM
+    // google
+    implementation(platform("com.google.firebase:firebase-bom:29.1.0")) // Firebase BoM
     implementation("com.google.firebase:firebase-common-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
-    implementation("androidx.work:work-runtime-ktx:2.7.1")
+    implementation("androidx.work:work-runtime:2.8.0-alpha01")
 
-
-    //dot indicator
+    // dot indicator
     implementation("com.tbuonomo:dotsindicator:4.2")
 
-    //Timber
+    // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 
-    //update
+    // update
     implementation("com.google.android.play:core:1.10.3")
 
-    //Kapt
-    //kapt(KaptDependencies.glide)
+    // Kapt
+    // kapt(KaptDependencies.glide)
 
-    //Socket.io
+    // Socket.io
     implementation("io.socket:socket.io-client:2.0.0") {
         exclude("org.json", "json")
     }
 
-    //okhttp websocket
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    // okhttp websocket
+    implementation("com.squareup.okhttp3:okhttp:3.12.12")
 
-    //gson
+    // gson
     implementation("com.google.code.gson:gson:2.9.0")
 
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 
-    //for push alarm
-    implementation ("androidx.work:work-runtime-ktx:2.7.1")
+    // for push alarm
+    implementation("androidx.work:work-runtime-ktx:2.7.1")
 
-    implementation ("com.airbnb.android:lottie:5.2.0")
+    implementation("com.airbnb.android:lottie:5.2.0")
+
+    // ted permission
+    implementation("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
 }

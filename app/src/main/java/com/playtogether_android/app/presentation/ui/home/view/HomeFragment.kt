@@ -15,6 +15,7 @@ import com.playtogether_android.app.presentation.ui.search.SearchActivity
 import com.playtogether_android.app.presentation.ui.thunder.list.view.ThunderListActivity
 import com.playtogether_android.app.presentation.ui.thunder.viewmodel.ThunderViewModel
 import com.playtogether_android.app.util.applyOpenChecker
+import com.playtogether_android.app.util.permission.NotificationPermission
 import com.playtogether_android.app.util.viewPagerAnimation
 import com.playtogether_android.data.singleton.PlayTogetherRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initData()
         initView()
         refreshView()
+        requestPermission()
         Timber.d("jwt 토큰 : ${PlayTogetherRepository.userToken}")
     }
 
@@ -139,7 +141,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun refreshView() {
         with(binding) {
             lsrlHomeContainer.setOnRefreshListener {
-                //해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
+                // 해당 부분에 애니메이션 넣는건가? ex) 배경 0.5초 검은색
                 initData()
                 initAdapter()
                 lsrlHomeContainer.isRefreshing = false
@@ -154,10 +156,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
+    private fun requestPermission() {
+        NotificationPermission.requestNotificationPermission(requireContext())
+    }
+
     companion object {
         const val CATEGORY_EAT = "먹을래"
         const val CATEGORY_GO = "갈래"
         const val CATEGORY_DO = "할래"
     }
-
 }
